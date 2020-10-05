@@ -1,0 +1,59 @@
+﻿@model InLifeCMS.ViewModel.FaqCategoriesViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title text-title">Create New Faq Category</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <div class="col-md-12">
+                            <form asp-action="Create" enctype="multipart/form-data" novalidate>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <p style="text-align:center;"><span style="color:red;"><b>@ViewBag.error</b></span></p>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <label class="control-label text-secondary">Category Name</label>
+                                                <input asp-for="strFaqCategory" class="form-control" placeholder="Enter Category Name" required data-validation-required-message="Category Name is required" />
+                                                <span asp-validation-for="strFaqCategory" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <label class="control-label text-secondary">Category Description</label>
+                                                <input asp-for="strFaqCatDescription" class="form-control" placeholder="Enter Category Description" required data-validation-required-message="Category Description is required" />
+                                                <span asp-validation-for="strFaqCatDescription" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row w-100">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="submit" value="Create" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group pull-right">
+                                            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

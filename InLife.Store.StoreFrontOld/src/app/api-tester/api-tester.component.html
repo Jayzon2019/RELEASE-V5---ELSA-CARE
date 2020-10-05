@@ -1,0 +1,46 @@
+<header id="content-header">
+	<h1>API Tester</h1>
+	<p>Open developer tools console to view output.</p>
+</header>
+
+<div id="content">
+
+	<form novalidate (ngSubmit)="submit()" [formGroup]="formGroup">
+		<div class="field endpoint">
+			<label>Endpoint</label>
+			<input type="text" placeholder="Endpoint" formControlName="endpoint" />
+		</div>
+		<div class="field headers">
+			<label>Headers</label>
+			<div class="key-value">
+				<input type="text" placeholder="Key" formControlName="headerKey1" />
+				&nbsp;
+				<input type="text" placeholder="Value" formControlName="headerValue1" />
+			</div>
+			<div class="key-value">
+				<input type="text" placeholder="Key" formControlName="headerKey2" />
+				&nbsp;
+				<input type="text" placeholder="Value" formControlName="headerValue2" />
+			</div>
+			<div class="key-value">
+				<input type="text" placeholder="Key" formControlName="headerKey3" />
+				&nbsp;
+				<input type="text" placeholder="Value" formControlName="headerValue3" />
+			</div>
+		</div>
+		<div class="field body">
+			<label>Body</label>
+			<textarea formControlName="body">
+			</textarea>
+		</div>
+		<div class="field">
+			<label>Method</label>
+			<select formControlName="method">
+				<option *ngFor="let method of methods" [ngValue]="method">
+					{{ method.name }}
+					</option>
+			</select>
+		</div>
+		<button type="submit">TEST</button>
+	</form>
+</div>

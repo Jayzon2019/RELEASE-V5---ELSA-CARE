@@ -1,0 +1,753 @@
+body,htm, p ,h1,  h2, h3, h4, h5, h6, li, a, strong{font-family: 'Inter', sans-serif;} 
+a:hover{text-decoration: none} 
+.form-row{    margin-right: -8px;
+    margin-left: -8px;}
+.form-row > .col, .form-row > [class*="col-"] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.form-control:focus {   
+    border-color: #3951a2!important; 
+    box-shadow: none!important;
+}
+button:focus{border: none!important; 
+    box-shadow: none!important;}
+ 
+.error-field {
+    border-color: #e43e25!important;
+}
+
+.success-field{
+    border-color: #29c398!important;}
+    .active-field:focus,
+    .active-field {   border-color: #3951a2!important;}
+	.ng-dirty.ng-invalid {
+    border-color: #e43e25!important;
+}
+	
+small.errormsg {
+    position: absolute;
+    bottom: -22px;
+    color: #e43e25;
+      width: 100%;     font-size: 80%;
+    font-weight: 400;
+}
+.custompading {
+    padding-left: 94px;
+    padding-right: 94px;
+}
+.pageheader {padding-top: 15px; padding-bottom: 15px;} 
+.pageheader  ul.mainnav{padding: 0px;margin: 0px; }
+.pageheader  .pagenav {    margin-top: 25px;}
+.pageheader  ul.mainnav  {text-align: center}
+.pageheader  ul.mainnav li{display: inline-block}
+.pageheader  ul.mainnav li a{ padding: 0 15px; color: #333;font-size: 15px;}
+.belowheadertitle {
+    padding: 20px 0;
+    background: url(../images/headbg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.belowheadertitle  .pagetitel-sec{text-align: left}
+.leftwrapsection {
+    padding: 36px 36px 36px 94px;
+}
+.logotitlebar{padding-bottom: 75px;}
+.logotitlebar .row{align-items: center}
+.pagetitel-sec {text-align: center}
+.pagetitel-sec h3{text-transform: uppercase;font-size: 18px; margin: 0px;    background: -webkit-gradient(linear,left top,right top,from(#2693cc),to(#9b3b56));    display: inline-block;
+    background: linear-gradient(90deg,#2693cc,#9b3b56);font-weight: 600;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;}
+
+.spacebig {
+    height: 136px;
+}
+.pagetitles { margin-bottom: 80px;text-align: center}
+.stepdetail h1 {
+    text-align: center;
+    color: #3951a2;
+    font-size: 42px;
+    font-weight: 600; margin-bottom: 80px;    letter-spacing: -1px;
+   
+}
+.pagetitles h1{  margin-bottom: 10px;}
+.pagetitles h5{font-size: 18px; color: #696969}
+
+
+.ineligible-page h5,.thankyoupage h5{font-size: 16px; font-weight: 300; line-height: 26px;}
+.form-row  .mb-3{
+    margin-bottom: 2rem !important;
+}
+
+.stepdetail  h3{
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+.stepdetail .preminumform p{color: #7e7e7e;font-size: 16px;}
+.stepdetail .preminumform label{color: #7e7e7e;font-size: 14px;     margin-bottom: .5rem;   font-weight: 400;}
+.stepdetail .preminumform input,
+.stepdetail .preminumform select{height: 56px!important; font-size: 14px;    padding: 0.375rem 10px; color: #333; font-weight: 500;border-width: 1.5px;    border-color: #d5d5d5;}
+ 
+.stepdetail .preminumform select option:first-child{color: #ababab!important;}
+.stepdetail .preminumform input::placeholder{color:#ababab }
+.checkbox-wrap .pf-list-item:first-child {border-radius: 4px 0px 0px 4px;border-right: none;}
+.checkbox-wrap .pf-list-item {
+       margin: 0;
+    background-color: #fff;
+    border-radius: 0px 4px 4px 0px;
+    border:1.5px solid #d3d3d3;
+    padding: 0;
+    display: inline-block;
+    width: 126px;
+    text-align: center;
+    height: 56px;
+    float: left;
+}
+
+.checkbox-wrap .pf-list-item label {
+    padding: 0px;margin: 0px;
+}
+.checkbox-wrap .pf-list-item label input {
+    position: absolute;
+    top: -20px;
+    opacity: 0;
+}
+.checkbox-wrap .pf-list-item label span {
+    text-align: center;
+    padding: 11px 12px;
+    height: 54px;
+    width: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ababab;
+    top: -1px;
+    position: relative;
+}
+.checkbox-wrap .pf-list-item:first-child  input:checked + span {border-radius: 4px 0px 0px 4px; }
+.checkbox-wrap .pf-list-item:last-child  input:checked + span {border-radius: 0px 4px 4px 0px; }
+.checkbox-wrap .pf-list-item label span i{display: none}
+.checkbox-wrap .pf-list-item input:checked + span i{display: inline-block; color: #fff;margin-right: 5px; }
+.checkbox-wrap .pf-list-item input:checked + span {
+    background-color: #29c398;width: 126px;
+    color: #fff; border: 1px solid #29c398; 
+}
+.checkbox-wrap .pf-list-item:hover  .pf-list-item-label {color: #fff;}
+.checkbox-wrap .pf-list-item:hover { 
+    background-color: #29c398;    
+    border: 1px solid #29c398;   
+    color: #fff;
+}
+.checkbox-wrap.smallgender .pf-list-item label span{ padding: 11px 16px;}
+.checkbox-wrap.smallgender .pf-list-item label span,
+.smallgender  .pf-list-item { width: 108px;}
+
+.form-group.mb-4{margin-bottom: 0px!important}
+ ul.listinnevcondition li{font-size: 18px;}
+    .stepdetail  .declarationsection  label.radio-container,
+   .stepdetail  .declarationsection p,.stepdetail   .declarationsection li{font-size: 15px;}
+    .step8 p.font-15{font-size: 13px;}
+   .stepdetail  .declarationsection hr {
+    margin-top: 2rem;
+       margin-bottom: 2rem;}
+
+
+.iconfieldcustom {
+    position: relative;
+}
+
+.iconfieldcustom input{
+        border-top-left-radius: 4px!important;
+    border-bottom-left-radius: 4px!important;
+    border-top-right-radius: 4px!important;
+    border-bottom-right-radius: 4px!important;}
+ .iconfieldcustom .input-group-prepend {
+    position: absolute;
+    left: 0;
+  top: 4px;   z-index: 9;
+}
+ 
+.stepdetail .preminumform .datepicker .mat-datepicker-toggle {    position: absolute;
+    right: 1px;
+        top: 2px;
+    z-index: 9;
+    height: 51px;
+    width: 55px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1.5px solid #d5d5d5;    color: #ababab;
+}
+.stepdetail .preminumform input.pnumber{padding-left: 57px;}
+ .iconfieldcustom .input-group-prepend  .input-group-text
+ {
+    border: none;
+    height: 48px;
+}
+ .iconfieldcustom  .input-group-append {
+    position: absolute;
+    right: 0;
+    top: 3px;    z-index: 9;
+}
+ .iconfieldcustom  .input-group-append .input-group-text
+ {
+    border: none;
+    height: 48px;
+}
+.stepdetail .preminumform .datepicker{padding: 0px;margin-bottom: 0px;}
+.stepdetail .preminumform .datepicker input{    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;    background: #fff;}
+.stepdetail .preminumform .datepicker .input-group-text{background: none;color: #ababab;}
+.datepicker td, .datepicker th {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.85rem;
+}
+
+.datepicker {
+    margin-bottom: 3rem;
+}
+
+.steplist ul{list-style: none;padding: 0px;margin: 0px;}
+.steplist  ul.steplistmain li{padding-left: 45px;font-size: 22px;color: #ababab;margin-bottom: 30px;position: relative}
+
+.steplist  ul.steplistmain li:before{    content: "1";
+    position: absolute;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #d5d5d5;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 15px;
+    line-height: 28px;
+    font-weight: 600;background: #fff;
+    overflow: hidden;
+    z-index: 99;}
+.steplist  ul.steplistmain li:nth-child(2):before{    content: "2";}
+.steplist  ul.steplistmain li:nth-child(3):before{    content: "3";}
+
+.steplist  ul.steplistmain li:nth-child(2):hover:before,
+.steplist  ul.steplistmain li.active:nth-child(2):before{ content: "2";}
+.steplist  ul.steplistmain li:nth-child(3):hover:before,
+.steplist  ul.steplistmain li.active:nth-child(3):before{ content: "3";}
+
+.steplist  ul.steplistmain li:hover:before,
+.steplist  ul.steplistmain li.active:before{    content: "1";
+    position: absolute;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    color: #29c398;
+    border: 2px solid #29c398;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 15px;
+    line-height: 28px;
+    font-weight: 600;}
+
+.steplist ul.steplistmain li.complete:hover:before, .steplist ul.steplistmain li.complete.active:before{background: #29c398; content: "\e876";     font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;color: #fff}
+.steplist  ul.steplistmain li ul.innerlist li:before{     content: "";
+    position: absolute;
+    left: -34px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #d5d5d5;
+    border-radius: 100%;
+    text-align: center; 
+    top: 13px;}
+.steplist  ul.steplistmain li ul.innerlist li.active:before,
+.steplist  ul.steplistmain li ul.innerlist li:hover:before{ position: absolute;
+    left: -34px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #29c398;
+    border-radius: 100%;    
+    text-align: center; 
+    top: 13px;}
+.steplist  ul.steplistmain li:first-child:after{display: none}
+.steplist  ul.steplistmain li ul.innerlist li:first-child:after{display: block}
+.steplist  ul.steplistmain li:after{     background: #ababab;
+    content: '';
+    position: absolute;
+    left: 15px;
+    width: 2px;
+    height: 53px;
+    top: -50px;}
+.steplist  ul.steplistmain li ul.innerlist li:after{     background: #ababab;content: '';
+    position: absolute;
+        left: -30px;
+    width: 2px;
+    height: 34px;
+    top: -21px;}
+.steplist  ul.steplistmain li.active:after,
+.steplist  ul.steplistmain li:hover:after{     background: #29c398;content: '';
+    position: absolute;
+     left: 15px;
+    width: 2px;  }
+.steplist  ul.steplistmain li ul.innerlist li.active:after,
+.steplist  ul.steplistmain li ul.innerlist li:hover:after{     background: #29c398;content: '';
+    position: absolute;
+      left: -30px;
+    width: 2px;
+    height: 34px;
+    top: -21px;}
+
+/*
+
+.steplist  ul.steplistmain li ul.innerlist li.active:after,
+.steplist  ul.steplistmain li ul.innerlist li:hover:after{     background: #29c398;content: '';
+    position: absolute;
+    left: -30px;
+    width: 2px;
+    height: 29px;
+    top: -15px;}*/
+
+
+.steplist  ul.steplistmain li.active,.steplist  ul.steplistmain li:hover{color: #333;}
+.steplist  ul.steplistmain li ul.innerlist li{padding: 0px; margin: 10px 0;font-weight: 500;}
+.steplist  ul.steplistmain li ul.innerlist li a{color: #ababab; font-size: 14px;font-weight: 500;}
+.steplist  ul.steplistmain li ul.innerlist li a:hover,.steplist  ul.steplistmain li ul.innerlist li.active a{color: #333;}
+.roghtwrapsection {
+    padding: 36px 94px 36px 36px;
+    background: #f5f7fd;position: relative;height: 100%;
+}
+
+.step6,
+.step7,
+.step8,
+.step5 ,
+.step2,.step3,.step4{margin: 0px 0 90px}
+.step2{margin-top: 90px;}
+.stepdetail  .preminumform  input.form-control.fname {
+    border-right: none;    border-radius: 4px 0px 0px 4px;
+}
+.stepdetail  .preminumform  input.form-control.mname {
+    border-left: none;   border-right: none;    border-radius: 0px 0px 0px 0px;
+}
+.stepdetail  .preminumform  input.form-control.lname {
+    border-left: none;    border-radius: 0px 4px 4px 0px;
+}
+
+
+.fieldinnr {
+    width: 33%;
+    position: relative;
+}
+.fieldinnr50{   width: 50%;
+    position: relative;}  
+.stepdetail   .preminumform  .input-group-text.areacode
+{
+    background: none;
+    border-right: none;font-size: 14px;
+    font-weight: 600; color: #333333;
+}
+ 
+
+
+
+.radio-container{  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;}
+
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.radio-container .checkmark {
+  position: absolute;border-radius: 3px;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+ background-color: transparent;
+    border-radius: 3px;
+    border: 1px solid #d5d5d5;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.radio-container input:checked ~ .checkmark {
+  background-color: #29c398;
+     border: 1px solid #29c398;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.radio-container .checkmark:after  {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.radio-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.radio-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+ul.condtionslist{list-style: none;padding: 0px; margin: 0px;}
+ul.condtionslist li{margin-bottom: 25px; color: #7e7e7e;font-size: 16px;}
+ul.condtionslist li .form-row{margin-top: 25px;}
+ul.condtionslist li span.numr {
+    width: 7%;
+    float: left;
+}
+ul.condtionslist li .ctnt{
+    width: 93%;
+    float: left;font-size: 16px;
+}
+.btnsec {
+    margin-top: 30px;
+}
+.btnsec  .btn{
+      position: relative;
+    background: -webkit-gradient(linear, left top, right top, from(#e43e25), to(#e47125));
+    background: linear-gradient(90deg, #e43e25 0%, #e47125 100%);
+    color: #fff;
+    z-index: 1;
+    border: 2px solid #e43e25;    text-align: center;
+    padding: 1em 2.8em;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease;
+    overflow: hidden;
+    text-transform: uppercase;border-radius: 4px;    display: inline-flex;
+}
+.btnsec  .btn:hover{-webkit-transform: translateY(-8px);
+    transform: translateY(-8px);}
+
+.btn.outlinedbtn {
+    color: #e43e25;
+    border-color: #e43e25;
+    background: none;
+   padding: 1em 2.8em;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease;
+    overflow: hidden;
+    text-transform: uppercase;border-radius: 4px;    display: inline-flex;
+}
+
+.btn.outlinedbtn:hover  {
+      position: relative;
+    background: -webkit-gradient(linear, left top, right top, from(#e43e25), to(#e47125));
+    background: linear-gradient(90deg, #e43e25 0%, #e47125 100%);
+    color: #fff;
+    z-index: 1;
+    border: 2px solid #e43e25;    text-align: center;
+    padding: 1em 2.8em;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+   -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+    overflow: hidden;
+    text-transform: uppercase;border-radius: 4px;    display: inline-flex;
+}
+.btn.outlinedbtn i{width: 30px;}
+.btnsec  .btn i{    margin-left: 5px;
+    position: relative;
+    top: -2px;}
+.btnsec  .btn.outlinedbtn i{    margin-left: 5px;
+    position: relative;
+    top: -1px;}
+ul.listinnevcondition{list-style: disc;padding-left: 20px;}
+ul.listinnevcondition li{margin-bottom: 5px;}
+.radio-container.customcheckcircle  .checkmark,
+.radio-container.customcheckcircle  input:checked ~ .checkmark {
+    background-color: #ffffff;
+    border: 1px solid #d5d5d5;
+    border-radius: 100%;display: block;    
+}
+ .radio-container.customcheckcircle {
+    margin: 10px 0 30px;
+}
+.radio-container.customcheckcircle  .checkmark:after {
+  left: 5.7px;
+    top: 5.7px;
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background: #fff;
+    border-radius: 100%;content: '';
+}
+.radio-container.customcheckcircle  input:checked ~ .checkmark:after {
+background: #29c398;
+}
+a.p-link{
+    font-size: 14px; 
+    color: #e43e25;
+    text-decoration: underline; 
+}
+
+
+.uploadimgescustom .image-upload-wrap {
+      margin-top: 20px;  
+    position: relative;  
+    background: url(../images/borderfile.png);   
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.uploadimgescustom .image-dropping,
+.uploadimgescustom .image-upload-wrap:hover {
+     background-color: #fdfdfd;
+    border: 2px dashed #d5d5d5;
+}
+
+.uploadimgescustom .image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.uploadimgescustom .drag-text {
+  text-align: center;
+}
+
+.uploadimgescustom .drag-text h3 {
+     font-weight: 500;
+    text-transform: capitalize;
+    color: #ababab;
+    padding: 60px 0;
+    font-size: 18px;
+    margin: 0px 0 ;
+}
+
+.uploadimgescustom .drag-text h3 span{display: block;font-size: 14px;margin-top: 5px;}
+.uploadimgescustom .file-upload-image {
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
+}
+.stepdetail .preminumform .uploadimgescustom .file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%!important;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+.uploadimgescustom .remove-image {
+  width: 200px;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.uploadimgescustom .remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.uploadimgescustom .remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+
+.roghtwrapsection h4{font-size: 14px; margin-bottom: 15px; color:#7e7e7e;text-transform: uppercase;letter-spacing: 1px;}
+.roghtwrapsection h2{font-size:40px; ; margin-bottom: 15px; color:#333333;text-transform: uppercase;font-weight: 700;    letter-spacing: -1px;}
+.roghtwrapsection p{font-size: 14px;line-height: 26px; margin-bottom: 15px; color:#7e7e7e ;    letter-spacing: -0.5px;}
+.roghtwrapsection p a{font-size: 14px; margin-bottom: 15px; color:#e43e25 ;text-decoration: none;border-bottom:2px solid #e43e25} 
+
+
+/* paypage*/
+
+.reviewbill {
+    background: #f5f7fd;
+    padding: 30px;
+}
+.outerdesclaimer  p,
+.reviewbill p{color: #7e7e7e;    font-size: 14px;}
+.reviewbill .titlebill p {color: #7e7e7e}
+.reviewbill .detailbill p{color: #333333}
+.reviewbill p.linkdpay a{font-size: 12px;display: inline-block; margin-right:10px;    color: #e43e25;text-decoration: underline}
+.outerdesclaimer {text-align: center; padding: 40px 25px}
+
+
+.socaillink {padding: 10px 0 15px;}
+.socaillink a{color: #7e7e7e;    font-size: 18px;display: inline-block;margin-right: 10px;}
+
+.wealth-section .wealth-box {padding: 15px;box-shadow: 0 0 3px #ccc;border-radius: 5px;margin-bottom: 20px;}
+.wealth-section .wealth-box .img-box {margin-bottom: 15px;}
+.wealth-section .wealth-box .img-box img{width: 100%;}
+.wealth-section .wealth-box  .box-content {    min-height: 132px;}
+.wealth-section .wealth-box  .box-content h5{font-size: 17px; color: #333}
+.wealth-section .wealth-box  .box-content p{font-size: 14px; color: #333}
+
+.footer-main  {padding: 40px 0;
+    background: url(../images/headbg.jpg);
+    background-repeat: repeat-y;
+    background-size: 100%; background-position: right center;}
+.footer-main .logof-copy p{margin-top: 20px; font-size: 14px; color: #505050}
+
+.footer-main  ul.footlink{list-style: none;padding: 0;margin: 0px;}
+.footer-main  ul.footlink li  {margin-bottom: 10px;}
+.footer-main  ul.footlink li a{color: #fff;font-size: 14px;}
+
+.footer-main  .footsocial a{color: #fff;    font-size: 18px;display: inline-block;margin-right: 15px;}
+.form-row .customrowform{  margin: 0;}
+.customrowform {
+    width: 100%;
+    display: flex;    margin: 0 -8px;
+}
+#customfieldsss.customrowform{ margin: 0 -8px;}
+#customfieldsss.customrowform label{display: none;}
+.customlabel.bigcol {
+    width: 23%;    padding-right: 15px;
+}
+.customlabel.bigsmall {
+    width: 20%;
+}
+.addneweow {
+    display: block;
+    text-align: right;
+    margin: 23px 0 15px;
+}
+.addneweow a{
+       color: #ababab;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+  
+}
+.addneweow a i{margin-right: 5px; }
+
+@media (min-width: 1600px) {
+    .stepdetail .preminumform .input-group-text.areacode{font-size: 18px;}
+    .roghtwrapsection h4,
+.roghtwrapsection p,
+    .roghtwrapsection p{font-size: 15px;}
+    .stepdetail .preminumform input, .stepdetail .preminumform select{font-size: 18px;}
+    .steplist ul.steplistmain li ul.innerlist li a {font-size: 17px;}
+    .stepdetail .preminumform label {    
+    font-size: 16px;
+}
+    .checkbox-wrap .pf-list-item label span{font-size: 18px;}
+    .roghtwrapsection h2{font-size: 48px;}
+    ul.condtionslist li .ctnt,
+    ul.listinnevcondition li{font-size: 18px;}
+    .stepdetail  .declarationsection  label.radio-container,
+   .stepdetail  .declarationsection p,.stepdetail   .declarationsection li{font-size: 18px;}
+    .step8 p.font-15{font-size: 15px;}
+    
+} 
+@media (max-width: 1440px) {.leftwrapsection {    padding: 36px 36px 36px 70px;}    
+    .roghtwrapsection {     padding: 36px 70px 36px 36px;}
+}
+@media (max-width: 1380px) {
+    .stepdetail .preminumform label{font-size: 12px;}
+        
+}
+@media (max-width: 1280px) {.leftwrapsection {    padding: 36px 36px 36px 50px;}    
+    .roghtwrapsection {     padding: 36px 50px 36px 36px;}
+    .steplist ul.steplistmain li ul.innerlist li a{font-size: 12px;}
+    .checkbox-wrap.smallgender .pf-list-item label span, .smallgender .pf-list-item {
+    width: 100px;}
+    .stepdetail .declarationsection label.radio-container, .stepdetail .declarationsection p, .stepdetail .declarationsection li {
+    font-size: 14px;
+}
+
+}
+
+@media (max-width: 1080px) {
+    .leftwrapsection {    padding: 36px 36px 36px 36px;}    
+    .roghtwrapsection {     padding: 36px 36px 36px 36px;}
+    .tabfull{
+     -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;}
+    .spacebig {
+    height: 0;
+}    
+}
+
+@media (max-width: 800px) {
+    .tabsamll  {
+     -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;}
+     .steplist ul.steplistmain li ul.innerlist li a,
+     .stepdetail .preminumform label{font-size: 14px;}
+}
+@media (max-width: 767px) {
+    .btnsec.text-right, .btnsec.text-left{text-align: center!important}
+.customrowform {
+    width: 100%; 
+    flex-flow: wrap;}
+    .customlabel.bigsmall,
+    .customlabel.bigcol{    width: 100%;
+    padding-right: 0px;    margin-bottom: 15px;}
+    .stepdetail h1{font-size: 30px;}
+    .customrowform.labelss label{display: none;}
+    #customfieldsss.customrowform label{display:block;}
+    .checkbox-wrap.smallgender .pf-list-item label span, .smallgender .pf-list-item {
+    width: 131px;
+}
+    .logo-sec {text-align: center; margin-bottom: 15px;}
+    .leftwrapsection  ,
+    .roghtwrapsection {  padding: 20px;}
+}
+.is-invalid{
+    border-color:#dc3545 !important;
+}
+.is-valid{
+    border-color:green !important;
+}
+@media (max-width: 680px) {
+    .btnsec .btn {    width: 100%; text-align: center;    justify-content: center;}}

@@ -1,0 +1,106 @@
+﻿@*@model IEnumerable<InLifeCMS.ViewModel.FooterLinksViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="column-selectors">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row w-100">
+                        <div class="col-md-6">
+                            <h4 class="card-title text-title">Faq List</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="pull-right">
+                                <a asp-action="Create" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new Faq</a>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <div class="table-responsive">
+                            <table class="table table-striped zero-configuration">
+
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Link Text / Image / Icon
+                                        </th>
+                                        <th>
+                                            Link Url
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @{
+                                                if (item.blnIsLink == true)
+                                                {
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.strLinkText)
+                                                    </td>
+                                                }
+                                            }
+                                            @{
+                                                if (item.blnIsLogo == true)
+                                                {
+                                                    <td>
+                                                        <div style="width:150px;height:150px;">
+                                                            <img src="data:image/jpeg;base64, @item.strLogoImg" style="width:100%" />
+                                                        </div>
+                                                    </td>
+                                                }
+                                            }
+                                            @{
+                                                if (item.blnIsSocialIcon == true)
+                                                {
+                                                    <td>
+                                                        <i class="@item.strSocialIcon" style="font-size: 35px;padding-top: 5px;color: #e23f2e;"></i>
+                                                    </td>
+                                                }
+                                            }
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.strUrlLink)
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.intFooterLinkId" title="Edit"><i class="feather icon-edit"></i></a> |
+                                                <a asp-action="Details" asp-route-id="@item.intFooterLinkId" title="Details"><i class="feather icon-eye"></i></a> |
+                                                <a asp-action="Delete" asp-route-id="@item.intFooterLinkId" title="Delete"><i class="feather icon-delete"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>
+                                            Link Text / Image / Icon
+                                        </th>
+                                        <th>
+                                            Link Url
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@

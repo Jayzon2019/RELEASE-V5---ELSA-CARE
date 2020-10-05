@@ -1,0 +1,209 @@
+﻿@model InLifeCMS.ViewModel.FooterLinksViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title text-title">Update Footer Links</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body card-dashboard">
+                    <div class="col-md-12">
+                        <form asp-action="Edit" enctype="multipart/form-data" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <p style="text-align:center;"><span style="color:red;"><b>@ViewBag.error</b></span></p>
+                            <input type="hidden" asp-for="intFooterLinkId" />
+                            <div class="row">
+
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link Text 1</label>
+                                            <input asp-for="strMainSiteTxt" value="@Model.strMainSiteTxt" class="form-control" placeholder="Enter Footer Link Text 1" required data-validation-required-message="Footer Link Text 1 is required" />
+                                            <span asp-validation-for="strMainSiteTxt" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link 1</label>
+                                            <input asp-for="strMainSiteUrl" value="@Model.strMainSiteUrl" class="form-control" placeholder="Enter Footer Link 1" required data-validation-required-message="Footer Link 1 is required" />
+                                            <span asp-validation-for="strMainSiteUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link Text 2</label>
+                                            <input asp-for="strInsCommissionTxt" value="@Model.strInsCommissionTxt" class="form-control" placeholder="Enter Footer Link Text 2" required data-validation-required-message="Footer Link Text 2 is required" />
+                                            <span asp-validation-for="strInsCommissionTxt" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link 2</label>
+                                            <input asp-for="strInsCommissionUrl" value="@Model.strInsCommissionUrl" class="form-control" placeholder="Enter Footer Link 2" required data-validation-required-message="Footer Link 2 is required" />
+                                            <span asp-validation-for="strInsCommissionUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link Text 3</label>
+                                            <input asp-for="strCusCharterTxt" value="@Model.strCusCharterTxt" class="form-control" placeholder="Enter Footer Link Text 3" required data-validation-required-message="Footer Link Text 3 is required" />
+                                            <span asp-validation-for="strCusCharterTxt" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link 3</label>
+                                            <input asp-for="strCusCharterUrl" value="@Model.strCusCharterUrl" class="form-control" placeholder="Enter Footer Link 3" required data-validation-required-message="Footer Link 3 is required" />
+                                            <span asp-validation-for="strCusCharterUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link Text 4</label>
+                                            <input asp-for="strTermsConditionTxt" value="@Model.strTermsConditionTxt" class="form-control" placeholder="Enter Footer Link Text 4" required data-validation-required-message="Footer Link Text 4 is required" />
+                                            <span asp-validation-for="strTermsConditionTxt" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link 4</label>
+                                            <input asp-for="strTermsConditionUrl" value="@Model.strTermsConditionUrl" class="form-control" placeholder="Enter Footer Link 4" required data-validation-required-message="Footer Link 4 is required" />
+                                            <span asp-validation-for="strTermsConditionUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link Text 5</label>
+                                            <input asp-for="strPrivacyPolicyTxt" value="@Model.strPrivacyPolicyTxt" class="form-control" placeholder="Enter Footer Link Text 5" required data-validation-required-message="Footer Link Text 5 is required" />
+                                            <span asp-validation-for="strPrivacyPolicyTxt" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link 5</label>
+                                            <input asp-for="strPrivacyPolicyUrl" value="@Model.strPrivacyPolicyUrl" class="form-control" placeholder="Enter Footer Link 5" required data-validation-required-message="Footer Link 5 is required" />
+                                            <span asp-validation-for="strPrivacyPolicyUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link Text 6</label>
+                                            <input asp-for="strContactUsTxt" value="@Model.strContactUsTxt" class="form-control" placeholder="Enter Footer Link Text 6" required data-validation-required-message="Footer Link Text 6 is required" />
+                                            <span asp-validation-for="strContactUsTxt" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Footer Link 6</label>
+                                            <input asp-for="strContactUsUrl" value="@Model.strContactUsUrl" class="form-control" placeholder="Enter Footer Link 6" required data-validation-required-message="Footer Link 6 is required" />
+                                            <span asp-validation-for="strContactUsUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">InLife Logo Url</label>
+                                            <input asp-for="strLogoUrl" value="@Model.strLogoUrl" class="form-control" placeholder="Enter InLife Logo Url" required data-validation-required-message="InLife Logo Url is required" />
+                                            <span asp-validation-for="strLogoUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Facebook Url</label>
+                                            <input asp-for="strFbUrl" value="@Model.strFbUrl" class="form-control" placeholder="Enter Facebook Url" required data-validation-required-message="Facebook Url is required" />
+                                            <span asp-validation-for="strFbUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Twitter Url</label>
+                                            <input asp-for="strTweeterUrl" value="@Model.strTweeterUrl" class="form-control" placeholder="Enter Twitter Url" required data-validation-required-message="Twitter Url is required" />
+                                            <span asp-validation-for="strTweeterUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Instagram Url</label>
+                                            <input asp-for="strInstaUrl" value="@Model.strInstaUrl" class="form-control" placeholder="Enter Instagram Url" required data-validation-required-message="Instagram Url is required" />
+                                            <span asp-validation-for="strInstaUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">YouTube Url</label>
+                                            <input asp-for="strYouTubeUrl" value="@Model.strYouTubeUrl" class="form-control" placeholder="Enter YouTube Url" required data-validation-required-message="YouTube Url is required" />
+                                            <span asp-validation-for="strYouTubeUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row w-100">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="submit" value="Update" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pull-right">
+                                        <a asp-action="Details" class="btn btn-secondary">Back to Detail Page</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

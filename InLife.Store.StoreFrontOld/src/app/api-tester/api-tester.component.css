@@ -1,0 +1,25 @@
+:host { display:block; padding:48px; width:640px; }
+
+label,
+input,
+textarea,
+select,
+button { display:block; margin-bottom:8px; width:100%; box-sizing:border-box; font-size:0.8rem; }
+
+input,
+textarea,
+select,
+button { height:40px; border:solid 1px #ccc; border-radius:4px; padding:0 0 0 8px; }
+
+textarea { height:200px; padding:8px; }
+
+.field { margin-bottom:1em; }
+
+.key-value { display:block; position:relative; text-align:justify; width:100%; margin-bottom:8px; font-size:0; }
+.key-value::after { content:''; display:inline-block; width:90%; height:0; }
+.key-value input { display:inline-block; width:48.5%; position:relative; margin:0; font-size:0.8rem; }
+
+
+label { line-height:1em; }
+button { text-align:center; background:#999; color:#fff; padding:0.4em; cursor: pointer; }
+button:hover { background-color:#333; }

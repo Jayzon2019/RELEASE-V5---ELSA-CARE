@@ -1,0 +1,153 @@
+﻿@model InLife.Store.Cms.ViewModels.UsersViewModel
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="users-edit">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="displayAccount" aria-labelledby="account-tab" role="tabpanel">
+                            <div class="media mb-2">
+                                <a class="mr-2 my-25" href="#">
+                                    <img src="@Url.Content("/"+Model.strUserImg)" id="user_img" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
+                                </a>
+                                <div class="media-body mt-50">
+                                    <h4 class="media-heading">@Model.strFirstName   @Model.strLastName</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Gender : @Model.strGender</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label>E-mail : @Model.strEmail</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+
+                                   
+                                    <div class="form-group">
+                                        <label>Date Of Birth : @Model.dteDob</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone : @Model.strPhone</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
+                                    <button type="button" onclick="edit()" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
+                                       Edit
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane active" id="account" style="display:none;" aria-labelledby="account-tab" role="tabpanel">
+                        <!-- users edit media object start -->
+                        <form asp-action="EditProfile" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
+                            <input type="hidden" asp-for="intUserId" />
+                            <div class="media mb-2">
+                                <a class="mr-2 my-25" href="#">
+                                    <img src="@Url.Content("/"+Model.strUserImg)" id="user_img" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
+                                </a>
+                                <div class="media-body mt-50">
+                                    <h4 class="media-heading">@Model.strFirstName   @Model.strLastName</h4>
+                                    <div class="col-12 d-flex mt-1 px-0">
+                                        <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Upload new photo</label>
+                                        <input type="file" onchange="show(this)" id="account-upload" name="file" hidden>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" placeholder="Username" asp-for="strFirstName" required data-validation-required-message="This field is required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" placeholder="Name" asp-for="strLastName" required data-validation-required-message="This name field is required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label>E-mail</label>
+                                            <input type="email" class="form-control" placeholder="Email" asp-for="strEmail" required data-validation-required-message="This email field is required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <select class="form-control" name="intGenderId">
+                                            <option value="0">Select Gender</option>
+                                            @foreach (var gen in ViewBag.genList)
+                                            {
+                                                if (gen.intGenderId == Model.intGenderId)
+                                                {
+                                                    <option selected="selected" value="@gen.intGenderId">@gen.strGender</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@gen.intGenderId">@gen.strGender</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date Of Birth</label>
+                                        <input asp-for="dteDob" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="number" class="form-control" asp-for="strPhone" placeholder="Contact Number">
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
+                                    <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
+                                        Save
+                                        Changes
+                                    </button>
+                                    <button type="button" onclick="cancel()" class="btn btn-outline-warning">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+
+    function edit() {
+        $("#displayAccount").hide();
+        $("#account").show();
+    }
+
+    function cancel() {
+        $("#account").hide();
+        $("#displayAccount").show();
+    }
+
+    function show(input) {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

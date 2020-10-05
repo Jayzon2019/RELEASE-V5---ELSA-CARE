@@ -1,0 +1,25 @@
+@using System.Diagnostics
+
+@{
+	var version = FileVersionInfo.GetVersionInfo(typeof(InLife.Store.Identity.Program).Assembly.Location).ProductVersion.Split('+').First();
+}
+
+<div class="welcome-page">
+	<h1>InLife Store Identity Service</h1>
+	<h2>(version @version)</h2>
+
+	<ul>
+		<li>
+			<a href="~/.well-known/openid-configuration">Discovery document containing the metadata and links to all the endpoints, key material, etc.</a>
+		</li>
+		<li>
+			<a href="~/diagnostics">Claims for current session</a>
+		</li>
+		<li>
+			<a href="~/grants">Manage stored grants</a>.
+		</li>
+		<li>
+			<a href="~/account/login">Login</a>.
+		</li>
+	</ul>
+</div>

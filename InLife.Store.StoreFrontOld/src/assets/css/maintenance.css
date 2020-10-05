@@ -1,0 +1,133 @@
+header {
+	position: unset;
+	background: none;
+}
+
+header .logo {
+	max-width: 180px;
+	margin: 0 auto;
+	padding-bottom: 108px;
+}
+
+.logo img {
+	width: 100%;
+	height: auto;
+}
+
+main, .tac {
+	text-align: center;
+}
+
+main h2.section-header {
+	font-size: 52px;
+	margin-bottom: 42px;
+}
+
+main p {
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 1em;
+}
+
+main h2 + p {
+	margin-bottom: 80px;
+}
+
+main .btn-orange {
+	margin-top: 0;
+	margin-bottom: 90px;
+}
+
+main .btn-orange:hover {
+	text-decoration: none;
+}
+
+.social-linksb li:last-child {
+	margin-right: 0;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.social-linksb {
+	float: none;
+}
+
+@media screen and (max-width: 1366px) {
+	body { padding:50px; }
+	header .logo { padding-bottom: 60px; }
+	main h2.section-header { font-size: 48px; margin-bottom: 32px; }
+	main p { font-size: 18px; margin-bottom: 1em; }
+	main h2 + p { margin-bottom: 60px; }
+	main .btn-orange { margin-bottom: 80px; }
+}
+
+@media screen and (max-width: 1024px) {
+	body { padding:30px; }
+	header .logo { padding-bottom: 40px; }
+	main h2.section-header { font-size: 42px; margin-bottom: 32px; }
+	main p { font-size: 16px; margin-bottom: 1em; }
+	main h2 + p { margin-bottom: 40px; }
+	main .btn-orange { margin-bottom: 60px; }
+	.btn-orange {
+		display: inline-block;
+	}
+}
+
+@media screen and (max-width: 951px) {
+	main {
+		padding-bottom: 2em;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	main h2.section-header {
+		font-size: 42px;
+		margin-bottom: 32px;
+	}
+
+	main p {
+		font-size: 18px;
+		margin-bottom: 0.6em;
+	}
+
+	main h2 + p {
+		margin-bottom: 60px;
+	}
+
+	main .btn-orange {
+		margin-top: 0;
+		margin-bottom: 50px;
+	}
+
+}
+
+@media screen and (max-width: 375px) {
+	main h2.section-header {
+		font-size: 32px;
+		margin-bottom: 25px;
+	}
+
+	main p {
+		font-size: 16px;
+		margin-bottom: 0.4em;
+	}
+
+	main h2 + p {
+		margin-bottom: 40px;
+	}
+
+	main .btn-orange {
+		margin-top: 0;
+		margin-bottom: 30px;
+	}
+}

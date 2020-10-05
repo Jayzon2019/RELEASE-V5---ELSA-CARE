@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<head>
+
+    <title>@ViewData["Title"] - InLifeCMS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="CMS Dashboard">
+    <meta name="keywords" content="CMS Dashboard">
+    <meta name="author" content="Saleem IShaq">
+    <title>Dashboard CMS</title>
+    <link rel="apple-touch-icon" href="~/images/inlife-logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/extensions/tether-theme-arrows.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/extensions/tether.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/themes/semi-dark-layout.css">
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/pages/dashboard-analytics.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/pages/card-analytics.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/validation/form-validation.css">
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link href="~/js/farbtastic.css" rel="stylesheet" />
+    <!-- END: Custom CSS-->
+    <style>
+        .invalid {
+            border-color: #EA5455;
+        }
+    </style>
+</head>
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+
+    <!-- BEGIN: Header-->
+    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item d-none d-lg-block">
+                                <a class="nav-link bookmark-star"><i class="ficon feather icon-star warning"></i></a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav float-right productDetailNote" style="display:none;">
+                            <li class="nav-item d-none d-lg-block" style="font-size:10px;">
+                                <span>Please Type <b class="text-primary">"applicable"</b> to show <img src="~/images/checked.png" width="18" height="18" /> in product Details feild. &nbsp; &nbsp; &nbsp; And Type <b class="text-primary">"NA"</b> to hide a field with its label. </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar-nav float-right">
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
+                        <li class="dropdown dropdown-user nav-item">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">@User.Identity.Name</span><span class="user-status">@User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Role)?.Value</span></div><span><img class="round" src="@Url.Content("/" + User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Surname)?.Value)" alt="avatar" height="40" width="40"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="EditProfile"><i class="feather icon-user"></i> Edit Profile</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ChangePassword"><i class="feather icon-lock"></i> Change Password</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Logout"><i class="feather icon-power"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Header-->
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mr-auto">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                        <div class="brand-logo"></div>
+                    </a>
+                </li>
+                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i></a></li>
+            </ul>
+        </div>
+        <div class="shadow-bottom"></div>
+        <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li id="dash">
+                    <a asp-area="" asp-controller="Home" asp-action="Index"><i class="feather icon-home"></i><span class="menu-item" data-i18n="Analytics">DashBoard</span></a>
+                </li>
+                <li id="home" class="nav-item">
+                    <a href="#"><i class="feather icon-menu"></i><span class="menu-title" data-i18n="Menu Levels">Home Page</span></a>
+                    <ul class="menu-content">
+                        <li id="heroSection">
+                            <a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Second Level">Hero Section</span></a>
+                            <ul class="menu-content">
+                                <li id="sliderEntries">
+                                    <a asp-area="" asp-controller="Hero" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Third Level">Slider Entries</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="productMenu">
+                            <a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Second Level">IHC Product</span></a>
+                            <ul class="menu-content">
+                                <li id="productLink">
+                                    <a asp-area="" asp-controller="Products" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Third Level">IHC Product Entries</span></a>
+                                </li>
+                                <li id="productDetailLink">
+                                    <a asp-area="" asp-controller="ProductDetails" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Third Level">IHC Product Details</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="FooterLinks">
+                            <a asp-area="" asp-controller="FooterLinks" asp-action="Details"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Footer Links</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="PrimeCarePageMenu" class=" nav-item">
+                    <a href="#"><i class="feather icon-copy"></i><span class="menu-title" data-i18n="Ecommerce">Prime Care Page</span></a>
+                    <ul class="menu-content">
+                        <li>
+                            <a asp-area="" asp-controller="PrimeHero" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Hero Section</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li id="faqMenu" class=" nav-item">
+                    <a href="#"><i class="feather icon-help-circle"></i><span class="menu-title" data-i18n="Ecommerce">FAQ Page</span></a>
+                    <ul class="menu-content">
+                        <li id="faqLink">
+                            <a asp-area="" asp-controller="Faq" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">FAQ Entries</span></a>
+                        </li>
+                        <li id="faqCatLink">
+                            <a asp-area="" asp-controller="FaqCategories" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">FAQ Categories</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li id="primeCareLink" class=" nav-item">
+                    <a href="#"><i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Ecommerce">Prime Care</span></a>
+                    <ul class="menu-content">
+                        <li>
+                            <a asp-area="" asp-controller="PrimeCare" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Files</span></a>
+                        </li>
+                    </ul>
+                </li>
+                @{
+                    var role = User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
+                    if (role == "Admin")
+                    {
+                        <li id="userLink" class=" nav-item">
+                            <a href="#"><i class="feather icon-settings"></i><span class="menu-title" data-i18n="Ecommerce">Settings</span></a>
+                            <ul class="menu-content">
+                                <li>
+                                    <a asp-area="" asp-controller="Users" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Users</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    } }
+            </ul>
+        </div>
+    </div>
+    <!-- END: Main Menu-->
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="~/app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="~/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="~/app-assets/vendors/js/extensions/tether.min.js"></script>
+
+    <script src="~/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script src="~/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+    <script src="~/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="~/app-assets/js/core/app-menu.js"></script>
+    <script src="~/app-assets/js/core/app.js"></script>
+    <script src="~/app-assets/js/scripts/components.js"></script>
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="~/js/farbtastic.js"></script>
+    <script src="~/app-assets/js/scripts/pages/dashboard-analytics.js"></script>
+    <script src="~/app-assets/js/scripts/datatables/datatable.js"></script>
+    <script src="~/app-assets/js/scripts/forms/validation/form-validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+
+    <!-- END: Page JS-->
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            jQuery(function ($) {
+                var path = window.location.href;
+                path = path.split('/');
+                if (path[3] == "" || path[3] == "/") {
+                    $("#dash").addClass("active");
+                }
+                if (path[3] == "Hero") {
+                    $("#home").addClass("open");
+                    $("#heroSection").addClass("open");
+                    $("#sliderEntries").addClass("active");
+                }
+                if (path[3] == "Products") {
+                    $("#home").addClass("open");
+                    $("#productMenu").addClass("open");
+                    $("#productLink").addClass("active");
+                }
+                if (path[3] == "ProductDetails") {
+                    if (path[4] == "Create" || path[4] == "Edit") {
+                        $(".productDetailNote").show();
+                    }
+                    $("#home").addClass("open");
+                    $("#productMenu").addClass("open");
+                    $("#productDetailLink").addClass("active");
+                }
+                 if (path[3] == "FooterLinks") {
+                    $("#home").addClass("open");
+                    $("#FooterLinks").addClass("active");
+                }
+                
+                if (path[3] == "PrimeHero") {
+                    $("#PrimeCarePageMenu").addClass("open");
+                    $("#PrimeCarePageMenu ul li").addClass("active");
+                }
+                if (path[3] == "Faq") {
+                    $("#faqMenu").addClass("open");
+                    $("#faqMenu #faqLink").addClass("active");
+                }
+                if (path[3] == "FaqCategories") {
+                    $("#faqMenu").addClass("open");
+                    $("#faqMenu #faqCatLink").addClass("active");
+                }
+                if (path[3] == "PrimeCare") {
+                    $("#primeCareLink").addClass("open");
+                    $("#primeCareLink ul li").addClass("active");
+                }
+                if (path[3] == "Users") {
+                    $("#userLink").addClass("open");
+                    $("#userLink ul li").addClass("active");
+                }
+
+
+
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

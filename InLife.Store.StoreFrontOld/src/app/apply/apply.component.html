@@ -1,0 +1,1345 @@
+<style type="text/css">
+    .stepdetail .preminumform select {
+        color: #ababab;
+    }
+
+    .uploadfilecontainer {
+        border: 2px dashed #d5d5d5;
+    }
+
+    .uploadfilecontainer{width:100%}
+    .files-list{
+                width:100%;
+                margin-top: 3.3rem;
+    }
+
+    ::ng-deep .my-tooltip {
+        font-size: 13px;
+        background: #000 !important;
+        white-space: pre-line !important;
+        padding: 1rem;
+    }
+    .add_new {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .black {
+        color: #000 !important;
+    }
+    .top-10{top:10%;}
+    @media screen and (max-width: 780px) {
+       .hidden-sm{ display: none; }
+    }
+     @media screen and (min-width: 780px) {
+       .hidden-lg{ display: none; }
+       .checkbox-wrap.smallgender .pf-list-item label span, .smallgender .pf-list-item {
+    width: 100px;
+}
+    }
+
+</style>
+<div class="mainpagewrap">
+    <div class="row m-0">
+        <div class="col-md-9 tabfull p-0">
+            <div class="leftwrapsection">
+                <app-inner-header></app-inner-header>
+                <div class="mainwizard">
+                    <div class="row">
+                        <div class="col-md-3 tabsamll">
+                            <div class="steplist">
+                                <ul class="steplistmain">
+                                    <li class="active complete">Get a Quote </li>
+                                    <li class="active">Apply
+                                        <ul class="innerlist">
+                                            <li class="active"><a href="javascript:void(0)">Personal Information</a>
+                                            </li>
+                                            <li
+                                                [ngClass]="((getApplyForm.get('personalInformation')?.valid))?'active':''">
+                                                <a href="javascript:void(0)">Business / Employment</a></li>
+                                            <li [ngClass]="((getApplyForm.get('employment')?.valid))?'active':''"><a
+                                                    href="javascript:void(0)">Identification</a></li>
+                                            <li [ngClass]="((getApplyForm.get('identification')?.valid))?'active':''"><a
+                                                    href="javascript:void(0)">Beneficiary Details</a></li>
+                                            <li
+                                                [ngClass]="((getApplyForm.get('beneficiaryDetails')?.valid))?'active':''">
+                                                <a href="javascript:void(0)">Declarations</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>Pay</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-9 tabsamll">
+                            <div class="stepdetail">
+                                <div class="pagetitles">
+                                    <h1>Congratulations, you may now avail of Prime Care!</h1>
+                                    <h5 align="center">Please provide additional information to complete your
+                                        application.</h5>
+                                </div>
+                                <form [formGroup]="getApplyForm" (ngSubmit)="submitApplyForm()" novalidate>
+                                    <!-- step4 strat -->
+
+                                    <div class="formcoantiner step4" formGroupName="personalInformation">
+                                        <h3>Personal Information</h3>
+                                        <div class="preminumform">
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+
+                                                    <label for="">Permanent Address</label>
+
+                                                </div>
+                                                <div class="col-md-4 mb-2">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Number and Street" formControlName="street"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('street').dirty || getApplyForm.get('personalInformation').get('street').touched) &&  getApplyForm.get('personalInformation').get('street')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('street')?.valid?'is-valid':''">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('street').dirty || getApplyForm.get('personalInformation').get('street').touched) &&  getApplyForm.get('personalInformation').get('street')?.errors">This
+                                                        is a required field</small>
+
+
+                                                </div>
+                                                <div class="col-md-4 mb-2">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Village / Building Name" formControlName="village"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('village').dirty || getApplyForm.get('personalInformation').get('village').touched) &&  getApplyForm.get('personalInformation').get('village')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('village')?.valid?'is-valid':''">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('village').dirty || getApplyForm.get('personalInformation').get('village').touched) &&  getApplyForm.get('personalInformation').get('village')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-2">
+                                                    <select class="form-control" id="" formControlName="country"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('country').dirty || getApplyForm.get('personalInformation').get('country').touched) &&  getApplyForm.get('personalInformation').get('country')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('country')?.valid?'is-valid black':''">
+                                                        <option value="">Select Country</option>
+                                                        <option *ngFor="let type of CONSTANTS.COUNTRY;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('country').dirty || getApplyForm.get('personalInformation').get('country').touched) &&  getApplyForm.get('personalInformation').get('country')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('country').value == '170'">
+
+                                                    <select class="form-control" id="" formControlName="province"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('province').dirty || getApplyForm.get('personalInformation').get('province').touched) &&  getApplyForm.get('personalInformation').get('province')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('province')?.valid?'is-valid black':''"
+                                                        (change)="onChangeProviance($event.target.value)">
+                                                        <option value="">Select Region / Province</option>
+                                                        <option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.Province}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('province').dirty || getApplyForm.get('personalInformation').get('province').touched) &&  getApplyForm.get('personalInformation').get('province')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('country').value == '170'">
+                                                    <select class="form-control" id="" formControlName="municipality"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('municipality').dirty || getApplyForm.get('personalInformation').get('municipality').touched) &&  getApplyForm.get('personalInformation').get('municipality')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('municipality')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select Municipality</option>
+                                                        <option *ngFor="let type of muncipality;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('municipality').dirty || getApplyForm.get('personalInformation').get('municipality').touched) &&  getApplyForm.get('personalInformation').get('municipality')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('country').value != '170'">
+                                                    <select class="form-control" id="" formControlName="province">
+                                                        <!-- <option value="">Select Region / Province</option> -->
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('country').value != '170'">
+                                                    <select class="form-control" id="" formControlName="municipality">
+                                                        <!-- <option value="">Select Municipality</option> -->
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <input type="text" class="form-control" placeholder="Zip Code" maxlength="4"
+                                                        formControlName="zipCode" [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('zipCode').dirty || getApplyForm.get('personalInformation').get('zipCode').touched) &&  getApplyForm.get('personalInformation').get('zipCode')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('zipCode')?.valid?'is-valid':''
+                                                        ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('zipCode').dirty || getApplyForm.get('personalInformation').get('zipCode').touched) &&  getApplyForm.get('personalInformation').get('zipCode')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Nationality
+                                                    <i class="fa fa-question-circle" matTooltip="Filipino citizenship and current residence in the Philippines are requirements for eligibility to the product. Filipinos currently residing abroad and other nationalities are not eligible to apply"matTooltipPosition="right" [matTooltipClass]="'my-tooltip'"></i>
+                                                    </label>
+                                                    <select class="form-control" id="" formControlName="nationality"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('nationality').dirty || getApplyForm.get('personalInformation').get('nationality').touched) &&  getApplyForm.get('personalInformation').get('nationality')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('personalInformation').get('nationality')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select nationality</option>
+                                                        <option *ngFor="let type of CONSTANTS.COUNTRY;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('nationality').dirty || getApplyForm.get('personalInformation').get('nationality').touched) &&  getApplyForm.get('personalInformation').get('nationality')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Civil Status</label>
+                                                    <select class="form-control" id="" formControlName="civilStatus"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('civilStatus').dirty || getApplyForm.get('personalInformation').get('civilStatus').touched) &&  getApplyForm.get('personalInformation').get('civilStatus')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('civilStatus')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select civil status</option>
+                                                        <option
+                                                            *ngFor="let type of CONSTANTS.CIVIL_STATUS;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('civilStatus').dirty || getApplyForm.get('personalInformation').get('civilStatus').touched) &&  getApplyForm.get('personalInformation').get('civilStatus')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"></div>
+
+                                                <div class="col-md-12">
+                                                    <label for="">Place of Birth</label>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <select class="form-control" id="" formControlName="birthCountry"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('birthCountry').dirty || getApplyForm.get('personalInformation').get('birthCountry').touched) &&  getApplyForm.get('personalInformation').get('birthCountry')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('personalInformation').get('birthCountry')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select Country</option>
+                                                        <option *ngFor="let type of CONSTANTS.COUNTRY;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('birthCountry').dirty || getApplyForm.get('personalInformation').get('birthCountry').touched) &&  getApplyForm.get('personalInformation').get('birthCountry')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('birthCountry').value == '170'">
+
+                                                    <select class="form-control" id="" formControlName="birthProvince"
+                                                        [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('birthProvince').dirty || getApplyForm.get('personalInformation').get('birthProvince').touched) &&  getApplyForm.get('personalInformation').get('birthProvince')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('personalInformation').get('birthProvince')?.valid?'is-valid black':''
+                                                        " (change)="onChangeProviances($event.target.value)">
+                                                        <option value="">Select Region / Province</option>
+                                                        <option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.Province}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('birthProvince').dirty || getApplyForm.get('personalInformation').get('birthProvince').touched) &&  getApplyForm.get('personalInformation').get('birthProvince')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('birthCountry').value == '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="birthMunicipality" [ngClass]="((submitted  || getApplyForm.get('personalInformation').get('birthMunicipality').dirty || getApplyForm.get('personalInformation').get('birthMunicipality').touched) &&  getApplyForm.get('personalInformation').get('birthMunicipality')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('personalInformation').get('birthMunicipality')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select Municipality</option>
+                                                        <option *ngFor="let type of muncipalitys;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('personalInformation').get('birthMunicipality').dirty || getApplyForm.get('personalInformation').get('birthMunicipality').touched) &&  getApplyForm.get('personalInformation').get('birthMunicipality')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('birthCountry').value != '170'">
+                                                    <select class="form-control" id="" formControlName="birthProvince">
+                                                        <!-- <option value="">Select Region / Province</option> -->
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('personalInformation').get('birthCountry').value != '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="birthMunicipality">
+                                                        <!-- <option value="">Select Municipality</option> -->
+                                                    </select>
+                                                </div>
+                                                <div class="col-12" *ngIf="!showSecondStep">
+                                                    <div class="btnsec text-right">
+                                                        <button type="button" class="btn"
+                                                            [disabled]="!getApplyForm.get('personalInformation')?.valid"
+                                                            (click)="setShowSecond();">Continue
+                                                            <i class="material-icons">arrow_forward</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- step5 strat -->
+
+                                    <div class="formcoantiner step5" formGroupName="employment"
+                                        *ngIf="getApplyForm.get('personalInformation')?.valid && showSecondStep">
+                                        <h3 id="step2_head">Business / Employment</h3>
+                                        <div class="preminumform">
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Occupation </label>
+                                                    <select class="form-control" id="" formControlName="occupation"
+                                                        [ngClass]="((submitted
+                                                        || getApplyForm.get('employment').get('occupation').dirty
+                                                        || getApplyForm.get('employment').get('occupation').touched)
+                                                        &&  getApplyForm.get('employment').get('occupation')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('employment').get('occupation')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select occupation</option>
+                                                        <option *ngFor="let type of CONSTANTS.OCCUPATION;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('employment').get('occupation').dirty || getApplyForm.get('employment').get('occupation').touched) &&  getApplyForm.get('employment').get('occupation')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Company </label>
+                                                    <input type="text" class="form-control" disabled="true"
+                                                        *ngIf="getApplyForm.get('employment').get('occupation').value==='1'">
+                                                    <input type="text" class="form-control"
+                                                        *ngIf="getApplyForm.get('employment').get('occupation').value!=='1'"
+                                                        placeholder="Company Name" formControlName="company" [ngClass]="((submitted  || getApplyForm.get('employment').get('company').dirty
+                                                || getApplyForm.get('employment').get('company').touched)
+                                                &&  getApplyForm.get('employment').get('company')?.errors)?'is-invalid'
+                                                :getApplyForm.get('employment').get('company')?.valid?'is-valid':''
+                                                ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('employment').get('company').dirty || getApplyForm.get('employment').get('company').touched) &&  getApplyForm.get('employment').get('company')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Monthly Income </label>
+                                                    <input type="text" class="form-control" disabled="true"
+                                                        *ngIf="getApplyForm.get('employment').get('occupation').value==='1'">
+                                                    <input type="number" maxlength="6"
+                                                        *ngIf="getApplyForm.get('employment').get('occupation').value!=='1'"
+                                                        class="form-control" required placeholder="Enter monthly income"
+                                                        formControlName="monthlyIncome" [ngClass]="((submitted  || getApplyForm.get('employment').get('monthlyIncome').dirty || getApplyForm.get('employment').get('monthlyIncome').touched) &&  getApplyForm.get('employment').get('monthlyIncome')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('employment').get('monthlyIncome')?.valid?'is-valid':''
+                                                        ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted
+                                                        || getApplyForm.get('employment').get('monthlyIncome').dirty
+                                                         || getApplyForm.get('employment').get('monthlyIncome').touched)
+                                                         &&  getApplyForm.get('employment').get('monthlyIncome')?.errors && getApplyForm.get('employment').get('occupation').value!=='1'">Required/Format
+                                                        is incorrect</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Source of funds</label>
+                                                    <select class="form-control" id="" formControlName="fundSource"
+                                                        [ngClass]="((submitted  || getApplyForm.get('employment').get('fundSource').dirty || getApplyForm.get('employment').get('fundSource').touched) &&  getApplyForm.get('employment').get('fundSource')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('employment').get('fundSource')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select source of funds</option>
+                                                        <option *ngFor="let type of CONSTANTS.FUND_SOURCE;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('employment').get('fundSource').dirty || getApplyForm.get('employment').get('fundSource').touched) &&  getApplyForm.get('employment').get('fundSource')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-12" *ngIf="!showThirdStep">
+                                                    <div class="btnsec text-right">
+                                                        <button type="button" class="btn"
+                                                            [disabled]="!getApplyForm.get('employment')?.valid"
+                                                            (click)="setShowThird();">Continue
+                                                            <i class="material-icons">arrow_forward</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- step6 strat -->
+
+                                    <div class="formcoantiner step6" formGroupName="identification" *ngIf="(getApplyForm.get('employment').get('occupation').value==='1'
+                                                && getApplyForm.get('employment').get('fundSource').value!=='' && showThirdStep)
+                                                || (getApplyForm.get('employment')?.valid && showThirdStep)">
+                                        <h3 id="step3_head">Identification</h3>
+                                        <div class="preminumform">
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Valid ID Type </label>
+                                                    <select class="form-control" id="" formControlName="legalIdType"
+                                                        [ngClass]="((submitted  || getApplyForm.get('identification').get('legalIdType').dirty || getApplyForm.get('identification').get('legalIdType').touched) &&  getApplyForm.get('identification').get('legalIdType')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('identification').get('legalIdType')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select valid ID type</option>
+                                                        <option *ngFor="let type of CONSTANTS.ID_TYPE;let i = index"
+                                                            [value]="type.name">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('identification').get('legalIdType').dirty || getApplyForm.get('identification').get('legalIdType').touched) &&  getApplyForm.get('identification').get('legalIdType')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Valid ID Number </label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter valid ID number" formControlName="LegalIdNumber"
+                                                        [ngClass]="((submitted  || getApplyForm.get('identification').get('LegalIdNumber').dirty || getApplyForm.get('identification').get('LegalIdNumber').touched) &&  getApplyForm.get('identification').get('LegalIdNumber')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('identification').get('LegalIdNumber')?.valid?'is-valid':''
+                                                        ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('identification').get('LegalIdNumber').dirty || getApplyForm.get('identification').get('LegalIdNumber').touched) &&  getApplyForm.get('identification').get('LegalIdNumber')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">TIN/SSS/GSIS ID <small>(Optional)</small></label>
+                                                    <select class="form-control" id="secondaryLegalIdType" formControlName="secondaryLegalIdType"
+                                                        [ngClass]="((submitted  || getApplyForm.get('identification').get('secondaryLegalIdType').dirty || getApplyForm.get('identification').get('secondaryLegalIdType').touched) &&  getApplyForm.get('identification').get('secondaryLegalIdType')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('identification').get('secondaryLegalIdType')?.valid?'is-valid':''
+                                                        ">
+                                                        <option value="">Select TIN/SSS/GSIS ID</option>
+                                                        <option *ngFor="let type of CONSTANTS.TINS;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('identification').get('secondaryLegalIdType').dirty || getApplyForm.get('identification').get('secondaryLegalIdType').touched) &&  getApplyForm.get('identification').get('secondaryLegalIdType')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">TIN/SSS/GSIS ID Number <small>(Optional)</small></label>
+                                                    <input type="number" max="99999999999" class="form-control"
+                                                        placeholder="Enter TIN/SSS/GSIS ID Number"
+                                                        formControlName="secondaryLegalIdNumber" [ngClass]="((submitted  || getApplyForm.get('identification').get('secondaryLegalIdNumber').dirty || getApplyForm.get('identification').get('secondaryLegalIdNumber').touched) &&  getApplyForm.get('identification').get('secondaryLegalIdNumber')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('identification').get('secondaryLegalIdNumber')?.valid?'is-valid':''
+                                                        ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('identification').get('secondaryLegalIdNumber').dirty || getApplyForm.get('identification').get('secondaryLegalIdNumber').touched) &&  getApplyForm.get('identification').get('secondaryLegalIdNumber')?.errors">Max Number limit is 11</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+
+												<div class="col-md-7 mb-3 uploadimgescustom">
+													<label>
+														Upload ID: <small>(We will contact you if ID is invalid and/or unreadable.)</small>
+													</label>
+													<label>
+                                                        <small class="errormsgs" *ngIf="sizeError">File size exceeded.</small>
+													</label>
+                                                    <div [hidden]="hasImage">
+                                                        <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="onFileChanged($event)">
+                                                            <input #fileInput hidden type="file"
+                                                                name="file"
+                                                                accept="image/*"
+                                                                formControlName="file"
+                                                                (change)="onFileChanged($event)"
+                                                                [ngClass]="((
+                                                                            submitted
+                                                                            || getApplyForm.get('identification').get('file').dirty
+                                                                            || getApplyForm.get('identification').get('file').touched
+                                                                        )
+                                                                        && getApplyForm.get('identification').get('file')?.errors
+                                                                    )
+                                                                    ? 'is-invalid'
+                                                                    : getApplyForm.get('identification').get('file')?.valid
+                                                                        ? 'is-valid'
+                                                                        :  ''" />
+                                                            <small class="errormsg"
+                                                                *ngIf="(submitted
+                                                                        || getApplyForm.get('identification').get('file').dirty
+                                                                        || getApplyForm.get('identification').get('file').touched)
+                                                                    && getApplyForm.get('identification').get('file')?.errors">
+                                                                Please attach your document
+                                                            </small>
+                                                            <div class="drag-text">
+                                                                <h3>
+                                                                    Click here to upload file
+                                                                    <span>(.JPG, .PNG)</span>
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+													<div class="identity-document-preview" *ngIf="hasImage">
+														<img [src]="insuredIdentityDocumentImagePreview" />
+														<button class="delete-file" (click)="deleteImage()">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+
+												<!--
+												<div class="col-md-5 mb-3 uploadimgescustom">
+													<div class="files-list" *ngFor="let file of files;let i= index">
+														<p>Delete</p>
+														<button class="delete-file" (click)="deleteAttachment(i)">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+												-->
+
+                                                <div class="col-12" *ngIf="!showFourthStep">
+                                                    <div class="btnsec text-right">
+                                                        <button type="button" class="btn"
+                                                            [disabled]="!getApplyForm.get('identification')?.valid || hasImage === false"
+                                                            (click)="setShowFourth();">Continue
+                                                            <i class="material-icons">arrow_forward</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- step7 strat -->
+
+                                    <div class="formcoantiner step7" formGroupName="beneficiaryDetails"
+                                        *ngIf="getApplyForm.get('identification')?.valid && showFourthStep">
+                                        <h3 id="step4_head">Beneficiary Details</h3>
+                                        <div class="preminumform">
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Relationship to Insured </label>
+                                                    <select class="form-control" id="" formControlName="relation"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('relation').dirty || getApplyForm.get('beneficiaryDetails').get('relation').touched) &&  getApplyForm.get('beneficiaryDetails').get('relation')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('beneficiaryDetails').get('relation')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select relationship to insured</option>
+                                                        <option *ngFor="let type of Enumerations.RelationshipBeneficiary; let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('relation').dirty || getApplyForm.get('beneficiaryDetails').get('relation').touched) &&  getApplyForm.get('beneficiaryDetails').get('relation')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <label for="">Name</label>
+                                                </div>
+                                                <div class="col-md-2 mb-3">
+                                                    <select class="form-control" id="" formControlName="prefix"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('prefix').dirty || getApplyForm.get('beneficiaryDetails').get('prefix').touched) &&  getApplyForm.get('beneficiaryDetails').get('prefix')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('beneficiaryDetails').get('prefix')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Prefix</option>
+                                                        <option *ngFor="let type of CONSTANTS.PREFIX;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-8 mb-3">
+                                                    <div class="input-group">
+                                                        <div class="fieldinnr">
+                                                            <input type="text" class="form-control fname"
+                                                                placeholder="First Name" formControlName="fname"
+                                                                [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('fname').dirty || getApplyForm.get('beneficiaryDetails').get('fname').touched) &&  getApplyForm.get('beneficiaryDetails').get('fname')?.errors)?'is-invalid'
+                                                                 :getApplyForm.get('beneficiaryDetails').get('fname')?.valid?'is-valid':''
+                                                                ">
+                                                            <small class="errormsg"
+                                                                *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('fname').dirty || getApplyForm.get('beneficiaryDetails').get('fname').touched) &&  getApplyForm.get('beneficiaryDetails').get('fname')?.errors">This
+                                                                is a required field</small>
+                                                        </div>
+                                                        <div class="fieldinnr">
+                                                            <input type="text" class="form-control mname"
+                                                                placeholder="Middle Name" formControlName="mname"
+                                                                [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('mname').dirty || getApplyForm.get('beneficiaryDetails').get('mname').touched) &&  getApplyForm.get('beneficiaryDetails').get('mname')?.errors)?'is-invalid'
+                                                                 :getApplyForm.get('beneficiaryDetails').get('mname')?.valid?'is-valid':''
+                                                                ">
+                                                            <small class="errormsg"
+                                                                *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('mname').dirty || getApplyForm.get('beneficiaryDetails').get('mname').touched) &&  getApplyForm.get('beneficiaryDetails').get('mname')?.errors">This
+                                                                is a required field</small>
+                                                        </div>
+                                                        <div class="fieldinnr">
+                                                            <input type="text" class="form-control lname"
+                                                                placeholder="Last Name" formControlName="lname"
+                                                                [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('lname').dirty || getApplyForm.get('beneficiaryDetails').get('lname').touched) &&  getApplyForm.get('beneficiaryDetails').get('lname')?.errors)?'is-invalid'
+                                                                 :getApplyForm.get('beneficiaryDetails').get('lname')?.valid?'is-valid':''
+                                                                ">
+                                                            <small class="errormsg"
+                                                                *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('lname').dirty || getApplyForm.get('beneficiaryDetails').get('lname').touched) &&  getApplyForm.get('beneficiaryDetails').get('lname')?.errors">This
+                                                                is a required field</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 mb-3">
+                                                    <select class="form-control" id="" formControlName="suffix"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('suffix').dirty || getApplyForm.get('beneficiaryDetails').get('suffix').touched) &&  getApplyForm.get('beneficiaryDetails').get('suffix')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('beneficiaryDetails').get('suffix')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Suffix</option>
+                                                        <option *ngFor="let type of CONSTANTS.SUFFIX;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <label for="">Address</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <label class="radio-container customcheckcircle">Same address as
+                                                        insured
+                                                        <input type="checkbox" checked="checked"
+                                                            formControlName="sameAddress"
+                                                            (change)="setSameAddress($event)"> <span
+                                                            class="checkmark"></span>
+                                                        <small class="errormsg"
+                                                            *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('sameAddress').dirty || getApplyForm.get('beneficiaryDetails').get('sameAddress').touched) &&  getApplyForm.get('beneficiaryDetails').get('sameAddress')?.errors">This
+                                                            is a required field</small>
+
+                                                    </label>
+                                                    <br>
+                                                </div>
+
+
+
+                                                <div class="col-md-4 mb-2">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Number and Street" formControlName="insuredStreet"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredStreet').dirty || getApplyForm.get('beneficiaryDetails').get('insuredStreet').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredStreet')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredStreet')?.valid?'is-valid':''
+                                                        ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredStreet').dirty || getApplyForm.get('beneficiaryDetails').get('insuredStreet').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredStreet')?.errors">This
+                                                        is a required field</small>
+
+
+                                                </div>
+                                                <div class="col-md-4 mb-2">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Village / Building Name"
+                                                        formControlName="insuredVillage" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredVillage').dirty || getApplyForm.get('beneficiaryDetails').get('insuredVillage').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredVillage')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredVillage')?.valid?'is-valid':''
+                                                        ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredVillage').dirty || getApplyForm.get('beneficiaryDetails').get('insuredVillage').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredVillage')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-2">
+                                                    <select class="form-control" id="" formControlName="insuredCountry"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredCountry').dirty || getApplyForm.get('beneficiaryDetails').get('insuredCountry').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredCountry')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('beneficiaryDetails').get('insuredCountry')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select Country</option>
+                                                        <option *ngFor="let type of CONSTANTS.COUNTRY;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredCountry').dirty || getApplyForm.get('beneficiaryDetails').get('insuredCountry').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredCountry')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredCountry').value == '170'">
+
+                                                    <select class="form-control" id="" formControlName="insuredProvince"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredProvince').dirty || getApplyForm.get('beneficiaryDetails').get('insuredProvince').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredProvince')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredProvince')?.valid?'is-valid black':''
+                                                        " (change)="onChangeBeneficiaryProviance($event.target.value)">
+                                                        <option value="">Select Region / Province</option>
+                                                        <option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.Province}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredProvince').dirty || getApplyForm.get('beneficiaryDetails').get('insuredProvince').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredProvince')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredCountry').value == '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredMunicipality" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').dirty || getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredMunicipality')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredMunicipality')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select Municipality</option>
+                                                        <option
+                                                            *ngFor="let type of beneficiaryMuncipality;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').dirty || getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredMunicipality')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredCountry').value != '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredProvince">
+                                                        <!-- <option value="">Select Region / Province</option> -->
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredCountry').value != '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredMunicipality">
+                                                        <!-- <option value="">Select Municipality</option> -->
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <input type="text" class="form-control" placeholder="Zip Code" maxlength="4"
+                                                        formControlName="insuredZipCode" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredZipCode').dirty || getApplyForm.get('beneficiaryDetails').get('insuredZipCode').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredZipCode')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredZipCode')?.valid?'is-valid':''
+                                                        ">
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredZipCode').dirty || getApplyForm.get('beneficiaryDetails').get('insuredZipCode').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredZipCode')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Civil Status</label>
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredCivilStatus" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').dirty || getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select civil status</option>
+                                                        <option
+                                                            *ngFor="let type of CONSTANTS.CIVIL_STATUS;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').dirty || getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Gender</label>
+                                                    <div class="checkbox-wrap smallgender" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredGender').dirty || getApplyForm.get('beneficiaryDetails').get('insuredGender').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredGender')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredGender')?.valid?'is-valid':''
+                                                        ">
+                                                        <span class="pf-form-control pf-checkbox">
+															<span class="pf-list-item" *ngFor="let type of CONSTANTS.GENDER; let i = index">
+																<label>
+																	<input type="radio" [value]="type.id" formControlName="insuredGender" />
+																	<span class="pf-list-item-label">
+																		<i class="material-icons">done</i>{{type.name}}
+																	</span>
+																</label>
+															</span>
+															<!--
+                                                            <span class="pf-list-item">
+                                                                <label><input type="radio" id="male" value="Male"
+                                                                        formControlName="insuredGender">
+                                                                    <span class="pf-list-item-label"><i
+                                                                            class="material-icons">done</i>Male</span></label>
+                                                            </span>
+                                                            <span class="pf-list-item">
+                                                                <label><input type="radio" id="female"
+                                                                        formControlName="insuredGender" value="Female">
+                                                                    <span class="pf-list-item-label"><i
+                                                                            class="material-icons">done</i>Female</span></label>
+                                                            </span>
+															-->
+														</span>
+                                                    </div>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredGender').dirty || getApplyForm.get('beneficiaryDetails').get('insuredGender').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredGender')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Birthdate</label>
+                                                    <div class="form-group mb-4">
+                                                        <div class="datepicker date input-group">
+                                                            <input type="text" matInput [max]="maxYear"
+                                                                class="form-control" id="insuredDateofbirth"
+                                                                formControlName="insuredDateofbirth"
+                                                                [matDatepicker]="picker" readonly [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').dirty || getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth')?.errors)?'is-invalid'
+                                                                 :getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth')?.valid?'is-valid':''
+                                                                " (click)="picker.open()">
+
+                                                            <mat-datepicker-toggle matSuffix [for]="picker">
+                                                            </mat-datepicker-toggle>
+                                                            <mat-datepicker #picker></mat-datepicker>
+                                                            <small class="errormsg"
+                                                                *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').dirty || getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth')?.errors">This
+                                                                is a required field</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <label for="">Place of Birth</label>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredBirthCountry" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').dirty || getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry')?.errors)?'is-invalid'
+                                                          :getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select Country</option>
+                                                        <option *ngFor="let type of CONSTANTS.COUNTRY;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').dirty || getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').value == '170'">
+
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredBirthProvince" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredBirthProvince').dirty || getApplyForm.get('beneficiaryDetails').get('insuredBirthProvince').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredBirthProvince')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredBirthProvince')?.valid?'is-valid black':''
+                                                        "
+                                                        (change)="onChangeBeneficiaryProviances($event.target.value)">
+                                                        <option value="">Select Region / Province</option>
+                                                        <option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.Province}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredBirthProvince').dirty || getApplyForm.get('beneficiaryDetails').get('insuredBirthProvince').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredBirthProvince')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').value == '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredBirthMunicipality" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredBirthMunicipality').dirty || getApplyForm.get('beneficiaryDetails').get('insuredBirthMunicipality').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredBirthMunicipality')?.errors)?'is-invalid'
+                                                        :getApplyForm.get('beneficiaryDetails').get('insuredBirthMunicipality')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select Municipality</option>
+                                                        <option
+                                                            *ngFor="let type of beneficiaryMuncipalities;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredBirthMunicipality').dirty || getApplyForm.get('beneficiaryDetails').get('insuredBirthMunicipality').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredBirthMunicipality')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').value != '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredBirthProvince">
+                                                        <!-- <option value="">Select Region / Province</option> -->
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-4 mb-3"
+                                                    *ngIf="getApplyForm.get('beneficiaryDetails').get('insuredBirthCountry').value != '170'">
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredBirthMunicipality">
+                                                        <!-- <option value="">Select Municipality</option> -->
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Nationality</label>
+                                                    <select class="form-control" id=""
+                                                        formControlName="insuredNationality" [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredNationality').dirty || getApplyForm.get('beneficiaryDetails').get('insuredNationality').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredNationality')?.errors)?'is-invalid'
+                                                          :getApplyForm.get('beneficiaryDetails').get('insuredNationality')?.valid?'is-valid black':''
+                                                        ">
+                                                        <option value="">Select nationality</option>
+                                                        <option *ngFor="let type of CONSTANTS.COUNTRY;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredNationality').dirty || getApplyForm.get('beneficiaryDetails').get('insuredNationality').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredNationality')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Contact Number</label>
+                                                    <div class="input-group iconfieldcustom">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text areacode" id="">+63</span>
+                                                        </div>
+                                                        <input type="text" maxlength="9" class="form-control pnumber"
+                                                            placeholder="Landline" formControlName="insuredLandline"
+                                                            [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredLandline').dirty || getApplyForm.get('beneficiaryDetails').get('insuredLandline').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredLandline')?.errors)?'is-invalid'
+                                                             :getApplyForm.get('beneficiaryDetails').get('insuredLandline')?.valid?'is-valid':''
+                                                            ">
+                                                        <small class="errormsg"
+                                                            *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredLandline').dirty || getApplyForm.get('beneficiaryDetails').get('insuredLandline').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredLandline')?.errors">Landline
+                                                            Number is incorrect</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="" style="opacity: 0;">Contact Number</label>
+                                                    <div class="input-group iconfieldcustom">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text areacode" id="">+63</span>
+                                                        </div>
+                                                        <input type="text" maxlength="10" class="form-control pnumber"
+                                                            placeholder="Mobile" formControlName="insuredMobile"
+                                                            [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredMobile').dirty || getApplyForm.get('beneficiaryDetails').get('insuredMobile').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredMobile')?.errors)?'is-invalid'
+                                                             :getApplyForm.get('beneficiaryDetails').get('insuredMobile')?.valid?'is-valid':''
+                                                            ">
+                                                        <small class="errormsg"
+                                                            *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('insuredMobile').dirty || getApplyForm.get('beneficiaryDetails').get('insuredMobile').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredMobile')?.errors">
+                                                            Mobile Number is incorrect</small>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Designation
+                                                        <i class="fa fa-question-circle" matTooltip="Primary Beneficiary - refers to the beneficiary/party given the first priority
+                                                      to receive the death proceeds of the policy if the insured dies.
+
+                                                      Revocable Beneficiary - owner of the policy can remove or make changes to beneficiary
+                                                      designation at any time without their permission."
+                                                            matTooltipPosition="right"
+                                                            [matTooltipClass]="'my-tooltip'"></i>
+                                                    </label>
+                                                    <select class="form-control" id="" formControlName="designation"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('designation').dirty || getApplyForm.get('beneficiaryDetails').get('designation').touched) &&  getApplyForm.get('beneficiaryDetails').get('designation')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('beneficiaryDetails').get('designation')?.valid?'is-valid black':''
+                                                        ">
+                                                        <!--option value="">Select designation</option-->
+                                                        <option *ngFor="let type of CONSTANTS.BENEFICIARY_PRIORITY;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+
+                                                    </select>
+
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('designation').dirty || getApplyForm.get('beneficiaryDetails').get('designation').touched) &&  getApplyForm.get('beneficiaryDetails').get('designation')?.errors">This
+                                                        is a required field</small>
+
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="">Type
+                                                        <i class="fa fa-question-circle" matTooltip="Primary Beneficiary - refers to the beneficiary/party given the first priority
+                                                      to receive the death proceeds of the policy if the insured dies.
+
+                                                      Revocable Beneficiary - owner of the policy can remove or make changes to beneficiary
+                                                      designation at any time without their permission."
+                                                            matTooltipPosition="right"
+                                                            [matTooltipClass]="'my-tooltip'"></i>
+                                                    </label>
+                                                    <select class="form-control" id="" formControlName="type"
+                                                        [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('type').dirty || getApplyForm.get('beneficiaryDetails').get('type').touched) &&  getApplyForm.get('beneficiaryDetails').get('type')?.errors)?'is-invalid'
+                                                         :getApplyForm.get('beneficiaryDetails').get('type')?.valid?'is-valid black':''
+                                                        "
+                                                    >
+                                                        <!--option value="">Select type</-->
+                                                        <option *ngFor="let type of CONSTANTS.BENEFICIARY_RIGHT;let i = index"
+                                                            [value]="type.id">
+                                                            {{type.name}}
+                                                        </option>
+                                                    </select>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('beneficiaryDetails').get('type').dirty || getApplyForm.get('beneficiaryDetails').get('type').touched) &&  getApplyForm.get('beneficiaryDetails').get('type')?.errors">This is a required field</small>
+
+                                                </div>
+
+                                                <div class="col-12" *ngIf="!showFifthStep">
+                                                    <div class="btnsec text-right">
+                                                        <button type="button" class="btn"
+                                                            [disabled]="!getApplyForm.get('beneficiaryDetails')?.valid"
+                                                            (click)="setShowFifth();">Continue
+                                                            <i class="material-icons">arrow_forward</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- step8 strat -->
+
+                                    <div class="formcoantiner declarationsection step8" formGroupName="declarationForm"
+                                        *ngIf="getApplyForm.get('beneficiaryDetails')?.valid && showFifthStep">
+                                        <h3 id="step5_head">Declarations <small>(All fields are required)</small></h3>
+                                        <div class="preminumform">
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <label class="radio-container">I hereby read and agree to the Data
+                                                        Privacy Statement as stated in the Customer Acceptance of
+                                                        Insular Life's <a style="font-size: inherit;" class="p-link"
+                                                            href="https://www.insularlife.com.ph/customer-charter"
+                                                            target="_blank">Customer Charter.</a>
+                                                        <input type="checkbox" value="Yes" formControlName="declaration"> <span
+                                                            class="checkmark"></span>
+                                                    </label>
+                                                    <small class="errormsg"
+                                                        *ngIf="(submitted  || getApplyForm.get('declarationForm').get('declaration').dirty
+                                                    || getApplyForm.get('declarationForm').get('declaration').touched)
+                                                    &&  getApplyForm.get('declarationForm').get('declaration')?.errors">This
+                                                        is a required field</small>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <p>Foreign Account Tax Compliance Act (FATCA)</p>
+
+                                                    <ul class="condtionslist listinnevcondition">
+                                                        <li>Are you a U.S Person* under US laws?
+                                                            <i class="fa fa-question-circle" matTooltip="US Persion means:
+                                                            a)a US citizen(including dual citizens where one country of
+                                                            citizenship is the US);
+
+                                                            b)US Permanent Resident;
+
+                                                            c)a person with substantial presence of mor than 31 days in the country calendar year or a totalof 183 days over the past 3 years from the current year; or
+
+                                                            d)a partnership/corporation organized in the US;
+
+                                                            e)US-owned foreign entity with 1 or more substantial US owner(one who owns more than 10% of the entity by vote or value)"
+                                                                matTooltipPosition="right"
+                                                                [matTooltipClass]="'my-tooltip'"></i>
+
+
+                                                            <div class="form-row">
+
+                                                                <div class="col-md-3 col-4">
+                                                                    <label class="radio-container">Yes
+                                                                        <input type="radio"
+                                                                            formControlName="uslawpersion"
+                                                                            id="uslawpersion" value="Yes"> <span
+                                                                            class="checkmark"></span>
+                                                                    </label> </div>
+                                                                <div class="col-md-3 col-4">
+                                                                    <label class="radio-container">No
+                                                                        <input type="radio" value="No" id="uslawpersion"
+                                                                            formControlName="uslawpersion">
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-md-6 col-4">
+                                                                    <small class="errormsgs"
+                                                                        *ngIf="(submitted  || getApplyForm.get('declarationForm').get('uslawpersion').dirty
+                                                                    || getApplyForm.get('declarationForm').get('uslawpersion').touched)
+                                                                    &&  getApplyForm.get('declarationForm').get('uslawpersion')?.errors">This
+                                                                        is a required field</small>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>If you are not a US Person under US laws, do you have any of
+                                                            the following US indicia**
+                                                            <i class="fa fa-question-circle" matTooltip="a)US place of birth;
+
+                                                            b)current US residence address,mailing address,phone number associalted with a financial account maintained in the US;
+
+                                                            c)a standing instruction to transfer funds to that account;
+
+                                                            d)a power of Attorney or signatory authority granted to be a person with a US address;or
+
+                                                            e)has an 'in case of' address or 'hold mail' address that is your sole address"
+                                                                matTooltipPosition="right"
+                                                                [matTooltipClass]="'my-tooltip'"></i>
+                                                            <div class="form-row">
+                                                                <div class="col-md-3 col-4">
+                                                                    <label class="radio-container">Yes
+                                                                        <input type="radio" formControlName="usnotlaw"
+                                                                            id="usnotlaw" value="Yes"> <span
+                                                                            class="checkmark"></span>
+                                                                    </label> </div>
+                                                                <div class="col-md-3 col-4"> <label
+                                                                        class="radio-container">No
+                                                                        <input type="radio" formControlName="usnotlaw"
+                                                                            id="usnotlaw" value="No">
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <small class="errormsgs"
+                                                                        *ngIf="(submitted  || getApplyForm.get('declarationForm').get('usnotlaw').dirty
+                                                                    || getApplyForm.get('declarationForm').get('usnotlaw').touched)
+                                                                    &&  getApplyForm.get('declarationForm').get('usnotlaw')?.errors">This
+                                                                        is a required field</small>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </li>
+                                                    </ul>
+                                                    <br>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <label class="radio-container">If there is any change in my declared
+                                                        status, I undertake to inform InLife of such change by submitting
+                                                        an updated accomplished FATCA Form.
+                                                        <input type="checkbox" name="" formControlName="confirmdeclare"
+                                                            id="confirmdeclare"> <span class="checkmark"></span>
+                                                    </label>
+
+                                                    <div class="col-md-12">
+                                                        <small class="errormsgs"
+                                                            *ngIf="(submitted  || getApplyForm.get('declarationForm').get('confirmdeclare').dirty
+                                                         || getApplyForm.get('declarationForm').get('confirmdeclare').touched)
+                                                         &&  getApplyForm.get('declarationForm').get('confirmdeclare')?.errors">This
+                                                            is a required field</small>
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <p> Declaration of Proposed Replacement of Existing Policies,
+                                                        </p>
+                                                        <ul class="condtionslist listinnevcondition">
+                                                            <li> Total Life Insurance in Force on the Proposed Insured
+                                                                <div class="form-row hidden-sm">
+                                                                    <div class="customrowform">
+                                                                        <div class="customlabel bigcol"> <label
+                                                                                for="">Company </label></div>
+                                                                        <div class="customlabel bigcol"> <label
+                                                                                for="">Basic/Cover </label></div>
+                                                                        <div class="customlabel bigcol"> <label
+                                                                                for="">Dreaded Disease </label></div>
+                                                                        <div class="customlabel bigcol"> <label
+                                                                                for="">Accident Rider </label></div>
+                                                                        <div class="customlabel bigsmall"> <label
+                                                                                for="">Year of Issue </label></div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="customrowform"
+                                                                    *ngFor="let dynamic of dynamicArray;let i=index;">
+                                                                    <div class="customlabel bigcol"><label class="hidden-lg"
+                                                                                for="">Company </label> <input [ngModelOptions]="{standalone: true}" [(ngModel)]="dynamicArray[i].CompanyName" class="form-control" type="text" />   </div>
+                                                                    <div class="customlabel bigcol"> <label class="hidden-lg"
+                                                                                for="">Basic/Cover</label><input [ngModelOptions]="{standalone: true}" [(ngModel)]="dynamicArray[i].LifeFaceAmount" class="form-control" type="number" maxlength="8" max="90000000" />   </div>
+                                                                    <div class="customlabel bigcol"><label class="hidden-lg"
+                                                                                for="">Dreaded Disease</label> <input [ngModelOptions]="{standalone: true}" [(ngModel)]="dynamicArray[i].DreadDiseaseFaceAmount" class="form-control" type="number" maxlength="8" max="90000000" />   </div>
+                                                                    <div class="customlabel bigcol"><label class="hidden-lg"
+                                                                                for="">Accident Rider</label> <input [ngModelOptions]="{standalone: true}" [(ngModel)]="dynamicArray[i].AccidentalFaceAmount" class="form-control" type="number" maxlength="8" max="90000000" />   </div>
+                                                                    <div class="customlabel bigsmall"><label class="hidden-lg"
+                                                                                for="">Year of Issue </label>
+                                                                        <input [ngModelOptions]="{standalone: true}" [(ngModel)]="dynamicArray[i].IssueYear" class="form-control" type="number" maxlength="4" max="2040" />
+                                                                    </div>
+                                                                    <div class="customlabel"><i class="fa fa-trash"
+                                                                            (click)="removeRow(i)"></i></div>
+                                                                </div>
+                                                                <div class="addneweow"><span class="add_new" (click)="addRow();">
+                                                                        <i class="material-icons">add_circle</i> Add
+                                                                        New Row</span></div>
+                                                                <br>
+                                                            </li>
+
+                                                            <li>Has there been or will there be any change in any
+                                                                existing insurance in force?
+                                                                <div class="form-row">
+                                                                    <div class="col-md-3 col-4">
+                                                                        <label class="radio-container">Yes
+                                                                            <input type="radio"
+                                                                                formControlName="changeexstinginsurance"
+                                                                                id="changeexstinginsurance" value="Yes">
+                                                                            <span class="checkmark"></span>
+                                                                        </label> </div>
+                                                                    <div class="col-md-3 col-4"> <label
+                                                                            class="radio-container">No
+                                                                            <input type="radio"
+                                                                                formControlName="changeexstinginsurance"
+                                                                                id="changeexstinginsurance" value="No">
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <small class="errormsgs"
+                                                                            *ngIf="(submitted  || getApplyForm.get('declarationForm').get('changeexstinginsurance').dirty
+                                                                        || getApplyForm.get('declarationForm').get('changeexstinginsurance').touched)
+                                                                        &&  getApplyForm.get('declarationForm').get('changeexstinginsurance')?.errors">This
+                                                                            is a required field</small>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li>Will premiums for the insurance applied for be paid by
+                                                                any loan from any existing policy?
+                                                                <div class="form-row">
+                                                                    <div class="col-md-3 col-4">
+                                                                        <label class="radio-container">Yes
+                                                                            <input type="radio"
+                                                                                formControlName="premiumpaid"
+                                                                                id="premiumpaid" value="Yes"> <span
+                                                                                class="checkmark"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-md-3 col-4"> <label
+                                                                            class="radio-container">No
+                                                                            <input type="radio"
+                                                                                formControlName="premiumpaid"
+                                                                                id="premiumpaid" value="No">
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <small class="errormsgs"
+                                                                            *ngIf="(submitted  || getApplyForm.get('declarationForm').get('premiumpaid').dirty
+                                                                        || getApplyForm.get('declarationForm').get('premiumpaid').touched)
+                                                                        &&  getApplyForm.get('declarationForm').get('premiumpaid')?.errors">This
+                                                                            is a required field</small>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="font-15">Important: If yes, please furnish
+                                                                    details (name of company, policy number and amount
+                                                                    of insurance being replaced).</p>
+                                                                <p class="font-15">REMINDER: It is usually
+                                                                    disadvantageous to REPLACE existing insurance
+                                                                    policy(ies) with a new one. Some disadvantages are:
+                                                                    (1) You may not be insurable on standard terms (2)
+                                                                    You may have to pay premium in view of higher age
+                                                                    (3) You may lose financial benefits accumulated over
+                                                                    the years. Please note that in your own interest, we
+                                                                    would advise that you consult your present insurer
+                                                                    before making a financial decision. Hear from both
+                                                                    sides and make careful comparison, You can then be
+                                                                    sure that you are making a decision that is in your
+                                                                    best interest.</p>
+
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <p>Anti-Money Laundering and Counter Financing of Terrorism:
+                                                            United Nations Security Council Resolution (UNSCR) 1540</p>
+
+                                                        <label class="radio-container">I hereby agree to be bound by the
+                                                            obligations set out in the relevant UNSCR relating to the
+                                                            prevention and suppression of proliferation financing of
+                                                            Weapons of Mass Destruction, including the freezing and
+                                                            unfreezing actions as well as prohibitions from conducting
+                                                            transactions with designated persons and entities
+                                                            <input type="checkbox" formControlName="antimoneylaundary"
+                                                                id="antimoneylaundary"> <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <small class="errormsgs"
+                                                            *ngIf="(submitted  || getApplyForm.get('declarationForm').get('antimoneylaundary').dirty
+                                                         || getApplyForm.get('declarationForm').get('antimoneylaundary').touched)
+                                                         &&  getApplyForm.get('declarationForm').get('antimoneylaundary')?.errors">This
+                                                            is a required field</small>
+                                                        <hr>
+                                                    </div>
+
+                                                    <div class="col-md-12 mb-5">
+                                                        <label class="radio-container">I confirm that the above
+                                                            declarations are true and correct. <input type="checkbox"
+                                                                name="" formControlName="confirmcorrect"
+                                                                id="confirmcorrect"> <span class="checkmark"></span>
+                                                        </label>
+                                                        <small class="errormsg"
+                                                            *ngIf="(submitted  || getApplyForm.get('declarationForm').get('confirmcorrect').dirty
+                                                         || getApplyForm.get('declarationForm').get('confirmcorrect').touched)
+                                                         &&  getApplyForm.get('declarationForm').get('confirmcorrect')?.errors">This
+                                                            is a required field</small>
+                                                    </div>
+                                                    <div class="col-md-12 mb-5">
+                                                        <label class="radio-container">I completed and submitted this
+                                                            application within the Philippines. <input type="checkbox"
+                                                                name="" formControlName="submitedPhilphine"
+                                                                id="submitedPhilphine"> <span class="checkmark"></span>
+                                                        </label>
+                                                        <small class="errormsg"
+                                                            *ngIf="(submitted  || getApplyForm.get('declarationForm').get('submitedPhilphine').dirty
+                                                         || getApplyForm.get('declarationForm').get('submitedPhilphine').touched)
+                                                         &&  getApplyForm.get('declarationForm').get('submitedPhilphine')?.errors">This
+                                                            is a required field</small>
+                                                    </div>
+                                                    <div class="col-md-12 mb-5">
+                                                        <label class="radio-container">I wish to be informed of InLife
+                                                            products, and other promotions, campaigns, or events that
+                                                            might interest me. <input type="checkbox"
+                                                                formControlName="informproduct" id="informproduct">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <small class="errormsg"
+                                                            *ngIf="(submitted  || getApplyForm.get('declarationForm').get('informproduct').dirty
+                                                         || getApplyForm.get('declarationForm').get('informproduct').touched)
+                                                         &&  getApplyForm.get('declarationForm').get('informproduct')?.errors">This
+                                                            is a required field</small>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="btnsec text-left"><button class="btn outlinedbtn"><i
+                                                            class="material-icons" [routerLink]="['/get-quote']" [queryParams]="{ plan: 'plan_50'}">arrow_backward</i> Back </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="btnsec text-right"><button type="submit" [disabled]="!getApplyForm.get('declarationForm')?.valid || hasImage===false"
+                                                        class="btn">Continue to Pay <i
+                                                            class="material-icons">arrow_forward</i> </button></div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3 tabfull p-0">
+            <app-inner-sidebar></app-inner-sidebar>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,258 @@
+<div class="mainpagewrap">
+    <div class="row m-0">
+        <div class="col-md-9 p-0">
+            <div class="leftwrapsection">
+                <div class="logotitlebar">
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="logo-sec"><a href="#"><img src="assets/images/logo.png"></a></div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="pagetitel-sec">
+                                <h3>Prime Care</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainwizard">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="steplist">
+                                <ul class="steplistmain">
+                                    <li class="active complete">Get a Quote </li>
+                                    <li class="active complete">Apply </li>
+
+
+                                    <li class="active">Pay
+                                        <ul class="innerlist">
+                                            <li class="active"><a href="#">Plan Summary</a></li>
+                                            <li class=""><a href="#">Payment</a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="stepdetail">
+                                <div class="pagetitles">
+                                    <h1>Please review your plan details before proceeding to payment.</h1>
+
+                                </div>
+
+
+                                <!-- step9 strat -->
+
+
+                                <div class="formcoantiner step9">
+                                    <div class="reviewbill">
+                                        <div class="row">
+                                            <div class="col-md-4 titlebill">
+                                                <p> Proposed Insured </p>
+                                            </div>
+                                            <div class="col-md-8 detailbill">
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p> First Name:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p>{{basicInformation.fname}}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 titlebill">
+                                                <p> Personal Information </p>
+                                            </div>
+                                            <div class="col-md-8 detailbill">
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Email Address:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p> {{basicInformation.email}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Birthdate:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p> {{calculationInformation.dateofbirth|date}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Contact Number:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p> {{basicInformation.mobile}}<br>
+                                                            {{basicInformation.landline}}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <br> <br>
+
+                                        <div class="row">
+                                            <div class="col-md-4 titlebill">
+                                                <p> Plan Details </p>
+                                            </div>
+                                            <div class="col-md-8 detailbill">
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p> Product Name:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p>Insular Life Prime Care</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Plan:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p *ngIf="calculationInformation.totalCashBenefit==='1080000'"> Plan 50 (P10,80000)</p>
+                                                        <p *ngIf="calculationInformation.totalCashBenefit==='1800000'"> Plan 30 (P1,800000)</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Current Age:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p>{{age.age}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Gender:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p>{{calculationInformation.gender}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Mode of Payment</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p> {{calculationInformation.paymentMode}}</p>
+                                                    </div>
+                                                </div>
+                                                <br>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Initial Premium Amount</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p>{{getinnerForm.amount}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Initial Lump Sum Benefit:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                         <p *ngIf="calculationInformation.totalCashBenefit==='1080000'">&#8369; 1,80,000.00</p>
+                                                        <p *ngIf="calculationInformation.totalCashBenefit==='1800000'">&#8369; 3,00,000.00</p>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>Total Monthly Allowance:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                         <p *ngIf="calculationInformation.totalCashBenefit==='1080000'">&#8369; 30,000.00</p>
+                                                        <p *ngIf="calculationInformation.totalCashBenefit==='1800000'">&#8369; 50,000.00</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row m-0">
+                                                    <div class="col-6">
+                                                        <p>TPD Benefit:</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                         <p *ngIf="calculationInformation.totalCashBenefit==='1080000'">&#8369; 10,80,000.00</p>
+                                                        <p *ngIf="calculationInformation.totalCashBenefit==='1800000'">&#8369; 18,00,000.00</p>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <br> <br>
+                                        <p>Prime Care is a yearly renewable term plan until age 69. Premiums for the
+                                            following years may change based on the attained age of the insured.</p>
+                                        <p>Reminder: <br>
+                                            For monthly payment mode, enrolment to our Auto-Charging Option (ACO)
+                                            facility is required for payment of succeeding monthly premiums using your
+                                            Mastercard or VISA credit cards to keep your policy in force.</p>
+                                        <p class="linkdpay"> <a href="#">Download the Policy Provisions</a> <a
+                                                href="#">Click here for Policy on Cancellation and Refund</a>
+                                            <a href="#">Link to Customer Charter </a> </p>
+                                    </div>
+                                    <div class="outerdesclaimer">
+                                        <p>If you wish to change anything related to your application, please select
+                                            Edit Details. Otherwise, please select Pay Now to proceed with your payment
+                                            transaction.</p>
+
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-6">
+                                            <div class="btnsec text-left"><a class="btn outlinedbtn" [routerLink]="['/apply']"><i
+                                                        class="material-icons">arrow_backward</i> Edit Details </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="btnsec text-right"><a class="btn" (click)="createAppication();" href="javascript:void(0)">Pay Now <i
+                                                        class="material-icons">arrow_forward</i> </a></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3 p-0">
+        </div>
+    </div>
+
+</div>

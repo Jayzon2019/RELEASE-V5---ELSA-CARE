@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Repository\Extensions\**" />
+	  <EmbeddedResource Remove="Repository\Extensions\**" />
+	  <None Remove="Repository\Extensions\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Business\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Services\IOrderService.cs" />
+	</ItemGroup>
+</Project>
