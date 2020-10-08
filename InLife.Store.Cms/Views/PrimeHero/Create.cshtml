@@ -1,231 +1,253 @@
-﻿@model InLife.Store.Cms.ViewModels.PrimeHeroViewModel
+@model PrimeHeroViewModel
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title text-title">Create New Prime Hero Banner</h4>
-            </div>
-            <div class="card-content">
-                <div class="card-body card-dashboard">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title text-title">Create New Prime Hero Banner</h4>
+			</div>
+			<div class="card-content">
+				<div class="card-body card-dashboard">
 
-                    <div class="col-md-12">
-                        <form asp-action="Create" enctype="multipart/form-data" novalidate>
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <p style="text-align:center;"><span style="color:red;"><b>@ViewBag.error</b></span></p>
+					<div class="col-md-12">
+						<form asp-action="Create" enctype="multipart/form-data" novalidate>
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<p style="text-align:center;"><span style="color:red;"><b>@ViewBag.error</b></span></p>
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <div style="width:150px;height:150px;"> <img id="primeHero_img" style="width:100%;border:solid" /> </div>
-                                            <label class="control-label text-secondary">Prime Hero Background Image</label>
-                                            <input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" required data-validation-required-message="Prime Hero Background Image is Required" />
-                                            <span asp-validation-for="strPrimeHeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <div style="width:150px;height:150px;"> <img id="primeHeroMob_img" style="width:100%;border:solid" /> </div>
-                                            <label class="control-label text-secondary">Prime Hero Mobile Background Image</label>
-                                            <input type="file" title="search image" class="form-control" id="fileMob" name="file" onchange="showMob(this)" required data-validation-required-message="Prime Hero Mobile Background Image is Required" />
-                                            <span asp-validation-for="strPrimeHeroBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Prime Hero Title</label>
-                                            <input asp-for="strPrimeHeroTitle" class="form-control" placeholder="Enter Prime Hero Title" required data-validation-required-message="Prime Hero Title is required" />
-                                            <span asp-validation-for="strPrimeHeroTitle" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Content Position</label>
-                                            <select class="form-control select2" name="strContentPostion" required data-validation-required-message="Content Position Is required">
-                                                <option value="Left">Left</option>
-                                                <option value="Right">Right</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Heading</label>
-                                            <input asp-for="strHeading" class="form-control" placeholder="Enter Prime Hero Heading" required data-validation-required-message="Prime Hero Heading is required" />
-                                            <span asp-validation-for="strHeading" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Sub-Heading</label>
-                                            <input asp-for="strSubHeading" class="form-control" placeholder="Enter Prime Hero Sub-Heading" required data-validation-required-message="Prime Hero Sub-Heading is required" />
-                                            <span asp-validation-for="strSubHeading" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<div style="width:150px;height:150px;"> <img id="primeHero_img" style="width:100%;border:solid" /> </div>
+											<label class="control-label text-secondary">Prime Hero Background Image</label>
+											<input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" required data-validation-required-message="Prime Hero Background Image is Required" />
+											<span asp-validation-for="PrimeHeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<div style="width:150px;height:150px;"> <img id="primeHeroMob_img" style="width:100%;border:solid" /> </div>
+											<label class="control-label text-secondary">Prime Hero Mobile Background Image</label>
+											<input type="file" title="search image" class="form-control" id="fileMob" name="file" onchange="showMob(this)" required data-validation-required-message="Prime Hero Mobile Background Image is Required" />
+											<span asp-validation-for="PrimeHeroBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Prime Hero Title</label>
+											<input asp-for="PrimeHeroTitle" class="form-control" placeholder="Enter Prime Hero Title" required data-validation-required-message="Prime Hero Title is required" />
+											<span asp-validation-for="PrimeHeroTitle" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Content Position</label>
+											<select class="form-control select2" name="ContentPostion" required data-validation-required-message="Content Position Is required">
+												<option value="Left">Left</option>
+												<option value="Right">Right</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Heading</label>
+											<input asp-for="Heading" class="form-control" placeholder="Enter Prime Hero Heading" required data-validation-required-message="Prime Hero Heading is required" />
+											<span asp-validation-for="Heading" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Sub-Heading</label>
+											<input asp-for="SubHeading" class="form-control" placeholder="Enter Prime Hero Sub-Heading" required data-validation-required-message="Prime Hero Sub-Heading is required" />
+											<span asp-validation-for="SubHeading" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Heading Color</label>
-                                            <input asp-for="strHeadingColor" class="form-control" id="color" name="strHeadingColor" value="#ffffff" required data-validation-required-message="Hero Heading Color is required" />
-                                            <div id="picker"></div>
-                                            <span asp-validation-for="strHeadingColor" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Heading Color</label>
+											<input asp-for="HeadingColor" class="form-control" id="color" name="HeadingColor" value="#ffffff" required data-validation-required-message="Hero Heading Color is required" />
+											<div id="picker"></div>
+											<span asp-validation-for="HeadingColor" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Sub-Heading Color</label>
-                                            <input asp-for="strSubHeadingColor" class="form-control" id="Sub-HeadingColor" name="strSubHeadingColor" value="#ffffff" required data-validation-required-message="Hero Sub-Heading Color is required" />
-                                            <div id="Sub-HeadingPicker"></div>
-                                            <span asp-validation-for="strSubHeadingColor" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Sub-Heading Color</label>
+											<input asp-for="SubHeadingColor" class="form-control" id="Sub-HeadingColor" name="SubHeadingColor" value="#ffffff" required data-validation-required-message="Hero Sub-Heading Color is required" />
+											<div id="Sub-HeadingPicker"></div>
+											<span asp-validation-for="SubHeadingColor" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Button Text</label>
-                                            <input asp-for="strPrimeHeroBtnTxt" class="form-control" placeholder="Enter Button Text" required data-validation-required-message="Button Text is required" />
-                                            <span asp-validation-for="strPrimeHeroBtnTxt" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Button Link</label>
-                                            <input asp-for="strBtnTxtLink" class="form-control" placeholder="Enter Button Link" required data-validation-required-message="Button Link is required" />
-                                            <span asp-validation-for="strBtnTxtLink" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row w-100">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="submit" onclick="myValidation()" value="Create" class="btn btn-primary" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group pull-right">
-                                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Button Text</label>
+											<input asp-for="PrimeHeroBtnTxt" class="form-control" placeholder="Enter Button Text" required data-validation-required-message="Button Text is required" />
+											<span asp-validation-for="PrimeHeroBtnTxt" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Button Link</label>
+											<input asp-for="BtnTxtLink" class="form-control" placeholder="Enter Button Link" required data-validation-required-message="Button Link is required" />
+											<span asp-validation-for="BtnTxtLink" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row w-100">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="submit" onclick="myValidation()" value="Create" class="btn btn-primary" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group pull-right">
+										<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">
-      $(document).ready(function () {
-        $('#picker').farbtastic('#color');
-        $('#Sub-HeadingPicker').farbtastic('#Sub-HeadingColor');
-    });
-    function show(input) {
-        if (ValidateFile()) {
-            if (input.files && input.files[0]) {
-                var filerdr = new FileReader();
-                filerdr.onload = function (e) {
-                    $('#primeHero_img').attr('src', e.target.result);
-                }
-                filerdr.readAsDataURL(input.files[0]);
-            }
-        }
-    }
-    function showMob(input) {
-        if (ValidateMobFile()) {
-            if (input.files && input.files[0]) {
-                var filerdr = new FileReader();
-                filerdr.onload = function (e) {
-                    $('#primeHeroMob_img').attr('src', e.target.result);
-                }
-                filerdr.readAsDataURL(input.files[0]);
-            }
-        }
-    }
+	$(document).ready(function ()
+	{
+		$('#picker').farbtastic('#color');
+		$('#Sub-HeadingPicker').farbtastic('#Sub-HeadingColor');
+	});
+	function show(input)
+	{
+		if (ValidateFile())
+		{
+			if (input.files && input.files[0])
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function (e)
+				{
+					$('#primeHero_img').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	}
+	function showMob(input)
+	{
+		if (ValidateMobFile())
+		{
+			if (input.files && input.files[0])
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function (e)
+				{
+					$('#primeHeroMob_img').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	}
 
-    function ValidateFile() {
-        var ext = $('#file').val().split('.').pop().toLowerCase();
-        if (ext == 'png') {
-            $("#fileError").hide();
-            $("#file").removeClass("invalid");
-            return true;
-        }
-        else if (ext == 'jpg') {
-            $("#fileError").hide();
-            $("#file").removeClass("invalid");
-            return true;
-        }
-        else if (ext == 'jpeg') {
-            $("#fileError").hide();
-            $("#file").removeClass("invalid");
-            return true;
-        }
-        else {
-            $("#fileError").show();
-            $("#file").addClass("invalid");
-            $('#primeHero_img').attr('src', "");
-            return false;
-        }
-    }
+	function ValidateFile()
+	{
+		var ext = $('#file').val().split('.').pop().toLowerCase();
+		if (ext == 'png')
+		{
+			$("#fileError").hide();
+			$("#file").removeClass("invalid");
+			return true;
+		}
+		else if (ext == 'jpg')
+		{
+			$("#fileError").hide();
+			$("#file").removeClass("invalid");
+			return true;
+		}
+		else if (ext == 'jpeg')
+		{
+			$("#fileError").hide();
+			$("#file").removeClass("invalid");
+			return true;
+		}
+		else
+		{
+			$("#fileError").show();
+			$("#file").addClass("invalid");
+			$('#primeHero_img').attr('src', "");
+			return false;
+		}
+	}
 
-    function ValidateMobFile() {
-        var ext = $('#fileMob').val().split('.').pop().toLowerCase();
-        if (ext == 'png') {
-            $("#mobFileError").hide();
-            $("#fileMob").removeClass("invalid");
-            return true;
-        }
-        else if (ext == 'jpg') {
-            $("#mobFileError").hide();
-            $("#fileMob").removeClass("invalid");
-            return true;
-        }
-        else if (ext == 'jpeg') {
-            $("#mobFileError").hide();
-            $("#fileMob").removeClass("invalid");
-            return true;
-        }
-        else {
-            $("#mobFileError").show();
-            $("#file").addClass("invalid");
-            $('#primeHeroMob_img').attr('src', "");
-            return false;
-        }
-    }
+	function ValidateMobFile()
+	{
+		var ext = $('#fileMob').val().split('.').pop().toLowerCase();
+		if (ext == 'png')
+		{
+			$("#mobFileError").hide();
+			$("#fileMob").removeClass("invalid");
+			return true;
+		}
+		else if (ext == 'jpg')
+		{
+			$("#mobFileError").hide();
+			$("#fileMob").removeClass("invalid");
+			return true;
+		}
+		else if (ext == 'jpeg')
+		{
+			$("#mobFileError").hide();
+			$("#fileMob").removeClass("invalid");
+			return true;
+		}
+		else
+		{
+			$("#mobFileError").show();
+			$("#file").addClass("invalid");
+			$('#primeHeroMob_img').attr('src', "");
+			return false;
+		}
+	}
 
-    function myValidation() {
-        if (ValidateFile() == false) {
-            event.preventDefault();
-            return false;
-        }
-        if (ValidateMobFile() == false) {
-            event.preventDefault();
-            return false;
-        }
-    }
+	function myValidation()
+	{
+		if (ValidateFile() == false)
+		{
+			event.preventDefault();
+			return false;
+		}
+		if (ValidateMobFile() == false)
+		{
+			event.preventDefault();
+			return false;
+		}
+	}
 </script>

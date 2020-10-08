@@ -1,189 +1,204 @@
-﻿@model InLife.Store.Cms.ViewModels.UsersViewModel
+@model UserViewModel
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title text-title">Create New User</h4>
-            </div>
-            <div class="card-content">
-                <div class="card-body card-dashboard">
-                  
-                    <div class="col-md-12">
-                        <form asp-action="Create" enctype="multipart/form-data" novalidate>
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title text-title">Create New User</h4>
+			</div>
+			<div class="card-content">
+				<div class="card-body card-dashboard">
 
-                            <div class="row">
+					<div class="col-md-12">
+						<form asp-action="Create" enctype="multipart/form-data" novalidate>
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">First Name</label>
-                                            <input asp-for="strFirstName" class="form-control" placeholder="Enter First Name" required data-validation-required-message="First Name is required" />
-                                            <span asp-validation-for="strFirstName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Last Name</label>
-                                            <input asp-for="strLastName" class="form-control" placeholder="Enter Last Name" required data-validation-required-message="Last Name is required" />
-                                            <span asp-validation-for="strLastName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
+							<div class="row">
 
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">First Name</label>
+											<input asp-for="FirstName" class="form-control" placeholder="Enter First Name" required data-validation-required-message="First Name is required" />
+											<span asp-validation-for="FirstName" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Last Name</label>
+											<input asp-for="LastName" class="form-control" placeholder="Enter Last Name" required data-validation-required-message="Last Name is required" />
+											<span asp-validation-for="LastName" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Email</label>
-                                            <input name="strEmail" type="email" placeholder="Enter Email" class="form-control" required data-validation-required-message="Email Is Required" />
-                                            <span asp-validation-for="strEmail" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Password</label>
-                                            <input name="strPassword" type="text" placeholder="Enter Users Password" class="form-control" required data-validation-required-message="Password Is Required" />
-                                            <span asp-validation-for="strPassword" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">User Role</label>
-                                            <select class="form-control" name="intUserRoleId">
-                                                @foreach (var role in ViewBag.roleList)
-                                                {
-                                                    <option value="@role.intUserRoleId">@role.strUserRole</option>
-                                                }
-                                            </select>
-                                            <span asp-validation-for="intUserRoleId" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-
-                                
-                            <div class="row">
-                                <div style="width:150px;height:150px;">
-                                    <img id="user_img" style="border:solid;width:100%;" />
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">User Image</label>
-                                            <input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" />
-                                            <span asp-validation-for="strUserImg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Gender</label>
-                                            <select class="form-control select2" name="intGenderId">
-                                                @foreach (var gen in ViewBag.genList)
-                                                {
-                                                    <option value="@gen.intGenderId">@gen.strGender</option>
-                                                }
-                                            </select>
-                                            <span asp-validation-for="intGenderId" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Contact Number</label>
-                                            <input asp-for="strPhone" class="form-control" placeholder="Enter Contact Number" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+								@*
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Email</label>
+											<input name="Email" type="email" placeholder="Enter Email" class="form-control" required data-validation-required-message="Email Is Required" />
+											<span asp-validation-for="Email" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Password</label>
+											<input name="Password" type="text" placeholder="Enter Users Password" class="form-control" required data-validation-required-message="Password Is Required" />
+											<span asp-validation-for="Password" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">User Role</label>
+											<select class="form-control" name="intUserRoleId">
+												@foreach (var role in ViewBag.roleList)
+												{
+													<option value="@role.intUserRoleId">@role.strUserRole</option>
+												}
+											</select>
+											<span asp-validation-for="intUserRoleId" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+							</div>
 
 
-                            <div class="row w-100">
-                                <div class="col-md-6">
+							<div class="row">
+								<div style="width:150px;height:150px;">
+									<img id="user_img" style="border:solid;width:100%;" />
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">User Image</label>
+											<input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" />
+											<span asp-validation-for="UserImg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Gender</label>
+											<select class="form-control select2" name="intGenderId">
+												@foreach (var gen in ViewBag.genList)
+												{
+													<option value="@gen.intGenderId">@gen.strGender</option>
+												}
+											</select>
+											<span asp-validation-for="intGenderId" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Contact Number</label>
+											<input asp-for="Phone" class="form-control" placeholder="Enter Contact Number" />
+										</div>
+									</div>
+								</div>
+								*@
 
-                                    <div class="form-group">
-                                        <input type="submit" onclick="myValidation()" value="Create" class="btn btn-primary" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group pull-right">
-                                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							</div>
+
+
+							<div class="row w-100">
+								<div class="col-md-6">
+
+									<div class="form-group">
+										<input type="submit" onclick="myValidation()" value="Create" class="btn btn-primary" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group pull-right">
+										<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">
 
-    function show(input) {
-        if (ValidateFile()) {
-            if (input.files && input.files[0]) {
-                var filerdr = new FileReader();
-                filerdr.onload = function (e) {
-                    $('#user_img').attr('src', e.target.result);
-                }
-                filerdr.readAsDataURL(input.files[0]);
-            }
-        }
-    }
-    function ValidateFile() {
-        var ext = $('#file').val().split('.').pop().toLowerCase();
-        if (ext != null && ext != "") {
-            if (ext == 'png') {
-                $("#fileError").hide();
-                $("#file").removeClass("invalid");
-                return true;
-            }
-            else if (ext == 'jpg') {
-                $("#fileError").hide();
-                $("#file").removeClass("invalid");
-                return true;
-            }
-            else if (ext == 'jpeg') {
-                $("#fileError").hide();
-                $("#file").removeClass("invalid");
-                return true;
-            }
-            else {
-                $("#fileError").show();
-                $("#file").addClass("invalid");
-                $('#hero_img').attr('src', "");
-                return false;
-            }
-        }
-        else {
-            $("#fileError").hide();
-            $("#file").removeClass("invalid");
-            return true;
-        }
-    }
+	function show(input)
+	{
+		if (ValidateFile())
+		{
+			if (input.files && input.files[0])
+			{
+				var filerdr = new FileReader();
+				filerdr.onload = function (e)
+				{
+					$('#user_img').attr('src', e.target.result);
+				}
+				filerdr.readAsDataURL(input.files[0]);
+			}
+		}
+	}
+	function ValidateFile()
+	{
+		var ext = $('#file').val().split('.').pop().toLowerCase();
+		if (ext != null && ext != "")
+		{
+			if (ext == 'png')
+			{
+				$("#fileError").hide();
+				$("#file").removeClass("invalid");
+				return true;
+			}
+			else if (ext == 'jpg')
+			{
+				$("#fileError").hide();
+				$("#file").removeClass("invalid");
+				return true;
+			}
+			else if (ext == 'jpeg')
+			{
+				$("#fileError").hide();
+				$("#file").removeClass("invalid");
+				return true;
+			}
+			else
+			{
+				$("#fileError").show();
+				$("#file").addClass("invalid");
+				$('#hero_img').attr('src', "");
+				return false;
+			}
+		}
+		else
+		{
+			$("#fileError").hide();
+			$("#file").removeClass("invalid");
+			return true;
+		}
+	}
 
-    function myValidation() {
-        if (ValidateFile() == false) {
-            event.preventDefault();
-            return false;
-        }
-    }
+	function myValidation()
+	{
+		if (ValidateFile() == false)
+		{
+			event.preventDefault();
+			return false;
+		}
+	}
 
-</script> 
+</script>

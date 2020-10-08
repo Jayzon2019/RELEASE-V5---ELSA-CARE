@@ -3,13 +3,17 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 using InLife.Store.Core.Models;
+using InLife.Store.Core.Repository;
 
 namespace InLife.Store.Cms.ViewModels
 {
 	public class FaqCategoryViewModel : BaseContentViewModel
 	{
-		public FaqCategoryViewModel()
+		private readonly IFaqCategoryRepository faqCategoryRepository;
+
+		public FaqCategoryViewModel(IFaqCategoryRepository faqCategoryRepository)
 		{
+			this.faqCategoryRepository = faqCategoryRepository;
 		}
 
 		public FaqCategoryViewModel(FaqCategory model) : base (model)
@@ -20,7 +24,11 @@ namespace InLife.Store.Cms.ViewModels
 
 		public FaqCategory Map()
 		{
-			var model = new FaqCategory();
+			var model = this.faqCategoryRepository.Get(Id);
+
+			if (model == null)
+				model = new FaqCategory();
+
 			return this.Map(model);
 		}
 

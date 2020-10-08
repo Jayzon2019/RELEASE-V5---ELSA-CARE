@@ -1,100 +1,80 @@
-﻿@model IEnumerable<InLifeCMS.ViewModel.FaqCategoriesViewModel>
+@model IEnumerable<FaqCategoryViewModel>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section id="column-selectors">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row w-100">
-                        <div class="col-md-6">
-                            <h4 class="card-title text-title">Faq Categories List</h4>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="pull-right">
-                                <a asp-action="Create" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new Faq Category</a>
-                            </p>
-                        </div>
-                        <div class="col-md-12">
-                            <p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table table-striped zero-configuration">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row w-100">
+						<div class="col-md-6">
+							<h4 class="card-title text-title">Faq Categories List</h4>
+						</div>
+						<div class="col-md-6">
+							<p class="pull-right">
+								<a asp-action="Create" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new Faq Category</a>
+							</p>
+						</div>
+						<div class="col-md-12">
+							<p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="card-content">
+					<div class="card-body card-dashboard">
+						<div class="table-responsive">
+							<table class="table table-striped zero-configuration">
 
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Faq Category
-                                        </th>
-                                        <th>
-                                            Description
-                                        </th>
-                                        <th>
-                                            Created Date
-                                        </th>
-                                        <th>
-                                           Created By
-                                        </th>
-                                        <th>
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strFaqCategory)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strFaqCatDescription)
-                                            </td>
-                                            <td>
-                                                @item.dteCreatedDate.ToShortDateString()
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strCreatedByUser)
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.intFaqCatId" title="Edit"><i class="feather icon-edit"></i></a> |
-                                                <a asp-action="Details" asp-route-id="@item.intFaqCatId" title="Details"><i class="feather icon-eye"></i></a> |
-                                                <a asp-action="Delete" asp-route-id="@item.intFaqCatId" title="Delete"><i class="feather icon-delete"></i></a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>
-                                            Faq Category
-                                        </th>
-                                        <th>
-                                            Description
-                                        </th>
-                                        <th>
-                                            Created Date
-                                        </th>
-                                        <th>
-                                            Created By
-                                        </th>
-                                        <th>
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<thead>
+									<tr>
+										<th>Faq Category</th>
+										<th>Description</th>
+										<th>Created Date</th>
+										<th>Created By</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model)
+									{
+										<tr>
+											<td>
+												@Html.DisplayFor(modelItem => item.Name)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.Description)
+											</td>
+											<td>
+												@item.CreatedDate
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.CreatedByName)
+											</td>
+											<td>
+												<a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="feather icon-edit"></i></a> |
+												<a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="feather icon-eye"></i></a> |
+												<a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="feather icon-delete"></i></a>
+											</td>
+										</tr>
+									}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Faq Category</th>
+										<th>Description</th>
+										<th>Created Date</th>
+										<th>Created By</th>
+										<th>Actions</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

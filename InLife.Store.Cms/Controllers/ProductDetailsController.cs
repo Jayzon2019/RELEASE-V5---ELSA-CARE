@@ -13,12 +13,14 @@ namespace InLife.Store.Cms.Controllers
 	[Authorize]
 	public class ProductDetailsController : BaseController
 	{
+		private readonly IProductRepository productRepository;
 		private readonly IProductDetailRepository productDetailRepository;
 
 		public ProductDetailsController
 		(
 			ILogger<ProductDetailsController> logger,
 			IUserRepository userRepository,
+			IProductRepository productRepository,
 			IProductDetailRepository productDetailRepository
 		) : base
 		(
@@ -26,85 +28,67 @@ namespace InLife.Store.Cms.Controllers
 			logger
 		)
 		{
+			this.productRepository = productRepository;
 			this.productDetailRepository = productDetailRepository;
 		}
-
-
-
-		ProductDetailService PDS = new ProductDetailService();
-		ProductsService PS = new ProductsService();
-		LogsRepo lR = new LogsRepo();
 
 		// GET: ProductDetails
 		public ActionResult Index()
 		{
-			var log = "";
 			try
 			{
-				var proDetList = PDS.GetProductDetailsList(ref log);
-				if (proDetList != null)
-				{
-					return View(proDetList);
-				}
-				else
-				{
-					return NotFound();
-				}
-			}
-			catch (Exception ex)
-			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				return NotFound();
-			}
+				var viewModelList = productDetailRepository
+					.GetAll()
+					.Select(model => new ProductDetailViewModel(model))
+					.ToList();
 
+				if (viewModelList == null)
+					return NotFound();
+
+				return View(viewModelList);
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 
 		// GET: ProductDetails/Details/5
 		public ActionResult Details(int? id)
 		{
-			var log = "";
 			try
 			{
-				if (id == null)
-				{
-					return NotFound();
-				}
+				var model = productDetailRepository.Get(id);
 
-				var ProDet = PDS.GetProductDetailById(ref log, id);
-				if (ProDet == null)
-				{
+				if (model == null)
 					return NotFound();
-				}
 
-				return View(ProDet);
+				var viewModel = new ProductDetailViewModel(model);
+
+				return View(viewModel);
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				return NotFound();
+				return GenericServerErrorResult(e);
 			}
 		}
 
 		// GET: ProductDetails/Create
 		public IActionResult Create()
 		{
-			var log = "";
 			try
 			{
-				var products = PS.GetProductsList(ref log);
-				ViewBag.products = products;
+				var faqCategoryViewModelList = productRepository
+					.GetAll()
+					.Select(model => new ProductViewModel(model))
+					.ToList();
+
+				ViewBag.Products = faqCategoryViewModelList;
 				return View();
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				return NotFound();
+				return GenericServerErrorResult(e);
 			}
 		}
 
@@ -113,64 +97,50 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind("intProductDetailId,intProductId,strProductImg,strProductName,strProductPrice,strCasesCovered,strBenefitType,strAgeEligibility,strNumberOfAvailments,strBenefitLimit,strDocProFee,strRoomAccommodation,strLaboratoryDiagnosticPro,strMedicinesAsMedicallyNeeded,strUseOfOperationRoom,strSurgerySurgonFees,strLaparoscopic,strMra,strMri,strCt,strTherapetic,strPainManagement,strArthoscopic,strOtherMedical,strOneTime,strUsage,strAccreditedHospitals,strMer,strAfr,strArp,strValidity,strWaiting,strNumberOfRegistrations,strUnlimitedTeleMed , strPreExistingConCover , strNonAccreditedHos , strReimbursementNonAccreditedHos , strTopSixHospitalAccess , strRegistrationOfSucceedingVouchers , strCombinability , strIndividualOrGroup , strPrepaidPlan , strConsultation , strInclusions , strSpecialModalities , strExclusions , strFtfconsultation , strTelemedicine , strDentalConsultation , strDentalServicesBenefit , strHospitalNetwork , strRegistrationRules,strMedicalCoverage,strLearnMoreBtnLink,strBuyNowBtnLink,strCoverage , strVoucherUsed , strVoucherUnused , strConsultationCards, strInPatient , strOutPatient")] ProductDetailsViewModel productDetailsViewModel)
+		public ActionResult Create([Bind("ProductId, ProductImg, ProductName, ProductPrice, CasesCovered, BenefitType, AgeEligibility, NumberOfAvailments, BenefitLimit, DocProFee, RoomAccommodation, LaboratoryDiagnosticPro, MedicinesAsMedicallyNeeded, UseOfOperationRoom, SurgerySurgonFees, Laparoscopic, MRA, MRI, CT, Therapetic, PainManagement, Arthoscopic, OtherMedical, OneTime, Usage, AccreditedHospitals, MER, AFR, ARP, Validity, Waiting, NumberOfRegistrations, UnlimitedTeleMed, PreExistingConCover, NonAccreditedHospitals, ReimbursementNonAccreditedHospitals, TopSixHospitalAccess, RegistrationOfSucceedingVouchers, Combinability, IndividualOrGroup, PrepaidPlan, Consultation, Inclusions, SpecialModalities, Exclusions, FTFConsultation, Telemedicine, DentalConsultation, DentalServicesBenefit, HospitalNetwork, RegistrationRules, MedicalCoverage, LearnMoreBtnLink, BuyNowBtnLink, Coverage, VoucherUsed, VoucherUnused, ConsultationCards, InPatient, OutPatient")]ProductDetailViewModel viewModel)
 		{
-			var log = "";
+			if (!ModelState.IsValid)
+				return View(viewModel);
+
 			try
 			{
-				if (ModelState.IsValid)
-				{
+				var model = viewModel.Map();
+				model.CreatedBy = this.CurrentUser();
+				model.CreatedDate = DateTimeOffset.Now;
 
-					var isSaved = PDS.SaveProductDetail(ref log, productDetailsViewModel);
-					if (isSaved != "Saved")
-					{
-						ViewBag.error = isSaved;
-					}
-					return RedirectToAction(nameof(Index));
-				}
-				else
-				{
-					var products = PS.GetProductsList(ref log);
-					ViewBag.products = products;
-				}
-				return View(productDetailsViewModel);
+				this.productDetailRepository.Create(model);
+
+				return RedirectToAction(nameof(Index));
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return View();
+				return GenericServerErrorResult(e);
 			}
 		}
 
 		// GET: ProductDetails/Edit/5
 		public ActionResult Edit(int? id)
 		{
-			var log = "";
 			try
 			{
-				if (id == null)
-				{
+				var model = this.productDetailRepository.Get(id);
+				if (model == null)
 					return NotFound();
-				}
-				var products = PS.GetProductsList(ref log);
-				ViewBag.products = products;
-				var proDetVM = PDS.GetProductDetailById(ref log, id);
-				if (proDetVM == null)
-				{
-					return NotFound();
-				}
-				return View(proDetVM);
+
+				var productViewModelList = productRepository
+					.GetAll()
+					.Select(model => new ProductViewModel(model))
+					.ToList();
+
+				ViewBag.Products = productViewModelList;
+
+				var viewModel = new ProductDetailViewModel(model);
+
+				return View(viewModel);
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return NotFound();
+				return GenericServerErrorResult(e);
 			}
 		}
 
@@ -179,75 +149,74 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, [Bind("intProductDetailId,intProductId,strProductImg,strProductName,strProductPrice,strCasesCovered,strBenefitType,strAgeEligibility,strNumberOfAvailments,strBenefitLimit,strDocProFee,strRoomAccommodation,strLaboratoryDiagnosticPro,strMedicinesAsMedicallyNeeded,strUseOfOperationRoom,strSurgerySurgonFees,strLaparoscopic,strMra,strMri,strCt,strTherapetic,strPainManagement,strArthoscopic,strOtherMedical,strOneTime,strUsage,strAccreditedHospitals,strMer,strAfr,strArp,strValidity,strWaiting,strNumberOfRegistrations,strUnlimitedTeleMed , strPreExistingConCover , strNonAccreditedHos , strReimbursementNonAccreditedHos , strTopSixHospitalAccess , strRegistrationOfSucceedingVouchers , strCombinability , strIndividualOrGroup , strPrepaidPlan , strConsultation,strInclusions , strSpecialModalities , strExclusions , strFtfconsultation , strTelemedicine , strDentalConsultation , strDentalServicesBenefit , strHospitalNetwork , strRegistrationRules,strMedicalCoverage,strLearnMoreBtnLink,strBuyNowBtnLink,strCoverage , strVoucherUsed , strVoucherUnused , strConsultationCards, strInPatient , strOutPatient")] ProductDetailsViewModel productDetailsViewModel)
+		public ActionResult Edit(int id, [Bind("ProductId, ProductImg, ProductName, ProductPrice, CasesCovered, BenefitType, AgeEligibility, NumberOfAvailments, BenefitLimit, DocProFee, RoomAccommodation, LaboratoryDiagnosticPro, MedicinesAsMedicallyNeeded, UseOfOperationRoom, SurgerySurgonFees, Laparoscopic, MRA, MRI, CT, Therapetic, PainManagement, Arthoscopic, OtherMedical, OneTime, Usage, AccreditedHospitals, MER, AFR, ARP, Validity, Waiting, NumberOfRegistrations, UnlimitedTeleMed, PreExistingConCover, NonAccreditedHospitals, ReimbursementNonAccreditedHospitals, TopSixHospitalAccess, RegistrationOfSucceedingVouchers, Combinability, IndividualOrGroup, PrepaidPlan, Consultation, Inclusions, SpecialModalities, Exclusions, FTFConsultation, Telemedicine, DentalConsultation, DentalServicesBenefit, HospitalNetwork, RegistrationRules, MedicalCoverage, LearnMoreBtnLink, BuyNowBtnLink, Coverage, VoucherUsed, VoucherUnused, ConsultationCards, InPatient, OutPatient")] ProductDetailViewModel viewModel)
 		{
-			var log = "";
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					if (id != productDetailsViewModel.intProductDetailId)
-					{
-						return NotFound();
-					}
+			if (!ModelState.IsValid)
+				return View(viewModel);
 
-					PDS.EditProductDetail(ref log, productDetailsViewModel);
-				}
-				catch (Exception ex)
-				{
-					string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-					var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-					lR.SaveExceptionLogs(exLog, ex, methodName);
-					ViewBag.error = Comman.SomethingWntWrong;
-					return View();
-				}
+			try
+			{
+				viewModel.Id = id;
+				var model = viewModel.Map();
+				if (model.Id == default)
+					return NotFound();
+
+				model.UpdatedBy = this.CurrentUser();
+				model.UpdatedDate = DateTimeOffset.Now;
+
+				this.productDetailRepository.Update(model);
+
 				return RedirectToAction(nameof(Index));
 			}
-			return View(productDetailsViewModel);
-
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
-
 
 		// POST: Users/Delete/5
 		//[HttpPost, ActionName("Delete")]
 		//[ValidateAntiForgeryToken]
 		public ActionResult Delete(int id)
 		{
-			var log = "";
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
 			try
 			{
-				PDS.Deactivate_DeleteProductDetail(ref log, id, true);
+				var model = this.productDetailRepository.Get(id);
+				if (model == null)
+					return NotFound();
+
+				this.productDetailRepository.Delete(model);
+
 				return RedirectToAction(nameof(Index));
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return RedirectToAction(nameof(Index));
+				return GenericServerErrorResult(e);
 			}
 		}
 
 		// POST: Users/Delete/5
 		//[HttpPost, ActionName("Deactive")]
 		//[ValidateAntiForgeryToken]
-		public ActionResult Deactive(int id)
-		{
-			var log = "";
-			try
-			{
-				PDS.Deactivate_DeleteProductDetail(ref log, id, false);
-				return RedirectToAction(nameof(Index));
-			}
-			catch (Exception ex)
-			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return RedirectToAction(nameof(Index));
-			}
-		}
+		//public ActionResult Deactive(int id)
+		//{
+		//	var log = "";
+		//	try
+		//	{
+		//		PDS.Deactivate_DeleteProductDetail(ref log, id, false);
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+		//		var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
+		//		lR.SaveExceptionLogs(exLog, ex, methodName);
+		//		ViewBag.error = Comman.SomethingWntWrong;
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//}
 	}
 }

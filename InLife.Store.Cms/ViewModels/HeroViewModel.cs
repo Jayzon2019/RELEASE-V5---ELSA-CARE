@@ -2,10 +2,62 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
+using InLife.Store.Core.Models;
+using InLife.Store.Core.Repository;
+
 namespace InLife.Store.Cms.ViewModels
 {
 	public class HeroViewModel : BaseContentViewModel
 	{
+		private readonly IHeroRepository heroRepository;
+
+		public HeroViewModel(IHeroRepository heroRepository)
+		{
+			this.heroRepository = heroRepository;
+		}
+
+		public HeroViewModel(Hero model) : base(model)
+		{
+			this.HeroBg = model.HeroBg;
+			this.HeroTitle = model.HeroTitle;
+			this.HeroBtnTxt = model.HeroBtnTxt;
+			this.BtnTxtLink = model.BtnTxtLink;
+			this.Heading = model.Heading;
+			this.SubHeading = model.SubHeading;
+			this.HeroMobBg = model.HeroMobBg;
+			this.HeadingColor = model.HeadingColor;
+			this.SubHeadingColor = model.SubHeadingColor;
+			this.ContentPostion = model.ContentPostion;
+		}
+
+		public Hero Map()
+		{
+			var model = this.heroRepository.Get(Id);
+
+			if (model == null)
+				model = new Hero();
+
+			return this.Map(model);
+		}
+
+		public Hero Map(Hero model)
+		{
+			model.HeroBg = this.HeroBg;
+			model.HeroTitle = this.HeroTitle;
+			model.HeroBtnTxt = this.HeroBtnTxt;
+			model.BtnTxtLink = this.BtnTxtLink;
+			model.Heading = this.Heading;
+			model.SubHeading = this.SubHeading;
+			model.HeroMobBg = this.HeroMobBg;
+			model.HeadingColor = this.HeadingColor;
+			model.SubHeadingColor = this.SubHeadingColor;
+			model.ContentPostion = this.ContentPostion;
+
+			return model;
+		}
+
+
+
 		public string HeroBg { get; set; }
 
 		[Required]

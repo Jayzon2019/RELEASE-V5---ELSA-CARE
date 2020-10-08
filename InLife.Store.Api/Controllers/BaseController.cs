@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -12,8 +12,6 @@ using Microsoft.Extensions.Logging;
 using InLife.Store.Core.Models;
 using InLife.Store.Core.Business;
 using InLife.Store.Core.Services;
-
-using InLife.Store.Infrastructure.Services;
 
 
 namespace InLife.Store.Api

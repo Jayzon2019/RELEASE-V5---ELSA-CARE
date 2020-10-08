@@ -34,28 +34,10 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var viewModelList = faqCategoryRepository.GetAll().Select(item => new FaqCategoryViewModel
-				{
-					Name = item.Name,
-					Description = item.Description,
-
-					CreatedBy = (item.CreatedBy == null)
-						? (Guid?)null
-						: item.CreatedBy.Id,
-					CreatedByName = (item.CreatedBy == null)
-						? null
-						: $"{item.CreatedBy.FirstName} {item.CreatedBy.LastName}".Trim(),
-					CreatedDate = item.CreatedDate,
-
-					UpdatedBy = (item.UpdatedBy == null)
-						? (Guid?)null
-						: item.UpdatedBy.Id,
-					UpdatedByName = (item.UpdatedBy == null)
-						? null
-						: $"{item.UpdatedBy.FirstName} {item.UpdatedBy.LastName}".Trim(),
-					UpdatedDate = item.UpdatedDate
-				})
-				.ToList();
+				var viewModelList = faqCategoryRepository
+					.GetAll()
+					.Select(model => new FaqCategoryViewModel(model))
+					.ToList();
 
 				if (viewModelList == null)
 					return NotFound();
@@ -78,7 +60,9 @@ namespace InLife.Store.Cms.Controllers
 				if (model == null)
 					return NotFound();
 
-				return View(item);
+				var viewModel = new FaqCategoryViewModel(model);
+
+				return View(viewModel);
 			}
 			catch (Exception e)
 			{
@@ -97,23 +81,18 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind("Name, Description")] FaqCategoryViewModel model)
+		public ActionResult Create([Bind("Name, Description")] FaqCategoryViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
+				return View(viewModel);
 
 			try
 			{
-				var user = this.CurrentUser();
-				var item = new FaqCategory
-				{
-					Name = model.Name,
-					Description = model.Description,
-					CreatedBy = user,
-					CreatedDate = DateTimeOffset.Now
-				};
+				var model = viewModel.Map();
+				model.CreatedBy = this.CurrentUser();
+				model.CreatedDate = DateTimeOffset.Now;
 
-				this.faqCategoryRepository.Create(item);
+				this.faqCategoryRepository.Create(model);
 
 				return RedirectToAction(nameof(Index));
 			}
@@ -132,17 +111,7 @@ namespace InLife.Store.Cms.Controllers
 				if (model == null)
 					return NotFound();
 
-				var viewModel = new FaqCategoryViewModel
-				{
-					Name = model.Name,
-					Description = model.Description,
-					CreatedBy = model.CreatedBy.Id,
-					CreatedDate = model.CreatedDate,
-					CreatedByName = $"{model.CreatedBy?.FirstName} {model.CreatedBy?.LastName}".Trim(),
-					UpdatedBy = model.UpdatedBy.Id,
-					UpdatedDate = model.UpdatedDate,
-					UpdatedByName = $"{model.UpdatedBy?.FirstName} {model.UpdatedBy?.LastName}".Trim()
-				};
+					var viewModel = new FaqCategoryViewModel(model);
 
 				return View(viewModel);
 			}
@@ -160,19 +129,16 @@ namespace InLife.Store.Cms.Controllers
 		public ActionResult Edit(int id, [Bind("Name, Description")] FaqCategoryViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
+				return View(viewModel);
 
 			try
 			{
-				var model = this.faqCategoryRepository.Get(id);
-				if (model == null)
+				viewModel.Id = id;
+				var model = viewModel.Map();
+				if (model.Id == default)
 					return NotFound();
 
-				var user = this.CurrentUser();
-
-				model.Name = viewModel.Name;
-				model.Description = viewModel.Description;
-				model.UpdatedBy = user;
+				model.UpdatedBy = this.CurrentUser();
 				model.UpdatedDate = DateTimeOffset.Now;
 
 				this.faqCategoryRepository.Update(model);

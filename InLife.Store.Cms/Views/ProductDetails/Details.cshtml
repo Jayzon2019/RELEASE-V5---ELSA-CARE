@@ -1,640 +1,639 @@
-﻿@model InLife.Store.Cms.ViewModels.ProductDetailsViewModel
+@model ProductDetailViewModel
 
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section class="users-edit">
-    <div class="card">
-        <div class="card-content">
-            <div class="card-body">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="displayAccount" aria-labelledby="account-tab" role="tabpanel">
-                        <div class="media mb-2">
-                            <a class="mr-2 my-25" href="#">
-                                <div style="width:200px;height:200px;overflow:hidden;">
-                                    
-                                    <img src="data:image/jpeg;base64, @Model.strProductImg" id="hero_img" alt="users avatar" class="users-avatar-shadow rounded" style="width:100%">
-                                </div>
-                            </a>
-                            <div class="media-body mt-50">
-                                <h4 class="media-heading text-primary">@Model.strProductCode</h4>
-                                <p class="mb-0">
-                                    <label><b class="text-primary">Product Name : </b>@Model.strProductName</label>
-                                </p>
-                                <p>
-                                    <label><b class="text-primary">Product Price :</b> @Model.strProductPrice</label>
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Cases Covered : </b>@Model.strCasesCovered</label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Benefit Type :</b> @Model.strBenefitType</label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Age Eligibility : </b>@Model.strAgeEligibility</label>
-                                </div>
-                            </div>
+	<div class="card">
+		<div class="card-content">
+			<div class="card-body">
+				<div class="tab-content">
+					<div class="tab-pane active" id="displayAccount" aria-labelledby="account-tab" role="tabpanel">
+						<div class="media mb-2">
+							<a class="mr-2 my-25" href="#">
+								<div style="width:200px;height:200px;overflow:hidden;">
 
-                            @{
-                                if (Model.strCoverage != null && Model.strCoverage != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Coverage : </b>@Model.strCoverage</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
+									<img src="data:image/jpeg;base64, @Model.ProductImg" id="hero_img" alt="users avatar" class="users-avatar-shadow rounded" style="width:100%">
+								</div>
+							</a>
+							<div class="media-body mt-50">
+								<h4 class="media-heading text-primary">@Model.ProductCode</h4>
+								<p class="mb-0">
+									<label><b class="text-primary">Product Name : </b>@Model.ProductName</label>
+								</p>
+								<p>
+									<label><b class="text-primary">Product Price :</b> @Model.ProductPrice</label>
+								</p>
+							</div>
+						</div>
+						<hr />
+						<div class="row">
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Cases Covered : </b>@Model.CasesCovered</label>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Benefit Type :</b> @Model.BenefitType</label>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Age Eligibility : </b>@Model.AgeEligibility</label>
+								</div>
+							</div>
 
-                            @{
-                                if (Model.strMedicalCoverage != null && Model.strMedicalCoverage != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Medical Coverage : </b>@Model.strMedicalCoverage</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Number Of Availments :</b> @Model.strNumberOfAvailments</label>
-                                </div>
-                            </div>
-                            @{
-                                if (Model.strBenefitLimit != null && Model.strBenefitLimit != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Benefit Limit : </b>@Model.strBenefitLimit</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strPreExistingConCover != null && Model.strPreExistingConCover != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Pre-existing Condition Coverage :</b>  @Model.strPreExistingConCover</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strInclusions != null && Model.strInclusions != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Inclusions :</b> @Html.Raw(Model.strInclusions)</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strDocProFee != null && Model.strDocProFee != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Doctor's professional fee :</b> @Model.strDocProFee</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strRoomAccommodation != null && Model.strRoomAccommodation != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Room Accommodation : </b>@Model.strRoomAccommodation</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strLaboratoryDiagnosticPro != null && Model.strLaboratoryDiagnosticPro != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Laboratory and diagnostic procedures :</b> @Model.strLaboratoryDiagnosticPro</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strMedicinesAsMedicallyNeeded != null && Model.strMedicinesAsMedicallyNeeded != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Medicines as medically needed :</b> @Model.strMedicinesAsMedicallyNeeded</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strUseOfOperationRoom != null && Model.strUseOfOperationRoom != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Use of operating room, recovery room, and ICU :</b> @Model.strUseOfOperationRoom</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strSurgerySurgonFees != null && Model.strSurgerySurgonFees != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Surgery and surgeon’s fees when medically necessary :</b> @Model.strSurgerySurgonFees</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strSpecialModalities != null && Model.strSpecialModalities != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Special Modalities as medically needed subject to PHP 5,000 sublimit :</b> @Model.strSpecialModalities</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strLaparoscopic != null && Model.strLaparoscopic != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Laparoscopic procedures :</b> @Model.strLaparoscopic</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
+							@{
+								if (!String.IsNullOrWhiteSpace(Model.Coverage))
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Coverage : </b>@Model.Coverage</label>
+										</div>
+									</div>
+								}
+							}
 
-                            @{
-                                if (Model.strMra != null && Model.strMra != "")
-                                {
+							@{
+								if (!String.IsNullOrWhiteSpace(Model.MedicalCoverage))
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Medical Coverage : </b>@Model.MedicalCoverage</label>
+										</div>
+									</div>
+								}
+							}
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Number Of Availments :</b> @Model.NumberOfAvailments</label>
+								</div>
+							</div>
+							@{
+								if (!String.IsNullOrWhiteSpace(Model.BenefitLimit))
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Benefit Limit : </b>@Model.BenefitLimit</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.PreExistingConCover != null && Model.PreExistingConCover != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Pre-existing Condition Coverage :</b>  @Model.PreExistingConCover</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Inclusions != null && Model.Inclusions != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Inclusions :</b> @Html.Raw(Model.Inclusions)</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.DocProFee != null && Model.DocProFee != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Doctor's professional fee :</b> @Model.DocProFee</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.RoomAccommodation != null && Model.RoomAccommodation != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Room Accommodation : </b>@Model.RoomAccommodation</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.LaboratoryDiagnosticPro != null && Model.LaboratoryDiagnosticPro != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Laboratory and diagnostic procedures :</b> @Model.LaboratoryDiagnosticPro</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.MedicinesAsMedicallyNeeded != null && Model.MedicinesAsMedicallyNeeded != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Medicines as medically needed :</b> @Model.MedicinesAsMedicallyNeeded</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.UseOfOperationRoom != null && Model.UseOfOperationRoom != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Use of operating room, recovery room, and ICU :</b> @Model.UseOfOperationRoom</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.SurgerySurgonFees != null && Model.SurgerySurgonFees != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Surgery and surgeon’s fees when medically necessary :</b> @Model.SurgerySurgonFees</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.SpecialModalities != null && Model.SpecialModalities != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Special Modalities as medically needed subject to PHP 5,000 sublimit :</b> @Model.SpecialModalities</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Laparoscopic != null && Model.Laparoscopic != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Laparoscopic procedures :</b> @Model.Laparoscopic</label>
+										</div>
+									</div>
+								}
+							}
 
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Magnetic Resonance Angiography (MRA) :</b> @Model.strMra</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strMri != null && Model.strMri != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Magnetic Resonance Imaging (MRI) :</b> @Model.strMri</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strCt != null && Model.strCt != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Computerized Tomography (CT) Scans :</b> @Model.strCt</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strTherapetic != null && Model.strTherapetic != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Endoscopic Procedures (Therapeutic) :</b> @Model.strTherapetic</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strPainManagement != null && Model.strPainManagement != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Pain Management :</b> @Model.strPainManagement</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strArthoscopic != null && Model.strArthoscopic != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Arthroscopic Procedures, Orthopedic Arthroscopy :</b> @Model.strArthoscopic</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strOtherMedical != null && Model.strOtherMedical != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Other medically necessary modalities not mentioned above and those for which there are no comparable, conventional or traditional counterparts :</b> @Model.strOtherMedical</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strOneTime != null && Model.strOneTime != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">One-time hospital cash benefit of Php 1000 in confinement :</b> @Model.strOneTime</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strUnlimitedTeleMed != null && Model.strUnlimitedTeleMed != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Unlimited telemedicine access (for gatekeeping) :</b> @Model.strUnlimitedTeleMed</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strExclusions != null && Model.strExclusions != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Exclusions:</b> @Html.Raw(Model.strExclusions)</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strUsage != null && Model.strUsage != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Usage :</b> @Model.strUsage</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strConsultationCards != null && Model.strConsultationCards != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Consultation Cards :</b> @Model.strConsultationCards</label>
-                                        </div>
-                                    </div>
+							@{
+								if (Model.MRA != null && Model.MRA != "")
+								{
 
-                                }
-                            }
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Magnetic Resonance Angiography (MRA) :</b> @Model.MRA</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.MRI != null && Model.MRI != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Magnetic Resonance Imaging (MRI) :</b> @Model.MRI</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.CT != null && Model.CT != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Computerized Tomography (CT) Scans :</b> @Model.CT</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Therapetic != null && Model.Therapetic != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Endoscopic Procedures (Therapeutic) :</b> @Model.Therapetic</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.PainManagement != null && Model.PainManagement != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Pain Management :</b> @Model.PainManagement</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Arthoscopic != null && Model.Arthoscopic != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Arthroscopic Procedures, Orthopedic Arthroscopy :</b> @Model.Arthoscopic</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.OtherMedical != null && Model.OtherMedical != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Other medically necessary modalities not mentioned above and those for which there are no comparable, conventional or traditional counterparts :</b> @Model.OtherMedical</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.OneTime != null && Model.OneTime != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">One-time hospital cash benefit of Php 1000 in confinement :</b> @Model.OneTime</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.UnlimitedTeleMed != null && Model.UnlimitedTeleMed != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Unlimited telemedicine access (for gatekeeping) :</b> @Model.UnlimitedTeleMed</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Exclusions != null && Model.Exclusions != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Exclusions:</b> @Html.Raw(Model.Exclusions)</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Usage != null && Model.Usage != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Usage :</b> @Model.Usage</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.ConsultationCards != null && Model.ConsultationCards != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Consultation Cards :</b> @Model.ConsultationCards</label>
+										</div>
+									</div>
 
-                            @{
-                                if (Model.strConsultation != null && Model.strConsultation != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Consultation Benefit :</b> @Model.strConsultation</label>
-                                        </div>
-                                    </div>
+								}
+							}
 
-                                }
-                            }
-                            @{
-                                if (Model.strFtfconsultation != null && Model.strFtfconsultation != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Face-to-Face consultation :</b> @Model.strFtfconsultation</label>
-                                        </div>
-                                    </div>
+							@{
+								if (Model.Consultation != null && Model.Consultation != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Consultation Benefit :</b> @Model.Consultation</label>
+										</div>
+									</div>
 
-                                }
-                            }
-                            @{
-                                if (Model.strTelemedicine != null && Model.strTelemedicine != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Telemedicine :</b> @Model.strTelemedicine</label>
-                                        </div>
-                                    </div>
+								}
+							}
+							@{
+								if (Model.FTFConsultation != null && Model.FTFConsultation != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Face-to-Face consultation :</b> @Model.FTFConsultation</label>
+										</div>
+									</div>
 
-                                }
-                            }
+								}
+							}
+							@{
+								if (Model.Telemedicine != null && Model.Telemedicine != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Telemedicine :</b> @Model.Telemedicine</label>
+										</div>
+									</div>
 
-                            @{
-                                if (Model.strDentalConsultation != null && Model.strDentalConsultation != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Dental Consultation :</b> @Model.strDentalConsultation</label>
-                                        </div>
-                                    </div>
+								}
+							}
 
-                                }
-                            }
-                            @{
-                                if (Model.strDentalServicesBenefit != null && Model.strDentalServicesBenefit != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Dental services benefit :</b> @Model.strDentalServicesBenefit</label>
-                                        </div>
-                                    </div>
+							@{
+								if (Model.DentalConsultation != null && Model.DentalConsultation != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Dental Consultation :</b> @Model.DentalConsultation</label>
+										</div>
+									</div>
 
-                                }
-                            }
-                            @{
-                                if (Model.strHospitalNetwork != null && Model.strHospitalNetwork != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Hospital Network :</b> @Model.strHospitalNetwork</label>
-                                        </div>
-                                    </div>
+								}
+							}
+							@{
+								if (Model.DentalServicesBenefit != null && Model.DentalServicesBenefit != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Dental services benefit :</b> @Model.DentalServicesBenefit</label>
+										</div>
+									</div>
 
-                                }
-                            }
-                            @{
-                                if (Model.strAccreditedHospitals != null && Model.strAccreditedHospitals != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Accredited Hospitals :</b> @Model.strAccreditedHospitals</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
+								}
+							}
+							@{
+								if (Model.HospitalNetwork != null && Model.HospitalNetwork != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Hospital Network :</b> @Model.HospitalNetwork</label>
+										</div>
+									</div>
 
-
-                            @{
-                                if (Model.strNonAccreditedHos != null && Model.strNonAccreditedHos != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Non-accredited Hospitals :</b> @Model.strNonAccreditedHos</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strReimbursementNonAccreditedHos != null && Model.strReimbursementNonAccreditedHos != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Reimbursement for non-accredited hospital availment	 :</b> @Model.strReimbursementNonAccreditedHos</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strTopSixHospitalAccess != null && Model.strTopSixHospitalAccess != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Top 6 Hospitals Access :</b> @Model.strTopSixHospitalAccess</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strCombinability != null && Model.strCombinability != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Combinability with another IHC product :</b> @Model.strCombinability</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strIndividualOrGroup != null && Model.strIndividualOrGroup != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Individual or Group Comprehensive Plan (with or without PEC coverage) :</b> @Model.strIndividualOrGroup</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strInPatient != null && Model.strInPatient != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Stand-alone Elective In-patient :</b> @Model.strInPatient</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strOutPatient != null && Model.strOutPatient != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Stand-alone Out-patient (diagnostics) :</b> @Model.strOutPatient</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strPrepaidPlan != null && Model.strPrepaidPlan != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Prepaid Plan :</b> @Model.strPrepaidPlan</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strRegistrationRules != null && Model.strRegistrationRules != "")
-                                {
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Registration Rules :</b> @Model.strRegistrationRules</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strMer != null && Model.strMer != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Medical Examination Requirement : </b>@Model.strMer</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strAfr != null && Model.strAfr != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Application Form Requirement :</b> @Model.strAfr</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strArp != null && Model.strArp != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Allowable registration period : </b>@Model.strArp</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strValidity != null && Model.strValidity != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Validity Period from the date of successful registration :</b> @Model.strValidity</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strWaiting != null && Model.strWaiting != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Waiting Period from registration to activation : </b>@Model.strWaiting</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strNumberOfRegistrations != null && Model.strNumberOfRegistrations != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">No. of registration within 12 months :</b> @Model.strNumberOfRegistrations</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strRegistrationOfSucceedingVouchers != null && Model.strRegistrationOfSucceedingVouchers != "")
-                                {
-
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Registration of succeeding vouchers within 12 months :</b> @Model.strRegistrationOfSucceedingVouchers</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strVoucherUsed != null && Model.strVoucherUsed != "")
-                                {
-
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">If voucher is used :</b> @Model.strVoucherUsed</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            @{
-                                if (Model.strVoucherUnused != null && Model.strVoucherUnused != "")
-                                {
-
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">If voucher is unused :</b> @Model.strVoucherUnused</label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Learn More Button Link :</b> @Model.strLearnMoreBtnLink</label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Buy Now Button Link :</b> @Model.strBuyNowBtnLink</label>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Created Date : </b>@Model.dteCreatedDate.ToShortDateString()</label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label><b class="text-primary">Created By :</b> @Model.strCreatedByUser</label>
-                                </div>
-                            </div>
-
-                            @{
-                                if (Model.dteUpdatedDate != null)
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Updated Date : </b>@Model.dteUpdatedDate?.ToShortDateString()</label>
-                                        </div>
-                                    </div>
-
-                                }
-                            }
-
-                            @{
-                                if (Model.strUpdatedByUser != null && Model.strUpdatedByUser != "")
-                                {
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label><b class="text-primary">Updated By :</b> @Model.strUpdatedByUser</label>
-                                        </div>
-                                    </div>
-
-                                }
-                            }
+								}
+							}
+							@{
+								if (Model.AccreditedHospitals != null && Model.AccreditedHospitals != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Accredited Hospitals :</b> @Model.AccreditedHospitals</label>
+										</div>
+									</div>
+								}
+							}
 
 
+							@{
+								if (Model.NonAccreditedHospitals != null && Model.NonAccreditedHospitals != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Non-accredited Hospitals :</b> @Model.NonAccreditedHospitals</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.ReimbursementNonAccreditedHospitals != null && Model.ReimbursementNonAccreditedHospitals != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Reimbursement for non-accredited hospital availment	 :</b> @Model.ReimbursementNonAccreditedHospitals</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.TopSixHospitalAccess != null && Model.TopSixHospitalAccess != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Top 6 Hospitals Access :</b> @Model.TopSixHospitalAccess</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Combinability != null && Model.Combinability != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Combinability with another IHC product :</b> @Model.Combinability</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.IndividualOrGroup != null && Model.IndividualOrGroup != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Individual or Group Comprehensive Plan (with or without PEC coverage) :</b> @Model.IndividualOrGroup</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.InPatient != null && Model.InPatient != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Stand-alone Elective In-patient :</b> @Model.InPatient</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.OutPatient != null && Model.OutPatient != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Stand-alone Out-patient (diagnostics) :</b> @Model.OutPatient</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.PrepaidPlan != null && Model.PrepaidPlan != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Prepaid Plan :</b> @Model.PrepaidPlan</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.RegistrationRules != null && Model.RegistrationRules != "")
+								{
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label><b class="text-primary">Registration Rules :</b> @Model.RegistrationRules</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.MER != null && Model.MER != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Medical Examination Requirement : </b>@Model.MER</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.AFR != null && Model.AFR != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Application Form Requirement :</b> @Model.AFR</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.ARP != null && Model.ARP != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Allowable registration period : </b>@Model.ARP</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Validity != null && Model.Validity != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Validity Period from the date of successful registration :</b> @Model.Validity</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.Waiting != null && Model.Waiting != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Waiting Period from registration to activation : </b>@Model.Waiting</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.NumberOfRegistrations != null && Model.NumberOfRegistrations != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">No. of registration within 12 months :</b> @Model.NumberOfRegistrations</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.RegistrationOfSucceedingVouchers != null && Model.RegistrationOfSucceedingVouchers != "")
+								{
 
-                        </div>
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Registration of succeeding vouchers within 12 months :</b> @Model.RegistrationOfSucceedingVouchers</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.VoucherUsed != null && Model.VoucherUsed != "")
+								{
+
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">If voucher is used :</b> @Model.VoucherUsed</label>
+										</div>
+									</div>
+								}
+							}
+							@{
+								if (Model.VoucherUnused != null && Model.VoucherUnused != "")
+								{
+
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">If voucher is unused :</b> @Model.VoucherUnused</label>
+										</div>
+									</div>
+								}
+							}
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Learn More Button Link :</b> @Model.LearnMoreBtnLink</label>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Buy Now Button Link :</b> @Model.BuyNowBtnLink</label>
+								</div>
+							</div>
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Created Date : </b>@Model.CreatedDate</label>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label><b class="text-primary">Created By :</b> @Model.CreatedByName</label>
+								</div>
+							</div>
+
+							@{
+								if (Model.UpdatedDate != null)
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Updated Date : </b>@Model.UpdatedDate</label>
+										</div>
+									</div>
+
+								}
+							}
+
+							@{
+								if (Model.UpdatedByName != null && Model.UpdatedByName != "")
+								{
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label><b class="text-primary">Updated By :</b> @Model.UpdatedByName</label>
+										</div>
+									</div>
+
+								}
+							}
 
 
-                            <div class="row w-100">
-                                <div class="col-md-6">
 
-                                    <div class="form-group">
-                                        <a asp-action="Edit" class="btn btn-primary glow mb-1 ml-1 mb-sm-0 mr-0 mr-sm-1" asp-route-id="@Model.intProductDetailId">Edit</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group pull-right">
-                                        <a asp-action="Index" class="btn btn-secondary glow mb-1  mb-sm-0 mr-0 mr-sm-1">Back to List</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						</div>
+
+
+						<div class="row w-100">
+							<div class="col-md-6">
+
+								<div class="form-group">
+									<a asp-action="Edit" class="btn btn-primary glow mb-1 ml-1 mb-sm-0 mr-0 mr-sm-1" asp-route-id="@Model.Id">Edit</a>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group pull-right">
+									<a asp-action="Index" class="btn btn-secondary glow mb-1  mb-sm-0 mr-0 mr-sm-1">Back to List</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

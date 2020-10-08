@@ -1,11 +1,11 @@
 using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
-namespace InLife.Store.Cms.ViewModels
+namespace InLife.Store.Api.Messages
 {
-	public class ProductDetailsViewModel : BaseContentViewModel
+	public class ProductDetailResponse
 	{
+		public int Id { get; set; }
+
 		#region Product
 
 		public int ProductId { get; set; }
@@ -80,9 +80,9 @@ namespace InLife.Store.Cms.ViewModels
 
 		public string PreExistingConCover { get; set; }
 
-		public string NonAccreditedHos { get; set; }
+		public string NonAccreditedHospitals { get; set; }
 
-		public string ReimbursementNonAccreditedHos { get; set; }
+		public string ReimbursementNonAccreditedHospitals { get; set; }
 
 		public string TopSixHospitalAccess { get; set; }
 

@@ -8,3 +8,10 @@
     CONSTRAINT [FK_UserTokens_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]) ON DELETE CASCADE
 );
 
+
+
+
+GO
+CREATE CLUSTERED INDEX [CI_UserTokens]
+    ON [dbo].[UserTokens]([ClusterId] ASC);
+

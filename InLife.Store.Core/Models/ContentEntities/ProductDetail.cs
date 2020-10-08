@@ -38,8 +38,8 @@ namespace InLife.Store.Core.Models
 
 		public string UnlimitedTeleMed { get; set; }
 		public string PreExistingConCover { get; set; }
-		public string NonAccreditedHos { get; set; }
-		public string ReimbursementNonAccreditedHos { get; set; }
+		public string NonAccreditedHospitals { get; set; }
+		public string ReimbursementNonAccreditedHospitals { get; set; }
 		public string TopSixHospitalAccess { get; set; }
 		public string RegistrationOfSucceedingVouchers { get; set; }
 		public string Combinability { get; set; }

@@ -1,111 +1,87 @@
-﻿@model IEnumerable<InLifeCMS.ViewModels.ProductsViewModel>
+@model IEnumerable<ProductViewModel>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section id="column-selectors">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row w-100">
-                        <div class="col-md-6">
-                            <h4 class="card-title text-title">Product List</h4>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="pull-right">
-                                        <a asp-action="Create" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new Product</a>
-                            </p>
-                        </div>
-                        <div class="col-md-12">
-                            <p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table table-striped zero-configuration">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row w-100">
+						<div class="col-md-6">
+							<h4 class="card-title text-title">Product List</h4>
+						</div>
+						<div class="col-md-6">
+							<p class="pull-right">
+								<a asp-action="Create" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new Product</a>
+							</p>
+						</div>
+						<div class="col-md-12">
+							<p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="card-content">
+					<div class="card-body card-dashboard">
+						<div class="table-responsive">
+							<table class="table table-striped zero-configuration">
 
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Product Image
-                                        </th>
-                                        <th>
-                                            Product Name
-                                        </th>
-                                        <th>
-                                            Product Code
-                                        </th>
-                                        <th>
-                                            Product Price
-                                        </th>
-                                        <th>
-                                            Sort #
-                                        </th>
-                                        <th>
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <div style="width:150px;height:150px;">
-                                                    <img src="data:image/jpeg;base64, @item.strProductImg" style="width:100%" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strProductName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strProductCode)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strProductPrice)
-                                            </td> 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.intSortNum)
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.intProductId" title="Edit"><i class="feather icon-edit"></i></a> |
-                                                <a asp-action="Details" asp-route-id="@item.intProductId" title="Details"><i class="feather icon-eye"></i></a> |
-                                                <a asp-action="Delete" asp-route-id="@item.intProductId" title="Delete"><i class="feather icon-delete"></i></a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>
-                                            Product Image
-                                        </th>
-                                        <th>
-                                            Product Name
-                                        </th>
-                                        <th>
-                                            Product Code
-                                        </th>
-                                        <th>
-                                            Product Price
-                                        </th>
-                                        <th>
-                                            Sort #
-                                        </th>
-                                        <th>
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<thead>
+									<tr>
+										<th>Product Image</th>
+										<th>Product Name</th>
+										<th>Product Code</th>
+										<th>Product Price</th>
+										<th>Sort #</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model)
+									{
+										<tr>
+											<td>
+												<div style="width:150px;height:150px;">
+													<img src="data:image/jpeg;base64, @item.ProductImg" style="width:100%" />
+												</div>
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.ProductName)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.ProductCode)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.ProductPrice)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.SortNum)
+											</td>
+											<td>
+												<a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="feather icon-edit"></i></a> |
+												<a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="feather icon-eye"></i></a> |
+												<a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="feather icon-delete"></i></a>
+											</td>
+										</tr>
+									}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Product Image</th>
+										<th>Product Name</th>
+										<th>Product Code</th>
+										<th>Product Price</th>
+										<th>Sort #</th>
+										<th>Actions</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

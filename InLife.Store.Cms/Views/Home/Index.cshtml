@@ -1,60 +1,62 @@
-﻿@model InLife.Store.Cms.ViewModels.KeyMetricsViewModel
+@model InLife.Store.Cms.ViewModels.KeyMetricViewModel
 @{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 <!-- Dashboard Ecommerce Starts -->
-    <section id="dashboard-ecommerce">
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 col-12">
-                <div class="card">
-                    <div class="card-header d-flex flex-column align-items-start pb-0">
-                        <div class="avatar bg-rgba-primary p-50 m-0">
-                            <div class="avatar-content">
-                                <i class="feather icon-users text-primary font-medium-5"></i>
-                            </div>
-                        </div>
-                        <h2 class="text-bold-700 mt-1">@Model.intUsers</h2>
-                        <p class="mb-0">Users Right Now</p>
-                    </div>
-                    <div class="card-content">
-                        <div id="line-area-chart-3"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-12">
-                <div class="card">
-                    <div class="card-header d-flex flex-column align-items-start pb-0">
-                        <div class="avatar bg-rgba-success p-50 m-0">
-                            <div class="avatar-content">
-                                <i class="feather icon-clock text-success font-medium-5"></i>
-                            </div>
-                        </div>
-                        <h2 class="text-bold-700 mt-1">@Model.strSessions</h2>
-                        <p class="mb-0">Sessions</p>
-                    </div>
-                    <div class="card-content">
-                        <div id="line-area-chart-2"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-12">
-                <div class="card">
-                    <div class="card-header d-flex flex-column align-items-start pb-0">
-                        <div class="avatar bg-rgba-danger p-50 m-0">
-                            <div class="avatar-content">
-                                <i style="color:rgba(115, 103, 240, 1)!important;" class="feather icon-eye text-danger font-medium-5"></i>
-                            </div>
-                        </div>
-                        <h2 class="text-bold-700 mt-1">@Model.intPageViews</h2>
-                        <p class="mb-0">Page Views</p>
-                    </div>
-                    <div class="card-content">
-                        <div id="line-area-chart-1"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section id="dashboard-ecommerce">
+	<div class="row">
+		<div class="col-lg-4 col-sm-6 col-12">
+			<div class="card">
+				<div class="card-header d-flex flex-column align-items-start pb-0">
+					<div class="avatar bg-rgba-primary p-50 m-0">
+						<div class="avatar-content">
+							<i class="feather icon-users text-primary font-medium-5"></i>
+						</div>
+					</div>
+					<h2 class="text-bold-700 mt-1">@Model.UserCount</h2>
+					<p class="mb-0">Users Right Now</p>
+				</div>
+				<div class="card-content">
+					<div id="line-area-chart-3"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-12">
+			<div class="card">
+				<div class="card-header d-flex flex-column align-items-start pb-0">
+					<div class="avatar bg-rgba-success p-50 m-0">
+						<div class="avatar-content">
+							<i class="feather icon-clock text-success font-medium-5"></i>
+						</div>
+					</div>
+					<h2 class="text-bold-700 mt-1">@Model.Sessions</h2>
+					<p class="mb-0">Sessions</p>
+				</div>
+				<div class="card-content">
+					<div id="line-area-chart-2"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-12">
+			<div class="card">
+				<div class="card-header d-flex flex-column align-items-start pb-0">
+					<div class="avatar bg-rgba-danger p-50 m-0">
+						<div class="avatar-content">
+							<i style="color:rgba(115, 103, 240, 1)!important;" class="feather icon-eye text-danger font-medium-5"></i>
+						</div>
+					</div>
+					<h2 class="text-bold-700 mt-1">@Model.PageViews</h2>
+					<p class="mb-0">Page Views</p>
+				</div>
+				<div class="card-content">
+					<div id="line-area-chart-1"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        @Html.Partial("_ActivityLogsPartial.cshtml", Model.lstActivityLogs)
-    </section>
+	@*
+	@Html.Partial("_ActivityLogsPartial.cshtml", Model.ActivityLogs)
+	*@
+</section>
 <!-- Dashboard Ecommerce ends -->

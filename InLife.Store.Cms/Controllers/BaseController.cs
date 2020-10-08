@@ -52,7 +52,7 @@ namespace InLife.Store.Cms.Controllers
 				exception: exception,
 				status: StatusCodes.Status500InternalServerError,
 				title: $"InLife Store CMS failed",
-				detail: $"Something went wrong with the CMS. Please notify InLife support with the error. Please attach this number for reference: #LOG-ID#",
+				detail: $"Something went wrong with the CMS. Please notify InLife support with the error and attach this number for reference: #LOG-ID#",
 				lineNumber: lineNumber,
 				callerFilePath: callerFilePath,
 				callerMemberName: callerMemberName

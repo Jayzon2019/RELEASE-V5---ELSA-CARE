@@ -105,6 +105,18 @@ namespace InLife.Store.Api
 			services.AddTransient<ICustomerRepository, CustomerRepository>();
 			services.AddTransient<IQuoteRepository, QuoteRepository>();
 
+			services.AddTransient<IActivityLogRepository, ActivityLogRepository>();
+			services.AddTransient<IKeyMetricRepository, KeyMetricRepository>();
+			services.AddTransient<IFaqCategoryRepository, FaqCategoryRepository>();
+			services.AddTransient<IFaqRepository, FaqRepository>();
+			services.AddTransient<IFooterLinkRepository, FooterLinkRepository>();
+			services.AddTransient<IHeroRepository, HeroRepository>();
+			services.AddTransient<IPrimeCareRepository, PrimeCareRepository>();
+			services.AddTransient<IPrimeHeroRepository, PrimeHeroRepository>();
+			services.AddTransient<IProductDetailRepository, ProductDetailRepository>();
+			services.AddTransient<IProductRepository, ProductRepository>();
+
+			services.AddTransient<IContentManagement, ContentManagement>();
 			services.AddTransient<IOrderProcessing, OrderProcessing>();
 
 			services.AddTransient<IEmailService, EmailService>();

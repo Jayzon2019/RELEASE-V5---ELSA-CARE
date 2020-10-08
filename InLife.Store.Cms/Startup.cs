@@ -28,6 +28,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.Options;
 using Microsoft.CodeAnalysis.Options;
+using IdentityModel;
 
 namespace InLife.Store.Cms
 {
@@ -60,24 +61,25 @@ namespace InLife.Store.Cms
 				{
 					options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 					options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-
 				})
 				.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
 				.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 				{
 					options.Authority = Configuration.GetSection("Authentication:Authority").Value;
 					options.ClientId = Configuration.GetSection("Authentication:ClientId").Value;
+					options.ClientSecret = Configuration.GetSection("Authentication:ClientSecret").Value;
 					options.ResponseType = IdentityModel.OidcConstants.ResponseTypes.Code;
-
-					options.GetClaimsFromUserInfoEndpoint = true;
-					options.RequireHttpsMetadata = false;
+					//options.ResponseMode = IdentityModel.OidcConstants.ResponseModes.Query;
+					//options.RequireHttpsMetadata = false;
+					options.UsePkce = true;
 					options.SaveTokens = true;
+					//options.GetClaimsFromUserInfoEndpoint = true;
 
 					options.Scope.Add(IdentityModel.OidcConstants.StandardScopes.OpenId);
 					options.Scope.Add(IdentityModel.OidcConstants.StandardScopes.Profile);
-					options.Scope.Add("role");
-					options.Scope.Add("IdentityServerApi");
-					options.Scope.Add("inlife.store.api");
+					//options.Scope.Add("role");
+					//options.Scope.Add("IdentityServerApi");
+					//options.Scope.Add("inlife.store.api");
 				});
 
 			services
@@ -118,6 +120,7 @@ namespace InLife.Store.Cms
 				loggingBuilder.AddDebug();
 			});
 
+			services.AddTransient<IUserRepository, UserRepository>();
 
 			services.AddTransient<ICustomerRepository, CustomerRepository>();
 			services.AddTransient<IQuoteRepository, QuoteRepository>();

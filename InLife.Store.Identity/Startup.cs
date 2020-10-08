@@ -32,6 +32,7 @@ using InLife.Store.Identity.Infrastructure.FeatureFolders;
 using InLife.Store.Identity.TokenProviders;
 using InLife.Store.Identity.GrantValidators;
 using IdentityServer4;
+using System.Diagnostics;
 
 namespace InLife.Store.Identity
 {
@@ -58,7 +59,7 @@ namespace InLife.Store.Identity
 				(
 					config =>
 					{
-						config.SignIn.RequireConfirmedEmail = true;
+						config.SignIn.RequireConfirmedEmail = false; //TODO: Implement email verification
 						config.User.RequireUniqueEmail = true;
 						config.Password.RequiredUniqueChars = 0;
 						config.Password.RequireDigit = false;
@@ -119,7 +120,8 @@ namespace InLife.Store.Identity
 				.AddInMemoryApiResources(Config.GetApiResources())
 				.AddInMemoryApiResources(Configuration.GetSection("IdentityServer:ApiResources"))
 				.AddInMemoryClients(Config.GetClients())
-				.AddInMemoryClients(Configuration.GetSection("IdentityServer:Clients"))
+				//TODO: There's a bug in AllowedScopes to RequestedScopes mapping in appsettings. Fix this.
+				//.AddInMemoryClients(Configuration.GetSection("IdentityServer:Clients"))
 				.AddOperationalStore(options =>
 				{
 					//options.DefaultSchema = "token";

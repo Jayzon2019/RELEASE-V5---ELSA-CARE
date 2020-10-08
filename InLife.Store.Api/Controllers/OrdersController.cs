@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ using InLife.Store.Core.Models;
 using InLife.Store.Core.Business;
 using InLife.Store.Core.Services;
 
-using InLife.Store.Infrastructure.Services;
+using InLife.Store.Api.Messages;
 
 namespace InLife.Store.Api
 {
@@ -20,7 +20,6 @@ namespace InLife.Store.Api
 	[Produces(MediaTypeNames.Application.Json)]
 	public class OrdersController : BaseController
 	{
-
 		public OrdersController
 		(
 			ILogger<BaseController> logger
@@ -31,7 +30,5 @@ namespace InLife.Store.Api
 		{
 
 		}
-
-
 	}
 }

@@ -1,3 +1,5 @@
+//TODO: USE AUTOMAPPER
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -16,34 +18,26 @@ namespace InLife.Store.Cms.ViewModels
 		{
 			this.Id = model.Id;
 
-			this.CreatedBy = (model.CreatedBy == null)
-				? (Guid?)null
-				: model.CreatedBy.Id;
-			this.CreatedByName = (model.CreatedBy == null)
-				? null
-				: $"{model.CreatedBy.FirstName} {model.CreatedBy.LastName}".Trim();
-			this.CreatedDate = model.CreatedDate;
+			this.CreatedBy = model.CreatedBy?.Id.ToString();
+			this.CreatedByName = $"{model.CreatedBy?.FirstName} {model.CreatedBy?.LastName}".Trim();
+			this.CreatedDate = model.CreatedDate.ToOffset(new TimeSpan(8, 0, 0)).ToString();
 
-			this.UpdatedBy = (model.UpdatedBy == null)
-				? (Guid?)null
-				: model.UpdatedBy.Id;
-			this.UpdatedByName = (model.UpdatedBy == null)
-				? null
-				: $"{model.UpdatedBy.FirstName} {model.UpdatedBy.LastName}".Trim();
-			this.UpdatedDate = model.UpdatedDate;
+			this.UpdatedBy = model.UpdatedBy?.Id.ToString();
+			this.UpdatedByName = $"{model.UpdatedBy?.FirstName} {model.UpdatedBy?.LastName}".Trim();
+			this.UpdatedDate = model.UpdatedDate?.ToOffset(new TimeSpan(8, 0, 0)).ToString();
 		}
 
 		public int Id { get; set; }
 
-		public DateTimeOffset CreatedDate { get; set; }
+		public string CreatedDate { get; set; }
 
-		public Guid? CreatedBy { get; set; }
+		public string CreatedBy { get; set; }
 
 		public string CreatedByName { get; set; }
 
-		public DateTimeOffset? UpdatedDate { get; set; }
+		public string UpdatedDate { get; set; }
 
-		public Guid? UpdatedBy { get; set; }
+		public string UpdatedBy { get; set; }
 
 		public string UpdatedByName { get; set; }
 	}

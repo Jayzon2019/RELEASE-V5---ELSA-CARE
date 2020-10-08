@@ -1,106 +1,86 @@
-﻿@model IEnumerable<InLifeCMS.ViewModel.PrimeCareViewModel>
+@model IEnumerable<PrimeCareViewModel>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section id="column-selectors">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row w-100">
-                        <div class="col-md-6">
-                            <h4 class="card-title text-title">Prime Care Files List</h4>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="pull-right">
-                                @{
-                                    if (Model.Count() == 0 ||Model.Count() == 1)
-                                    {
-                                        <a asp-action="Create" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new File</a>
-                                    }
-                                }
-                            </p>
-                        </div>
-                        <div class="col-md-12">
-                            <p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table table-striped zero-configuration">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row w-100">
+						<div class="col-md-6">
+							<h4 class="card-title text-title">Prime Care Files List</h4>
+						</div>
+						<div class="col-md-6">
+							<p class="pull-right">
+								@{
+									if (Model.Count() <= 1)
+									{
+										<a asp-action="Create" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new File</a>
+									}
+								}
+							</p>
+						</div>
+						<div class="col-md-12">
+							<p style="text-align:center;">     <span style="color:red;"><b>@ViewBag.error</b></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="card-content">
+					<div class="card-body card-dashboard">
+						<div class="table-responsive">
+							<table class="table table-striped zero-configuration">
 
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            File Name
-                                        </th>
-                                        <th>
-                                            File Description
-                                        </th>
-                                        <th>
-                                            Created Date
-                                        </th>
-                                        <th>
-                                            Created By
-                                        </th>
-                                        <th>
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <a href="data:application/pdf;base64, @item.strPrimeCareFile" download="download"> @Html.DisplayFor(modelItem => item.strPrimeCareFileName)</a>
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strPrimeCareFileDescription)
-                                            </td>
-                                            <td>
-                                                @item.dteCreatedDate.ToShortDateString()
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.strCreatedByUser)
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.intPrimeCareId" title="Edit"><i class="feather icon-edit"></i></a> |
-                                                <a asp-action="Details" asp-route-id="@item.intPrimeCareId" title="Details"><i class="feather icon-eye"></i></a> 
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>
-                                            File Name
-                                        </th>
-                                        <th>
-                                            File Description
-                                        </th>
-                                        <th>
-                                            Created Date
-                                        </th>
-                                        <th>
-                                            Created By
-                                        </th>
-                                        <th>
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<thead>
+									<tr>
+										<th>File Name</th>
+										<th>File Description</th>
+										<th>Created Date</th>
+										<th>Created By</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model)
+									{
+										<tr>
+											<td>
+												<a href="data:application/pdf;base64, @item.PrimeCareFile" download="download"> @Html.DisplayFor(modelItem => item.PrimeCareFileName)</a>
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.PrimeCareFileDescription)
+											</td>
+											<td>
+												@item.CreatedDate
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.CreatedByName)
+											</td>
+											<td>
+												<a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="feather icon-edit"></i></a> |
+												<a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="feather icon-eye"></i></a>
+											</td>
+										</tr>
+									}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>File Name</th>
+										<th>File Description</th>
+										<th>Created Date</th>
+										<th>Created By</th>
+										<th>Actions</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 

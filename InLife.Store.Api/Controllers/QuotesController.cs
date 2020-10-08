@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
@@ -10,8 +10,6 @@ using Microsoft.Extensions.Logging;
 using InLife.Store.Core.Models;
 using InLife.Store.Core.Business;
 using InLife.Store.Core.Services;
-
-using InLife.Store.Infrastructure.Services;
 
 using InLife.Store.Api.Messages;
 

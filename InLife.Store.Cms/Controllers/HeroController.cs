@@ -29,67 +29,44 @@ namespace InLife.Store.Cms.Controllers
 			this.heroRepository = heroRepository;
 		}
 
-
-
-		private IWebHostEnvironment _webHostEnvironment;
-		public HeroController(IWebHostEnvironment hostingEnvironment)
-		{
-			_webHostEnvironment = hostingEnvironment;
-		}
-		HeroService HS = new HeroService();
-		LogsRepo lR = new LogsRepo();
-
-
 		// GET: Hero
 		public ActionResult Index()
 		{
-			var log = "";
 			try
 			{
-				var heroList = HS.GetHeroSliders(ref log);
-				if (heroList != null)
-				{
-					return View(heroList);
-				}
-				else
-				{
+				var viewModelList = heroRepository
+					.GetAll()
+					.Select(model => new HeroViewModel(model))
+					.ToList();
+
+				if (viewModelList == null)
 					return NotFound();
-				}
+
+				return View(viewModelList);
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				return NotFound();
+				return GenericServerErrorResult(e);
 			}
 		}
 
 		// GET: Hero/Details/5
 		public ActionResult Details(int? id)
 		{
-			var log = "";
 			try
 			{
-				if (id == null)
-				{
-					return NotFound();
-				}
+				var model = heroRepository.Get(id);
 
-				var HeroSlider = HS.GetHeroSliderById(ref log, id);
-				if (HeroSlider == null)
-				{
+				if (model == null)
 					return NotFound();
-				}
 
-				return View(HeroSlider);
+				var viewModel = new HeroViewModel(model);
+
+				return View(viewModel);
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				return NotFound();
+				return GenericServerErrorResult(e);
 			}
 		}
 
@@ -104,61 +81,44 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create([Bind("intHeroId,strHeroBg,strHeroTitle,strHeroBtnTxt,strBtnTxtLink,dteCreatedDate,intCreatedBy,dteUpdatedDate,intUpdatedBy,blnIsActive,blnIsArchived,strHeading,strSubHeading,strHeadingColor,strSubHeadingColor,strContentPostion")] HeroViewModel heroViewModel)
+		public IActionResult Create([Bind("HeroBg, HeroTitle, HeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] HeroViewModel viewModel)
 		{
-			var log = "";
+			if (!ModelState.IsValid)
+				return View(viewModel);
+
 			try
 			{
-				if (ModelState.IsValid)
-				{
-					siteOptions.DirectoryPath = _webHostEnvironment.WebRootPath;
-					var isSaved = HS.SaveHeroSlider(ref log, heroViewModel);
-					if (isSaved != "Saved")
-					{
-						ViewBag.error = isSaved;
-					}
-					return RedirectToAction(nameof(Index));
-				}
-				return View(heroViewModel);
+				var model = viewModel.Map();
+				model.CreatedBy = this.CurrentUser();
+				model.CreatedDate = DateTimeOffset.Now;
+
+				this.heroRepository.Create(model);
+
+				return RedirectToAction(nameof(Index));
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return View();
+				return GenericServerErrorResult(e);
 			}
-
-
 		}
 
 		// GET: Hero/Edit/5
 		public IActionResult Edit(int? id)
 		{
-			var log = "";
 			try
 			{
-				if (id == null)
-				{
+				var model = this.heroRepository.Get(id);
+				if (model == null)
 					return NotFound();
-				}
-				var heroVM = HS.GetHeroSliderById(ref log, id);
-				if (heroVM == null)
-				{
-					return NotFound();
-				}
-				return View(heroVM);
-			}
-			catch (Exception ex)
-			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return NotFound();
-			}
 
+				var viewModel = new HeroViewModel(model);
+
+				return View(viewModel);
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 
 		// POST: Hero/Edit/5
@@ -166,32 +126,29 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Edit(int id, [Bind("intHeroId,strHeroBg,strHeroTitle,strHeroBtnTxt,strBtnTxtLink,dteCreatedDate,intCreatedBy,dteUpdatedDate,intUpdatedBy,blnIsActive,blnIsArchived,strHeading,strSubHeading,strHeadingColor,strSubHeadingColor,strContentPostion")] HeroViewModel heroViewModel)
+		public IActionResult Edit(int id, [Bind("HeroBg, HeroTitle, HeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] HeroViewModel viewModel)
 		{
-			var log = "";
-			if (ModelState.IsValid)
+			if (!ModelState.IsValid)
+				return View(viewModel);
+
+			try
 			{
-				try
-				{
-					if (id != heroViewModel.intHeroId)
-					{
-						return View();
-					}
-					siteOptions.DirectoryPath = _webHostEnvironment.WebRootPath;
-					HS.EditHeroSlider(ref log, heroViewModel);
-				}
-				catch (Exception ex)
-				{
-					string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-					var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-					lR.SaveExceptionLogs(exLog, ex, methodName);
-					ViewBag.error = Comman.SomethingWntWrong;
-					return View();
-				}
+				viewModel.Id = id;
+				var model = viewModel.Map();
+				if (model.Id == default)
+					return NotFound();
+
+				model.UpdatedBy = this.CurrentUser();
+				model.UpdatedDate = DateTimeOffset.Now;
+
+				this.heroRepository.Update(model);
+
 				return RedirectToAction(nameof(Index));
 			}
-			return View(heroViewModel);
-
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 
 
@@ -200,41 +157,44 @@ namespace InLife.Store.Cms.Controllers
 		// [ValidateAntiForgeryToken]
 		public ActionResult Delete(int id)
 		{
-			var log = "";
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
 			try
 			{
-				HS.Deactivate_DeleteHeroSlider(ref log, id, true);
+				var model = this.heroRepository.Get(id);
+				if (model == null)
+					return NotFound();
+
+				this.heroRepository.Delete(model);
+
 				return RedirectToAction(nameof(Index));
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return RedirectToAction(nameof(Index));
+				return GenericServerErrorResult(e);
 			}
 		}
 
 		// POST: Users/Delete/5
 		// [HttpPost, ActionName("Deactive")]
 		// [ValidateAntiForgeryToken]
-		public ActionResult DeactiveHero(int id)
-		{
-			var log = "";
-			try
-			{
-				HS.Deactivate_DeleteHeroSlider(ref log, id, false);
-				return RedirectToAction(nameof(Index));
-			}
-			catch (Exception ex)
-			{
-				string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-				var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-				lR.SaveExceptionLogs(exLog, ex, methodName);
-				ViewBag.error = Comman.SomethingWntWrong;
-				return RedirectToAction(nameof(Index));
-			}
-		}
+		//public ActionResult DeactiveHero(int id)
+		//{
+		//	var log = "";
+		//	try
+		//	{
+		//		HS.Deactivate_DeleteHeroSlider(ref log, id, false);
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+		//		var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
+		//		lR.SaveExceptionLogs(exLog, ex, methodName);
+		//		ViewBag.error = Comman.SomethingWntWrong;
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//}
 	}
 }

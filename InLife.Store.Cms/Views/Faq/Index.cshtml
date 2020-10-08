@@ -57,7 +57,7 @@
 												@Html.DisplayFor(modelItem => item.SortNum)
 											</td>
 											<td>
-												@item.CreatedDate.ToOffset(new TimeSpan(8, 0, 0))
+												@item.CreatedDate
 											</td>
 											<td>
 												@Html.DisplayFor(modelItem => item.CreatedByName)
@@ -72,27 +72,13 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>
-											Category
-										</th>
-										<th>
-											Question
-										</th>
-										<th>
-											Answer
-										</th>
-										<th>
-											Sort #
-										</th>
-										<th>
-											Created Date
-										</th>
-										<th>
-											Created By
-										</th>
-										<th>
-											Actions
-										</th>
+										<th>Category</th>
+										<th>Question</th>
+										<th>Answer</th>
+										<th>Sort #</th>
+										<th>Created Date</th>
+										<th>Created By</th>
+										<th>Actions</th>
 									</tr>
 								</tfoot>
 							</table>

@@ -10,9 +10,9 @@ using InLife.Store.Cms.ViewModels;
 
 namespace InLife.Store.Cms.Controllers
 {
-    [Authorize]
-    public class ProductsController : BaseController
-    {
+	[Authorize]
+	public class ProductsController : BaseController
+	{
 		private readonly IProductRepository productRepository;
 
 		public ProductsController
@@ -29,207 +29,173 @@ namespace InLife.Store.Cms.Controllers
 			this.productRepository = productRepository;
 		}
 
+		// GET: Products
+		public ActionResult Index()
+		{
+			try
+			{
+				var viewModelList = productRepository
+					.GetAll()
+					.Select(model => new ProductViewModel(model))
+					.ToList();
 
-		private IWebHostEnvironment _webHostEnvironment;
-        public ProductsController(IWebHostEnvironment hostingEnvironment)
-        {
-            _webHostEnvironment = hostingEnvironment;
-        }
-        ProductsService PS = new ProductsService();
-        LogsRepo lR = new LogsRepo();
+				if (viewModelList == null)
+					return NotFound();
 
-        // GET: Products
-        public ActionResult Index()
-        {
-            var log = "";
-            try
-            {
-                var proList = PS.GetProductsList(ref log);
-                if (proList != null)
-                {
-                    return View(proList);
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-                lR.SaveExceptionLogs(exLog, ex, methodName);
-                return NotFound();
-            }
-        }
+				return View(viewModelList);
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
+		}
 
-        // GET: Products/Details/5
-        public ActionResult Details(int? id)
-        {
-            var log = "";
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
+		// GET: Products/Details/5
+		public ActionResult Details(int? id)
+		{
+			try
+			{
+				var model = productRepository.Get(id);
 
-                var Pro = PS.GetProductById(ref log, id);
-                if (Pro == null)
-                {
-                    return NotFound();
-                }
+				if (model == null)
+					return NotFound();
 
-                return View(Pro);
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-                lR.SaveExceptionLogs(exLog, ex, methodName);
-                return NotFound();
-            }
-        }
+				var viewModel = new ProductViewModel(model);
 
-        // GET: Products/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+				return View(viewModel);
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
+		}
 
-        // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("intProductId,strProductImg,strProductName,strProductPrice,strProductCode,strShortDescription,strPriceWithOffer,intSortNum")] ProductsViewModel productsViewModel)
-        {
-            var log = "";
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    siteOptions.DirectoryPath = _webHostEnvironment.WebRootPath;
-                    var isSaved = PS.SaveProduct(ref log, productsViewModel);
-                    if (isSaved != "Saved")
-                    {
-                        ViewBag.error = isSaved;
-                    }
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(productsViewModel);
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-                lR.SaveExceptionLogs(exLog, ex, methodName);
-                ViewBag.error = Comman.SomethingWntWrong;
-                return View();
-            }
-        }
+		// GET: Products/Create
+		public IActionResult Create()
+		{
+			return View();
+		}
 
-        // GET: Products/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            var log = "";
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-                var proVM = PS.GetProductById(ref log, id);
-                if (proVM == null)
-                {
-                    return NotFound();
-                }
-                return View(proVM);
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-                lR.SaveExceptionLogs(exLog, ex, methodName);
-                ViewBag.error = Comman.SomethingWntWrong;
-                return NotFound();
-            }
-        }
+		// POST: Products/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Create([Bind("ProductImg, ProductName, ProductPrice, ProductCode, ShortDescription, PriceWithOffer, SortNum")] ProductViewModel viewModel)
+		{
+			if (!ModelState.IsValid)
+				return View(viewModel);
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, [Bind("intProductId,strProductImg,strProductName,strProductPrice,strProductCode,strShortDescription,strPriceWithOffer,intSortNum")] ProductsViewModel productsViewModel)
-        {
-            var log = "";
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    if (id != productsViewModel.intProductId)
-                    {
-                        return NotFound();
-                    }
-                    siteOptions.DirectoryPath = _webHostEnvironment.WebRootPath;
-                    PS.EditProducts(ref log, productsViewModel);
-                }
-                catch (Exception ex)
-                {
-                    string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                    var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-                    lR.SaveExceptionLogs(exLog, ex, methodName);
-                    ViewBag.error = Comman.SomethingWntWrong;
-                    return View();
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(productsViewModel);
-        }
+			try
+			{
+				var model = viewModel.Map();
+				model.CreatedBy = this.CurrentUser();
+				model.CreatedDate = DateTimeOffset.Now;
+
+				this.productRepository.Create(model);
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
+		}
+
+		// GET: Products/Edit/5
+		public ActionResult Edit(int? id)
+		{
+			try
+			{
+				var model = this.productRepository.Get(id);
+				if (model == null)
+					return NotFound();
+
+				var viewModel = new ProductViewModel(model);
+
+				return View(viewModel);
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
+		}
+
+		// POST: Products/Edit/5
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Edit(int id, [Bind("ProductImg, ProductName, ProductPrice, ProductCode, ShortDescription, PriceWithOffer, SortNum")] ProductViewModel viewModel)
+		{
+			if (!ModelState.IsValid)
+				return View(viewModel);
+
+			try
+			{
+				viewModel.Id = id;
+				var model = viewModel.Map();
+				if (model.Id == default)
+					return NotFound();
+
+				model.UpdatedBy = this.CurrentUser();
+				model.UpdatedDate = DateTimeOffset.Now;
+
+				this.productRepository.Update(model);
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
+		}
 
 
-        // POST: Users/Delete/5
-        //[HttpPost, ActionName("Delete")]
-       // [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
-        {
-            var log = "";
-            try
-            {
-                PS.Deactivate_DeleteProduct(ref log, id, true);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-                lR.SaveExceptionLogs(exLog, ex, methodName);
-                ViewBag.error = Comman.SomethingWntWrong;
-                return RedirectToAction(nameof(Index));
-            }
-        }
+		// POST: Users/Delete/5
+		//[HttpPost, ActionName("Delete")]
+		// [ValidateAntiForgeryToken]
+		public ActionResult Delete(int id)
+		{
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Deactive")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeactiveHero(int id)
-        {
-            var log = "";
-            try
-            {
-                PS.Deactivate_DeleteProduct(ref log, id, false);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-                lR.SaveExceptionLogs(exLog, ex, methodName);
-                ViewBag.error = Comman.SomethingWntWrong;
-                return RedirectToAction(nameof(Index));
-            }
-        }
+			try
+			{
+				var model = this.productRepository.Get(id);
+				if (model == null)
+					return NotFound();
 
-    }
+				this.productRepository.Delete(model);
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
+		}
+
+		// POST: Users/Delete/5
+		//[HttpPost, ActionName("Deactive")]
+		//[ValidateAntiForgeryToken]
+		//public ActionResult DeactiveHero(int id)
+		//{
+		//	var log = "";
+		//	try
+		//	{
+		//		PS.Deactivate_DeleteProduct(ref log, id, false);
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+		//		var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
+		//		lR.SaveExceptionLogs(exLog, ex, methodName);
+		//		ViewBag.error = Comman.SomethingWntWrong;
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//}
+
+	}
 }

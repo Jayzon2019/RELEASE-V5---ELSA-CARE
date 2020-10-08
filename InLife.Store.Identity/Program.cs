@@ -18,9 +18,6 @@ namespace InLife.Store.Identity
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder
-						.UseUrls(
-							"https://0.0.0.0:5000",
-							"https://localhost:5000")
 						.UseStartup<Startup>();
 				});
 	}

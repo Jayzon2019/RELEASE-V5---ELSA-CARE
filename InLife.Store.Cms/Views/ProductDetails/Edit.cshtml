@@ -1,572 +1,573 @@
-﻿@model InLife.Store.Cms.ViewModels.ProductDetailsViewModel
+@model ProductDetailViewModel
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Edit";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title text-title">Edit Product's Detail</h4>
-            </div>
-            <div class="card-content">
-                <div class="card-body card-dashboard">
-                    <div class="col-md-12">
-                        <form asp-action="Edit" enctype="multipart/form-data" novalidate>
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <p style="text-align:center;"><span style="color:red;"><b>@ViewBag.error</b></span></p>
-                            <input type="hidden" asp-for="intProductDetailId" />
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Products</label>
-                                            <select class="form-control select2" name="intProductId">
-                                                @foreach (var pro in ViewBag.products)
-                                                {
-                                                    if (pro.intProductId == Model.intProductId)
-                                                    {
-                                                        <option selected="selected" value="@pro.intProductId">@pro.strProductName</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@pro.intProductId">@pro.strProductName</option>
-                                                    }
-                                                }
-                                            </select>
-                                            <span asp-validation-for="intProductId" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Cases Covered</label>
-                                            <input asp-for="strCasesCovered" class="form-control" placeholder="Enter Cases Covered" />
-                                            <span asp-validation-for="strCasesCovered" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Benefit Type</label>
-                                            <input asp-for="strBenefitType" class="form-control" placeholder="Enter Benefit Type" />
-                                            <span asp-validation-for="strBenefitType" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Age Eligibility</label>
-                                            <input asp-for="strAgeEligibility" class="form-control" placeholder="Enter Age Eligibility" />
-                                            <span asp-validation-for="strAgeEligibility" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title text-title">Edit Product's Detail</h4>
+			</div>
+			<div class="card-content">
+				<div class="card-body card-dashboard">
+					<div class="col-md-12">
+						<form asp-action="Edit" enctype="multipart/form-data" novalidate>
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<p style="text-align:center;"><span style="color:red;"><b>@ViewBag.error</b></span></p>
+							<input type="hidden" asp-for="Id" />
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Products</label>
+											<select class="form-control select2" name="intProductId">
+												@foreach (var product in ViewBag.products)
+												{
+													if (product.Id == Model.ProductId)
+													{
+														<option selected="selected" value="@product.Id">@product.ProductName</option>
+													}
+													else
+													{
+														<option value="@product.Id">@product.ProductName</option>
+													}
+												}
+											</select>
+											<span asp-validation-for="ProductId" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Cases Covered</label>
+											<input asp-for="CasesCovered" class="form-control" placeholder="Enter Cases Covered" />
+											<span asp-validation-for="CasesCovered" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Benefit Type</label>
+											<input asp-for="BenefitType" class="form-control" placeholder="Enter Benefit Type" />
+											<span asp-validation-for="BenefitType" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Age Eligibility</label>
+											<input asp-for="AgeEligibility" class="form-control" placeholder="Enter Age Eligibility" />
+											<span asp-validation-for="AgeEligibility" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Coverage </label>
-                                            <input asp-for="strCoverage" class="form-control" placeholder="Coverage" />
-                                            <span asp-validation-for="strCoverage" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Coverage </label>
+											<input asp-for="Coverage" class="form-control" placeholder="Coverage" />
+											<span asp-validation-for="Coverage" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Medical Coverage </label>
-                                            <input asp-for="strMedicalCoverage" class="form-control" placeholder="Medical Coverage" />
-                                            <span asp-validation-for="strMedicalCoverage" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Number Of Availments</label>
-                                            <input asp-for="strNumberOfAvailments" class="form-control" placeholder="Enter Number Of Availments" />
-                                            <span asp-validation-for="strNumberOfAvailments" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Benefit Limit</label>
-                                            <input asp-for="strBenefitLimit" class="form-control" placeholder="Enter Benefit Limit" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Pre-existing Condition Coverage</label>
-                                            <input asp-for="strPreExistingConCover" class="form-control" placeholder="Pre-existing Condition Coverage" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Medical Coverage </label>
+											<input asp-for="MedicalCoverage" class="form-control" placeholder="Medical Coverage" />
+											<span asp-validation-for="MedicalCoverage" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Number Of Availments</label>
+											<input asp-for="NumberOfAvailments" class="form-control" placeholder="Enter Number Of Availments" />
+											<span asp-validation-for="NumberOfAvailments" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Benefit Limit</label>
+											<input asp-for="BenefitLimit" class="form-control" placeholder="Enter Benefit Limit" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Pre-existing Condition Coverage</label>
+											<input asp-for="PreExistingConCover" class="form-control" placeholder="Pre-existing Condition Coverage" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Inclusions</label>
-                                            <textarea name="strInclusions" id="summernoteInclusions">@Html.Raw(Model.strInclusions)</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Doctor's professional fee</label>
-                                            <input asp-for="strDocProFee" class="form-control" placeholder="Doctor's professional fee" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Room Accommodation</label>
-                                            <input asp-for="strRoomAccommodation" class="form-control" placeholder="Enter Room Accommodation" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Laboratory and diagnostic procedures</label>
-                                            <input asp-for="strLaboratoryDiagnosticPro" class="form-control" placeholder="Laboratory and diagnostic procedures" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Medicines as medically needed</label>
-                                            <input asp-for="strMedicinesAsMedicallyNeeded" class="form-control" placeholder="Medicines as medically needed" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Use of operating room, recovery room, and ICU</label>
-                                            <input asp-for="strUseOfOperationRoom" class="form-control" placeholder="Use of operating room, recovery room, and ICU" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Surgery and surgeon’s fees when medically necessary</label>
-                                            <input asp-for="strSurgerySurgonFees" class="form-control" placeholder="Surgery and surgeon’s fees when medically necessary" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Special Modalities as medically needed subject to PHP 5,000 sublimit</label>
-                                            <input asp-for="strSpecialModalities" class="form-control" placeholder="Special Modalities as medically needed subject to PHP 5,000 sublimit" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Laparoscopic procedures</label>
-                                            <input asp-for="strLaparoscopic" class="form-control" placeholder="Laparoscopic procedures" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Magnetic Resonance Angiography (MRA)</label>
-                                            <input asp-for="strMra" class="form-control" placeholder="Magnetic Resonance Angiography (MRA)" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Magnetic Resonance Imaging (MRI)</label>
-                                            <input asp-for="strMri" class="form-control" placeholder="Magnetic Resonance Imaging (MRI)" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Computerized Tomography (CT) Scans</label>
-                                            <input asp-for="strCt" class="form-control" placeholder="Computerized Tomography (CT) Scans" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Endoscopic Procedures (Therapeutic)</label>
-                                            <input asp-for="strTherapetic" class="form-control" placeholder="Endoscopic Procedures (Therapeutic)" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Pain Management</label>
-                                            <input asp-for="strPainManagement" class="form-control" placeholder="Pain Management" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Arthroscopic Procedures, Orthopedic Arthroscopy</label>
-                                            <input asp-for="strArthoscopic" class="form-control" placeholder="Arthroscopic Procedures, Orthopedic Arthroscopy" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Other medically necessary modalities not mentioned above and those for which there are no comparable, conventional or traditional counterparts</label>
-                                            <input asp-for="strOtherMedical" class="form-control" placeholder="Other medically necessary modalities" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Inclusions</label>
+											<textarea name="Inclusions" id="summernoteInclusions">@Html.Raw(Model.Inclusions)</textarea>
+										</div>
+									</div>
+								</div>
 
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">One-time hospital cash benefit of Php 1000 in confinement</label>
-                                            <input asp-for="strOneTime" class="form-control" placeholder="One-time hospital cash benefit of Php 1000 in confinement" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Doctor's professional fee</label>
+											<input asp-for="DocProFee" class="form-control" placeholder="Doctor's professional fee" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Unlimited telemedicine access (for gatekeeping)</label>
-                                            <input asp-for="strUnlimitedTeleMed" class="form-control" placeholder="Unlimited telemedicine access (for gatekeeping)" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Room Accommodation</label>
+											<input asp-for="RoomAccommodation" class="form-control" placeholder="Enter Room Accommodation" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Exclusions</label>
-                                            <textarea name="strExclusions" id="summernoteExclusions">@Html.Raw(Model.strExclusions)</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Usage</label>
-                                            <input asp-for="strUsage" class="form-control" placeholder="Enter Usage" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Laboratory and diagnostic procedures</label>
+											<input asp-for="LaboratoryDiagnosticPro" class="form-control" placeholder="Laboratory and diagnostic procedures" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Consultation Benefit</label>
-                                            <input asp-for="strConsultation" class="form-control" placeholder="Consultation Benefit" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Consultation Cards</label>
-                                            <input asp-for="strConsultationCards" class="form-control" placeholder="Consultation Cards" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Face-to-Face consultation</label>
-                                            <input asp-for="strFtfconsultation" class="form-control" placeholder="Face-to-Face consultation" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Telemedicine</label>
-                                            <input asp-for="strTelemedicine" class="form-control" placeholder="Telemedicine" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Medicines as medically needed</label>
+											<input asp-for="MedicinesAsMedicallyNeeded" class="form-control" placeholder="Medicines as medically needed" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Use of operating room, recovery room, and ICU</label>
+											<input asp-for="UseOfOperationRoom" class="form-control" placeholder="Use of operating room, recovery room, and ICU" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Dental Consultation</label>
-                                            <input asp-for="strDentalConsultation" class="form-control" placeholder="Dental Consultation" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Dental services benefit</label>
-                                            <input asp-for="strDentalServicesBenefit" class="form-control" placeholder="Dental services benefit" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Surgery and surgeon’s fees when medically necessary</label>
+											<input asp-for="SurgerySurgonFees" class="form-control" placeholder="Surgery and surgeon’s fees when medically necessary" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Hospital Network</label>
-                                            <input asp-for="strHospitalNetwork" class="form-control" placeholder="Hospital Network " />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Special Modalities as medically needed subject to PHP 5,000 sublimit</label>
+											<input asp-for="SpecialModalities" class="form-control" placeholder="Special Modalities as medically needed subject to PHP 5,000 sublimit" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Accredited Hospitals</label>
-                                            <input asp-for="strAccreditedHospitals" class="form-control" placeholder="Accredited Hospitals" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Laparoscopic procedures</label>
+											<input asp-for="Laparoscopic" class="form-control" placeholder="Laparoscopic procedures" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Magnetic Resonance Angiography (MRA)</label>
+											<input asp-for="MRA" class="form-control" placeholder="Magnetic Resonance Angiography (MRA)" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Magnetic Resonance Imaging (MRI)</label>
+											<input asp-for="MRI" class="form-control" placeholder="Magnetic Resonance Imaging (MRI)" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Computerized Tomography (CT) Scans</label>
+											<input asp-for="CT" class="form-control" placeholder="Computerized Tomography (CT) Scans" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Endoscopic Procedures (Therapeutic)</label>
+											<input asp-for="Therapetic" class="form-control" placeholder="Endoscopic Procedures (Therapeutic)" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Pain Management</label>
+											<input asp-for="PainManagement" class="form-control" placeholder="Pain Management" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Arthroscopic Procedures, Orthopedic Arthroscopy</label>
+											<input asp-for="Arthoscopic" class="form-control" placeholder="Arthroscopic Procedures, Orthopedic Arthroscopy" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Other medically necessary modalities not mentioned above and those for which there are no comparable, conventional or traditional counterparts</label>
+											<input asp-for="OtherMedical" class="form-control" placeholder="Other medically necessary modalities" />
+										</div>
+									</div>
+								</div>
 
 
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">One-time hospital cash benefit of Php 1000 in confinement</label>
+											<input asp-for="OneTime" class="form-control" placeholder="One-time hospital cash benefit of Php 1000 in confinement" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Unlimited telemedicine access (for gatekeeping)</label>
+											<input asp-for="UnlimitedTeleMed" class="form-control" placeholder="Unlimited telemedicine access (for gatekeeping)" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Exclusions</label>
+											<textarea name="Exclusions" id="summernoteExclusions">@Html.Raw(Model.Exclusions)</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Usage</label>
+											<input asp-for="Usage" class="form-control" placeholder="Enter Usage" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Consultation Benefit</label>
+											<input asp-for="Consultation" class="form-control" placeholder="Consultation Benefit" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Consultation Cards</label>
+											<input asp-for="ConsultationCards" class="form-control" placeholder="Consultation Cards" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Face-to-Face consultation</label>
+											<input asp-for="FTFConsultation" class="form-control" placeholder="Face-to-Face consultation" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Telemedicine</label>
+											<input asp-for="Telemedicine" class="form-control" placeholder="Telemedicine" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Dental Consultation</label>
+											<input asp-for="DentalConsultation" class="form-control" placeholder="Dental Consultation" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Dental services benefit</label>
+											<input asp-for="DentalServicesBenefit" class="form-control" placeholder="Dental services benefit" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Hospital Network</label>
+											<input asp-for="HospitalNetwork" class="form-control" placeholder="Hospital Network " />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Accredited Hospitals</label>
+											<input asp-for="AccreditedHospitals" class="form-control" placeholder="Accredited Hospitals" />
+										</div>
+									</div>
+								</div>
 
 
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Non-Accredited Hospitals</label>
-                                            <input asp-for="strNonAccreditedHos" class="form-control" placeholder="Non-Accredited Hospitals" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Reimbursement for non-accredited hospital availment</label>
-                                            <input asp-for="strReimbursementNonAccreditedHos" class="form-control" placeholder="Reimbursement for non-accredited hospital availment" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Top 6 Hospitals Access</label>
-                                            <input asp-for="strTopSixHospitalAccess" class="form-control" placeholder="Top 6 Hospitals Access" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Combinability with another IHC product</label>
-                                            <input asp-for="strCombinability" class="form-control" placeholder="Combinability with another IHC product" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Individual or Group Comprehensive Plan (with or without PEC coverage)</label>
-                                            <input asp-for="strIndividualOrGroup" class="form-control" placeholder="Individual or Group Comprehensive Plan (with or without PEC coverage)" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Stand-alone Elective In-patient</label>
-                                            <input asp-for="strInPatient" class="form-control" placeholder="Stand-alone Elective In-patient" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Stand-alone Out-patient (diagnostics)</label>
-                                            <input asp-for="strOutPatient" class="form-control" placeholder="Stand-alone Out-patient (diagnostics)" />
-                                        </div>
-                                    </div>
-                                </div>
 
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Prepaid Plan</label>
-                                            <input asp-for="strPrepaidPlan" class="form-control" placeholder="Prepaid Plan" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Non-Accredited Hospitals</label>
+											<input asp-for="NonAccreditedHospitals" class="form-control" placeholder="Non-Accredited Hospitals" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Registration Rules</label>
-                                            <input asp-for="strRegistrationRules" class="form-control" placeholder="Enter Registration Rules" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Reimbursement for non-accredited hospital availment</label>
+											<input asp-for="ReimbursementNonAccreditedHospitals" class="form-control" placeholder="Reimbursement for non-accredited hospital availment" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Medical Examination Requirement</label>
-                                            <input asp-for="strMer" class="form-control" placeholder="Enter Medical Examination Requirement" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Application Form Requirement</label>
-                                            <input asp-for="strAfr" class="form-control" placeholder="Enter Application Form Requirement" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Allowable registration period</label>
-                                            <input asp-for="strArp" class="form-control" placeholder="Enter Allowable registration period" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Validity Period from the date of successful registration</label>
-                                            <input asp-for="strValidity" class="form-control" placeholder="Enter Validity Period" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Waiting Period from registration to activation</label>
-                                            <input asp-for="strWaiting" class="form-control" placeholder="Enter Waiting Period" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Number of registration within 12 months</label>
-                                            <input asp-for="strNumberOfRegistrations" class="form-control" placeholder="Enter Number of registration" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Registration of succeeding vouchers within 12 months</label>
-                                            <input asp-for="strRegistrationOfSucceedingVouchers" class="form-control" placeholder="Registration of succeeding vouchers within 12 months" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Top 6 Hospitals Access</label>
+											<input asp-for="TopSixHospitalAccess" class="form-control" placeholder="Top 6 Hospitals Access" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">If voucher is used</label>
-                                            <input asp-for="strVoucherUsed" class="form-control" placeholder="If voucher is used" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Combinability with another IHC product</label>
+											<input asp-for="Combinability" class="form-control" placeholder="Combinability with another IHC product" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">If voucher is unused</label>
-                                            <input asp-for="strVoucherUnused" class="form-control" placeholder="If voucher is unused" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Individual or Group Comprehensive Plan (with or without PEC coverage)</label>
+											<input asp-for="IndividualOrGroup" class="form-control" placeholder="Individual or Group Comprehensive Plan (with or without PEC coverage)" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Stand-alone Elective In-patient</label>
+											<input asp-for="InPatient" class="form-control" placeholder="Stand-alone Elective In-patient" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Stand-alone Out-patient (diagnostics)</label>
+											<input asp-for="OutPatient" class="form-control" placeholder="Stand-alone Out-patient (diagnostics)" />
+										</div>
+									</div>
+								</div>
 
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Learn More Button Link</label>
-                                            <input asp-for="strLearnMoreBtnLink" class="form-control" placeholder="Enter Learn More Button Link" />
-                                            <span asp-validation-for="strLearnMoreBtnLink" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label class="control-label text-secondary">Buy Now Button Link</label>
-                                            <input asp-for="strBuyNowBtnLink" class="form-control" placeholder="Enter Buy Now Button Link" />
-                                            <span asp-validation-for="strBuyNowBtnLink" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Prepaid Plan</label>
+											<input asp-for="PrepaidPlan" class="form-control" placeholder="Prepaid Plan" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Registration Rules</label>
+											<input asp-for="RegistrationRules" class="form-control" placeholder="Enter Registration Rules" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Medical Examination Requirement</label>
+											<input asp-for="MER" class="form-control" placeholder="Enter Medical Examination Requirement" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Application Form Requirement</label>
+											<input asp-for="AFR" class="form-control" placeholder="Enter Application Form Requirement" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Allowable registration period</label>
+											<input asp-for="ARP" class="form-control" placeholder="Enter Allowable registration period" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Validity Period from the date of successful registration</label>
+											<input asp-for="Validity" class="form-control" placeholder="Enter Validity Period" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Waiting Period from registration to activation</label>
+											<input asp-for="Waiting" class="form-control" placeholder="Enter Waiting Period" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Number of registration within 12 months</label>
+											<input asp-for="NumberOfRegistrations" class="form-control" placeholder="Enter Number of registration" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Registration of succeeding vouchers within 12 months</label>
+											<input asp-for="RegistrationOfSucceedingVouchers" class="form-control" placeholder="Registration of succeeding vouchers within 12 months" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">If voucher is used</label>
+											<input asp-for="VoucherUsed" class="form-control" placeholder="If voucher is used" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">If voucher is unused</label>
+											<input asp-for="VoucherUnused" class="form-control" placeholder="If voucher is unused" />
+										</div>
+									</div>
+								</div>
 
 
-                            </div>
-                            <div class="row w-100 mt-2">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="submit" value="Update" class="btn btn-primary" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group pull-right">
-                                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Learn More Button Link</label>
+											<input asp-for="LearnMoreBtnLink" class="form-control" placeholder="Enter Learn More Button Link" />
+											<span asp-validation-for="LearnMoreBtnLink" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Buy Now Button Link</label>
+											<input asp-for="BuyNowBtnLink" class="form-control" placeholder="Enter Buy Now Button Link" />
+											<span asp-validation-for="BuyNowBtnLink" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="row w-100 mt-2">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="submit" value="Update" class="btn btn-primary" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group pull-right">
+										<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#summernoteInclusions').summernote();
-        $('#summernoteExclusions').summernote();
-    });
+	$(document).ready(function ()
+	{
+		$('#summernoteInclusions').summernote();
+		$('#summernoteExclusions').summernote();
+	});
 </script>
 
 

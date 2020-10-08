@@ -1,4 +1,5 @@
-﻿@model InLife.Store.Cms.ViewModels.UsersViewModel
+@*
+@model InLife.Store.Cms.ViewModels.UsersViewModel
 @{
     ViewData["Title"] = "EditProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,10 +13,10 @@
                     <div class="tab-pane active" id="displayAccount" aria-labelledby="account-tab" role="tabpanel">
                             <div class="media mb-2">
                                 <a class="mr-2 my-25" href="#">
-                                    <img src="@Url.Content("/"+Model.strUserImg)" id="user_img" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
+                                    <img src="@Url.Content("/"+Model.UserImg)" id="user_img" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
                                 </a>
                                 <div class="media-body mt-50">
-                                    <h4 class="media-heading">@Model.strFirstName   @Model.strLastName</h4>
+                                    <h4 class="media-heading">@Model.FirstName   @Model.LastName</h4>
                                 </div>
                             </div>
                             <div class="row">
@@ -25,18 +26,18 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="controls">
-                                            <label>E-mail : @Model.strEmail</label>
+                                            <label>E-mail : @Model.Email</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
 
-                                   
+
                                     <div class="form-group">
                                         <label>Date Of Birth : @Model.dteDob</label>
                                     </div>
                                     <div class="form-group">
-                                        <label>Phone : @Model.strPhone</label>
+                                        <label>Phone : @Model.Phone</label>
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
@@ -54,10 +55,10 @@
                             <input type="hidden" asp-for="intUserId" />
                             <div class="media mb-2">
                                 <a class="mr-2 my-25" href="#">
-                                    <img src="@Url.Content("/"+Model.strUserImg)" id="user_img" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
+                                    <img src="@Url.Content("/"+Model.UserImg)" id="user_img" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
                                 </a>
                                 <div class="media-body mt-50">
-                                    <h4 class="media-heading">@Model.strFirstName   @Model.strLastName</h4>
+                                    <h4 class="media-heading">@Model.FirstName   @Model.LastName</h4>
                                     <div class="col-12 d-flex mt-1 px-0">
                                         <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Upload new photo</label>
                                         <input type="file" onchange="show(this)" id="account-upload" name="file" hidden>
@@ -70,19 +71,19 @@
                                     <div class="form-group">
                                         <div class="controls">
                                             <label>First Name</label>
-                                            <input type="text" class="form-control" placeholder="Username" asp-for="strFirstName" required data-validation-required-message="This field is required">
+                                            <input type="text" class="form-control" placeholder="Username" asp-for="FirstName" required data-validation-required-message="This field is required">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="controls">
                                             <label>Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Name" asp-for="strLastName" required data-validation-required-message="This name field is required">
+                                            <input type="text" class="form-control" placeholder="Name" asp-for="LastName" required data-validation-required-message="This name field is required">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="controls">
                                             <label>E-mail</label>
-                                            <input type="email" class="form-control" placeholder="Email" asp-for="strEmail" required data-validation-required-message="This email field is required">
+                                            <input type="email" class="form-control" placeholder="Email" asp-for="Email" required data-validation-required-message="This email field is required">
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +112,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Phone</label>
-                                        <input type="number" class="form-control" asp-for="strPhone" placeholder="Contact Number">
+                                        <input type="number" class="form-control" asp-for="Phone" placeholder="Contact Number">
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
@@ -151,3 +152,4 @@
         }
     }
 </script>
+*@

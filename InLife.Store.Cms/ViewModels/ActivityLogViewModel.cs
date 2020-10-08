@@ -3,40 +3,44 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 using InLife.Store.Core.Models;
+using InLife.Store.Core.Repository;
 
 namespace InLife.Store.Cms.ViewModels
 {
 	public class ActivityLogViewModel
 	{
-		public ActivityLogViewModel()
+		private readonly IActivityLogRepository activityLogRepository;
+
+		public ActivityLogViewModel(IActivityLogRepository activityLogRepository)
 		{
+			this.activityLogRepository = activityLogRepository;
 		}
 
 		public ActivityLogViewModel(ActivityLog model)
 		{
 			this.Id = model.Id;
-			this.ActivityBy = $"{model.ActivityBy.FirstName} {model.ActivityBy.LastName}".Trim();
 			this.ActionPerfomed = model.ActionPerfomed;
 			this.ActivityDescription = model.ActivityDescription;
 			this.IpAddress = model.IpAddress;
-			this.ActivityDate = model.ActivityDate;
-			this.ActivityById = model.ActivityById;
+			this.ActivityBy = $"{model.ActivityBy.FirstName} {model.ActivityBy.LastName}".Trim();
+			this.ActivityDate = model.ActivityDate?.ToOffset(new TimeSpan(8, 0, 0)).ToString();
+			this.ActivityById = model.ActivityById.ToString();
 		}
 
-		public ActivityLog Map()
-		{
-			var model = new ActivityLog
-			{
-				Id = this.Id,
-				ActionPerfomed = this.ActionPerfomed,
-				ActivityDescription = this.ActivityDescription,
-				IpAddress = this.IpAddress,
-				ActivityDate = this.ActivityDate,
-				ActivityById = this.ActivityById
-		};
+		//public ActivityLog Map()
+		//{
+		//	var model = new ActivityLog
+		//	{
+		//		Id = this.Id,
+		//		ActionPerfomed = this.ActionPerfomed,
+		//		ActivityDescription = this.ActivityDescription,
+		//		IpAddress = this.IpAddress,
+		//		ActivityDate = this.ActivityDate,
+		//		ActivityById = this.ActivityById
+		//	};
 
-			return model;
-		}
+		//	return model;
+		//}
 
 		public int Id { get; set; }
 
@@ -48,8 +52,8 @@ namespace InLife.Store.Cms.ViewModels
 
 		public string IpAddress { get; set; }
 
-		public DateTimeOffset? ActivityDate { get; set; }
+		public string ActivityDate { get; set; }
 
-		public Guid? ActivityById { get; set; }
+		public string ActivityById { get; set; }
     }
 }
