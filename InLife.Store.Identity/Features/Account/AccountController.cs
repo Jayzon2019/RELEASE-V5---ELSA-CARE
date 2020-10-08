@@ -57,6 +57,12 @@ namespace InLife.Store.Identity.Features
 			this.dbContext = dbContext;
 		}
 
+		[HttpGet]
+		public ActionResult Login2()
+		{
+			return View();
+		}
+
 		/// <summary>
 		/// Entry point into the login workflow
 		/// </summary>

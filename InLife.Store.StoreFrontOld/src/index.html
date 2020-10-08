@@ -10,7 +10,7 @@
 			gtag('config', 'UA-173350504-1');
 		</script>
 
-		<base href="https://dev-inlife-estore.azurewebsites.net/">
+		<base href="https://localhost:4200/">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -657,8 +657,7 @@
 				}
 
 				for (var i = 0; i < proDet.length; i++) {
-
-					var product = pro.find(x => x.productId == proDet[i].productId);
+					var product = pro.find(x => x.id == proDet[i].productId);
 					var img = 'data:image/jpg;base64,' + product.productImg;
 					var proName = product.productName;
 					var proNameId = proName.replace(/\s+/g, '-');

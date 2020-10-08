@@ -10,7 +10,7 @@
 		gtag('config', 'UA-173350504-1');
 	</script>
 
-	<base href="https://dev-inlife-estore.azurewebsites.net/">
+	<base href="https://localhost:4200/">
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -323,29 +323,29 @@
 			if (faqCatList.length > 0 && faqList.length > 0) {
 				var faqTabs = "<div class=\"tab\">";
 				for (var i = 0; i < faqCatList.length; i++) {
-					var id = faqCatList[i].faqCategory;
+					var id = faqCatList[i].name;
 					id = id.replace(/\s/g, '');
-					faqTabs = faqTabs + "<button class=\"tablinks " + id + "\" onclick=\"window.location.hash='#" + id + "'\">" + faqCatList[i].faqCategory + "</button>"
+					faqTabs = faqTabs + "<button class=\"tablinks " + id + "\" onclick=\"window.location.hash='#" + id + "'\">" + faqCatList[i].name + "</button>"
 				}
 				faqTabs = faqTabs + "</div>";
 				$(".tab-section").append(faqTabs);
 				for (var i = 0; i < faqCatList.length; i++) {
-					var cat = faqCatList[i].faqCategory;
+					var cat = faqCatList[i].name;
 					cat = cat.replace(/\s/g, '');
 					var faq = "<div id=\"" + cat + "\" class=\"faqMainDiv tabcontent\">";
 
 					for (var x = 0; x < faqList.length; x++) {
-						var faqCid = faqCatList[i].faqCatId;
-						var fCId = faqList[x].faqCatId;
+						var faqCid = faqCatList[i].id;
+						var fCId = faqList[x].categoryId;
 						if (fCId == faqCid) {
 							var idChanged = checkIds(fCId);
 							if (idChanged == true) {
-								faq = faq + "<div class=\"palet row\"><div class=\"col-xs-12\"><h3 class=\"palet-title\"><a href=\"#faqs" + [x] + "\" onclick=\"return false;\" data-toggle=\"collapse\">" + faqList[x].faqQuestion + "</a></h3>";
-								faq = faq + "<div id=\"faqs" + [x] + "\" class=\"lh-35 collapse show\">" + faqList[x].faqAnswer + "</div></div></div>";
+								faq = faq + "<div class=\"palet row\"><div class=\"col-xs-12\"><h3 class=\"palet-title\"><a href=\"#faqs" + [x] + "\" onclick=\"return false;\" data-toggle=\"collapse\">" + faqList[x].question + "</a></h3>";
+								faq = faq + "<div id=\"faqs" + [x] + "\" class=\"lh-35 collapse show\">" + faqList[x].answer + "</div></div></div>";
 							}
 							else {
-								faq = faq + "<div class=\"palet row\"><div class=\"col-xs-12\"><h3 class=\"palet-title\"><a href=\"#faqs" + [x] + "\" onclick=\"return false;\" data-toggle=\"collapse\" class=\"collapsed\">" + faqList[x].faqQuestion + "</a></h3>";
-								faq = faq + "<div id=\"faqs" + [x] + "\" class=\"lh-35 collapse\">" + faqList[x].faqAnswer + "</div></div></div>";
+								faq = faq + "<div class=\"palet row\"><div class=\"col-xs-12\"><h3 class=\"palet-title\"><a href=\"#faqs" + [x] + "\" onclick=\"return false;\" data-toggle=\"collapse\" class=\"collapsed\">" + faqList[x].question + "</a></h3>";
+								faq = faq + "<div id=\"faqs" + [x] + "\" class=\"lh-35 collapse\">" + faqList[x].answer + "</div></div></div>";
 							}
 						}
 					}
