@@ -16,61 +16,78 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserClaims]') AND type in (N'U'))
 ALTER TABLE [dbo].[UserClaims] DROP CONSTRAINT IF EXISTS [FK_UserClaims_Users_UserId]
 GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Persons]') AND type in (N'U'))
-ALTER TABLE [dbo].[Persons] DROP CONSTRAINT IF EXISTS [DF_Persons_DateCreated]
-GO
-/****** Object:  Index [PK_UserTokens]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_UserTokens]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserTokens]') AND type in (N'U'))
 ALTER TABLE [dbo].[UserTokens] DROP CONSTRAINT IF EXISTS [PK_UserTokens]
 GO
-/****** Object:  Index [PK_Users_UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_Users_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users_UserRoles]') AND type in (N'U'))
 ALTER TABLE [dbo].[Users_UserRoles] DROP CONSTRAINT IF EXISTS [PK_Users_UserRoles]
 GO
-/****** Object:  Index [PK_Users]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_Users]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
 ALTER TABLE [dbo].[Users] DROP CONSTRAINT IF EXISTS [PK_Users]
 GO
-/****** Object:  Index [PK_UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserRoles]') AND type in (N'U'))
 ALTER TABLE [dbo].[UserRoles] DROP CONSTRAINT IF EXISTS [PK_UserRoles]
 GO
-/****** Object:  Index [PK_UserLogins]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_UserLogins]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserLogins]') AND type in (N'U'))
 ALTER TABLE [dbo].[UserLogins] DROP CONSTRAINT IF EXISTS [PK_UserLogins]
 GO
-/****** Object:  Index [PK_Persons]    Script Date: 5 Oct 2020 8:24:57 AM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Persons]') AND type in (N'U'))
-ALTER TABLE [dbo].[Persons] DROP CONSTRAINT IF EXISTS [PK_Persons]
+/****** Object:  Index [IX_PersistedGrants_SubjectId_SessionId_Type]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [IX_PersistedGrants_SubjectId_SessionId_Type] ON [dbo].[PersistedGrants]
 GO
-/****** Object:  Table [dbo].[UserTokens]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [IX_PersistedGrants_SubjectId_ClientId_Type]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [IX_PersistedGrants_SubjectId_ClientId_Type] ON [dbo].[PersistedGrants]
+GO
+/****** Object:  Index [IX_PersistedGrants_Expiration]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [IX_PersistedGrants_Expiration] ON [dbo].[PersistedGrants]
+GO
+/****** Object:  Index [IX_DeviceCodes_Expiration]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [IX_DeviceCodes_Expiration] ON [dbo].[DeviceCodes]
+GO
+/****** Object:  Index [IX_DeviceCodes_DeviceCode]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [IX_DeviceCodes_DeviceCode] ON [dbo].[DeviceCodes]
+GO
+/****** Object:  Index [CI_UserTokens]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [CI_UserTokens] ON [dbo].[UserTokens] WITH ( ONLINE = OFF )
+GO
+/****** Object:  Table [dbo].[UserTokens]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserTokens]
 GO
-/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [CI_Users_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [CI_Users_UserRoles] ON [dbo].[Users_UserRoles] WITH ( ONLINE = OFF )
+GO
+/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[Users_UserRoles]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[Users]
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserRoles]
 GO
-/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserRoleClaims]
 GO
-/****** Object:  Table [dbo].[UserLogins]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [CI_UserLogins]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP INDEX IF EXISTS [CI_UserLogins] ON [dbo].[UserLogins] WITH ( ONLINE = OFF )
+GO
+/****** Object:  Table [dbo].[UserLogins]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserLogins]
 GO
-/****** Object:  Table [dbo].[UserClaims]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[UserClaims]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserClaims]
 GO
-/****** Object:  Table [dbo].[Persons]    Script Date: 5 Oct 2020 8:24:57 AM ******/
-DROP TABLE IF EXISTS [dbo].[Persons]
+/****** Object:  Table [dbo].[PersistedGrants]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+DROP TABLE IF EXISTS [dbo].[PersistedGrants]
 GO
-/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 DROP TABLE IF EXISTS [dbo].[DeviceCodes]
 GO
-/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -91,59 +108,29 @@ CREATE TABLE [dbo].[DeviceCodes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Persons]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[PersistedGrants]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Persons](
-	[ClusteringId] [bigint] IDENTITY(1,1) NOT NULL,
-	[Id] [uniqueidentifier] NOT NULL,
-	[DateCreated] [datetimeoffset](7) NOT NULL,
-	[NamePrefix] [nvarchar](10) NULL,
-	[NameSuffix] [nvarchar](10) NULL,
-	[FirstName] [nvarchar](50) NOT NULL,
-	[MiddleName] [nvarchar](50) NULL,
-	[LastName] [nvarchar](50) NOT NULL,
-	[Nationality] [nvarchar](50) NOT NULL,
-	[CivilStatus] [varchar](20) NOT NULL,
-	[Gender] [varchar](20) NOT NULL,
-	[BirthDate] [smalldatetime] NULL,
-	[BirthCountry] [nvarchar](30) NULL,
-	[BirthRegion] [nvarchar](30) NULL,
-	[BirthCity] [nvarchar](30) NULL,
-	[EmailAddress] [varchar](320) NULL,
-	[MobileNumber] [varchar](20) NULL,
-	[HomePhoneNumber] [varchar](20) NULL,
-	[HomeAddress1] [nvarchar](100) NULL,
-	[HomeAddress2] [nvarchar](100) NULL,
-	[HomeAddress3] [nvarchar](100) NULL,
-	[HomeCity] [nvarchar](30) NULL,
-	[HomeRegion] [nvarchar](30) NULL,
-	[HomeZipCode] [nvarchar](10) NULL,
-	[HomeCountry] [nvarchar](30) NULL,
-	[WorkPhoneNumber] [varchar](20) NULL,
-	[WorkAddress1] [nvarchar](100) NULL,
-	[WorkAddress2] [nvarchar](100) NULL,
-	[WorkAddress3] [nvarchar](100) NULL,
-	[WorkCity] [nvarchar](30) NULL,
-	[WorkRegion] [nvarchar](30) NULL,
-	[WorkZipCode] [nvarchar](10) NULL,
-	[WorkHomeCountry] [nvarchar](30) NULL,
-	[PreferredMailingAddress] [varchar](10) NULL,
-	[CompanyName] [nvarchar](50) NULL,
-	[Occupation] [nvarchar](50) NULL,
-	[IncomeMonthlyAmount] [decimal](19, 4) NULL,
-	[IncomeSource] [nvarchar](50) NULL,
-	[LegalIdType] [varchar](30) NULL,
-	[LegalIdNumber] [varchar](30) NULL,
-	[LegalIdImage] [varchar](max) NULL,
-	[SecondaryLegalIdType] [varchar](30) NULL,
-	[SecondaryLegalIdNumber] [varchar](30) NULL,
-	[SecondaryLegalIdImage] [varchar](max) NULL
+CREATE TABLE [dbo].[PersistedGrants](
+	[Key] [nvarchar](200) NOT NULL,
+	[Type] [nvarchar](50) NOT NULL,
+	[SubjectId] [nvarchar](200) NULL,
+	[SessionId] [nvarchar](100) NULL,
+	[ClientId] [nvarchar](200) NOT NULL,
+	[Description] [nvarchar](200) NULL,
+	[CreationTime] [datetime2](7) NOT NULL,
+	[Expiration] [datetime2](7) NULL,
+	[ConsumedTime] [datetime2](7) NULL,
+	[Data] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_PersistedGrants] PRIMARY KEY CLUSTERED 
+(
+	[Key] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserClaims]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[UserClaims]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -159,7 +146,7 @@ CREATE TABLE [dbo].[UserClaims](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserLogins]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[UserLogins]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -172,7 +159,13 @@ CREATE TABLE [dbo].[UserLogins](
 	[UserId] [varchar](36) NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [CI_UserLogins]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE CLUSTERED INDEX [CI_UserLogins] ON [dbo].[UserLogins]
+(
+	[ClusterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +181,7 @@ CREATE TABLE [dbo].[UserRoleClaims](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -200,7 +193,7 @@ CREATE TABLE [dbo].[UserRoles](
 	[ConcurrencyStamp] [nvarchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -228,7 +221,7 @@ CREATE TABLE [dbo].[Users](
 	[DateActivated] [datetimeoffset](7) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +232,13 @@ CREATE TABLE [dbo].[Users_UserRoles](
 	[RoleId] [varchar](36) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserTokens]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [CI_Users_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE CLUSTERED INDEX [CI_Users_UserRoles] ON [dbo].[Users_UserRoles]
+(
+	[ClusterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserTokens]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -252,21 +251,61 @@ CREATE TABLE [dbo].[UserTokens](
 	[Value] [nvarchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+/****** Object:  Index [CI_UserTokens]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE CLUSTERED INDEX [CI_UserTokens] ON [dbo].[UserTokens]
+(
+	[ClusterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
 INSERT [dbo].[UserRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'Admin', N'Administrator', N'ADMINISTRATOR', NULL)
 GO
 INSERT [dbo].[UserRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'ContentManager', N'Content Manager', N'CONTENT MANAGER', NULL)
 GO
 INSERT [dbo].[UserRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'Agent', N'Agent', N'AGENT', NULL)
 GO
-/****** Object:  Index [PK_Persons]    Script Date: 5 Oct 2020 8:24:57 AM ******/
-ALTER TABLE [dbo].[Persons] ADD  CONSTRAINT [PK_Persons] PRIMARY KEY NONCLUSTERED 
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_DeviceCodes_DeviceCode]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_DeviceCodes_DeviceCode] ON [dbo].[DeviceCodes]
 (
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	[DeviceCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_DeviceCodes_Expiration]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE NONCLUSTERED INDEX [IX_DeviceCodes_Expiration] ON [dbo].[DeviceCodes]
+(
+	[Expiration] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_PersistedGrants_Expiration]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE NONCLUSTERED INDEX [IX_PersistedGrants_Expiration] ON [dbo].[PersistedGrants]
+(
+	[Expiration] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_UserLogins]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [IX_PersistedGrants_SubjectId_ClientId_Type]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE NONCLUSTERED INDEX [IX_PersistedGrants_SubjectId_ClientId_Type] ON [dbo].[PersistedGrants]
+(
+	[SubjectId] ASC,
+	[ClientId] ASC,
+	[Type] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_PersistedGrants_SubjectId_SessionId_Type]    Script Date: 12 Oct 2020 12:55:59 PM ******/
+CREATE NONCLUSTERED INDEX [IX_PersistedGrants_SubjectId_SessionId_Type] ON [dbo].[PersistedGrants]
+(
+	[SubjectId] ASC,
+	[SessionId] ASC,
+	[Type] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [PK_UserLogins]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 ALTER TABLE [dbo].[UserLogins] ADD  CONSTRAINT [PK_UserLogins] PRIMARY KEY NONCLUSTERED 
 (
 	[LoginProvider] ASC,
@@ -275,7 +314,7 @@ ALTER TABLE [dbo].[UserLogins] ADD  CONSTRAINT [PK_UserLogins] PRIMARY KEY NONCL
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 ALTER TABLE [dbo].[UserRoles] ADD  CONSTRAINT [PK_UserRoles] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
@@ -283,7 +322,7 @@ ALTER TABLE [dbo].[UserRoles] ADD  CONSTRAINT [PK_UserRoles] PRIMARY KEY NONCLUS
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_Users]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_Users]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [PK_Users] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
@@ -291,7 +330,7 @@ ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [PK_Users] PRIMARY KEY NONCLUSTERED
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_Users_UserRoles]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_Users_UserRoles]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 ALTER TABLE [dbo].[Users_UserRoles] ADD  CONSTRAINT [PK_Users_UserRoles] PRIMARY KEY NONCLUSTERED 
 (
 	[UserId] ASC,
@@ -300,15 +339,13 @@ ALTER TABLE [dbo].[Users_UserRoles] ADD  CONSTRAINT [PK_Users_UserRoles] PRIMARY
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_UserTokens]    Script Date: 5 Oct 2020 8:24:57 AM ******/
+/****** Object:  Index [PK_UserTokens]    Script Date: 12 Oct 2020 12:55:59 PM ******/
 ALTER TABLE [dbo].[UserTokens] ADD  CONSTRAINT [PK_UserTokens] PRIMARY KEY NONCLUSTERED 
 (
 	[UserId] ASC,
 	[LoginProvider] ASC,
 	[Name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[Persons] ADD  CONSTRAINT [DF_Persons_DateCreated]  DEFAULT (sysdatetimeoffset()) FOR [DateCreated]
 GO
 ALTER TABLE [dbo].[UserClaims]  WITH CHECK ADD  CONSTRAINT [FK_UserClaims_Users_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([Id])
