@@ -135,14 +135,14 @@ $ dotnet publish -c Release
 ```javascript
 appApi:
 {
-    host: 'https://dev-inlife-estore.azurewebsites.net',
+    host: 'https://host/api',
     quotesEndpoint: '/quotes',
     ordersEndpoint: '/orders',
 },
 
 primeCareApi:
 {
-    subscriptionKey: '(ง •̀_•́)ง',
+    subscriptionKey: 'SUBSCRIPTION-KEY',
     host: 'https://apim-uat.insularlife.com.ph/pg/v4',
     createApplicationEndpoint: '/CreateApplication',
     savePaymentEndpoint: '/SavePayment',
@@ -174,7 +174,7 @@ thankyou.html
 
 3. Replace the URL in the HTML base tag according to your server URL:
 ```html
-<base href="https://dev-inlife-estore.azurewebsites.net/">
+<base href="https://host/">
 ```
 
 4. Save the changes then rebuild the application
@@ -227,14 +227,7 @@ thankyou.html
 
 2. Open `appsettings.json` file in your text editor.
 
-3. Go to the `IdentityServer` section and change the `IssuerUri` value depending on the host configuration of the application
-```json
-"IdentityServer":
-{
-	"IssuerUri": "https://dev-inlife-estore.azurewebsites.net/identity"
-}
-```
-4. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application
+3. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application.
 ```json
 "Clients":
 [
@@ -243,10 +236,14 @@ thankyou.html
 
 		...
 
+		// replace https://host/cms/ with the URI of your CMS
+
 		// redirect after login
-		"RedirectUris": [ "https://dev-inlife-estore.azurewebsites.net/cms" ],
+		"RedirectUris": [ "https://host/cms/signin-oidc" ],
 		// redirect after logout
-		"PostLogoutRedirectUris": [ "https://dev-inlife-estore.azurewebsites.net/cms" ]
+		"PostLogoutRedirectUris": [ "https://host/cms/signout-callback-oidc" ],
+		// logout uri
+		"FrontChannelLogoutUri": "https://host/cms/signout-oidc"
 	}
 ]
 ```
@@ -264,7 +261,7 @@ thankyou.html
 ```json
 "Authentication":
 {
-	"Authority": "https://dev-inlife-estore.azurewebsites.net/identity",
+	"Authority": "https://host/identity",
 	"ClientId": "inlife.store.cms"
 }
 ```
@@ -282,7 +279,7 @@ thankyou.html
 ```json
 "AllowedOrigins":
 [
-	"https://dev-inlife-estore.azurewebsites.net"
+	"https://host"
 ]
 ```
 
