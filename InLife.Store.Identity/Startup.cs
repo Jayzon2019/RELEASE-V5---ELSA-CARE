@@ -119,9 +119,8 @@ namespace InLife.Store.Identity
 				.AddInMemoryIdentityResources(Config.GetIdentityResources())
 				.AddInMemoryApiResources(Config.GetApiResources())
 				.AddInMemoryApiResources(Configuration.GetSection("IdentityServer:ApiResources"))
-				.AddInMemoryClients(Config.GetClients())
-				//TODO: There's a bug in AllowedScopes to RequestedScopes mapping in appsettings. Fix this.
-				//.AddInMemoryClients(Configuration.GetSection("IdentityServer:Clients"))
+				//.AddInMemoryClients(Config.GetClients())
+				.AddInMemoryClients(Configuration.GetSection("IdentityServer:Clients"))
 				.AddOperationalStore(options =>
 				{
 					//options.DefaultSchema = "token";
