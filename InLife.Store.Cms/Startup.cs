@@ -1,10 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
@@ -13,9 +18,10 @@ using Newtonsoft.Json.Serialization;
 
 using System.IdentityModel.Tokens.Jwt;
 
-using IdentityServer4;
-using IdentityServer4.AccessTokenValidation;
+using IdentityModel;
 using IdentityModel.AspNetCore.OAuth2Introspection;
+//using IdentityServer4;
+//using IdentityServer4.AccessTokenValidation;
 
 using InLife.Store.Core.Business;
 using InLife.Store.Core.Settings;
@@ -24,11 +30,6 @@ using InLife.Store.Core.Repository;
 
 using InLife.Store.Infrastructure.Services;
 using InLife.Store.Infrastructure.Repository;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Extensions.Options;
-using Microsoft.CodeAnalysis.Options;
-using IdentityModel;
 
 namespace InLife.Store.Cms
 {
@@ -98,7 +99,12 @@ namespace InLife.Store.Cms
 					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 				});
 
-
+			services
+				.Configure<ForwardedHeadersOptions>(options =>
+				{
+					options.ForwardedHeaders =
+						ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+				});
 
 			// AutoMapper
 			//services.AddAutoMapper(config => config.AddProfile<MappingProfile>(), typeof(Startup));
@@ -147,11 +153,12 @@ namespace InLife.Store.Cms
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				app.UseDatabaseErrorPage();
+				app.UseForwardedHeaders();
 			}
 			else
 			{
 				app.UseExceptionHandler("/Error");
+				app.UseForwardedHeaders();
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
