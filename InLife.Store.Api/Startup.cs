@@ -1,6 +1,10 @@
+using System;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,7 +23,6 @@ using InLife.Store.Core.Repository;
 
 using InLife.Store.Infrastructure.Services;
 using InLife.Store.Infrastructure.Repository;
-
 
 namespace InLife.Store.Api
 {
@@ -51,6 +54,17 @@ namespace InLife.Store.Api
 				.Configure<UrlSettings>(Configuration.GetSection("Url"))
 				.Configure<SmtpSettings>(Configuration.GetSection("Smtp"))
 				.Configure<EmailSettings>(Configuration.GetSection("Email"));
+
+			services
+				.Configure<ForwardedHeadersOptions>(options =>
+				{
+					options.ForwardedHeaders =
+						ForwardedHeaders.XForwardedFor |
+						ForwardedHeaders.XForwardedProto |
+						ForwardedHeaders.XForwardedHost;
+					options.KnownNetworks.Clear();
+					options.KnownProxies.Clear();
+				});
 
 			var allowedOrigins = Configuration.GetSection("AllowedOrigins").Get<string[]>();
 			services.AddCors(options =>
@@ -125,17 +139,30 @@ namespace InLife.Store.Api
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			var customDomainProtocol = Configuration.GetSection("CustomDomain:Protocol").Value;
+			var customDomainHost     = Configuration.GetSection("CustomDomain:Host").Value;
+			var customDomainPathBase = Configuration.GetSection("CustomDomain:PathBase").Value;
+			if (!String.IsNullOrWhiteSpace(customDomainProtocol) && !String.IsNullOrWhiteSpace(customDomainHost))
+			{
+				app.Use((context, next) =>
+				{
+					context.Request.Protocol = customDomainProtocol;
+					context.Request.Host = new HostString(customDomainHost);
+					context.Request.PathBase = new PathString(customDomainPathBase);
+					return next();
+				});
+			}
+
+			app.UseForwardedHeaders();
+						
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
 			}
 
 			app.UseCors(AllowSpecificOrigins);
-
 			app.UseHttpsRedirection();
-
 			app.UseRouting();
-
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>

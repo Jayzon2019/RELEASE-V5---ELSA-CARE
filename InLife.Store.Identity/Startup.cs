@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 using Microsoft.EntityFrameworkCore;
 
@@ -31,8 +33,7 @@ using InLife.Store.Identity.Services;
 using InLife.Store.Identity.Infrastructure.FeatureFolders;
 using InLife.Store.Identity.TokenProviders;
 using InLife.Store.Identity.GrantValidators;
-using IdentityServer4;
-using System.Diagnostics;
+
 
 namespace InLife.Store.Identity
 {
@@ -54,6 +55,16 @@ namespace InLife.Store.Identity
 
 			services.AddDbContext<ApplicationContext>(options =>
 				options.UseSqlServer(connectionString));
+
+			services.Configure<ForwardedHeadersOptions>(options =>
+			{
+				options.ForwardedHeaders =
+					ForwardedHeaders.XForwardedFor |
+					ForwardedHeaders.XForwardedProto |
+					ForwardedHeaders.XForwardedHost;
+				options.KnownNetworks.Clear();
+				options.KnownProxies.Clear();
+			});
 
 			services.AddIdentity<ApplicationUser, ApplicationRole>
 				(
@@ -152,6 +163,22 @@ namespace InLife.Store.Identity
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			var customDomainProtocol = Configuration.GetSection("CustomDomain:Protocol").Value;
+			var customDomainHost     = Configuration.GetSection("CustomDomain:Host").Value;
+			var customDomainPathBase = Configuration.GetSection("CustomDomain:PathBase").Value;
+			if (!String.IsNullOrWhiteSpace(customDomainProtocol) && !String.IsNullOrWhiteSpace(customDomainHost))
+			{
+				app.Use((context, next) =>
+				{
+					context.Request.Protocol = customDomainProtocol;
+					context.Request.Host = new HostString(customDomainHost);
+					context.Request.PathBase = new PathString(customDomainPathBase);
+					return next();
+				});
+			}
+
+			app.UseForwardedHeaders();
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

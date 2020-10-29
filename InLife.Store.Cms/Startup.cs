@@ -1,5 +1,8 @@
+using System;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -11,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 using Newtonsoft.Json;
@@ -30,6 +34,7 @@ using InLife.Store.Core.Repository;
 
 using InLife.Store.Infrastructure.Services;
 using InLife.Store.Infrastructure.Repository;
+
 
 namespace InLife.Store.Cms
 {
@@ -52,9 +57,21 @@ namespace InLife.Store.Cms
 			services.AddDbContext<ApplicationContext>(options =>
 				options.UseSqlServer(connectionString));
 
+			services
+				.Configure<ForwardedHeadersOptions>(options =>
+				{
+					options.ForwardedHeaders =
+						ForwardedHeaders.XForwardedFor |
+						ForwardedHeaders.XForwardedProto |
+						ForwardedHeaders.XForwardedHost;
+					options.KnownNetworks.Clear();
+					options.KnownProxies.Clear();
+				});
+
 			//TODO: Convert from mvc to razor pages
 			//services.AddRazorPages();
 
+			IdentityModelEventSource.ShowPII = true;
 			JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
 			services
@@ -71,7 +88,7 @@ namespace InLife.Store.Cms
 					options.ClientSecret = Configuration.GetSection("Authentication:ClientSecret").Value;
 					options.ResponseType = IdentityModel.OidcConstants.ResponseTypes.Code;
 					//options.ResponseMode = IdentityModel.OidcConstants.ResponseModes.Query;
-					//options.RequireHttpsMetadata = false;
+					options.RequireHttpsMetadata = false;
 					options.UsePkce = true;
 					options.SaveTokens = true;
 					//options.GetClaimsFromUserInfoEndpoint = true;
@@ -97,13 +114,6 @@ namespace InLife.Store.Cms
 					options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
 					options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-				});
-
-			services
-				.Configure<ForwardedHeadersOptions>(options =>
-				{
-					options.ForwardedHeaders =
-						ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 				});
 
 			// AutoMapper
@@ -150,17 +160,25 @@ namespace InLife.Store.Cms
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			var customDomainProtocol = Configuration.GetSection("CustomDomain:Protocol").Value;
+			var customDomainHost     = Configuration.GetSection("CustomDomain:Host").Value;
+			var customDomainPathBase = Configuration.GetSection("CustomDomain:PathBase").Value;
+			if (!String.IsNullOrWhiteSpace(customDomainProtocol) && !String.IsNullOrWhiteSpace(customDomainHost))
+			{
+				app.Use((context, next) =>
+				{
+					context.Request.Protocol = customDomainProtocol;
+					context.Request.Host = new HostString(customDomainHost);
+					context.Request.PathBase = new PathString(customDomainPathBase);
+					return next();
+				});
+			}
+
+			app.UseForwardedHeaders();
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				app.UseForwardedHeaders();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Error");
-				app.UseForwardedHeaders();
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
 			}
 
 			app.UseHttpsRedirection();

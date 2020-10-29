@@ -14,128 +14,32 @@
 
 
 
+---
+
+
+
 ### StoreFront (Angular)
 
 1. Open a terminal window
 
 2. Go to `InLife.Store.StoreFront.Old` folder. Ignore `InLife.Store.StoreFront`, it is still under development.
 
-3. Install Angular CLI (if not yet installed)
-```shell
-$ npm install -g @angular/cli
-```
+3. Go to the `/src/environments` source code folder.
 
-4. Install/Update the project NPM packages
+4. Open `environment.ENV.ts` in your text editor.
 ```shell
-$ npm install
-```
-
-5. Publish the source code
-```shell
-// For Projectgrey DEV Environment
-$ ng build --configuration dev
-
 // For InLife UAT Environment
-$ ng build --configuration uat
+$ environment.uat.ts
 
 // For InLife PROD Environment
-$ ng build --prod
+$ environment.prod.ts
 ```
 
-6. Copy the files from the published folder `InLife.Store.Web/dist` to the designated Azure App Service
-
-
-
-### Identity Service (ASP.NET Core)
-
-1. Open a terminal window
-
-2. Go to `InLife.Store.Identity` folder
-
-3. Restore reference packages and publish the source code
-```shell
-$ dotnet restore
-$ dotnet build
-$ dotnet publish -c Release
-```
-
-4. Copy the files from the published folder `InLife.Store.Identity/bin/Release/netcoreapp3.1/publish` to the designated Azure App Service
-
-
-
-### API (ASP.NET Core)
-
-1. Open a terminal window
-
-2. Go to `InLife.Store.Api` folder
-
-3. Restore reference packages and publish the source code
-```shell
-$ dotnet restore
-$ dotnet build
-$ dotnet publish -c Release
-```
-
-4. Copy the files from the published folder `InLife.Store.Api/bin/Release/netcoreapp3.1/publish` to the designated Azure App Service
-
-
-
-### Content Management System (ASP.NET Core)
-
-1. Open a terminal window
-
-2. Go to `InLife.Store.Cms` folder
-
-3. Restore reference packages and publish the source code
-```shell
-$ dotnet restore
-$ dotnet build
-$ dotnet publish -c Release
-```
-
-4. Copy the files from the published folder `InLife.Store.Cms/bin/Release/netcoreapp3.1/publish` to the designated Azure App Service
-
-
-
-### Database
-
-1. Launch Visual Studio, and in the menu, click **Open** > **File**
-
-2. Go to `InLife.Store.Database` folder
-
-3. Open the `InLife.Store.Database.sqlproj` project file
-
-4. In the **Solution Explorer**, right-click the `InLife.Store.Database` project then click on **Schema Compare**
-
-5. In. the toolbar, select the database project as the source, and select the Azure Database as the target
-
-6. Click on the **Compare** button and check to see if there are conflicts
-
-7. Click on the **Update** button to update the target database
-
-
-
----
-
-
-
-## Setup and Configuration Guide
-
-
-
-### StoreFront URL Settings
-
-1. Go to the `InLife.Store.StoreFront` source code folder.
-
-2. Go to the `/src/environments` source code folder.
-
-3. Open `environment.prod.ts` in your text editor.
-
-4. Change thhe URLs based on your environment setup.
+5. Change the URLs based on your environment setup.
 ```javascript
 appApi:
 {
-    host: 'https://host/api',
+    host: 'https://HOST/api',
     quotesEndpoint: '/quotes',
     ordersEndpoint: '/orders',
 },
@@ -151,15 +55,11 @@ primeCareApi:
 paymentGatewayEndpoint: 'https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx'
 ```
 
-5. Save the file then rebuild the application
+5. Save the file
 
+6. Go to the `/src` source code folder.
 
-
-### StoreFront HTML Base URL Settings
-
-1. Go to the `InLife.Store.StoreFront` source code folder.
-
-2. Open the following files:
+7. Open the following files in your text editor:
 ```terminal
 index.html
 faqs.html
@@ -172,22 +72,72 @@ template.html
 thankyou.html
 ```
 
-3. Replace the URL in the HTML base tag according to your server URL:
+8. Replace the URL in the HTML base tag according to your server URL:
 ```html
-<base href="https://host/">
+<base href="https://HOST/">
 ```
 
-4. Save the changes then rebuild the application
+9. Save the changes
+
+10. Go to the `/src/assets/js` source code folder.
+
+11. Open `appsettings.js` in your text editor.
+
+12. Replace the URL of the API
+```javascript
+var api = "https://HOST/api/";
+```
+
+13. Save the file
+
+14. Install Angular CLI (if not yet installed)
+```shell
+$ npm install -g @angular/cli
+```
+
+15. Install/Update the project NPM packages
+```shell
+$ npm install
+```
+
+16. Publish the source code
+```shell
+// For Projectgrey DEV Environment
+$ ng build --configuration dev
+
+// For InLife UAT Environment
+$ ng build --configuration uat
+
+// For InLife PROD Environment
+$ ng build --prod
+```
+
+17. Copy the files from the published folder `/dist` to the designated Azure App Service
 
 
 
-### ASP.NET Core Database Connection Strings (`InLife.Store.Identity`, `InLife.Store.Api`, `InLife.Store.Cms`)
+---
 
-1. Go to the project's published folder.
 
-2. Open `appsettings.json` file in your text editor.
 
-3. Go to the `DefaultConnection` under `ConnectionStrings` section and replace the connection string provided by your Azure Database Server
+### Identity Service (ASP.NET Core)
+
+1. Open a terminal window
+
+2. Go to `InLife.Store.Identity` folder
+
+3. Restore reference packages and publish the source code
+```shell
+$ dotnet restore
+$ dotnet build
+$ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true
+```
+
+4. Go to the published folder `/bin/Release/netcoreapp3.1/win-x64/publish`.
+
+5. Open `appsettings.json` in your text editor.
+
+6. Go to the `DefaultConnection` under `ConnectionStrings` section and replace the connection string provided by your Azure Database Server
 ```json
 "ConnectionStrings":
 {
@@ -195,39 +145,29 @@ thankyou.html
 }
 ```
 
-4. Save the file then restart the App Service.
+7. Go to the `CustomDomain` section and replace the values depending on your hosting environment.
+```json
+"CustomDomain":
+{
+	"Protocol": "https",
+	"Host": "dev-inlifestore.projectgrey.net",
+	"PathBase": "/identity"
+}
+```
 
-
-
-### ASP.NET Core SMTP Settings (`InLife.Store.Identity`, `InLife.Store.Api`, `InLife.Store.Cms`)
-
-1. Go to the project's published folder.
-
-2. Open `appsettings.json` file in your text editor.
-
-3. Go to the `Smtp` section and replace the credentials with your own.
+8. Go to the `Smtp` section and replace the credentials with your own.
 ```json
 "Smtp":
 {
 	"Host": "my-smtp.host.com",
 	"Port": 587,
-	"Username": "(づ ￣ ³￣)づ",
-	"Password": "ಠ_ಠ",
+	"Username": "USERNAME",
+	"Password": "PASSWORD",
 	"EnableSsl": true
 }
 ```
 
-4. Save the file then restart the App Service.
-
-
-
-### Identity Service Settings
-
-1. Go to the `InLife.Store.Identity` published folder.
-
-2. Open `appsettings.json` file in your text editor.
-
-3. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application.
+9. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application.
 ```json
 "Clients":
 [
@@ -236,51 +176,203 @@ thankyou.html
 
 		...
 
-		// replace https://host/cms/ with the URI of your CMS
-
 		// redirect after login
-		"RedirectUris": [ "https://host/cms/signin-oidc" ],
+		"RedirectUris": [ "https://dev-inlifestore.projectgrey.net/cms/signin-oidc" ],
 		// redirect after logout
-		"PostLogoutRedirectUris": [ "https://host/cms/signout-callback-oidc" ],
+		"PostLogoutRedirectUris": [ "https://dev-inlifestore.projectgrey.net/cms/signout-callback-oidc" ],
 		// logout uri
-		"FrontChannelLogoutUri": "https://host/cms/signout-oidc"
+		"FrontChannelLogoutUri": "https://dev-inlifestore.projectgrey.net/cms/signout-oidc"
 	}
 ]
 ```
-5. Save the file then restart the App Service.
+10. Apply the appropriate changes to `inlife.store.ams`
+
+11. Save the file.
+
+12. Open `web.config` in your text editor.
+
+13. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+```xml
+<system.webServer>
+	<handlers>
+		<add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+	</handlers>
+	<aspNetCore processPath=".\InLife.Store.Identity.exe" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" hostingModel="inprocess" />
+</system.webServer>
+```
+
+14. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+
+15. Restart the App Service
 
 
 
-### CMS Authentication Settings
+---
 
-1. Go to the `InLife.Store.Identity` published folder.
 
-2. Open `appsettings.json` file in your text editor.
 
-3. Go to the `Authentication` section and change the `Authority` value depending on the host configuration of the Identity Service
+### API (ASP.NET Core)
+
+1. Open a terminal window
+
+2. Go to `InLife.Store.Api` folder
+
+3. Restore reference packages and publish the source code
+```shell
+$ dotnet restore
+$ dotnet build
+$ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true
+```
+
+4. Go to the published folder `/bin/Release/netcoreapp3.1/win-x64/publish`.
+
+5. Open `appsettings.json` in your text editor.
+
+6. Go to the `DefaultConnection` under `ConnectionStrings` section and replace the connection string provided by your Azure Database Server
 ```json
-"Authentication":
+"ConnectionStrings":
 {
-	"Authority": "https://host/identity",
-	"ClientId": "inlife.store.cms"
+	"DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 }
 ```
-4. Save the file then restart the App Service.
 
+7. Go to the `CustomDomain` section and replace the values depending on your hosting environment.
+```json
+"CustomDomain":
+{
+	"Protocol": "https",
+	"Host": "dev-inlifestore.projectgrey.net",
+	"PathBase": "/api"
+}
+```
 
+8. Go to the `Smtp` section and replace the credentials with your own.
+```json
+"Smtp":
+{
+	"Host": "my-smtp.host.com",
+	"Port": 587,
+	"Username": "USERNAME",
+	"Password": "PASSWORD",
+	"EnableSsl": true
+}
+```
 
-### API CORS Whitelisting
-
-1. Go to the `InLife.Store.Api` published folder.
-
-2. Open `appsettings.json` file in your text editor.
-
-3. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
+9. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
 ```json
 "AllowedOrigins":
 [
-	"https://host"
+	"https://dev-inlifestore.projectgrey.net"
 ]
 ```
 
-4. Save the file then restart the App Service.
+10. Save the file.
+
+11. Open `web.config` in your text editor.
+
+12. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+```xml
+<system.webServer>
+	<handlers>
+		<add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+	</handlers>
+	<aspNetCore processPath=".\InLife.Store.Api.exe" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" hostingModel="inprocess" />
+</system.webServer>
+```
+
+13. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+
+14. Restart the App Service
+
+
+
+---
+
+
+
+### Content Management System (ASP.NET Core)
+
+1. Open a terminal window
+
+2. Go to `InLife.Store.Cms` folder
+
+3. Restore reference packages and publish the source code
+```shell
+$ dotnet restore
+$ dotnet build
+$ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true
+```
+
+4. Go to the published folder `/bin/Release/netcoreapp3.1/win-x64/publish`.
+
+5. Open `appsettings.json` in your text editor.
+
+6. Go to the `DefaultConnection` under `ConnectionStrings` section and replace the connection string provided by your Azure Database Server
+```json
+"ConnectionStrings":
+{
+	"DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+}
+```
+
+7. Go to the `CustomDomain` section and replace the values depending on your hosting environment.
+```json
+"CustomDomain":
+{
+	"Protocol": "https",
+	"Host": "dev-inlifestore.projectgrey.net",
+	"PathBase": "/cms"
+}
+```
+
+8. Go to the `Smtp` section and replace the credentials with your own.
+```json
+"Smtp":
+{
+	"Host": "my-smtp.host.com",
+	"Port": 587,
+	"Username": "USERNAME",
+	"Password": "PASSWORD",
+	"EnableSsl": true
+}
+```
+
+9. Go to the `Authentication` section and change the `Authority` value depending on the host configuration of the Identity Service
+```json
+"Authentication":
+{
+	"Authority": "https://dev-inlifestore.projectgrey.net/identity",
+	"ClientId": "inlife.store.cms"
+}
+```
+
+10. Save the file.
+
+11. Open `web.config` in your text editor.
+
+12. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+```xml
+<system.webServer>
+	<handlers>
+		<add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+	</handlers>
+	<aspNetCore processPath=".\InLife.Store.Cms.exe" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" hostingModel="inprocess" />
+</system.webServer>
+```
+
+13. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+
+14. Restart the App Service
+
+
+
+---
+
+
+
+### Affiliate Marketing System (ASP.NET Core)
+
+*UNDER DEVELOPMENT*
+
+
+
