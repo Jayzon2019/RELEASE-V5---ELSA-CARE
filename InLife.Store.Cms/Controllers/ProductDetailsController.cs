@@ -105,6 +105,10 @@ namespace InLife.Store.Cms.Controllers
 			try
 			{
 				var model = viewModel.Map();
+
+				var product = this.productRepository.Get(viewModel.ProductId);
+				model.Product = product;
+
 				model.CreatedBy = this.CurrentUser();
 				model.CreatedDate = DateTimeOffset.Now;
 
@@ -156,10 +160,15 @@ namespace InLife.Store.Cms.Controllers
 
 			try
 			{
-				viewModel.Id = id;
-				var model = viewModel.Map();
-				if (model.Id == default)
+				var model = this.productDetailRepository.Get(id);
+
+				if (model == null)
 					return NotFound();
+
+				model = viewModel.Map(model);
+
+				var product = this.productRepository.Get(viewModel.ProductId);
+				model.Product = product;
 
 				model.UpdatedBy = this.CurrentUser();
 				model.UpdatedDate = DateTimeOffset.Now;

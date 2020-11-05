@@ -9,17 +9,8 @@ namespace InLife.Store.Cms.ViewModels
 {
 	public class ProductDetailViewModel : BaseContentViewModel
 	{
-		private readonly IProductRepository productRepository;
-		private readonly IProductDetailRepository productDetailRepository;
-
-		public ProductDetailViewModel
-		(
-			IProductRepository productRepository,
-			IProductDetailRepository productDetailRepository
-		)
+		public ProductDetailViewModel()
 		{
-			this.productRepository = productRepository;
-			this.productDetailRepository = productDetailRepository;
 		}
 
 		public ProductDetailViewModel(ProductDetail model) : base(model)
@@ -90,18 +81,12 @@ namespace InLife.Store.Cms.ViewModels
 
 		public ProductDetail Map()
 		{
-			var model = this.productDetailRepository.Get(Id);
-
-			if (model == null)
-				model = new ProductDetail();
-
+			var model = new ProductDetail();
 			return this.Map(model);
 		}
 
 		public ProductDetail Map(ProductDetail model)
 		{
-			model.Product = this.productRepository.Get(this.ProductId);
-
 			model.CasesCovered = this.CasesCovered;
 			model.BenefitType = this.BenefitType;
 			model.AgeEligibility = this.AgeEligibility;

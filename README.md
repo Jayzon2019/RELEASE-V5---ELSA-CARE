@@ -167,7 +167,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-9. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application.
+9. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+
+10. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application.
 ```json
 "Clients":
 [
@@ -185,13 +187,13 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 	}
 ]
 ```
-10. Apply the appropriate changes to `inlife.store.ams`
+11. Apply the appropriate changes to `inlife.store.ams`
 
-11. Save the file.
+12. Save the file.
 
-12. Open `web.config` in your text editor.
+13. Open `web.config` in your text editor.
 
-13. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+15. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -201,9 +203,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-14. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+16. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-15. Restart the App Service
+17. Restart the App Service
 
 
 
@@ -258,7 +260,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-9. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
+9. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+
+10. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
 ```json
 "AllowedOrigins":
 [
@@ -266,11 +270,11 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 ]
 ```
 
-10. Save the file.
+11. Save the file.
 
-11. Open `web.config` in your text editor.
+12. Open `web.config` in your text editor.
 
-12. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+13. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -280,9 +284,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-13. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+14. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-14. Restart the App Service
+15. Restart the App Service
 
 
 
@@ -337,7 +341,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-9. Go to the `Authentication` section and change the `Authority` value depending on the host configuration of the Identity Service
+9. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+
+10. Go to the `Authentication` section and change the `Authority` value depending on the host configuration of the Identity Service
 ```json
 "Authentication":
 {
@@ -346,11 +352,11 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-10. Save the file.
+11. Save the file.
 
-11. Open `web.config` in your text editor.
+12. Open `web.config` in your text editor.
 
-12. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+13. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -360,9 +366,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-13. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+14. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-14. Restart the App Service
+15. Restart the App Service
 
 
 

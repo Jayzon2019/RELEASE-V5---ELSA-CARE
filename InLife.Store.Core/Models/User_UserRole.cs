@@ -8,7 +8,7 @@ namespace InLife.Store.Core.Models
 {
 	public class User_UserRole
 	{
-		public Guid UserId { get; set; }
+		public string UserId { get; set; }
 
 		public string UserRoleId { get; set; }
 

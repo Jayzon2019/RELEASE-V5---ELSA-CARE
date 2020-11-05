@@ -65,8 +65,6 @@
     <Build Include="dbo\Tables\Quotes.sql" />
     <Build Include="dbo\Tables\Customers.sql" />
     <Build Include="dbo\Tables\Addresses.sql" />
-    <Build Include="dbo\Tables\TblUsers.sql" />
-    <Build Include="dbo\Tables\TblUserRoles.sql" />
     <Build Include="dbo\Tables\TblProducts.sql" />
     <Build Include="dbo\Tables\TblProductDetails.sql" />
     <Build Include="dbo\Tables\TblKeyMetrics.sql" />
@@ -83,7 +81,6 @@
     <Build Include="dbo\Tables\UserLogins.sql" />
     <Build Include="dbo\Tables\UserClaims.sql" />
     <Build Include="dbo\Tables\TblPrimeHeroes.sql" />
-    <Build Include="dbo\Tables\TblPrimeCare_1.sql" />
     <Build Include="dbo\Tables\TblHeroes.sql" />
     <Build Include="dbo\Tables\TblFaqs.sql" />
     <Build Include="dbo\Tables\Persons.sql" />
@@ -91,5 +88,8 @@
     <Build Include="dbo\Tables\OtherInsurances.sql" />
     <Build Include="dbo\Tables\InsuranceApplications.sql" />
     <Build Include="dbo\Tables\DeviceCodes.sql" />
+    <Build Include="dbo\Tables\TblPrimeCare_1.sql" />
+    <Build Include="dbo\Tables\Files.sql" />
+    <Build Include="dbo\Tables\TblPrimeCare.sql" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
@@ -89,6 +90,7 @@ namespace InLife.Store.Cms.Controllers
 					$"ExceptionInner: {exception.InnerException}\n" +
 					$"ExceptionStackTrace: {exception.StackTrace}\n";
 
+			Debug.WriteLine(log);
 			logger.LogError(log);
 
 			var problemDetails = new ProblemDetails

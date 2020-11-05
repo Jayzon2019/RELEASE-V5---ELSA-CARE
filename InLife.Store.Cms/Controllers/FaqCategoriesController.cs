@@ -111,7 +111,7 @@ namespace InLife.Store.Cms.Controllers
 				if (model == null)
 					return NotFound();
 
-					var viewModel = new FaqCategoryViewModel(model);
+				var viewModel = new FaqCategoryViewModel(model);
 
 				return View(viewModel);
 			}
@@ -133,10 +133,12 @@ namespace InLife.Store.Cms.Controllers
 
 			try
 			{
-				viewModel.Id = id;
-				var model = viewModel.Map();
-				if (model.Id == default)
+				var model = this.faqCategoryRepository.Get(id);
+
+				if (model == null)
 					return NotFound();
+
+				model = viewModel.Map(model);
 
 				model.UpdatedBy = this.CurrentUser();
 				model.UpdatedDate = DateTimeOffset.Now;

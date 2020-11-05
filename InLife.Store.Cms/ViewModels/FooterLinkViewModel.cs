@@ -9,11 +9,8 @@ namespace InLife.Store.Cms.ViewModels
 {
 	public partial class FooterLinkViewModel : BaseContentViewModel
 	{
-		private readonly IFooterLinkRepository footerLinkRepository;
-
-		public FooterLinkViewModel(IFooterLinkRepository footerLinkRepository)
+		public FooterLinkViewModel()
 		{
-			this.footerLinkRepository = footerLinkRepository;
 		}
 
 		public FooterLinkViewModel(FooterLink model) : base(model)
@@ -39,11 +36,7 @@ namespace InLife.Store.Cms.ViewModels
 
 		public FooterLink Map()
 		{
-			var model = this.footerLinkRepository.Get(Id);
-
-			if (model == null)
-				model = new FooterLink();
-
+			var model = new FooterLink();
 			return this.Map(model);
 		}
 

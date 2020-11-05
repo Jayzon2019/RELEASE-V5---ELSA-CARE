@@ -108,6 +108,16 @@ namespace InLife.Store.Identity
 					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 				});
 
+			services
+				.AddRazorPages()
+				.AddNewtonsoftJson(options =>
+				{
+					options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+					options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
+					options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+				});
+
 			services.AddTransient<IEmailSender, EmailSender>();
 			services.AddTransient<IProfileService, ProfileService>();
 
@@ -205,6 +215,8 @@ namespace InLife.Store.Identity
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
+				endpoints.MapRazorPages();
+
 			});
 		}
 	}

@@ -9,11 +9,8 @@ namespace InLife.Store.Cms.ViewModels
 {
 	public class PrimeCareViewModel : BaseContentViewModel
 	{
-		private readonly IPrimeCareRepository primeCareRepository;
-
-		public PrimeCareViewModel(IPrimeCareRepository primeCareRepository)
+		public PrimeCareViewModel()
 		{
-			this.primeCareRepository = primeCareRepository;
 		}
 
 		public PrimeCareViewModel(PrimeCare model) : base(model)
@@ -25,11 +22,7 @@ namespace InLife.Store.Cms.ViewModels
 
 		public PrimeCare Map()
 		{
-			var model = this.primeCareRepository.Get(Id);
-
-			if (model == null)
-				model = new PrimeCare();
-
+			var model = new PrimeCare();
 			return this.Map(model);
 		}
 

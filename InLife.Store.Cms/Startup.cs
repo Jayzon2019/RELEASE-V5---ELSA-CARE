@@ -3,6 +3,7 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -35,6 +36,8 @@ using InLife.Store.Core.Repository;
 using InLife.Store.Infrastructure.Services;
 using InLife.Store.Infrastructure.Repository;
 
+using InLife.Store.Cms.Data;
+using InLife.Store.Cms.Models;
 
 namespace InLife.Store.Cms
 {
@@ -55,6 +58,9 @@ namespace InLife.Store.Cms
 			var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
 			services.AddDbContext<ApplicationContext>(options =>
+				options.UseSqlServer(connectionString));
+
+			services.AddDbContext<IdentityContext>(options =>
 				options.UseSqlServer(connectionString));
 
 			services
@@ -101,6 +107,41 @@ namespace InLife.Store.Cms
 				});
 
 			services
+				.AddIdentityCore<ApplicationUser>
+				(
+					config =>
+					{
+						config.User.RequireUniqueEmail = true;
+						config.Password.RequiredUniqueChars = 0;
+						config.Password.RequireDigit = false;
+						config.Password.RequireUppercase = false;
+						config.Password.RequireNonAlphanumeric = false;
+						config.Password.RequiredLength = 8;
+					}
+				)
+				.AddRoles<ApplicationRole>()
+				.AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, ApplicationRole>>()
+				.AddEntityFrameworkStores<IdentityContext>()
+				.AddDefaultTokenProviders();
+
+			//services.AddIdentity<ApplicationUser, ApplicationRole>
+			//	(
+			//		config =>
+			//		{
+			//			config.SignIn.RequireConfirmedEmail = false; //TODO: Implement email verification
+			//			config.User.RequireUniqueEmail = true;
+			//			config.Password.RequiredUniqueChars = 0;
+			//			config.Password.RequireDigit = false;
+			//			config.Password.RequireUppercase = false;
+			//			config.Password.RequireNonAlphanumeric = false;
+			//			config.Password.RequiredLength = 8;
+			//			config.Lockout.MaxFailedAccessAttempts = 3;
+			//		}
+			//	)
+			//	.AddEntityFrameworkStores<ApplicationContext>()
+			//	.AddDefaultTokenProviders();
+
+			services
 				.AddRouting(options =>
 				{
 					options.LowercaseUrls = true;
@@ -122,12 +163,11 @@ namespace InLife.Store.Cms
 			services.AddCors();
 			services.AddHttpContextAccessor();
 
-			// Appsettings.json
-			//services.AddOptions()
-			//	.Configure<AppSettings>(options =>
-			//	{
-			//		options.NotificationApi = Configuration.GetSection("URL:NotificationApi").Value;
-			//	});
+			// App Settings
+			services
+				.Configure<UrlSettings>(Configuration.GetSection("Url"))
+				.Configure<SmtpSettings>(Configuration.GetSection("Smtp"))
+				.Configure<EmailSettings>(Configuration.GetSection("Email"));
 
 			services.AddLogging(loggingBuilder =>
 			{

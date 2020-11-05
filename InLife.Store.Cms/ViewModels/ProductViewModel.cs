@@ -9,11 +9,8 @@ namespace InLife.Store.Cms.ViewModels
 {
 	public partial class ProductViewModel : BaseContentViewModel
 	{
-		private readonly IProductRepository productRepository;
-
-		public ProductViewModel(IProductRepository productRepository)
+		public ProductViewModel()
 		{
-			this.productRepository = productRepository;
 		}
 
 		public ProductViewModel(Product model) : base(model)
@@ -29,11 +26,7 @@ namespace InLife.Store.Cms.ViewModels
 
 		public Product Map()
 		{
-			var model = this.productRepository.Get(Id);
-
-			if (model == null)
-				model = new Product();
-
+			var model = new Product();
 			return this.Map(model);
 		}
 

@@ -32,6 +32,8 @@ namespace InLife.Store.Infrastructure.Services
 			this.smtpSettings = smtpSettings.Value;
 		}
 
+		#region General
+
 		public async Task SendAsync(MailAddress sender, MailAddressCollection recipients, string subject, string body)
 		{
 			MailMessage mail = new MailMessage()
@@ -90,7 +92,39 @@ namespace InLife.Store.Infrastructure.Services
 				body
 			);
 		}
-		
+
+		#endregion
+
+		#region Identity
+
+		public async Task SendPasswordAsync(MailAddress recipient, string password)
+		{
+			var emailSettings = this.emailSettings.SendPassword;
+			var body = this.LoadEmailTemplate(emailSettings.TemplateFile);
+
+			body = body
+				.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
+				.Replace("#PASSWORD#", password);
+
+			var sender = new MailAddress(emailSettings.SenderEmail, emailSettings.SenderName);
+			var recipients = new MailAddressCollection();
+			var subject = emailSettings.Subject;
+			
+			recipients.Add(new MailAddress(recipient.Address, recipient.DisplayName));
+
+			await this.SendAsync
+			(
+				sender,
+				recipients,
+				subject,
+				body
+			);
+		}
+
+		#endregion
+
+		#region Business
+
 		public async Task SendQuoteRequestAsync(Quote model)
 		{
 			// Send email to admin
@@ -300,7 +334,9 @@ namespace InLife.Store.Infrastructure.Services
 				body
 			);
 		}
-		
+
+		#endregion
+
 		private string LoadEmailTemplate(string filename)
 		{
 			var directory = $"EmailTemplates"; // TODO: Retrieve this from appsettings

@@ -46,3 +46,10 @@
     CONSTRAINT [PK_Persons] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );
 
+
+
+
+GO
+CREATE CLUSTERED INDEX [CI_Persons]
+    ON [dbo].[Persons]([ClusteringId] ASC);
+

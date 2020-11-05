@@ -20,11 +20,11 @@ namespace InLife.Store.Cms.ViewModels
 
 			this.CreatedBy = model.CreatedBy?.Id.ToString();
 			this.CreatedByName = $"{model.CreatedBy?.FirstName} {model.CreatedBy?.LastName}".Trim();
-			this.CreatedDate = model.CreatedDate.ToOffset(new TimeSpan(8, 0, 0)).ToString();
+			this.CreatedDate = model.CreatedDate.ToOffset(new TimeSpan(8, 0, 0)).ToString("yyyy-MM-dd hh:mm tt");
 
 			this.UpdatedBy = model.UpdatedBy?.Id.ToString();
 			this.UpdatedByName = $"{model.UpdatedBy?.FirstName} {model.UpdatedBy?.LastName}".Trim();
-			this.UpdatedDate = model.UpdatedDate?.ToOffset(new TimeSpan(8, 0, 0)).ToString();
+			this.UpdatedDate = model.UpdatedDate?.ToOffset(new TimeSpan(8, 0, 0)).ToString("yyyy-MM-dd hh:mm tt");
 		}
 
 		public int Id { get; set; }

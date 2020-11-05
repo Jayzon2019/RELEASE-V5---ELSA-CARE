@@ -9,17 +9,14 @@ namespace InLife.Store.Cms.ViewModels
 {
 	public class UserViewModel
 	{
-		private readonly IUserRepository userRepository;
-
-		public UserViewModel(IUserRepository userRepository)
+		public UserViewModel()
 		{
-			this.userRepository = userRepository;
 		}
 
 		public UserViewModel(User model)
 		{
 			this.Id = model.Id;
-			this.UserName = model.UserName;
+			this.Email = model.Email;
 			this.FirstName = model.FirstName;
 			this.MiddleName = model.MiddleName;
 			this.LastName = model.LastName;
@@ -27,17 +24,14 @@ namespace InLife.Store.Cms.ViewModels
 
 		public User Map()
 		{
-			var model = this.userRepository.Get(Id);
-
-			if (model == null)
-				model = new User();
-
+			var model = new User();
 			return this.Map(model);
 		}
 
 		public User Map(User model)
 		{
-			model.UserName = this.UserName;
+			model.UserName = this.Email;
+			//model.PhoneNumber = this.Phone;
 			model.FirstName = this.FirstName;
 			model.MiddleName = this.MiddleName;
 			model.LastName = this.LastName;
@@ -46,13 +40,19 @@ namespace InLife.Store.Cms.ViewModels
 		}
 
 
-		public Guid? Id { get; set; }
+		public string Id { get; set; }
 
 		[Required]
 		[EmailAddress]
 		[MaxLength(256)]
 		[DisplayName("Email")]
-		public string UserName { get; set; }
+		public string Email { get; set; }
+
+		//[Required]
+		//[Phone]
+		//[MaxLength(20)]
+		//[DisplayName("Phone")]
+		//public string Phone { get; set; }
 
 		[Required]
 		[MaxLength(50)]

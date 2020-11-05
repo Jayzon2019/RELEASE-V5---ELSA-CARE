@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
 
@@ -161,6 +161,7 @@
 						</li>
 					</ul>
 				</li>
+				<!--
 				@{
 					var role = User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
 					if (role == "Admin")
@@ -173,7 +174,17 @@
 								</li>
 							</ul>
 						</li>
-					} }
+					}
+				}
+				-->
+				<li id="userLink" class=" nav-item">
+					<a href="#"><i class="feather icon-settings"></i><span class="menu-title" data-i18n="Ecommerce">Settings</span></a>
+					<ul class="menu-content">
+						<li>
+							<a asp-area="" asp-controller="Users" asp-action="Index"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Users</span></a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>

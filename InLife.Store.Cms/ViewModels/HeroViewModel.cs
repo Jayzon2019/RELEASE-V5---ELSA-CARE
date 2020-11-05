@@ -9,11 +9,8 @@ namespace InLife.Store.Cms.ViewModels
 {
 	public class HeroViewModel : BaseContentViewModel
 	{
-		private readonly IHeroRepository heroRepository;
-
-		public HeroViewModel(IHeroRepository heroRepository)
+		public HeroViewModel()
 		{
-			this.heroRepository = heroRepository;
 		}
 
 		public HeroViewModel(Hero model) : base(model)
@@ -32,11 +29,7 @@ namespace InLife.Store.Cms.ViewModels
 
 		public Hero Map()
 		{
-			var model = this.heroRepository.Get(Id);
-
-			if (model == null)
-				model = new Hero();
-
+			var model = new Hero();
 			return this.Map(model);
 		}
 

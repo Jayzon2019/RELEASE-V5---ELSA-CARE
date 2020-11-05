@@ -1,27 +1,41 @@
 using System;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 using InLife.Store.Core.Models;
 using InLife.Store.Core.Repository;
+using InLife.Store.Core.Services;
+
 using InLife.Store.Cms.ViewModels;
+using InLife.Store.Cms.Data;
+using InLife.Store.Cms.Models;
+
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+
 
 namespace InLife.Store.Cms.Controllers
 {
 	[Authorize]
 	public class HomeController : BaseController
 	{
+		private readonly UserManager<ApplicationUser> userManager;
+		private readonly IEmailService emailService;
+
 		private readonly IKeyMetricRepository keyMetricRepository;
 		private readonly IActivityLogRepository activityLogRepository;
 
 		public HomeController
 		(
+			UserManager<ApplicationUser> userManager,
+			IEmailService emailService,
 			ILogger<FaqCategoriesController> logger,
 			IUserRepository userRepository,
 			IKeyMetricRepository keyMetricRepository,
@@ -32,6 +46,9 @@ namespace InLife.Store.Cms.Controllers
 			logger
 		)
 		{
+			this.userManager = userManager;
+			this.emailService = emailService;
+
 			this.keyMetricRepository = keyMetricRepository;
 			this.activityLogRepository = activityLogRepository;
 		}
@@ -117,41 +134,40 @@ namespace InLife.Store.Cms.Controllers
 			{
 				return GenericServerErrorResult(e);
 			}
-
-			//var log = "";
-			//try
-			//{
-			//	int id = Convert.ToInt32(httpContextAccessor.HttpContext.User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Sid)?.Value);
-			//	if (id == 0)
-			//	{
-			//		ViewBag.error = "User not found!";
-			//		return NotFound();
-			//	}
-			//	var genderList = US.GetGenders(ref log);
-			//	ViewBag.genList = genderList;
-			//	var usersViewModel = US.GetUserById(ref log, id);
-			//	if (usersViewModel == null)
-			//	{
-			//		ViewBag.error = "User not found!";
-			//		return NotFound();
-			//	}
-			//	return View(usersViewModel);
-			//}
-			//catch (Exception ex)
-			//{
-			//	string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-			//	var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-			//	lR.SaveExceptionLogs(exLog, ex, methodName);
-			//	ViewBag.error = Comman.SomethingWntWrong;
-			//	return null;
-			//}
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult EditProfile(int id, [Bind("UserName, FirstName, LastName")] UserViewModel userViewModel)
+		public async Task<ActionResult> EditProfile([Bind("Email, FirstName, LastName")] UserViewModel viewModel)
 		{
-			return View(userViewModel);
+			if (!ModelState.IsValid)
+				return View(viewModel);
+
+			try
+			{
+				var id = CurrentUser().Id;
+				var model = await userManager.FindByIdAsync(id);
+
+				if (model == null)
+					return NotFound();
+
+				var email = viewModel.Email.ToLower().Trim();
+				model.UserName = email;
+				model.Email = email;
+				model.FirstName = viewModel.FirstName.Trim();
+				model.LastName = viewModel.LastName.Trim();
+
+				var token = await userManager.GenerateChangeEmailTokenAsync(model, email);
+				await userManager.ChangeEmailAsync(model, email, token);
+
+				await userManager.UpdateAsync(model);
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 
 			//var log = "";
 			//ModelState.Remove("Password");
@@ -196,39 +212,51 @@ namespace InLife.Store.Cms.Controllers
 
 		public IActionResult ChangePassword()
 		{
-			return View();
-			//var log = "";
-			//try
-			//{
-			//	int id = Convert.ToInt32(httpContextAccessor.HttpContext.User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Sid)?.Value);
-			//	if (id == 0)
-			//	{
-			//		ViewBag.error = "User not Found!";
-			//		return NotFound();
-			//	}
-			//	var usersViewModel = US.GetUserById(ref log, id);
-			//	if (usersViewModel == null)
-			//	{
-			//		ViewBag.error = "User not Found!";
-			//		return NotFound();
-			//	}
-			//	return View(usersViewModel);
-			//}
-			//catch (Exception ex)
-			//{
-			//	string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-			//	var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-			//	lR.SaveExceptionLogs(exLog, ex, methodName);
-			//	ViewBag.error = Comman.SomethingWntWrong;
-			//	return null;
-			//}
+			try
+			{
+				//var currentUserViewModel = new UserPasswordViewModel(this.CurrentUser());
+
+				return View();
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> ChangePassword(string password, string conPassword)
+		public async Task<IActionResult> ChangePassword([Bind("OldPassword", "NewPassword1", "NewPassword2")] UserPasswordViewModel viewModel)
 		{
-			await Task.Delay(0);
-			return View();
+			try
+			{
+				if (viewModel.NewPassword1 != viewModel.NewPassword2)
+				{
+					ViewBag.error = "Passwords did not match. Please check passwords and try again.";
+					return View();
+				}
+
+				if (!ModelState.IsValid)
+					return View(viewModel);
+
+				var id = CurrentUser().Id;
+				var model = await userManager.FindByIdAsync(id);
+
+				if (model == null)
+					return NotFound();
+
+				var result = await userManager.ChangePasswordAsync(model, viewModel.OldPassword, viewModel.NewPassword1);
+
+				return new SignOutResult(new[]
+				{
+					CookieAuthenticationDefaults.AuthenticationScheme,
+					OpenIdConnectDefaults.AuthenticationScheme
+				});
+				//return RedirectToAction(nameof(Index));
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 			//var log = "";
 			//try
 			//{

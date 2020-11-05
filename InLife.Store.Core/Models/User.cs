@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InLife.Store.Core.Models
 {
-	public class User : Entity<Guid>
+	public class User : Entity<string>
 	{
 		public string UserName { get; set; }
 

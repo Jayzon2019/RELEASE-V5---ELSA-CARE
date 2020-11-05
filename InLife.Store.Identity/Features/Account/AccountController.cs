@@ -241,7 +241,9 @@ namespace InLife.Store.Identity.Features
 				var user = new ApplicationUser
 				{
 					UserName = model.Username,
-					Email = model.Username
+					Email = model.Username,
+					FirstName = "Administrator",
+					LastName = "Administrator"
 				};
 				var createResult = await this.userManager.CreateAsync(user, model.Password);
 				if (createResult.Succeeded)

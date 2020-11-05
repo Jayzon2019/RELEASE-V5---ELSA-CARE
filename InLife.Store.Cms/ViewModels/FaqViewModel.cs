@@ -9,17 +9,8 @@ namespace InLife.Store.Cms.ViewModels
 {
 	public class FaqViewModel : BaseContentViewModel
 	{
-		private readonly IFaqRepository faqRepository;
-		private readonly IFaqCategoryRepository faqCategoryRepository;
-
-		public FaqViewModel
-		(
-			IFaqRepository faqRepository,
-			IFaqCategoryRepository faqCategoryRepository
-		)
+		public FaqViewModel()
 		{
-			this.faqRepository = faqRepository;
-			this.faqCategoryRepository = faqCategoryRepository;
 		}
 
 		public FaqViewModel(Faq model) : base(model)
@@ -29,23 +20,16 @@ namespace InLife.Store.Cms.ViewModels
 			this.Question = model.Question;
 			this.Answer = model.Answer;
 			this.SortNum = model.SortNum;
-	}
+		}
 
 		public Faq Map()
 		{
-			var model = this.faqRepository.Get(Id);
-
-			if (model == null)
-				model = new Faq();
-
+			var model = new Faq();
 			return this.Map(model);
 		}
 
 		public Faq Map(Faq model)
 		{
-			var faqCategory = faqCategoryRepository.Get(this.CategoryId);
-
-			model.Category = faqCategory;
 			model.Question = this.Question;
 			model.Answer = this.Answer;
 

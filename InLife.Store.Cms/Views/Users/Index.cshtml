@@ -33,7 +33,6 @@
 									<tr>
 										<th>Name</th>
 										<th>Email</th>
-										<th>Role</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
@@ -41,19 +40,11 @@
 									@foreach (var item in Model)
 									{
 										<tr>
-
 											<td>
 												@item.FirstName @item.LastName
 											</td>
 											<td>
-												@*
 												@Html.DisplayFor(modelItem => item.Email)
-												*@
-											</td>
-											<td>
-												@*
-												@Html.DisplayFor(modelItem => item.strUserRole)
-												*@
 											</td>
 											<td>
 												<a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="feather icon-edit"></i></a> |
@@ -67,7 +58,6 @@
 									<tr>
 										<th>Name</th>
 										<th>Email</th>
-										<th>Role</th>
 										<th>Actions</th>
 									</tr>
 								</tfoot>

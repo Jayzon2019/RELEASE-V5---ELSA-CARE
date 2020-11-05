@@ -7,6 +7,9 @@ namespace InLife.Store.Core.Settings
 	public class EmailSettings
 	{
 		public EmailDetails ErrorNotification { get; set; }
+
+		public EmailDetails SendPassword { get; set; }
+
 		public EmailDetails QuoteRequestAdmin { get; set; }
 		public EmailDetails QuoteRequest { get; set; }
 		public EmailDetails OrderConfirmationAdmin { get; set; }

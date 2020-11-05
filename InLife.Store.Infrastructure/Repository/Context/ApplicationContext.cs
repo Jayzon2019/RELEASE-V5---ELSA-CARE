@@ -185,14 +185,14 @@ namespace InLife.Store.Infrastructure.Repository
 					.HasForeignKey("CategoryId");
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()
@@ -205,14 +205,14 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.HasKey(e => new { e.Id });
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()
@@ -225,14 +225,14 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.HasKey(e => new { e.Id });
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()
@@ -245,14 +245,14 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.HasKey(e => new { e.Id });
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()
@@ -265,14 +265,14 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.HasKey(e => new { e.Id });
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()
@@ -285,14 +285,14 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.HasKey(e => new { e.Id });
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()
@@ -313,14 +313,14 @@ namespace InLife.Store.Infrastructure.Repository
 					.HasForeignKey("ProductId");
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()
@@ -333,14 +333,14 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.HasKey(e => new { e.Id });
 
 				entity.Ignore(e => e.CreatedBy);
-				entity.Property<Guid?>("CreatedById").HasColumnName("CreatedBy");
+				entity.Property<string>("CreatedById").HasColumnName("CreatedBy");
 				entity
 					.HasOne(e => e.CreatedBy)
 					.WithMany()
 					.HasForeignKey("CreatedById");
 
 				entity.Ignore(e => e.UpdatedBy);
-				entity.Property<Guid?>("UpdatedById").HasColumnName("UpdatedBy");
+				entity.Property<string>("UpdatedById").HasColumnName("UpdatedBy");
 				entity
 					.HasOne(e => e.UpdatedBy)
 					.WithMany()

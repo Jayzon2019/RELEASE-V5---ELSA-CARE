@@ -135,11 +135,13 @@ namespace InLife.Store.Cms.Controllers
 
 			try
 			{
-				viewModel.Id = id;
-				var model = viewModel.Map();
-				if (model.Id == default)
+				var model = this.primeCareRepository.Get(id);
+
+				if (model == null)
 					return NotFound();
 
+				model = viewModel.Map(model);
+				
 				model.UpdatedBy = this.CurrentUser();
 				model.UpdatedDate = DateTimeOffset.Now;
 

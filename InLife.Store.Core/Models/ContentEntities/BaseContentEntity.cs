@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace InLife.Store.Core.Models
 {
-	public class BaseContentEntity : Entity<int>
+	public abstract class BaseContentEntity : Entity<int>
 	{
 		public bool IsActive { get; set; }
 		public bool IsArchived { get; set; }

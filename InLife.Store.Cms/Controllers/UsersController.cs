@@ -1,22 +1,36 @@
 using System;
 using System.Linq;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 using InLife.Store.Core.Models;
 using InLife.Store.Core.Repository;
+using InLife.Store.Core.Services;
+
 using InLife.Store.Cms.ViewModels;
+using InLife.Store.Cms.Data;
+using InLife.Store.Cms.Models;
 
 namespace InLife.Store.Cms.Controllers
 {
-	[Authorize(Roles = "Admin")]
+	//[Authorize(Roles = "Admin")]
+	[Authorize]
 	public class UsersController : BaseController
 	{
 		//private readonly IUserRoleRepository userRoleRepository;
 
+		private readonly UserManager<ApplicationUser> userManager;
+		private readonly IEmailService emailService;
+
 		public UsersController
 		(
+			UserManager<ApplicationUser> userManager,
+			IEmailService emailService,
 			ILogger<UsersController> logger,
 			IUserRepository userRepository
 		) : base
@@ -25,7 +39,8 @@ namespace InLife.Store.Cms.Controllers
 			logger
 		)
 		{
-
+			this.userManager = userManager;
+			this.emailService = emailService;
 		}
 
 		// GET: Users
@@ -50,7 +65,7 @@ namespace InLife.Store.Cms.Controllers
 		}
 
 		// GET: Users/Details/5
-		public ActionResult Details(int? id)
+		public ActionResult Details(string id)
 		{
 			try
 			{
@@ -100,19 +115,39 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind("FirstName, LastName")] UserViewModel viewModel)
+		public async Task<ActionResult> Create([Bind("Email, FirstName, LastName")] UserViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
 
 			try
 			{
-				var model = viewModel.Map();
-				//model.CreatedBy = this.CurrentUser();
-				//model.CreatedDate = DateTimeOffset.Now;
+				var email = viewModel.Email.ToLower().Trim();
+				var model = new ApplicationUser()
+				{
+					UserName = email,
+					Email = email,
+					FirstName = viewModel.FirstName.Trim(),
+					LastName = viewModel.LastName.Trim()
+				};
 
-				this.userRepository.Create(model);
+				var tempPassword = Guid.NewGuid().ToString("N");
 
+				var createUserResult = await userManager.CreateAsync(model, tempPassword);
+				if (!createUserResult.Succeeded)
+				{
+					// Failed to create user
+					return ErrorResult
+					(
+						status: StatusCodes.Status400BadRequest,
+						title: $"Failed to create a new user",
+						detail: $"There's error in creating the user with an email address of {email}."
+					);
+				}
+
+				var recipient = new MailAddress(email, $"{model.FirstName} {model.LastName}");
+				await emailService.SendPasswordAsync(recipient, tempPassword);
+			
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -122,7 +157,7 @@ namespace InLife.Store.Cms.Controllers
 		}
 
 		// GET: Users/Edit/5
-		public ActionResult Edit(int? id)
+		public ActionResult Edit(string id)
 		{
 			try
 			{
@@ -145,17 +180,20 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(Guid? id, [Bind("FirstName, LastName")] UserViewModel viewModel)
+		public ActionResult Edit(string id, [Bind("FirstName, LastName")] UserViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
 
 			try
 			{
-				viewModel.Id = id;
-				var model = viewModel.Map();
-				if (model.Id == default)
+				var model = this.userRepository.Get(id);
+
+				if (model == null)
 					return NotFound();
+
+				model.FirstName = viewModel.FirstName;
+				model.LastName = viewModel.LastName;
 
 				//model.UpdatedBy = this.CurrentUser();
 				//model.UpdatedDate = DateTimeOffset.Now;
@@ -173,7 +211,7 @@ namespace InLife.Store.Cms.Controllers
 
 		// POST: Users/Delete/5
 		// [ValidateAntiForgeryToken]
-		public ActionResult Delete(int? id)
+		public ActionResult Delete(string id)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
