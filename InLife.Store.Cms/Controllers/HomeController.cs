@@ -158,9 +158,27 @@ namespace InLife.Store.Cms.Controllers
 				model.LastName = viewModel.LastName.Trim();
 
 				var token = await userManager.GenerateChangeEmailTokenAsync(model, email);
-				await userManager.ChangeEmailAsync(model, email, token);
+				var changeEmailResult = await userManager.ChangeEmailAsync(model, email, token);
+				if (!changeEmailResult.Succeeded)
+				{
+					return ErrorResult
+					(
+						status: StatusCodes.Status400BadRequest,
+						title: $"Failed to update user",
+						detail: $"There's an error in updating the email address of user {id}."
+					);
+				}
 
-				await userManager.UpdateAsync(model);
+				var updateUserResult = await userManager.UpdateAsync(model);
+				if (!updateUserResult.Succeeded)
+				{
+					return ErrorResult
+					(
+						status: StatusCodes.Status400BadRequest,
+						title: $"Failed to update user",
+						detail: $"There's an error in updating the user profile of user {id}."
+					);
+				}
 
 				return RedirectToAction(nameof(Index));
 			}

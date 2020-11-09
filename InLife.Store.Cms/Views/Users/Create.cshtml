@@ -1,4 +1,4 @@
-@model UserViewModel
+@model UserWithPasswordViewModel
 
 @{
 	ViewData["Title"] = "Create";
@@ -28,8 +28,7 @@
 											<span asp-validation-for="FirstName" class="text-danger"></span>
 										</div>
 									</div>
-								</div>
-								<div class="col-sm-6">
+
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Last Name</label>
@@ -37,18 +36,24 @@
 											<span asp-validation-for="LastName" class="text-danger"></span>
 										</div>
 									</div>
-								</div>
 
-								<div class="col-sm-6">
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Email</label>
-											<input name="Email" type="email" placeholder="Enter Email" class="form-control" required data-validation-required-message="Email Is Required" />
+											<input name="Email" type="email" placeholder="Enter Email" class="form-control" required data-validation-required-message="Email Is Required" maxlength="256" />
 											<span asp-validation-for="Email" class="text-danger"></span>
 										</div>
 									</div>
-								</div>
 
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Password</label>
+											<input type="password" name="Password" class="form-control" placeholder="Password" required data-validation-required-message="Password field is required" minlength="8" maxlength="256" />
+											<span asp-validation-for="Password" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+								
 								@*
 								
 								<div class="col-sm-6">
@@ -118,16 +123,18 @@
 
 
 							<div class="row w-100">
-								<div class="col-md-6">
+                                <div class="col-md-6">
 
-									<div class="form-group">
-										<input type="submit" onclick="myValidation()" value="Create" class="btn btn-primary" />
-									</div>
-								</div>
+                                    <div class="form-group">
+                                        <input type="submit" onclick="myValidation()" value="Create" class="btn btn-primary" />
+                                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                    <div class="form-group pull-right">
+                                       
+                                    </div>
+                                </div>
 								<div class="col-md-6">
-									<div class="form-group pull-right">
-										<a asp-action="Index" class="btn btn-secondary">Back to List</a>
-									</div>
+									
 								</div>
 							</div>
 						</form>

@@ -29,8 +29,6 @@
 											<span asp-validation-for="FirstName" class="text-danger"></span>
 										</div>
 									</div>
-								</div>
-								<div class="col-sm-6">
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Last Name</label>
@@ -38,12 +36,10 @@
 											<span asp-validation-for="LastName" class="text-danger"></span>
 										</div>
 									</div>
-								</div>
-								<div class="col-sm-6">
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Email</label>
-											<input name="Email" type="email" value="@Model.Email" placeholder="Enter Email" class="form-control" required data-validation-required-message="Email Is Required" data-v />
+											<input name="Email" type="email" value="@Model.Email" placeholder="Enter Email" class="form-control" required data-validation-required-message="Email Is Required" />
 											<span asp-validation-for="Email" class="text-danger"></span>
 										</div>
 									</div>
@@ -134,13 +130,14 @@
 
 							<div class="row w-100">
 								<div class="col-md-6">
-									<div class="form-group">
-										<input type="submit" onclick="myValidation()" value="Update" class="btn btn-primary" />
-									</div>
+                                    <div class="form-group">
+                                        <input type="submit" onclick="myValidation()" value="Update" class="btn btn-primary" />
+                                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                                    </div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group pull-right">
-										<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+										
 									</div>
 								</div>
 							</div>

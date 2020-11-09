@@ -115,7 +115,7 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create([Bind("Email, FirstName, LastName")] UserViewModel viewModel)
+		public async Task<ActionResult> Create([Bind("Password, Email, FirstName, LastName")] UserWithPasswordViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
@@ -131,9 +131,10 @@ namespace InLife.Store.Cms.Controllers
 					LastName = viewModel.LastName.Trim()
 				};
 
-				var tempPassword = Guid.NewGuid().ToString("N");
+				//var tempPassword = Guid.NewGuid().ToString("N");
 
-				var createUserResult = await userManager.CreateAsync(model, tempPassword);
+				//var createUserResult = await userManager.CreateAsync(model, tempPassword);
+				var createUserResult = await userManager.CreateAsync(model, viewModel.Password);
 				if (!createUserResult.Succeeded)
 				{
 					// Failed to create user
@@ -145,8 +146,8 @@ namespace InLife.Store.Cms.Controllers
 					);
 				}
 
-				var recipient = new MailAddress(email, $"{model.FirstName} {model.LastName}");
-				await emailService.SendPasswordAsync(recipient, tempPassword);
+				//var recipient = new MailAddress(email, $"{model.FirstName} {model.LastName}");
+				//await emailService.SendPasswordAsync(recipient, tempPassword);
 			
 				return RedirectToAction(nameof(Index));
 			}
@@ -180,25 +181,46 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(string id, [Bind("FirstName, LastName")] UserViewModel viewModel)
+		public async Task<ActionResult> Edit(string id, [Bind("Email, FirstName, LastName")] UserViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
 
 			try
 			{
-				var model = this.userRepository.Get(id);
+				var model = await userManager.FindByIdAsync(id);
 
 				if (model == null)
 					return NotFound();
 
-				model.FirstName = viewModel.FirstName;
-				model.LastName = viewModel.LastName;
+				var email = viewModel.Email.ToLower().Trim();
+				model.UserName = email;
+				model.Email = email;
+				model.FirstName = viewModel.FirstName.Trim();
+				model.LastName = viewModel.LastName.Trim();
 
-				//model.UpdatedBy = this.CurrentUser();
-				//model.UpdatedDate = DateTimeOffset.Now;
+				var token = await userManager.GenerateChangeEmailTokenAsync(model, email);
+				var changeEmailResult = await userManager.ChangeEmailAsync(model, email, token);
+				if (!changeEmailResult.Succeeded)
+				{
+					return ErrorResult
+					(
+						status: StatusCodes.Status400BadRequest,
+						title: $"Failed to update user",
+						detail: $"There's an error in updating the email address of user {id}."
+					);
+				}
 
-				this.userRepository.Update(model);
+				var updateUserResult = await userManager.UpdateAsync(model);
+				if (!updateUserResult.Succeeded)
+				{
+					return ErrorResult
+					(
+						status: StatusCodes.Status400BadRequest,
+						title: $"Failed to update user",
+						detail: $"There's an error in updating the user profile of user {id}."
+					);
+				}
 
 				return RedirectToAction(nameof(Index));
 			}
