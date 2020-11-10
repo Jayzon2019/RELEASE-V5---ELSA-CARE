@@ -82,7 +82,7 @@ namespace InLife.Store.Infrastructure.Repository
 
 				// Users - UserRoles - Enumeration
 				entity.Ignore(e => e.Role);
-				entity.Property(e => e.UserRoleId).HasColumnName("UserRoleId");
+				entity.Property(e => e.UserRoleId).HasColumnName("RoleId");
 
 				// Users >< Roles
 				entity

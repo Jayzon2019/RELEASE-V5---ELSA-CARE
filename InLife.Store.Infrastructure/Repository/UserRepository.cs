@@ -16,6 +16,7 @@ namespace InLife.Store.Infrastructure.Repository
 			InitializeDataSet
 			(
 				this.dbset
+					.Include(x => x.Roles)
 					.OrderBy(x => x.LastName)
 					.OrderBy(x => x.FirstName)
 			);

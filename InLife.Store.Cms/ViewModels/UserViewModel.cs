@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -67,5 +68,7 @@ namespace InLife.Store.Cms.ViewModels
 		[MaxLength(50)]
 		[DisplayName("Last Name")]
 		public string LastName { get; set; }
+
+		public List<UserRolesViewModel> Roles { get; set; }
 	}
 }

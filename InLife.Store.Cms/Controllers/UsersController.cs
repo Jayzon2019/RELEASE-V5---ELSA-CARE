@@ -25,11 +25,13 @@ namespace InLife.Store.Cms.Controllers
 		//private readonly IUserRoleRepository userRoleRepository;
 
 		private readonly UserManager<ApplicationUser> userManager;
+		private readonly RoleManager<ApplicationRole> roleManager;
 		private readonly IEmailService emailService;
 
 		public UsersController
 		(
 			UserManager<ApplicationUser> userManager,
+			RoleManager<ApplicationRole> roleManager,
 			IEmailService emailService,
 			ILogger<UsersController> logger,
 			IUserRepository userRepository
@@ -40,6 +42,7 @@ namespace InLife.Store.Cms.Controllers
 		)
 		{
 			this.userManager = userManager;
+			this.roleManager = roleManager;
 			this.emailService = emailService;
 		}
 
@@ -48,6 +51,8 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
+				var list = userRepository.GetAll().ToList();
+
 				var viewModelList = userRepository
 					.GetAll()
 					.Select(model => new UserViewModel(model))
@@ -69,12 +74,24 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var model = userRepository.Get(id);
+				//var model = userRepository.Get(id);
+				var model = userRepository.GetAll().SingleOrDefault(x => x.Id == id);
 
 				if (model == null)
 					return NotFound();
 
-				var viewModel = new UserViewModel(model);
+				var modelRoleIds = model.Roles.Select(role => role.UserRoleId).ToArray();
+
+				var viewModel = new UserViewModel(model)
+				{
+					Roles = roleManager.Roles
+					.Select(role => new UserRolesViewModel
+					{
+						Id = role.Id,
+						Name = role.Name,
+						Selected = modelRoleIds.Contains(role.Id)
+					}).ToList()
+				};
 
 				return View(viewModel);
 			}
@@ -87,27 +104,26 @@ namespace InLife.Store.Cms.Controllers
 		// GET: Users/Create
 		public IActionResult Create()
 		{
-			return View();
+			try
+			{
+				var roles = Enumeration<string>.GetAll<UserRole>();
 
-			//var log = "";
-			//try
-			//{
-			//	var genderList = US.GetGenders(ref log);
-			//	ViewBag.genList = genderList;
-			//	var roleList = US.GetRoles(ref log);
-			//	ViewBag.roleList = roleList;
+				var viewModel = new UserWithPasswordViewModel
+				{
+					Roles = roles
+						.Select(model => new UserRolesViewModel
+						{
+							Id = model.Id,
+							Name = model.Name
+						}).ToList()
+				};
 
-			//	return View();
-
-			//}
-			//catch (Exception ex)
-			//{
-			//	string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-			//	var exLog = Comman.ExceptionLogBulder(log, methodName, ex);
-			//	lR.SaveExceptionLogs(exLog, ex, methodName);
-			//	ViewBag.error = Comman.SomethingWntWrong;
-			//	return NotFound();
-			//}
+				return View(viewModel);
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 
 		// POST: Users/Create
@@ -115,7 +131,7 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create([Bind("Password, Email, FirstName, LastName")] UserWithPasswordViewModel viewModel)
+		public async Task<ActionResult> Create([Bind("Password, Email, FirstName, LastName, Roles")] UserWithPasswordViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
@@ -146,9 +162,12 @@ namespace InLife.Store.Cms.Controllers
 					);
 				}
 
+				var addRoles = viewModel.Roles.Where(x => x.Selected).Select(role => role.Name).ToArray();
+				await userManager.AddToRolesAsync(model, addRoles);
+
 				//var recipient = new MailAddress(email, $"{model.FirstName} {model.LastName}");
 				//await emailService.SendPasswordAsync(recipient, tempPassword);
-			
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -162,11 +181,23 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var model = this.userRepository.Get(id);
+				//var model = this.userRepository.Get(id);
+				var model = userRepository.GetAll().SingleOrDefault(x => x.Id == id);
 				if (model == null)
 					return NotFound();
 
-				var viewModel = new UserViewModel(model);
+				var modelRoleIds = model.Roles.Select(role => role.UserRoleId).ToArray();
+
+				var viewModel = new UserViewModel(model)
+				{
+					Roles = roleManager.Roles
+						.Select(role => new UserRolesViewModel
+						{
+							Id = role.Id,
+							Name = role.Name,
+							Selected = modelRoleIds.Contains(role.Id)
+						}).ToList()
+				};
 
 				return View(viewModel);
 			}
@@ -181,7 +212,7 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Edit(string id, [Bind("Email, FirstName, LastName")] UserViewModel viewModel)
+		public async Task<ActionResult> Edit(string id, [Bind("Email, FirstName, LastName, Roles")] UserViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
@@ -189,7 +220,6 @@ namespace InLife.Store.Cms.Controllers
 			try
 			{
 				var model = await userManager.FindByIdAsync(id);
-
 				if (model == null)
 					return NotFound();
 
@@ -221,6 +251,12 @@ namespace InLife.Store.Cms.Controllers
 						detail: $"There's an error in updating the user profile of user {id}."
 					);
 				}
+								
+				var addRoles = viewModel.Roles.Where(x => x.Selected).Select(role => role.Name).ToArray();
+				await userManager.AddToRolesAsync(model, addRoles);
+
+				var removeRoles = viewModel.Roles.Where(x => !x.Selected).Select(role => role.Name).ToArray();
+				await userManager.RemoveFromRolesAsync(model, removeRoles);
 
 				return RedirectToAction(nameof(Index));
 			}
