@@ -80,7 +80,7 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create([Bind("HeroBg, HeroTitle, HeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] HeroViewModel viewModel)
+		public IActionResult Create([Bind("HeroBg, HeroMobBg, HeroTitle, HeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] HeroViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
@@ -107,6 +107,7 @@ namespace InLife.Store.Cms.Controllers
 			try
 			{
 				var model = this.heroRepository.Get(id);
+
 				if (model == null)
 					return NotFound();
 
@@ -125,7 +126,7 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Edit(int id, [Bind("HeroBg, HeroTitle, HeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] HeroViewModel viewModel)
+		public IActionResult Edit(int id, [Bind("HeroBg, HeroMobBg, HeroTitle, HeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] HeroViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
@@ -138,7 +139,7 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				model = viewModel.Map(model);
-				
+
 				model.UpdatedBy = this.CurrentUser();
 				model.UpdatedDate = DateTimeOffset.Now;
 

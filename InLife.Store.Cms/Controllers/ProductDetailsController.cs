@@ -55,21 +55,31 @@ namespace InLife.Store.Cms.Controllers
 		// GET: ProductDetails/Details/5
 		public ActionResult Details(int? id)
 		{
-			try
-			{
-				var model = productDetailRepository.Get(id);
+			//var model = productDetailRepository.Get(id); 
+			var model = productDetailRepository.GetAll().SingleOrDefault(x => x.Id == id);
 
-				if (model == null)
-					return NotFound();
+			if (model == null)
+				return NotFound();
 
-				var viewModel = new ProductDetailViewModel(model);
+			var viewModel = new ProductDetailViewModel(model);
 
-				return View(viewModel);
-			}
-			catch (Exception e)
-			{
-				return GenericServerErrorResult(e);
-			}
+			return View(viewModel);
+
+			//try
+			//{
+			//	var model = productDetailRepository.Get(id);
+
+			//	if (model == null)
+			//		return NotFound();
+
+			//	var viewModel = new ProductDetailViewModel(model);
+
+			//	return View(viewModel);
+			//}
+			//catch (Exception e)
+			//{
+			//	return GenericServerErrorResult(e);
+			//}
 		}
 
 		// GET: ProductDetails/Create

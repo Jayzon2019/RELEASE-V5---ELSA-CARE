@@ -23,7 +23,8 @@
                                     <div class="form-group">
                                         <div class="controls">
                                             <label class="control-label text-secondary">Product Image</label>
-                                            <input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" required data-validation-required-message="Product Image is Required" />
+                                            <input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" required data-validation-required-message="Product Image is Required" />
+                                            <input type="hidden" asp-for="ProductImg" required />
                                             <span asp-validation-for="ProductImg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
                                         </div>
                                     </div>
@@ -106,7 +107,9 @@
             if (input.files && input.files[0]) {
                 var filerdr = new FileReader();
                 filerdr.onload = function (e) {
-                    $('#pro_img').attr('src', e.target.result);
+                    var imgdata = e.target.result;
+                    $('#pro_img').attr('src', imgdata);
+                    $('#ProductImg').val(imgdata);
                 }
                 filerdr.readAsDataURL(input.files[0]);
             }

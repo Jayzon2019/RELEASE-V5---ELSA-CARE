@@ -87,7 +87,11 @@ namespace InLife.Store.Api.Controllers
 					.Select(model => new ProductResponse
 					{
 						Id = model.Id,
-						ProductImg = model.ProductImg,
+
+						// This is a hack, old uploaded images doesn't have an image data
+						// Clean this up when StoreFront has been updated
+						ProductImg = ParseImageData(model.ProductImg),
+
 						ProductName = model.ProductName,
 						ProductPrice = model.ProductPrice,
 						ProductCode = model.ProductCode,
@@ -118,7 +122,11 @@ namespace InLife.Store.Api.Controllers
 						Id = model.Id,
 
 						ProductId = model.Product.Id,
-						ProductImg = model.Product.ProductImg,
+
+						// This is a hack, old uploaded images doesn't have an image data
+						// Clean this up when StoreFront has been updated
+						ProductImg = ParseImageData(model.Product.ProductImg),
+
 						ProductName = model.Product.ProductName,
 						ProductPrice = model.Product.ProductPrice,
 						ProductCode = model.Product.ProductCode,
@@ -271,5 +279,16 @@ namespace InLife.Store.Api.Controllers
 			//}
 		}
 
+
+
+
+		// This is a hack, old uploaded images doesn't have an image data
+		// Clean this up when StoreFront has been updated
+		private string ParseImageData(string imageData)
+		{
+			return imageData.Contains(",")
+				? imageData.Split(",")[1].Trim()
+				: imageData;
+		}
 	}
 }

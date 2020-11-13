@@ -22,9 +22,10 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<div class="controls">
-											<div style="width:150px;height:150px;"> <img src="data:image/jpeg;base64, @Model.HeroBg" id="hero_img" style="width:100%;border:solid" /> </div>
+											<div style="width:150px;height:150px;"> <img src="@Model.HeroBg" id="hero_img" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Hero Background Image</label>
-											<input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" />
+											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" />
+											<input type="hidden" asp-for="HeroBg" required />
 											<span asp-validation-for="HeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
 									</div>
@@ -32,9 +33,10 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<div class="controls">
-											<div style="width:150px;height:150px;"> <img id="heroMob_img" src="data:image/jpeg;base64, @Model.HeroMobBg" style="width:100%;border:solid" /> </div>
+											<div style="width:150px;height:150px;"> <img id="heroMob_img" src="@Model.HeroMobBg" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Hero Mobile Background Image</label>
-											<input type="file" title="search image" class="form-control" id="fileMob" name="fileMob" onchange="showMob(this)" />
+											<input type="file" title="search image" class="form-control" id="fileMob" name="fileMob" name="file" accept="image/*" onchange="showMob(this)" />
+											<input type="hidden" asp-for="HeroMobBg" required />
 											<span asp-validation-for="HeroMobBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
 									</div>
@@ -157,7 +159,7 @@
 		$('#picker').farbtastic('#color');
 		$('#Sub-HeadingPicker').farbtastic('#Sub-HeadingColor');
 	});
-
+	
 	function show(input)
 	{
 		if (ValidateFile())
@@ -167,7 +169,9 @@
 				var filerdr = new FileReader();
 				filerdr.onload = function (e)
 				{
-					$('#hero_img').attr('src', e.target.result);
+					var imgdata = e.target.result;
+					$('#hero_img').attr('src', imgdata);
+					$('#HeroBg').val(imgdata);
 				}
 				filerdr.readAsDataURL(input.files[0]);
 			}
@@ -182,7 +186,9 @@
 				var filerdr = new FileReader();
 				filerdr.onload = function (e)
 				{
-					$('#heroMob_img').attr('src', e.target.result);
+					var imgdata = e.target.result;
+					$('#heroMob_img').attr('src', imgdata);
+					$('#HeroMobBg').val(imgdata);
 				}
 				filerdr.readAsDataURL(input.files[0]);
 			}

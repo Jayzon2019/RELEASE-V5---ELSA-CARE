@@ -40,5 +40,18 @@ namespace InLife.Store.Cms.ViewModels
 		public string UpdatedBy { get; set; }
 
 		public string UpdatedByName { get; set; }
+
+
+
+		// This is a hack, old uploaded images doesn't have an image data
+		protected string ParseImageData(string imageData)
+		{
+			if (String.IsNullOrWhiteSpace(imageData))
+				return "";
+
+			return imageData.Contains("data:image")
+				? imageData
+				: $"data:image/jpeg;base64, {imageData}";
+		}
 	}
 }

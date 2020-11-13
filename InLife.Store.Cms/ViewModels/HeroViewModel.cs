@@ -15,13 +15,13 @@ namespace InLife.Store.Cms.ViewModels
 
 		public HeroViewModel(Hero model) : base(model)
 		{
-			this.HeroBg = model.HeroBg;
+			this.HeroBg = ParseImageData(model.HeroBg);
 			this.HeroTitle = model.HeroTitle;
 			this.HeroBtnTxt = model.HeroBtnTxt;
 			this.BtnTxtLink = model.BtnTxtLink;
 			this.Heading = model.Heading;
 			this.SubHeading = model.SubHeading;
-			this.HeroMobBg = model.HeroMobBg;
+			this.HeroMobBg = ParseImageData(model.HeroMobBg);
 			this.HeadingColor = model.HeadingColor;
 			this.SubHeadingColor = model.SubHeadingColor;
 			this.ContentPostion = model.ContentPostion;
@@ -35,13 +35,13 @@ namespace InLife.Store.Cms.ViewModels
 
 		public Hero Map(Hero model)
 		{
-			model.HeroBg = this.HeroBg;
+			model.HeroBg = ParseImageData(this.HeroBg);
 			model.HeroTitle = this.HeroTitle;
 			model.HeroBtnTxt = this.HeroBtnTxt;
 			model.BtnTxtLink = this.BtnTxtLink;
 			model.Heading = this.Heading;
 			model.SubHeading = this.SubHeading;
-			model.HeroMobBg = this.HeroMobBg;
+			model.HeroMobBg = ParseImageData(this.HeroMobBg);
 			model.HeadingColor = this.HeadingColor;
 			model.SubHeadingColor = this.SubHeadingColor;
 			model.ContentPostion = this.ContentPostion;

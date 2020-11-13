@@ -25,7 +25,8 @@
 										<div class="controls">
 											<div style="width:150px;height:150px;"> <img id="primeHero_img" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Prime Hero Background Image</label>
-											<input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" required data-validation-required-message="Prime Hero Background Image is Required" />
+											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" required data-validation-required-message="Prime Hero Background Image is Required" />
+											<input type="hidden" asp-for="PrimeHeroBg" required />
 											<span asp-validation-for="PrimeHeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
 									</div>
@@ -35,8 +36,9 @@
 										<div class="controls">
 											<div style="width:150px;height:150px;"> <img id="primeHeroMob_img" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Prime Hero Mobile Background Image</label>
-											<input type="file" title="search image" class="form-control" id="fileMob" name="file" onchange="showMob(this)" required data-validation-required-message="Prime Hero Mobile Background Image is Required" />
-											<span asp-validation-for="PrimeHeroBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
+											<input type="file" title="search image" class="form-control" id="fileMob" name="file" accept="image/*" onchange="showMob(this)" required data-validation-required-message="Prime Hero Mobile Background Image is Required" />
+											<input type="hidden" asp-for="PrimeHeroMobBg" required />
+											<span asp-validation-for="PrimeHeroMobBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
 									</div>
 								</div>
@@ -155,7 +157,9 @@
 				var filerdr = new FileReader();
 				filerdr.onload = function (e)
 				{
-					$('#primeHero_img').attr('src', e.target.result);
+					var imgdata = e.target.result;
+					$('#primeHero_img').attr('src', imgdata);
+					$('#PrimeHeroBg').val(imgdata);
 				}
 				filerdr.readAsDataURL(input.files[0]);
 			}
@@ -170,7 +174,9 @@
 				var filerdr = new FileReader();
 				filerdr.onload = function (e)
 				{
-					$('#primeHeroMob_img').attr('src', e.target.result);
+					var imgdata = e.target.result;
+					$('#primeHeroMob_img').attr('src', imgdata);
+					$('#PrimeHeroMobBg').val(imgdata);
 				}
 				filerdr.readAsDataURL(input.files[0]);
 			}

@@ -14,7 +14,7 @@
 			<div class="card-content">
 				<div class="card-body card-dashboard">
 					<div style="width:150px;height:150px;">
-						<img id="pro_img" src="data:image/jpeg;base64, @Model.ProductImg" alt="users avatar" class="users-avatar-shadow rounded" style="width:100%;border:solid" />
+						<img id="pro_img" src="@Model.ProductImg" alt="users avatar" class="users-avatar-shadow rounded" style="width:100%;border:solid" />
 					</div>
 					<div class="col-md-12">
 						<form asp-action="Edit" enctype="multipart/form-data" novalidate>
@@ -26,7 +26,8 @@
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Product Image</label>
-											<input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" />
+											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" />
+											<input type="hidden" asp-for="ProductImg" required />
 											<span asp-validation-for="ProductImg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
 									</div>
@@ -113,7 +114,9 @@
 				var filerdr = new FileReader();
 				filerdr.onload = function (e)
 				{
-					$('#pro_img').attr('src', e.target.result);
+					var imgdata = e.target.result;
+					$('#pro_img').attr('src', imgdata);
+					$('#ProductImg').val(imgdata);
 				}
 				filerdr.readAsDataURL(input.files[0]);
 			}

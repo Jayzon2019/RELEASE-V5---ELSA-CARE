@@ -54,7 +54,8 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var model = footerLinkRepository.Get(id);
+				//var model = footerLinkRepository.Get(id);
+				var model = footerLinkRepository.GetAll().First();
 
 				if (model == null)
 					return NotFound();
@@ -93,7 +94,7 @@ namespace InLife.Store.Cms.Controllers
 
 				this.footerLinkRepository.Create(model);
 
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(Details));
 			}
 			catch (Exception e)
 			{
@@ -132,7 +133,8 @@ namespace InLife.Store.Cms.Controllers
 
 			try
 			{
-				var model = this.footerLinkRepository.Get(id);
+				//var model = this.footerLinkRepository.Get(id);
+				var model = footerLinkRepository.GetAll().First();
 
 				if (model == null)
 					return NotFound();
@@ -144,7 +146,7 @@ namespace InLife.Store.Cms.Controllers
 
 				this.footerLinkRepository.Update(model);
 
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(Details));
 			}
 			catch (Exception e)
 			{

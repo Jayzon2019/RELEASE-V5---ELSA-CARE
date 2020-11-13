@@ -21,22 +21,24 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<div class="controls">
-											<div style="width:150px;height:150px;"> <img id="hero_img" style="width:100%;border:solid" /> </div>
-											<label class="control-label text-secondary">Hero Background Image</label>
-											<input type="file" title="search image" class="form-control" id="file" name="file" onchange="show(this)" required data-validation-required-message="Hero Background Image is Required" />
-											<span asp-validation-for="HeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
-										</div>
+                                        <div class="controls">
+                                            <div style="width:150px;height:150px;"> <img id="hero_img" style="width:100%;border:solid" /> </div>
+                                            <label class="control-label text-secondary">Hero Background Image</label>
+                                            <input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" required data-validation-required-message="Hero Background Image is Required" />
+                                            <input type="hidden" asp-for="HeroBg" required />
+                                            <span asp-validation-for="HeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
+                                        </div>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<div class="controls">
-											<div style="width:150px;height:150px;"> <img id="heroMob_img" style="width:100%;border:solid" /> </div>
-											<label class="control-label text-secondary">Hero Mobile Background Image</label>
-											<input type="file" title="search image" class="form-control" id="fileMob" name="file" onchange="showMob(this)" required data-validation-required-message="Hero Mobile Background Image is Required" />
-											<span asp-validation-for="HeroMobBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
-										</div>
+                                        <div class="controls">
+                                            <div style="width:150px;height:150px;"> <img id="heroMob_img" style="width:100%;border:solid" /> </div>
+                                            <label class="control-label text-secondary">Hero Mobile Background Image</label>
+                                            <input type="file" title="search image" class="form-control" id="fileMob" name="file" accept="image/jpeg" onchange="showMob(this)" required data-validation-required-message="Hero Mobile Background Image is Required" />
+                                            <input type="hidden" asp-for="HeroMobBg" required />
+                                            <span asp-validation-for="HeroMobBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
+                                        </div>
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -158,7 +160,9 @@
 				var filerdr = new FileReader();
 				filerdr.onload = function (e)
 				{
-					$('#hero_img').attr('src', e.target.result);
+					var imgdata = e.target.result;
+					$('#hero_img').attr('src', imgdata);
+					$('#HeroBg').val(imgdata);
 				}
 				filerdr.readAsDataURL(input.files[0]);
 			}
@@ -173,7 +177,9 @@
 				var filerdr = new FileReader();
 				filerdr.onload = function (e)
 				{
-					$('#heroMob_img').attr('src', e.target.result);
+					var imgdata = e.target.result;
+					$('#heroMob_img').attr('src', imgdata);
+					$('#HeroMobBg').val(imgdata);
 				}
 				filerdr.readAsDataURL(input.files[0]);
 			}

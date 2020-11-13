@@ -15,7 +15,7 @@ namespace InLife.Store.Cms.ViewModels
 
 		public ProductViewModel(Product model) : base(model)
 		{
-			this.ProductImg = model.ProductImg;
+			this.ProductImg = ParseImageData(model.ProductImg);
 			this.ProductName = model.ProductName;
 			this.ProductPrice = model.ProductPrice;
 			this.ProductCode = model.ProductCode;
@@ -32,7 +32,7 @@ namespace InLife.Store.Cms.ViewModels
 
 		public Product Map(Product model)
 		{
-			model.ProductImg = this.ProductImg;
+			model.ProductImg = ParseImageData(this.ProductImg);
 			model.ProductName = this.ProductName;
 			model.ProductPrice = this.ProductPrice;
 			model.ProductCode = this.ProductCode;

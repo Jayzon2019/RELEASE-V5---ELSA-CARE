@@ -16,7 +16,7 @@ namespace InLife.Store.Cms.ViewModels
 		public ProductDetailViewModel(ProductDetail model) : base(model)
 		{
 			this.ProductId = model.Product.Id;
-			this.ProductImg = model.Product.ProductImg;
+			this.ProductImg = ParseImageData(model.Product.ProductImg);
 			this.ProductName = model.Product.ProductName;
 			this.ProductPrice = model.Product.ProductPrice;
 			this.ProductCode = model.Product.ProductCode;

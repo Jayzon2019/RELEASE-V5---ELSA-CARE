@@ -5,8 +5,8 @@ namespace InLife.Store.Core.Models
 {
 	public abstract class BaseContentEntity : Entity<int>
 	{
-		public bool IsActive { get; set; }
-		public bool IsArchived { get; set; }
+		//public bool IsActive { get; set; }
+		//public bool IsArchived { get; set; }
 
 		public DateTimeOffset CreatedDate { get; set; }
 		public virtual User CreatedBy { get; set; }

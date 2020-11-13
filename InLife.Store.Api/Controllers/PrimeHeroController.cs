@@ -48,13 +48,21 @@ namespace InLife.Store.Api.Controllers
 					.Select(model => new PrimeHeroResponse
 					{
 						Id = model.Id,
-						PrimeHeroBg = model.PrimeHeroBg,
+
+						// This is a hack, old uploaded images doesn't have an image data
+						// Clean this up when StoreFront has been updated
+						PrimeHeroBg = ParseImageData(model.PrimeHeroBg),
+
 						PrimeHeroTitle = model.PrimeHeroTitle,
 						PrimeHeroBtnTxt = model.PrimeHeroBtnTxt,
 						BtnTxtLink = model.BtnTxtLink,
 						Heading = model.Heading,
 						SubHeading = model.SubHeading,
-						PrimeHeroMobBg = model.PrimeHeroMobBg,
+
+						// This is a hack, old uploaded images doesn't have an image data
+						// Clean this up when StoreFront has been updated
+						PrimeHeroMobBg = ParseImageData(model.PrimeHeroMobBg),
+
 						HeadingColor = model.HeadingColor,
 						SubHeadingColor = model.SubHeadingColor,
 						ContentPostion = model.ContentPostion
@@ -67,6 +75,16 @@ namespace InLife.Store.Api.Controllers
 			{
 				return GenericServerErrorResult(e);
 			}
+		}
+
+
+		// This is a hack, old uploaded images doesn't have an image data
+		// Clean this up when StoreFront has been updated
+		private string ParseImageData(string imageData)
+		{
+			return imageData.Contains(",")
+				? imageData.Split(",")[1].Trim()
+				: imageData;
 		}
 	}
 }
