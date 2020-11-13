@@ -6,7 +6,7 @@ namespace InLife.Store.Core.Models
 	{
 		public static UserRole Admin          = new UserRole("Admin",          "Administrator");
 		public static UserRole ContentManager = new UserRole("ContentManager", "Content Manager");
-		public static UserRole Agent          = new UserRole("Agent",          "Agent");
+		//public static UserRole Agent          = new UserRole("Agent",          "Agent");
 
 		public UserRole() { }
 

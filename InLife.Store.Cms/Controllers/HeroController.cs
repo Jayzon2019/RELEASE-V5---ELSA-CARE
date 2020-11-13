@@ -10,7 +10,6 @@ using InLife.Store.Cms.ViewModels;
 
 namespace InLife.Store.Cms.Controllers
 {
-	[Authorize]
 	public class HeroController : BaseController
 	{
 		private readonly IHeroRepository heroRepository;

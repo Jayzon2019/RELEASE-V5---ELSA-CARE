@@ -5,9 +5,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 using InLife.Store.Core.Models;
@@ -15,6 +16,7 @@ using InLife.Store.Core.Repository;
 
 namespace InLife.Store.Cms.Controllers
 {
+	[Authorize(Roles = "Administrator, Content Manager")]
 	public class BaseController : Controller
 	{
 		//protected readonly UserManager<ApplicationUser> userManager;

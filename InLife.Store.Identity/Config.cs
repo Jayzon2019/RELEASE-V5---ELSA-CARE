@@ -32,7 +32,6 @@ namespace InLife.Store.Identity
 				new IdentityResources.OpenId(),
 				new IdentityResources.Profile(),
 				new IdentityResources.Email(),
-				new IdentityResource("role", new List<string> { "role" })
 			};
 		}
 

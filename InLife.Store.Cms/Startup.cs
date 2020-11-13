@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
@@ -79,6 +81,7 @@ namespace InLife.Store.Cms
 
 			IdentityModelEventSource.ShowPII = true;
 			JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 			services
 				.AddAuthentication(options =>
@@ -93,17 +96,26 @@ namespace InLife.Store.Cms
 					options.ClientId = Configuration.GetSection("Authentication:ClientId").Value;
 					options.ClientSecret = Configuration.GetSection("Authentication:ClientSecret").Value;
 					options.ResponseType = IdentityModel.OidcConstants.ResponseTypes.Code;
-					//options.ResponseMode = IdentityModel.OidcConstants.ResponseModes.Query;
+
 					options.RequireHttpsMetadata = false;
 					options.UsePkce = true;
 					options.SaveTokens = true;
 					//options.GetClaimsFromUserInfoEndpoint = true;
 
+					options.ClaimActions.DeleteClaim("sid");
+					options.ClaimActions.DeleteClaim("idp");
+
 					options.Scope.Add(IdentityModel.OidcConstants.StandardScopes.OpenId);
 					options.Scope.Add(IdentityModel.OidcConstants.StandardScopes.Profile);
-					//options.Scope.Add("role");
+
 					//options.Scope.Add("IdentityServerApi");
 					//options.Scope.Add("inlife.store.api");
+
+					options.ClaimActions.MapJsonKey("role", "role");
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						RoleClaimType = "role"
+					};
 				});
 
 			services

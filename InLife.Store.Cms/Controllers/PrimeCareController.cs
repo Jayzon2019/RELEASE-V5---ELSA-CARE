@@ -12,7 +12,6 @@ using InLife.Store.Cms.Helpers;
 
 namespace InLife.Store.Cms.Controllers
 {
-	[Authorize]
 	public class PrimeCareController : BaseController
 	{
 		private readonly IPrimeCareRepository primeCareRepository;

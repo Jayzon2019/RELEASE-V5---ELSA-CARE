@@ -23,7 +23,6 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace InLife.Store.Cms.Controllers
 {
-	[Authorize]
 	public class HomeController : BaseController
 	{
 		private readonly UserManager<ApplicationUser> userManager;

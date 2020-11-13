@@ -18,8 +18,7 @@ using InLife.Store.Cms.Models;
 
 namespace InLife.Store.Cms.Controllers
 {
-	//[Authorize(Roles = "Admin")]
-	[Authorize]
+	[Authorize(Roles = "Administrator, Admin, ContentManager, Content Manager")]
 	public class UsersController : BaseController
 	{
 		//private readonly IUserRoleRepository userRoleRepository;
@@ -80,17 +79,18 @@ namespace InLife.Store.Cms.Controllers
 				if (model == null)
 					return NotFound();
 
+				var allRoles = Enumeration<string>.GetAll<UserRole>();
 				var modelRoleIds = model.Roles.Select(role => role.UserRoleId).ToArray();
 
 				var viewModel = new UserViewModel(model)
 				{
-					Roles = roleManager.Roles
-					.Select(role => new UserRolesViewModel
-					{
-						Id = role.Id,
-						Name = role.Name,
-						Selected = modelRoleIds.Contains(role.Id)
-					}).ToList()
+					Roles = allRoles
+						.Select(role => new UserRolesViewModel
+						{
+							Id = role.Id,
+							Name = role.Name,
+							Selected = modelRoleIds.Contains(role.Id)
+						}).ToList()
 				};
 
 				return View(viewModel);
@@ -106,11 +106,11 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var roles = Enumeration<string>.GetAll<UserRole>();
+				var allRoles = Enumeration<string>.GetAll<UserRole>();
 
 				var viewModel = new UserWithPasswordViewModel
 				{
-					Roles = roles
+					Roles = allRoles
 						.Select(model => new UserRolesViewModel
 						{
 							Id = model.Id,
@@ -186,11 +186,12 @@ namespace InLife.Store.Cms.Controllers
 				if (model == null)
 					return NotFound();
 
+				var allRoles = Enumeration<string>.GetAll<UserRole>();
 				var modelRoleIds = model.Roles.Select(role => role.UserRoleId).ToArray();
 
 				var viewModel = new UserViewModel(model)
 				{
-					Roles = roleManager.Roles
+					Roles = allRoles
 						.Select(role => new UserRolesViewModel
 						{
 							Id = role.Id,
@@ -251,12 +252,12 @@ namespace InLife.Store.Cms.Controllers
 						detail: $"There's an error in updating the user profile of user {id}."
 					);
 				}
-								
+
+				var removeRoles = await userManager.GetRolesAsync(model);
+				await userManager.RemoveFromRolesAsync(model, removeRoles);
+
 				var addRoles = viewModel.Roles.Where(x => x.Selected).Select(role => role.Name).ToArray();
 				await userManager.AddToRolesAsync(model, addRoles);
-
-				var removeRoles = viewModel.Roles.Where(x => !x.Selected).Select(role => role.Name).ToArray();
-				await userManager.RemoveFromRolesAsync(model, removeRoles);
 
 				return RedirectToAction(nameof(Index));
 			}

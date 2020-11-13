@@ -43,6 +43,7 @@ namespace InLife.Store.Identity.Services
 			var user = await userManager.FindByIdAsync(sub);
 			var principal = await claimsFactory.CreateAsync(user);
 			var hasPassword = await userManager.HasPasswordAsync(user);
+			var roles = await userManager.GetRolesAsync(user);
 
 			var claims = principal.Claims.ToList();
 			claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
@@ -53,6 +54,11 @@ namespace InLife.Store.Identity.Services
 			claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email ?? String.Empty));
 			claims.Add(new Claim(IdentityServerConstants.StandardScopes.Phone, user.PhoneNumber ?? String.Empty));
 			claims.Add(new Claim("has_password", hasPassword.ToString()));
+
+			foreach (var role in roles)
+			{
+				claims.Add(new Claim(JwtClaimTypes.Role, role));
+			}
 
 			context.IssuedClaims = claims;
 		}
