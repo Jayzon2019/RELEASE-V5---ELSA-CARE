@@ -1,9 +1,36 @@
 using System;
+using InLife.Store.Core.Models;
 
 namespace InLife.Store.Api.Messages
 {
-	public class HeroResponse
+	public class HeroResponse : BaseResponse
 	{
+		public HeroResponse()
+		{
+		}
+
+		public HeroResponse(Hero model)
+		{
+			Id = model.Id;
+
+			// This is a hack, old uploaded images doesn't have an image data
+			// Clean this up when StoreFront has been updated
+			HeroBg = ParseImageData(model.HeroBg);
+
+			// This is a hack, old uploaded images doesn't have an image data
+			// Clean this up when StoreFront has been updated
+			HeroMobBg = ParseImageData(model.HeroMobBg);
+
+			HeroTitle = model.HeroTitle;
+			HeroBtnTxt = model.HeroBtnTxt;
+			BtnTxtLink = model.BtnTxtLink;
+			Heading = model.Heading;
+			SubHeading = model.SubHeading;
+			HeadingColor = model.HeadingColor;
+			SubHeadingColor = model.SubHeadingColor;
+			ContentPostion = model.ContentPostion;
+		}
+
 		public int Id { get; set; }
 
 		public string HeroBg { get; set; }

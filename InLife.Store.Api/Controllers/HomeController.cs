@@ -52,20 +52,7 @@ namespace InLife.Store.Api.Controllers
 			{
 				var result = heroRepository
 					.GetAll()
-					.Select(model => new HeroResponse
-					{
-						Id = model.Id,
-						HeroBg = model.HeroBg,
-						HeroTitle = model.HeroTitle,
-						HeroBtnTxt = model.HeroBtnTxt,
-						BtnTxtLink = model.BtnTxtLink,
-						Heading = model.Heading,
-						SubHeading = model.SubHeading,
-						HeroMobBg = model.HeroMobBg,
-						HeadingColor = model.HeadingColor,
-						SubHeadingColor = model.SubHeadingColor,
-						ContentPostion = model.ContentPostion
-					})
+					.Select(model => new HeroResponse(model))
 					.ToList();
 
 				return Ok(result);
@@ -84,21 +71,7 @@ namespace InLife.Store.Api.Controllers
 			{
 				var result = productRepository
 					.GetAll()
-					.Select(model => new ProductResponse
-					{
-						Id = model.Id,
-
-						// This is a hack, old uploaded images doesn't have an image data
-						// Clean this up when StoreFront has been updated
-						ProductImg = ParseImageData(model.ProductImg),
-
-						ProductName = model.ProductName,
-						ProductPrice = model.ProductPrice,
-						ProductCode = model.ProductCode,
-						ShortDescription = model.ShortDescription,
-						PriceWithOffer = model.PriceWithOffer,
-						SortNum = model.SortNum
-					})
+					.Select(model => new ProductResponse(model))
 					.ToList();
 
 				return Ok(result);
@@ -117,77 +90,7 @@ namespace InLife.Store.Api.Controllers
 			{
 				var result = productDetailRepository
 					.GetAll()
-					.Select(model => new ProductDetailResponse
-					{
-						Id = model.Id,
-
-						ProductId = model.Product.Id,
-
-						// This is a hack, old uploaded images doesn't have an image data
-						// Clean this up when StoreFront has been updated
-						ProductImg = ParseImageData(model.Product.ProductImg),
-
-						ProductName = model.Product.ProductName,
-						ProductPrice = model.Product.ProductPrice,
-						ProductCode = model.Product.ProductCode,
-
-						CasesCovered = model.CasesCovered,
-						BenefitType = model.BenefitType,
-						AgeEligibility = model.AgeEligibility,
-						NumberOfAvailments = model.NumberOfAvailments,
-						BenefitLimit = model.BenefitLimit,
-						DocProFee = model.DocProFee,
-						RoomAccommodation = model.RoomAccommodation,
-						LaboratoryDiagnosticPro = model.LaboratoryDiagnosticPro,
-						MedicinesAsMedicallyNeeded = model.MedicinesAsMedicallyNeeded,
-						UseOfOperationRoom = model.UseOfOperationRoom,
-						SurgerySurgonFees = model.SurgerySurgonFees,
-						Laparoscopic = model.Laparoscopic,
-						MRA = model.MRA,
-						MRI = model.MRI,
-						CT = model.CT,
-						Therapetic = model.Therapetic,
-						PainManagement = model.PainManagement,
-						Arthoscopic = model.Arthoscopic,
-						OtherMedical = model.OtherMedical,
-						OneTime = model.OneTime,
-						Usage = model.Usage,
-						AccreditedHospitals = model.AccreditedHospitals,
-						MER = model.MER,
-						AFR = model.AFR,
-						ARP = model.ARP,
-						Validity = model.Validity,
-						Waiting = model.Waiting,
-						NumberOfRegistrations = model.NumberOfRegistrations,
-						UnlimitedTeleMed = model.UnlimitedTeleMed,
-						PreExistingConCover = model.PreExistingConCover,
-						NonAccreditedHospitals = model.NonAccreditedHospitals,
-						ReimbursementNonAccreditedHospitals = model.ReimbursementNonAccreditedHospitals,
-						TopSixHospitalAccess = model.TopSixHospitalAccess,
-						RegistrationOfSucceedingVouchers = model.RegistrationOfSucceedingVouchers,
-						Combinability = model.Combinability,
-						IndividualOrGroup = model.IndividualOrGroup,
-						PrepaidPlan = model.PrepaidPlan,
-						Consultation = model.Consultation,
-						Inclusions = model.Inclusions,
-						SpecialModalities = model.SpecialModalities,
-						Exclusions = model.Exclusions,
-						FTFConsultation = model.FTFConsultation,
-						Telemedicine = model.Telemedicine,
-						DentalConsultation = model.DentalConsultation,
-						DentalServicesBenefit = model.DentalServicesBenefit,
-						HospitalNetwork = model.HospitalNetwork,
-						RegistrationRules = model.RegistrationRules,
-						MedicalCoverage = model.MedicalCoverage,
-						LearnMoreBtnLink = model.LearnMoreBtnLink,
-						BuyNowBtnLink = model.BuyNowBtnLink,
-						Coverage = model.Coverage,
-						VoucherUsed = model.VoucherUsed,
-						VoucherUnused = model.VoucherUnused,
-						ConsultationCards = model.ConsultationCards,
-						InPatient = model.InPatient,
-						OutPatient = model.OutPatient,
-					})
+					.Select(model => new ProductDetailResponse(model))
 					.ToList();
 
 				return Ok(result);
@@ -277,18 +180,6 @@ namespace InLife.Store.Api.Controllers
 			//	lR.SaveExceptionLogs(exLog, ex, methodName);
 			//	return NotFound();
 			//}
-		}
-
-
-
-
-		// This is a hack, old uploaded images doesn't have an image data
-		// Clean this up when StoreFront has been updated
-		private string ParseImageData(string imageData)
-		{
-			return imageData.Contains(",")
-				? imageData.Split(",")[1].Trim()
-				: imageData;
 		}
 	}
 }

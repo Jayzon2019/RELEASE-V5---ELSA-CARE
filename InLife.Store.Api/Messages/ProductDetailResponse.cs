@@ -1,9 +1,86 @@
 using System;
+using InLife.Store.Core.Models;
 
 namespace InLife.Store.Api.Messages
 {
-	public class ProductDetailResponse
+	public class ProductDetailResponse : BaseResponse
 	{
+		public ProductDetailResponse()
+		{
+		}
+
+		public ProductDetailResponse(ProductDetail model)
+		{
+			Id = model.Id;
+
+			ProductId = model.Product.Id;
+
+			// This is a hack, old uploaded images doesn't have an image data
+			// Clean this up when StoreFront has been updated
+			ProductImg = ParseImageData(model.Product.ProductImg);
+
+			ProductName = model.Product.ProductName;
+			ProductPrice = model.Product.ProductPrice;
+			ProductCode = model.Product.ProductCode;
+
+			CasesCovered = model.CasesCovered;
+			BenefitType = model.BenefitType;
+			AgeEligibility = model.AgeEligibility;
+			NumberOfAvailments = model.NumberOfAvailments;
+			BenefitLimit = model.BenefitLimit;
+			DocProFee = model.DocProFee;
+			RoomAccommodation = model.RoomAccommodation;
+			LaboratoryDiagnosticPro = model.LaboratoryDiagnosticPro;
+			MedicinesAsMedicallyNeeded = model.MedicinesAsMedicallyNeeded;
+			UseOfOperationRoom = model.UseOfOperationRoom;
+			SurgerySurgonFees = model.SurgerySurgonFees;
+			Laparoscopic = model.Laparoscopic;
+			MRA = model.MRA;
+			MRI = model.MRI;
+			CT = model.CT;
+			Therapetic = model.Therapetic;
+			PainManagement = model.PainManagement;
+			Arthoscopic = model.Arthoscopic;
+			OtherMedical = model.OtherMedical;
+			OneTime = model.OneTime;
+			Usage = model.Usage;
+			AccreditedHospitals = model.AccreditedHospitals;
+			MER = model.MER;
+			AFR = model.AFR;
+			ARP = model.ARP;
+			Validity = model.Validity;
+			Waiting = model.Waiting;
+			NumberOfRegistrations = model.NumberOfRegistrations;
+			UnlimitedTeleMed = model.UnlimitedTeleMed;
+			PreExistingConCover = model.PreExistingConCover;
+			NonAccreditedHospitals = model.NonAccreditedHospitals;
+			ReimbursementNonAccreditedHospitals = model.ReimbursementNonAccreditedHospitals;
+			TopSixHospitalAccess = model.TopSixHospitalAccess;
+			RegistrationOfSucceedingVouchers = model.RegistrationOfSucceedingVouchers;
+			Combinability = model.Combinability;
+			IndividualOrGroup = model.IndividualOrGroup;
+			PrepaidPlan = model.PrepaidPlan;
+			Consultation = model.Consultation;
+			Inclusions = model.Inclusions;
+			SpecialModalities = model.SpecialModalities;
+			Exclusions = model.Exclusions;
+			FTFConsultation = model.FTFConsultation;
+			Telemedicine = model.Telemedicine;
+			DentalConsultation = model.DentalConsultation;
+			DentalServicesBenefit = model.DentalServicesBenefit;
+			HospitalNetwork = model.HospitalNetwork;
+			RegistrationRules = model.RegistrationRules;
+			MedicalCoverage = model.MedicalCoverage;
+			LearnMoreBtnLink = model.LearnMoreBtnLink;
+			BuyNowBtnLink = model.BuyNowBtnLink;
+			Coverage = model.Coverage;
+			VoucherUsed = model.VoucherUsed;
+			VoucherUnused = model.VoucherUnused;
+			ConsultationCards = model.ConsultationCards;
+			InPatient = model.InPatient;
+			OutPatient = model.OutPatient;
+		}
+
 		public int Id { get; set; }
 
 		#region Product
