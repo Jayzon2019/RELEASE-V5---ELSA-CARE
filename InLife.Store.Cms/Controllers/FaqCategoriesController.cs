@@ -54,7 +54,8 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var model = faqCategoryRepository.Get(id);
+				//var model = faqCategoryRepository.Get(id);
+				var model = faqCategoryRepository.GetAll().SingleOrDefault(x => x.Id == id);
 
 				if (model == null)
 					return NotFound();

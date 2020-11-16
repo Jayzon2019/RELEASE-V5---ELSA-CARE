@@ -18,7 +18,7 @@ using InLife.Store.Cms.Models;
 
 namespace InLife.Store.Cms.Controllers
 {
-	[Authorize(Roles = "Administrator, Admin, ContentManager, Content Manager")]
+	[Authorize(Roles = "Administrator")]
 	public class UsersController : BaseController
 	{
 		//private readonly IUserRoleRepository userRoleRepository;
@@ -79,17 +79,14 @@ namespace InLife.Store.Cms.Controllers
 				if (model == null)
 					return NotFound();
 
-				var allRoles = Enumeration<string>.GetAll<UserRole>();
-				var modelRoleIds = model.Roles.Select(role => role.UserRoleId).ToArray();
-
 				var viewModel = new UserViewModel(model)
 				{
-					Roles = allRoles
+					Roles = model.Roles
 						.Select(role => new UserRolesViewModel
 						{
-							Id = role.Id,
-							Name = role.Name,
-							Selected = modelRoleIds.Contains(role.Id)
+							Id = role.Role.Id,
+							Name = role.Role.Name,
+							Selected = true
 						}).ToList()
 				};
 

@@ -56,7 +56,8 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var model = primeCareRepository.Get(id);
+				//var model = primeCareRepository.Get(id);
+				var model = primeCareRepository.GetAll().SingleOrDefault(x => x.Id == id);
 
 				if (model == null)
 					return NotFound();

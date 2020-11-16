@@ -54,7 +54,8 @@ namespace InLife.Store.Cms.Controllers
 		{
 			try
 			{
-				var model = productRepository.Get(id);
+				//var model = productRepository.Get(id);
+				var model = productRepository.GetAll().SingleOrDefault(x => x.Id == id);
 
 				if (model == null)
 					return NotFound();
