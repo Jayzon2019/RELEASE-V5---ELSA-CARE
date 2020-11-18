@@ -612,7 +612,7 @@
 					var img = 'data:image/jpg;base64,' + pro[0].productImg;
 					var proName = pro[0].productName;
 					var proNameId = proName.replace(/\s+/g, '-');
-					var product = proDet.find(x => x.productId == pro[0].productId);
+					var product = proDet.find(x => x.productId == pro[0].id);
 					var mainPro;
 					if (product != null && product != undefined) {
 						mainPro = "<a href=\"#" + proNameId + "\" rel=\"modal:open\"><p class=\"img\"><img src=\"" + img + "\"></p>";
@@ -633,7 +633,7 @@
 					var img = 'data:image/jpg;base64,' + pro[i].productImg;
 					var proName = pro[i].productName;
 					var proNameId = proName.replace(/\s+/g, '-');
-					var product = proDet.find(x => x.productId == pro[i].productId);
+					var product = proDet.find(x => x.productId == pro[i].id);
 					var proList;
 					if (product != null && product != undefined) {
 						proList = "<li class=\"product-item  wow fadeInUp\"><div class=\"product-card\"><a href=\"#" + proNameId + "\" rel=\"modal:open\">";

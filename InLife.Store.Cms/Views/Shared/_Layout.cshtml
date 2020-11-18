@@ -1,6 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{
+	string baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}/";
+}
+<!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
+
+	<base href="@baseUrl">
 
 	<title>@ViewData["Title"] - InLife Store CMS</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,8 +13,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta name="description" content="CMS Dashboard">
 	<meta name="keywords" content="CMS Dashboard">
-	<meta name="author" content="Saleem IShaq">
-	<title>Dashboard CMS</title>
+	<meta name="author" content="Projectgrey - www.projectgrey.net">
+
 	<link rel="apple-touch-icon" href="~/images/inlife-logo.png">
 	<link rel="shortcut icon" type="image/x-icon" href="~/app-assets/images/ico/favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -242,6 +247,8 @@
 
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	<script type="text/javascript">
+		
+
 		$(document).ready(function ()
 		{
 			jQuery(function ($)
