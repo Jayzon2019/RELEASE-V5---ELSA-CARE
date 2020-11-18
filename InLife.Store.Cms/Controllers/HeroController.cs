@@ -18,11 +18,13 @@ namespace InLife.Store.Cms.Controllers
 		(
 			ILogger<HeroController> logger,
 			IUserRepository userRepository,
+			IActivityLogRepository activityLogRepository,
 			IHeroRepository heroRepository
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.heroRepository = heroRepository;
@@ -94,6 +96,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.heroRepository.Create(model);
 
+				LogUserActivity("Created a Hero", $"Created a new Hero - {model.HeroTitle}");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -146,6 +150,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.heroRepository.Update(model);
 
+				LogUserActivity("Updated a Hero", $"Hero '{model.HeroTitle}' [{model.Id}] has been updated.");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -170,6 +176,8 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				this.heroRepository.Delete(model);
+
+				LogUserActivity("Deleted a Hero", $"Hero '{model.HeroTitle}' [{model.Id}] has been deleted.");
 
 				return RedirectToAction(nameof(Index));
 			}

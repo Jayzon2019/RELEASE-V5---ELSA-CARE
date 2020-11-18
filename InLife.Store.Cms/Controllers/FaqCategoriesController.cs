@@ -18,11 +18,13 @@ namespace InLife.Store.Cms.Controllers
 		(
 			ILogger<FaqCategoriesController> logger,
 			IUserRepository userRepository,
+			IActivityLogRepository activityLogRepository,
 			IFaqCategoryRepository faqCategoryRepository
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.faqCategoryRepository = faqCategoryRepository;
@@ -94,6 +96,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.faqCategoryRepository.Create(model);
 
+				LogUserActivity("Created a FAQ Category", $"Created a new FAQ Category - {model.Name}");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -145,6 +149,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.faqCategoryRepository.Update(model);
 
+				LogUserActivity("Updated a FAQ Category", $"FAQ Category '{model.Name}' [{model.Id}] has been updated.");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -168,6 +174,8 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				this.faqCategoryRepository.Delete(model);
+
+				LogUserActivity("Deleted a FAQ Category", $"FAQ Category [{model.Id}] has been deleted.");
 
 				return RedirectToAction(nameof(Index));
 			}

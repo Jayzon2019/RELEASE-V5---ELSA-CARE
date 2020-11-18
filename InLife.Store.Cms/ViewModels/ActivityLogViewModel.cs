@@ -19,41 +19,26 @@ namespace InLife.Store.Cms.ViewModels
 		public ActivityLogViewModel(ActivityLog model)
 		{
 			this.Id = model.Id;
-			this.ActionPerfomed = model.ActionPerfomed;
-			this.ActivityDescription = model.ActivityDescription;
-			this.IpAddress = model.IpAddress;
-			this.ActivityBy = $"{model.ActivityBy.FirstName} {model.ActivityBy.LastName}".Trim();
-			this.ActivityDate = model.ActivityDate?.ToOffset(new TimeSpan(8, 0, 0)).ToString();
-			this.ActivityById = model.ActivityById.ToString();
+			this.Action = model.Action;
+			this.Description = model.Description;
+			this.TransactionById = model.TransactionBy.Id;
+			this.TransactionByName = model.TransactionByName;
+			this.TransactionDate = model.TransactionDate?.ToOffset(new TimeSpan(8, 0, 0)).ToString("yyyy-MM-dd hh:mm tt");
+			this.TransactionRemoteAddress = model.TransactionRemoteAddress;
 		}
-
-		//public ActivityLog Map()
-		//{
-		//	var model = new ActivityLog
-		//	{
-		//		Id = this.Id,
-		//		ActionPerfomed = this.ActionPerfomed,
-		//		ActivityDescription = this.ActivityDescription,
-		//		IpAddress = this.IpAddress,
-		//		ActivityDate = this.ActivityDate,
-		//		ActivityById = this.ActivityById
-		//	};
-
-		//	return model;
-		//}
 
 		public int Id { get; set; }
 
-        public string ActivityBy { get; set; }
+		public string Action { get; set; }
 
-		public string ActionPerfomed { get; set; }
+		public string Description { get; set; }
 
-		public string ActivityDescription { get; set; }
+		public string TransactionById { get; set; }
 
-		public string IpAddress { get; set; }
+		public string TransactionByName { get; set; }
 
-		public string ActivityDate { get; set; }
+		public string TransactionDate { get; set; }
 
-		public string ActivityById { get; set; }
-    }
+		public string TransactionRemoteAddress { get; set; }
+	}
 }

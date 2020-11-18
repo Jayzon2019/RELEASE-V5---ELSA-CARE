@@ -18,8 +18,8 @@ namespace InLife.Store.Infrastructure.Repository
 			InitializeDataSet
 			(
 				this.dbset
-					.Include(x => x.ActivityBy)
-					.OrderByDescending(x => x.ActivityDate)
+					.Include(x => x.TransactionBy)
+					.OrderByDescending(x => x.TransactionDate)
 			);
 		}
 

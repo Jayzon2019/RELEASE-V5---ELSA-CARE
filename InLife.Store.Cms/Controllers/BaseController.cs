@@ -20,6 +20,8 @@ namespace InLife.Store.Cms.Controllers
 	public class BaseController : Controller
 	{
 		//protected readonly UserManager<ApplicationUser> userManager;
+
+		protected readonly IActivityLogRepository activityLogRepository;
 		protected readonly IUserRepository userRepository;
 		protected readonly ILogger<BaseController> logger;
 
@@ -27,12 +29,14 @@ namespace InLife.Store.Cms.Controllers
 		(
 			//UserManager<ApplicationUser> userManager,
 			IUserRepository userRepository,
-			ILogger<BaseController> logger
+			ILogger<BaseController> logger,
+			IActivityLogRepository activityLogRepository
 		)
 		{
 			//this.userManager = userManager;
 			this.userRepository = userRepository;
 			this.logger = logger;
+			this.activityLogRepository = activityLogRepository;
 		}
 
 		protected User CurrentUser()
@@ -109,6 +113,24 @@ namespace InLife.Store.Cms.Controllers
 				ContentTypes = { "application/problem+json" },
 				StatusCode = status,
 			};
+		}
+
+		protected void LogUserActivity(string action, string description)
+		{
+			var user = CurrentUser();
+			var userFullName = $"{user.FirstName} {user.LastName}".Trim();
+			
+			var log = new ActivityLog
+			{
+				 Action = action,
+				 Description = description,
+				 TransactionBy = user,
+				 TransactionByName = userFullName,
+				 TransactionDate = DateTimeOffset.Now,
+				 TransactionRemoteAddress = HttpContext.Connection.RemoteIpAddress.ToString()
+			};
+
+			activityLogRepository.Create(log);
 		}
 	}
 }

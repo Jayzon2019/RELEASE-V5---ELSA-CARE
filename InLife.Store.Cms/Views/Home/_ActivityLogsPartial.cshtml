@@ -20,10 +20,10 @@
 
 							<thead>
 								<tr>
-									<th>Action Performed</th>
-									<th>Action Performed By</th>
+									<th>Action</th>
+									<th>Performed By</th>
 									<th>Description</th>
-									<th>Action Performed Date</th>
+									<th>Date</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -31,26 +31,26 @@
 								{
 									<tr>
 										<td>
-											@Html.DisplayFor(modelItem => item.ActionPerfomed)
+											@Html.DisplayFor(modelItem => item.Action)
 										</td>
 										<td>
-											@Html.DisplayFor(modelItem => item.ActivityBy)
+											@Html.DisplayFor(modelItem => item.TransactionByName)
 										</td>
 										<td>
-											@Html.DisplayFor(modelItem => item.ActivityDescription)
+											@Html.DisplayFor(modelItem => item.Description)
 										</td>
 										<td>
-											@item.ActivityDate
+											@item.TransactionDate
 										</td>
 									</tr>
 								}
 							</tbody>
 							<tfoot>
 								<tr>
-									<th>Action Performed</th>
-									<th>Action Performed By</th>
+									<th>Action</th>
+									<th>Performed By</th>
 									<th>Description</th>
-									<th>Action Performed Date</th>
+									<th>Date</th>
 								</tr>
 							</tfoot>
 						</table>

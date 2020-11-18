@@ -18,11 +18,13 @@ namespace InLife.Store.Cms.Controllers
 		(
 			ILogger<ProductsController> logger,
 			IUserRepository userRepository,
+			IActivityLogRepository activityLogRepository,
 			IProductRepository productRepository
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.productRepository = productRepository;
@@ -94,6 +96,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.productRepository.Create(model);
 
+				LogUserActivity("Created a Product", $"Created a new Product - {model.ProductName}");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -145,6 +149,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.productRepository.Update(model);
 
+				LogUserActivity("Updated a Product", $"Product '{model.ProductName}' [{model.Id}] has been updated.");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -169,6 +175,8 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				this.productRepository.Delete(model);
+
+				LogUserActivity("Deleted a Product", $"Product '{model.ProductName}' [{model.Id}] has been deleted.");
 
 				return RedirectToAction(nameof(Index));
 			}

@@ -29,7 +29,6 @@ namespace InLife.Store.Cms.Controllers
 		private readonly IEmailService emailService;
 
 		private readonly IKeyMetricRepository keyMetricRepository;
-		private readonly IActivityLogRepository activityLogRepository;
 
 		public HomeController
 		(
@@ -42,14 +41,14 @@ namespace InLife.Store.Cms.Controllers
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.userManager = userManager;
 			this.emailService = emailService;
 
 			this.keyMetricRepository = keyMetricRepository;
-			this.activityLogRepository = activityLogRepository;
 		}
 
 		public IActionResult Index()
@@ -66,14 +65,23 @@ namespace InLife.Store.Cms.Controllers
 
 				//return View(viewModelList);
 
+				var activityLogs = activityLogRepository
+					.GetAll()
+					.Select(model => new ActivityLogViewModel(model))
+					.ToList();
+
+				var userCount = userRepository.GetAll().Count();
+
+				var keyMetrics = keyMetricRepository.GetAll();
+
 				var viewModel = new KeyMetricViewModel
 				{
 					Id = 0,
 					PageName = "",
 					PageViews = 0,
 					Sessions = "",
-					UserCount = 0,
-					ActivityLogs = new List<ActivityLogViewModel>()
+					UserCount = userCount,
+					ActivityLogs = activityLogs
 				};
 				return View(viewModel);
 			}

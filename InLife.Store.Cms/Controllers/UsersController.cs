@@ -33,11 +33,13 @@ namespace InLife.Store.Cms.Controllers
 			RoleManager<ApplicationRole> roleManager,
 			IEmailService emailService,
 			ILogger<UsersController> logger,
-			IUserRepository userRepository
+			IUserRepository userRepository,
+			IActivityLogRepository activityLogRepository
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.userManager = userManager;
@@ -165,6 +167,8 @@ namespace InLife.Store.Cms.Controllers
 				//var recipient = new MailAddress(email, $"{model.FirstName} {model.LastName}");
 				//await emailService.SendPasswordAsync(recipient, tempPassword);
 
+				LogUserActivity("Created a User", $"Created a new User - {model.UserName}");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -256,6 +260,8 @@ namespace InLife.Store.Cms.Controllers
 				var addRoles = viewModel.Roles.Where(x => x.Selected).Select(role => role.Name).ToArray();
 				await userManager.AddToRolesAsync(model, addRoles);
 
+				LogUserActivity("Updated a User", $"User '{model.UserName}' [{model.Id}] has been updated.");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -279,6 +285,8 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				this.userRepository.Delete(model);
+
+				LogUserActivity("Deleted a User", $"User '{model.UserName}' [{model.Id}] has been deleted.");
 
 				return RedirectToAction(nameof(Index));
 			}

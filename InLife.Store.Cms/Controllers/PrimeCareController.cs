@@ -20,11 +20,13 @@ namespace InLife.Store.Cms.Controllers
 		(
 			ILogger<PrimeCareController> logger,
 			IUserRepository userRepository,
+			IActivityLogRepository activityLogRepository,
 			IPrimeCareRepository primeCareRepository
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.primeCareRepository = primeCareRepository;
@@ -96,6 +98,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.primeCareRepository.Create(model);
 
+				LogUserActivity("Uploaded a PrimeCare file", $"Uploaded a new PrimeCare files - {model.PrimeCareFileName}");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -147,6 +151,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.primeCareRepository.Update(model);
 
+				LogUserActivity("Updated a PrimeCare file", $"PrimeCare file '{model.PrimeCareFileName}' [{model.Id}] has been updated.");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -171,6 +177,8 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				this.primeCareRepository.Delete(model);
+
+				LogUserActivity("Deleted a PrimeCare file", $"PrimeCare file '{model.PrimeCareFileName}' [{model.Id}] has been deleted.");
 
 				return RedirectToAction(nameof(Index));
 			}

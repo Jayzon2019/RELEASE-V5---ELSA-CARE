@@ -151,6 +151,20 @@ namespace InLife.Store.Infrastructure.Repository
 			{
 				entity.ToTable("TblActivityLogs");
 				entity.HasKey(e => new { e.Id });
+
+				entity.Property(e => e.Action).HasColumnName("ActionPerfomed");
+				entity.Property(e => e.Description).HasColumnName("ActivityDescription");
+
+				entity.Property(e => e.TransactionByName).HasColumnName("ActivityBy");
+				entity.Property(e => e.TransactionDate).HasColumnName("ActivityDate");
+				entity.Property(e => e.TransactionRemoteAddress).HasColumnName("IpAddress");
+
+				entity.Ignore(e => e.TransactionBy);
+				entity.Property<string>("TransactionById").HasColumnName("ActivityById");
+				entity
+					.HasOne(e => e.TransactionBy)
+					.WithMany()
+					.HasForeignKey("TransactionById");
 			});
 
 			builder.Entity<EmailCredential>(entity =>

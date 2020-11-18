@@ -18,11 +18,13 @@ namespace InLife.Store.Cms.Controllers
 		(
 			ILogger<PrimeHeroController> logger,
 			IUserRepository userRepository,
+			IActivityLogRepository activityLogRepository,
 			IPrimeHeroRepository primeHeroRepository
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.primeHeroRepository = primeHeroRepository;
@@ -93,6 +95,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.primeHeroRepository.Create(model);
 
+				LogUserActivity("Created a Prime Hero Banner", $"Created a new Prime Hero Banner - {model.PrimeHeroTitle}");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -144,6 +148,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.primeHeroRepository.Update(model);
 
+				LogUserActivity("Updated a Prime Hero Banner", $"Prime Hero Banner '{model.PrimeHeroTitle}' [{model.Id}] has been updated.");
+
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception e)
@@ -167,6 +173,8 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				this.primeHeroRepository.Delete(model);
+
+				LogUserActivity("Deleted a Prime Hero Banner", $"Prime Hero Banner '{model.PrimeHeroTitle}' [{model.Id}] has been deleted.");
 
 				return RedirectToAction(nameof(Index));
 			}

@@ -18,11 +18,13 @@ namespace InLife.Store.Cms.Controllers
 		(
 			ILogger<FooterLinksController> logger,
 			IUserRepository userRepository,
+			IActivityLogRepository activityLogRepository,
 			IFooterLinkRepository footerLinkRepository
 		) : base
 		(
 			userRepository,
-			logger
+			logger,
+			activityLogRepository
 		)
 		{
 			this.footerLinkRepository = footerLinkRepository;
@@ -94,6 +96,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.footerLinkRepository.Create(model);
 
+				LogUserActivity("Created a Footer Link", $"Created a new Footer Link");
+
 				return RedirectToAction(nameof(Details));
 			}
 			catch (Exception e)
@@ -146,6 +150,8 @@ namespace InLife.Store.Cms.Controllers
 
 				this.footerLinkRepository.Update(model);
 
+				LogUserActivity("Updated a Footer Links", $"Footer Links has been updated.");
+
 				return RedirectToAction(nameof(Details));
 			}
 			catch (Exception e)
@@ -166,6 +172,8 @@ namespace InLife.Store.Cms.Controllers
 					return NotFound();
 
 				this.footerLinkRepository.Delete(model);
+
+				LogUserActivity("Deleted a Footer Link", $"Footer Link [{model.Id}] has been deleted.");
 
 				return RedirectToAction(nameof(Index));
 			}
