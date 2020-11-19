@@ -21,7 +21,7 @@ namespace InLife.Store.Cms.ViewModels
 			this.Id = model.Id;
 			this.Action = model.Action;
 			this.Description = model.Description;
-			this.TransactionById = model.TransactionBy.Id;
+			this.TransactionById = model.TransactionBy?.Id;
 			this.TransactionByName = model.TransactionByName;
 			this.TransactionDate = model.TransactionDate?.ToOffset(new TimeSpan(8, 0, 0)).ToString("yyyy-MM-dd hh:mm tt");
 			this.TransactionRemoteAddress = model.TransactionRemoteAddress;
