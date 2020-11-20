@@ -129,7 +129,7 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, [Bind("PrimeHeroBg, PrimeHeroTitle, PrimeHeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] PrimeHeroViewModel viewModel)
+		public ActionResult Edit(int id, [Bind("PrimeHeroBg, PrimeHeroMobBg, PrimeHeroTitle, PrimeHeroBtnTxt, BtnTxtLink, Heading, SubHeading, HeadingColor, SubHeadingColor, ContentPostion")] PrimeHeroViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
