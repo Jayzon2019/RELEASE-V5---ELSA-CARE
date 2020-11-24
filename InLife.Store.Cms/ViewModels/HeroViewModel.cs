@@ -50,7 +50,7 @@ namespace InLife.Store.Cms.ViewModels
 		}
 
 
-
+		[Required]
 		public string HeroBg { get; set; }
 
 		[Required]
@@ -78,7 +78,7 @@ namespace InLife.Store.Cms.ViewModels
 		[DisplayName("Sub-Heading")]
 		public string SubHeading { get; set; }
 
-
+		[Required]
 		public string HeroMobBg { get; set; }
 
 		public string HeadingColor { get; set; }

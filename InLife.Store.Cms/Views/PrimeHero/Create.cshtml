@@ -25,7 +25,7 @@
 										<div class="controls">
 											<div style="width:150px;height:150px;"> <img id="primeHero_img" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Prime Hero Background Image</label>
-											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" required data-validation-required-message="Prime Hero Background Image is Required" />
+											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="imageUpload(this, 'PrimeHeroBg', 'primeHero_img', 'fileError')" required data-validation-required-message="Prime Hero Background Image is Required" />
 											<input type="hidden" asp-for="PrimeHeroBg" required />
 											<span asp-validation-for="PrimeHeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
@@ -36,7 +36,7 @@
 										<div class="controls">
 											<div style="width:150px;height:150px;"> <img id="primeHeroMob_img" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Prime Hero Mobile Background Image</label>
-											<input type="file" title="search image" class="form-control" id="fileMob" name="file" accept="image/*" onchange="showMob(this)" required data-validation-required-message="Prime Hero Mobile Background Image is Required" />
+											<input type="file" title="search image" class="form-control" id="fileMob" name="file" accept="image/*" onchange="imageUpload(this, 'PrimeHeroMobBg', 'primeHeroMob_img', 'mobFileError')" required data-validation-required-message="Prime Hero Mobile Background Image is Required" />
 											<input type="hidden" asp-for="PrimeHeroMobBg" required />
 											<span asp-validation-for="PrimeHeroMobBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>

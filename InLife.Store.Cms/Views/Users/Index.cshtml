@@ -33,6 +33,7 @@
 									<tr>
 										<th>Name</th>
 										<th>Email</th>
+										<th>Locked</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
@@ -47,6 +48,9 @@
 												@Html.DisplayFor(modelItem => item.Email)
 											</td>
 											<td>
+												@(item.IsLocked ? "YES" : "NO")
+											</td>
+											<td>
 												<a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="feather icon-edit"></i></a> |
 												<a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="feather icon-eye"></i></a> |
 												<a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="feather icon-delete"></i></a>
@@ -58,6 +62,7 @@
 									<tr>
 										<th>Name</th>
 										<th>Email</th>
+										<th>Locked</th>
 										<th>Actions</th>
 									</tr>
 								</tfoot>

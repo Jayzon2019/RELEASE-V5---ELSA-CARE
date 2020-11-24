@@ -41,9 +41,15 @@
 									<div>
 										@for (var i = 0; i < Model.Roles.Count; i++)
 										{
-											<span style="display:inline-block; line-height:2em; padding:0 1em; margin-right:0.5em; border-radius:4px; background:purple; color:#fff;s">@Model.Roles[i].Name</span>
+											<span style="display:inline-block; line-height:2em; padding:0 1em; margin-right:0.5em; border-radius:4px; background:purple; color:#fff;">@Model.Roles[i].Name</span>
 										}
 									</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="controls">
+										<label class="text-secondary">Is Locked?</label>
+										<h4>@(Model.IsLocked ? "YES" : "NO")</h4>
 									</div>
 								</div>
 							</div>

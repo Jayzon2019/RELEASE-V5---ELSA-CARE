@@ -89,7 +89,11 @@ namespace InLife.Store.Cms
 					options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 					options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 				})
-				.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+				{
+					options.SlidingExpiration = true;
+					options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+				})
 				.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 				{
 					options.Authority = Configuration.GetSection("Authentication:Authority").Value;
@@ -129,6 +133,8 @@ namespace InLife.Store.Cms
 						config.Password.RequireUppercase = false;
 						config.Password.RequireNonAlphanumeric = false;
 						config.Password.RequiredLength = 8;
+						config.Lockout.MaxFailedAccessAttempts = 3;
+						config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(365000);
 					}
 				)
 				.AddRoles<ApplicationRole>()

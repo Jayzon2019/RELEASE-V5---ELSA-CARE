@@ -33,3 +33,45 @@ function idleAutoLogout()
 }
 
 idleAutoLogout();
+
+
+function imageUpload(input, placeholderId, previewId, messageId)
+{
+	if (input.files.length > 0)
+	{
+		const file = input.files[0];
+		const reader = new FileReader();
+
+		reader.onloadend = (event) =>
+		{
+			const uploadedData = event.target.result;
+			const image = new Image();
+
+			const placeholder = document.getElementById(placeholderId);
+			const preview = document.getElementById(previewId);
+			const message = document.getElementById(messageId);
+
+			image.onload = (event) =>
+			{
+				console.log('Valid image file');
+				input.classList.remove('invalid');
+				placeholder.value = uploadedData;
+				preview.src = uploadedData;
+				message.style.display = 'none';
+			}
+
+			image.onerror = (event) =>
+			{
+				console.log('Invalid image file');
+				input.classList.add('invalid');
+				placeholder.value = '';
+				preview.src = '';
+				message.style.display = 'inline';
+			}
+
+			image.src = uploadedData;
+		}
+
+		reader.readAsDataURL(file);
+	}
+}

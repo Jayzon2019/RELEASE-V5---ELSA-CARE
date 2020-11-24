@@ -50,7 +50,7 @@ namespace InLife.Store.Cms.ViewModels
 		}
 
 
-
+		[Required]
 		public string PrimeHeroBg { get; set; }
 
 		[Required]
@@ -78,6 +78,7 @@ namespace InLife.Store.Cms.ViewModels
 		[DisplayName("Sub-Heading")]
 		public string SubHeading { get; set; }
 
+		[Required]
 		public string PrimeHeroMobBg { get; set; }
 
 		public string HeadingColor { get; set; }

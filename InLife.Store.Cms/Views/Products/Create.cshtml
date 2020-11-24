@@ -23,7 +23,7 @@
                                     <div class="form-group">
                                         <div class="controls">
                                             <label class="control-label text-secondary">Product Image</label>
-                                            <input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" required data-validation-required-message="Product Image is Required" />
+                                            <input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="imageUpload(this, 'ProductImg', 'pro_img', 'fileError')" required data-validation-required-message="Product Image is Required" />
                                             <input type="hidden" asp-for="ProductImg" required />
                                             <span asp-validation-for="ProductImg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
                                         </div>

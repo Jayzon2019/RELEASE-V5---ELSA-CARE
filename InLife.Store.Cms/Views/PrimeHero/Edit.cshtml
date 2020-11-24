@@ -26,7 +26,7 @@
 												<img id="primeHero_img" src="@Model.PrimeHeroBg" width="150" height="150" style="width:100%;border:solid" />
 											</div>
 											<label class="control-label text-secondary">Prime Hero Background Image</label>
-											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" />
+											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="imageUpload(this, 'PrimeHeroBg', 'primeHero_img', 'fileError')" />
 											<input type="hidden" asp-for="PrimeHeroBg" required />
 											<span asp-validation-for="PrimeHeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
@@ -39,7 +39,7 @@
 												<img id="primeHeroMob_img" src="@Model.PrimeHeroMobBg" width="150" height="150" style="width:100%;border:solid" />
 											</div>
 											<label class="control-label text-secondary">Prime Hero Mobile Background Image</label>
-											<input type="file" title="search image" class="form-control" id="fileMob" name="fileMob" accept="image/*" onchange="showMob(this)" />
+											<input type="file" title="search image" class="form-control" id="fileMob" name="fileMob" accept="image/*" onchange="imageUpload(this, 'PrimeHeroMobBg', 'primeHeroMob_img', 'mobFileError')" />
 											<input type="hidden" asp-for="PrimeHeroMobBg" required />
 											<span asp-validation-for="PrimeHeroMobBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>

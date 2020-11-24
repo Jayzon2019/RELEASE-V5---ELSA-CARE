@@ -16,11 +16,12 @@ namespace InLife.Store.Cms.ViewModels
 
 		public UserViewModel(User model)
 		{
-			this.Id = model.Id;
-			this.Email = model.Email;
-			this.FirstName = model.FirstName;
-			this.MiddleName = model.MiddleName;
-			this.LastName = model.LastName;
+			Id = model.Id;
+			Email = model.Email;
+			FirstName = model.FirstName;
+			MiddleName = model.MiddleName;
+			LastName = model.LastName;
+			IsLocked = (model.LockoutEnd.HasValue && model.LockoutEnd.Value > DateTimeOffset.UtcNow);
 		}
 
 		public User Map()
@@ -31,11 +32,16 @@ namespace InLife.Store.Cms.ViewModels
 
 		public User Map(User model)
 		{
-			model.UserName = this.Email;
+			model.UserName = Email;
 			//model.PhoneNumber = this.Phone;
-			model.FirstName = this.FirstName;
-			model.MiddleName = this.MiddleName;
-			model.LastName = this.LastName;
+			model.FirstName = FirstName;
+			model.MiddleName = MiddleName;
+			model.LastName = LastName;
+
+			if (IsLocked)
+				model.LockoutEnd = DateTimeOffset.Now.AddYears(1000);
+			else
+				model.LockoutEnd = null;
 
 			return model;
 		}
@@ -68,6 +74,8 @@ namespace InLife.Store.Cms.ViewModels
 		[MaxLength(50)]
 		[DisplayName("Last Name")]
 		public string LastName { get; set; }
+
+		public bool IsLocked { get; set; } = false;
 
 		public List<UserRolesViewModel> Roles { get; set; }
 	}

@@ -43,6 +43,7 @@ namespace InLife.Store.Cms.ViewModels
 			return model;
 		}
 
+		[Required]
 		public string ProductImg { get; set; }
 
 		[Required]

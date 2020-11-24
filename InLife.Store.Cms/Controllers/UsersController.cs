@@ -214,7 +214,7 @@ namespace InLife.Store.Cms.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Edit(string id, [Bind("Email, FirstName, LastName, Roles")] UserViewModel viewModel)
+		public async Task<ActionResult> Edit(string id, [Bind("Email, FirstName, LastName, Roles, IsLocked")] UserViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 				return View(viewModel);
@@ -230,6 +230,11 @@ namespace InLife.Store.Cms.Controllers
 				model.Email = email;
 				model.FirstName = viewModel.FirstName.Trim();
 				model.LastName = viewModel.LastName.Trim();
+
+				if (viewModel.IsLocked)
+					model.LockoutEnd = DateTimeOffset.Now.AddYears(1000);
+				else
+					model.LockoutEnd = null;
 
 				var token = await userManager.GenerateChangeEmailTokenAsync(model, email);
 				var changeEmailResult = await userManager.ChangeEmailAsync(model, email, token);

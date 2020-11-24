@@ -18,13 +18,14 @@
 							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 							<p style="text-align:center;"><span style="color:red;"><b>@ViewBag.error</b></span></p>
 							<input type="hidden" asp-for="Id" />
+
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
 										<div class="controls">
 											<div style="width:150px;height:150px;"> <img src="@Model.HeroBg" id="hero_img" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Hero Background Image</label>
-											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="show(this)" />
+											<input type="file" title="search image" class="form-control" id="file" name="file" accept="image/*" onchange="imageUpload(this, 'HeroBg', 'hero_img', 'fileError')" />
 											<input type="hidden" asp-for="HeroBg" required />
 											<span asp-validation-for="HeroBg" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>
@@ -35,7 +36,7 @@
 										<div class="controls">
 											<div style="width:150px;height:150px;"> <img id="heroMob_img" src="@Model.HeroMobBg" style="width:100%;border:solid" /> </div>
 											<label class="control-label text-secondary">Hero Mobile Background Image</label>
-											<input type="file" title="search image" class="form-control" id="fileMob" name="fileMob" name="file" accept="image/*" onchange="showMob(this)" />
+											<input type="file" title="search image" class="form-control" id="fileMob" name="fileMob" name="file" accept="image/*" onchange="imageUpload(this, 'HeroMobBg', 'heroMob_img', 'mobFileError')" />
 											<input type="hidden" asp-for="HeroMobBg" required />
 											<span asp-validation-for="HeroMobBg" class="text-danger"></span><span style="display:none;" id="mobFileError" class="text-danger">Please upload a png , jpg or jpeg Image</span>
 										</div>

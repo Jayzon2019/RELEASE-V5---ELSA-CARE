@@ -43,6 +43,26 @@
 											<span asp-validation-for="Email" class="text-danger"></span>
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="controls">
+											<label class="control-label text-secondary">Is Locked?</label>
+											<select class="form-control select2" name="IsLocked">
+											@{
+												if (Model.IsLocked)
+												{
+													<option value="False">No</option>
+													<option selected="selected" value="True">Yes</option>
+												}
+												else
+												{
+													<option selected="selected" value="False">No</option>
+													<option value="True">Yes</option>
+												}
+											}
+											</select>
+
+										</div>
+									</div>
 								</div>
 
 								<div class="col-sm-6">

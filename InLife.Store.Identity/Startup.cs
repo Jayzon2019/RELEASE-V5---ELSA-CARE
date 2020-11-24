@@ -78,6 +78,7 @@ namespace InLife.Store.Identity
 						config.Password.RequireNonAlphanumeric = false;
 						config.Password.RequiredLength = 8;
 						config.Lockout.MaxFailedAccessAttempts = 3;
+						config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(365000); // 1000 years should be enough
 					}
 				)
 				.AddEntityFrameworkStores<ApplicationContext>()
