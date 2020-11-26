@@ -19,7 +19,7 @@ using InLife.Store.Cms.Models;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-
+using Microsoft.Extensions.Primitives;
 
 namespace InLife.Store.Cms.Controllers
 {
@@ -120,8 +120,15 @@ namespace InLife.Store.Cms.Controllers
 
 		public IActionResult Logout()
 		{
-			// HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			//return RedirectToAction("Login", "Login");
+			this.HttpContext.Response.Headers.Add("Clear-Site-Data", new StringValues(new string[] { "\"cache\"", "\"cookies\"" }));
+
+			this.Response.Cookies.Append("Cookies", "deleted", new CookieOptions()
+			{
+				Expires = DateTimeOffset.MinValue
+			});
+
+			//return RedirectToAction(nameof(Index));
+
 			return new SignOutResult(new[]
 			{
 				CookieAuthenticationDefaults.AuthenticationScheme,
