@@ -32,6 +32,7 @@ namespace InLife.Store.Cms.ViewModels
 		{
 			model.Question = this.Question;
 			model.Answer = this.Answer;
+			model.SortNum = this.SortNum;
 
 			return model;
 		}

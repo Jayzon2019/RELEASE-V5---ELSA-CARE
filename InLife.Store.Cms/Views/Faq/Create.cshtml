@@ -22,7 +22,7 @@
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Faq Category</label>
-											<select class="form-control select2" name="intFaqCatId" required data-validation-required-message="Category is required">
+											<select asp-for="CategoryId" class="form-control select2" required data-validation-required-message="Category is required">
 												@foreach (var faqCategory in ViewBag.FaqCategories)
 												{
 													<option value="@faqCategory.Id">@faqCategory.Name</option>

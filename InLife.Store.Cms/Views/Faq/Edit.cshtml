@@ -23,7 +23,7 @@
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Faq Category</label>
-											<select class="form-control select2" name="intFaqCatId" required data-validation-required-message="Faq Category Is required">
+											<select asp-for="CategoryId" class="form-control select2" required data-validation-required-message="Faq Category Is required">
 												@foreach (var faqCategory in ViewBag.FaqCategories)
 												{
 													if (faqCategory.Id == Model.CategoryId)
