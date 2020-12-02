@@ -366,7 +366,6 @@
 													<label for="">Province of Residence</label>
 													<select class="form-control" id="" formControlName="province">
 													</select>
-
 												</div>
 												<div class="col-md-4 mb-3"
 													 *ngIf="getQuoteForm.get('basicInformation').get('country').value != '170'">
@@ -374,56 +373,70 @@
 													<select class="form-control" id="" formControlName="municipality">
 													</select>
 												</div>
-												<div class="col-md-6 mb-3">
-													<label for="">I learned about Prime Care through:</label>
-													<select class="form-control" id="" formControlName="primeCare"
-															[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('primeCare').dirty || getQuoteForm.get('basicInformation').get('primeCare').touched) &&  getQuoteForm.get('basicInformation').get('primeCare')?.errors)?'is-invalid'
-                                                          :getQuoteForm.get('basicInformation').get('primeCare')?.valid?'is-valid black':''
-                                                        ">
-														<option value="">Select</option>
-														<option *ngFor="let type of CONSTANTS.PRIME_CARE;let i = index"
-																[value]="type.id">
-															{{type.name}}
-														</option>
-													</select>
-													<small class="errormsg"
-														   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('primeCare').dirty || getQuoteForm.get('basicInformation').get('primeCare').touched) &&  getQuoteForm.get('basicInformation').get('primeCare')?.errors">
-														This
-														is a required field
-													</small>
-												</div>
 
-												<div class="col-md-6 mb-9"
-													 *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value == '1'">
-													<label for="">Agent Name</label>
-													<div class="input-group">
-														<div class="fieldinnr50">
-															<input type="text" class="form-control fname" ng-required="isRequired"
-																   placeholder="First Name" formControlName="afname"
-																   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('afname').dirty || getQuoteForm.get('basicInformation').get('afname').touched) &&  getQuoteForm.get('basicInformation').get('afname')?.errors)?'is-invalid'
-                                                                 :getQuoteForm.get('basicInformation').get('afname')?.valid?'is-valid':''
-                                                                ">
-															<small class="errormsg"
-																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('afname').dirty || getQuoteForm.get('basicInformation').get('afname').touched) &&  getQuoteForm.get('basicInformation').get('afname')?.errors">
-																This
-																is a required field
-															</small>
-														</div>
-														<div class="fieldinnr50">
-															<input type="text" class="form-control lname" ng-required="isRequired"
-																   placeholder="Last Name" formControlName="alname"
-																   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('alname').dirty || getQuoteForm.get('basicInformation').get('alname').touched) &&  getQuoteForm.get('basicInformation').get('alname')?.errors)?'is-invalid'
-                                                                 :getQuoteForm.get('basicInformation').get('alname')?.valid?'is-valid':''
-                                                                ">
-															<small class="errormsg"
-																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('alname').dirty || getQuoteForm.get('basicInformation').get('alname').touched) &&  getQuoteForm.get('basicInformation').get('alname')?.errors">
-																This
-																is a required field
-															</small>
+												<ng-container *ngIf="!affiliate?.agentCode">
+													<div class="col-md-6 mb-3">
+														<label for="">I learned about Prime Care through:</label>
+														<select class="form-control" id="" formControlName="primeCare"
+																[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('primeCare').dirty || getQuoteForm.get('basicInformation').get('primeCare').touched) &&  getQuoteForm.get('basicInformation').get('primeCare')?.errors)?'is-invalid'
+															  :getQuoteForm.get('basicInformation').get('primeCare')?.valid?'is-valid black':''
+															">
+															<option value="">Select</option>
+															<option *ngFor="let type of CONSTANTS.PRIME_CARE;let i = index"
+																	[value]="type.id">
+																{{type.name}}
+															</option>
+														</select>
+														<small class="errormsg"
+															   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('primeCare').dirty || getQuoteForm.get('basicInformation').get('primeCare').touched) &&  getQuoteForm.get('basicInformation').get('primeCare')?.errors">
+															This
+															is a required field
+														</small>
+													</div>
+													<div class="col-md-6 mb-9"
+														 *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value == '1'">
+														<label for="">Agent Name</label>
+														<div class="input-group">
+															<div class="fieldinnr50">
+																<input type="text" class="form-control fname" ng-required="isRequired"
+																	   placeholder="First Name" formControlName="afname"
+																	   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('afname').dirty || getQuoteForm.get('basicInformation').get('afname').touched) &&  getQuoteForm.get('basicInformation').get('afname')?.errors)?'is-invalid'
+																	 :getQuoteForm.get('basicInformation').get('afname')?.valid?'is-valid':''
+																	">
+																<small class="errormsg"
+																	   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('afname').dirty || getQuoteForm.get('basicInformation').get('afname').touched) &&  getQuoteForm.get('basicInformation').get('afname')?.errors">
+																	This
+																	is a required field
+																</small>
+															</div>
+															<div class="fieldinnr50">
+																<input type="text" class="form-control lname" ng-required="isRequired"
+																	   placeholder="Last Name" formControlName="alname"
+																	   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('alname').dirty || getQuoteForm.get('basicInformation').get('alname').touched) &&  getQuoteForm.get('basicInformation').get('alname')?.errors)?'is-invalid'
+																	 :getQuoteForm.get('basicInformation').get('alname')?.valid?'is-valid':''
+																	">
+																<small class="errormsg"
+																	   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('alname').dirty || getQuoteForm.get('basicInformation').get('alname').touched) &&  getQuoteForm.get('basicInformation').get('alname')?.errors">
+																	This
+																	is a required field
+																</small>
+															</div>
 														</div>
 													</div>
-												</div>
+												</ng-container>
 
+												<ng-container *ngIf="affiliate?.agentCode">
+													<div class="col-md-6 mb-3">
+														<label for="">I learned about Prime Care through:</label>
+														<input type="text" class="form-control" value="REFERRAL OF INSULAR LIFE ADVISOR/ AGENT" readonly />
+														<input type="hidden" formControlName="primeCare" value="1" />
+													</div>
+													<div class="col-md-6 mb-3">
+														<label for="">Agent Name</label>
+														<input type="text" class="form-control" formControlName="afname" [value]="affiliate.agentName" readonly />
+														<input type="hidden" formControlName="alname" value="" />
+													</div>
+												</ng-container>
 
 												<div class="col-12" *ngIf="!showThirdStep">
 													<div class="btnsec text-right">

@@ -4,9 +4,10 @@ export const environment =
 
 	appApi:
 	{
-		host: 'https://dev-inlife-estore-api.azurewebsites.net',
+		host: 'https://dev-inlifestore.projectgrey.net/api',
 		quotesEndpoint: '/quotes',
 		ordersEndpoint: '/orders',
+		affiliatesEndpoint: '/affiliates'
 	},
 
 	primeCareApi:
@@ -14,7 +15,7 @@ export const environment =
 		subscriptionKey: 'a149d58ebd14432ea950e802a6d32783',
 		host: 'https://apim-uat.insularlife.com.ph/pg/v4',
 		createApplicationEndpoint: '/CreateApplication',
-		savePaymentEndpoint: '/SavePayment',
+		savePaymentEndpoint: '/SavePayment'
 	},
 
 	paymentGatewayEndpoint: 'http://projectgrey.net/fake-payment-gateway.html'

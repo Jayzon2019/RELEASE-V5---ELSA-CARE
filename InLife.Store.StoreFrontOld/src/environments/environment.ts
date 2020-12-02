@@ -8,10 +8,11 @@ export const environment =
 
 	appApi:
 	{
-		host: 'https://dev-inlife-estore-api.azurewebsites.net',
+		host: 'https://inlifestore.insularlife.com.ph/api',
 		//host: 'https://localhost:5001',
 		quotesEndpoint: '/quotes',
 		ordersEndpoint: '/orders',
+		affiliatesEndpoint: '/affiliates'
 	},
 
 	primeCareApi:

@@ -53,7 +53,8 @@ namespace InLife.Store.Api
 			services
 				.Configure<UrlSettings>(Configuration.GetSection("Url"))
 				.Configure<SmtpSettings>(Configuration.GetSection("Smtp"))
-				.Configure<EmailSettings>(Configuration.GetSection("Email"));
+				.Configure<EmailSettings>(Configuration.GetSection("Email"))
+				.Configure<ExternalServices>(Configuration.GetSection("ExternalServices"));
 
 			services
 				.Configure<ForwardedHeadersOptions>(options =>

@@ -7,6 +7,7 @@ export const environment =
 		host: 'https://localhost:5100',
 		quotesEndpoint: '/quotes',
 		ordersEndpoint: '/orders',
+		affiliatesEndpoint: '/affiliates'
 	},
 
 	primeCareApi:

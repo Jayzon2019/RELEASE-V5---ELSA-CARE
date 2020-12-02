@@ -19,19 +19,22 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 	templateUrl: './get-quote.component.html',
 	styleUrls: ['./get-quote.component.css']
 })
-export class GetQuoteComponent implements OnInit {
-  getQuoteForm: FormGroup;
-  submitted = false;
-  today = new Date(new Date().setFullYear(new Date().getFullYear() - 18));
-  maxYear = new Date(2020, 11, 31);
-  muncipality;
-  CONSTANTS = CONSTANTS;
-  plan = '';
-  amount = 0;
-  showSecondStep:Boolean=false;
-  showThirdStep:Boolean=false;
-  calulatedAge:number=0;
-  privacyFile:any;
+export class GetQuoteComponent implements OnInit
+{
+	getQuoteForm: FormGroup;
+	submitted = false;
+	today = new Date(new Date().setFullYear(new Date().getFullYear() - 18));
+	maxYear = new Date(2020, 11, 31);
+	muncipality;
+	CONSTANTS = CONSTANTS;
+	plan = '';
+	amount = 0;
+	showSecondStep:Boolean=false;
+	showThirdStep:Boolean=false;
+	calulatedAge:number=0;
+	privacyFile:any;
+	affiliate:any;
+	hasAffiliate: Boolean = false;
 
 	constructor
 	(
@@ -57,103 +60,123 @@ export class GetQuoteComponent implements OnInit {
 		});
 	}
 
-  ngOnInit(): void {
-    const getQuoteFormData = JSON.parse(this.session.get("getQuoteForm") || "[]");
-	  this.initForm(getQuoteFormData);
-	  this.getFile();
-    if (this.getQuoteForm.get('basicInformation').get('country').value == '170'
-      && this.getQuoteForm.get('basicInformation').get('province').value) {
-      if (this.getQuoteForm.get('basicInformation').get('province').value) {
-        this.onChangeProviance(this.getQuoteForm.get('basicInformation').get('province').value);
-      }
-      this.getQuoteForm.get('basicInformation').get('province').enable();
-      this.getQuoteForm.get('basicInformation').get('municipality').enable();
-      this.getQuoteForm.get('basicInformation').get('province').setValidators([Validators.required]);
-      this.getQuoteForm.get('basicInformation').get('municipality').setValidators([Validators.required]);
-      //this.onChangeProviance(this.getQuoteForm.get('basicInformation').get('province').value);
-    } else {
-      // this.getQuoteForm.get('basicInformation').get('province').disable();
-      // this.getQuoteForm.get('basicInformation').get('municipality').disable();
-    }
+	ngOnInit(): void
+	{
+		try{ this.affiliate = JSON.parse(sessionStorage.getItem("affiliate")); }
+		catch(ex) { this.affiliate = {}; }
 
+		const getQuoteFormData = JSON.parse(this.session.get("getQuoteForm") || "[]");
+		this.initForm(getQuoteFormData);
+		this.getFile();
 
-    if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1') {
-      this.getQuoteForm.get('basicInformation').get('afname').enable();
-      this.getQuoteForm.get('basicInformation').get('alname').enable();
+		if (this.getQuoteForm.get('basicInformation').get('country').value == '170'
+			&& this.getQuoteForm.get('basicInformation').get('province').value)
+		{
+			if (this.getQuoteForm.get('basicInformation').get('province').value)
+			{
+				this.onChangeProviance(this.getQuoteForm.get('basicInformation').get('province').value);
+			}
+			this.getQuoteForm.get('basicInformation').get('province').enable();
+			this.getQuoteForm.get('basicInformation').get('municipality').enable();
+			this.getQuoteForm.get('basicInformation').get('province').setValidators([Validators.required]);
+			this.getQuoteForm.get('basicInformation').get('municipality').setValidators([Validators.required]);
+			//this.onChangeProviance(this.getQuoteForm.get('basicInformation').get('province').value);
+		}
+		else
+		{
+			// this.getQuoteForm.get('basicInformation').get('province').disable();
+			// this.getQuoteForm.get('basicInformation').get('municipality').disable();
+		}
 
-      this.getQuoteForm.get('basicInformation').get('afname').setValidators([Validators.required]);
-      this.getQuoteForm.get('basicInformation').get('alname').setValidators([Validators.required]);
+		if (this.affiliate?.agentCode)
+		{
+			this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
+			this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agentName);
 
-    } else {
-      this.getQuoteForm.get('basicInformation').get('afname').disable();
-      this.getQuoteForm.get('basicInformation').get('alname').disable();
-    }
+			this.getQuoteForm.get('basicInformation').get('afname').enable();
+			this.getQuoteForm.get('basicInformation').get('alname').enable();
+		}
+		else if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1')
+		{
+			this.getQuoteForm.get('basicInformation').get('afname').enable();
+			this.getQuoteForm.get('basicInformation').get('alname').enable();
 
+			this.getQuoteForm.get('basicInformation').get('afname').setValidators([Validators.required]);
+			this.getQuoteForm.get('basicInformation').get('alname').setValidators([Validators.required]);
+		}
+		else
+		{
+			this.getQuoteForm.get('basicInformation').get('afname').disable();
+			this.getQuoteForm.get('basicInformation').get('alname').disable();
+		}
 
+		this.getQuoteForm.get('basicInformation').get('country').valueChanges.subscribe(result =>
+		{
+			if (result === '170')
+			{
+				this.getQuoteForm.get('basicInformation').get('province').enable();
+				this.getQuoteForm.get('basicInformation').get('municipality').enable();
+				this.getQuoteForm.get('basicInformation').get('province').setValidators([Validators.required]);
+				this.getQuoteForm.get('basicInformation').get('municipality').setValidators([Validators.required]);
+			}
+			else
+			{
+				this.getQuoteForm.get('basicInformation').get('province').disable();
+				this.getQuoteForm.get('basicInformation').get('municipality').disable();
+			}
+			this.getQuoteForm.updateValueAndValidity();
+		});
 
+		this.getQuoteForm.get('basicInformation').get('primeCare').valueChanges.subscribe(result =>
+		{
+			if (result === '1')
+			{
+				this.getQuoteForm.get('basicInformation').get('afname').enable();
+				this.getQuoteForm.get('basicInformation').get('alname').enable();
 
-    this.getQuoteForm.get('basicInformation').get('country').valueChanges.subscribe(
-      result => {
-        if (result === '170') {
-          this.getQuoteForm.get('basicInformation').get('province').enable();
-          this.getQuoteForm.get('basicInformation').get('municipality').enable();
-          this.getQuoteForm.get('basicInformation').get('province').setValidators([Validators.required]);
-          this.getQuoteForm.get('basicInformation').get('municipality').setValidators([Validators.required]);
-        } else {
-          this.getQuoteForm.get('basicInformation').get('province').disable();
-          this.getQuoteForm.get('basicInformation').get('municipality').disable();
-        }
-        this.getQuoteForm.updateValueAndValidity();
-      });
+				this.getQuoteForm.get('basicInformation').get('afname').setValidators([Validators.required]);
+				this.getQuoteForm.get('basicInformation').get('alname').setValidators([Validators.required]);
+			}
+			else
+			{
+				this.getQuoteForm.get('basicInformation').get('afname').disable();
+				this.getQuoteForm.get('basicInformation').get('alname').disable();
+			}
+		});
 
+		this.getQuoteForm.get('healthCondition').get('privacyPolicy').valueChanges.subscribe(result =>
+		{
+			if (result === false)
+			{
+				this.getQuoteForm.get('healthCondition').get('privacyPolicy').setValue(null);
+				// this.getQuoteForm.get('healthCondition').get('privacyPolicy').setValidators([Validators.required]);
+			}
+		});
 
-    this.getQuoteForm.get('basicInformation').get('primeCare').valueChanges.subscribe(
-      result => {
-        if (result === '1') {
-          this.getQuoteForm.get('basicInformation').get('afname').enable();
-          this.getQuoteForm.get('basicInformation').get('alname').enable();
+		this.getQuoteForm.get('calculatePremium').valueChanges.subscribe(result =>
+		{
+			if (this.getQuoteForm.get('calculatePremium').valid)
+			{
+				this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
+				this.session.set("getinnerForm",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
+			}
+			else
+			{
+				const getQuoteFormData1 = this.session.get("getinnerForm");
+				if(!getQuoteFormData1)
+				{
+					this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: 0 });
+					this.session.set("getinnerForm",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
+				}
+			}
+		});
 
-          this.getQuoteForm.get('basicInformation').get('afname').setValidators([Validators.required]);
-          this.getQuoteForm.get('basicInformation').get('alname').setValidators([Validators.required]);
-        } else {
-          this.getQuoteForm.get('basicInformation').get('afname').disable();
-          this.getQuoteForm.get('basicInformation').get('alname').disable();
-        }
-      });
+		this.showSecondStep=this.getQuoteForm.get('calculatePremium').valid===true?true:false;
+		this.showThirdStep=this.getQuoteForm.get('basicInformation').valid===true?true:false;
+		this.getAge(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value);
+		this.ngxService.stop();
+	}
 
-
-
-    this.getQuoteForm.get('healthCondition').get('privacyPolicy').valueChanges.subscribe(
-      result => {
-        if (result === false) {
-          this.getQuoteForm.get('healthCondition').get('privacyPolicy').setValue(null);
-          // this.getQuoteForm.get('healthCondition').get('privacyPolicy').setValidators([Validators.required]);
-        }
-      });
-
-
-    this.getQuoteForm.get('calculatePremium').valueChanges.subscribe(
-      result => {
-        if (this.getQuoteForm.get('calculatePremium').valid) {
-          this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-           //alert("zz");
-           this.session.set("getinnerForm",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-        } else {
-             const getQuoteFormData1 = this.session.get("getinnerForm");
-             if(!getQuoteFormData1)
-             {
-              this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: 0 });
-              this.session.set("getinnerForm",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-             }
-
-
-        }
-      });
-      this.showSecondStep=this.getQuoteForm.get('calculatePremium').valid===true?true:false;
-      this.showThirdStep=this.getQuoteForm.get('basicInformation').valid===true?true:false;
-      this.getAge(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value);
-      this.ngxService.stop();
-  }
   getcall()
   {
   //alert("ss");
