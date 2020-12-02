@@ -261,6 +261,7 @@ export class MakePaymentComponent implements OnInit
 			"InsuredValidIdImage": this.insuredIdentityDocumentImageData,
 			"OwnerValidIdImage": this.insuredIdentityDocumentImageData,
 
+			"AgentCode": this.basicInformation.acode,
 			"RefFirstName": this.basicInformation.afname,
 			"RefLastName": this.basicInformation.alname
 		}

@@ -33,7 +33,7 @@
 							"src/thankyou.html",
 							"src/redirect.html",
 							"src/maintenance.html",
-							"src/template.html"
+							"src/affiliate.html"
 						],
 						"styles": [
 							"src/styles.scss"

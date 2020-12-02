@@ -83,13 +83,16 @@ namespace InLife.Store.Api.Messages
 		// Others
 
 		[Required]
-		[StringLength(50)]
+		[StringLength(80)]
 		public string ReferralSource { get; set; }
+
+		[StringLength(50)]
+		public string AgentCode { get; set; }
 
 		[StringLength(50)]
 		public string AgentFirstName { get; set; }
 
-		[StringLength(80)]
+		[StringLength(50)]
 		public string AgentLastName { get; set; }
 
 		// Health

@@ -47,12 +47,16 @@
 			{
 				const productPages =
 				{
-					'prime-care': 'get-prime-care.html'
+					'prime-care': 'prime-care.html'
 				};
 
 				const params = new URLSearchParams(window.location.search);
-				const code = params.get('code');
-				const product = params.get('product');
+				const code = params.get('affcode')
+					?? params.get('code')
+					?? params.get('c');
+				const product = params.get('product')
+					?? params.get('prod')
+					?? params.get('p');
 
 				const targetPage = productPages[product]
 					? productPages[product]
