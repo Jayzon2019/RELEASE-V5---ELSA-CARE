@@ -256,7 +256,8 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 {
 	"AffiliateApi":
 	{
-		"SubscriptionKey": "",
+		"ClientId": "CLIENT-ID",
+		"ClientSecret": "CLIENT-SECRET",
 		"Host": "https://access-dev.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
 		"AgentInfoEndpoint": "/info"
 	}

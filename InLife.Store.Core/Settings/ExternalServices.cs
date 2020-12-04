@@ -21,7 +21,8 @@ namespace InLife.Store.Core.Settings
 
 	public class AffiliateApi
 	{
-		public string SubscriptionKey { get; set; }
+		public string ClientId { get; set; }
+		public string ClientSecret { get; set; }
 		public string Host { get; set; }
 		public string AgentInfoEndpoint { get; set; }
 	}

@@ -38,6 +38,9 @@ namespace InLife.Store.Api
 		)
 		{
 			this.affiliateApi = externalServices.Value.AffiliateApi;
+
+			this.affiliateApiClient.Value.DefaultRequestHeaders.Add("ClientID", affiliateApi.ClientId);
+			this.affiliateApiClient.Value.DefaultRequestHeaders.Add("ClientSecret", affiliateApi.ClientSecret);
 		}
 
 
