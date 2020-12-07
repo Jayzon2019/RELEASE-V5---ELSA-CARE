@@ -91,8 +91,9 @@ namespace InLife.Store.Cms
 				})
 				.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
 				{
-					options.SlidingExpiration = true;
+					options.SlidingExpiration = false;
 					options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+					options.Cookie.MaxAge = TimeSpan.FromMinutes(5);
 				})
 				.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 				{
@@ -105,6 +106,7 @@ namespace InLife.Store.Cms
 					options.UsePkce = true;
 					options.SaveTokens = true;
 					//options.GetClaimsFromUserInfoEndpoint = true;
+					options.UseTokenLifetime = true;
 
 					options.ClaimActions.DeleteClaim("sid");
 					options.ClaimActions.DeleteClaim("idp");

@@ -86,6 +86,12 @@ namespace InLife.Store.Identity
 				.AddPasswordlessEmailTokenProvider()
 				.AddPasswordlessPhoneTokenProvider();
 
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.SlidingExpiration = false;
+				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+			});
+
 			services
 				.AddDataProtection()
 				.SetApplicationName("InLife.Store.Identity")

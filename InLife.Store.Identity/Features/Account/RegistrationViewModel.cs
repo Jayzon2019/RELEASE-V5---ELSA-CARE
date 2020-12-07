@@ -11,7 +11,7 @@ namespace InLife.Store.Identity.Features
 		[Compare("Password", ErrorMessage = "The passwords didn't match.")]
 		public string PasswordConfirm { get; set; }
 
-		public bool AllowRememberLogin { get; set; } = true;
+		public bool AllowRememberLogin { get; set; } = false;
 		public bool EnableLocalLogin { get; set; } = true;
 
 

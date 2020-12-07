@@ -17,7 +17,7 @@ namespace InLife.Store.Identity.Features
 		[MaxLength(256, ErrorMessage = "Password must be between 8 to 256 characters.")]
 		public string Password { get; set; }
 
-		public bool RememberLogin { get; set; }
+		public bool RememberLogin { get; set; } = true;
 
 		public string ReturnUrl { get; set; }
 	}
