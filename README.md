@@ -178,6 +178,14 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 		...
 
+		"RequirePkce": true,
+		"AllowPlainTextPkce": false,
+
+		"AlwaysSendClientClaims": true,
+		"AlwaysIncludeUserClaimsInIdToken": true,
+		"AllowOfflineAccess": false,
+		"AccessTokenLifetime": 300,
+
 		// redirect after login
 		"RedirectUris": [ "https://dev-inlifestore.projectgrey.net/cms/signin-oidc" ],
 		// redirect after logout
