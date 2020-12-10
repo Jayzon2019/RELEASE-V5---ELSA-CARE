@@ -88,7 +88,7 @@ namespace InLife.Store.Identity
 
 			services.ConfigureApplicationCookie(options =>
 			{
-				options.SlidingExpiration = false;
+				options.SlidingExpiration = true;
 				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 			});
 

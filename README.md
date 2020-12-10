@@ -183,7 +183,7 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 		"AlwaysSendClientClaims": true,
 		"AlwaysIncludeUserClaimsInIdToken": true,
-		"AllowOfflineAccess": false,
+		"AllowOfflineAccess": true,
 		"AccessTokenLifetime": 300,
 
 		// redirect after login

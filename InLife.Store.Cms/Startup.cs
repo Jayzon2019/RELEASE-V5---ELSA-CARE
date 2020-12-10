@@ -91,7 +91,7 @@ namespace InLife.Store.Cms
 				})
 				.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
 				{
-					options.SlidingExpiration = false;
+					options.SlidingExpiration = true;
 					options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 					options.Cookie.MaxAge = TimeSpan.FromMinutes(5);
 				})
