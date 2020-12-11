@@ -96,6 +96,7 @@ export class GetQuoteComponent implements OnInit
 			this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agentCode);
 			this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agentName);
 
+			this.getQuoteForm.get('basicInformation').get('acode').enable();
 			this.getQuoteForm.get('basicInformation').get('afname').enable();
 			this.getQuoteForm.get('basicInformation').get('alname').enable();
 
@@ -104,6 +105,7 @@ export class GetQuoteComponent implements OnInit
 		}
 		else if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1')
 		{
+			this.getQuoteForm.get('basicInformation').get('acode').disable();
 			this.getQuoteForm.get('basicInformation').get('afname').enable();
 			this.getQuoteForm.get('basicInformation').get('alname').enable();
 
@@ -112,6 +114,7 @@ export class GetQuoteComponent implements OnInit
 		}
 		else
 		{
+			this.getQuoteForm.get('basicInformation').get('acode').disable();
 			this.getQuoteForm.get('basicInformation').get('afname').disable();
 			this.getQuoteForm.get('basicInformation').get('alname').disable();
 		}
