@@ -8,6 +8,8 @@ namespace InLife.Store.Identity.Features
 	public class RegistrationViewModel : LoginInputModel
 	{
 		[Required]
+		[MinLength(8, ErrorMessage = "Password must be between 8 to 256 characters.")]
+		[MaxLength(256, ErrorMessage = "Password must be between 8 to 256 characters.")]
 		[Compare("Password", ErrorMessage = "The passwords didn't match.")]
 		public string PasswordConfirm { get; set; }
 
