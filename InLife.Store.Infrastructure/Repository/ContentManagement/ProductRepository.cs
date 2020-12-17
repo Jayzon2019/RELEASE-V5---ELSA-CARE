@@ -21,6 +21,8 @@ namespace InLife.Store.Infrastructure.Repository
 					.Include(x => x.Details)
 					.Include(x => x.CreatedBy)
 					.Include(x => x.UpdatedBy)
+					.OrderBy(x => x.SortNum)
+						.ThenBy(x => x.ProductName)
 			);
 		}
 
