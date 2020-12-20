@@ -148,114 +148,114 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblActivityLogs]') AND type in (N'U'))
 ALTER TABLE [dbo].[TblActivityLogs] DROP CONSTRAINT IF EXISTS [DF_TblActivityLogs_ActivityDate]
 GO
-/****** Object:  Index [PK_UserTokens]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [PK_UserTokens]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserTokens]') AND type in (N'U'))
 ALTER TABLE [dbo].[UserTokens] DROP CONSTRAINT IF EXISTS [PK_UserTokens]
 GO
-/****** Object:  Index [PK_Users_UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [PK_Users_UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users_UserRoles]') AND type in (N'U'))
 ALTER TABLE [dbo].[Users_UserRoles] DROP CONSTRAINT IF EXISTS [PK_Users_UserRoles]
 GO
-/****** Object:  Index [PK_Users]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [PK_Users]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
 ALTER TABLE [dbo].[Users] DROP CONSTRAINT IF EXISTS [PK_Users]
 GO
-/****** Object:  Index [PK_UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [PK_UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserRoles]') AND type in (N'U'))
 ALTER TABLE [dbo].[UserRoles] DROP CONSTRAINT IF EXISTS [PK_UserRoles]
 GO
-/****** Object:  Index [PK_UserLogins]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [PK_UserLogins]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserLogins]') AND type in (N'U'))
 ALTER TABLE [dbo].[UserLogins] DROP CONSTRAINT IF EXISTS [PK_UserLogins]
 GO
-/****** Object:  Index [IX_PersistedGrants_SubjectId_SessionId_Type]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [IX_PersistedGrants_SubjectId_SessionId_Type]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [IX_PersistedGrants_SubjectId_SessionId_Type] ON [dbo].[PersistedGrants]
 GO
-/****** Object:  Index [IX_PersistedGrants_SubjectId_ClientId_Type]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [IX_PersistedGrants_SubjectId_ClientId_Type]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [IX_PersistedGrants_SubjectId_ClientId_Type] ON [dbo].[PersistedGrants]
 GO
-/****** Object:  Index [IX_PersistedGrants_Expiration]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [IX_PersistedGrants_Expiration]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [IX_PersistedGrants_Expiration] ON [dbo].[PersistedGrants]
 GO
-/****** Object:  Index [IX_DeviceCodes_Expiration]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [IX_DeviceCodes_Expiration]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [IX_DeviceCodes_Expiration] ON [dbo].[DeviceCodes]
 GO
-/****** Object:  Index [IX_DeviceCodes_DeviceCode]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [IX_DeviceCodes_DeviceCode]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [IX_DeviceCodes_DeviceCode] ON [dbo].[DeviceCodes]
 GO
-/****** Object:  Index [CI_UserTokens]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [CI_UserTokens]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [CI_UserTokens] ON [dbo].[UserTokens] WITH ( ONLINE = OFF )
 GO
-/****** Object:  Table [dbo].[UserTokens]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserTokens]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserTokens]
 GO
-/****** Object:  Index [CI_Users_UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [CI_Users_UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [CI_Users_UserRoles] ON [dbo].[Users_UserRoles] WITH ( ONLINE = OFF )
 GO
-/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[Users_UserRoles]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[Users]
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserRoles]
 GO
-/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserRoleClaims]
 GO
-/****** Object:  Index [CI_UserLogins]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [CI_UserLogins]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP INDEX IF EXISTS [CI_UserLogins] ON [dbo].[UserLogins] WITH ( ONLINE = OFF )
 GO
-/****** Object:  Table [dbo].[UserLogins]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserLogins]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserLogins]
 GO
-/****** Object:  Table [dbo].[UserClaims]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserClaims]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[UserClaims]
 GO
-/****** Object:  Table [dbo].[TblProducts]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblProducts]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblProducts]
 GO
-/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblProductDetails]
 GO
-/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblPrimeHeroes]
 GO
-/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblPrimeCare]
 GO
-/****** Object:  Table [dbo].[TblKeyMetrics]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblKeyMetrics]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblKeyMetrics]
 GO
-/****** Object:  Table [dbo].[TblHeroes]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblHeroes]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblHeroes]
 GO
-/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFooterLinks]
 GO
-/****** Object:  Table [dbo].[TblFaqs]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblFaqs]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFaqs]
 GO
-/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFaqCategories]
 GO
-/****** Object:  Table [dbo].[TblExceptionLogs]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblExceptionLogs]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblExceptionLogs]
 GO
-/****** Object:  Table [dbo].[TblEmailCredentials]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblEmailCredentials]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblEmailCredentials]
 GO
-/****** Object:  Table [dbo].[TblActivityLogs]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblActivityLogs]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblActivityLogs]
 GO
-/****** Object:  Table [dbo].[PersistedGrants]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[PersistedGrants]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[PersistedGrants]
 GO
-/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 DROP TABLE IF EXISTS [dbo].[DeviceCodes]
 GO
-/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[DeviceCodes]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -276,7 +276,7 @@ CREATE TABLE [dbo].[DeviceCodes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PersistedGrants]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[PersistedGrants]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -298,7 +298,7 @@ CREATE TABLE [dbo].[PersistedGrants](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblActivityLogs]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblActivityLogs]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -317,7 +317,7 @@ CREATE TABLE [dbo].[TblActivityLogs](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblEmailCredentials]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblEmailCredentials]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -336,7 +336,7 @@ CREATE TABLE [dbo].[TblEmailCredentials](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblExceptionLogs]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblExceptionLogs]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -354,7 +354,7 @@ CREATE TABLE [dbo].[TblExceptionLogs](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -375,7 +375,7 @@ CREATE TABLE [dbo].[TblFaqCategories](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFaqs]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblFaqs]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -398,7 +398,7 @@ CREATE TABLE [dbo].[TblFaqs](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -434,7 +434,7 @@ CREATE TABLE [dbo].[TblFooterLinks](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblHeroes]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblHeroes]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -463,7 +463,7 @@ CREATE TABLE [dbo].[TblHeroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblKeyMetrics]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblKeyMetrics]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -483,7 +483,7 @@ CREATE TABLE [dbo].[TblKeyMetrics](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -505,7 +505,7 @@ CREATE TABLE [dbo].[TblPrimeCare](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -534,7 +534,7 @@ CREATE TABLE [dbo].[TblPrimeHeroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -610,7 +610,7 @@ CREATE TABLE [dbo].[TblProductDetails](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblProducts]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[TblProducts]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -636,7 +636,7 @@ CREATE TABLE [dbo].[TblProducts](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserClaims]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserClaims]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -652,7 +652,7 @@ CREATE TABLE [dbo].[UserClaims](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserLogins]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserLogins]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -665,13 +665,13 @@ CREATE TABLE [dbo].[UserLogins](
 	[UserId] [varchar](36) NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Index [CI_UserLogins]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [CI_UserLogins]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 CREATE CLUSTERED INDEX [CI_UserLogins] ON [dbo].[UserLogins]
 (
 	[ClusterId] ASC
 )WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserRoleClaims]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -687,7 +687,7 @@ CREATE TABLE [dbo].[UserRoleClaims](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -699,7 +699,7 @@ CREATE TABLE [dbo].[UserRoles](
 	[ConcurrencyStamp] [nvarchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -727,7 +727,7 @@ CREATE TABLE [dbo].[Users](
 	[DateActivated] [datetimeoffset](7) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[Users_UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -738,13 +738,13 @@ CREATE TABLE [dbo].[Users_UserRoles](
 	[RoleId] [varchar](36) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Index [CI_Users_UserRoles]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [CI_Users_UserRoles]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 CREATE CLUSTERED INDEX [CI_Users_UserRoles] ON [dbo].[Users_UserRoles]
 (
 	[ClusterId] ASC
 )WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserTokens]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Table [dbo].[UserTokens]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -757,7 +757,7 @@ CREATE TABLE [dbo].[UserTokens](
 	[Value] [nvarchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Index [CI_UserTokens]    Script Date: 17 Dec 2020 11:51:42 PM ******/
+/****** Object:  Index [CI_UserTokens]    Script Date: 20 Dec 2020 3:47:14 PM ******/
 CREATE CLUSTERED INDEX [CI_UserTokens] ON [dbo].[UserTokens]
 (
 	[ClusterId] ASC
@@ -1156,31 +1156,127 @@ SET IDENTITY_INSERT [dbo].[TblPrimeHeroes] OFF
 GO
 SET IDENTITY_INSERT [dbo].[TblProductDetails] ON 
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (4, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 80,000', N'applicable', N'semi-private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'applicable', N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'One-time', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (4, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 80,000', N'applicable', N'semi-private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'None; Health declaration. Insured must be in good health upon registration.', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'One-time', NULL, NULL, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (5, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1004, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', NULL, N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'None; Health declaration. Insured must be in good health upon registration.', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', NULL, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'One-time', N'https://shop.insularhealthcare.com.ph/', N'https://shop.insularhealthcare.com.ph/total-protect-er.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (5, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1004, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'None; Health declaration. Insured must be in good health upon registration.', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'', NULL, N'NA', N'NA', N'NA', N'NA', N'NA', N'Accredited Hospitals', NULL, N'One-time', N'https://shop.insularhealthcare.com.ph/', N'https://shop.insularhealthcare.com.ph/total-protect-er.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (6, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1002, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Children (1 - 17 y/o)', N'One-time', N'Php 60,000', N'applicable', N'ward', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'NA', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', NULL, N'NA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph/', N'https://shop.insularhealthcare.com.ph/er-care-all-in-60-kids.html', NULL, N'1 calendar day after used', N'10 calendar days before expiry', N'applicable', NULL, N'applicable')
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (6, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1002, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Children (1 - 17 y/o)', N'One-time', N'Php 60,000', N'applicable', N'ward', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'NA', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph/', N'https://shop.insularhealthcare.com.ph/er-care-all-in-60-kids.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (7, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 2, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', NULL, N'NA', NULL, NULL, N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph/', N'https://shop.insularhealthcare.com.ph/er-care-all-in-100-adults.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (7, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 2, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', N'NA', N'NA', N'', NULL, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'https://shop.insularhealthcare.com.ph/', N'https://shop.insularhealthcare.com.ph/er-care-all-in-100-adults.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (8, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1006, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient', N'Children (1 - 17 y/o)', N'One-time', N'Php 80,000', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'Single', NULL, N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', NULL, N'NA', NULL, NULL, N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/er-care-all-in-80-kids.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (8, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1006, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient', N'Children (1 - 17 y/o)', N'One-time', N'Php 80,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/er-care-all-in-80-kids.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (9, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1005, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Children (1 - 17 y/o)', N'One-time', N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', NULL, N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/er-care-all-in-100-kids.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (9, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1005, N'Medical emergency due to accidents, viral, and bacterial conditions', N'Out-patient/ In-patient care', N'Children (1 - 17 y/o)', N'One-time', N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'NA', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/er-care-all-in-100-kids.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (10, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1007, N'Medical emergency due to accidents', N'Out-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 50,000', N'applicable', N'emergency room', N'applicable', N'applicable', N'NA', N'applicable', NULL, N'applicable', N'applicable', N'applicable', N'NA', N'applicable', N'NA', N'applicable', N'NA', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'applicable', N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/01-er-care-basic-50.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (10, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1007, N'Medical emergency due to accidents', N'Out-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 50,000', N'applicable', N'emergency room', N'applicable', N'applicable', N'NA', N'applicable', N'NA', N'NA', N'applicable', N'applicable', N'NA', N'applicable', N'NA', N'applicable', N'NA', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/01-er-care-basic-50.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (11, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1008, N'Medical emergency due to accidents', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 60,000', N'applicable', N'ward', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/02-er-care-booster-60-card.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (11, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1008, N'Medical emergency due to accidents', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 60,000', N'applicable', N'ward', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/02-er-care-booster-60-card.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (12, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1009, N'Medical emergency due to accidents', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 80,000', N'applicable', N'semi-private', N'applicable', N'applicable', N'NA', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/03-er-care-booster-80.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (12, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1009, N'Medical emergency due to accidents', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 80,000', N'applicable', N'semi-private', N'applicable', N'applicable', N'NA', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/03-er-care-booster-80.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (13, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1010, N'Medical emergency due to accidents', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'applicable', N'applicable', N'applicable', N'applicable', N'Single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'<p>NA</p>', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/er-care-booster-100.html', NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (13, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1010, N'Medical emergency due to accidents', N'Out-patient/ In-patient care', N'Adult (18 - 64 y/o)', N'One-time', N'Php 100,000', N'applicable', N'regular private', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'applicable', N'NA', N'applicable', N'applicable', N'applicable', N'applicable', N'Single', N'applicable', N'none', N'none', N'90 calendar days', N'12 months or up until used', N'10 calendar days (reg date is day 0)', N'No limit', 1, 0, N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, N'NA', N'NA', N'NA', N'NA', N'NA', NULL, NULL, NULL, N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/er-care-booster-100.html', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (14, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1011, N'NA', N'NA', N'Adult (18 - 64 y/o)', N'Mixed', N'NA', N'applicable', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'none', N'none', N'NA', N'1 Year', N'3 days', N'NA', 1, 0, N'NA', N'applicable', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', N'Yes, with any ER product variant', N'NA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'NA', N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/medconsult-adults.html', N'Out-patient consultations with IHC-accredited general physicians, family medicine 								specialists, internal medicine specialists (with subspecialties in cardiology, 								gastroenterology, pulmonology, endocrinology, infectious medicine, nephrology, urology, 								rheumatology, oncology, hematology, and allergology), general surgeons, orthopedic doctors, 								ENT specialists, geriatricians and rehabilitation medicine specialists', N'NA', N'NA', NULL, N'NA', N'NA')
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (14, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1011, N'NA', N'NA', N'Adult (18 - 64 y/o)', N'Mixed', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'none', N'none', N'NA', N'1 Year', N'3 days', N'NA', 1, 0, N'NA', N'applicable', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', N'Yes, with any ER product variant', N'', N'NA', N'NA', N'<p>Consultations with neurologist, neurosurgeons, specialists of sleep medicine, and developmental and behavioral pediatricians.</p> <br>
+								<p>The Out-patient Consultation Voucher shall cover consultations made only in a doctor’s office and if not listed below as exclusion:</p><br>
+
+								<ol class="list-style-num">
+									<li>Consultations in emergency room facilities.</li>
+									<li>Consultations with non-accredited Physician and/or in a non-accredited hospital.</li>
+									<li>Conditions secondary to all pregnancy and fertility-related illnesses / treatments.</li>
+									<li>Sexually transmitted infections such as but not limited to syphilis, gonorrhea, chlamydia, human papillomavirus infection and HIV/AIDS.</li>
+									<li>Consultations for complications resulting from sterilization of either sex or reversal of such, artificial insemination, sex transformations, and circumcision.</li>
+									<li>
+										<p>All in-clinic procedures. The following are examples but not limited to:</p><br>
+
+										<ol class="list-style-alpha">
+											<li>Ophthalmology procedures like visual acuity, refraction, slit lamp exam, fundoscopy, tonometry, etc.</li>
+											<li>Ears, nose, throat (ENT) procedures like ear irrigation/cleaning, ear/nasal suctioning, rhinoscopy, laryngoscopy, etc. </li>
+											<li>Surgical procedures like incision and drainage, wound cleaning, debridement, suture removal, etc.</li>
+											<li>Injection administration</li>
+											<li>Pap smear</li>
+										</ol>
+									</li>
+									<li>Dermatological consultations and procedures for purpose of beautification. Examples are but not limited to acne, warts, hyperpigmentation and milia </li>
+									<li>Consultations with neurologists.</li>
+									<li>Psychiatric disorders, psychosomatic illnesses, hyperventilation syndrome, stress related conditions, adjustment disorders, childhood and developmental disorders, alcoholism and its complications or conditions related to substance or drug abuse, addiction and intoxication.</li>
+									<li>Hypersensitivity and allergy tests.</li>
+									<li>Cardio-pulmonary (CP) clearance required prior to surgery or medical procedures.</li>
+									<li>Physical examination required for obtaining employment, medical certification, insurance or government license, including cardio-pulmonary (CP) clearance required prior to surgery or other medical procedures.</li>
+									<li>Injuries or illnesses due to military, paramilitary, police service, high risk activities, or suffered under conditions of war.</li>
+									<li>Injuries or illnesses which are self-inflicted, caused by attempt at suicide or incurred as a result of or while participating in a crime or acts involving the violation of law, administrative order or ordinances.</li>
+									<li>Diseases declared by the Department of Health as “epidemic”.</li>
+									<li>Outpatient medicines.</li>
+									<li>Medico-legal consultations.</li>
+									<li>Physical therapy</li>
+								</ol>', N'4', N'Unlimited', N'Unlimited', N'Package 2', N'IHC accredited hospitals and clinics', N'NA', N'NA', N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/medconsult-adults.html', N'Out-patient consultations with IHC-accredited general physicians, family medicine 								specialists, internal medicine specialists (with subspecialties in cardiology, 								gastroenterology, pulmonology, endocrinology, infectious medicine, nephrology, urology, 								rheumatology, oncology, hematology, and allergology), general surgeons, orthopedic doctors, 								ENT specialists, geriatricians and rehabilitation medicine specialists', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (15, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1012, N'NA', N'NA', N'Children (1 - 17 y/o)', N'Mixed', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'none', N'none', N'NA', N'1 Year', N'3 days', N'NA', 1, 0, N'NA', N'applicable', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', N'Yes, with any ER product variant', NULL, N'<p><br></p>', NULL, N'<p><br></p>', NULL, NULL, NULL, NULL, NULL, NULL, N'NA', N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/medconsult-kids.html', N'Out-patient consultations with IHC-accredited general physicians, family medicine 								specialists, internal medicine specialists (with subspecialties in cardiology, 								gastroenterology, pulmonology, endocrinology, infectious medicine, nephrology, urology, 								rheumatology, oncology, hematology, and allergology), general surgeons, orthopedic doctors, 								ENT specialists, geriatricians and rehabilitation medicine specialists', N'NA', N'NA', NULL, N'NA', N'NA')
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (15, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1012, N'NA', N'NA', N'Children (1 - 17 y/o)', N'Mixed', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'none', N'none', N'NA', N'1 Year', N'3 days', N'NA', 1, 0, N'NA', N'applicable', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', N'Yes, with any ER product variant', N'', N'NA', N'NA', N'	<p>Consultations with neurologist, neurosurgeons, specialists of sleep medicine, and developmental and behavioral pediatricians.</p> <br>
+								<p>The Out-patient Consultation Voucher shall cover consultations made only in a doctor’s office and if not listed below as exclusion:</p><br>
+
+								<ol class="list-style-num">
+									<li>Consultations in emergency room facilities.</li>
+									<li>Consultations with non-accredited Physician and/or in a non-accredited hospital.</li>
+									<li>Conditions secondary to all pregnancy and fertility-related illnesses / treatments.</li>
+									<li>Sexually transmitted infections such as but not limited to syphilis, gonorrhea, chlamydia, human papillomavirus infection and HIV/AIDS.</li>
+									<li>Consultations for complications resulting from sterilization of either sex or reversal of such, artificial insemination, sex transformations, and circumcision.</li>
+									<li>
+										<p>All in-clinic procedures. The following are examples but not limited to:</p><br>
+
+										<ol class="list-style-alpha">
+											<li>Ophthalmology procedures like visual acuity, refraction, slit lamp exam, fundoscopy, tonometry, etc.</li>
+											<li>Ears, nose, throat (ENT) procedures like ear irrigation/cleaning, ear/nasal suctioning, rhinoscopy, laryngoscopy, etc. </li>
+											<li>Surgical procedures like incision and drainage, wound cleaning, debridement, suture removal, etc.</li>
+											<li>Injection administration</li>
+											<li>Pap smear</li>
+										</ol>
+									</li>
+									<li>Dermatological consultations and procedures for purpose of beautification. Examples are but not limited to acne, warts, hyperpigmentation and milia </li>
+									<li>Consultations with neurologists.</li>
+									<li>Psychiatric disorders, psychosomatic illnesses, hyperventilation syndrome, stress related conditions, adjustment disorders, childhood and developmental disorders, alcoholism and its complications or conditions related to substance or drug abuse, addiction and intoxication.</li>
+									<li>Hypersensitivity and allergy tests.</li>
+									<li>Cardio-pulmonary (CP) clearance required prior to surgery or medical procedures.</li>
+									<li>Physical examination required for obtaining employment, medical certification, insurance or government license, including cardio-pulmonary (CP) clearance required prior to surgery or other medical procedures.</li>
+									<li>Injuries or illnesses due to military, paramilitary, police service, high risk activities, or suffered under conditions of war.</li>
+									<li>Injuries or illnesses which are self-inflicted, caused by attempt at suicide or incurred as a result of or while participating in a crime or acts involving the violation of law, administrative order or ordinances.</li>
+									<li>Diseases declared by the Department of Health as “epidemic”.</li>
+									<li>Outpatient medicines.</li>
+									<li>Medico-legal consultations.</li>
+									<li>Physical therapy</li>
+								</ol>', N'4', N'Unlimited', N'Unlimited', N'Package 2', N'IHC accredited hospitals and clinics', N'NA', N'NA', N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/medconsult-kids.html', N'Out-patient consultations  with IHC-accredited pediatricians', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
-INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (16, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1013, N'NA', N'NA', N'65 y/o & above', N'Mixed', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'none', N'none', N'NA', N'1 Year', N'3 days', N'NA', 1, 0, N'NA', N'applicable', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', N'Yes, with any ER product variant', NULL, N'<p><br></p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'NA', N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/medconsult-seniors.html', N'Out-patient consultations with IHC-accredited general physicians, family medicine 								specialists, internal medicine specialists (with subspecialties in cardiology, 								gastroenterology, pulmonology, endocrinology, infectious medicine, nephrology, urology, 								rheumatology, oncology, hematology, and allergology), general surgeons, orthopedic doctors, 								ENT specialists, geriatricians and rehabilitation medicine specialists', N'NA', N'NA', NULL, N'NA', N'NA')
+INSERT [dbo].[TblProductDetails] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [ProductId], [CasesCovered], [BenefitType], [AgeEligibility], [NumberOfAvailments], [BenefitLimit], [DocProFee], [RoomAccommodation], [LaboratoryDiagnosticPro], [MedicinesAsMedicallyNeeded], [UseOfOperationRoom], [SurgerySurgonFees], [Laparoscopic], [MRA], [MRI], [CT], [Therapetic], [PainManagement], [Arthoscopic], [OtherMedical], [OneTime], [Usage], [AccreditedHospitals], [MER], [AFR], [ARP], [Validity], [Waiting], [NumberOfRegistrations], [IsActive], [IsArchived], [UnlimitedTeleMed], [PreExistingConCover], [NonAccreditedHospitals], [ReimbursementNonAccreditedHospitals], [TopSixHospitalAccess], [RegistrationOfSucceedingVouchers], [Combinability], [IndividualOrGroup], [PrepaidPlan], [Consultation], [Inclusions], [SpecialModalities], [Exclusions], [FTFConsultation], [Telemedicine], [DentalConsultation], [DentalServicesBenefit], [HospitalNetwork], [RegistrationRules], [MedicalCoverage], [LearnMoreBtnLink], [BuyNowBtnLink], [Coverage], [VoucherUsed], [VoucherUnused], [ConsultationCards], [InPatient], [OutPatient]) VALUES (16, CAST(N'2020-01-01T00:00:00.0000000+00:00' AS DateTimeOffset), NULL, NULL, NULL, 1013, N'NA', N'NA', N'65 y/o & above', N'Mixed', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'NA', N'none', N'none', N'NA', N'1 Year', N'3 days', N'NA', 1, 0, N'NA', N'applicable', N'NA', N'NA', N'NA', N'NA', NULL, N'NA', N'Yes, with any ER product variant', N'', N'NA', N'NA', N'	<p>Consultations with neurologist, neurosurgeons, specialists of sleep medicine, and developmental and behavioral pediatricians.</p> <br>
+								<p>The Out-patient Consultation Voucher shall cover consultations made only in a doctor’s office and if not listed below as exclusion:</p><br>
+
+								<ol class="list-style-num">
+									<li>Consultations in emergency room facilities.</li>
+									<li>Consultations with non-accredited Physician and/or in a non-accredited hospital.</li>
+									<li>Conditions secondary to all pregnancy and fertility-related illnesses / treatments.</li>
+									<li>Sexually transmitted infections such as but not limited to syphilis, gonorrhea, chlamydia, human papillomavirus infection and HIV/AIDS.</li>
+									<li>Consultations for complications resulting from sterilization of either sex or reversal of such, artificial insemination, sex transformations, and circumcision.</li>
+									<li>
+										<p>All in-clinic procedures. The following are examples but not limited to:</p><br>
+
+										<ol class="list-style-alpha">
+											<li>Ophthalmology procedures like visual acuity, refraction, slit lamp exam, fundoscopy, tonometry, etc.</li>
+											<li>Ears, nose, throat (ENT) procedures like ear irrigation/cleaning, ear/nasal suctioning, rhinoscopy, laryngoscopy, etc. </li>
+											<li>Surgical procedures like incision and drainage, wound cleaning, debridement, suture removal, etc.</li>
+											<li>Injection administration</li>
+											<li>Pap smear</li>
+										</ol>
+									</li>
+									<li>Dermatological consultations and procedures for purpose of beautification. Examples are but not limited to acne, warts, hyperpigmentation and milia </li>
+									<li>Consultations with neurologists.</li>
+									<li>Psychiatric disorders, psychosomatic illnesses, hyperventilation syndrome, stress related conditions, adjustment disorders, childhood and developmental disorders, alcoholism and its complications or conditions related to substance or drug abuse, addiction and intoxication.</li>
+									<li>Hypersensitivity and allergy tests.</li>
+									<li>Cardio-pulmonary (CP) clearance required prior to surgery or medical procedures.</li>
+									<li>Physical examination required for obtaining employment, medical certification, insurance or government license, including cardio-pulmonary (CP) clearance required prior to surgery or other medical procedures.</li>
+									<li>Injuries or illnesses due to military, paramilitary, police service, high risk activities, or suffered under conditions of war.</li>
+									<li>Injuries or illnesses which are self-inflicted, caused by attempt at suicide or incurred as a result of or while participating in a crime or acts involving the violation of law, administrative order or ordinances.</li>
+									<li>Diseases declared by the Department of Health as “epidemic”.</li>
+									<li>Outpatient medicines.</li>
+									<li>Medico-legal consultations.</li>
+									<li>Physical therapy</li>
+								</ol>', N'4', N'Unlimited', N'Unlimited', N'Package 2', N'IHC accredited hospitals and clinics', N'NA', N'NA', N'https://shop.insularhealthcare.com.ph', N'https://shop.insularhealthcare.com.ph/medconsult-seniors.html', N'Out-patient consultations with IHC-accredited general physicians, family medicine 								specialists, internal medicine specialists (with subspecialties in cardiology, 								gastroenterology, pulmonology, endocrinology, infectious medicine, nephrology, urology, 								rheumatology, oncology, hematology, and allergology), general surgeons, orthopedic doctors, 								ENT specialists, geriatricians and rehabilitation medicine specialists', N'NA', N'NA', N'NA', N'NA', N'NA')
 GO
 SET IDENTITY_INSERT [dbo].[TblProductDetails] OFF
 GO
@@ -1222,19 +1318,19 @@ INSERT [dbo].[UserRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VA
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_DeviceCodes_DeviceCode]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [IX_DeviceCodes_DeviceCode]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [IX_DeviceCodes_DeviceCode] ON [dbo].[DeviceCodes]
 (
 	[DeviceCode] ASC
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_DeviceCodes_Expiration]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [IX_DeviceCodes_Expiration]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 CREATE NONCLUSTERED INDEX [IX_DeviceCodes_Expiration] ON [dbo].[DeviceCodes]
 (
 	[Expiration] ASC
 )WITH (STATISTICS_NORECOMPUTE = OFF, DROP_EXISTING = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_PersistedGrants_Expiration]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [IX_PersistedGrants_Expiration]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 CREATE NONCLUSTERED INDEX [IX_PersistedGrants_Expiration] ON [dbo].[PersistedGrants]
 (
 	[Expiration] ASC
@@ -1242,7 +1338,7 @@ CREATE NONCLUSTERED INDEX [IX_PersistedGrants_Expiration] ON [dbo].[PersistedGra
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_PersistedGrants_SubjectId_ClientId_Type]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [IX_PersistedGrants_SubjectId_ClientId_Type]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 CREATE NONCLUSTERED INDEX [IX_PersistedGrants_SubjectId_ClientId_Type] ON [dbo].[PersistedGrants]
 (
 	[SubjectId] ASC,
@@ -1252,7 +1348,7 @@ CREATE NONCLUSTERED INDEX [IX_PersistedGrants_SubjectId_ClientId_Type] ON [dbo].
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_PersistedGrants_SubjectId_SessionId_Type]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [IX_PersistedGrants_SubjectId_SessionId_Type]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 CREATE NONCLUSTERED INDEX [IX_PersistedGrants_SubjectId_SessionId_Type] ON [dbo].[PersistedGrants]
 (
 	[SubjectId] ASC,
@@ -1262,7 +1358,7 @@ CREATE NONCLUSTERED INDEX [IX_PersistedGrants_SubjectId_SessionId_Type] ON [dbo]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_UserLogins]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [PK_UserLogins]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 ALTER TABLE [dbo].[UserLogins] ADD  CONSTRAINT [PK_UserLogins] PRIMARY KEY NONCLUSTERED 
 (
 	[LoginProvider] ASC,
@@ -1271,7 +1367,7 @@ ALTER TABLE [dbo].[UserLogins] ADD  CONSTRAINT [PK_UserLogins] PRIMARY KEY NONCL
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_UserRoles]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [PK_UserRoles]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 ALTER TABLE [dbo].[UserRoles] ADD  CONSTRAINT [PK_UserRoles] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
@@ -1279,7 +1375,7 @@ ALTER TABLE [dbo].[UserRoles] ADD  CONSTRAINT [PK_UserRoles] PRIMARY KEY NONCLUS
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_Users]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [PK_Users]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [PK_Users] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
@@ -1287,7 +1383,7 @@ ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [PK_Users] PRIMARY KEY NONCLUSTERED
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_Users_UserRoles]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [PK_Users_UserRoles]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 ALTER TABLE [dbo].[Users_UserRoles] ADD  CONSTRAINT [PK_Users_UserRoles] PRIMARY KEY NONCLUSTERED 
 (
 	[UserId] ASC,
@@ -1296,7 +1392,7 @@ ALTER TABLE [dbo].[Users_UserRoles] ADD  CONSTRAINT [PK_Users_UserRoles] PRIMARY
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [PK_UserTokens]    Script Date: 17 Dec 2020 11:52:15 PM ******/
+/****** Object:  Index [PK_UserTokens]    Script Date: 20 Dec 2020 3:47:46 PM ******/
 ALTER TABLE [dbo].[UserTokens] ADD  CONSTRAINT [PK_UserTokens] PRIMARY KEY NONCLUSTERED 
 (
 	[UserId] ASC,
