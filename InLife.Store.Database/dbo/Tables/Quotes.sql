@@ -5,6 +5,7 @@
     [ProductName]       NVARCHAR (50)      NOT NULL,
     [ProductFaceAmount] DECIMAL (19, 4)    NULL,
     [PaymentMode]       INT                NULL,
+    [AgentCode]         VARCHAR (50)      NULL,
     [AgentFirstName]    NVARCHAR (50)      NULL,
     [AgentLastName]     NVARCHAR (50)      NULL,
     [ReferralSource]    NVARCHAR (80)      NULL,

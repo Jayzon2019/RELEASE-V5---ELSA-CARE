@@ -75,6 +75,7 @@ namespace InLife.Store.Api
 					PaymentMode = request.PaymentMode,
 
 					ReferralSource = request.ReferralSource,
+					AgentCode = request.AgentCode,
 					AgentFirstName = request.AgentFirstName,
 					AgentLastName = request.AgentLastName,
 

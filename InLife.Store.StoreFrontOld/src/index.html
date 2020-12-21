@@ -51,8 +51,6 @@
 
 		<link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-		<link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
 		<script type="text/javascript">
 		//<![CDATA[
@@ -526,7 +524,17 @@
 			var pro;
 			var proDet;
 			var url = api;
+			var affiliate;
+
+			// Backup Affiliate
+			try { affiliate  = JSON.parse(sessionStorage.getItem('affiliate')); }
+			catch (ex) { }
+
 			sessionStorage.clear();
+
+			if (affiliate)
+				sessionStorage.setItem('affiliate', JSON.stringify(affiliate));
+
 			$(document).ready(function () {
 
 				$.get(url + "Home/GetPageId_SetPageView?page=Home", function (data) {

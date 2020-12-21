@@ -16,6 +16,7 @@ namespace InLife.Store.Core.Models
 		public int PaymentMode { get; set; }
 
 		// Referrer
+		public string AgentCode { get; set; }
 		public string AgentFirstName { get; set; }
 		public string AgentLastName { get; set; }
 		public string ReferralSource { get; set; }

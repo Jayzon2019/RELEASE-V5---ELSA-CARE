@@ -43,7 +43,7 @@ namespace InLife.Store.Api
 			(
 				exception: exception,
 				status: StatusCodes.Status500InternalServerError,
-				title: $"InLife PrimeCare Store API failed",
+				title: $"InLife Store API failed",
 				detail: $"Something went wrong with the API. Please notify InLife support with the error. Please attach this number for reference: #LOG-ID#",
 				lineNumber: lineNumber,
 				callerFilePath: callerFilePath,

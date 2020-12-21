@@ -42,6 +42,7 @@ appApi:
     host: 'https://HOST/api',
     quotesEndpoint: '/quotes',
     ordersEndpoint: '/orders',
+	affiliatesEndpoint: '/affiliates'
 },
 
 primeCareApi:
@@ -70,6 +71,7 @@ prime-care.html
 redirect.html
 template.html
 thankyou.html
+affiliate.html
 ```
 
 8. Replace the URL in the HTML base tag according to your server URL:
@@ -253,6 +255,20 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 	"Protocol": "https",
 	"Host": "dev-inlifestore.projectgrey.net",
 	"PathBase": "/api"
+}
+```
+
+8. Go to the `ExternalServices` section and replace the values depending environments of the external APIs.
+```json
+"ExternalServices":
+{
+	"AffiliateApi":
+	{
+		"ClientId": "CLIENT-ID",
+		"ClientSecret": "CLIENT-SECRET",
+		"Host": "https://access-dev.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
+		"AgentInfoEndpoint": "/info"
+	}
 }
 ```
 
