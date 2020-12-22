@@ -42,7 +42,6 @@ appApi:
     host: 'https://HOST/api',
     quotesEndpoint: '/quotes',
     ordersEndpoint: '/orders',
-	affiliatesEndpoint: '/affiliates'
 },
 
 primeCareApi:
@@ -71,7 +70,6 @@ prime-care.html
 redirect.html
 template.html
 thankyou.html
-affiliate.html
 ```
 
 8. Replace the URL in the HTML base tag according to your server URL:
@@ -258,20 +256,6 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-8. Go to the `ExternalServices` section and replace the values depending environments of the external APIs.
-```json
-"ExternalServices":
-{
-	"AffiliateApi":
-	{
-		"ClientId": "CLIENT-ID",
-		"ClientSecret": "CLIENT-SECRET",
-		"Host": "https://access-dev.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
-		"AgentInfoEndpoint": "/info"
-	}
-}
-```
-
 8. Go to the `Smtp` section and replace the credentials with your own.
 ```json
 "Smtp":
@@ -400,9 +384,26 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 
 
-### Affiliate Marketing System (ASP.NET Core)
+### Database
 
-*UNDER DEVELOPMENT*
+1. Launch Visual Studio, and in the menu, click **Open** > **File**
 
+2. Go to `InLife.Store.Database` folder
+
+3. Open the `InLife.Store.Database.sqlproj` project file
+
+4. In the **Solution Explorer**, right-click the `InLife.PrimeCare.Store.Database` project then click on **Schema Compare**
+
+5. In. the toolbar, select the database project as the source, and select the Azure Database as the target
+
+6. Click on the **Compare** button and check to see if there are conflicts
+
+7. Click on the **Update** button to update the target database
+
+#### One Time Scripts
+
+* **To all database tables** - Go to `InLife.Store.Database/Scripts/FreshDatabase.sql` then execute the script on your database.
+
+* **To set CMS data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables.sql` then execute the script on your database.
 
 
