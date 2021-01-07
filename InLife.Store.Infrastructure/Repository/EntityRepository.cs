@@ -28,6 +28,16 @@ namespace InLife.Store.Infrastructure.Repository
 
 		public virtual T Get(object id)
 		{
+			//This is more efficient
+			//return this.dbset.Find(id);
+
+			//But I can use include here XD
+			//return this.dbset.FirstOrDefault(x => x.Id == id);
+			return this.dataset.FirstOrDefault(x => x.Id == id);
+		}
+
+		public virtual T Find(object id)
+		{
 			return this.dbset.Find(id);
 		}
 
@@ -37,6 +47,15 @@ namespace InLife.Store.Infrastructure.Repository
 				throw new ArgumentNullException("Cannot create null entity");
 
 			this.dbset.Add(entity);
+			this.context.SaveChanges();
+		}
+
+		public virtual void Create(ICollection<T> entities)
+		{
+			if (entities == null)
+				throw new ArgumentNullException("Cannot create entities from a null collection");
+
+			this.dbset.AddRange(entities);
 			this.context.SaveChanges();
 		}
 
@@ -50,12 +69,30 @@ namespace InLife.Store.Infrastructure.Repository
 			this.context.SaveChanges();
 		}
 
+		public virtual void Update(ICollection<T> entities)
+		{
+			if (entities == null)
+				throw new ArgumentNullException("Cannot update entities from a null collection");
+
+			this.dbset.UpdateRange(entities);
+			this.context.SaveChanges();
+		}
+
 		public virtual void Delete(T entity)
 		{
 			if (entity == null)
 				throw new ArgumentNullException("Cannot delete null entity");
 
 			this.dbset.Remove(entity);
+			this.context.SaveChanges();
+		}
+
+		public virtual void Delete(ICollection<T> entities)
+		{
+			if (entities == null)
+				throw new ArgumentNullException("Cannot delete entities from a null collection");
+
+			this.dbset.RemoveRange(entities);
 			this.context.SaveChanges();
 		}
 

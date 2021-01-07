@@ -185,6 +185,7 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 		"AlwaysIncludeUserClaimsInIdToken": true,
 		"AllowOfflineAccess": true,
 		"AccessTokenLifetime": 300,
+        "AccessTokenType": 1,
 
 		// redirect after login
 		"RedirectUris": [ "https://dev-inlifestore.projectgrey.net/cms/signin-oidc" ],

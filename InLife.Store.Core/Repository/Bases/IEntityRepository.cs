@@ -11,15 +11,23 @@ namespace InLife.Store.Core.Repository
 	{
 		void Create(T entity);
 
+		void Create(ICollection<T> entities);
+
 		void Update(T entity);
 
+		void Update(ICollection<T> entities);
+
 		void Delete(T entity);
+
+		void Delete(ICollection<T> entities);
 
 		/// <summary>
 		///		Get the entity that matches the provided Id
 		/// </summary>
 		/// <returns>Single entity</returns>
 		T Get(object id);
+
+		T Find(object id);
 
 		/// <summary>
 		///		Get all entities

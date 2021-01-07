@@ -348,6 +348,8 @@ namespace InLife.Store.Identity.Features
 				return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
 			}
 
+			await interaction.RevokeTokensForCurrentSessionAsync();
+
 			return View("LoggedOut", vm);
 		}
 

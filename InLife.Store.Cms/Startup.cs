@@ -65,6 +65,27 @@ namespace InLife.Store.Cms
 			services.AddDbContext<IdentityContext>(options =>
 				options.UseSqlServer(connectionString));
 
+			services.AddTransient<IUserRepository, UserRepository>();
+			services.AddTransient<IUserSessionRepository, UserSessionRepository>();
+
+			services.AddTransient<ICustomerRepository, CustomerRepository>();
+			services.AddTransient<IQuoteRepository, QuoteRepository>();
+
+			services.AddTransient<IActivityLogRepository, ActivityLogRepository>();
+			services.AddTransient<IKeyMetricRepository, KeyMetricRepository>();
+			services.AddTransient<IFaqCategoryRepository, FaqCategoryRepository>();
+			services.AddTransient<IFaqRepository, FaqRepository>();
+			services.AddTransient<IFooterLinkRepository, FooterLinkRepository>();
+			services.AddTransient<IHeroRepository, HeroRepository>();
+			services.AddTransient<IPrimeCareRepository, PrimeCareRepository>();
+			services.AddTransient<IPrimeHeroRepository, PrimeHeroRepository>();
+			services.AddTransient<IProductDetailRepository, ProductDetailRepository>();
+			services.AddTransient<IProductRepository, ProductRepository>();
+
+			services.AddTransient<IContentManagement, ContentManagement>();
+
+			services.AddTransient<IEmailService, EmailService>();
+
 			services
 				.Configure<ForwardedHeadersOptions>(options =>
 				{
@@ -75,6 +96,13 @@ namespace InLife.Store.Cms
 					options.KnownNetworks.Clear();
 					options.KnownProxies.Clear();
 				});
+
+			//services
+			//	.AddOptions<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme)
+			//	.Configure<ITicketStore>((options, store) =>
+			//	{
+			//		options.SessionStore = store;
+			//	});
 
 			//TODO: Convert from mvc to razor pages
 			//services.AddRazorPages();
@@ -94,6 +122,9 @@ namespace InLife.Store.Cms
 					options.SlidingExpiration = true;
 					options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 					options.Cookie.MaxAge = TimeSpan.FromMinutes(5);
+					options.Cookie.HttpOnly = true;
+					options.Cookie.SameSite = SameSiteMode.Lax;
+					options.SessionStore = new CustomTicketStore(services);
 				})
 				.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 				{
@@ -110,6 +141,7 @@ namespace InLife.Store.Cms
 
 					options.ClaimActions.DeleteClaim("sid");
 					options.ClaimActions.DeleteClaim("idp");
+					//options.ClaimActions.MapAllExcept("aud", "iss", "iat", "nbf", "exp", "aio", "c_hash", "uti", "nonce");
 
 					options.Scope.Add(IdentityModel.OidcConstants.StandardScopes.OpenId);
 					options.Scope.Add(IdentityModel.OidcConstants.StandardScopes.Profile);
@@ -195,26 +227,6 @@ namespace InLife.Store.Cms
 				loggingBuilder.AddConsole();
 				loggingBuilder.AddDebug();
 			});
-
-			services.AddTransient<IUserRepository, UserRepository>();
-
-			services.AddTransient<ICustomerRepository, CustomerRepository>();
-			services.AddTransient<IQuoteRepository, QuoteRepository>();
-
-			services.AddTransient<IActivityLogRepository, ActivityLogRepository>();
-			services.AddTransient<IKeyMetricRepository, KeyMetricRepository>();
-			services.AddTransient<IFaqCategoryRepository, FaqCategoryRepository>();
-			services.AddTransient<IFaqRepository, FaqRepository>();
-			services.AddTransient<IFooterLinkRepository, FooterLinkRepository>();
-			services.AddTransient<IHeroRepository, HeroRepository>();
-			services.AddTransient<IPrimeCareRepository, PrimeCareRepository>();
-			services.AddTransient<IPrimeHeroRepository, PrimeHeroRepository>();
-			services.AddTransient<IProductDetailRepository, ProductDetailRepository>();
-			services.AddTransient<IProductRepository, ProductRepository>();
-
-			services.AddTransient<IContentManagement, ContentManagement>();
-
-			services.AddTransient<IEmailService, EmailService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -36,4 +36,12 @@
 		<Folder Include="GrantValidators\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\InLife.Store.Core\InLife.Store.Core.csproj">
+	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	  </ProjectReference>
+	  <ProjectReference Include="..\InLife.Store.Infrastructure\InLife.Store.Infrastructure.csproj">
+	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	  </ProjectReference>
+	</ItemGroup>
 </Project>

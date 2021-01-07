@@ -17,6 +17,7 @@ using InLife.Store.Cms.ViewModels;
 using InLife.Store.Cms.Data;
 using InLife.Store.Cms.Models;
 
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.Primitives;
@@ -127,7 +128,7 @@ namespace InLife.Store.Cms.Controllers
 				Expires = DateTimeOffset.MinValue
 			});
 
-			//return RedirectToAction(nameof(Index));
+			//await AuthenticationHttpContextExtensions.SignOutAsync(HttpContext);
 
 			return new SignOutResult(new[]
 			{

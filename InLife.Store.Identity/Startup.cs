@@ -24,6 +24,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 using IdentityServer4.Services;
+using IdentityServer4.Configuration;
 using IdentityServer4.AccessTokenValidation;
 using IdentityModel.AspNetCore.OAuth2Introspection;
 
@@ -34,6 +35,11 @@ using InLife.Store.Identity.Infrastructure.FeatureFolders;
 using InLife.Store.Identity.TokenProviders;
 using InLife.Store.Identity.GrantValidators;
 
+using InLife.Store.Core.Repository;
+using InLife.Store.Infrastructure.Repository;
+
+using ApplicationContext = InLife.Store.Identity.Data.ApplicationContext;
+using InfrastructureApplicationContext = InLife.Store.Infrastructure.Repository.ApplicationContext;
 
 namespace InLife.Store.Identity
 {
@@ -55,6 +61,12 @@ namespace InLife.Store.Identity
 
 			services.AddDbContext<ApplicationContext>(options =>
 				options.UseSqlServer(connectionString));
+
+			services.AddDbContext<InfrastructureApplicationContext>(options =>
+				options.UseSqlServer(connectionString));
+
+			services.AddTransient<IUserRepository, UserRepository>();
+			services.AddTransient<IUserSessionRepository, UserSessionRepository>();
 
 			services.Configure<ForwardedHeadersOptions>(options =>
 			{
@@ -90,6 +102,10 @@ namespace InLife.Store.Identity
 			{
 				options.SlidingExpiration = true;
 				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+				options.Cookie.MaxAge = TimeSpan.FromMinutes(5);
+				options.Cookie.HttpOnly = true;
+				options.Cookie.SameSite = SameSiteMode.Lax;
+				options.SessionStore = new CustomTicketStore(services);
 			});
 
 			services
@@ -154,7 +170,7 @@ namespace InLife.Store.Identity
 					//options.DefaultSchema = "token";
 					options.ConfigureDbContext = dbBuilder => dbBuilder.UseSqlServer(connectionString);
 					options.EnableTokenCleanup = true;
-					options.TokenCleanupInterval = 30;
+					options.TokenCleanupInterval = 3600;
 				});
 
 			services.AddCors();

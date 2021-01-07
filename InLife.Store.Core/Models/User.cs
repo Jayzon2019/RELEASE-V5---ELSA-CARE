@@ -22,5 +22,7 @@ namespace InLife.Store.Core.Models
 		public DateTimeOffset? LockoutEnd { get; set; } 
 
 		public virtual ICollection<User_UserRole> Roles { get; set; }
+
+		public virtual ICollection<UserSession> Sessions { get; set; }
 	}
 }

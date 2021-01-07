@@ -91,5 +91,6 @@
     <Build Include="dbo\Tables\TblPrimeCare_1.sql" />
     <Build Include="dbo\Tables\Files.sql" />
     <Build Include="dbo\Tables\TblPrimeCare.sql" />
+    <Build Include="dbo\Tables\UserSessions.sql" />
   </ItemGroup>
 </Project>

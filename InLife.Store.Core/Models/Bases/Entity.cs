@@ -8,13 +8,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InLife.Store.Core.Models
 {
-	public abstract class BaseEntity
+	public class BaseEntity
 	{
-
+		public virtual object Id { get; set; }
 	}
 
 	public abstract class Entity<TKey> : BaseEntity, IEntity<TKey>
 	{
-		public virtual TKey Id { get; set; }
+		public virtual new TKey Id { get; set; }
 	}
 }

@@ -17,6 +17,7 @@ namespace InLife.Store.Infrastructure.Repository
 		// Identity
 		DbSet<User> Users { get; set; }
 		DbSet<User_UserRole> Users_UserRoles { get; set; }
+		DbSet<UserSession> UserSessions { get; set; }
 
 		// Business
 		DbSet<Quote> Quotes { get; set; }
@@ -93,6 +94,24 @@ namespace InLife.Store.Infrastructure.Repository
 					.HasForeignKey(junction => junction.UserId);
 			});
 
+			builder.Entity<UserSession>(entity =>
+			{
+				// Table mapping
+				entity.ToTable("UserSessions");
+
+				// PK - Id
+				entity.HasKey(e => new { e.Id });
+
+				// Shadow FK - UserId
+				entity.Property<string>("UserId");
+
+				// Quotes >> Customer
+				entity
+					.HasOne(session => session.User)
+					.WithMany(user => user.Sessions)
+					.HasForeignKey("UserId");
+			});
+
 			#endregion
 
 			#region Business
@@ -102,11 +121,11 @@ namespace InLife.Store.Infrastructure.Repository
 				// Table mapping
 				entity.ToTable("Quotes");
 
-				// Shadow FK - CustomerId
-				entity.Property<int>("CustomerId");
-
 				// PK - Id
 				entity.HasKey(e => new { e.Id });
+
+				// Shadow FK - CustomerId
+				entity.Property<int>("CustomerId");
 
 				// Quotes >> Customer
 				entity
@@ -419,6 +438,7 @@ namespace InLife.Store.Infrastructure.Repository
 		// Identity
 		public DbSet<User> Users { get; set; }
 		public DbSet<User_UserRole> Users_UserRoles { get; set; }
+		public DbSet<UserSession> UserSessions { get; set; }
 
 		// Business
 		public DbSet<Quote> Quotes { get; set; }
