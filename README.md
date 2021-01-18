@@ -169,7 +169,31 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 9. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
 
-10. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application.
+
+10. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `ClientId` value to your preferred CMS ClientId, or you may leave it as it is.
+```json
+"Clients":
+[
+	{
+		"ClientId": "inlife.store.cms",
+		...
+	}
+]
+```
+
+11. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `ClientSecrets` - `Value` to your preferred encoded ClientSecret, or you may leave it as it is. The value must be a `SHA-256 Base64` encoded string. You may use this url to generate an encoded string for your client secret: https://hash.online-convert.com/sha256-generator
+```json
+"Clients":
+[
+	{
+		"ClientId": "inlife.store.cms",
+		"ClientSecrets": [ { "Value": "4z8cAM4W2ucfXHLATo6+3wViQiWJTiRHU66ac7QKJew=" } ],
+		...
+	}
+]
+```
+
+12. Go to the `Clients` section, look for the `inlife.store.cms` client and change the `RedirectUris` and `PostLogoutRedirectUris` value depending on the host configuration of the application.
 ```json
 "Clients":
 [
@@ -196,6 +220,7 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 	}
 ]
 ```
+
 11. Apply the appropriate changes to `inlife.store.ams`
 
 12. Save the file.
@@ -256,6 +281,7 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 	"PathBase": "/api"
 }
 ```
+
 8. Go to the `ExternalServices` section and replace the values depending environments of the external APIs.
 ```json
 "ExternalServices":
@@ -370,15 +396,36 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 "Authentication":
 {
 	"Authority": "https://dev-inlifestore.projectgrey.net/identity",
-	"ClientId": "inlife.store.cms"
+	...
+	...
 }
 ```
 
-11. Save the file.
+11. Go to the `Authentication` section and change the `ClientId` value depending CMS ClientId defined in the configuration of the Identity Service
+```json
+"Authentication":
+{
+	...
+	"ClientId": "inlife.store.cms",
+	...
+}
+```
 
-12. Open `web.config` in your text editor.
+12. Go to the `Authentication` section and change the `ClientSecret` value depending on the ClientSecret defined in the configuration of the Identity Service
+```json
+"Authentication":
+{
+	...
+	...
+	"ClientSecret": "<INLIFE-STORE-CMS-CLIENT-SECRET>"
+}
+```
 
-13. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+13. Save the file.
+
+14. Open `web.config` in your text editor.
+
+15. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -388,9 +435,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-14. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+16. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-15. Restart the App Service
+17. Restart the App Service
 
 
 
