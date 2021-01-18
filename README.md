@@ -256,8 +256,21 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 	"PathBase": "/api"
 }
 ```
+8. Go to the `ExternalServices` section and replace the values depending environments of the external APIs.
+```json
+"ExternalServices":
+{
+	"AffiliateApi":
+	{
+		"ClientId": "CLIENT-ID",
+		"ClientSecret": "CLIENT-SECRET",
+		"Host": "https://access-XXX.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
+		"AgentInfoEndpoint": "/info"
+	}
+}
+```
 
-8. Go to the `Smtp` section and replace the credentials with your own.
+9. Go to the `Smtp` section and replace the credentials with your own.
 ```json
 "Smtp":
 {
@@ -269,9 +282,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-9. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+10. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
 
-10. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
+11. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
 ```json
 "AllowedOrigins":
 [
@@ -279,11 +292,11 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 ]
 ```
 
-11. Save the file.
+12. Save the file.
 
-12. Open `web.config` in your text editor.
+13. Open `web.config` in your text editor.
 
-13. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+14. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -293,9 +306,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-14. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+15. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-15. Restart the App Service
+16. Restart the App Service
 
 
 
