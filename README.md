@@ -465,6 +465,8 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 * **To all database tables** - Go to `InLife.Store.Database/Scripts/FreshDatabase.sql` then execute the script on your database.
 
-* **To set CMS data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables.sql` then execute the script on your database.
+* **To set CMS user data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Users.sql` then execute the script on your database.
+
+* **To set CMS content data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content.sql` then execute the script on your database.
 
 
