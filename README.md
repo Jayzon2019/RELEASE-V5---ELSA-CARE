@@ -447,6 +447,8 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 ### Database
 
+> :warning: **Always backup your database before doing any changes.**
+
 1. Launch Visual Studio, and in the menu, click **Open** > **File**
 
 2. Go to `InLife.Store.Database` folder
@@ -462,6 +464,8 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 7. Click on the **Update** button to update the target database
 
 #### One Time Scripts
+
+> :warning: **Executing these scripts will reset your data. Use with caution. Always backup your database.**
 
 * **To all database tables** - Go to `InLife.Store.Database/Scripts/FreshDatabase.sql` then execute the script on your database.
 
