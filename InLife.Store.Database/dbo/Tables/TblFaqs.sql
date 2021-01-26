@@ -6,7 +6,7 @@
     [UpdatedBy]   VARCHAR (36)       NULL,
     [CategoryId]  INT                CONSTRAINT [DF_TblFaq_FaqCatId] DEFAULT ((0)) NOT NULL,
     [Question]    NVARCHAR (300)     CONSTRAINT [DF_TblFaq_FaqQuestion] DEFAULT ('') NOT NULL,
-    [Answer]      NVARCHAR (800)     CONSTRAINT [DF_TblFaq_FaqAnswer] DEFAULT ('') NOT NULL,
+    [Answer]      NVARCHAR (MAX)     CONSTRAINT [DF_TblFaq_FaqAnswer] DEFAULT ('') NOT NULL,
     [IsActive]    BIT                CONSTRAINT [DF_TblFaq_IsActive] DEFAULT ((0)) NOT NULL,
     [IsArchived]  BIT                CONSTRAINT [DF_TblFaq_IsArchived] DEFAULT ((0)) NOT NULL,
     [SortNum]     INT                NULL,
