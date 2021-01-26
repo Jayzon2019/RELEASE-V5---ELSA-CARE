@@ -48,7 +48,6 @@ namespace InLife.Store.Cms.ViewModels
 		public string Question { get; set; }
 
 		[Required]
-		[MaxLength(800)]
 		[DisplayName("Answer")]
 		public string Answer { get; set; }
 

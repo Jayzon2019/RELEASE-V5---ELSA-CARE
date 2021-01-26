@@ -23,8 +23,9 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<div class="controls">
-											<label class="control-label text-secondary">Upload New Prime Care File</label>
-											<input type="file" title="search file" onchange="ValidateFile()" class="form-control" id="file" name="file" />
+											<label class="control-label text-secondary">Upload Prime Care File</label>
+											<input type="file" title="Select PDF file" class="form-control" id="file" name="file" accept="application/pdf" onchange="documentUpload(this, 'PrimeCareFile', 'fileError')" />
+											<input type="hidden" asp-for="PrimeCareFile" required />
 											<span asp-validation-for="PrimeCareFile" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a pdf file</span>
 										</div>
 									</div>

@@ -23,7 +23,7 @@
 									<div class="form-group">
 										<div class="controls">
 											<label class="control-label text-secondary">Products</label>
-											<select class="form-control select2" name="intProductId">
+											<select asp-for="ProductId" class="form-control select2">
 												@foreach (var product in ViewBag.products)
 												{
 													if (product.Id == Model.ProductId)

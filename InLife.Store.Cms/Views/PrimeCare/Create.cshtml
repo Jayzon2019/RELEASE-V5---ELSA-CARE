@@ -20,11 +20,12 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<div class="controls">
-											<label class="control-label text-secondary">Prime Care File</label>
-											<input type="file" title="search file" class="form-control" id="file" name="file" required data-validation-required-message="Prime Care File Is Required" />
-											<span asp-validation-for="PrimeCareFile" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a pdf file</span>
-										</div>
+                                        <div class="controls">
+                                            <label class="control-label text-secondary">Upload Prime Care File</label>
+                                            <input type="file" title="Select PDF file" class="form-control" id="file" name="file" required data-validation-required-message="Prime Care File Is Required" accept="application/pdf" onchange="documentUpload(this, 'PrimeCareFile', 'fileError')" />
+                                            <input type="hidden" asp-for="PrimeCareFile" required />
+                                            <span asp-validation-for="PrimeCareFile" class="text-danger"></span><span style="display:none;" id="fileError" class="text-danger">Please upload a pdf file</span>
+                                        </div>
 									</div>
 								</div>
 								<div class="col-sm-6">

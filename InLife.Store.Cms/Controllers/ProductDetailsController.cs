@@ -66,22 +66,6 @@ namespace InLife.Store.Cms.Controllers
 			var viewModel = new ProductDetailViewModel(model);
 
 			return View(viewModel);
-
-			//try
-			//{
-			//	var model = productDetailRepository.Get(id);
-
-			//	if (model == null)
-			//		return NotFound();
-
-			//	var viewModel = new ProductDetailViewModel(model);
-
-			//	return View(viewModel);
-			//}
-			//catch (Exception e)
-			//{
-			//	return GenericServerErrorResult(e);
-			//}
 		}
 
 		// GET: ProductDetails/Create

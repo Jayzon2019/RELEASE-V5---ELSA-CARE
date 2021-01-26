@@ -75,3 +75,35 @@ function imageUpload(input, placeholderId, previewId, messageId)
 		reader.readAsDataURL(file);
 	}
 }
+
+
+function documentUpload(input, placeholderId, messageId)
+{
+	if (input.files.length > 0)
+	{
+		const file = input.files[0];
+		const reader = new FileReader();
+
+		reader.onloadend = (event) =>
+		{
+			const uploadedData = event.target.result;
+			const placeholder = document.getElementById(placeholderId);
+			const message = document.getElementById(messageId);
+
+			const data = uploadedData.split(',')[1];
+
+			console.log('data');
+			console.log(data);
+
+			console.log('Valid document file');
+			input.classList.remove('invalid');
+			placeholder.value = data;
+			message.style.display = 'none';
+		}
+
+		console.log('file');
+		console.log(file);
+		reader.readAsDataURL(file);
+	}
+}
+
