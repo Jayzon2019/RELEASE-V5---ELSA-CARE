@@ -2201,6 +2201,7 @@ border-radius: 0 0 10px 10px;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+    padding-right:160px;
   }
 }
 
@@ -2238,7 +2239,7 @@ border-radius: 0 0 10px 10px;
 
 .memo .container .memo-close {
   margin-left: auto;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   color: #fff;
   text-decoration: none;
   display: inline-block;
@@ -2256,6 +2257,7 @@ border-radius: 0 0 10px 10px;
 @media (max-width: 767px) {
   .memo .container .memo-close {
     display: block;
+    margin-bottom: 15px;
   }
 }
 
