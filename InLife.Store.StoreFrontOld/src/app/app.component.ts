@@ -34,17 +34,12 @@ export class AppComponent
 				console.log('Router NavigationEnd:');
 				console.log(event.urlAfterRedirects);
 
-				//gtag('config', 'UA-173350504-1',
-				//{
-				//	'page_path': event.urlAfterRedirects
-				//});
 				this.googleAnalyticsService.config
 				({
 					'page_path': event.urlAfterRedirects
 				});
 
-				//fbq('track', 'PageView');
-				this.facebookPixelService.track('PageView');
+				//this.facebookPixelService.track('PageView');
 			}
 		});
 	}
