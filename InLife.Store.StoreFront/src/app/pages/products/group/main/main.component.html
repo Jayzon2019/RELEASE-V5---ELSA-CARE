@@ -1,0 +1,750 @@
+<main class="group-main-wrapper">
+	<input type="hidden" id="keyId" />
+
+	<!--<section class="hero-group-insurence">
+		<div style="{{'background-image:' + getUrl(slider?.primeHeroBg) + ';background-size: cover;'}}" class="{{'section section-hero wow fadeInUp hero-slide-'}}">
+			<div class="container">
+				<div style="{{getPosition(slider?.contentPostion)}}" class="hero-content">
+					<h2 style="{{'color:' + getColor(slider?.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.headingColor) + '!important;'}}">{{slider?.heading }}<br class="only-in-mobile" /></h2>
+					<p style="{{'color:' + getColor(slider?.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.subHeadingColor) + '!important;'}}">{{ slider?.subHeading }}</p>
+				</div>
+			</div>
+			<img [src]="sanitize(slider?.primeHeroBg)" class="only-in-mobile">
+		</div>
+		<div class="hero-bottom-area">
+			<div class="container">
+				<ul>
+					<li><a (click)="scroll('view-products')" style="cursor:pointer;"><img style="height: 77px" src="assets/images/view-products.svg"><span>View Products</span></a></li>
+					<li><a (click)="scroll('howToApply')" style="cursor:pointer;"><img style="height: 77px" src="assets/images/how-to-apply.svg"><span>How to Apply</span></a></li>
+					<li><a (click)="scroll('application-status')" style="cursor:pointer;"><img style="height: 77px" src="assets/images/check-application-status.svg"><span>Check Application Status</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+	</section>-->
+	<section class="hero-group-insurence">
+		<div class="section section-hero wow fadeInUp">
+			<div class="container">
+				<div class="hero-content hero-content-group-page">
+					<h2>Protect your business and your people from unnecessary expenses and worries.</h2>
+					<p>Set up your group protection with InLife’s wide array of insurance benefits.</p>
+				</div>	
+			</div>
+			<img class="only-in-mobile" src="assets/images/hero-group-insurance-mobile.jpg">
+		</div>
+		<div class="hero-bottom-area">
+			<div class="container">
+				<ul>
+					<li><a (click)="scroll('view-products')" style="cursor:pointer;"><img style="height: 77px" src="assets/images/view-products.svg"><span>View Products</span></a></li>
+					<li><a (click)="scroll('howToApply')" style="cursor:pointer;"><img style="height: 77px" src="assets/images/how-to-apply.svg"><span>How to Apply</span></a></li>
+					<li><a (click)="scroll('application-status')" style="cursor:pointer;"><img style="height: 77px" src="assets/images/check-application-status.svg"><span>Check Application Status</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="section section-features new-features-section" id="view-products">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">
+				What type of business are you?
+			</h2>
+
+
+			<ul class="feature-list-item financial-protection-list">
+				<li class="plan-tab" id="plan-tab-1" (click)="planClick('plan-section-1')">
+					<div class="feature-list-col">
+						<div class="feature-img case-icon">
+							<img src="assets/images/administrative-and-office-based.png" alt="Administrative and Office-based">
+						</div>
+						<div class="feature-content">
+							<span>Administrative and Office-based</span>
+
+						</div>
+					</div>
+				</li>
+				<li class="plan-tab" id="plan-tab-2" (click)="planClick('plan-section-2')">
+					<div class="feature-list-col">
+						<div class="feature-img disability-icon">
+							<img src="assets/images/security-agencies.png" alt="Security Agencies">
+						</div>
+						<div class="feature-content">
+							<span>Security Agencies</span>
+
+						</div>
+					</div>
+				</li>
+				<li class="plan-tab" id="plan-tab-3" (click)="planClick('plan-section-3')">
+					<div class="feature-list-col">
+						<div class="feature-img death-icon">
+							<img src="assets/images/Schools and Universities.png" alt="Schools and Universities">
+						</div>
+						<div class="feature-content">
+							<span>Schools and Universities</span>
+
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="section h-prime-section prime-secure-section special-section plan-section" id="plan-section-1" style="display: none;">
+		<div class="close-icon btn-close" (click)="closePlans()"><img src="assets/images/close.svg"></div>
+		<div class="container">
+			<!-- <p class="section-lead wow fadeInUp">&nbsp;</p> -->
+			<div class="h-prime-contant-area clearfix flax">
+				<div class="col-left">
+					<img src="assets\images/special.png" alt="Special Group Plan">
+
+				</div>
+				<div class="col-right">
+					<h2 class="section-header wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">Employee Secure Plan</h2>
+					<p class="last-child">Employee Secure Plan provides life, accident and permanent disability benefits to employees engaged in non-hazardous businesses. The plan assures that there is something for the employee's family to live by should he/she no longer be capable to provide income to the household.</p>
+
+					<p style="display: none;" class="special-tag">
+						Looking for other group plans? <a targer="_blank" href="https://www.insularlife.com.ph/group-insurance">Click here</a>
+					</p>
+				</div>
+			</div>
+			<div class="h-prime-contant-area clearfix package-area">
+				<div class="col-left">
+					<h4>Preferred Industry Type</h4>
+					<p>This plan is ideal for Micro, Small and Medium Enterprises engaged in office-based jobs like finance, legal, computer services, pharmaceutical products, and sales rental and leasing.</p>
+					<p>Moreover, it can cover a minimum of three (3) up to a hundred and sixty (160) employees.</p>
+					<h4>Who Are Qualified Under This Plan?</h4>
+					<p>
+						Permanent or probationary employees ages 18-64 years old who are working in non-hazardous industries can be insured under this plan.
+					</p>
+
+				</div>
+				<div class="col-right">
+					<h4>Employee Secure Plan Packages</h4>
+					<ul class="employe-secure-plan">
+<!-- 
+						<li class="head">
+							<div class="col3">&nbsp;</div>
+							<div class="col3"><span>Life <br />Coverage</span></div>
+							<div class="col3"><span>Accidental Death and Disability / Total and Permanent Disability Benefit Coverage</span></div>
+							<div class="col3"><span>Annual <br />Premium per <br />Head</span></div>
+
+						</li>
+						<li>
+							<div class="col3"><span>Plan 1</span></div>
+							<div class="col3">₱100,000</div>
+							<div class="col3">₱100,000</div>
+							<div class="col3">₱400</div>
+						</li>
+						<li>
+							<div class="col3"><span>Plan 2</span></div>
+							<div class="col3">₱150,000</div>
+							<div class="col3">₱150,000</div>
+							<div class="col3">₱600</div>
+						</li>
+						<li>
+							<div class="col3"><span>Plan 3</span></div>
+							<div class="col3">₱200,000</div>
+							<div class="col3">₱200,000</div>
+							<div class="col3">₱800</div>
+						</li>
+						<li>
+							<div class="col3"><span>Plan 4</span></div>
+							<div class="col3">₱250,000</div>
+							<div class="col3">₱250,000</div>
+							<div class="col3">₱1,000</div>
+						</li>
+						 -->
+						<li class="head">
+
+							<div class="col3">&nbsp;</div>
+							<div class="col3"><span>Plan 1</span></div>
+							<div class="col3"><span>Plan 2</span></div>
+							<div class="col3"><span>Plan 3</span></div>
+							<div class="col3"><span>Plan 4</span></div>
+
+						</li>
+						<li>
+							<div class="col3"><span>Life Coverage</span></div>
+							<div class="col3">₱100,000</div>
+							<div class="col3">₱150,000</div>
+							<div class="col3">₱200,000</div>
+							<div class="col3">₱250,000</div>
+						</li>
+						<li>
+							<div class="col3"><span>Accidental Death and Disability / Total and Permanent Disability Benefit Coverage</span></div>
+							<div class="col3">₱100,000</div>
+							<div class="col3">₱150,000</div>
+							<div class="col3">₱200,000</div>
+							<div class="col3">₱250,000</div>
+						</li>
+						<li>
+							<div class="col3"><span>Annual Premium<br> per Head</span></div>
+							<div class="col3">₱4,000</div>
+							<div class="col3">₱6,000</div>
+							<div class="col3">₱8,000</div>
+							<div class="col3">₱1,000</div>
+						</li>
+					</ul>
+					<p class="small-text">*The Employee Secure Plan is also available at higher coverages with hospitalization benefits. For the details of these packages, please contact the Corporate Solutions team via e-mail: <a style="color:#e43d24;" href="mailto:corporatesolutions@insular.com.ph">corporatesolutions@insular.com.ph</a> or landline 8878 1841.
+				</div>
+				<div class="buttons-center">
+					<a [routerLink]="['/group/quote']" [queryParams]="{ plan: '1', planCode: '1 - Administrative and Office-based' , productName:'Employee Secure Plan', productType: '0'}" class="btn-orange">GET A QUOTE</a> <a href="#requirements-popup1" class="btn-orange border-orange" rel="modal:open">Application Requirements</a>
+					<a routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" class="btn-orange border-orange">FAQ</a>
+				</div>
+			
+			</div>
+		</div>
+	</section>
+	<section class="section h-prime-section prime-secure-section special-section plan-section" id="plan-section-2" style="display: none;">
+		<div class="close-icon btn-close" (click)="closePlans()"><img src="assets/images/close.svg"></div>
+		<div class="container">
+			<!-- <p class="section-lead wow fadeInUp">&nbsp;</p> -->
+			<div class="h-prime-contant-area clearfix flax">
+				<div class="col-left">
+					<img src="assets/images/security-agencies1.png" alt="Security Agencies">
+
+				</div>
+				<div class="col-right">
+					<h2 class="section-header wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">Security Guard Plan</h2>
+					<p class="last-child">It provides life, burial, accident and disability benefits to security personnel employed under a security group or a company. THis plan can cover a minimum of twenty five (25) security guards and no maximum limit on the number of members.</p>
+
+				</div>
+			</div>
+			<div class="h-prime-contant-area clearfix package-area">
+				<div class="col-left">
+					<h4>Who Are Qualified Under This Plan?</h4>
+					<p>
+						Permanent or probationary employees ages 18-64 years old who are working in non-hazardous industries can be insured under this plan.
+					</p>
+				</div>
+				<div class="col-right">
+					<h4>Security Guard Plan Packages</h4>
+					<ul>
+						<!-- <li class="head">
+
+							<div class="col3">&nbsp;</div>
+							<div class="col3"><span>Life <br />Coverage</span></div>
+							<div class="col3"><span>Accidental Death and Disability / Total and Permanent Disability Benefit Coverage</span></div>
+							<div class="col3"><span>Annual <br />Premium per <br />Head</span></div>
+
+						</li>
+						<li>
+							<div class="col3"><span>Plan 1</span></div>
+							<div class="col3">₱25,000</div>
+							<div class="col3">₱25,000</div>
+							<div class="col3">₱194.75</div>
+						</li>
+						<li>
+							<div class="col3"><span>Plan 2</span></div>
+							<div class="col3">₱35,000</div>
+							<div class="col3">₱35,000</div>
+							<div class="col3">₱261.25</div>
+						</li>
+						<li>
+							<div class="col3"><span>Plan 3</span></div>
+							<div class="col3">₱55000</div>
+							<div class="col3">₱55000</div>
+							<div class="col3">₱394.25</div>
+						</li>
+						<li>
+							<div class="col3"><span>Plan 4</span></div>
+							<div class="col3">₱65,000</div>
+							<div class="col3">₱65,000</div>
+							<div class="col3">₱460.75</div>
+						</li> -->
+
+						<li class="head">
+
+							<div class="col3">&nbsp;</div>
+							<div class="col3"><span>Plan 1</span></div>
+							<div class="col3"><span>Plan 2</span></div>
+							<div class="col3"><span>Plan 3</span></div>
+							<div class="col3"><span>Plan 4</span></div>
+
+						</li>
+						<li>
+							<div class="col3"><span>Life Coverage</span></div>
+							<div class="col3">₱25,000</div>
+							<div class="col3">₱35,000</div>
+							<div class="col3">₱55,000</div>
+							<div class="col3">₱65,000</div>
+						</li>
+						<li>
+							<div class="col3"><span>Accidental Death and Disability</span></div>
+							<div class="col3">₱25,000</div>
+							<div class="col3">₱35,000</div>
+							<div class="col3">₱55,000</div>
+							<div class="col3">₱65,000</div>
+						</li>
+						<li>
+							<div class="col3"><span>Annual Premium<br> per Head</span></div>
+							<div class="col3">₱194.75</div>
+							<div class="col3">₱261.25</div>
+							<div class="col3">₱394.25</div>
+							<div class="col3">₱460.75</div>
+						</li>
+					</ul>
+					<p class="small-text">*The Security Guard Plan is also available at higher coverages with hospitalization benefits. For the details of these packages, please contact the Corporate Solutions team via e-mail: <a style="color:#e43d24;" href="mailto:corporatesolutions@insular.com.ph">corporatesolutions@insular.com.ph</a> or landline 8878 1841.
+				</div>
+				<div class="buttons-center">
+					<a [routerLink]="['/group/quote']" [queryParams]="{ plan: '2', planCode: '2 - Security Agencies', productName:'Security Guard Plan', productType: '0'}" class="btn-orange">GET A QUOTE</a> 
+					<a href="#requirements-popup2" rel="modal:open" class="btn-orange border-orange">Application Requirements</a>
+					<a routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" class="btn-orange border-orange">FAQ</a>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section h-prime-section prime-secure-section special-section plan-section" id="plan-section-3" style="display: none;">
+		<div class="close-icon btn-close" (click)="closePlans()"><img src="assets/images/close.svg"></div>
+		<div class="container">
+			<!-- <p class="section-lead wow fadeInUp">&nbsp;</p> -->
+			<div class="h-prime-contant-area clearfix flax">
+				<div class="col-left">
+					<img src="assets/images/Schools and Universities1.png" alt="Special Group Plan">
+
+				</div>
+				<div class="col-right">
+					<h2 class="section-header wow fadeInUp" style="visibility: visible; animation-name: fadeInUp; font-size:42px;">Students and Teachers Plan</h2>
+					<p class="last-child">
+						Students and Teachers Plan is a group plan that provides life insurance benefits upon the individual’s demise. In addition, the plan offers accident, hospitalization and disability coverage to students. All these benefits are payable wherever and whenever the unfortunate event happens.
+					</p>
+					<br/>
+					<p class="last-child">
+						The plan can cover a minimum of fifty (50) students and fifteen (15) teachers with no maximum limit to the number of insured members. Just remember that the number of teachers should not exceed the number of students insured.
+					</p>
+					<p style="display: none;" class="special-tag">
+						Got questions? <a href="https://www.insularlife.com.ph/group-insurance
+">Click here to view FAQs</a>
+					</p>
+				</div>
+			</div>
+			<div class="h-prime-contant-area clearfix package-area">
+				<div class="col-left">
+					<h4>Who Are Qualified Under This Plan?</h4>
+					<p>All bona fide students ages 2 – 40 years old that carry a minimum of six (6) units per semester; and Full-time teachers ages 18 – 59 years old with permanent employment status in the school/university can be insured under this plan.</p>
+				</div>
+				<div class="col-right five-col">
+					<h4>Students and Teachers Plan Packages</h4>
+					<ul>
+						<li class="head">
+
+							<div class="col3">&nbsp;</div>
+							<div class="col3"><span>Plan 1</span></div>
+							<div class="col3"><span>Plan 2</span></div>
+							<div class="col3"><span>Plan 3</span></div>
+							<div class="col3"><span>Plan 4</span></div>
+
+						</li>
+						<li>
+							<div class="col3"><span>Life Insurance <br>(non-accident)</span></div>
+							<div class="col3">₱10,000</div>
+							<div class="col3">₱20,000</div>
+							<div class="col3">₱25,000</div>
+							<div class="col3">₱35,000</div>
+						</li>
+						<li>
+							<div class="col3"><span>Life Insurance (accident)</span></div>
+							<div class="col3">₱25,000</div>
+							<div class="col3">₱45,000</div>
+							<div class="col3">₱55,000</div>
+							<div class="col3">₱75,000</div>
+						</li>
+						<li class="full-row">
+							<div class="col3"><span>For Students Only</span></div>
+							<div class="col3">Hospitalization benefits have its corresponding maximum limit per disability</div>
+						</li>
+						<li>
+							<div >
+								<div class="col3">
+									<span>
+										Disability:
+										
+	
+									</span>
+								</div>
+								<div class="col3">₱10,000</div>
+								<div class="col3">₱20,000</div>
+								<div class="col3">₱25,000</div>
+								<div class="col3">₱35,000</div>
+							</div>
+							<div class="row col-12 disability-infos">
+								<ol style="width: 100%; padding: 0 5px;">
+									<li>both hands or feet</li>
+									<li>sight of both eyes</li>
+									<li>one hand & a foot</li>
+									<li>one hand & a sight of one eye</li>
+									<li>a foot & a sight of one eye</li>
+								</ol>
+							</div>
+							
+						</li>
+						<li>
+							<div>
+								<div class="col3">
+									<span>
+										Disability:
+										
+	
+									</span>
+								</div>
+								<div class="col3">₱7,500</div>
+								<div class="col3">₱12,500</div>
+								<div class="col3">₱15,000</div>
+								<div class="col3">₱20,000</div>
+							</div>
+							<div class="row col-12 disability-infos">
+								<ol style="width: 100%; padding: 0 5px;">
+									<li>one hand or a foot</li>
+									<li>sight of one eye</li>
+
+								</ol>
+							</div>
+						</li>
+						<li>
+							<div class="col3"><span>Room & Board</span></div>
+							<div class="col3">₱200</div>
+							<div class="col3">₱400</div>
+							<div class="col3">₱500</div>
+							<div class="col3">₱700</div>
+						</li>
+						<li>
+							<div class="col3"><span>Special Hospital Services</span></div>
+							<div class="col3">₱2,400</div>
+							<div class="col3">₱4,800</div>
+							<div class="col3">₱6,000</div>
+							<div class="col3">₱8,400</div>
+						</li>
+						<li>
+							<div class="col3"><span>Doctor’s Call</span></div>
+							<div class="col3">₱2,400</div>
+							<div class="col3">₱4,800</div>
+							<div class="col3">₱6,000</div>
+							<div class="col3">₱8,400</div>
+						</li>
+						<li>
+							<div class="col3"><span>Maximum Hospitalization on per Disability</span></div>
+							<div class="col3">₱8,000</div>
+							<div class="col3">₱16,000</div>
+							<div class="col3">₱20,000</div>
+							<div class="col3">₱28,000</div>
+						</li>
+						<li>
+							<div class="col3"><span>Outpatient Benefit</span></div>
+							<div class="col3">₱2,000</div>
+							<div class="col3">₱4,000</div>
+							<div class="col3">₱5,000</div>
+							<div class="col3">₱7,000</div>
+						</li>
+					</ul>
+					<p class="small-text">*The Students and Teachers Plan is also available at higher coverages. For the details of these packages, please contact the Corporate Solutions team via e-mail: <a style="color:#e43d24;" href="mailto:corporatesolutions@insular.com.ph">corporatesolutions@insular.com.ph</a> or landline 8878 1841.
+				</div>
+				<div class="buttons-center">
+					<a [routerLink]="['/group/quote']" [queryParams]="{ plan: '3', planCode: '3 - Schools and Universities' , productName:'Students and Teachers Plan', productType: '0'}" class="btn-orange">GET A QUOTE</a> <a href="#requirements-popup3" class="btn-orange border-orange" rel="modal:open">Application Requirements</a>
+					<a routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" class="btn-orange border-orange">FAQ</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section ptb50" style="padding-top:15px">
+		<div class="container">
+			<p class="special-tag" style="margin-top: 0; text-align: center;">
+				Looking for other group plans? <a target="_blank" href="https://www.insularlife.com.ph/group-insurance">Click here</a>
+			</p>
+		</div>
+	</section>
+
+
+
+
+
+	<section class="section section-newsletter newsletter-blue" id="application-status">
+		<div class="container">
+			<h2 class="section-header">Already have a Group Application?</h2>
+			<p class="section-lead">Let’s check your application status by entering your reference code:</p>
+			<form #f="ngForm" (ngSubmit)="checkReferenceCode(f.form.valid)" novalidate autocomplete="off" class="reference-form">
+				<input type="text"
+					   placeholder="Enter reference code"
+					   name="code"
+					   [ngClass]="{invalid: this.submitted && reference_code.invalid}"
+					   #reference_code="ngModel" [ngModel]="referenceCode"
+					   (ngModelChange)="referenceCode = $event.toUpperCase()"
+					   required>
+				<input type="submit" class="check-status-btn" value="Check">
+			</form>
+		</div>
+	</section>
+
+	<section id="howToApply" class="section-easy-step">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">Easy 3-Step Application Process</h2>
+			<div class="three-step">
+				<div class="line-svg" style="display: none;">
+					<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+						 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+						 xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+						 xmlns:xlink="http://www.w3.org/1999/xlink"
+						 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+						 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="mysvg" version="1.1"
+						 inkscape:version="0.48.5 r10040" width="1225.7102" height="254.88278"
+						 sodipodi:docname="animation-with-color.svg">
+						<style>
+							#path3765 {
+								animation: dash 3s linear forwards;
+								fill: none;
+								stroke: url(#linearGradient3810);
+								stroke-width: 3.50000000000000000;
+								stroke-linecap: butt;
+								stroke-linejoin: miter;
+								stroke-miterlimit: 4;
+								stroke-opacity: 1;
+								stroke-dasharray: none
+							}
+
+							#path2995-1 {
+								animation: dash1 3s;
+								fill: #ed8327;
+								fill-opacity: 1;
+								fill-rule: evenodd;
+								stroke: none;
+							}
+
+							@keyframes dash {
+								from {
+									stroke-dasharray: 1631;
+									stroke-dashoffset: 1631;
+								}
+
+								to {
+									stroke-dasharray: 1631;
+									stroke-dashoffset: 0;
+								}
+							}
+
+							@keyframes dash1 {
+								0% {
+									opacity: 0;
+								}
+
+								99% {
+									opacity: 0;
+								}
+
+								100% {
+									opacity: 1;
+								}
+							}
+						</style>
+
+						<defs id="defs2989">
+							<linearGradient id="linearGradient3812">
+								<stop id="stop3814" offset="0" style="stop-color:#1f97d3;stop-opacity:1;" />
+								<stop style="stop-color:#3755a5;stop-opacity:1;" offset="0.47854841"
+									  id="stop3816" />
+								<stop id="stop3818" offset="0.51287097"
+									  style="stop-color:#9d3953;stop-opacity:1;" />
+								<stop id="stop3820" offset="1" style="stop-color:#ed8327;stop-opacity:1;" />
+							</linearGradient>
+							<linearGradient id="linearGradient3798">
+								<stop style="stop-color:#1f97d3;stop-opacity:1;" offset="0" id="stop3800" />
+								<stop id="stop3806" offset="0.50715053"
+									  style="stop-color:#3755a5;stop-opacity:1;" />
+								<stop style="stop-color:#9d3953;stop-opacity:1;" offset="0.51188737"
+									  id="stop3808" />
+								<stop style="stop-color:#ed8327;stop-opacity:1;" offset="1" id="stop3802" />
+							</linearGradient>
+							<linearGradient inkscape:collect="always" xlink:href="#linearGradient3798"
+											id="linearGradient3804" x1="-3.7402344e-006" y1="127.44139" x2="1225.7103"
+											y2="127.44139" gradientUnits="userSpaceOnUse" />
+							<linearGradient inkscape:collect="always" xlink:href="#linearGradient3812"
+											id="linearGradient3810" gradientUnits="userSpaceOnUse" x1="-3.7402344e-006"
+											y1="127.44139" x2="1225.7103" y2="127.44139" />
+						</defs>
+
+						<g id="g3785" style="stroke:url(#linearGradient3804)">
+							<path transform="translate(-356.52042,-401.72872)"
+								  d="m 372.29648,529.33746 a 7.888031,7.888031 0 1 1 -15.77606,0 7.888031,7.888031 0 1 1 15.77606,0 z"
+								  sodipodi:ry="7.888031" sodipodi:rx="7.888031" sodipodi:cy="529.33746"
+								  sodipodi:cx="364.40845" id="path2995"
+								  style="fill:#1f97d3;fill-opacity:1;fill-rule:evenodd;stroke:none"
+								  sodipodi:type="arc" />
+							<path sodipodi:nodetypes="cccccccc" inkscape:connector-curvature="0" id="path3765"
+								  d="m 13.663124,127.8062 110.933856,-0.61974 c 3.14694,-163.678674 243.80304,-170.780854 249.13638,0 l 113.41283,-0.61975 c 14.15146,168.45232 240.14839,168.84987 253.47459,0.61974 l 112.7931,0 c 1.8597,-154.527964 236.71002,-179.176924 251.61532,0.61975 l 108.4549,-0.61975"
+								  style="fill:none;stroke:url(#linearGradient3810);stroke-width:3.50000000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+							<path transform="translate(853.41378,-401.3905)"
+								  d="m 372.29648,529.33746 a 7.888031,7.888031 0 1 1 -15.77606,0 7.888031,7.888031 0 1 1 15.77606,0 z"
+								  sodipodi:ry="7.888031" sodipodi:rx="7.888031" sodipodi:cy="529.33746"
+								  sodipodi:cx="364.40845" id="path2995-1"
+								  style="fill:#ed8327;fill-opacity:1;fill-rule:evenodd;stroke:none"
+								  sodipodi:type="arc" />
+						</g>
+					</svg>
+				</div>
+				<ul>
+					<li>
+						<div class="step-icon-wrap"><img src="assets/images/step01.svg" alt="Step one"></div>
+						<div class="step-title">STEP 1: Get a Quote</div>
+						<p class="step-desc">Choose a group package for your employees and enter your company's basic information.</p>
+					</li>
+					<li>
+						<div class="step-icon-wrap"><img src="assets/images/step02.svg" alt="Step one"></div>
+						<div class="step-title">STEP 2: Apply</div>
+						<p class="step-desc">Upload all the requirements and let the authorized representative of your company accomplish the application.</p>
+						<p class="step-desc">We have available templates for some requirements that you should download and upload once you get to apply.<br><a href="https://www.insularlife.com.ph/form-library
+							" target="_blank">Click here to download.</a></p>
+					</li>
+					<li>
+						<div class="step-icon-wrap"><img src="assets/images/step03.svg" alt="Step one"></div>
+						<div class="step-title">STEP 3: Pay</div>
+						<p class="step-desc">Choose your payment scheme and pay. Your application will now be processed.</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+
+
+</main>
+
+<div id="requirements-popup1" class="modal requirements-popup">
+	<a href="#" class="modal-close" rel="modal:close"><img src="assets/images/close.svg"></a>
+	<div class="popup-content">
+		<h2>Requirements</h2>
+		<div class="req-row">
+			<h4>Standard Requirements</h4>
+			<ol>
+				<li><span>1.</span> List of employees (census) <a href="javascript:Void(0);" (click)="censusFile()"> download template</a></li>
+				<li><span>2.</span> Entity Plan Admin Form <a href="javascript:Void(0);" (click)="adminForm()"> download template</a></li>
+				<li><span>3.</span> ID of Authorized Representative</li>
+				<li><span>4.</span> BIR Notice of Inclusion in Top 20,000 Corporations and BIR Form 2307 (if applicable)</li>
+				<li><span>5.</span> Post-policy Issuance: Individual Application Form <a href="javascript:Void(0);" (click)="IndividualApplicationForm()"> download template</a></li>
+
+
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Corporations</h4>
+			<ol>
+				<li><span>1.</span> SEC Registration/City/Municipality Ordinance/Congressional Bill</li>
+				<li><span>2.</span> Articles of Incorporation and By-Laws</li>
+				<li><span>3.</span> Secretary's Certificate/Board Resolution <a href="javascript:Void(0);" (click)="SecretarysCertificate()"> download template </a></li>
+
+
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Partnerships</h4>
+			<ol>
+				<li><span>1.</span> SEC Registration</li>
+				<li><span>2.</span> Articles of Partnership and By-Laws</li>
+				<li><span>3.</span> Partnership Resolution/Managing Parthner's Certificate</li>
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Sole Proprietorship</h4>
+			<ol>
+				<li><span>1.</span>DTI Registration</li>
+				<li><span>2.</span>Authorization of Owner to the Authorized Representative to transact business with Insular Life </li>
+			</ol>
+		</div>
+
+	</div>
+</div>
+
+<div id="requirements-popup2" class="modal requirements-popup">
+	<a href="#" class="modal-close" rel="modal:close"><img src="assets/images/close.svg"></a>
+	<div class="popup-content">
+		<h2>Requirements</h2>
+		<div class="req-row">
+			<h4>Standard Requirements</h4>
+			<ol>
+				<li><span>1.</span> List of security guards (census) <a href="javascript:Void(0);" (click)="censusFile()"> download template</a></li>
+				<li><span>2.</span> Customer Info Update Form <a href="javascript:Void(0);" (click)="ciuForm()"> download template</a></li>
+				<li><span>3.</span> ID of Authorized Representative</li>
+				<li><span>4.</span> BIR Notice of Inclusion in Top 20,000 Corporations and BIR Form 2307 (if applicable)</li>
+				<li><span>5.</span> Percentage tax (if applicable)</li>
+				<li><span>6.</span> Post-policy Issuance: Individual Application Form <a href="javascript:Void(0);" (click)="IndividualApplicationForm()"> download template</a></li>
+
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Corporations</h4>
+			<ol>
+				<li><span>1.</span> SEC Registration/City/Municipality Ordinance/Congressional Bill</li>
+				<li><span>2.</span> Articles of Incorporation and By-Laws</li>
+				<li><span>3.</span> Secretary’s Certificate/Board Resolution <a href="javascript:Void(0);" (click)="SecretarysCertificate()"> download template </a></li>
+
+
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Partnerships</h4>
+			<ol>
+				<li><span>1.</span> SEC Registration</li>
+				<li><span>2.</span> Articles of Partnership and By-Laws</li>
+				<li><span>3.</span> Partnership Resolution/Managing Partner’s Certificate</li>
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Sole Proprietorship</h4>
+			<ol>
+				<li><span>1.</span>DTI Registration</li>
+				<li><span>2.</span>Authorization of Owner to the Authorized Representative to transact business with Insular Life </li>
+
+
+			</ol>
+		</div>
+
+	</div>
+</div>
+
+<div id="requirements-popup3" class="modal requirements-popup">
+	<a href="#" class="modal-close" rel="modal:close"><img src="assets/images/close.svg"></a>
+	<div class="popup-content">
+		<h2>Requirements</h2>
+		<div class="req-row">
+			<h4>Standard Requirements</h4>
+			<ol>
+				<li><span>1.</span> List of students and teachers (census) <a href="javascript:Void(0);" (click)="censusFile()"> download template</a></li>
+				<li><span>2.</span> Customer Info Update Form <a href="javascript:Void(0);" (click)="ciuForm()"> download template</a></li>
+				<li><span>3.</span> ID of Authorized Representative</li>
+				<li><span>4.</span> BIR Notice of Inclusion in Top 20,000 Corporations and BIR Form 2307 (if applicable)</li>
+				<li><span>5.</span> Certification that all faculty members are full time/permanent employees of the school (if permanency date is not indicated in the census template)<br /> Post-policy Issuance: Individual Application Form <a href="javascript:Void(0);" (click)="IndividualApplicationForm()"> download template</a></li>
+				<li><span>6.</span> Post-policy Issuance: Individual Application Form <a href="javascript:Void(0);" (click)="IndividualApplicationForm()"> download template</a></li>
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Corporations</h4>
+			<ol>
+				<li><span>1.</span>SEC Registration/City/Municipality Ordinance/Congressional Bill/Certificate of Establishment from Department of Education</li>
+				<li><span>2.</span> Articles of Incorporation and By-Laws</li>
+				<li><span>3.</span> Secretary’s Certificate/Board Resolution or Principal’s Appointment who will transact business with Insular Life</li>
+				<li><span>4.</span> General Information Sheet (GIS)</li>
+
+
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Partnerships</h4>
+			<ol>
+				<li><span>1.</span>SEC Registration or Principal’s Appointment who will transact with Insular Life</li>
+				<li><span>2.</span> Articles of Partnership and By-Laws</li>
+				<li><span>3.</span> Partnership Resolution/Managing Partner’s Certificate</li>
+			</ol>
+		</div>
+		<div class="req-row">
+			<h4>For Sole Proprietorship</h4>
+			<ol>
+				<li><span>1.</span>DTI Registration</li>
+				<li><span>2.</span>Authorization of Owner to the Authorized Representative to transact business with Insular Life  </li>
+			</ol>
+		</div>
+
+		<div class="req-row">
+			<h4>For Public Schools</h4>
+			<ol>
+				<li><span>1.</span>City/Municipality Ordinance or Congressional Bill or Certificate from the Department of Education</li>
+				<li><span>2.</span>Principal's Appointment who will transact business with IL</li>
+			</ol>
+		</div>
+	</div>
+</div>

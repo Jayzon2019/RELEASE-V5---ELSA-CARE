@@ -1,0 +1,40 @@
+.ps-lite-pay-page{
+    .steplist-wrapper {
+        .steplist{
+            position: fixed;
+        }
+    }
+
+    .leftwrapsection {
+        padding: 36px 250px 36px 150px;
+    }
+    
+    @media (max-width: 1280px) {
+        .leftwrapsection {
+        padding-right: 150px;
+        }
+    }
+
+    @media (max-width: 1080px) {
+        .leftwrapsection {
+        padding: 36px 60px 36px 60px;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .steplist-wrapper > .steplist{
+            position: inherit;
+        }
+
+        .main-conten-wrapper {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .leftwrapsection {
+            padding: 36px;
+        }
+    }
+
+    
+}

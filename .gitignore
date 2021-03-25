@@ -74,3 +74,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Configuration files
+appsettings.json
+local.settings.json
+/InLife.Store.StoreFront/src/app/common/pipes/format-number.pipe.ts

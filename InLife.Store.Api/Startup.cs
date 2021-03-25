@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +17,7 @@ using Newtonsoft.Json.Serialization;
 
 using AutoMapper;
 
+using InLife.Store.Core.Models;
 using InLife.Store.Core.Business;
 using InLife.Store.Core.Settings;
 using InLife.Store.Core.Services;
@@ -42,12 +44,31 @@ namespace InLife.Store.Api
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			// DB Context
-			var defaultConnectionString = Configuration.GetConnectionString("DefaultConnection");
+			// If using Kestrel:
+			services.Configure<KestrelServerOptions>(options =>
+			{
+				options.AllowSynchronousIO = true;
+			});
 
+			// If using IIS:
+			services.Configure<IISServerOptions>(options =>
+			{
+				options.AllowSynchronousIO = true;
+			});
+
+			// DB Context
 			services
 				.AddDbContext<ApplicationContext>(options =>
-					options.UseSqlServer(defaultConnectionString));
+					options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+			services
+				.AddDbContext<PrimeCareContext>(options =>
+					options.UseSqlServer(Configuration.GetConnectionString("PrimeCareConnection")));
+			services
+				.AddDbContext<GroupContext>(options =>
+					options.UseSqlServer(Configuration.GetConnectionString("GroupConnection")));
+			//services
+			//	.AddDbContext<PrimeSecureContext>(options =>
+			//		options.UseSqlServer(Configuration.GetConnectionString("PrimeSecureConnection")));
 
 			// App Settings
 			services
@@ -70,19 +91,15 @@ namespace InLife.Store.Api
 			var allowedOrigins = Configuration.GetSection("AllowedOrigins").Get<string[]>();
 			services.AddCors(options =>
 			{
-				//options.AddPolicy(AllowSpecificOrigins,
-				//	builder =>
-				//	{
-				//		builder
-				//			.WithOrigins(allowedOrigins)
-				//			.AllowAnyHeader()
-				//			.AllowAnyMethod()
-				//			.WithExposedHeaders("WWW-Authenticate");
-				//	});
-
 				options.AddPolicy(AllowSpecificOrigins,
 					builder =>
 					{
+						//builder
+						//	.WithOrigins(allowedOrigins)
+						//	.AllowAnyHeader()
+						//	.AllowAnyMethod()
+						//	.WithExposedHeaders("WWW-Authenticate");
+
 						builder
 							.AllowAnyOrigin()
 							.AllowAnyHeader()
@@ -117,24 +134,29 @@ namespace InLife.Store.Api
 			// AutoMapper
 			services.AddAutoMapper(config => config.AddProfile<MappingProfile>(), typeof(Startup));
 
-			services.AddTransient<ICustomerRepository, CustomerRepository>();
-			services.AddTransient<IQuoteRepository, QuoteRepository>();
-
-			services.AddTransient<IActivityLogRepository, ActivityLogRepository>();
-			services.AddTransient<IKeyMetricRepository, KeyMetricRepository>();
-			services.AddTransient<IFaqCategoryRepository, FaqCategoryRepository>();
-			services.AddTransient<IFaqRepository, FaqRepository>();
-			services.AddTransient<IFooterLinkRepository, FooterLinkRepository>();
-			services.AddTransient<IHeroRepository, HeroRepository>();
-			services.AddTransient<IPrimeCareRepository, PrimeCareRepository>();
-			services.AddTransient<IPrimeHeroRepository, PrimeHeroRepository>();
-			services.AddTransient<IProductDetailRepository, ProductDetailRepository>();
-			services.AddTransient<IProductRepository, ProductRepository>();
-
-			services.AddTransient<IContentManagement, ContentManagement>();
-			services.AddTransient<IOrderProcessing, OrderProcessing>();
-
+			// General
 			services.AddTransient<IEmailService, EmailService>();
+			services.AddTransient<ISftpService, SftpService>();
+
+			// Product - PrimeCare
+			services.AddScoped<IPrimeCareApplicationRepository, PrimeCareApplicationRepository>();
+
+			// Product - Group
+			services.AddScoped<IGroupApplicationProcessing, GroupApplicationProcessing>();
+			services.AddScoped<IGroupApplicationRepository, GroupApplicationRepository>();
+			services.AddScoped<IGroupFileRepository, GroupFileRepository>();
+
+			// Content
+			services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
+			services.AddScoped<IKeyMetricRepository, KeyMetricRepository>();
+			services.AddScoped<IFaqCategoryRepository, FaqCategoryRepository>();
+			services.AddScoped<IFaqRepository, FaqRepository>();
+			services.AddScoped<IFooterLinkRepository, FooterLinkRepository>();
+			services.AddScoped<IHeroRepository, HeroRepository>();
+			services.AddScoped<IPrimeCareRepository, PrimeCareRepository>();
+			services.AddScoped<IPrimeHeroRepository, PrimeHeroRepository>();
+			services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
+			services.AddScoped<IProductRepository, ProductRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -155,7 +177,7 @@ namespace InLife.Store.Api
 			}
 
 			app.UseForwardedHeaders();
-						
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

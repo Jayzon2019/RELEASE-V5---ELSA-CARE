@@ -1,0 +1,112 @@
+.reviewbill .detailbill p {
+	margin-bottom: 0.5rem;
+}
+
+p.linkdpay {
+	text-align: center;
+}
+/*-- css changes 04-march-2021 start here --*/
+.stepdetail h1 {
+	font-size: 42px;
+	font-weight: bold;
+}
+.stepdetail h3 {
+	color: #070752;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+.stepdetail .preminumform label {
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+.steplist ul.steplistmain li {
+	font-weight: 600;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li ul.innerlist li a,
+.stepdetail .preminumform input,
+.stepdetail .preminumform select,
+.checkbox-wrap .pf-list-item label span {
+	font-size: 15px;
+	font-weight: 600;
+}
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	color: #070752;
+}
+.stepdetail .preminumform input:visited,
+.stepdetail .preminumform select:visited {
+	border: 2px solid #2895df;
+}
+input#inputEmail4 {
+	background: #f6f7f8;
+}
+input#inputEmail4::placeholder {
+	color: #070752 !important;
+}
+.stepdetail .preminumform p {
+	line-height: 24px !important;
+	color: #070752;
+	font-size: 15px;
+}
+ul.condtionslist li {
+	color: #42414d;
+	line-height: 24px;
+	font-size: 15px;
+}
+.step6,
+.step7,
+.step8,
+.step5,
+.step2,
+.step3,
+.step4 {
+	margin-bottom: 60px !important;
+}
+.formcoantiner.step3 {
+	margin-bottom: 0 !important;
+}
+.pagetitel-sec h3 {
+	display: none;
+}
+/*--- 10-march-2021 css start  ---*/
+.formcoantiner .titlebill p {
+	color: #42414d;
+	font-size: 16px;
+	font-weight: 600;
+}
+.formcoantiner .detailbill p {
+	color: #42414d;
+	font-size: 15px;
+}
+.outerdesclaimer p,
+.reviewbill p {
+	color: #42414d;
+	font-size: 15px;
+	line-height: 24px;
+}
+.reviewbill p.linkdpay a {
+	font-size: 15px;
+	color: #e43e25;
+}
+.steplist ul.steplistmain li.active.complete:before {
+	color: #fff;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+.form-control:focus,
+.form-control:hover {
+	border-color: #01a7e0 !important;
+}
+p.linkdpay a,
+p.linkdpay a:hover {
+	text-decoration: none;
+	margin: auto 14px;
+}

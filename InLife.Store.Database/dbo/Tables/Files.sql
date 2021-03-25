@@ -1,8 +1,15 @@
 ﻿CREATE TABLE [dbo].[Files] (
-    [Id]        VARCHAR (36) NOT NULL,
-    [ClusterId] INT          NOT NULL,
+    [Id]          UNIQUEIDENTIFIER   NOT NULL,
+    [ClusterId]   INT                NOT NULL,
+    [DateCreated] DATETIMEOFFSET (7) CONSTRAINT [DF_Files_DateCreated] DEFAULT (sysdatetimeoffset()) NOT NULL,
+    [MediaType]   VARCHAR (30)       NULL,
+    [Data]        NVARCHAR (MAX)     NULL,
     CONSTRAINT [PK_Files] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );
+
+
+
+
 
 
 GO

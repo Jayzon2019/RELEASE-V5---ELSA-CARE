@@ -1,0 +1,87 @@
+<main class="d-flex flex-column align-items-center group-payment-pending-page" *ngIf="!isPaymentUploaded">
+	<h2 class="section-header wow fadeInUp">
+		Your InLife Group Application is
+	</h2>
+	<div class="pending-text-box cursor-pointer mt-5">
+		PENDING FOR PAYMENT
+	</div>
+	<p class="sub-title wow fadeInUp">
+		InLife awaits for your payment confirmation. Once paid, you may upload your proof 
+		<br>of payment here or send it via e-mail at 
+		<a href="mailto:corporatesolutions@insular.com.ph">corporatesolutions@insular.com.ph</a> 
+	</p>
+	<span class="text-primary text-center mt-5 font-weight-bold">
+		Upload my Official Receipt / Deposit Slip (Proof of Payment)
+	</span>
+
+	<div class="col-md-12 mb-3">
+		<div class="image-upload-wrap"
+			*ngIf="!requirementsForm.valid"
+			(click)="fileInput.click()" appDragDrop 
+			(onFileDropped)="onFileChanged($event)">
+			<input #fileInput hidden type="file" name="file" 
+					accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" 
+					class="file-upload-input"
+					(change)="onFileChanged($event)"
+					[ngClass]="(requirementsForm.get('ProofOfPayment').dirty || requirementsForm.get('ProofOfPayment').touched) && requirementsForm.get('ProofOfPayment')?.errors ? 'is-invalid'
+								: requirementsForm.get('ProofOfPayment').valid ? 'is-valid' : ''"/>
+			<small class="errormsg" *ngIf="(requirementsForm.get('ProofOfPayment').dirty || requirementsForm.get('ProofOfPayment')?.errors) ">
+				<span *ngIf="sizeError; else empty">File size exceeded</span>
+
+				<ng-template #empty>Please attach your document</ng-template>
+			</small>
+			<div class="drag-text">
+				<h3> Click here to upload file<br>
+					<span class="file-inner-text"> (.jpg, .png, .pdf, .xls, .doc / 5MB max file Size)</span>
+				</h3>
+			</div>
+		</div>
+
+		<div class="identity-document-preview" *ngIf="requirementsForm.valid">
+			<ng-template [ngTemplateOutlet]="fileTypeDispTemplate">
+			</ng-template>
+			<button class="delete-file" (click)="deleteImage()">
+				<i class="fa fa-trash"></i>
+			</button>
+		</div>
+	</div>
+	<ng-template #fileTypeDispTemplate let-fileData="data" let-fileType="type">
+		<ng-container *ngIf="paymentProofType.type != 'image'; else imgDisp">
+			<img [src]="paymentProofType.fileInfo.loc" height="65px"/>
+			<p>{{paymentProofType.title}}</p>
+		</ng-container>
+		<ng-template #imgDisp>
+			<img [src]="paymentProofType.image"/>
+		</ng-template>
+	</ng-template>
+	<div class="col-12 error-msg" *ngIf="hasError">
+		<span>{{errorMsg}}</span>
+	</div>
+	<div class="d-flex flex-row controls">
+		<button class="btn-fill wow fadeInUp" (click)="uploadPaymentProof()" [disabled]="!requirementsForm.valid">
+			submit
+		</button>
+    </div>
+</main>
+
+
+<main class="d-flex flex-column align-items-center group-payment-pending-page" *ngIf="isPaymentUploaded">
+	<h2 class="section-header wow fadeInUp">
+		Proof of Payment Received
+	</h2>
+	<p class="sub-title wow fadeInUp mt-5">
+		Thank you for your payment. We will get back to you within
+		2-3 business days on policy <br> issuance or any other
+		requirements we may need.
+	</p>
+	<p class="sub-title wow fadeInUp">
+		For queries and other concerns, you may reach us thru e-mail:
+		<br><a href="mailto:corporatesolutions@insular.com.ph">corporatesolutions@insular.com.ph</a> or landline 02 8878 1841
+	</p>
+	<div class="d-flex flex-row mt-5 controls">
+		<button class="btn-outline wow fadeInUp mr-4" (click)="backToHome()">
+			<span class="ml-4">back to home page</span>
+		</button>
+    </div>
+</main>
+

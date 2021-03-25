@@ -1,0 +1,84 @@
+.cancel-application-wrapper {
+
+    p, label, textarea {
+        font-size: 16px;
+    }
+
+    .comments-suggestions {
+        width: 100%;
+        padding-left: 4.5rem;
+        label {
+            color: #42414d;
+        }
+    }
+    .error-msg {
+        display: flex;
+        margin-top: 29px;
+        text-align: center;
+        max-width: 620px;
+    
+        span {
+            padding: 10px 60px;
+            background: linear-gradient(90deg, #e43e25 0%, #e47125 100%);
+            color: white;
+        }
+    }
+    .section-header {
+        width: 90%;
+        font-size: 35px;
+    }
+    
+    .cancel-controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 80px;
+        button {
+            margin: 0 5px;
+        }
+    }
+
+    
+    
+    @media (max-width: 1200px) {
+    
+        .section-header {
+            width: 100%;
+            font-size: 25px !important;
+        }
+        p, label, textarea {
+            font-size: 15px;
+        }
+    
+    }
+    @media (max-width: 600px) {
+        .section-header {
+            font-size: 20px !important;
+        }
+    
+        .cancel-controls {
+            flex-direction: column;
+    
+            button {
+                font-size: 12px;
+            }
+            .submit-btn {
+                display: block !important;
+                text-align: center !important;
+            }
+        }
+        p, .cancel-feedback-option, textarea, label {
+            font-size: 13px;
+        }
+
+        .comments-suggestions {
+            padding-left: 3.5rem;
+        }
+    }
+}
+
+
+
+
+
+    

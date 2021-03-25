@@ -1,0 +1,42 @@
+.leftwrapsection {
+    padding-top: 100px !important;
+}
+
+.feature-list-item {
+    .plan-tab {
+        width: 33.33%;
+        height: 500px;
+    }
+
+    li {
+        .feature-list-col {
+            min-height: 465px;
+        }
+    }
+}
+
+a:hover {
+    p {
+        text-decoration: underline;
+        text-decoration-color: #e3512e;
+        color: #e3512e;
+    }
+    
+}
+
+h1 {
+    color: #3951a2;
+}
+
+p {
+    color: #42414d;
+}
+h5 {
+    color: #696969;
+}
+
+p, h5 {
+    font-size: 16px;
+    line-height: 30px;
+}
+

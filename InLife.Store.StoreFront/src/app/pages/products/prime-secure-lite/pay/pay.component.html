@@ -1,0 +1,293 @@
+<div class="mainpagewrap ps-lite-pay-page">
+	<div class="row m-0">
+		<div class="col-md-12 p-0">
+			<div class="leftwrapsection">
+				<!-- <app-prime-secure-lite-header></app-prime-secure-lite-header> -->
+				<div class="mainwizard">
+					<div class="row">
+						<div class=" col-md-3 col-lg-3 tabsamll steplist-wrapper" style="position: relative;">
+							<div class="steplist">
+								<ul class="steplistmain">
+									<li class="active complete">Get a Quote</li>
+									<li class="active complete">Apply</li>
+
+									<li class="active">
+										Pay
+										<ul class="innerlist">
+											<li class="active">
+												<a href="#">Plan Summary</a>
+											</li>
+											<li class="">
+												<a href="#">Payment</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-12 main-conten-wrapper">
+							<div class="stepdetail">
+								<div class="pagetitles">
+									<h1>
+										Please Review Your Plan Details Before
+										Proceeding To Payment.
+									</h1>
+								</div>
+
+								<!-- step9 strat -->
+
+								<div class="formcoantiner step9">
+									<div class="reviewbill">
+										<div class="row">
+											<div class="col-md-4 titlebill">
+												<p>Proposed Insured</p>
+											</div>
+											<div class="col-md-8 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Insured Name:</p>
+													</div>
+													<div class="col-6">
+														<p>{{ basicInformation.fname }} {{ basicInformation.mname }} {{ basicInformation.lname }}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-4 titlebill">
+												<p>Personal Information</p>
+											</div>
+											<div class="col-md-8 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Email Address:</p>
+													</div>
+													<div class="col-6">
+														<p>
+															{{ basicInformation.email }}
+														</p>
+													</div>
+												</div>
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Birthdate:</p>
+													</div>
+													<div class="col-6">
+														<p>
+															{{ calculationInformation.dateofbirth | date }}
+														</p>
+													</div>
+												</div>
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Contact Number:</p>
+													</div>
+													<div class="col-6">
+														<p>
+															+63{{ basicInformation.mobile }}
+															<br />
+															{{ basicInformation.landline }}
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-4 titlebill">
+												<p>Plan Details</p>
+											</div>
+											<div class="col-md-8 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Product Name:</p>
+													</div>
+													<div class="col-6">
+														<p>PRIME SECURE LITE</p>
+													</div>
+												</div>
+
+												<!-- <div class="row m-0">
+													<div class="col-6">
+														<p>Plan:</p>
+													</div>
+													<div class="col-6">
+														<p>Plan 300</p>
+													</div>
+												</div> -->
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Current Age:</p>
+													</div>
+													<div class="col-6">
+														<p>{{ age.age }}</p>
+													</div>
+												</div>
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Gender:</p>
+													</div>
+													<div class="col-6">
+														<p>
+															{{
+																getReferenceDataById(
+																	CONSTANTS.GENDER,
+																	calculationInformation.gender
+																).name
+															}}
+														</p>
+													</div>
+												</div>
+
+												<!-- <div class="row m-0">
+													<div class="col-6">
+														<p>Mode of Payment</p>
+													</div>
+													<div class="col-6">
+														<p>Annual</p>
+													</div>
+												</div> -->
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Sum Assured:</p>
+													</div>
+													<div class="col-6">
+														<p>{{ calculationInformation.totalCashBenefit }}</p>
+													</div>
+												</div>
+
+												<!-- <div class="row m-0">
+													<div class="col-6">
+														<p>
+															Extended Spouse
+															Accident Coverage:
+														</p>
+													</div>
+													<div class="col-6">
+														<p>&#8369;150,000</p>
+													</div>
+												</div> -->
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>
+															Cancer, Heart Attack
+															and Stroke Coverage:
+														</p>
+													</div>
+													<div class="col-6">
+														<p>{{ calculationInformation.chas }}</p>
+													</div>
+												</div>
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>
+															Covid-19 Insurance
+															Benefit(6-months
+															Coverage):
+														</p>
+													</div>
+													<div class="col-6">
+														<p>{{ calculationInformation.covid }}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<br />
+										<p class="mt-5">
+											Prime Secure Lite is a One-Year plan
+											available for applicants aged
+											18-60.Customers may re-apply to
+											extend their coverage. Policy
+											issuance is subject to coordination
+											of benefits with other insurance
+											policies
+										</p>
+										<p class="mt-3">
+											Reminder: <br />
+											Enrolment to our Auto-Charging
+											Option (ACO) facility is required
+											for payment of succeeding annual and
+											monthly premiums using your
+											Mastercard or VISA credit cards to
+											keep your policy in force.
+										</p>
+										<p class="linkdpay mt-3">
+											<a
+												[href]="sanitize(policy)"
+												target="_blank"
+												download="Policy Provisions and Exclusions.pdf"
+											>
+												Download the Policy Provisions
+											</a>
+											<a
+												[href]="sanitize(privacyFile)"
+												target="_blank"
+												download="Policy on Cancellation and Refund.pdf"
+											>
+												Click here for Policy on
+												Cancellation and Refund
+											</a>
+											<a
+												href="https://www.insularlife.com.ph/customer-charter"
+												target="_blank"
+												>Link to Customer Charter
+											</a>
+										</p>
+									</div>
+									<div class="outerdesclaimer">
+										<p>
+											If you wish to change anything
+											related to your application, please
+											select Edit Details. Otherwise,
+											please select Pay Now to proceed
+											with your payment transaction.
+										</p>
+									</div>
+
+									<div class="form-row">
+										<div class="col-6">
+											<div class="btnsec text-left">
+												<a
+													class="btn outlinedbtn"
+													[routerLink]="[
+														'/prime-secure-lite/quote'
+													]"
+												>
+													<i class="material-icons"
+														>arrow_backward</i
+													>
+													Edit Details
+												</a>
+											</div>
+										</div>
+										<div class="col-6">
+											<div class="btnsec text-right">
+												<button
+													class="btn"
+													(click)="createApplication()"
+												>
+													Pay Now
+													<i class="material-icons"
+														>arrow_forward</i
+													>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,420 @@
+.stepdetail .preminumform select {
+	color: #ababab;
+}
+
+.black {
+	color: #000 !important;
+}
+.stepdetail {
+	h1 {
+		line-height: 1.4;
+	}
+	.errorMsg-wrapper {
+		margin-top: 20px;
+		width: 98%;
+		padding: 10px;
+		background-color: #e87325;
+		color: white;
+	}
+}
+.plan-card {
+	cursor: pointer;
+	text-align: center;
+	margin-top: 15px;
+
+	h5 {
+		margin: 10px 0 10px 0;
+		font-size: 15px;
+		font-weight: 500;
+	}
+	h2 {
+		font-weight: 700;
+		margin-bottom: 15px;
+		font-size: 30px;
+	}
+	p {
+		margin-bottom: 5px;
+	}
+}
+.wealth-box {
+	padding: 25px 12px;
+	border: 2px solid #d5d5d5;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+//.plan-card:hover {
+// .wealth-box{
+//     background-color: dodgerblue;
+//     color: #fff;
+// }
+// p{
+//     color: #fff;
+// }
+//}
+
+.selected-li {
+	background-color: #2895df;
+	color: #fff;
+	border: 2px solid #d5d5d5;
+	p {
+		color: #fff;
+	}
+}
+
+.pagetitles {
+	margin: 0px 0 80px 0;
+}
+
+.stepdetail {
+	margin-bottom: 60px;
+	h3 {
+		color: #070752;
+		font-weight: 600;
+	}
+}
+
+.btn-back {
+	margin-right: 30px;
+}
+
+.errormsg {
+	&.formnumform-msg {
+		bottom: -28px !important;
+	}
+}
+
+.right-panel {
+	background: #f5f7fd;
+	padding: 140px 20px 20px;
+	top: 0;
+	z-index: 9999;
+	min-width: 242px;
+	right: 0px;
+}
+
+// ::ng-deep .main-nav {
+// 	display: none;
+// }
+
+// ::ng-deep footer {
+// 	display: none;
+// }
+
+h1 {
+	color: #070752;
+}
+.right-panel .col-md-12 {
+	padding: 0px;
+}
+.totalprice {
+	color: #070752;
+	font-size: 30px;
+	font-weight: 800;
+	margin: 13px 0 16px;
+	text-transform: uppercase;
+}
+.subprice {
+	color: #070752;
+	font-size: 12px;
+	font-weight: 600;
+	margin: 10px 0 15px;
+	text-transform: uppercase;
+}
+.subprice1 {
+	color: #070752;
+	font-size: 12px;
+	font-weight: 600;
+	margin: 10px 0 15px;
+	text-transform: uppercase;
+}
+.faq #faq {
+	font-size: 14px;
+}
+.stepdetail .preminumform label {
+	color: #42414d;
+
+	.caveat {
+		display: block;
+		margin-top: 5px;
+		font-size: smaller;
+
+	}
+}
+.packageavail h5,
+.packageavail p,
+.packageavail h2 {
+	color: #42414d;
+}
+.selected-li h5,
+.selected-li p,
+.selected-li h2 {
+	color: #fff;
+}
+.packageavail p {
+	font-size: 15px;
+}
+
+.packageavail li.col-md-3 {
+	padding: 0 7px;
+}
+.ppolcy span {
+	line-height: 23px;
+}
+.savebtns:hover,
+.savebtns {
+	padding: 1em 2em;
+}
+.label {
+	color: #42414d;
+	font-size: 14px;
+	margin-bottom: 0.5rem;
+	margin-top: 0.5rem;
+	font-weight: 400;
+}
+
+.faq {
+	font-size: 12px;
+	margin-top: 40px;
+	cursor: pointer;
+	//  padding-left: 10px;
+}
+/*-- css by Designer 05-2021 start --*/
+.stepdetail {
+	margin-right: 15px;
+}
+button.btn.outlinedbtn.text-left.btn-back {
+	margin-right: 15px;
+}
+.stepdetail h1 {
+	// max-width: 708px;
+}
+.stepdetail h3 {
+	font-weight: 500;
+	margin-bottom: 40px;
+}
+
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #2895df;
+	border: 2px solid #2895df;
+}
+
+.stepdetail .preminumform label {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	font-size: 16px;
+}
+
+.mobile-rep-contactnumber {
+	display: none;
+}
+.col-md-12.packageavail ul.row {
+	margin: auto 15px auto 0;
+}
+.steplist ul.steplistmain li ul.innerlist li a {
+	font-size: 16px;
+}
+.col-md-12.packageavail label {
+	margin-bottom: 10px !important;
+}
+
+.btnsec.text-right {
+	margin-right: 25px;
+}
+.formcoantiner.step2 .form-row {
+	margin-right: 15px !important;
+}
+.step2 .btnsec.text-right {
+	margin-right: 0 !important;
+}
+h1.subprice,
+h1.subprice1 {
+	font-size: 18px;
+}
+h1.totalprice {
+	font-size: 40px;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+ul.steplistmain li.active.complete::before {
+	color: #fff !important;
+}
+//update 8 feb
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	/*color: #42414d !important;*/
+}
+.form-control:focus {
+	border-color: #2895df !important;
+}
+/*--css by Designer start 08-feb-2020 --*/
+.form-control.is-valid,
+.was-validated .form-control:valid {
+	background-image: url("/assets/images/check.png");
+}
+/*--css by Designer start 15-feb-2020 --*/
+
+@media screen and (max-width: 991px) {
+	.right-panel {
+		z-index: 99;
+	}
+}
+
+@media screen and (max-width: 1279px) and (min-width: 1024px) {
+	.right-panel {
+		position: absolute !important;
+	}
+	.leftwrapsection {
+		padding: 30px 0;
+	}
+	.stepdetail h1 {
+		font-size: 34px;
+		margin-bottom: 45px;
+	}
+
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.col-md-8.tabsamll form {
+		padding-left: 35px;
+		width: 94%;
+	}
+	.btnsec.text-right[_ngcontent-qiv-c134] {
+		margin-right: 66px;
+	}
+
+	button.btn {
+		margin: 10px auto;
+	}
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+	.leftwrapsection {
+		padding: 30px 15px;
+	}
+	.col-md-8.tabsamll {
+		max-width: 75%;
+	}
+	.col-md-2.col-12.tabsamll {
+		max-width: 25%;
+	}
+	.right-panel {
+		min-width: 10px !important;
+		padding: 25px;
+		position: relative !important;
+	}
+	.steplist ul.steplistmain li {
+		font-size: 20px;
+	}
+	.steplist ul.steplistmain li a {
+		font-size: 14px !important;
+	}
+	.stepdetail h1 {
+		font-size: 32px;
+		margin-bottom: 45px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+		font-size: 18px;
+	}
+
+	input.form-control.ng-untouched.ng-pristine.ng-invalid,
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		height: 46px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 20px;
+	}
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		font-size: 14px;
+	}
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.wealth-box h2 {
+		font-size: 24px !important;
+	}
+	.preminumform .col-md-4 {
+		max-width: 100%;
+	}
+}
+@media screen and (max-width: 767px) {
+	.btnsec.text-right {
+		margin-right: 0 !important;
+	}
+	.steplist,
+	.right-panel {
+		position: relative !important;
+	}
+
+	.tabsamll {
+		padding: 25px 0 0;
+	}
+	.stepdetail h1 {
+		font-size: 30px !important;
+		margin-bottom: 50px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+	}
+	.stepdetail .preminumform label {
+		margin-bottom: 0.5rem;
+	}
+	.stepdetail {
+		margin: auto auto 35px !important;
+	}
+	.packageavail ul.row {
+		margin: auto !important;
+	}
+	.right-panel {
+		padding: 25px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 30px !important;
+	}
+
+	.mobile-rep-contactnumber {
+		display: flex;
+	}
+	.desktop-rep-contactnumber {
+		display: none;
+	}
+}
+
+
+@media (max-width: 800px) {
+	.group-quote-page {
+		.steplist {
+			position: unset !important;
+		}
+	}
+}
+
+@media (max-width: 1169px) and (min-width: 768px) {
+	.business-type {
+		height: 39px !important;
+	}
+	
+	
+}
+@media (max-width: 767px) {
+
+	
+
+	.business-type {
+		height: 14px !important;
+	}
+}

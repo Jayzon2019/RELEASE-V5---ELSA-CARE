@@ -1,0 +1,667 @@
+	<div class="container post-container text-container">
+
+		<div class="timeline-wrapper showloader">
+			<div class="timeline-item">
+				<div class="animated-background facebook">
+					<div class="background-masker header-top"></div>
+					<div class="background-masker header-left"></div>
+					<div class="background-masker header-right"></div>
+					<div class="background-masker header-bottom"></div>
+					<div class="background-masker subheader-left"></div>
+					<div class="background-masker subheader-right"></div>
+					<div class="background-masker subheader-bottom"></div>
+					<div class="background-masker content-top"></div>
+					<div class="background-masker content-first-end"></div>
+					<div class="background-masker content-second-line"></div>
+					<div class="background-masker content-second-end"></div>
+					<div class="background-masker content-third-line"></div>
+					<div class="background-masker content-third-end"></div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="mainpagewrap hideloader group-quote-page">
+			<div class="row m-0">
+				<div class="col-md-12 tabfull p-0">
+					<div class="leftwrapsection">
+						<!-- <app-inner-header></app-inner-header> -->
+						<div class="mainwizard">
+							<div class="row">
+								<div class="col-lg-2 col-md-3 tabsamll">
+									<div class="steplist" style="position:fixed;">
+										<ul class="steplistmain">
+
+											<li class="active">
+												Get a Quote
+												<ul class="innerlist">
+													<li class="active"><a href="javascript:void(0)">Choose a Package</a></li>
+													<li [ngClass]="((getQuoteForm.get('groupPackage')?.valid))?'active':''">
+														<a href="javascript:void(0)">Enter Basic Info</a>
+													</li>
+												</ul>
+											</li>
+											<li>Apply</li>
+											<li>Pay</li>
+
+										</ul>
+									</div>
+								</div>
+								<div class=" col-lg-8 col-md-9 tabsamll">
+									<div class="stepdetail">
+										<h1>Design Your Group Plan</h1>
+										<form [formGroup]="getQuoteForm">
+											<div class="formcoantiner" formGroupName="groupPackage">
+												<div class="form-head">
+													<h3>Choose a Package</h3>
+												</div>
+												<div class="preminumform">
+													<div class="form-row">
+														
+														<ng-container *ngIf="selectedPlan == 1 || selectedPlan == 2">
+															<div class="col-md-12">
+																<label for="">Total No. Of Members</label>
+															</div>
+															<div class="col-md-6 mb-4">
+																
+																<input (keyup)="onPlan(productType)" type="text" class="form-control mb-2"
+																	placeholder="Total No. Of Members" formControlName="TotalNumberOfMembers"
+																	[ngClass]="((submitted  || getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').dirty || getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').touched) &&  getQuoteForm.get('groupPackage').get('TotalNumberOfMembers')?.errors)?'is-invalid'
+																:getQuoteForm.get('groupPackage').get('TotalNumberOfMembers')?.valid?'is-valid':''
+																">
+																<ng-container *ngIf="(submitted  || getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').dirty || getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').touched)">
+																	<small class="errormsg preminumform-msg" *ngIf ="(getQuoteForm.get('groupPackage').get('TotalNumberOfMembers')?.errors?.required); else minmaxErrorMsg">
+																   		This is a required field
+																	</small>
+																	<ng-template #minmaxErrorMsg>
+																		<small class="errormsg preminumform-msg" *ngIf="groupPackageCtrl.get('TotalNumberOfMembers')?.errors">
+																			<ng-container *ngIf="selectedPlan == 1">
+																				Employee Secure Plan requires a minimum headcount of 3 and a maximum of 160. 
+																			</ng-container>
+																			<ng-container *ngIf="selectedPlan == 2">
+																				Security Guard Plan requires a minimum headcount of 25.
+																			</ng-container>
+																		</small>
+																	</ng-template>
+																	
+																</ng-container>
+																
+															</div>
+														</ng-container>
+														<ng-container *ngIf="selectedPlan == 3">
+															<div class="row col-md-12">
+																<div class="col-md-6">
+																	<div class="col-md-12">
+																		<label for="">Total No. of Students
+																		</label>
+																	</div>
+																	<div class="col-md-12 mb-4">
+																		
+																		<input type="text" class="form-control mb-2"
+																			placeholder="Total No. Of Students" formControlName="TotalNumberOfStudents"
+																			[ngClass]="((submitted  || groupPackageCtrl.get('TotalNumberOfStudents').dirty || groupPackageCtrl.get('TotalNumberOfStudents').touched) &&  groupPackageCtrl.get('TotalNumberOfStudents')?.errors)?'is-invalid'
+																		:groupPackageCtrl.get('TotalNumberOfStudents')?.valid?'is-valid':''
+																		">
+																		<ng-container *ngIf="(submitted  || getQuoteForm.get('groupPackage').get('TotalNumberOfStudents').dirty || getQuoteForm.get('groupPackage').get('TotalNumberOfStudents').touched)">
+																			<small class="errormsg preminumform-msg" *ngIf ="(getQuoteForm.get('groupPackage').get('TotalNumberOfStudents')?.errors?.required); else minErrorMsg">
+																				   This is a required field
+																			</small>
+																			<ng-template #minErrorMsg>
+																				<small class="errormsg preminumform-msg" *ngIf="groupPackageCtrl.get('TotalNumberOfStudents')?.errors?.min || groupPackageCtrl.get('TotalNumberOfStudents')?.errors?.pattern">
+																					Students Plan require a minimum headcount of 50. 
+																				</small>
+																			</ng-template>
+																		</ng-container>
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="col-md-12">
+																		<label for="">Total No. of Teachers
+																		</label>
+																	</div>
+																	<div class="col-md-12 mb-4">
+																		
+																		<input (keyup)="onPlan(productType)" type="text" class="form-control mb-2"
+																			placeholder="Total No. Of Teachers" formControlName="TotalNumberOfTeachers"
+																			[ngClass]="((submitted  || getQuoteForm.get('groupPackage').get('TotalNumberOfTeachers').dirty || getQuoteForm.get('groupPackage').get('TotalNumberOfTeachers').touched) &&  getQuoteForm.get('groupPackage').get('TotalNumberOfTeachers')?.errors)?'is-invalid'
+																		:getQuoteForm.get('groupPackage').get('TotalNumberOfTeachers')?.valid?'is-valid':''
+																		">
+																		<ng-container *ngIf="(submitted  || getQuoteForm.get('groupPackage').get('TotalNumberOfTeachers').dirty || getQuoteForm.get('groupPackage').get('TotalNumberOfTeachers').touched)">
+																			<small class="errormsg preminumform-msg" *ngIf ="(getQuoteForm.get('groupPackage').get('TotalNumberOfTeachers')?.errors?.required); else minErrorMsg">
+																				   This is a required field
+																			</small>
+																			<ng-template #minErrorMsg>
+																				<small class="errormsg preminumform-msg" *ngIf="groupPackageCtrl.get('TotalNumberOfTeachers')?.errors">
+																					<ng-container *ngIf="groupPackageCtrl.get('TotalNumberOfTeachers')?.errors?.min || 
+																										groupPackageCtrl.get('TotalNumberOfTeachers')?.errors?.pattern">
+																						Teachers Plan require a minimum headcount of 15. 
+																					</ng-container>
+																					<ng-container *ngIf="groupPackageCtrl.get('TotalNumberOfTeachers')?.errors?.max">
+																						The number of teachers should not exceed the number of students insured.
+																					</ng-container>
+																				</small>
+																			</ng-template>
+																		</ng-container>
+																	</div>
+																</div>
+															</div>
+														</ng-container>
+
+
+														<div class="col-md-12 packageavail mt-3">
+
+															<label for="">Choose a package to avail per member:</label>
+															<ul class="row">
+																<li class="wow fadeInUp animated col-md-3 plan-card" (click)="onPlan(1)">
+
+																	<div class="wealth-box" [ngClass]="{'selected-li': productType== 1}">
+																		<div>
+																			<h5>PLAN 1</h5>
+																			<h2><del>P</del>{{lc1}}</h2>
+																			<p>Life Insurance Coverage</p>
+																			<p><del>P</del>{{Pr1}} Premium</p>
+																		</div>
+																	</div>
+
+																</li>
+																<li class="wow fadeInUp animated col-md-3 plan-card" (click)="onPlan(2)">
+																	<div class="wealth-box" [ngClass]="{'selected-li': productType == 2}">
+																		<div>
+																			<h5>PLAN 2</h5>
+																			<h2><del>P</del>{{lc2}}</h2>
+																			<p>Life Insurance Coverage</p>
+																			<p><del>P</del>{{Pr2}} Premium</p>
+																		</div>
+																	</div>
+																</li>
+																<li class="wow fadeInUp animated col-md-3 plan-card" (click)="onPlan(3)">
+																	<div class="wealth-box" [ngClass]="{'selected-li': productType == 3}">
+																		<div>
+																			<h5>PLAN 3</h5>
+																			<h2><del>P</del>{{lc3}}</h2>
+																			<p>Life Insurance Coverage</p>
+																			<p><del>P</del>{{Pr3}} Premium</p>
+																		</div>
+																	</div>
+																</li>
+																<li class="wow fadeInUp animated col-md-3 plan-card" (click)="onPlan(4)">
+																	<div class="wealth-box" [ngClass]="{'selected-li': productType == 4}">
+																		<div>
+																			<h5>PLAN 4</h5>
+																			<h2><del>P</del>{{lc4}}</h2>
+																			<p>Life Insurance Coverage</p>
+																			<p><del>P</del>{{Pr4}} Premium</p>
+																		</div>
+																	</div>
+																</li>
+															</ul>
+														</div>
+
+														<div class="col-12 text-center" *ngIf="!isValidTotalPremium && 
+														(groupPackageCtrl.get('PlanType').value && (groupPackageCtrl.get('TotalNumberOfMembers').dirty || groupPackageCtrl.get('TotalNumberOfStudents').dirty))">
+															<h3 style="font-size: 14px !important; color: #e43e25;">Minimum Total Annual Premium is P5000.</h3>
+														</div>
+
+														<div class="col-12">
+															<div class="btnsec text-right" *ngIf="!showSecondStep">
+																<button type="button" class="btn" [disabled]="(!getQuoteForm.get('groupPackage')?.valid || !isValidTotalPremium)"
+																		(click)="setShowSecond();">
+																	Continue
+																	<i class="material-icons">arrow_forward</i>
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+
+											<div id="step2_head" class="mb-4"></div>
+
+											<!-- step2 strat -->
+											<div class="formcoantiner step2" formGroupName="basicInformation"
+												 *ngIf="getQuoteForm.get('groupPackage')?.valid && showSecondStep">
+												<h3>Basic Information</h3>
+												<div class="preminumform">
+													<div class="form-row">
+														
+														<div class="col-md-4 mb-3">
+															<label for="">
+																Company Name
+																<small class="caveat">*SEC/DTI registered company name</small>
+															</label>
+															
+															<input type="text" class="form-control" placeholder="Company Name"
+																	formControlName="CompanyName" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('CompanyName').dirty || getQuoteForm.get('basicInformation').get('CompanyName').touched) &&  getQuoteForm.get('basicInformation').get('CompanyName')?.errors)?'is-invalid'
+															:getQuoteForm.get('basicInformation').get('CompanyName')?.valid?'is-valid':''
+														">
+															<small class="errormsg"
+																	*ngIf="(submitted  || getQuoteForm.get('basicInformation').get('CompanyName').dirty || getQuoteForm.get('basicInformation').get('CompanyName').touched) &&  (getQuoteForm.get('basicInformation').get('CompanyName')?.errors?.required)">
+																This
+																is a required field
+															</small>
+														</div>
+														<div class="col-md-4 mb-3">
+															<label for="" class="business-type" style="height: 28px">Business Type</label>
+															<select class="form-control" id="" formControlName="BusinessType"
+																	[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('BusinessType').dirty || getQuoteForm.get('basicInformation').get('BusinessType').touched) &&  getQuoteForm.get('basicInformation').get('BusinessType')?.errors)?'is-invalid':getQuoteForm.get('basicInformation').get('BusinessType')?.valid?'is-valid black':''">
+																<option value="" >Business Type</option>
+																<option value="Single Proprietorship">Single Proprietorship</option>
+																<option value="Partnership">Partnership</option>
+																<option value="Corporation">Corporation</option>
+
+															</select>
+															<small class="errormsg"
+																	*ngIf="(submitted  || getQuoteForm.get('basicInformation').get('BusinessType').dirty || getQuoteForm.get('basicInformation').get('BusinessType').touched) &&  getQuoteForm.get('basicInformation').get('BusinessType')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+														
+														<div class="col-md-12">
+															<label for="">Company Address</label>
+														</div>
+
+														<div class="col-md-4 mb-3">
+															<input type="text" class="form-control" placeholder="Number and street"
+																   formControlName="StreetNumer" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('StreetNumer').dirty || getQuoteForm.get('basicInformation').get('StreetNumer').touched) &&  getQuoteForm.get('basicInformation').get('StreetNumer')?.errors)?'is-invalid'
+                                                           :getQuoteForm.get('basicInformation').get('StreetNumer')?.valid?'is-valid':''
+                                                        ">
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('StreetNumer').dirty || getQuoteForm.get('basicInformation').get('StreetNumer').touched) &&  getQuoteForm.get('basicInformation').get('StreetNumer')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+
+														<div class="col-md-4 mb-3">
+															<input type="text" class="form-control" placeholder="Village / Building Name"
+																   formControlName="VillageName" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('VillageName').dirty || getQuoteForm.get('basicInformation').get('VillageName').touched) &&  getQuoteForm.get('basicInformation').get('VillageName')?.errors)?'is-invalid'
+                                                           :getQuoteForm.get('basicInformation').get('VillageName')?.valid?'is-valid':''
+                                                        ">
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('VillageName').dirty || getQuoteForm.get('basicInformation').get('VillageName').touched) &&  getQuoteForm.get('basicInformation').get('VillageName')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+
+														<div class="col-md-4 mb-3">
+															<input type="text" maxlength="50" class="form-control" placeholder="Barangay"
+																   formControlName="Barangaya" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('Barangaya').dirty || getQuoteForm.get('basicInformation').get('Barangaya').touched) &&  getQuoteForm.get('basicInformation').get('Barangaya')?.errors)?'is-invalid'
+													 :getQuoteForm.get('basicInformation').get('Barangaya')?.valid?'is-valid black':''
+                                                        ">
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('Barangaya').dirty || getQuoteForm.get('basicInformation').get('Barangaya').touched) &&  getQuoteForm.get('basicInformation').get('Barangaya')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+
+
+														<div class="col-md-4 mb-3">
+															<select class="form-control" id="" formControlName="Region"
+																	(change)="getRegion($event)"
+																	[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('Region').dirty || getQuoteForm.get('basicInformation').get('Region').touched) &&  getQuoteForm.get('basicInformation').get('Region')?.errors)?'is-invalid'
+													:getQuoteForm.get('basicInformation').get('Region')?.valid?'is-valid black':''"
+																	(change)="onChangeProviance($event.target.selectedIndex)">
+																<option value="">Region / Province</option>
+																<option *ngFor="let type of CONSTANTS.PROVIANCE; let i = index"
+																		[value]="type.id">
+																	{{type.Province}}
+																</option>
+															</select>
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('Region').dirty || getQuoteForm.get('basicInformation').get('Region').touched) &&  getQuoteForm.get('basicInformation').get('Region')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+
+														<div class="col-md-4 mb-3">
+															<select class="form-control" id="" formControlName="City"
+																	(change)="getCity($event)"
+																	[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('City').dirty || getQuoteForm.get('basicInformation').get('City').touched) &&  getQuoteForm.get('basicInformation').get('City')?.errors)?'is-invalid'
+													  :getQuoteForm.get('basicInformation').get('City')?.valid?'is-valid black':''
+												   ">
+																<option value="">City / Municipality</option>
+																<option *ngFor="let type of muncipality;let i = index" [value]="type.id">
+																	{{type.name}}
+																</option>
+															</select>
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('City').dirty || getQuoteForm.get('basicInformation').get('City').touched) &&  getQuoteForm.get('basicInformation').get('City')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+
+
+														<div class="col-md-4 mb-3">
+															<input type="text" class="form-control" maxlength="5" placeholder="Zip Code"
+																   formControlName="ZipCode" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('ZipCode').dirty || getQuoteForm.get('basicInformation').get('ZipCode').touched) &&  getQuoteForm.get('basicInformation').get('ZipCode')?.errors)?'is-invalid'
+                                                           :getQuoteForm.get('basicInformation').get('ZipCode')?.valid?'is-valid':''
+                                                        ">
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('ZipCode').dirty || getQuoteForm.get('basicInformation').get('ZipCode').touched) &&  getQuoteForm.get('basicInformation').get('ZipCode')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+
+														<div class="col-md-12">
+															<label for="">Company Contact Number</label>
+														</div>
+
+														<div class="col-md-4 mb-3">
+															<div class="input-group iconfieldcustom">
+																<div class="input-group-prepend">
+																	<span class="input-group-text areacode" id="">+63</span>
+																</div>
+																<input type="text" maxlength="9" class="form-control pnumber"
+																	   placeholder="(XXX) XXX XXX " formControlName="CompanyLandLineNo" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('CompanyLandLineNo').dirty || getQuoteForm.get('basicInformation').get('CompanyLandLineNo').touched) &&  getQuoteForm.get('basicInformation').get('CompanyLandLineNo')?.errors)?'is-invalid'
+                                                           :getQuoteForm.get('basicInformation').get('CompanyLandLineNo')?.valid?'is-valid':''
+                                                            ">
+																<small class="errormsg"
+																	   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('CompanyLandLineNo').dirty || getQuoteForm.get('basicInformation').get('CompanyLandLineNo').touched) &&  getQuoteForm.get('basicInformation').get('CompanyLandLineNo')?.errors?.pattern">
+																	Landline Number
+																	is invalid
+																</small>
+															</div>
+														</div>
+														<div class="col-md-4 mb-3">
+															<div class="input-group iconfieldcustom">
+																<div class="input-group-prepend">
+																	<span class="input-group-text areacode" id="">+63</span>
+																</div>
+																<input type="text" maxlength="10" class="form-control pnumber"
+																	   placeholder="91XXXXXXXX" formControlName="CompanyMobileNo" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('CompanyMobileNo').dirty || getQuoteForm.get('basicInformation').get('CompanyMobileNo').touched) &&  getQuoteForm.get('basicInformation').get('CompanyMobileNo')?.errors)?'is-invalid'
+                                                             :getQuoteForm.get('basicInformation').get('CompanyMobileNo')?.valid?'is-valid':''
+                                                            ">
+																<small class="errormsg"
+																	   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('CompanyMobileNo').dirty
+                                                            || getQuoteForm.get('basicInformation').get('CompanyMobileNo').touched)">
+																	<span *ngIf="getQuoteForm.get('basicInformation').get('CompanyMobileNo')?.errors?.pattern">
+																		Mobile
+																		number is invalid
+																	</span>
+																</small>
+
+															</div>
+														</div>
+
+
+														<div class="col-md-12">
+															<label for="">Authorized Representative Name
+																<small class="caveat">*The Authorized Representative should be duly approved by the company to transact this application and business with Insular Life.</small>
+															</label>
+														</div>
+														<div class="col-md-2 mb-3">
+															<select class="form-control" id=""
+																	(change)="getPrefix($event)"
+																	formControlName="AuthPrefixName"
+																	[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthPrefixName').dirty || getQuoteForm.get('basicInformation').get('AuthPrefixName').touched) &&  getQuoteForm.get('basicInformation').get('AuthPrefixName')?.errors)?'is-invalid'
+                                                         :getQuoteForm.get('basicInformation').get('AuthPrefixName')?.valid?'is-valid black':''
+                                                        ">
+																<option value="">Prefix</option>
+																<option *ngFor="let type of CONSTANTS.PREFIX; let i = index"
+																		[value]="type.id">
+																	{{type.name}}
+																</option>
+															</select>
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthPrefixName').dirty || getQuoteForm.get('basicInformation').get('AuthPrefixName').touched) &&  getQuoteForm.get('basicInformation').get('AuthPrefixName')?.errors?.required">
+																This
+																is a required field
+															</small>
+
+														</div>
+														<div class="col-md-8 mb-3">
+															<div class="input-group">
+																<div class="fieldinnr">
+																	<input type="text" class="form-control fname"
+																		   placeholder="First Name" formControlName="AuthFristName"
+																		   onkeypress="return (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || event.charCode == 45 || event.charCode == 39 || event.charCode == 32 || event.charCode == 46"
+																		   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthFristName').dirty || getQuoteForm.get('basicInformation').get('AuthFristName').touched) &&  getQuoteForm.get('basicInformation').get('AuthFristName')?.errors)?'is-invalid'
+                                                                 :getQuoteForm.get('basicInformation').get('AuthFristName')?.valid?'is-valid':''
+                                                                ">
+																	<small class="errormsg"
+																		   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthFristName').dirty || getQuoteForm.get('basicInformation').get('AuthFristName').touched) &&  getQuoteForm.get('basicInformation').get('AuthFristName')?.errors?.required">
+																		This
+																		is a required field
+																	</small>
+																</div>
+																<div class="fieldinnr">
+																	<input type="text" class="form-control mname"
+																		   placeholder="Middle Name" formControlName="AuthMiddleName"
+																		   onkeypress="return (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || event.charCode == 45 || event.charCode == 39 || event.charCode == 32 || event.charCode == 46"
+																		   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthMiddleName').dirty || getQuoteForm.get('basicInformation').get('AuthMiddleName').touched) &&  getQuoteForm.get('basicInformation').get('AuthMiddleName')?.errors)?'is-invalid'
+                                                                :getQuoteForm.get('basicInformation').get('AuthMiddleName')?.valid && getQuoteForm.get('basicInformation').get('AuthMiddleName')?.value !==''  ?'is-valid':''
+                                                                ">
+																	<small class="errormsg"
+																		   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthMiddleName').dirty || getQuoteForm.get('basicInformation').get('AuthMiddleName').touched) &&  getQuoteForm.get('basicInformation').get('AuthMiddleName')?.errors?.required">
+																		This
+																		is a required field
+																	</small>
+																</div>
+																<div class="fieldinnr">
+																	<input type="text" class="form-control lname"
+																		   placeholder="Last Name" formControlName="AuthLastName"
+																		   onkeypress="return (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || event.charCode == 45 || event.charCode == 39 || event.charCode == 32 || event.charCode == 46"
+																		   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthLastName').dirty || getQuoteForm.get('basicInformation').get('AuthLastName').touched) &&  getQuoteForm.get('basicInformation').get('AuthLastName')?.errors)?'is-invalid'
+                                                                :getQuoteForm.get('basicInformation').get('AuthLastName')?.valid?'is-valid':''
+                                                                ">
+																	<small class="errormsg"
+																		   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthLastName').dirty || getQuoteForm.get('basicInformation').get('AuthLastName').touched) &&  getQuoteForm.get('basicInformation').get('AuthLastName')?.errors?.required">
+																		This
+																		is a required field
+																	</small>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-2 mb-3">
+															<select class="form-control"
+																	(change)="getSuffix($event)"
+																	id="" formControlName="AuthSuffixName"
+																	[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthSuffixName').dirty || getQuoteForm.get('basicInformation').get('AuthSuffixName').touched) &&  getQuoteForm.get('basicInformation').get('AuthSuffixName')?.errors)?'is-invalid'
+                                                         :getQuoteForm.get('basicInformation').get('AuthSuffixName')?.valid?'is-valid black':''
+                                                        ">
+																<option value="">Suffix</option>
+																<option *ngFor="let type of CONSTANTS.SUFFIX;let i = index"
+																		[value]="type.id">
+																	{{type.name}}
+																</option>
+															</select>
+															<small class="errormsg"
+																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthSuffixName').dirty || getQuoteForm.get('basicInformation').get('AuthSuffixName').touched) &&  getQuoteForm.get('basicInformation').get('AuthSuffixName')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+														<div class="row col-md-12" style="margin-left: 0;">
+															<div class="col-md-4" style="padding-left: 0;">
+																<label for="">Authorized Representative Email Address</label>
+															</div>
+															<div class="col-md-8 desktop-rep-contactnumber" style="padding-right: 0;
+															padding-left: 5px;">
+																<label for="">Authorized Representative Contact Number  </label>
+															</div>
+														</div>
+														
+														<div class="col-md-4 mb-3">
+															<input type="email" class="form-control" placeholder="username@domain.com"
+																	formControlName="AuthEamilId" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthEamilId').dirty || getQuoteForm.get('basicInformation').get('AuthEamilId').touched) &&  getQuoteForm.get('basicInformation').get('AuthEamilId')?.errors)?'is-invalid'
+															:getQuoteForm.get('basicInformation').get('AuthEamilId')?.valid?'is-valid':''
+														">
+															<small class="errormsg"
+																	*ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthEamilId').dirty || getQuoteForm.get('basicInformation').get('AuthEamilId').touched) &&  getQuoteForm.get('basicInformation').get('AuthEamilId')?.errors?.required">
+																This
+																is a required field
+															</small>
+														</div>
+														<div class="col-md-12 mobile-rep-contactnumber">
+															<label for="">Authorized Representative Contact Number </label>
+														</div>
+														<div class="col-md-4 mb-3">
+															
+															<div class="input-group iconfieldcustom">
+																<div class="input-group-prepend">
+																	<span class="input-group-text areacode" id="">+63</span>
+																</div>
+																<input type="text" maxlength="9" class="form-control pnumber"
+																	placeholder="(XXX) XXX XXX " formControlName="AuthLandlineNo" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthLandlineNo').dirty || getQuoteForm.get('basicInformation').get('AuthLandlineNo').touched) &&  getQuoteForm.get('basicInformation').get('AuthLandlineNo')?.errors)?'is-invalid'
+														:(getQuoteForm.get('basicInformation').get('AuthLandlineNo')?.valid && getQuoteForm.get('basicInformation').get('AuthLandlineNo')?.value !=='')?'is-valid':''
+															">
+																<small class="errormsg"
+																	*ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthLandlineNo').dirty || getQuoteForm.get('basicInformation').get('AuthLandlineNo').touched) &&  getQuoteForm.get('basicInformation').get('AuthLandlineNo')?.errors?.pattern">
+																	Landline Number
+																	is incorrect
+																</small>
+															</div>
+														</div>
+														<div class="col-md-4 mb-3">
+															<div class="input-group iconfieldcustom">
+																<div class="input-group-prepend">
+																	<span class="input-group-text areacode" id="">+63</span>
+																</div>
+																<input type="text" maxlength="10" class="form-control pnumber"
+																	placeholder="91XXXXXXXX" formControlName="AuthMobileNumber" [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthMobileNumber').dirty || getQuoteForm.get('basicInformation').get('AuthMobileNumber').touched) &&  getQuoteForm.get('basicInformation').get('AuthMobileNumber')?.errors)?'is-invalid'
+															:getQuoteForm.get('basicInformation').get('AuthMobileNumber')?.valid?'is-valid':''
+															">
+																<small class="errormsg"
+																	*ngIf="(submitted  || getQuoteForm.get('basicInformation').get('AuthMobileNumber').dirty
+															|| getQuoteForm.get('basicInformation').get('AuthMobileNumber').touched)">
+																	<span *ngIf="getQuoteForm.get('basicInformation').get('AuthMobileNumber')?.errors?.pattern">
+																		Mobile
+																		number is invalid
+																	</span>
+																</small>
+
+															</div>
+														</div>
+
+													</div>
+
+												</div>
+												<hr class="mr-4">
+												<br>
+												<div>
+													<ul>
+														<li style="padding-left: 0;position: relative; display: inline-table;"
+															class="clearfix">
+															<span class="numr"></span>
+															<div class="ctnt">
+																<label class="radio-container" style="margin-bottom: 0.1rem !important;">
+																	<input type="checkbox" formControlName="privacyPolicy"
+																		   id="healthCondition31" value="Yes">
+																	<span class="checkmark"></span>
+																</label>
+																<div style="margin-left: 42px;" class="ppolcy pr-3">
+																	<span>
+																		In line with my use of the InLife Store website, I hereby authorize
+																		InLife to process my personal and sensitive information in accordance
+																		with the
+																		<a id="pp" style="color:#e43e25" href="https://www.insularlife.com.ph/privacy-policy"
+																		   target="_blank">Privacy Policy</a> given.
+																	</span>
+
+																	<div class="form-row">
+																		<div class="col-md-12">
+																			<small class="errormsg"
+																				   *ngIf="(submitted || getQuoteForm.get('basicInformation').get('privacyPolicy').dirty || getQuoteForm.get('basicInformation').get('privacyPolicy').touched) &&  getQuoteForm.get('basicInformation').get('privacyPolicy')?.errors?.required">
+																				This is a required field
+																			</small>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+
+												<div class="errorMsg-wrapper" *ngIf='errorInfo'>
+													<span>{{errorInfo}}</span>
+												</div>
+
+												<div class="form-row" style="margin-top: 80px;margin-bottom: 60px;">
+													<div class="col-md-7 col-12">
+														<div class="btnsec">
+															<button class="btn outlinedbtn text-left btn-back" (click)="backtoGroupPage()">
+																<i class="material-icons">arrow_backward</i> Back
+															</button>
+															<button class="btn savebtns outlinedbtn" type="btn" (click)="conformSave()" [disabled]="!getQuoteForm.get('basicInformation')?.valid || !getQuoteForm.get('basicInformation').value.privacyPolicy">
+																SAVE INFORMATION
+															</button>
+															<a id="conformBtn" style="display:none" href="#Conform" rel="modal:open">
+																Alert
+															</a>
+														</div>
+
+
+													</div>
+													<div class="col-md-5 col-12">
+														<div class="btnsec text-right">
+															<button type="submit" class="btn" (click)="saveQuoteForm('submit')" [disabled]="!getQuoteForm.get('basicInformation')?.valid || !getQuoteForm.get('basicInformation').value.privacyPolicy">
+																Continue to Apply <i class="material-icons">arrow_forward</i>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											
+										</form>
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-12 sk tabsamll">
+									<div style="position:fixed;height:100%;" class="right-panel">
+										<div class="col-md-12">
+											<label for="" class="label" style="font-size:13px;font-weight:500;">TOTAL ANNUAL PREMIUM</label>
+											<h1 class="totalprice"><del>p</del>{{totalPremium}}</h1>
+										</div>
+										<div class="col-md-12">
+											<label for="" class="label" style="font-size:13px;font-weight:403;">Annual Premium per Member</label>
+											<h1 class="subprice"><del>p</del>{{annualPremium}}</h1>
+										</div>
+
+										<div class="col-md-12">
+											<label for="" class="label" style="font-size:13px;font-weight:403;">Life Insurance Coverage per Member</label>
+											<h1 class="subprice1"><del>p</del>{{insuranceCoverage}}</h1>
+										</div>
+										<div class="col-md-12 faq download-dis" (click)="downloadPlanDes()">
+											<a target="_blank" style="color: #e43e25;font-weight:500;font-size:13px; margin-top: 40px;"><u>Plan Description</u></a>
+										</div>
+										<div class="col-md-12 faq download-dis">
+											<a id="faq" routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" style="text-decoration: underline;color: #e43e25;font-weight:500;font-size:13px;">Frequently Asked Questions</a>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-3 tabfull p-0">
+				</div>
+
+			</div>
+
+		</div>
+		<div id="Conform" class="modal" style="max-width: 600px;height: 300px;padding: 100px 50px;">
+			<p class="confirmation-text" style="text-align:center;font-size:20px!important;color:#42414d;">
+				Are you sure ?
+			</p>
+			<br/><br/>
+				 <div class="row" style="margin-top:40px;">
+					 <div class="col-md-6  col-12 text-center text-md-right" style="margin: 5px 0;">
+					 	<a id="closeModal-quote" class="btn savebtns outlinedbtn" style="top: 0px;position: relative;padding: 1.0em 4em;font-size: 14px;letter-spacing: 2px;font-weight: 700;margin: auto;border-radius: 6px;text-transform: uppercase;cursor: pointer;" href="#" rel="modal:close">
+					 		NO
+					 	</a>
+					 </div>
+					 <div class="col-md-6  col-12 text-center text-md-left" style="margin: 5px 0;">
+					 	<button class="button button-primary" (click)="saveQuoteForm('save')" data-proceed-button href="#" style="padding: 1.2em 4em;font-size: 14px;">Yes</button>
+					 </div>
+				 </div>
+		</div>

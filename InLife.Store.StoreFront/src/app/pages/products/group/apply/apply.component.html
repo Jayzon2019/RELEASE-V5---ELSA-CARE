@@ -1,0 +1,3043 @@
+<style type="text/css">
+	.stepdetail .preminumform select {
+		color: #ababab;
+	}
+
+	.uploadfilecontainer {
+		border: 2px dashed #d5d5d5;
+	}
+
+	.uploadfilecontainer {
+		width: 100%;
+	}
+
+	.files-list {
+		width: 100%;
+		margin-top: 3.3rem;
+	}
+
+	::ng-deep .my-tooltip {
+		font-size: 13px;
+		background: #000 !important;
+		white-space: pre-line !important;
+		padding: 1rem;
+	}
+
+	.add_new {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	.black {
+		color: #000 !important;
+	}
+
+	.top-10 {
+		top: 10%;
+	}
+
+	@media screen and (max-width: 780px) {
+		.hidden-sm {
+			display: none;
+		}
+	}
+
+	@media screen and (min-width: 780px) {
+		.hidden-lg {
+			display: none;
+		}
+
+		.checkbox-wrap.smallgender .pf-list-item label span,
+		.smallgender .pf-list-item {
+			width: 100px;
+		}
+	}
+</style>
+<div class="container post-container text-container group-apply-page">
+	<div class="mainpagewrap">
+		<div class="row m-0">
+			<div class="col-md-10 tabfull p-0">
+				<div class="leftwrapsection">
+					<!-- <app-inner-header></app-inner-header> -->
+					<div class="mainwizard">
+						<div class="row">
+							<div class="col-md-3 tabsamll">
+								<div class="steplist" style="position: fixed">
+									<ul class="steplistmain">
+										<li class="active complete">
+											Get a Quote
+										</li>
+										<li class="active">
+											Apply
+											<ul class="innerlist">
+												<li class="active">
+													<a href="javascript:void(0)">
+														Fill out the Master Application Form
+													</a>
+												</li>
+												<li class="active">
+													<a href="javascript:void(0)">Upload Requirements</a>
+												</li>
+												<li [ngClass]="
+														getApplyForm.get(
+															'requirementsForm'
+														)?.valid
+															? 'active'
+															: ''
+													">
+													<a href="javascript:void(0)">View and Accept Declarations</a>
+												</li>
+											</ul>
+										</li>
+										<li>Pay</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-9 tabsamll">
+								<div class="stepdetail">
+									<div class="pagetitles">
+										<h1>
+											Complete Your Group Insurance
+											Application Requirements
+										</h1>
+									</div>
+									<form [formGroup]="getApplyForm" novalidate>
+										<!-- step1 strat -->
+										<div class="formcoantiner step4" formGroupName="basicInformation">
+											<h3 id="step_head">
+												Master Application Form
+											</h3>
+											<div class="preminumform">
+												<div class="form-row">
+													<div class="col-md-4 mb-3">
+														<label for="">Company Name
+															<small class="caveat">*SEC/DTI registered company name</small>
+														</label>
+														<input type="text" class="form-control"
+															placeholder="Company Name" disabled readonly
+															formControlName="CompanyName" [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'CompanyName'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyName'
+																			)
+																			?.valid
+																	? 'is-valid'
+																	: ''
+															" />
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'CompanyName'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-4 mb-3">
+														<label for="">Business Type
+															<small class="caveat" style="opacity: 0;">*SEC/DTI registered company name</small>
+														</label>
+														<select class="form-control" id=""
+															formControlName="BusinessType" disabled readonly [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'BusinessType'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'BusinessType'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'BusinessType'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'BusinessType'
+																			)
+																			?.valid
+																	? 'is-valid black'
+																	: ''
+															">
+															<option value="">Business Type</option>
+															<option value="Single Proprietorship">Single Proprietorship
+															</option>
+															<option value="Partnership">Partnership</option>
+															<option value="Corporation">Corporation</option>
+														</select>
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'BusinessType'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'BusinessType'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'BusinessType'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-12">
+														<label for="">
+															Company
+															Address
+														</label>
+													</div>
+													<div class="col-md-4 mb-3">
+														<input type="text" class="form-control"
+															placeholder="Number and street" disabled readonly
+															formControlName="StreetNumer" [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'StreetNumer'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'StreetNumer'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'StreetNumer'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'StreetNumer'
+																			)
+																			?.valid
+																	? 'is-valid'
+																	: ''
+															" />
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'StreetNumer'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'StreetNumer'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'StreetNumer'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-4 mb-3">
+														<input type="text" class="form-control"
+															placeholder="Village / Building Name" disabled readonly
+															formControlName="VillageName" [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'VillageName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'VillageName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'VillageName'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'VillageName'
+																			)
+																			?.valid
+																	? 'is-valid'
+																	: ''
+															" />
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'VillageName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'VillageName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'VillageName'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-4 mb-3">
+														<input type="text" class="form-control" placeholder="Barangay"
+															disabled readonly formControlName="Barangaya" [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Barangaya'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Barangaya'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'Barangaya'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'Barangaya'
+																			)
+																			?.valid
+																	? 'is-valid'
+																	: ''
+															" />
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Barangaya'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Barangaya'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'Barangaya'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+
+													</div>
+													<div class="col-md-4 mb-3">
+														<select class="form-control" id="" formControlName="Region"
+															disabled readonly [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Region'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Region'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'Region'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'Region'
+																			)
+																			?.valid
+																	? 'is-valid black'
+																	: ''
+															">
+															<option value="">
+																Region /
+																Province
+															</option>
+															<option *ngFor="
+																	let type of CONSTANTS.PROVIANCE;
+																	let i = index
+																" [value]="
+																	type.id
+																">
+																{{
+																type.Province
+																}}
+															</option>
+														</select>
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Region'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'Region'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'Region'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-4 mb-3">
+														<select class="form-control" id="" formControlName="City"
+															disabled readonly [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'City'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'City'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get('City')
+																	?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'City'
+																			)
+																			?.valid
+																	? 'is-valid black'
+																	: ''
+															">
+															<option value="">
+																City /
+																Municipality
+															</option>
+															<option
+																*ngFor="let type of beneficiaryMuncipalities; let i = index"
+																[value]="type.id">
+																{{ type.name }}
+															</option>
+														</select>
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'City'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'City'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get('City')
+																	?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-4 mb-3">
+														<input type="text" class="form-control" placeholder="Zip Code"
+															disabled readonly formControlName="ZipCode" [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'ZipCode'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'ZipCode'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'ZipCode'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'ZipCode'
+																			)
+																			?.valid
+																	? 'is-valid'
+																	: ''
+															" />
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'ZipCode'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'ZipCode'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'ZipCode'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-12">
+														<label for="">
+															Company Contact
+															Number
+														</label>
+													</div>
+													<div class="col-md-4 mb-3">
+														<div class="input-group iconfieldcustom">
+															<div class="input-group-prepend">
+																<span class="input-group-text areacode" id="">+63</span>
+															</div>
+															<input type="text" maxlength="9"
+																class="form-control pnumber" disabled readonly
+																placeholder="Landline"
+																formControlName="CompanyLandLineNo" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyLandLineNo'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyLandLineNo'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyLandLineNo'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'CompanyLandLineNo'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyLandLineNo'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyLandLineNo'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyLandLineNo'
+																		)
+																		?.errors
+																">
+																Landline Number
+																is incorrect
+															</small>
+														</div>
+													</div>
+													<div class="col-md-4 mb-3">
+														<div class="input-group iconfieldcustom">
+															<div class="input-group-prepend">
+																<span class="input-group-text areacode" id="">+63</span>
+															</div>
+															<input type="text" maxlength="10"
+																class="form-control pnumber" disabled readonly
+																placeholder="Mobile" formControlName="CompanyMobileNo"
+																[ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyMobileNo'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyMobileNo'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyMobileNo'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'CompanyMobileNo'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyMobileNo'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'CompanyMobileNo'
+																		)
+																		.touched
+																">
+																<span *ngIf="
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'CompanyMobileNo'
+																			)
+																			?.errors
+																	">
+																	Mobile
+																	number is
+																	invalid
+																</span>
+															</small>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<label for="">
+															Authorized
+															Representative
+															Name
+															<small class="caveat">*The Authorized Representative should be duly approved by the company to transact this application and business with Insular Life.</small>
+														</label>
+													</div>
+													<div class="col-md-2 mb-3">
+														<select class="form-control" id=""
+															formControlName="AuthPrefixName" disabled readonly
+															[ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthPrefixName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthPrefixName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'AuthPrefixName'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthPrefixName'
+																			)
+																			?.valid
+																	? 'is-valid black'
+																	: ''
+															">
+															<option value="">
+																Prefix
+															</option>
+															<option *ngFor="
+																	let type of CONSTANTS.PREFIX;
+																	let i = index
+																" [value]="
+																	type.id
+																">
+																{{ type.name }}
+															</option>
+														</select>
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthPrefixName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthPrefixName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'AuthPrefixName'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-8 mb-3">
+														<div class="input-group">
+															<div class="fieldinnr">
+																<input type="text" class="form-control fname" disabled
+																	readonly placeholder="First Name"
+																	formControlName="AuthFristName" [ngClass]="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthFristName'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthFristName'
+																				)
+																				.touched) &&
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthFristName'
+																			)
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'basicInformation'
+																					)
+																					.get(
+																						'AuthFristName'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthFristName'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthFristName'
+																				)
+																				.touched) &&
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthFristName'
+																			)
+																			?.errors
+																	">
+																	This is a
+																	required
+																	field
+																</small>
+															</div>
+															<div class="fieldinnr">
+																<input type="text" class="form-control mname" disabled
+																	readonly placeholder="Middle Name"
+																	formControlName="AuthMiddleName" [ngClass]="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthMiddleName'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthMiddleName'
+																				)
+																				.touched) &&
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthMiddleName'
+																			)
+																			?.errors
+																			? 'is-invalid'
+																			: (getApplyForm.get('basicInformation').get('AuthMiddleName')?.valid && getApplyForm.get('basicInformation').get('AuthMiddleName')?.value !== '')
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthMiddleName'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthMiddleName'
+																				)
+																				.touched) &&
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthMiddleName'
+																			)
+																			?.errors
+																	">
+																	This is a
+																	required
+																	field
+																</small>
+															</div>
+															<div class="fieldinnr">
+																<input type="text" class="form-control lname" disabled
+																	readonly placeholder="Last Name"
+																	formControlName="AuthLastName" [ngClass]="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthLastName'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthLastName'
+																				)
+																				.touched) &&
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthLastName'
+																			)
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'basicInformation'
+																					)
+																					.get(
+																						'AuthLastName'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthLastName'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthLastName'
+																				)
+																				.touched) &&
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthLastName'
+																			)
+																			?.errors
+																	">
+																	This is a
+																	required
+																	field
+																</small>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-2 mb-3">
+														<select class="form-control" id=""
+															formControlName="AuthSuffixName" disabled readonly
+															[ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthSuffixName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthSuffixName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'AuthSuffixName'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthSuffixName'
+																			)
+																			?.valid
+																	? 'is-valid black'
+																	: ''
+															">
+															<option value="">
+																Suffix
+															</option>
+															<option *ngFor="
+																	let type of CONSTANTS.SUFFIX;
+																	let i = index
+																" [value]="
+																	type.id
+																">
+																{{ type.name }}
+															</option>
+														</select>
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthSuffixName'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthSuffixName'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'AuthSuffixName'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-4 mb-3">
+														<label for="">
+															Authorized
+															Representative Email
+															Address
+														</label>
+														<input type="email" class="form-control"
+															placeholder="Email Address" disabled readonly
+															formControlName="AuthEamilId" [ngClass]="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthEamilId'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthEamilId'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'AuthEamilId'
+																	)?.errors
+																	? 'is-invalid'
+																	: getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthEamilId'
+																			)
+																			?.valid
+																	? 'is-valid'
+																	: ''
+															" />
+														<small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthEamilId'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthEamilId'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'basicInformation'
+																	)
+																	.get(
+																		'AuthEamilId'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small>
+													</div>
+													<div class="col-md-4 mb-3">
+														<label for="">
+															Authorized
+															Representative
+															Contact Number
+														</label>
+														<div class="input-group iconfieldcustom">
+															<div class="input-group-prepend">
+																<span class="input-group-text areacode" id="">+63</span>
+															</div>
+															<input type="text" maxlength="9"
+																class="form-control pnumber" disabled readonly
+																placeholder="Landline" formControlName="AuthLandlineNo"
+																[ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthLandlineNo'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthLandlineNo'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthLandlineNo'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: (getApplyForm.get('basicInformation').get('AuthLandlineNo')?.valid && getApplyForm.get('basicInformation').get('AuthLandlineNo')?.value !== '')
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthLandlineNo'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthLandlineNo'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthLandlineNo'
+																		)
+																		?.errors
+																">
+																Landline Number
+																is incorrect
+															</small>
+														</div>
+													</div>
+													<div class="col-md-4 mb-3">
+														<label for="" style="opacity: 0">
+															Authorized
+															Representative
+															Contact
+															Number
+														</label>
+														<div class="input-group iconfieldcustom">
+															<div class="input-group-prepend">
+																<span class="input-group-text areacode" id="">+63</span>
+															</div>
+															<input type="text" maxlength="10"
+																class="form-control pnumber" disabled readonly
+																placeholder="Mobile" formControlName="AuthMobileNumber"
+																[ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthMobileNumber'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthMobileNumber'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthMobileNumber'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'basicInformation'
+																				)
+																				.get(
+																					'AuthMobileNumber'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	submitted ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthMobileNumber'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'basicInformation'
+																		)
+																		.get(
+																			'AuthMobileNumber'
+																		)
+																		.touched
+																">
+																<span *ngIf="
+																		getApplyForm
+																			.get(
+																				'basicInformation'
+																			)
+																			.get(
+																				'AuthMobileNumber'
+																			)
+																			?.errors
+																	">
+																	Mobile
+																	number is
+																	invalid
+																</span>
+															</small>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="apply-page" class="mb-4"></div>
+										</div>
+										
+										<!-- step2 strat -->
+										<div class="formcoantiner step2">
+											<h3 id="step_head">
+												Upload Requirements
+											</h3>
+											<div class="preminumform">
+												<h4>
+													Please upload the following
+													requirements:
+												</h4>
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<div class="requirement-label-wrapper">
+														<label class="file-label">
+															Employee Census 
+															<span *ngIf="requirementsTypes['EmployeeCesusForm'].error" 
+															[ngClass]="requirementsTypes['EmployeeCesusForm'].error.type == 'success' || 
+																	   requirementsTypes['EmployeeCesusForm'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['EmployeeCesusForm'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['EmployeeCesusForm'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														<a href="https://www.insularlife.com.ph/form-library" target="_blank"
+														style="cursor:pointer" class="text-dowload">Download
+														Template</a>
+													</div>
+													
+													
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'EmployeeCesusForm'
+																	).value && !requirementsTypes['EmployeeCesusForm'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'EmployeeCesusForm',
+																	'employee-census'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																	onFileChanged(
+																		$event,
+																		'EmployeeCesusForm',
+																		'employee-census'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'EmployeeCesusForm'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'EmployeeCesusForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'EmployeeCesusForm'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'EmployeeCesusForm'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted || getApplyForm.get('requirementsForm').get('EmployeeCesusForm')
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'EmployeeCesusForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'EmployeeCesusForm'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span>
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'EmployeeCesusForm'
+																).value || ( hasRequirementsData && requirementsTypes['EmployeeCesusForm'].uploaded)
+														">
+
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('EmployeeCesusForm').value, type: 'EmployeeCesusForm'}">
+														</ng-template>
+														
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'EmployeeCesusForm'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+												
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<div class="requirement-label-wrapper">
+														<label class="file-label">
+															Entity Plan Admin Form
+															<span *ngIf="requirementsTypes['EntityPlanForm'].error" 
+															[ngClass]="requirementsTypes['EntityPlanForm'].error.type == 'success' || 
+																	requirementsTypes['EntityPlanForm'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['EntityPlanForm'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['EntityPlanForm'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														<!-- <a download (click)="downloadFile('EntityPlan')"
+															style="cursor:pointer" class="text-dowload">Download
+															Template</a> -->
+														<a href="https://www.insularlife.com.ph/form-library" target="_blank"
+														style="cursor:pointer" class="text-dowload">Download
+														Template</a>
+													</div>
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'EntityPlanForm'
+																	).value && !requirementsTypes['EntityPlanForm'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'EntityPlanForm',
+																	'admin-form'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																	onFileChanged(
+																		$event,
+																		'EntityPlanForm',
+																		'admin-form'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'EntityPlanForm'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'EntityPlanForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'EntityPlanForm'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'EntityPlanForm'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'EntityPlanForm'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'EntityPlanForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'EntityPlanForm'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span class="file-inner-text">
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'EntityPlanForm'
+																).value || ( hasRequirementsData && requirementsTypes['EntityPlanForm'].uploaded)
+														">
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('EntityPlanForm').value, type: 'EntityPlanForm'}">
+														</ng-template>
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'EntityPlanForm'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<label class="file-label">
+														ID of Authorized
+														Representative
+														<span *ngIf="requirementsTypes['AuthRepresentativeId'].error" 
+														[ngClass]="requirementsTypes['AuthRepresentativeId'].error.type == 'success' || 
+																   requirementsTypes['AuthRepresentativeId'].error.type == 'uploading'? 'success-upload': ''">
+															{{ requirementsTypes['AuthRepresentativeId'].error?.msg }}
+															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['AuthRepresentativeId'].error.type == 'uploading'"></i>
+														</span>
+													</label>
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'AuthRepresentativeId'
+																	).value && !requirementsTypes['AuthRepresentativeId'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'AuthRepresentativeId',
+																	'representative'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																	onFileChanged(
+																		$event,
+																		'AuthRepresentativeId',
+																		'representative'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'AuthRepresentativeId'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'AuthRepresentativeId'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'AuthRepresentativeId'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'AuthRepresentativeId'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'AuthRepresentativeId'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'AuthRepresentativeId'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'AuthRepresentativeId'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span class="file-inner-text">
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'AuthRepresentativeId'
+																).value || ( hasRequirementsData && requirementsTypes['AuthRepresentativeId'].uploaded)
+														">
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('AuthRepresentativeId').value, type: 'AuthRepresentativeId'}">
+														</ng-template>
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'AuthRepresentativeId'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<label class="file-label">
+														BIR Notice of inclusion
+														in Top 20,000
+														Corporations and BIR
+														Form 2307 (if
+														applicable) 
+														<span *ngIf="requirementsTypes['BIRNoticeForm'].error" 
+														[ngClass]="requirementsTypes['BIRNoticeForm'].error.type == 'success' || 
+																   requirementsTypes['BIRNoticeForm'].error.type == 'uploading'? 'success-upload': ''">
+															{{ requirementsTypes['BIRNoticeForm'].error?.msg }}
+															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['BIRNoticeForm'].error.type == 'uploading'"></i>
+														</span>
+													</label>
+													
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'BIRNoticeForm'
+																	).value && !requirementsTypes['BIRNoticeForm'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'BIRNoticeForm',
+																	'bir-document'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																	onFileChanged(
+																		$event,
+																		'BIRNoticeForm',
+																		'bir-document'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'BIRNoticeForm'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'BIRNoticeForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'BIRNoticeForm'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'BIRNoticeForm'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'BIRNoticeForm'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'BIRNoticeForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'BIRNoticeForm'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span class="file-inner-text">
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'BIRNoticeForm'
+																).value || ( hasRequirementsData && requirementsTypes['BIRNoticeForm'].uploaded)
+														">
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('BIRNoticeForm').value, type: 'BIRNoticeForm'}">
+														</ng-template>
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'BIRNoticeForm'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<label class="file-label">
+														SEC
+														Registration/City/Municipality
+														Ordinance/Congressional
+														Bill/DTI Registration 
+														<span *ngIf="requirementsTypes['SECRegistration'].error" 
+														[ngClass]="requirementsTypes['SECRegistration'].error.type == 'success' || 
+																   requirementsTypes['SECRegistration'].error.type == 'uploading'? 'success-upload': ''">
+															{{ requirementsTypes['SECRegistration'].error?.msg }}
+															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['SECRegistration'].error.type == 'uploading'"></i>
+														</span>
+													</label>
+													
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'SECRegistration'
+																	).value && !requirementsTypes['SECRegistration'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'SECRegistration',
+																	'business-registration-document'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																	onFileChanged(
+																		$event,
+																		'SECRegistration',
+																		'business-registration-document'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'SECRegistration'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'SECRegistration'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'SECRegistration'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'SECRegistration'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'SECRegistration'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'SECRegistration'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'SECRegistration'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span class="file-inner-text">
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'SECRegistration'
+																).value || ( hasRequirementsData && requirementsTypes['SECRegistration'].uploaded)
+														">
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('SECRegistration').value, type: 'SECRegistration'}">
+														</ng-template>
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'SECRegistration'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<label class="file-label">
+														Articles of
+														Incorporation/Partnership
+														and By-Laws (if
+														applicable) 
+														<span *ngIf="requirementsTypes['IncorporationArticles'].error" 
+														[ngClass]="requirementsTypes['IncorporationArticles'].error.type == 'success' || 
+																   requirementsTypes['IncorporationArticles'].error.type == 'uploading'? 'success-upload': ''">
+															{{ requirementsTypes['IncorporationArticles'].error?.msg }}
+															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['IncorporationArticles'].error.type == 'uploading'"></i>
+														</span>
+													</label>
+													
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'IncorporationArticles'
+																	).value && !requirementsTypes['IncorporationArticles'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'IncorporationArticles',
+																	'incorporation-document'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																	onFileChanged(
+																		$event,
+																		'IncorporationArticles',
+																		'incorporation-document'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IncorporationArticles'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IncorporationArticles'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'IncorporationArticles'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'IncorporationArticles'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IncorporationArticles'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IncorporationArticles'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'IncorporationArticles'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span class="file-inner-text">
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'IncorporationArticles'
+																).value || ( hasRequirementsData && requirementsTypes['IncorporationArticles'].uploaded)
+														">
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('IncorporationArticles').value, type: 'IncorporationArticles'}">
+														</ng-template>
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'IncorporationArticles'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<label class="file-label">
+														Secretary's
+														Cretificate/Board
+														Resolution/Partnership
+														Resolution/Managing
+														Partners' Certificate/
+														Authorization of Owner
+														to the Authorize
+														Representative to
+														transact business with
+														Insular 
+														<span *ngIf="requirementsTypes['IdentityCertificate'].error" 
+														[ngClass]="requirementsTypes['IdentityCertificate'].error.type == 'success' || 
+																   requirementsTypes['IdentityCertificate'].error.type == 'uploading'? 'success-upload': ''">
+															{{ requirementsTypes['IdentityCertificate'].error?.msg }}
+															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['IdentityCertificate'].error.type == 'uploading'"></i>
+														</span>
+													</label>
+													
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'IdentityCertificate'
+																	).value && !requirementsTypes['IdentityCertificate'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'IdentityCertificate',
+																	'authorization-document'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}"  (change)="
+																	onFileChanged(
+																		$event,
+																		'IdentityCertificate',
+																		'authorization-document'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IdentityCertificate'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IdentityCertificate'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'IdentityCertificate'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'IdentityCertificate'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IdentityCertificate'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'IdentityCertificate'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'IdentityCertificate'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span class="file-inner-text">
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'IdentityCertificate'
+																).value || ( hasRequirementsData && requirementsTypes['IdentityCertificate'].uploaded)
+														">
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('IdentityCertificate').value, type: 'IdentityCertificate'}">
+														</ng-template>
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'IdentityCertificate'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+												<div class="col-md-12 mb-3 uploadimgescustom">
+													<label class="file-label">
+														Post-Policy Issuance:
+														Individual Application
+														Forms (if applicable) 
+														<span *ngIf="requirementsTypes['PostPolicyForm'].error" 
+														[ngClass]="requirementsTypes['PostPolicyForm'].error.type == 'success' || 
+																   requirementsTypes['PostPolicyForm'].error.type == 'uploading'? 'success-upload': ''">
+															{{ requirementsTypes['PostPolicyForm'].error?.msg }}
+															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['PostPolicyForm'].error.type == 'uploading'"></i>
+														</span>
+													</label>
+													
+													<div>
+														<div *ngIf="
+																!getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'PostPolicyForm'
+																	).value && !requirementsTypes['PostPolicyForm'].uploaded
+															" class="uploadfilecontainer" (click)="
+																fileInput.click()
+															" appDragDrop (onFileDropped)="
+																onFileChanged(
+																	$event,
+																	'PostPolicyForm',
+																	'individual-applications'
+																)
+															">
+															<input #fileInput hidden type="file" name="file"
+																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																	onFileChanged(
+																		$event,
+																		'PostPolicyForm',
+																		'individual-applications'
+																	)
+																" [ngClass]="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'PostPolicyForm'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'PostPolicyForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'PostPolicyForm'
+																		)
+																		?.errors
+																		? 'is-invalid'
+																		: getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'PostPolicyForm'
+																				)
+																				?.valid
+																		? 'is-valid'
+																		: ''
+																" />
+															<small class="errormsg" *ngIf="
+																	(submitted ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'PostPolicyForm'
+																			)
+																			.dirty ||
+																		getApplyForm
+																			.get(
+																				'requirementsForm'
+																			)
+																			.get(
+																				'PostPolicyForm'
+																			)
+																			.touched) &&
+																	getApplyForm
+																		.get(
+																			'requirementsForm'
+																		)
+																		.get(
+																			'PostPolicyForm'
+																		)
+																		?.errors
+																">
+																Please attach
+																your document
+															</small>
+															<div class="drag-text">
+																<h3>
+																	Click here
+																	to upload
+																	file
+																	<span class="file-inner-text">
+																		(.jpg,
+																		.png,
+																		.pdf,
+																		.xls,
+																		.doc /
+																		5MB max
+																		file
+																		Size)
+																	</span>
+																</h3>
+															</div>
+														</div>
+													</div>
+													<div class="identity-document-preview" *ngIf="
+															getApplyForm
+																.get(
+																	'requirementsForm'
+																)
+																.get(
+																	'PostPolicyForm'
+																).value || ( hasRequirementsData && requirementsTypes['PostPolicyForm'].uploaded)
+														">
+														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('PostPolicyForm').value, type: 'PostPolicyForm'}">
+														</ng-template>
+														<button class="delete-file" (click)="
+																deleteImage(
+																	'PostPolicyForm'
+																)
+															">
+															<i class="fa fa-trash"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div id="step3_head"></div>
+										</div>
+
+										<ng-template #fileTypeDispTemplate let-fileData="data" let-fileType="type">
+											<ng-container *ngIf="requirementsTypes[fileType].type != 'image'; else imgDisp">
+												<img [src]="requirementsTypes[fileType].fileInfo.loc"/>
+												<p>{{requirementsTypes[fileType].title}}</p>
+											</ng-container>
+											<ng-template #imgDisp>
+												<img [src]="requirementsTypes[fileType].fileInfo"/>
+											</ng-template>
+										</ng-template>
+										<!-- step3 strat -->
+										<div class="formcoantiner declarationsection step3"
+											formGroupName="declarationsForm" *ngIf="((getApplyForm.get('requirementsForm')?.valid && showThirdStep) || (hasRequirementsData && showThirdStep))">
+											<h3 id="step_head">Declarations</h3>
+											<div class="preminumform">
+												<div class="form-row">
+													<div class="col-md-12">
+														<label class="radio-container">
+															I understand that my insurance is issued based on my declared statements in my application and my acceptance of the following: 
+															<input type="checkbox" value="Yes" (change)="changedDeclartions($event, 'IsCheckDataPrivacy')"
+																formControlName="IsCheckDataPrivacy" />
+															<span class="checkmark"></span>
+														</label>
+														<!-- <small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckDataPrivacy'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckDataPrivacy'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'declarationsForm'
+																	)
+																	.get(
+																		'IsCheckDataPrivacy'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small> -->
+													</div>
+													<div class="col-md-12">
+														<hr />
+													</div>
+													<div class="col-md-12">
+
+														<label class="radio-container">
+															I understand that as a financial institution, Insular Life is subject to existing and future government regulations. I therefore agree to be bound by all applicable domestic and international laws in relation to any matter including but not limited to anti-money laundering, tax monitoring and data privacy.
+															<br> <br>
+															In this connection, I authorize Insular Life to process my personal and sensitive personal information (also known as personally identifiable information or PII) including the collection, usage, storage, retention, and disclosure of my PII in the related processes and systems until its disposal. I likewise give my consent to Insular Life to share such information to its subsidiaries, affiliates, agents, medical information sharing facility of the insurance industry and third parties for any legitimate purpose, including the underwriting and administration of insurance coverage and claims, marketing and promotion of products, market research, data analytics and automated processing systems, internal and external audits, and such activities for which my PII may be required in fulfillment of mandated services across my entire life stages.
+															<br> <br>
+															I hold Insular Life free and harmless from any liability that may arise from any collection, use, disclosure, destruction or sharing of said information.  
+															<input type="checkbox" formControlName="IsCheckDataUNSCR" (change)="changedDeclartions($event, 'IsCheckDataUNSCR')"
+																id="antimoneylaundary" />
+															<span class="checkmark"></span>
+														</label>
+													</div>
+													<div class="col-md-12">
+														<!-- <small class="errormsgs" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckDataUNSCR'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckDataUNSCR'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'declarationsForm'
+																	)
+																	.get(
+																		'IsCheckDataUNSCR'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small> -->
+														<hr />
+													</div>
+													<div class="col-md-12 mb-3">
+														<label class="radio-container">
+															In accordance with the Insurance Commission’s Circular Letter No. 2016-54, your medical information will be uploaded to a Medical Information Database accessible to life insurance companies for the purpose of enhancing risk assessment and preventing fraud.
+															<br><br>
+															Once uploaded, all life insurance companies will only have limited access to your information in order to protect your right to privacy in accordance with law. A copy of Circular Letter No. 2016-54 may be accessed at the Insurance Commission’s website at www.insurance.gov.ph.&nbsp;
+															<a style="font-size: inherit;" class="p-link" href="https://www.insurance.gov.ph/" target="_blank">www.insurance.gov.ph.</a>
+															<input type="checkbox" name=""  (change)="changedDeclartions($event, 'IsCheckDeclarationStatement')"
+																formControlName="IsCheckDeclarationStatement"
+																id="confirmcorrect" />
+															<span class="checkmark"></span>
+														</label>
+														<!-- <small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckDeclarationStatement'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckDeclarationStatement'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'declarationsForm'
+																	)
+																	.get(
+																		'IsCheckDeclarationStatement'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small> -->
+													</div>
+													<div class="col-md-12 mb-3">
+														<label class="radio-container">
+															I authorize any physician, hospital, clinic or other medically-related facility to furnish Insular Life with any information concerning my medical history and physical condition. 
+															<input type="checkbox" name=""  (change)="changedDeclartions($event, 'IsCheckSubmittedPhlippinesApp')"
+																formControlName="IsCheckSubmittedPhlippinesApp"
+																id="submitedPhilphine" />
+															<span class="checkmark"></span>
+														</label>
+														<!-- <small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckSubmittedPhlippinesApp'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckSubmittedPhlippinesApp'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'declarationsForm'
+																	)
+																	.get(
+																		'IsCheckSubmittedPhlippinesApp'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small> -->
+													</div>
+													<div class="col-md-12 mb-3">
+														<label class="radio-container">
+															During the effectivity of the policy, I hereby agree to the following:
+															<ol type="1" class="life-products-ol">
+																<li>
+																	In case Insular Life is unable to comply with the relevant CDD measures as required under Republic Act 9160 or the Anti-Money Laundering Act, as amended and relevant issuances due to my fault, Insular Life may apply the following:
+																	<ol type="a" class="life-products-ol-sub">
+																		<li>Measures to restrict the services available or prohibit any further transactions on the policy until full and proper CDD measures have been successfully conducted; and</li>
+																		<li>In case the foregoing is unsuccessful, terminate business relationship. The exercise of Insular Life of this measure shall only entitle me to receive the unused portions of premium or withdrawal value, if any, whichever is applicable.</li>
+																	</ol>
+																</li>
+																<li>
+																	Be bound by the obligations set out in relevant United Nations Security Council Resolutions (UNSCR) relating to the prevention and suppression of proliferation financing of Weapons of Mass Destruction (WMD), including the freezing and unfreezing actions as well as prohibitions from conducting transactions with designated persons and entities. 
+																</li>
+															</ol>
+															<input type="checkbox" formControlName="IsCheckLifeProducts"  (change)="changedDeclartions($event, 'IsCheckLifeProducts')"
+																id="informproduct" />
+															<span class="checkmark"></span>
+														</label>
+														<!-- <small class="errormsg" *ngIf="
+																(submitted ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckLifeProducts'
+																		)
+																		.dirty ||
+																	getApplyForm
+																		.get(
+																			'declarationsForm'
+																		)
+																		.get(
+																			'IsCheckLifeProducts'
+																		)
+																		.touched) &&
+																getApplyForm
+																	.get(
+																		'declarationsForm'
+																	)
+																	.get(
+																		'IsCheckLifeProducts'
+																	)?.errors
+															">
+															This is a required
+															field
+														</small> -->
+													</div>
+												</div>
+											</div>
+											
+										</div>
+
+										<div class="col-md-12 error-msg" *ngIf="hasError">
+											<span>{{errorMsg}}</span>
+										</div>
+										<div class="form-row">
+											<div class="col-md-7 col-12">
+												<div class="btnsec text-left">
+													<button class="btn outlinedbtn" id="back-btn" (click)="backtoQoute()" *ngIf="!showThirdStep">
+														<i class="material-icons">arrow_backward</i>
+														Back
+													</button>
+													<button class="btn outlinedbtn" id="back-btn" (click)="backtoUploadFiles()" *ngIf="showThirdStep">
+														<i class="material-icons">arrow_backward</i>
+														Back
+													</button>
+													<button class="btn savebtns outlinedbtn" type="btn" (click)="conformSave()" [disabled]="isFileSizeError || 
+													!getApplyForm.get('requirementsForm')?.valid || !getApplyForm.get('declarationsForm')?.valid
+												">
+														Save Information
+													</button>
+													<a id="conformBtnApply" style="display:none" href="#Conform"
+														rel="modal:open">
+														Alert
+													</a>
+												</div>
+											</div>
+											<div class="col-md-5 col-12">
+												<div class="btnsec text-right" *ngIf="!showThirdStep">
+													<button type="button" class="btn" [disabled]="isFileSizeError || 
+															!getApplyForm.get(
+																'requirementsForm'
+															)?.valid
+														" (click)="setShowThird()">
+														Continue
+														<i class="material-icons">arrow_forward</i>
+													</button>
+												</div>
+												<div class="btnsec text-right" *ngIf="showThirdStep">
+													<button type="submit" [disabled]="isFileSizeError || !getApplyForm.get('requirementsForm')?.valid || !getApplyForm.get('declarationsForm')?.valid" class="btn" (click)="addApplyForm()">
+														Continue to Pay
+														<i class="material-icons">arrow_forward</i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 sk tabsamll">
+				<div style="position: fixed; height: 100%" class="right-panel">
+					<div class="col-md-12">
+						<label for="" class="label">TOTAL ANNUAL PREMIUM</label>
+						<h1 class="totalprice">
+							<del>p</del>{{ totalPremium }}
+						</h1>
+					</div>
+					<div class="col-md-12">
+						<label for="" class="label">Annual Premium per Member</label>
+						<h1 class="subprice">
+							<del>p</del>{{ annualPremium }}
+						</h1>
+					</div>
+					<div class="col-md-12">
+						<label for="" class="label">Life Insurance Coverage per Member</label>
+						<h1 class="subprice">
+							<del>p</del>{{ insuranceCoverage }}
+						</h1>
+					</div>
+					<div class="col-md-12 faq download-dis" (click)="downloadPlanDes()">
+						<a target="_blanck" id="faq"
+							style="color: #e43e25;font-weight:500;font-size:13px; margin-top: 40px;"><u>Plan
+								Description</u></a>
+					</div>
+					<div class="col-md-12 faq">
+						<a target="_blank" id="faq" routerLink="/faqs" [queryParams]="{ tab: 4}"
+							style="text-decoration: underline;color: #e43e25">Frequently Asked Questions</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="Conform" class="modal" style="max-width: 600px;height: 300px;padding: 100px 50px;">
+	<p class="confirmation-text" style="text-align:center;font-size:20px;color:#42414d;">
+		Are you sure ?
+	</p>
+	<br /><br />
+	<div class="row" style="margin-top:40px;">
+		<div class="col-md-6  col-12 text-center text-md-right" style="margin: 5px 0;">
+			<a id="closeModal" class="btn savebtns outlinedbtn"
+				style="top: 0px;position: relative;padding: 1.0em 4em;font-size: 14px;letter-spacing: 2px;font-weight: 700;margin: auto;border-radius: 6px;text-transform: uppercase;cursor: pointer;"
+				href="#" rel="modal:close">
+				NO
+			</a>
+		</div>
+		<div class="col-md-6  col-12 text-center text-md-left" style="margin: 5px 0;">
+			<button class="button button-primary" (click)="addApplyForm('save')" data-proceed-button href="#"
+				style="padding: 1.2em 4em;font-size: 14px;">Yes</button>
+		</div>
+	</div>
+</div>
+	

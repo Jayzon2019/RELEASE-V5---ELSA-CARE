@@ -1,0 +1,60 @@
+.ps-lite-apply-page {
+    label.id-secondary {
+        display: none;
+
+        
+    }
+
+    @media (max-width: 767px) {
+        label.id-secondary {
+            display: block;
+        }
+
+        .id-secondary {
+            display: none;
+        }
+    }
+
+    .drag-text {
+        h3 {
+            color: #ababab;
+        }
+    }
+
+    .radio-container.customcheckcircle input:checked ~ .checkmark:after {
+        background-color: #2895df;
+    }
+    
+    .pf-list-item:hover {
+        background-color: #2895df;
+        border-color: #2895df;
+    }
+
+    .steplist ul.steplistmain li ul.innerlist{
+        li.active:after {
+            height: 60px;
+        }
+        li:after {
+            height: 60px;
+        }
+    } 
+
+    .steplist-wrapper {
+        .steplist{
+            position: fixed;
+        }
+    }
+
+    @media (max-width: 1080px) and (min-width: 801px) {
+        .roghtwrapsection-wrapper {
+            margin-left: 25%;
+            max-width: 75%;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .steplist-wrapper > .steplist{
+            position: inherit;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<div class="roghtwrapsection">
+	<div class="ps-lit-logo">
+		<img src="assets\images\prime-logo.png" alt="prime-care" width="90%"/>
+	</div>
+	<h4 *ngIf="status == 0">Your {{ subscription.annual }} Premium Is</h4>
+	<h2 *ngIf="status == 0">P{{ subscription.amount || "0.00" }}</h2>
+
+	<h4 *ngIf="status == 1 && subscriptions">
+		Your {{ subscriptions.annual }} Premium Is
+	</h4>
+	<h2 *ngIf="status == 1 && subscriptions">
+		P{{ subscriptions.amount || "0.00" }}
+	</h2>
+
+	<p class="my-5">
+		Prime Care Critical Illness Insurance is a yearly renewable term plan.
+		Succeeding premiums will be based on the attained age of the insured.
+	</p>
+	<p>
+		<a
+			id="policy"
+			href="assets/documents/policy-provisions.pdf"
+			download="Policy Provisions and Exclusions.pdf"
+			>Policy Provisions and Exclusions</a
+		>
+	</p>
+	<p>
+		<a href="javascript:void(0)" [routerLink]="['/faqs']" [queryParams]="{ tab: 1}" target="_blank" >Frequently Asked Questions</a>
+	</p>
+</div>

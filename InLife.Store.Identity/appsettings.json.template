@@ -1,0 +1,132 @@
+{
+	"Logging":
+	{
+		"IncludeScopes": false,
+		"LogLevel":
+		{
+			"Default": "Information",
+			"System": "Information",
+			"Microsoft": "Information"
+		}
+	},
+
+	"ConnectionStrings":
+	{
+		"_DefaultConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true",
+		"DefaultConnection": "Server=localhost,1433;Database=InLife.Store;User ID=sa;Password=P@ssw0rd;",
+		"__DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=USERNAME;Password=PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+
+	},
+
+	//"CustomDomain":
+	//{
+	//	"Protocol": "https",
+	//	"Host": "dev-inlifestore.projectgrey.net",
+	//	"PathBase": "/identity"
+	//},
+
+	"Smtp":
+	{
+		"Host": "smtp-relay.sendinblue.com",
+		"Port": 587,
+		"Username": "",
+		"Password": "",
+		"EnableSsl": true
+	},
+
+	"IdentityServer":
+	{
+		"ApiResources":
+		[
+			{
+				"Name": "IdentityServerApi",
+				"DisplayName": "IdentityServerApi",
+				"Scopes": [ { "Name": "IdentityServerApi" } ]
+			},
+			{
+				"Name": "inlife.store.api",
+				"DisplayName": "inlife.store.api",
+				"UserClaims": [ "role" ],
+				"Scopes": [ { "Name": "inlife.store.api" } ]
+			}
+		],
+		"Clients":
+		[
+			{
+				"Enabled": true,
+				"ClientId": "inlife.store.cms",
+				"ClientName": "InLife Store CMS",
+				"ClientSecrets": [ { "Value": "PKqo/JGi5K2WVM3gfAtXUPr8RU+tnpGKtd/GuoVaecs=" } ],
+
+				"AllowedGrantTypes": [ "authorization_code" ],
+				"AllowedScopes": [ "openid", "profile" ],
+
+				"RequirePkce": true,
+				"AllowPlainTextPkce": false,
+
+				"AlwaysSendClientClaims": true,
+				"AlwaysIncludeUserClaimsInIdToken": true,
+				"AllowOfflineAccess": false,
+				"AccessTokenLifetime": 300,
+				"AccessTokenType": 1,
+
+				"RedirectUris": [ "https://localhost:8100/signin-oidc" ],
+				"PostLogoutRedirectUris": [ "https://localhost:8100/signout-callback-oidc" ],
+				"FrontChannelLogoutUri": "https://localhost:8100/signout-oidc"
+			},
+			{
+				"Enabled": true,
+				"ClientId": "inlife.store.ams",
+				"ClientName": "InLife Store AMS",
+				"ClientSecrets": [ { "Value": "PKqo/JGi5K2WVM3gfAtXUPr8RU+tnpGKtd/GuoVaecs=" } ],
+
+				"AllowedGrantTypes": [ "authorization_code" ],
+				"AllowedScopes": [ "openid", "profile" ],
+
+				"RequirePkce": true,
+				"AllowPlainTextPkce": false,
+
+				"AlwaysSendClientClaims": true,
+				"AlwaysIncludeUserClaimsInIdToken": true,
+				"AllowOfflineAccess": true,
+				"AccessTokenLifetime": 300,
+				"AccessTokenType": 1,
+
+				"RedirectUris": [ "https://localhost:8200/signin-oidc" ],
+				"PostLogoutRedirectUris": [ "https://localhost:8200/signout-callback-oidc" ],
+				"FrontChannelLogoutUri": "https://localhost:8200/signout-oidc"
+			}
+		]
+	},
+
+	"Email":
+	{
+		"ErrorNotification":
+		{
+			"SenderName": "InLife Store Identity - #SERVER#",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"info@projectgrey.net"
+			],
+			"Subject": "InLife Store Identity : An error has occurred",
+			"TemplateFile": "ErrorNotification.html"
+		},
+
+		"AccountVerification":
+		{
+			"SenderName": "InLife Store Identity",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Subject": "Verify your email address",
+			"TemplateFile": "AccountVerification.html"
+		},
+
+		"AccountRecovery":
+		{
+			"SenderName": "InLife Store Identity",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Subject": "Recover your account",
+			"TemplateFile": "AccountRecovery.html"
+		}
+	}
+}

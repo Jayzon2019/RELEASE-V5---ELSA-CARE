@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +19,7 @@ namespace InLife.Store.Core.Models
 
 		public string LastName { get; set; }
 
-		public DateTimeOffset? LockoutEnd { get; set; } 
+		public DateTimeOffset? LockoutEnd { get; set; }
 
 		public virtual ICollection<User_UserRole> Roles { get; set; }
 
