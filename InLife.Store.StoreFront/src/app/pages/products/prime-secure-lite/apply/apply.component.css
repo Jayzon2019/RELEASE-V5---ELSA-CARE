@@ -1,0 +1,238 @@
+.datepicker-custom {
+	width: 100%;
+}
+
+mat-datepicker-toggle.mat-datepicker-toggle {
+	position: absolute;
+	right: 1.4%;
+	padding-top: 1%;
+	padding-right: 1%;
+}
+
+.uploadfilecontainer {
+	background-repeat: no-repeat;
+	background-size: 100px;
+	background-position: center;
+	height: 200px;
+	width: 80%;
+	margin: 20px auto;
+	border: 2px dashed #111111;
+	border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+	cursor: pointer;
+	/* background-color:#9ecbec !important; */
+	opacity: 0.8;
+}
+
+.files-list {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin: 10px auto;
+	background: #ffffff;
+	border: 1px dashed;
+	border-radius: 12px;
+	padding: 5px;
+	color: #111111;
+}
+
+.files-list .delete-file {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.files-list .delete-file img {
+	width: 30px;
+}
+
+.errormsgs {
+	position: absolute;
+	bottom: 0px;
+	color: #e43e25;
+	width: 100%;
+	font-size: 80%;
+	font-weight: 400;
+}
+
+.identity-document-preview {
+	position: relative;
+	display: block;
+	padding: 10px;
+	background: #ccc;
+	text-align: center;
+}
+
+.identity-document-preview > img {
+	display: block;
+	width: 100%;
+}
+
+.identity-document-preview > button {
+	display: block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 0;
+	background: #e43e25;
+	color: #fff;
+}
+/*-- css by Designer 05-2021 start --*/
+
+.stepdetail {
+	margin-right: 25px;
+}
+h3#step_head {
+	font-size: 20px !important;
+}
+.steplist ul.steplistmain li ul.innerlist li a {
+	font-size: 14px;
+}
+.stepdetail .preminumform label {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	font-size: 16px;
+}
+input.form-control.is-valid.ng-untouched.ng-pristine.ng-valid {
+	border-color: #2895df;
+}
+
+.preminumform h4,
+.right-panel h1.subprice {
+	font-size: 18px;
+}
+.right-panel label.label {
+	font-size: 14px;
+}
+.btnsec button.btn.outlinedbtn {
+	padding: 1em 1.5em;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+ul.steplistmain li.active.complete::before {
+	color: #fff !important;
+}
+.uploadimgescustom .drag-text h3 {
+	text-transform: none !important;
+}
+/*-- css changes 04-march-2021 start here --*/
+.stepdetail h1 {
+	font-size: 42px;
+	font-weight: bold;
+}
+.stepdetail h3 {
+	color: #070752;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+.stepdetail .preminumform label {
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+.steplist ul.steplistmain li {
+	font-weight: 600;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li ul.innerlist li a,
+.stepdetail .preminumform input,
+.stepdetail .preminumform select,
+.checkbox-wrap .pf-list-item label span {
+	font-size: 15px;
+	font-weight: 500;
+}
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	color: #070752;
+}
+.stepdetail .preminumform input:visited,
+.stepdetail .preminumform select:visited {
+	border: 2px solid #2895df;
+}
+input#inputEmail4 {
+	background: #f6f7f8;
+}
+input#inputEmail4::placeholder {
+	color: #070752 !important;
+}
+.stepdetail .preminumform p {
+	line-height: 24px !important;
+	color: #42414d;
+	font-size: 15px;
+}
+ul.condtionslist li {
+	color: #42414d;
+	line-height: 24px;
+	font-size: 15px;
+}
+.step6,
+.step7,
+.step8,
+.step5,
+.step2,
+.step3,
+.step4 {
+	margin-bottom: 60px !important;
+}
+.formcoantiner.step3 {
+	margin-bottom: 0 !important;
+}
+.pagetitel-sec h3 {
+	display: none;
+}
+/*--- 10-march-2021 css start  ---*/
+
+pagetitles h5,
+.formcoantiner h3 {
+	color: #070752;
+}
+.stepdetail h1 {
+	margin-bottom: 20px;
+	font-size: 42px;
+	font-weight: bold;
+}
+.checkbox-wrap .pf-list-item input:checked + span {
+	background-color: #2895df;
+	border: 1px solid #2895df;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+.form-control:focus,
+.form-control:hover {
+	border-color: #01a7e0 !important;
+}
+a.p-link,
+a.p-link:hover {
+	text-decoration: none;
+}
+
+ul.listinnevcondition {
+	list-style: none !important;
+	padding-left: 0 !important;
+}
+
+.form-control.is-valid {
+	background-image: url(/assets/images/check.png);
+}

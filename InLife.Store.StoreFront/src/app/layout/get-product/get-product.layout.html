@@ -1,0 +1,101 @@
+<header id="header" class="fixed">
+	<div class="container">
+		<div class="logo" [ngClass]="{'ps-page-header': isPSChild }" style="position: absolute;">
+			<a href="javascript:void(0);" (click)="home()"><img src="assets/images/logo.png" alt="Inlife logo"></a>
+		</div>
+		<ng-container *ngIf="isShowFooterandHeader">
+			<a href="javascript:void(0)" (click)="mobileMenuClick()" class="burger-menu">
+				<i class="fa fa-bars burger-icon" aria-hidden="true"></i>
+				<i class="fa fa-times burger-close-icon" aria-hidden="true"></i>
+			</a>
+			<nav class="main-nav">
+				<ul class="main-nav-list">
+					<li class="children-menu">
+						<a href="javascript:void(0)">Personal</a>
+						<div class="sub-menu" style="display: none;">
+							<div class="sub-menu-content">
+								<div class="sub-menu-block">
+									<a class="sub-menu-block-img" routerLink="/prime-care">
+										<img src="assets/images/sub-menu-prime-care.png">
+										<div class="sub-menu-cnt">
+											<div class="sub-heading" style="color:#070752!important;">Prime Care</div>
+											<p style="color:#42414d!important;">Protect your finances from <br />critical illness</p>
+										</div>
+									</a>
+								</div>
+								<!-- <div class="sub-menu-block">
+									<a class="sub-menu-block-img" routerLink="/prime-secure">
+										<img src="assets/images/sub-menu-prime-secure.png">
+										<div class="sub-menu-cnt">
+											
+											<div class="sub-heading" style="color:#070752!important;">Prime Secure</div>
+											<p style="color:#42414d!important;">Comprehensive protection <br />for these trying times</p>
+										</div>
+									</a>
+								</div> -->
+								<div class="sub-menu-block">
+									<a class="sub-menu-block-img" routerLink="/prime-secure-lite">
+										<img src="assets/images/sub-menu-prime-secure-lite.png">
+										<div class="sub-menu-cnt">
+											<div class="sub-heading" style="color:#070752!important;">Prime Secure Lite</div>
+											<p style="color:#42414d!important;">Fast and easy three-fold <br />protection</p>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="dropdown-bg"></div>
+					</li>
+					<!-- <li><a routerLink="/group">Group</a></li> -->
+					<li>
+						<a routerLink="/faqs">FAQs</a>
+						
+					</li>
+					<li><a href="https://www.insularlife.com.ph/contact-us" target="_blank">Contact Us</a></li>
+					<li><a href="https://www.insularlife.com.ph/" target="_blank">InLife Main Site</a></li>
+				</ul>
+			</nav>
+		</ng-container>
+		
+		
+	</div>
+</header>
+
+<main id="main-content" [ngClass]="{'prime-page-wrapper': isPSChild }">
+	<router-outlet></router-outlet>
+</main>
+<footer id="footer">
+	<div class="container">
+		<div class="footer-copy wow fadeInUp">
+			<div class="footer-logo">
+				<a href={{footerLinks?.logoUrl}}><img src="assets/images/logo.png" alt="InLife Logo"></a>
+			</div>
+			<span class="copyrights">© 2020 All Rights Reserved.</span>
+		</div>
+
+		<div class="footer-link wow fadeInUp">
+			<nav>
+				<ul>
+					<li><a href={{footerLinks?.mainSiteUrl}} target="_blank">{{footerLinks?.mainSiteTxt}}</a></li>
+					<li><a href={{footerLinks?.insCommissionUrl}} target="_blank">{{footerLinks?.insCommissionTxt}}</a></li>
+					<li><a href={{footerLinks?.cusCharterUrl}} target="_blank">{{footerLinks?.cusCharterTxt}}</a></li>
+				</ul>
+				<ul>
+					<li><a href={{footerLinks?.termsConditionUrl}} target="_blank">{{footerLinks?.termsConditionTxt}}</a></li>
+					<li><a href={{footerLinks?.privacyPolicyUrl}} target="_blank">{{footerLinks?.privacyPolicyTxt}}</a></li>
+					<li><a href={{footerLinks?.contactUsUrl}} target="_blank">{{footerLinks?.contactUsTxt}}</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="social-links wow fadeInUp">
+			<nav>
+				<ul>
+					<li><a href={{footerLinks?.fbUrl}} target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+					<li><a href={{footerLinks?.tweeterUrl}} target="_blank"><i class="fa fa-twitter"></i></a></li>
+					<li><a href={{footerLinks?.instaUrl}} target="_blank"><i class="fa fa-instagram"></i></a></li>
+					<li><a href={{footerLinks?.youTubeUrl}} target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</footer>

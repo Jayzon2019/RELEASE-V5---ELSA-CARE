@@ -1,0 +1,17 @@
+.roghtwrapsection {
+    position: fixed;
+    z-index: 9998;
+    top: 0px;
+
+    @media (max-width: 1080px) {
+        margin: 25px;
+        position: relative;
+        z-index: unset;
+        top: unset;
+        // width: 250px;
+
+        .ps-lit-logo {
+            width: 250px;
+        }
+    }
+}

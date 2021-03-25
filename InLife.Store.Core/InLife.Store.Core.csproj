@@ -15,11 +15,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Business\" />
-	  <Folder Include="Utilities\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Compile Remove="Services\IOrderService.cs" />
 	</ItemGroup>
 </Project>

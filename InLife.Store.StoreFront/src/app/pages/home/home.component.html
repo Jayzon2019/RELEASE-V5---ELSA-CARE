@@ -1,0 +1,162 @@
+<main>
+	<section class="hero-slider">
+		<ngx-slick-carousel class="carousel"
+							#slickModal="slick-carousel"
+							[config]="slideConfig">
+			<div ngxSlickItem *ngFor="let slide of sliders; let i = index" class="slide">
+				<div [ngStyle]="{'background-image': getUrl(slide.heroBg)}" style="background-size: cover;" class="{{'section section-hero wow fadeInUp hero-slide-' + i}}">
+					<div class="container">
+						<div style="{{getPosition(slide.contentPostion)}}" class="hero-content">
+							<h2 style="{{'color:' + getColor(slide.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slide.headingColor) + '!important;'}}">{{slide.heading }}<br class="only-in-mobile" /></h2>
+							<p style="{{'color:' + getColor(slide.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slide.subHeadingColor) + '!important;'}}">{{ slide.subHeading }}</p>
+							<a [href]="slide.btnTxtLink" class="btn-orange">{{slide.heroBtnTxt }}</a>
+						</div>
+					</div>
+					<img [src]="sanitize(slide.heroMobBg)" class="only-in-mobile">
+				</div>
+			</div>
+		</ngx-slick-carousel>
+	</section>
+
+	<section class="section section-features">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">A Lifetime for Good is just a click away</h2>
+
+			<ul class="feature-list">
+				<li class="feature-item wow fadeInUp"><img src="assets/images/features-icon-3.png" alt="Get the latest deals"><span>Exclusive product offerings</span></li>
+				<li class="feature-item wow fadeInUp"><img src="assets/images/features-icon-1.png" alt="Buy online fast and hassle-free"><span>Fast and hassle-free application</span></li>
+				<li class="feature-item wow fadeInUp"><img src="assets/images/features-icon-2.png" alt="No long interview and paperwork"><span>No long interview and paperwork</span></li>
+				<li class="feature-item wow fadeInUp"><img src="assets/images/features-icon-4.png" alt="Safe and secured transaction"><span>Safe and secured transaction</span></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="section section-about">
+		<div class="container">
+			<img src="assets/images/about-bg.jpg" alt="" class="only-in-mobile about-banner">
+			<div class="only-in-desktop about-desktop-banner"></div>
+			<div class="container-half">
+				<h2 class="section-header  wow fadeInUp">InLife Store Checklist <br />Before You Get Started </h2>
+				<ul class="about-checklist">
+					<li class="wow fadeInUp">Filipino citizenship and currently residing <br />in the Philippines</li>
+					<li class="wow fadeInUp">Valid government-issued ID</li>
+					<li class="wow fadeInUp">Credit/debit card for online payment</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	
+	<section id="section-prime-secure" class="section prime-secure-section">
+		<div class="container">
+			<!-- <p class="section-lead wow fadeInUp">&nbsp;</p> -->
+			<div class="h-prime-contant-area clearfix">
+				<div class="col-right prime-secure-wrapper">
+					<!-- <img class="secure-img-after" src="assets\images/prime-secure-lite2.png" alt="prime secure lite"> -->
+					<img class="secure-img-after" src="assets\images/prime-secure-lite1.png" alt="prime secure lite">
+					<img src="assets\images/prime-secure-lite.png" alt="prime secure lite">
+					
+				</div>
+				<div class="col-right">
+					<h2 class="section-header wow fadeInUp text-left">Get a Comprehensive Plan Online</h2>
+					<p class="last-child">Prime Secure Lite offers life insurance with additional health insurance benefits. Getting protected is easy via these 3 steps: Get Quote, Apply, and Pay Online.</p>
+					<a href="prime-care.html" class="btn-orange">Learn More</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="section-prime-care" class="section section-products h-prime-section">
+		<div class="container">
+			<!-- <p class="section-lead wow fadeInUp">&nbsp;</p> -->
+			<div class="h-prime-contant-area clearfix">
+				<div class="col-right">
+					<h2 class="section-header wow fadeInUp">Guarantee Your Future with an InLife Plan</h2>
+					<p>Critical Illness Insurance that provides financial security so you can focus on your recovery and getting well.</p>
+					<p class="last-child">Receive a lump sum amount plus monthly cash allowances in case you are diagnosed with any of the 35 dread diseases.</p>
+					<a href="prime-care.html" class="btn-orange">Learn More</a>
+				</div>
+				<div class="col-right">
+					<video id="video" playsinline autoplay muted="true" loop>
+						<source src="assets/images/iPad_Animation.mp4" type="video/mp4">
+						<source src="assets/images/iPad_Animation.mp4" type="video/ogg">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-products" id="ihc">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">A Healthy Future Starts Here</h2>
+			<p class="section-lead wow fadeInUp">Because life happens, InLife Health Care - every Filipino’s partner in getting convenient, <br />affordable, and medically-appropriate health services - is ready to support you through it.</p>
+
+			<div class="cardBlock">
+				<a [href]="makeIdFromProductName(productName)" rel="modal:open">
+					<p class="img"><img [src]="sanitize(productImg)" alt="" /></p>
+					<div class="textBlock">
+						<p class="title">{{productName}}</p>
+						<p class="text" [innerHTML]="shortDescription"></p>
+						<p class="price" style="color:#e33c23;">Total {{productName}} ₱{{productPrice}}</p>
+						<p class="price" style="color:#e33c23;">Total {{productName}} {{priceWithOffer}}</p>
+					</div>
+				</a>
+			</div>
+
+
+			<ul class="product-list">
+				<li class="product-item  wow fadeInUp" *ngFor="let pro of productsLst;">
+					<div class="product-card">
+						<a [href]="makeIdFromProductName(pro.productName)" rel="modal:open">
+							<img [src]="sanitize(pro.productImg)" alt={{pro.productName}}>
+							<span class="product-title">{{pro.productName}}</span>
+							<span class="product-price">{{pro.productPrice}}</span>
+						</a>
+					</div>
+				</li>
+
+			</ul>
+
+			<div class="text-center">
+				<a href="#" class="button button-secondary button-center  wow fadeInUp" id="loadmore" (click)="loadMore()">Load more</a>
+			</div>
+		</div>
+
+	</section>
+	<section class="section section-newsletter">
+		<div class="container">
+			<h2 class="section-header">Need Help?</h2>
+			<p class="section-lead">
+				Hotline: (632) 8-876-1800 | Toll-Free: 1-800-10-INSULAR (4678527)
+
+				<a routerLink="/faqs">Click here to view FAQs</a>
+			</p>
+		</div>
+	</section>
+</main>
+
+<div class="modals">
+</div>
+
+
+			<div id="buy-now-confirmation" class="modal">
+				<a href="#" class="modal-close" rel="modal:close"><i class="fa fa-times" aria-hidden="true"></i></a>
+				<p class="confirmation-text">
+					You are leaving The InLife Store website and will be re-directed to InLife Health Care (IHC)'s official online store. If you choose to proceed, IHC’s privacy policy and terms and conditions will be in effect. Please review the privacy policies and terms and conditions of these sites accordingly.
+				</p>
+				<div class="text-center">
+					<a class="button button-primary" data-proceed-button href="#" target="_blank">Proceed</a>
+				</div>
+			</div>
+			<div id="buy-now-confirmation2" class="modal">
+				<a href="#" class="modal-close" rel="modal:close"><i class="fa fa-times" aria-hidden="true"></i></a>
+				<p class="confirmation-text">
+					You are leaving The InLife Store website and will be re-directed to InLife Health Care (IHC)'s official online store. If you choose to proceed, IHC’s privacy policy and terms and conditions will be in effect. Please review the privacy policies and terms and conditions of these sites accordingly.
+				</p>
+				<div class="text-center">
+					<a class="button button-primary" data-proceed-button href="#" target="_blank">Proceed</a>
+				</div>
+			</div>
+
+
+			

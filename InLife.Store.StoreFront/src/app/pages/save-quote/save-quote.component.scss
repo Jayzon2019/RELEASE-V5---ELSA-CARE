@@ -1,0 +1,81 @@
+.radiolabel {
+	color: #070752;
+	font-size: 12px;
+	padding-top: 6px !important;
+}
+.heading {
+	text-align: center;
+	color: #070752;
+	font-size: 42px;
+	font-weight: 600;
+	margin-bottom: 50px;
+	letter-spacing: -1px;
+	line-height: normal;
+}
+
+input {
+	border-radius: 4px;
+	margin-top: 57px;
+	margin-left: 24px;
+	font-size: 24px;
+	padding-top: 3px;
+	padding-left: 13px;
+	width: 400px;
+	height: 52px;
+	font-weight: 600;
+	color: #070752;
+	text-transform: uppercase;
+
+	margin: 43px auto 0;
+	display: block;
+	border: 2px solid #d5d5d5;
+}
+input:focus,
+input:active {
+	border: 2px solid #2895df;
+}
+
+.para {
+	margin-top: 22px;
+	font-size: 18px;
+	color: #070752;
+	line-height: 8px;
+}
+.para1 {
+	margin-top: 8px;
+	font-size: 12px;
+	color: #070752;
+	font-weight: 500;
+}
+#copycode {
+	margin-top: 10px;
+	font-size: 11px;
+	color: #e43e25;
+	font-weight: 550;
+	text-align: center;
+	cursor: pointer;
+}
+.btnsec {
+	margin-top: 7em;
+}
+@media (min-width: 1025px) {
+	body {
+		padding-top: 0px;
+	}
+	.logotitlebar {
+		margin-top: -80px;
+	}
+}
+
+body {
+	font-family: "Inter", sans-serif;
+	font-weight: 400;
+	color: #696969;
+	padding-top: 0px !important;
+}
+.logotitlebar .row {
+	padding: 4px 20px 0px 20px !important;
+}
+.logo-sec img {
+	max-width: 186px;
+}

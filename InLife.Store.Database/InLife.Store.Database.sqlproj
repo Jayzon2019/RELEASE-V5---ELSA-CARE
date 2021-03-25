@@ -60,11 +60,17 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="PrimeCare\" />
+    <Folder Include="PrimeCare\Tables\" />
+    <Folder Include="Security\" />
+    <Folder Include="Group\" />
+    <Folder Include="Group\Tables\" />
+    <Folder Include="Content\" />
+    <Folder Include="Content\Tables\" />
+    <Folder Include="PrimeSecure\" />
+    <Folder Include="PrimeSecure\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Quotes.sql" />
-    <Build Include="dbo\Tables\Customers.sql" />
-    <Build Include="dbo\Tables\Addresses.sql" />
     <Build Include="dbo\Tables\TblProducts.sql" />
     <Build Include="dbo\Tables\TblProductDetails.sql" />
     <Build Include="dbo\Tables\TblKeyMetrics.sql" />
@@ -83,14 +89,29 @@
     <Build Include="dbo\Tables\TblPrimeHeroes.sql" />
     <Build Include="dbo\Tables\TblHeroes.sql" />
     <Build Include="dbo\Tables\TblFaqs.sql" />
-    <Build Include="dbo\Tables\Persons.sql" />
     <Build Include="dbo\Tables\PersistedGrants.sql" />
-    <Build Include="dbo\Tables\OtherInsurances.sql" />
-    <Build Include="dbo\Tables\InsuranceApplications.sql" />
     <Build Include="dbo\Tables\DeviceCodes.sql" />
-    <Build Include="dbo\Tables\TblPrimeCare_1.sql" />
     <Build Include="dbo\Tables\Files.sql" />
     <Build Include="dbo\Tables\TblPrimeCare.sql" />
     <Build Include="dbo\Tables\UserSessions.sql" />
+    <Build Include="PrimeCare\Tables\OtherInsurances.sql" />
+    <Build Include="PrimeCare\Tables\Customers.sql" />
+    <Build Include="PrimeCare\Tables\Addresses.sql" />
+    <Build Include="PrimeCare\Tables\Quotes.sql" />
+    <Build Include="PrimeCare\Tables\Persons.sql" />
+    <Build Include="Security\PrimeSecure.sql" />
+    <Build Include="Security\PrimeCare.sql" />
+    <Build Include="PrimeCare\Tables\Files.sql" />
+    <Build Include="PrimeCare\Tables\Applications.sql" />
+    <Build Include="Group\Tables\Files.sql" />
+    <Build Include="Group\Tables\Applications.sql" />
+    <Build Include="Security\Group.sql" />
+    <Build Include="Security\Content.sql" />
+    <Build Include="Content\Tables\Heroes.sql" />
+    <Build Include="Content\Tables\HealthCareProducts.sql" />
+    <Build Include="Content\Tables\Files.sql" />
+    <Build Include="Content\Tables\Faqs.sql" />
+    <Build Include="Content\Tables\FaqCategories.sql" />
+    <Build Include="PrimeSecure\Tables\Applications.sql" />
   </ItemGroup>
 </Project>

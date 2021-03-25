@@ -1,0 +1,14 @@
+export enum StorageType {
+    ACCESS_DATA = 'ACCESS',
+    SESSION = 'SESSION',
+    POST_GROUP_QUOTE = 'QUOTE_FORM',
+    GROUP_PLAN_DATA = 'GROUP_PLAN_DATA',
+    REQUIREMENTS_DATA  = 'REQUIREMENTS_DATA',
+    STUDENTS_TEACHERS_BENEFITS = 'STUDENTS_TEACHERS_BENEFITS'
+  }
+  
+  export enum WebStorageType {
+    LOCAL = 1,
+    SESSION = 2,
+    COOKIE = 3
+  }

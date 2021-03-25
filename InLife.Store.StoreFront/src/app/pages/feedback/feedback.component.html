@@ -1,0 +1,71 @@
+<main *ngIf="!isSuccess" class="feedback-page">
+	<section class="section section-feedback">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">
+				We'd Love to Hear From You.
+			</h2>
+			<p class="sub-title wow fadeInUp">
+				How did you find your group application experience?
+            </p>
+            <div class="radio-section">
+                
+                <div class="radio-group">
+                    <div class="radio">
+                        <input id="poor" name="feedback_option" type="radio" [(ngModel)]="feedbackOption" [value]="1"/>
+                        <label for="poor" class="radio-label">Poor</label>
+                    </div>
+                    <div class="radio">
+                        <input id="fair" name="feedback_option" type="radio" [(ngModel)]="feedbackOption" [value]="2"/>
+                        <label for="fair" class="radio-label">Fair</label>
+                    </div>
+                    <div class="radio">
+                        <input id="good" name="feedback_option" type="radio" [(ngModel)]="feedbackOption" [value]="3"/>
+                        <label for="good" class="radio-label">Good</label>
+                    </div>
+                    <div class="radio">
+                        <input id="great" name="feedback_option" type="radio" [(ngModel)]="feedbackOption" [value]="4"/>
+                        <label for="great" class="radio-label">Great</label>
+                    </div>
+                </div>
+                <span *ngIf="submitted && !feedbackOption" class="text-warning">*Required</span>
+            </div>
+            <p class="sub-title wow fadeInUp">
+				What could we improve to provide you a great e-store experience?
+            </p>
+
+            <textarea class="c-textarea" 
+                placeholder="Enter you comments and/or suggestions here" 
+                name="message"
+                [(ngModel)]="feedbackText"
+                [ngClass]="{invalid: this.submitted && !feedbackText }"
+                ></textarea>
+
+            <div class="error-msg" *ngIf="hasError">
+                <span>{{errorMsg}}</span>
+            </div>
+            <div class="controls mt-4">
+                <a href="javascript:void(0)" (click)="sendFeeback()" class="btn-orange button-center wow fadeInUp submit-btn" id="">SUBMIT</a>
+            </div>
+            
+		</div>
+	</section>
+</main>
+
+<main class="d-flex flex-column align-items-center feedback-page" style="padding: 100px 10px 0 10px;" *ngIf="isSuccess">
+	<h2 class="section-header wow fadeInUp">
+		Feedback Received
+	</h2>
+	<p class="sub-title wow fadeInUp mt-5">
+		Thank you for your feedback.
+	</p>
+	<p class="sub-title wow fadeInUp">
+		For queries and other concerns, you may reach us thru e-mail:
+		<br><a class="feedback-email" href="mailto:corporatesolutions@insular.com.ph">corporatesolutions@insular.com.ph</a> or landline 02 8878 1841
+	</p>
+	<div class="d-flex flex-row mt-5 controls">
+        <button class="btn-outline wow fadeInUp" (click)="backToHome()">
+			<i class="fa fa-arrow-left" aria-hidden="true"></i>
+			<span class="ml-4">back to home page</span>
+		</button>
+    </div>
+</main>

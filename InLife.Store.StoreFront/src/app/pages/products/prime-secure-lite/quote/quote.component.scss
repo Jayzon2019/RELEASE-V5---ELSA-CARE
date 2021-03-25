@@ -1,0 +1,51 @@
+::ng-deep .my-tooltip {
+    font-size: 13px;
+    background: #000 !important;
+    white-space: pre-line !important;
+    padding: 1rem;
+}
+
+.ps-lite-quote-page {
+    .steplist ul.steplistmain li ul.innerlist{
+        li.active:after {
+            height: 60px;
+        }
+        li:after {
+            height: 60px;
+        }
+    }
+
+    .formcontainer.step2, .formcontainer.step3 {
+        padding-top: 25px !important;
+    }
+
+    .steplist-wrapper {
+        .steplist{
+            position: fixed;
+        }
+    }
+
+    .health-declartions-list-items {
+        list-style-type: inherit; 
+        list-style: disc;
+		list-style-position: inside;
+        padding-left: 15px;
+        li {
+            margin-bottom: 5px;
+        }
+    }
+
+    @media (max-width: 1080px) and (min-width: 801px) {
+        .roghtwrapsection-wrapper {
+            margin-left: 25%;
+            max-width: 75%;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .steplist-wrapper > .steplist{
+            position: inherit;
+        }
+    }
+    
+}

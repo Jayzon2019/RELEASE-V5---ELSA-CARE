@@ -57,62 +57,40 @@ paymentGatewayEndpoint: 'https://beta2.insularlife.com.ph/CustomerPortal/Custome
 
 5. Save the file
 
-6. Go to the `/src` source code folder.
+6. Go to the `/src/assets/js` source code folder.
 
-7. Open the following files in your text editor:
-```terminal
-index.html
-faqs.html
-get-prime-care.html
-ineligible.html
-maintenance.html
-prime-care.html
-redirect.html
-template.html
-thankyou.html
-```
+7. Open `appsettings.js` in your text editor.
 
-8. Replace the URL in the HTML base tag according to your server URL:
-```html
-<base href="https://HOST/">
-```
-
-9. Save the changes
-
-10. Go to the `/src/assets/js` source code folder.
-
-11. Open `appsettings.js` in your text editor.
-
-12. Replace the URL of the API
+8. Replace the URL of the API
 ```javascript
 var api = "https://HOST/api/";
 ```
 
-13. Save the file
+9. Save the file
 
-14. Install Angular CLI (if not yet installed)
+10. Install Angular CLI (if not yet installed)
 ```shell
 $ npm install -g @angular/cli
 ```
 
-15. Install/Update the project NPM packages
+11. Install/Update the project NPM packages
 ```shell
 $ npm install
 ```
 
-16. Publish the source code
+12. Publish the source code
 ```shell
 // For Projectgrey DEV Environment
-$ ng build --configuration dev
+$ ng build --configuration dev --base-href="https://dev-inlife-estore.azurewebsites.net/"
 
 // For InLife UAT Environment
-$ ng build --configuration uat
+$ ng build --configuration uat --base-href="https://uat-inlifestore.insularlife.com.ph/"
 
 // For InLife PROD Environment
-$ ng build --prod
+$ ng build --prod --base-href="https://inlifestore.insularlife.com.ph/"
 ```
 
-17. Copy the files from the published folder `/dist` to the designated Azure App Service
+13. Copy the files from the published folder `/dist` to the designated Azure App Service
 
 
 

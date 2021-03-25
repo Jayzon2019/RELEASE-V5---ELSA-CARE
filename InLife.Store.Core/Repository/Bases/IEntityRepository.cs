@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -21,6 +21,8 @@ namespace InLife.Store.Core.Repository
 
 		void Delete(ICollection<T> entities);
 
+		int SaveChanges();
+
 		/// <summary>
 		///		Get the entity that matches the provided Id
 		/// </summary>
@@ -28,6 +30,7 @@ namespace InLife.Store.Core.Repository
 		T Get(object id);
 
 		T Find(object id);
+
 
 		/// <summary>
 		///		Get all entities

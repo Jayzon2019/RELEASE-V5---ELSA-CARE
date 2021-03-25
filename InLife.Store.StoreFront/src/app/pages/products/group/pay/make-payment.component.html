@@ -1,0 +1,334 @@
+<div class="mainpagewrap">
+	<div class="row m-0">
+		<div class="col-md-10 tabfull p-0">
+			<div class="leftwrapsection">
+				<!-- <app-inner-header></app-inner-header> -->
+				<div class="mainwizard">
+					<div class="row">
+						<div class="col-md-3 tabsamll">
+							<div class="steplist" style="position: fixed">
+								<ul class="steplistmain">
+									<li class="active complete">Get a Quote</li>
+									<li class="active complete">Apply</li>
+									<li class="active">
+										Pay
+										<ul class="innerlist">
+											<li class="active">
+												<a href="javascript:void(0)"
+													>View Summary</a
+												>
+											</li>
+											<li class="active">
+												<a href="javascript:void(0)"
+													>Pay</a
+												>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-9 tabsamll">
+							<div class="stepdetail">
+								<div class="pagetitles">
+									<h1>Select Your Payment Scheme</h1>
+								</div>
+								<!-- step1 strat -->
+								<div class="formcoantiner step4">
+									<div class="preminumform">
+										<div class="form-row">
+											<div class="col-md-12">
+												<ul class="row">
+													<li class="col-md-3"></li>
+													<li
+														class="wow fadeInUp animated col-md-3 plan-card"
+														(click)="paymentMode = 1">
+														<div class="wealth-box" [ngClass]="paymentMode == 1 ? 'selected-li' : ''">
+															<div
+																(click)="bank()"
+																class="icon-box"
+															>
+																<img
+																	src="assets\images\bank-icon.png"
+																/>
+																<img
+																	src="assets\images\bank-icon-w.png"
+																	class="img-white"
+																/>
+																<!-- <i class="fa fa-university icon" aria-hidden="true"></i> -->
+																<h4
+																	class="bank"
+																>
+																	Bank
+																	Transfer
+																</h4>
+															</div>
+														</div>
+													</li>
+													<li
+														class="wow fadeInUp animated col-md-3 plan-card"
+														(click)="
+															paymentMode = 2
+														"
+													>
+														<div
+															class="wealth-box"
+															[ngClass]="
+																paymentMode == 2
+																	? 'selected-li'
+																	: ''
+															"
+														>
+															<div
+																(click)="
+																	counter()
+																"
+																class="icon-box"
+															>
+																<img
+																	src="assets\images\counter.png"
+																/>
+																<img
+																	src="assets\images\counter-w.png"
+																	class="img-white"
+																/>
+
+																<h4
+																	class="bank"
+																>
+																	Over-the-Counter
+																</h4>
+															</div>
+														</div>
+													</li>
+													<li class="col-md-3"></li>
+												</ul>
+											</div>
+
+											<div
+												*ngIf="thirdpage"
+												class="col-md-12"
+											>
+												<div class="message">
+													<p
+														style="font-size: 18px"
+														class="first-line"
+													>
+														Settle payment and
+														upload the proof of
+														payment (deposit slip or
+														official receipt) in the
+														InLife Store within the
+														next 24 hours.
+													</p>
+													<p class="second-line">
+														Pay your premiums and
+														provide your reference
+														code in my InLife
+														offices.
+													</p>
+													<a href="https://www.insularlife.com.ph/find-a-branch"
+														style="color: #e43e25"
+														target="_blank"
+														>View InLife branches</a
+													>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- bank transfar start here -->
+							<div
+								*ngIf="secondpage"
+								class="reviewbill bank-transfar mb-5"
+							>
+								<div class="row" style="margin-bottom: 15px">
+									<div class="col-12">
+										<p class="mb-5 text-center" style="font-size: 18px" >
+											Settle payment and upload the proof of payment (deposit slip or official receipt) in the InLife Store within the next 24 hours. 
+										</p>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 35px">
+									<div class="col-md-12 titlebill">
+										<p>Pay your group premiums through bank deposit or wire transfer.</p>
+									</div>
+									<!-- <div class="col-md-4 titlebill">
+										<p></p>
+									</div> -->
+								</div>
+
+								<div class="row mb-2">
+									<div class="col-md-6 titlebill">
+										<p>Account name:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>
+											The Insular Life Assurance Company,
+											Ltd.
+										</p>
+									</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-md-6 titlebill">
+										<p>Name of bank branch and address:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>
+											Union Bank of the Philippines,
+											Ayala-SSS Branch, SSS (Makati)
+											Building, Ayala Avenue Corner V.
+											Rufino street, Makati city
+										</p>
+									</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-md-6 titlebill">
+										<p>Account number:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>00-001-001987-0</p>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 40px">
+									<div class="col-md-6 titlebill">
+										<p>GL Code:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>13801</p>
+									</div>
+								</div>
+								<hr>
+								<div class="row mb-2"  style="margin-top: 40px">
+									<div class="col-md-6 titlebill">
+										<p>Account name:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>
+											The Insular Life Assurance Company,
+											Ltd.
+										</p>
+									</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-md-6 titlebill">
+										<p>Name of bank branch and address:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>
+											The Bank of the Philippine Islands
+											Alabang-Insular Branch G/F, Insular
+											Life Corporate Center Insular Life
+											Drive, Filinvest Corporate City,
+											Alabang, Muntinlupa City Philippines
+										</p>
+									</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-md-6 titlebill">
+										<p>Account number:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>CA No. 8841-0000-22</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 titlebill">
+										<p>SWIFT ID number:</p>
+									</div>
+									<div class="col-md-6 titlebill">
+										<p>BOPIPHMM</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<p
+											class="mt-5"
+											style="
+												color: #42414d;
+												margin-top: 25px;
+											"
+										>
+										Payments thru wire transfer may incur additional charges separate from the Group Product premium. Charges vary depending on the selected bank’s wire transfer setup. 
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="error-msg col-md-12" *ngIf="hasError">
+								<span>{{errorMsg}}</span>
+							</div>
+							<!-- bank transfar end here -->
+							<!-- defult button start here -->
+
+							<!-- defult button end here -->
+							<div class="form-row">
+								<div class="col-md-6 col-12" *ngIf="secondpage || thirdpage">
+									<div class="btnsec text-left">
+										<button class="btn outlinedbtn btn-back cus-but" (click)="backToPlanSummary()">
+											<i
+												class="material-icons"
+												
+												>arrow_backward</i
+											>
+											Back
+										</button>
+									</div>
+								</div>
+								<div class="col-md-6 col-12" *ngIf="secondpage">
+									<div class="btnsec text-right">
+										<button
+											type="btn"
+											[disabled]="!paymentMode"
+											(click)="onSubmit()"
+											class="btn"
+										>
+											Finish Application
+											<i class="material-icons"
+												>arrow_forward</i
+											>
+										</button>
+									</div>
+								</div>
+								<div class="col-md-6 col-12" *ngIf="thirdpage">
+									<div class="btnsec text-right">
+										<button
+											type="btn"
+											[disabled]="!paymentMode"
+											(click)="onSubmit()"
+											class="btn"
+										>
+											Finish Application
+											<i class="material-icons"
+												>arrow_forward</i
+											>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 tabfull p-0 right-panel">
+			<!--<div class="col-md-12">
+				<label for="" class="label">TOTAL ANNUAL PREMIUM</label>
+				<h1><del>p</del> &nbsp;{{totalPremium}}</h1>
+			</div>
+			<div class="col-md-12">
+				<label for="" class="label">Annual Premium Per Member</label>
+				<h1><del>p</del> &nbsp;{{annualPremium}}</h1>
+			</div>
+
+			<div class="col-md-12">
+				<label for="" class="label">Insurance Coverage</label>
+				<h1><del>p</del> &nbsp;{{insuranceCoverage}}</h1>
+			</div>
+				<div class="col-md-12 faq" [routerLink]="['/faqs']">
+					<p id="faq"  style="color: #e43e25;">Frequently Asked Questions</p>
+				</div>-->
+		</div>
+	</div>
+</div>

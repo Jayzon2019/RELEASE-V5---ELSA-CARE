@@ -1,0 +1,598 @@
+<div class="typ mainpagewrap">
+	<div class="row m-0">
+		<div class="col-md-12 tabfull p-0">
+			<div class="typ leftwrapsection">
+				<!--<app-inner-header></app-inner-header>-->
+				<div class="mainwizard">
+					<div class="row">
+						<!-- <div class="col-md-3"></div> -->
+						<div class="col-md-12">
+							<div class="stepdetail">
+								<div
+									class="pagetitles thank-you-page"
+									style="margin-bottom: 55px !important"
+								>
+									<h1 class="mb-7 thank-you-header">
+										Thank you for choosing Insular Life to be your partner in securing the lives of your members. <br>You have successfully applied for<br>{{productName}}.
+									</h1>
+
+									<h5 class="text text-left">
+										As we validate your requirements, please
+										settle your payment according to your
+										selected payment scheme (bank deposit or
+										over the counter). Save your Reference
+										Code and present it upon payment.
+									</h5>
+									<br />
+									<br />
+									<h5 class="text" style="text-align: left">
+										Please upload your proof of payment
+										following these steps:
+									</h5>
+									<ol
+										style="
+											text-align: left;
+											font-size: 16px;
+											padding-left: 25px;
+											list-style: decimal;
+											padding-top: 30px;
+											line-height: 30px;
+											color: #42414d !important;
+											font-weight: normal;
+										"
+									>
+										<li>
+											Go to the InLife Store Group
+											Insurance page.
+										</li>
+										<li>
+											Click on the Check Application
+											Status and Enter your Reference
+											Code.
+										</li>
+										<li>
+											Input the One-time Pin which will be
+											sent to your registered mobile
+											number and e-mail address
+										</li>
+										<li>
+											Upload your proof of Payment and
+											Submit.
+										</li>
+									</ol>
+									<br />
+									<br />
+									<h5
+										class="text"
+										style="
+											font-size: 16px;
+											text-align: left;
+										"
+									>
+										Kindly expect another e-mail within 2-3 business days for our feedback. Please note that the master policy including the terms and condition may be viewed online upon request to InLife's Corporate Solutions.
+									</h5>
+								</div>
+
+								<!-- step9 strat -->
+
+								<div class="formcoantiner step9">
+									<div class="reviewbill">
+										<div class="row">
+											<div class="col-md-3 titlebill">
+												<p>Transaction Details</p>
+											</div>
+											<div class="col-md-9 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p
+															class="pb-0"
+															style="
+																margin-bottom: 0 !important;
+															"
+														>
+															Reference Number:
+														</p>
+													</div>
+													<div
+														class="col-6"
+														style="
+															margin-bottom: 0 !important; word-break: break-all;
+														"
+													>
+														<p>
+															{{
+																paymentData.RerefenceCode
+															}}
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div
+												class="col-md-3 titlebill"
+											></div>
+											<div class="col-md-9 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Transaction Date:</p>
+													</div>
+													<div class="col-6">
+														<p>
+															{{
+																transactionDate
+																	| date
+															}}
+														</p>
+													</div>
+												</div>
+												<br />
+											</div>
+										</div>
+										<br />
+										<div class="row">
+											<div class="col-md-3 titlebill">
+												<p>Company Information</p>
+											</div>
+											<div class="col-md-9 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p
+															class="pb-0"
+															style="
+																margin-bottom: 0 !important;
+															"
+														>
+															Company Name:
+														</p>
+													</div>
+													<div
+														class="col-6"
+														style="
+															margin-bottom: 0 !important;
+														"
+													>
+														<p>{{ companyName }}</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p
+															class="pb-0"
+															style="
+																margin-bottom: 0 !important;
+															"
+														>
+															Company Address:
+														</p>
+													</div>
+													<div
+														class="col-6"
+														style="
+															margin-bottom: 0 !important;
+														"
+													>
+														<p>
+															{{ address }}, {{ countryTxt }}, {{ cityZip }}.
+														</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p
+															class="pb-0"
+															style="
+																margin-bottom: 0 !important;
+															"
+														>
+															Contact Number:
+														</p>
+													</div>
+													<div
+														class="col-6"
+														style="
+															margin-bottom: 0 !important;
+														"
+													>
+														<p>{{ landline }}</p>
+														<p>
+															{{ mobileNumber }}
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<br />
+										<div class="row">
+											<div class="col-md-3 titlebill">
+												<p>Authorized Representative</p>
+											</div>
+											<div class="col-md-9 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p
+															class="pb-0"
+															style="
+																margin-bottom: 0 !important;
+															"
+														>
+															Name:
+														</p>
+													</div>
+													<div
+														class="col-6"
+														style="
+															margin-bottom: 0 !important;
+														"
+													>
+														<p>
+															{{
+																representativeName
+															}}
+														</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p
+															class="pb-0"
+															style="
+																margin-bottom: 0 !important;
+															"
+														>
+															Contact Number:
+														</p>
+													</div>
+													<div
+														class="col-6"
+														style="
+															margin-bottom: 0 !important;
+														"
+													>
+														<p>
+															{{
+																representativeLandline
+															}}
+														</p>
+														<p>
+															{{
+																representativeMobileNumber
+															}}
+														</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p
+															class="pb-0"
+															style="
+																margin-bottom: 0 !important;
+															"
+														>
+															Email Address:
+														</p>
+													</div>
+													<div
+														class="col-6"
+														style="
+															margin-bottom: 0 !important;
+														"
+													>
+														<p style="word-break:break-all">
+															{{
+																representativeEmail
+															}}
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<br />
+										<div class="row">
+											<div class="col-md-3 titlebill">
+												<p>Plan Details</p>
+											</div>
+											<div class="col-md-9 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Product Name:</p>
+													</div>
+													<div class="col-6">
+														<p>{{ productName }}</p>
+													</div>
+												</div>
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Plan No:</p>
+													</div>
+													<div class="col-6">
+														<p>{{ planNo }}</p>
+													</div>
+												</div>
+
+												<div class="row m-0" *ngIf="selectedGroupPlanData.plan !== '3'; else studentsandTeachers">
+													<div class="col-6">
+														<p>Total Number of Members:</p>
+													</div>
+													<div class="col-6">
+														<p>{{totalMembers}}</p>
+													</div>
+												</div>
+												<ng-template #studentsandTeachers>
+													<div class="row m-0" >
+														<div class="col-6">
+															<p>Total Number of Students:</p>
+														</div>
+														<div class="col-6">
+															<p>{{totalStudents}}</p>
+														</div>
+													</div>
+													<div class="row m-0" >
+														<div class="col-6">
+															<p>Total Number of Teachers:</p>
+														</div>
+														<div class="col-6">
+															<p>{{totalTeachers}}</p>
+														</div>
+													</div>
+												</ng-template>
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Benefits per Member</p>
+													</div>
+													<div class="col-6">
+														<p>
+															&#8369;
+															{{ premiumPerHead }}
+														</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Total Premium</p>
+													</div>
+													<div class="col-6">
+														<p>
+															&#8369;
+															{{ totalPremium }}
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<br />
+										<div class="row mb-3">
+											<div class="col-md-3 titlebill">
+												<p>Benefits</p>
+											</div>
+											<div class="col-md-9 detailbill">
+												<ng-container *ngIf="selectedGroupPlanData.plan !== '3'">
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">
+																Life Coverage
+															</p>
+														</div>
+														<div class="col-6">
+															<p>
+																&#8369;
+																{{
+																	LifeCoverageperHead
+																}}
+															</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0" *ngIf="selectedGroupPlanData.plan === '1'">
+																Accidental Death and Disability/Total and Permanent Disability Benefit
+															</p>
+															<p class="pb-0" *ngIf="selectedGroupPlanData.plan === '2'">
+																Accidental Death and Disability
+															</p>
+														</div>
+														<div class="col-6">
+															<p>
+																&#8369;
+																{{ ADD_TPDCoverageperHead }}
+															</p>
+														</div>
+													</div>
+												</ng-container>
+												<ng-container *ngIf="selectedGroupPlanData.plan == '3'">
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Life Coverage(non-accident)</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{LifeCoverageperHead}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Life Coverage(accident)</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{ADD_TPDCoverageperHead}}</p>
+														</div>
+													</div>
+													<div class="row m-0 mt-2">
+														<div class="col-12">
+															<p class="pb-0">For Students (coverage per Head)</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Disability:
+																<span class="disability-wrapper">
+																	<ol>
+																		<li>both hands or feet</li>
+																		<li>sight of both eyes</li>
+																		<li>one hand & a foot</li>
+																		<li>one hand & a sight of one eye</li>
+																		<li>a foot & a sight of one eye</li>
+																	</ol>
+																</span>
+															</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Disability_Double}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Disability:
+																<span class="disability-wrapper">
+																	<ol>
+																		<li>one hand or a foot</li>
+																		<li>sight of one eye</li>
+								
+																	</ol>
+																</span>
+															</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Disability_Single}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Room and Board</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Room_and_Board}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Special Hospital Services</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Special_Hospital_Service}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Doctor's Call</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Doctors_Call}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Maximum Hospitalization per Disability</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Maximum_Hospitalization_per_Disability}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Outpatient Benefits</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Outpatient_Benefit}}</p>
+														</div>
+													</div>
+												</ng-container>
+												
+												
+												<!-- <div class="row m-0" *ngIf="selectedGroupPlanData.plan !== '1'">
+													<div class="col-6">
+														<p class="pb-0">Burial Benefit</p>
+													</div>
+													<div class="col-6">
+														<p>&#8369; {{ LifeCoverageperHead}}</p>
+													</div>
+												</div> -->
+											</div>
+										</div>
+										<br />
+										<div class="row mb-3">
+											<div class="col-md-3 titlebill">
+												<p>Payment Details</p>
+											</div>
+											<div class="col-md-9 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0">
+															Payment Scheme:
+														</p>
+													</div>
+													<div class="col-6">
+														<p>{{ paymentData.PaymentType}}</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0">
+															Amount:
+														</p>
+													</div>
+													<div class="col-6">
+														<p>&#8369; {{totalPremium}}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<br />
+										<p
+											class="pb-2"
+											style="color: #42414d !important"
+										>
+											For inquiries or updates regarding
+											the status of your application,
+											contact our Corporate Solutions
+											through e-mail
+											<span
+												><a
+													class="text-danger"
+													href="mailto:corporatesolutions@insular.com.ph"
+													>corporatesolutions@insular.com.ph</a
+												></span
+											>
+											or landline 02 8878 1841.
+										</p>
+									</div>
+								</div>
+								<p
+									class="pb-3 pt-4 my-3 text-center"
+									style="color: #42414d !important"
+								>
+									Tell us about your group application
+									experience.
+									<span
+										><a
+											class="text-danger"
+											href="javascript:void(0)" (click)="feedback()"
+											>Click here</a
+										></span
+									>
+								</p>
+								<div class="form-row text-center mb-5">
+									<div class="col-12">
+										<div class="btnsec text-center">
+											<a
+												class="btn outlinedbtn"
+												(click)="back()"
+											>
+												<i class="material-icons"
+													>arrow_backward</i
+												>
+												BACK TO HOME PAGE
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

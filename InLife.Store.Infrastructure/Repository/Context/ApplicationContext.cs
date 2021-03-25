@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Configuration;
 using System.Security.Claims;
 
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 using InLife.Store.Core.Models;
+using DocumentFormat.OpenXml.Spreadsheet;
+using InLife.Store.Core.Models.ContentEntities;
 
 namespace InLife.Store.Infrastructure.Repository
 {
@@ -18,11 +22,6 @@ namespace InLife.Store.Infrastructure.Repository
 		DbSet<User> Users { get; set; }
 		DbSet<User_UserRole> Users_UserRoles { get; set; }
 		DbSet<UserSession> UserSessions { get; set; }
-
-		// Business
-		DbSet<Quote> Quotes { get; set; }
-		DbSet<Customer> Customers { get; set; }
-		DbSet<Address> Addresses { get; set; }
 
 		// TODO: CMS ENTITIES FOR CLEANUP
 		// Content
@@ -39,6 +38,10 @@ namespace InLife.Store.Infrastructure.Repository
 		DbSet<PrimeHero> PrimeHero { get; set; }
 		DbSet<ProductDetail> ProductDetail { get; set; }
 		DbSet<Product> Product { get; set; }
+		DbSet<GroupsT> GroupsT { get; set; }
+		DbSet<Feedback> Feedback { get; set; }
+		DbSet<ApplyDocuments> ApplyDocuments { get; set; }
+		DbSet<PaymentStatus> PaymentStatus { get; set; }
 	}
 
 	public class ApplicationContext : DbContext, IApplicationContext
@@ -57,7 +60,8 @@ namespace InLife.Store.Infrastructure.Repository
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer("Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true");
+				// Local dev setup
+				optionsBuilder.UseSqlServer("Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true;");
 			}
 		}
 
@@ -110,55 +114,6 @@ namespace InLife.Store.Infrastructure.Repository
 					.HasOne(session => session.User)
 					.WithMany(user => user.Sessions)
 					.HasForeignKey("UserId");
-			});
-
-			#endregion
-
-			#region Business
-
-			builder.Entity<Quote>(entity =>
-			{
-				// Table mapping
-				entity.ToTable("Quotes");
-
-				// PK - Id
-				entity.HasKey(e => new { e.Id });
-
-				// Shadow FK - CustomerId
-				entity.Property<int>("CustomerId");
-
-				// Quotes >> Customer
-				entity
-					.HasOne(quote => quote.Customer)
-					.WithMany(customer => customer.Quotes)
-					.HasForeignKey("CustomerId");
-			});
-
-			builder.Entity<Customer>(entity =>
-			{
-				// Table mapping
-				entity.ToTable("Customers");
-
-				// Shadow FK - HomeAddressId
-				entity.Property<int?>(c => c.HomeAddressId);
-
-				// PK - Id
-				entity.HasKey(e => new { e.Id });
-
-				// Customers == HomeAddress (Nullable)
-				entity
-					.HasOne(customer => customer.HomeAddress)
-					.WithOne()
-					.HasForeignKey<Customer>(c => c.HomeAddressId);
-			});
-
-			builder.Entity<Address>(entity =>
-			{
-				// Table mapping
-				entity.ToTable("Addresses");
-
-				// PK - Id
-				entity.HasKey(e => new { e.Id });
 			});
 
 			#endregion
@@ -380,7 +335,32 @@ namespace InLife.Store.Infrastructure.Repository
 					.HasForeignKey("UpdatedById");
 			});
 
+			builder.Entity<Feedback>(entity =>
+			{
+				entity.ToTable("TblFeedback");
+				entity.HasKey(e => new { e.Id });
+				entity.Ignore(e => e.CreatedBy);
+				entity.Ignore(e => e.UpdatedBy);
+			});
+
 			#endregion
+
+			builder.Entity<GroupsT>(entity =>
+			{
+				entity.ToTable("TblGroupsQuote");
+				entity.HasKey(e => new {e.Id});
+			});
+			builder.Entity<ApplyDocuments>(entity =>
+			{
+				entity.ToTable("TblUploadDocumens");
+				entity.HasKey(e => new { e.Id });
+			});
+
+			builder.Entity<PaymentStatus>(entity =>
+			{
+				entity.ToTable("TblPaymentStatus");
+				entity.HasKey(e => new { e.Id });
+			});
 		}
 
 		public override int SaveChanges()
@@ -440,11 +420,6 @@ namespace InLife.Store.Infrastructure.Repository
 		public DbSet<User_UserRole> Users_UserRoles { get; set; }
 		public DbSet<UserSession> UserSessions { get; set; }
 
-		// Business
-		public DbSet<Quote> Quotes { get; set; }
-		public DbSet<Customer> Customers { get; set; }
-		public DbSet<Address> Addresses { get; set; }
-
 		// TODO: CMS ENTITIES FOR CLEANUP
 		// Content
 		public DbSet<ActivityLog> ActivityLog { get; set; }
@@ -460,5 +435,10 @@ namespace InLife.Store.Infrastructure.Repository
 		public DbSet<PrimeHero> PrimeHero { get; set; }
 		public DbSet<ProductDetail> ProductDetail { get; set; }
 		public DbSet<Product> Product { get; set; }
+		public DbSet<Feedback> Feedback { get; set; }
+		public DbSet<GroupsT> GroupsT { get; set; }
+		public DbSet<ApplyDocuments> ApplyDocumnets { get; set; }
+		public DbSet<PaymentStatus> PaymentStatus { get; set; }
+		public DbSet<ApplyDocuments> ApplyDocuments { get; set; }
 	}
 }

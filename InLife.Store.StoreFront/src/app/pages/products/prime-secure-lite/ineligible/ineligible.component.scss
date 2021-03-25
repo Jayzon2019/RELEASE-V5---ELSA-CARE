@@ -1,0 +1,85 @@
+/*--- 10-march-2021 css start  ---*/
+.stepdetail h1 {
+	font-size: 42px;
+	font-weight: bold;
+}
+.stepdetail h3 {
+	color: #070752;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+.formcoantiner .titlebill p {
+	color: #42414d;
+	font-size: 15px;
+	font-weight: 600;
+}
+.formcoantiner .detailbill p {
+	color: #42414d;
+	font-size: 15px;
+}
+.outerdesclaimer p,
+.reviewbill p,
+.wealth-section .wealth-box .box-content p {
+	color: #42414d;
+	font-size: 15px;
+	line-height: 24px;
+}
+.pagetitles h5 {
+	line-height: 26px;
+}
+.wealth-section .wealth-box .box-content h5 {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 20px;
+	color: #070752;
+}
+.logo-sec img {
+	width: 192px;
+}
+
+.wealth-section .wealth-box .box-content {
+	min-height: 158px;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+
+.feature-list-item {
+    .plan-tab {
+        width: 33.33%;
+        height: 500px;
+    }
+
+    li {
+        .feature-list-col {
+            min-height: 465px;
+        }
+    }
+}
+
+a:hover {
+    p {
+        text-decoration: underline;
+        text-decoration-color: #e3512e;
+        color: #e3512e;
+    }
+    
+}
+
+h1 {
+    color: #3951a2;
+}
+
+p {
+    color: #42414d;
+}
+h5 {
+    color: #696969;
+}
+
+p, h5 {
+    font-size: 16px;
+    line-height: 30px;
+}
+

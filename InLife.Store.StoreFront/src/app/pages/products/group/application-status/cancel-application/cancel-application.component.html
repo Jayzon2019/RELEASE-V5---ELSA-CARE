@@ -1,0 +1,68 @@
+<main *ngIf="!isSuccess" class="cancel-application-wrapper">
+	<h2 class="section-header wow fadeInUp">
+		We regret that you have cancelled your group application.
+	</h2>
+	<p class="sub-title wow fadeInUp">
+		May you share with us your feedback and how we can improve our service?
+	</p>
+	<form #f="ngForm" novalidate autocomplete="off" [formGroup]="cancelForm" class="mt-5 d-flex flex-column align-items-center" >
+		<div class="radio-section inline-block">
+			<span *ngIf="submitted && !cancelForm.get('feedbackOption').valid" class="text-warning">*Required</span>
+			<div class="radio-group inline">
+				<div class="radio" *ngFor="let x of listofReason">
+					<input id="c-a-{{x.id}}" type="radio" formControlName="feedbackOption" [value]="x"/>
+					<label for="c-a-{{x.id}}" class="radio-label cancel-feedback-option">{{x.name}}</label>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="inline-block"> -->
+			<textarea class="c-textarea mt-2 "
+			placeholder="Enter message" 
+			*ngIf="cancelForm.get('feedbackOption').value.id === 6"
+			[ngClass]="{invalid: this.submitted && !cancelForm.get('feedbackText').valid}"
+			 formControlName="feedbackText"
+			></textarea>
+		<!-- </div> -->
+		
+		<div class="inline-block mt-4 comments-suggestions">
+			<label>Please enter your comments and/or suggestions here.</label>
+		</div>
+			<textarea class="c-textarea" 
+			placeholder="Enter comment and suggestions" 
+			[ngClass]="{invalid: this.submitted && !cancelForm.get('commentandsugggestions').valid}"
+			formControlName="commentandsugggestions"
+			></textarea>
+		
+		<div class="inline-block error-msg" *ngIf="hasError">
+			<span>{{errorMsg}}</span>
+		</div>
+		<div class="cancel-controls">
+			<button class="btn-outline back-btn wow fadeInUp mt-2" (click)="backToHome()">
+				<i class="fa fa-arrow-left" aria-hidden="true"></i>
+				<span class="ml-4">back to home page</span>
+			</button>
+			<button class="btn-fill submit-btn wow fadeInUp mt-2" (click)="cancelApplication()">
+				submit
+			</button>
+		</div>
+	</form>
+</main>
+
+<main class="d-flex flex-column align-items-center" *ngIf="isSuccess">
+	<h2 class="section-header wow fadeInUp">
+		Feedback Received
+	</h2>
+	<p class="sub-title wow fadeInUp mt-5">
+		Thank you for your feedback.
+	</p>
+	<p class="sub-title wow fadeInUp">
+		For queries and other concerns, you may reach us thru e-mail:
+		<br><a href="mailto:customercare@insular.com.ph">customercare@insular.com.ph</a> or landline 02 8878 1841
+	</p>
+	<div class="d-flex flex-row mt-5">
+		<button class="btn-outline wow fadeInUp mr-4" (click)="backToHome()">
+			<span class="ml-4">back to home page</span>
+		</button>
+    </div>
+</main>
+

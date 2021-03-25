@@ -1,0 +1,154 @@
+.datepicker-custom {
+	width: 100%;
+}
+
+mat-datepicker-toggle.mat-datepicker-toggle {
+	position: absolute;
+	right: 1.4%;
+	padding-top: 1%;
+	padding-right: 1%;
+}
+
+.uploadfilecontainer {
+	background-repeat: no-repeat;
+	background-size: 100px;
+	background-position: center;
+	height: 200px;
+	width: 80%;
+	margin: 20px auto;
+	border: 2px dashed #111111;
+	border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+	cursor: pointer;
+	/* background-color:#9ecbec !important; */
+	opacity: 0.8;
+}
+
+.files-list {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin: 10px auto;
+	background: #ffffff;
+	border: 1px dashed;
+	border-radius: 12px;
+	padding: 5px;
+	color: #111111;
+}
+
+.files-list .delete-file {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.files-list .delete-file img {
+	width: 30px;
+}
+
+.errormsgs {
+	position: absolute;
+	bottom: 0px;
+	color: #e43e25;
+	width: 100%;
+	font-size: 80%;
+	font-weight: 400;
+}
+
+.identity-document-preview {
+	position: relative;
+	display: block;
+	padding: 10px;
+	background: #ccc;
+	text-align: center;
+}
+
+.identity-document-preview > img {
+	display: block;
+	width: 100%;
+}
+
+.identity-document-preview > button {
+	display: block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 0;
+	background: #e43e25;
+	color: #fff;
+}
+/*-- css by Designer 05-2021 start --*/
+
+.stepdetail {
+	margin-right: 25px;
+}
+h3#step_head {
+	font-size: 20px !important;
+}
+.steplist ul.steplistmain li ul.innerlist li a {
+	font-size: 14px;
+}
+.stepdetail .preminumform label {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	font-size: 16px;
+}
+input.form-control.is-valid.ng-untouched.ng-pristine.ng-valid {
+	border-color: #2895df;
+}
+.preminumform .col-md-12.mb-3.uploadimgescustom {
+	padding: 0;
+}
+.preminumform h4,
+.right-panel h1.subprice {
+	font-size: 18px;
+}
+.right-panel label.label {
+	font-size: 14px;
+}
+.btnsec button.btn.outlinedbtn {
+	padding: 1em 1.5em;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+ul.steplistmain li.active.complete::before {
+	color: #fff !important;
+}
+
+@media (max-width: 1200px) and (min-width: 1081px) {
+	.steplist {
+		width: 18%;
+	}
+	.steplist ul.steplistmain li ul.innerlist li.active:after, 
+	.steplist ul.steplistmain li ul.innerlist li:after {
+		height: 60px;
+	}
+}
+
+
+@media (max-width: 870px) and (min-width: 801px) {
+	.steplist {
+		width: 22%;
+	}
+
+	.steplist ul.steplistmain li ul.innerlist li.active:after, 
+	.steplist ul.steplistmain li ul.innerlist li:after {
+		height: 60px;
+	}
+}
