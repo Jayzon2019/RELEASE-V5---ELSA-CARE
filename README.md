@@ -22,7 +22,7 @@
 
 1. Open a terminal window
 
-2. Go to `InLife.Store.StoreFront.Old` folder. Ignore `InLife.Store.StoreFront`, it is still under development.
+2. Go to `InLife.Store.StoreFront` folder.
 
 3. Go to the `/src/environments` source code folder.
 
@@ -51,7 +51,7 @@ primeCareApi:
     createApplicationEndpoint: '/CreateApplication',
     savePaymentEndpoint: '/SavePayment',
 },
-
+    
 paymentGatewayEndpoint: 'https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx'
 ```
 
@@ -242,11 +242,14 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 5. Open `appsettings.json` in your text editor.
 
-6. Go to the `DefaultConnection` under `ConnectionStrings` section and replace the connection string provided by your Azure Database Server
+6. Go to the `ConnectionStrings` section and replace the connection string provided by your Azure Database Server for each service. `DefaultConnection` connects to the database containing the **CMS** and **Identity** tables. The other connection strings (`PrimeCareConnection`, `GroupConnection`, and `PrimeSecureConnection`) connects to the database of the corresponding product/module if you decided to have a separate databases for each.
 ```json
 "ConnectionStrings":
 {
-	"DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+	"DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=DEFAULT_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+	"PrimeCareConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=PRIMECARE_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "GroupConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=GROUP_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "PrimeSecureConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=PRIMESECURE_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 }
 ```
 
@@ -264,17 +267,76 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 ```json
 "ExternalServices":
 {
+    "PrimeCareApi":
+	{
+		"SubscriptionKey": "SUBSCRIPTION-KEY",
+		"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
+		"CreateApplicationEndpoint": "/CreateApplication",
+		"SavePaymentEndpoint": "/SavePayment"
+	},
+    
 	"AffiliateApi":
 	{
 		"ClientId": "CLIENT-ID",
 		"ClientSecret": "CLIENT-SECRET",
 		"Host": "https://access-XXX.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
 		"AgentInfoEndpoint": "/info"
-	}
+	},
+    
+    "GroupApi":
+	{
+		"SubscriptionKey": "SUBSCRIPTION-KEY",
+		"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
+		"CreateApplicationEndpoint": "/CreateApplication",
+		"SavePaymentEndpoint": "/SavePayment"
+	},
+    
+    "PrimeSecureApi":
+	{
+		"SubscriptionKey": "SUBSCRIPTION-KEY",
+		"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
+		"CreateApplicationEndpoint": "/CreateApplication",
+		"SavePaymentEndpoint": "/SavePayment"
+	},
+    
+    ...
 }
 ```
 
-9. Go to the `Smtp` section and replace the credentials with your own.
+
+9. Go to the `ExternalServices` section and replace the values under `GroupSftp` depending on the configuration of the Group SFTP given by your service provider.
+```json
+"ExternalServices":
+{
+	...
+	
+	"GroupSftp":
+	{
+		"Host": "127.0.0.1",
+		"Port": "22",
+		"Username": "root",
+		"Password": "",
+		"PrivateKey": "D:\\home\\.ssh\\InLife-Group-SFTP-OPENSSH",
+		"Passphrase": "PASSPHRASE"
+	},
+	
+	...
+}
+```
+
+9. Go to the `ExternalServices` section and replace the value of `PaymentGateway` depending on the configuration of the payment gateway given by your service provider..
+```json
+"ExternalServices":
+{
+	...
+	
+	"PaymentGateway": "https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx"
+}
+```
+
+
+
+10. Go to the `Smtp` section and replace the credentials with your own.
 ```json
 "Smtp":
 {
@@ -286,9 +348,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-10. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+11. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
 
-11. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
+12. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
 ```json
 "AllowedOrigins":
 [
@@ -296,11 +358,11 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 ]
 ```
 
-12. Save the file.
+13. Save the file.
 
-13. Open `web.config` in your text editor.
+14. Open `web.config` in your text editor.
 
-14. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+15. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -310,9 +372,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-15. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+16. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-16. Restart the App Service
+17. Restart the App Service
 
 
 
@@ -423,38 +485,130 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 
 
-### Database
+### Azure Functions (ASP.NET Core)
+
+1. Open a terminal window
+
+2. Go to `InLife.Store.Functions` folder
+
+3. Restore reference packages and publish the source code
+```shell
+$ dotnet restore
+$ dotnet build
+$ dotnet publish -c Release
+```
+
+4. Go to the published folder `/bin/Release/netcoreapp3.1/publish`.
+
+5. Open `appsettings.json` in your text editor.
+
+6. Go to the `Values` section and replace the value with your Azure Storage service. Alternatively, you can set this in the environment variables. Refer to the official documentation for more details https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings
+```json
+"Values":
+{
+	"AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=inlife;AccountKey=MY_ACCOUNT_KEY;BlobEndpoint=https://inlife.blob.core.windows.net/;TableEndpoint=https://inlife.table.core.windows.net/;QueueEndpoint=https://inlife.queue.core.windows.net/;FileEndpoint=https://inlife.file.core.windows.net/"
+}
+```
+
+7. Go to the `ConnectionStrings` section and replace the connection string provided by your Azure Database Server for each service. `DefaultConnection` connects to the database containing the **CMS** and **Identity** tables. The other connection strings (`PrimeCareConnection`, `GroupConnection`, and `PrimeSecureConnection`) connects to the database of the corresponding product/module if you decided to have a separate databases for each.
+```json
+"ConnectionStrings":
+{
+	"DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=DEFAULT_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+	"PrimeCareConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=PRIMECARE_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "GroupConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=GROUP_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "PrimeSecureConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=PRIMESECURE_DATABASE;Persist Security Info=False;User ID=DATABASE_USER;Password=DATABASE_PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+}
+```
+
+8. Go to the `ExternalServices` section and replace the values under `GroupSftp` depending on the configuration of the Group SFTP given by your service provider.
+```json
+"ExternalServices":
+{
+	...
+	
+	"GroupSftp":
+	{
+		"Host": "127.0.0.1",
+		"Port": "22",
+		"Username": "root",
+		"Password": "",
+		"PrivateKey": "D:\\home\\.ssh\\InLife-Group-SFTP-OPENSSH",
+		"Passphrase": "PASSPHRASE"
+	},
+	
+	...
+}
+```
+
+9. Go to the `Smtp` section and replace the credentials with your own.
+```json
+"Smtp":
+{
+	"Host": "my-smtp.host.com",
+	"Port": 587,
+	"Username": "USERNAME",
+	"Password": "PASSWORD",
+	"EnableSsl": true
+}
+```
+
+10. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+
+11. Save the file.
+
+12. Copy the files from the published folder `/bin/Release/netcoreapp3.1/publish` to the designated Azure Function
+
+13. Restart the App Service
+
+> For more details, refer to the official documentation of Azure Functions at https://docs.microsoft.com/en-us/azure/azure-functions
+
+---
+
+
+
+### Database (Single database setup)
 
 > :warning: **Always backup your database before doing any changes.**
 
 1. Launch Visual Studio, and in the menu, click **Open** > **File**
-
 2. Go to `InLife.Store.Database` folder
-
 3. Open the `InLife.Store.Database.sqlproj` project file
-
-4. In the **Solution Explorer**, right-click the `InLife.PrimeCare.Store.Database` project then click on **Schema Compare**
-
+4. In the **Solution Explorer**, right-click the `InLife.Store.Database` project then click on **Schema Compare**
 5. In. the toolbar, select the database project as the source, and select the Azure Database as the target
-
 6. Click on the **Compare** button and check to see if there are conflicts
-
 7. Click on the **Update** button to update the target database
+
+### Database (Multiple database setup)
+
+> :warning: **Always backup your database before doing any changes.**
+
+1. Identify which modules/producst you want to have a separate database.
+2. Create an empty database for each module/product you want to have a separate database. You can have 4 separate databases:
+   A. Identity + CMS
+   B. PrimeCare
+   C. Group
+   D. PrimeSecure
+3. Launch Visual Studio, and in the menu, click **Open** > **File**
+4. Go to `InLife.Store.Database` folder
+5. Open the `InLife.Store.Database.sqlproj` project file
+6. In the **Solution Explorer**, right-click the `InLife.Store.Database` project then click on **Schema Compare**
+7. In. the toolbar, select the database project as the source
+8. Select the specific database you want to target. For example if you want to have a separate database for PrimeCare, target the newly created PrimeCare database.
+9. Click on the **Compare** button and check to see if there are conflicts.
+10. Check/Select only the database objects related to the current module. In our example, only select the PrimeCare-related tables.
+11. Click on the **Update** button to update the target database
+12. Repeat steps 8 to 11 for different modules/products.
 
 #### One Time Scripts
 
 > :warning: **Executing these scripts will reset your data. Use with caution. Always backup your database.**
 
 * **To all database tables** - Go to `InLife.Store.Database/Scripts/FreshDatabase.sql` then execute the script on your database.
-
 * **To set CMS user data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Users.sql` then execute the script on your database.
-
 * **To set CMS content data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content.sql` then execute the script on your database.
-
 * **To set CMS content (PrimeCare Files) data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content-PrimeCareFiles.sql` then execute the script on your database.
-
 * **To set CMS content (IHC Products) data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content-IHCProducts.sql` then execute the script on your database.
-
 * **To set CMS content (FAQs) data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content-FAQs.sql` then execute the script on your database.
 
 

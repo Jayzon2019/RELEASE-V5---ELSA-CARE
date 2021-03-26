@@ -30,6 +30,18 @@ export const environment =
 		requestSessionEndpoint: '/api/group/applications/{refcode}/request-session?otp={otp}'
 	},
 
+	primeSecureApi:
+	{
+		quoteEndpoint: '/prime-secure/applications',
+		applicationEndpoint: '/prime-secure/applications/{refcode}',
+		uploadFileEndpoint: '/prime-secure/applications/{refcode}/files/{type}',
+		feedbackEndpoint: '/prime-secure/applications/{refcode}/feedback',
+		summaryEndpont: '/prime-secure/applications/{refcode}/summary',
+		statusEndpoint: '/prime-secure/applications/{refcode}/status',
+		requestOtpEndpoint: '/prime-secure/applications/{refcode}/request-otp',
+		requestSessionEndpoint: '/api/group/applications/{refcode}/request-session?otp={otp}'
+	},
+
 	paymentGatewayEndpoint: 'http://projectgrey.net/fake-payment-gateway.html'
 	/*paymentGatewayEndpoint: 'https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx'*/
 };
