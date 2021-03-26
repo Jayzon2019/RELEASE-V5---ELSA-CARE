@@ -1,0 +1,87 @@
+{
+	"IsEncrypted": false,
+	"Values":
+	{
+		"AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=inlife;AccountKey=BUUA8yauOi0eJW/wE6fRF7VZ2ctojKZasn/e7Xsj+GHFx/UrqE9Q50QpHETI9/fJfk8nux1ADZqnKrDpfNcAcQ==;BlobEndpoint=https://inlife.blob.core.windows.net/;TableEndpoint=https://inlife.table.core.windows.net/;QueueEndpoint=https://inlife.queue.core.windows.net/;FileEndpoint=https://inlife.file.core.windows.net/",
+		"FUNCTIONS_WORKER_RUNTIME": "dotnet"
+	},
+
+	"ConnectionStrings":
+	{
+		"DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+		"PrimeCareConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+		"GroupConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+		"PrimeSecureConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+	},
+
+	"ExternalServices":
+	{
+		"PrimeCareApi":
+		{
+			"SubscriptionKey": "a149d58ebd14432ea950e802a6d32783",
+			"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
+			"CreateApplicationEndpoint": "/CreateApplication",
+			"SavePaymentEndpoint": "/SavePayment"
+		},
+
+		"AffiliateApi":
+		{
+			"ClientId": "f0b5e66c604f9a3b7868",
+			"ClientSecret": "0286b6b4fa642141831cde4ba6ae7675330a206ee811df8b44e10f0e743c",
+			"Host": "https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
+			"AgentInfoEndpoint": "/info"
+		},
+
+		"GroupSftp":
+		{
+			"Host": "165.232.171.10",
+			"Port": "22",
+			"Username": "root",
+			"Password": "",
+			"PrivateKey": "C:\\Users\\chris\\.ssh\\InLife-Group-SFTP-OPENSSH",
+			"Passphrase": "P@ssw0rd",
+			"Directory":  "/home/group-applications/"
+		},
+
+		"PaymentGateway": "https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx"
+	},
+
+	"Smtp":
+	{
+		"Host": "smtp-relay.sendinblue.com",
+		"Port": 587,
+		"Username": "glen@projectgrey.net",
+		"Password": "xsmtpsib-e2798c39c436060c3c59ddce9a852142d3c5f2dd1932c8d36c9e935c05145440-8FIT7ygJcBqs94p3",
+		"EnableSsl": true
+	},
+
+	"Email":
+	{
+		"ErrorNotification":
+		{
+			"SenderName": "InLife Store Functions - #SERVER#",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"info@projectgrey.net"
+			],
+			"Subject": "InLife Store Functions : An error has occurred",
+			"TemplateFile": "ErrorNotification.html"
+		},
+
+		"GroupApplicationsCompletedBatch":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"christian@projectgrey.net",
+				"glen@projectgrey.net",
+				"tj@projectgrey.net",
+				"abbelandres@insular.com.ph"
+			],
+			"Subject": "InLife Store Group Applications",
+			"TemplateFile": "GroupApplicationsCompletedBatch.html"
+		}
+	}
+}

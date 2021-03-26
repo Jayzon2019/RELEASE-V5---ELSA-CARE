@@ -18,12 +18,12 @@
 		"https://dev-inlife-estore.azurewebsites.net"
 	],
 
-	//"CustomDomain":
-	//{
-	//	"Protocol": "https",
-	//	"Host": "dev-inlifestore.projectgrey.net",
-	//	"PathBase": "/api"
-	//},
+	"CustomDomain":
+	{
+		"Protocol": "https",
+		"Host": "dev-inlifestore.projectgrey.net",
+		"PathBase": "/api"
+	},
 
 	"ConnectionStrings":
 	{
@@ -89,42 +89,50 @@
 		"EnableSsl": true
 	},
 
-	"Email": {
-		"ErrorNotification": {
+	"Email":
+	{
+		"ErrorNotification":
+		{
 			"SenderName": "InLife Store API - #SERVER#",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Recipients": [
+			"Recipients":
+			[
 				"info@projectgrey.net"
 			],
 			"Subject": "InLife Store API : An error has occurred",
 			"TemplateFile": "ErrorNotification.html"
 		},
 
-		"GroupApplicationReferenceCode": {
+		"GroupApplicationReferenceCode":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
 			"Subject": "InLife Group Application Reference Code",
 			"TemplateFile": "GroupApplicationReferenceCode.html"
 		},
 
-		"GroupApplicationOtp": {
+		"GroupApplicationOtp":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
 			"Subject": "Verification",
 			"TemplateFile": "GroupApplicationOtp.html"
 		},
 
-		"GroupApplicationThankYou": {
+		"GroupApplicationThankYou":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
 			"Subject": "Thank you for your InLife Group Application",
 			"TemplateFile": "GroupApplicationThankYou.html"
 		},
 
-		"GroupApplicationFeedbackAdmin": {
+		"GroupApplicationFeedbackAdmin":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Recipients": [
+			"Recipients":
+			[
 				"christian@projectgrey.net",
 				"glen@projectgrey.net",
 				"tj@projectgrey.net",
@@ -134,10 +142,12 @@
 			"TemplateFile": "GroupApplicationFeedbackAdmin.html"
 		},
 
-		"GroupApplicationCompleteAdmin": {
+		"GroupApplicationCompleteAdmin":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Recipients": [
+			"Recipients":
+			[
 				"christian@projectgrey.net",
 				"glen@projectgrey.net",
 				"tj@projectgrey.net",
@@ -147,10 +157,12 @@
 			"TemplateFile": "GroupApplicationCompleteAdmin.html"
 		},
 
-		"GroupApplicationCancel": {
+		"GroupApplicationCancel":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Recipients": [
+			"Recipients":
+			[
 				"christian@projectgrey.net",
 				"glen@projectgrey.net",
 				"tj@projectgrey.net",
@@ -160,10 +172,12 @@
 			"TemplateFile": "GroupApplicationCancel.html"
 		},
 
-		"GroupApplicationPaymentProof": {
+		"GroupApplicationPaymentProof":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Recipients": [
+			"Recipients":
+			[
 				"christian@projectgrey.net",
 				"glen@projectgrey.net",
 				"tj@projectgrey.net",
@@ -174,10 +188,12 @@
 			"TemplateFile": "GroupApplicationPaymentProof.html"
 		},
 
-		"GroupApplicationsCompletedBatch": {
+		"GroupApplicationsCompletedBatch":
+		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Recipients": [
+			"Recipients":
+			[
 				"christian@projectgrey.net",
 				"glen@projectgrey.net",
 				"tj@projectgrey.net",
