@@ -146,6 +146,10 @@ namespace InLife.Store.Api
 			services.AddScoped<IGroupApplicationRepository, GroupApplicationRepository>();
 			services.AddScoped<IGroupFileRepository, GroupFileRepository>();
 
+			// Product - PrimeSecure
+			services.AddScoped<IPrimeSecureApplicationProcessing, PrimeSecureApplicationProcessing>();
+			services.AddScoped<IPrimeSecureApplicationRepository, PrimeSecureApplicationRepository>();
+
 			// Content
 			services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
 			services.AddScoped<IKeyMetricRepository, KeyMetricRepository>();

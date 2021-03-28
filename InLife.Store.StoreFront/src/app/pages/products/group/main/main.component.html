@@ -187,7 +187,7 @@
 				</div>
 				<div class="buttons-center">
 					<a [routerLink]="['/group/quote']" [queryParams]="{ plan: '1', planCode: '1 - Administrative and Office-based' , productName:'Employee Secure Plan', productType: '0'}" class="btn-orange">GET A QUOTE</a> <a href="#requirements-popup1" class="btn-orange border-orange" rel="modal:open">Application Requirements</a>
-					<a routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" class="btn-orange border-orange">FAQ</a>
+					<a href="javascript:void(0)" (click)="openNewWindow('/faqs?tab=4')" class="btn-orange border-orange">FAQ</a>
 				</div>
 			
 			</div>
@@ -287,7 +287,7 @@
 				<div class="buttons-center">
 					<a [routerLink]="['/group/quote']" [queryParams]="{ plan: '2', planCode: '2 - Security Agencies', productName:'Security Guard Plan', productType: '0'}" class="btn-orange">GET A QUOTE</a> 
 					<a href="#requirements-popup2" rel="modal:open" class="btn-orange border-orange">Application Requirements</a>
-					<a routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" class="btn-orange border-orange">FAQ</a>
+					<a href="javascript:void(0)" (click)="openNewWindow('/faqs?tab=4')" class="btn-orange border-orange">FAQ</a>
 					
 				</div>
 			</div>
@@ -439,7 +439,7 @@
 				</div>
 				<div class="buttons-center">
 					<a [routerLink]="['/group/quote']" [queryParams]="{ plan: '3', planCode: '3 - Schools and Universities' , productName:'Students and Teachers Plan', productType: '0'}" class="btn-orange">GET A QUOTE</a> <a href="#requirements-popup3" class="btn-orange border-orange" rel="modal:open">Application Requirements</a>
-					<a routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" class="btn-orange border-orange">FAQ</a>
+					<a href="javascript:void(0)" (click)="openNewWindow('/faqs?tab=4')" class="btn-orange border-orange">FAQ</a>
 				</div>
 			</div>
 		</div>
@@ -447,7 +447,9 @@
 	<section class="section ptb50" style="padding-top:15px">
 		<div class="container">
 			<p class="special-tag" style="margin-top: 0; text-align: center;">
-				Looking for other group plans? <a target="_blank" href="https://www.insularlife.com.ph/group-insurance">Click here</a>
+				Looking for other group plans?
+				 <a href="javascript:void(0)" 
+				(click)="openNewWindow('https://www.insularlife.com.ph/group-insurance')">Click here</a>
 			</p>
 		</div>
 	</section>
@@ -588,8 +590,7 @@
 						<div class="step-icon-wrap"><img src="assets/images/step02.svg" alt="Step one"></div>
 						<div class="step-title">STEP 2: Apply</div>
 						<p class="step-desc">Upload all the requirements and let the authorized representative of your company accomplish the application.</p>
-						<p class="step-desc">We have available templates for some requirements that you should download and upload once you get to apply.<br><a href="https://www.insularlife.com.ph/form-library
-							" target="_blank">Click here to download.</a></p>
+						<p class="step-desc">We have available templates for some requirements that you should download and upload once you get to apply.<br><a href="javascript:void(0)"(click)="openNewWindow('https://www.insularlife.com.ph/form-library')">Click here to download.</a></p>
 					</li>
 					<li>
 						<div class="step-icon-wrap"><img src="assets/images/step03.svg" alt="Step one"></div>

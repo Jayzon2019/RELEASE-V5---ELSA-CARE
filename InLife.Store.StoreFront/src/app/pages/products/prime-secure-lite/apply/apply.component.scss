@@ -45,6 +45,27 @@
         }
     }
 
+    .roghtwrapsection-wrapper {
+        &.only-in-mobile {
+            display: none;
+        }
+
+        &.only-in-desktop {
+            display: block;
+        }
+
+        @media (max-width: 1080px) {
+            &.only-in-mobile {
+                display: block !important;    
+                padding-bottom: 45px !important;
+                margin-top: -20px !important;
+            }
+            &.only-in-desktop {
+                display: none !important;
+            }
+        }
+    }
+
     @media (max-width: 1080px) and (min-width: 801px) {
         .roghtwrapsection-wrapper {
             margin-left: 25%;

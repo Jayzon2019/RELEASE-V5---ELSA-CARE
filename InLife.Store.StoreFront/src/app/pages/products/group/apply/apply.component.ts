@@ -17,9 +17,10 @@ import { Enumerations } from '@app/common/enumerations';
 import { ApiService, SessionStorageService } from '@app/services';
 import { DynamicGrid } from './extension.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, finalize, retry, takeUntil } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { catchError, finalize, retry, takeUntil, switchMap } from 'rxjs/operators';
+import { throwError, Subject, Observable } from 'rxjs';
 import { finished } from 'stream';
+import { UtilitiesService } from '../services/utilities.service';
 
 @Component
 	({
@@ -74,17 +75,24 @@ export class ApplyComponent implements OnInit, OnDestroy {
 	isFileSizeError: boolean = false;
 	selectedGroupPlanData: any;
 	hasRequirementsData: boolean = false;
+	showErrorPrompt: boolean = false;
+	hasQueue: boolean = false;
 	requirementsTypes: any = {
-		EmployeeCesusForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		EntityPlanForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		AuthRepresentativeId: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
+		EmployeeCesusForm: { type: '', title: '', fileInfo: {}, error: { msg: '*Required' }, uploaded: false},
+		EntityPlanForm: { type: '', title: '', fileInfo: {}, error: { msg: '*Required' }, uploaded: false},
+		AuthRepresentativeId: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		BIRNoticeForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		SECRegistration: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
+		SECRegistration: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		IncorporationArticles: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
+		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		PostPolicyForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
 		
 	}
+
+	requests$ = new Subject();
+	queue: PendingRequest[] = [];
+
+
 	constructor
 		(
 			private router: Router,
@@ -95,12 +103,18 @@ export class ApplyComponent implements OnInit, OnDestroy {
 			private http: HttpClient,
 			private session: SessionStorageService,
 			private ngxService: NgxUiLoaderService,
-			private vps: ViewportScroller
+			private vps: ViewportScroller,
+			private util: UtilitiesService
 		) {
 		this.ngxService.start();
+		this.requests$.subscribe((request: PendingRequest) => this.execute(request));
 		this.initForm();
 
 	}
+
+
+	
+
 
 	dynamicArray: Array<DynamicGrid> = [];
 	newDynamic: any = {};
@@ -172,8 +186,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
 			})
 		});
 		if(getRequirementsData)  {
-			this.showThirdStep = true;
 			this.hasRequirementsData = true;
+			this.showErrorPrompt = true;
 			this.requirementsTypes = getRequirementsData;
 			let uploadedFilesArray = Object.entries(getRequirementsData);
 			uploadedFilesArray.map(([key, val]) => {
@@ -185,11 +199,15 @@ export class ApplyComponent implements OnInit, OnDestroy {
 					this.getApplyForm.get('requirementsForm').get(key).patchValue(value.fileInfo.loc);
 				}
 			});
-			console.log(uploadedFilesArray);
+			this.showThirdStep = (this.getApplyForm.get('requirementsForm').valid) ? true : false;
 		}
 
 		this.setMunicipalities(getQuoteFormData.Region.id);
 
+	}
+
+	openNewWindow(url: string) {
+		this.util.openNewWindow(url);
 	}
 
 	setMunicipalities(region: any) {
@@ -263,32 +281,82 @@ export class ApplyComponent implements OnInit, OnDestroy {
 
 
 	uploadByFile(fileData, type, dbType) {
+		this.addRequestToQueue(fileData, type, dbType);
+	}
+
+	execute(requestData: PendingRequest) {
 		this.hasError = false;
 		if(true) {
-			let url = environment.appApi.host + `/group/applications/${this.accessData.referenceCode}/files/${dbType}`;
+			let url = environment.appApi.host + `/group/applications/${this.accessData.referenceCode}/files/${requestData.dbType}`;
 			let formData = new FormData();
-			formData.append("file", fileData);
-			this.apply_API.uploadRequirement(url, formData, fileData.type)
+			formData.append("file", requestData.fileData);
+			const req = this.apply_API.uploadRequirement(url, formData, requestData.fileData.type)
 				.pipe(
-					takeUntil(this.destroy$)
+					takeUntil(this.destroy$),
+					finalize(() => { 
+						//remove duplicate upload
+						console.log(requestData, this.queue[0]);
+						if(requestData === this.queue[0])
+							this.queue.shift();
+						else 
+							this.queue.shift();
+						this.startNextRequest();
+
+						this.getApplyForm.get('requirementsForm').get(requestData.type).enable();
+						this.getApplyForm.get('requirementsForm').get(requestData.type).updateValueAndValidity();
+					})
 				)
 				.subscribe(data => {
-					this.getApplyForm.get('requirementsForm').get(type).setValue(fileData);
-					this.requirementsTypes[type].error = {
+					this.getApplyForm.get('requirementsForm').get(requestData.type).setValue(requestData.fileData);
+					this.requirementsTypes[requestData.type].error = {
 						type: 'success',
 						msg: '(File successfully uploaded.)'
 					}
-					this.requirementsTypes[type].uploaded = true;
+					this.requirementsTypes[requestData.type].uploaded = true;
+
+					this.validateIncompleteRequirement(requestData.type);
 				}, error => {
 					this.ngxService.stopAll();
 					this.hasError = true;
 					this.errorMsg = error.message;
-					this.requirementsTypes[type].error = {
+					this.requirementsTypes[requestData.type].error = {
 						type: 'upload',
 						msg: '(Failed to upload this file.)'
 					}
-					this.requirementsTypes[type].uploaded = false;
+					this.requirementsTypes[requestData.type].uploaded = false;
 				});
+				console.log(req);
+		}
+	}
+
+	validateIncompleteRequirement(type: string) {
+		if(type == 'IdentityCertificate')
+			this.showErrorPrompt = true;
+	}
+
+	addRequestToQueue(fileData, type, dbType) {
+		this.hasQueue = true;
+		const sub = new Subject<any>();
+		const request = new PendingRequest(fileData, type, dbType, sub)
+		console.log(this.queue.length);
+		// if there are no pending req's, execute immediately.
+		if (this.queue.length === 0) {
+			this.queue.push(request);
+			this.requests$.next(request);
+		} else {
+			// otherwise put it to queue.
+			this.queue.push(request);
+		}
+		return sub;
+	}
+
+	startNextRequest() {
+		// get next request, if any.
+		if (this.queue.length) {
+			this.hasQueue = true;
+			this.execute(this.queue[0]);
+		} else {
+			this.hasQueue = false;
 		}
 	}
 
@@ -370,6 +438,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 					};
 					this.evaluateFiles()
 					if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
+						this.getApplyForm.get('requirementsForm').get(type).disable();
 						this.uploadByFile(file, type, dbType);
 					}
 				};
@@ -432,6 +501,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
 						}
 						this.evaluateFiles();
 						if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
+							this.getApplyForm.get('requirementsForm').get(type).disable();
+							this.getApplyForm.get('requirementsForm').get(type).updateValueAndValidity();
 							this.uploadByFile(file, type, dbType);
 						}
 						//	this.insuredIdentityDocumentImagePreview = newDataUrl;
@@ -466,8 +537,12 @@ export class ApplyComponent implements OnInit, OnDestroy {
 
 
 	deleteImage(type) {
-		this.getApplyForm.get('requirementsForm').get(type).setValue('');
-		this.requirementsTypes[type] = {};
+		let requirementFormCtrl = this.getApplyForm.get('requirementsForm').get(type);
+		requirementFormCtrl.setValue('');
+		if(!requirementFormCtrl.valid)
+			this.requirementsTypes[type] = {error: { msg: '*Required' }};
+		else
+			this.requirementsTypes[type] = {};
 	}
 
 	deleteAttachment(index) {
@@ -539,7 +614,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 			filePath = '../../../../../assets/documents/Students And Teachers_Plan Description.pdf';
 			pdfName = 'Students And Teachers_Plan Description';
 		}
-		window.open(filePath + '#page=' + 1, '_blank');
+		this.openNewWindow(filePath + '#page=' + 1);
 	}
 	conformSave() {
 		document.getElementById("conformBtnApply").click();
@@ -558,8 +633,26 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		FileSaver.saveAs(filePath, pdfName);
 	}
 
+	get getRequirementsCtrl() {
+		return this.getApplyForm.controls;
+	}
+
 	ngOnDestroy() {
 		this.destroy$.next(true);
 		this.destroy$.unsubscribe();
 	}
 }
+export class PendingRequest {
+	url: string;
+	fileData: any; 
+	type: string; 
+	dbType: string
+	subscription: Subject<any>;
+  
+	constructor(fileData: any, type: string, dbType, subscription: Subject<any>) {
+	  this.fileData = fileData;
+	  this.type = type;
+	  this.dbType = dbType;
+	  this.subscription = subscription;
+	}
+  }

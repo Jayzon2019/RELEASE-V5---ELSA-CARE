@@ -119,8 +119,6 @@ export class PayComponent implements OnInit
 			"municipality": this.basicInformation.municipality,
 			"primeCare": this.basicInformation.primeCare
 		}
-		//console.log(arr);
-		//alert(JSON.stringify(this.age));
 	}
 
 	getFile()

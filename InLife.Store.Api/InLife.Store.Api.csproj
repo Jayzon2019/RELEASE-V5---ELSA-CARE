@@ -30,7 +30,6 @@
 
 	<ItemGroup>
 		<Folder Include="EmailTemplates\" />
-		<Folder Include="Messages\PrimeSecure\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -45,5 +44,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="**/*" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="Controllers\PrimeSecureController.cs" />
+	  <Compile Remove="Messages\PrimeSecure\BasePrimeSecureResponse.cs" />
+	  <Compile Remove="Messages\PrimeSecure\PrimeSecureQuoteRequest.cs" />
+	  <Compile Remove="Messages\PrimeSecure\PrimeSecureQuoteResponse.cs" />
 	</ItemGroup>
 </Project>

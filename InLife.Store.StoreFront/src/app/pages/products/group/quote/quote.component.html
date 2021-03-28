@@ -562,8 +562,7 @@
 																		In line with my use of the InLife Store website, I hereby authorize
 																		InLife to process my personal and sensitive information in accordance
 																		with the
-																		<a id="pp" style="color:#e43e25" href="https://www.insularlife.com.ph/privacy-policy"
-																		   target="_blank">Privacy Policy</a> given.
+																		<a id="pp" style="color:#e43e25" href="javascript:void(0)" (click)="openNewWindow('https://www.insularlife.com.ph/privacy-policy')">Privacy Policy</a> given.
 																	</span>
 
 																	<div class="form-row">
@@ -633,7 +632,7 @@
 											<a target="_blank" style="color: #e43e25;font-weight:500;font-size:13px; margin-top: 40px;"><u>Plan Description</u></a>
 										</div>
 										<div class="col-md-12 faq download-dis">
-											<a id="faq" routerLink="/faqs" [queryParams]="{ tab: 4}" target="_blank" style="text-decoration: underline;color: #e43e25;font-weight:500;font-size:13px;">Frequently Asked Questions</a>
+											<a id="faq" href="javascript:void(0)" (click)="openNewWindow('/faqs?tab=4')" style="text-decoration: underline;color: #e43e25;font-weight:500;font-size:13px;">Frequently Asked Questions</a>
 										</div>
 									</div>
 								</div>

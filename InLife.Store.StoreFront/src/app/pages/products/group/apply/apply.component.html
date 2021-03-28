@@ -1511,94 +1511,74 @@
 											<h3 id="step_head">
 												Upload Requirements
 											</h3>
-											<div class="preminumform">
-												<h4>
-													Please upload the following
-													requirements:
-												</h4>
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<div class="requirement-label-wrapper">
-														<label class="file-label">
-															Employee Census 
-															<span *ngIf="requirementsTypes['EmployeeCesusForm'].error" 
-															[ngClass]="requirementsTypes['EmployeeCesusForm'].error.type == 'success' || 
-																	   requirementsTypes['EmployeeCesusForm'].error.type == 'uploading'? 'success-upload': ''">
-																{{ requirementsTypes['EmployeeCesusForm'].error?.msg }}
-																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['EmployeeCesusForm'].error.type == 'uploading'"></i>
-															</span>
-														</label>
-														<a href="https://www.insularlife.com.ph/form-library" target="_blank"
-														style="cursor:pointer" class="text-dowload">Download
-														Template</a>
-													</div>
-													
-													
-													<div>
-														<div *ngIf="
-																!getApplyForm
-																	.get(
-																		'requirementsForm'
-																	)
-																	.get(
-																		'EmployeeCesusForm'
-																	).value && !requirementsTypes['EmployeeCesusForm'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'EmployeeCesusForm',
-																	'employee-census'
-																)
-															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
-																	onFileChanged(
-																		$event,
-																		'EmployeeCesusForm',
-																		'employee-census'
-																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'EmployeeCesusForm'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'EmployeeCesusForm'
-																			)
-																			.touched) &&
-																	getApplyForm
+
+											<form [formGroup]="getApplyForm">
+												<div class="preminumform" formGroupName="requirementsForm">
+													<h4>
+														Please upload the following
+														requirements:
+													</h4>
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<div class="requirement-label-wrapper">
+															<label class="file-label">
+																Employee Census 
+																<span *ngIf="requirementsTypes['EmployeeCesusForm'].error" 
+																[ngClass]="requirementsTypes['EmployeeCesusForm'].error.type == 'success' || 
+																		   requirementsTypes['EmployeeCesusForm'].error.type == 'uploading'? 'success-upload': ''">
+																	{{ requirementsTypes['EmployeeCesusForm'].error?.msg }}
+																	<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['EmployeeCesusForm'].error.type == 'uploading'"></i>
+																</span>
+															</label>
+															<a href="javascript:void(0)" (click)="openNewWindow('https://www.insularlife.com.ph/form-library')"
+															style="cursor:pointer" class="text-dowload">Download
+															Template</a>
+														</div>
+														
+														
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'EmployeeCesusForm'
+																		).value && !requirementsTypes['EmployeeCesusForm'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'EmployeeCesusForm',
+																		'employee-census'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file" 
+																	[disabled]="getApplyForm.get('requirementsForm').get('EmployeeCesusForm').disabled" 
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																		onFileChanged(
+																			$event,
+																			'EmployeeCesusForm',
+																			'employee-census'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'EmployeeCesusForm'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted || getApplyForm.get('requirementsForm').get('EmployeeCesusForm')
-																			.dirty ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'EmployeeCesusForm'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -1606,145 +1586,128 @@
 																			.get(
 																				'EmployeeCesusForm'
 																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'EmployeeCesusForm'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span>
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'EmployeeCesusForm'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="showErrorPrompt && getApplyForm.get('requirementsForm').get('EmployeeCesusForm')?.errors">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span>
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'EmployeeCesusForm'
-																).value || ( hasRequirementsData && requirementsTypes['EmployeeCesusForm'].uploaded)
-														">
-
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('EmployeeCesusForm').value, type: 'EmployeeCesusForm'}">
-														</ng-template>
-														
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'EmployeeCesusForm'
-																)
-															">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</div>
-												
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<div class="requirement-label-wrapper">
-														<label class="file-label">
-															Entity Plan Admin Form
-															<span *ngIf="requirementsTypes['EntityPlanForm'].error" 
-															[ngClass]="requirementsTypes['EntityPlanForm'].error.type == 'success' || 
-																	requirementsTypes['EntityPlanForm'].error.type == 'uploading'? 'success-upload': ''">
-																{{ requirementsTypes['EntityPlanForm'].error?.msg }}
-																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['EntityPlanForm'].error.type == 'uploading'"></i>
-															</span>
-														</label>
-														<!-- <a download (click)="downloadFile('EntityPlan')"
-															style="cursor:pointer" class="text-dowload">Download
-															Template</a> -->
-														<a href="https://www.insularlife.com.ph/form-library" target="_blank"
-														style="cursor:pointer" class="text-dowload">Download
-														Template</a>
-													</div>
-													<div>
-														<div *ngIf="
-																!getApplyForm
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
 																	.get(
 																		'requirementsForm'
 																	)
 																	.get(
-																		'EntityPlanForm'
-																	).value && !requirementsTypes['EntityPlanForm'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'EntityPlanForm',
-																	'admin-form'
-																)
+																		'EmployeeCesusForm'
+																	).value || ( hasRequirementsData && requirementsTypes['EmployeeCesusForm'].uploaded)
 															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
-																	onFileChanged(
-																		$event,
-																		'EntityPlanForm',
-																		'admin-form'
+	
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('EmployeeCesusForm').value, type: 'EmployeeCesusForm'}">
+															</ng-template>
+															
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'EmployeeCesusForm'
 																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'EntityPlanForm'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'EntityPlanForm'
-																			)
-																			.touched) &&
-																	getApplyForm
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
+													</div>
+													
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<div class="requirement-label-wrapper">
+															<label class="file-label">
+																Entity Plan Admin Form
+																<span *ngIf="requirementsTypes['EntityPlanForm'].error" 
+																[ngClass]="requirementsTypes['EntityPlanForm'].error.type == 'success' || 
+																		requirementsTypes['EntityPlanForm'].error.type == 'uploading'? 'success-upload': ''">
+																	{{ requirementsTypes['EntityPlanForm'].error?.msg }}
+																	<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['EntityPlanForm'].error.type == 'uploading'"></i>
+																</span>
+															</label>
+															<!-- <a download (click)="downloadFile('EntityPlan')"
+																style="cursor:pointer" class="text-dowload">Download
+																Template</a> -->
+															<a href="javascript:void(0)" (click)="openNewWindow('https://www.insularlife.com.ph/form-library')"
+															style="cursor:pointer" class="text-dowload">Download
+															Template</a>
+														</div>
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'EntityPlanForm'
+																		).value && !requirementsTypes['EntityPlanForm'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'EntityPlanForm',
+																		'admin-form'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file"
+																[disabled]="getApplyForm.get('requirementsForm').get('EntityPlanForm').disabled" 
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																		onFileChanged(
+																			$event,
+																			'EntityPlanForm',
+																			'admin-form'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'EntityPlanForm'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'EntityPlanForm'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -1752,144 +1715,119 @@
 																			.get(
 																				'EntityPlanForm'
 																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'EntityPlanForm'
-																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'EntityPlanForm'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span class="file-inner-text">
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'EntityPlanForm'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="showErrorPrompt && getApplyForm.get('requirementsForm').get('EntityPlanForm')?.errors">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span class="file-inner-text">
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'EntityPlanForm'
-																).value || ( hasRequirementsData && requirementsTypes['EntityPlanForm'].uploaded)
-														">
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('EntityPlanForm').value, type: 'EntityPlanForm'}">
-														</ng-template>
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'EntityPlanForm'
-																)
-															">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</div>
-
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<label class="file-label">
-														ID of Authorized
-														Representative
-														<span *ngIf="requirementsTypes['AuthRepresentativeId'].error" 
-														[ngClass]="requirementsTypes['AuthRepresentativeId'].error.type == 'success' || 
-																   requirementsTypes['AuthRepresentativeId'].error.type == 'uploading'? 'success-upload': ''">
-															{{ requirementsTypes['AuthRepresentativeId'].error?.msg }}
-															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['AuthRepresentativeId'].error.type == 'uploading'"></i>
-														</span>
-													</label>
-													<div>
-														<div *ngIf="
-																!getApplyForm
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
 																	.get(
 																		'requirementsForm'
 																	)
 																	.get(
-																		'AuthRepresentativeId'
-																	).value && !requirementsTypes['AuthRepresentativeId'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'AuthRepresentativeId',
-																	'representative'
-																)
+																		'EntityPlanForm'
+																	).value || ( hasRequirementsData && requirementsTypes['EntityPlanForm'].uploaded)
 															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
-																	onFileChanged(
-																		$event,
-																		'AuthRepresentativeId',
-																		'representative'
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('EntityPlanForm').value, type: 'EntityPlanForm'}">
+															</ng-template>
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'EntityPlanForm'
 																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'AuthRepresentativeId'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'AuthRepresentativeId'
-																			)
-																			.touched) &&
-																	getApplyForm
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
+													</div>
+	
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<label class="file-label">
+															ID of Authorized
+															Representative
+															<span *ngIf="requirementsTypes['AuthRepresentativeId'].error" 
+															[ngClass]="requirementsTypes['AuthRepresentativeId'].error.type == 'success' || 
+																	   requirementsTypes['AuthRepresentativeId'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['AuthRepresentativeId'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['AuthRepresentativeId'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'AuthRepresentativeId'
+																		).value && !requirementsTypes['AuthRepresentativeId'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'AuthRepresentativeId',
+																		'representative'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file"
+																[disabled]="getApplyForm.get('requirementsForm').get('AuthRepresentativeId').disabled" 
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																		onFileChanged(
+																			$event,
+																			'AuthRepresentativeId',
+																			'representative'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'AuthRepresentativeId'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'AuthRepresentativeId'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -1897,147 +1835,122 @@
 																			.get(
 																				'AuthRepresentativeId'
 																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'AuthRepresentativeId'
-																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'AuthRepresentativeId'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span class="file-inner-text">
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'AuthRepresentativeId'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="showErrorPrompt && getApplyForm.get('requirementsForm').get('AuthRepresentativeId')?.errors">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span class="file-inner-text">
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'AuthRepresentativeId'
-																).value || ( hasRequirementsData && requirementsTypes['AuthRepresentativeId'].uploaded)
-														">
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('AuthRepresentativeId').value, type: 'AuthRepresentativeId'}">
-														</ng-template>
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'AuthRepresentativeId'
-																)
-															">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</div>
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<label class="file-label">
-														BIR Notice of inclusion
-														in Top 20,000
-														Corporations and BIR
-														Form 2307 (if
-														applicable) 
-														<span *ngIf="requirementsTypes['BIRNoticeForm'].error" 
-														[ngClass]="requirementsTypes['BIRNoticeForm'].error.type == 'success' || 
-																   requirementsTypes['BIRNoticeForm'].error.type == 'uploading'? 'success-upload': ''">
-															{{ requirementsTypes['BIRNoticeForm'].error?.msg }}
-															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['BIRNoticeForm'].error.type == 'uploading'"></i>
-														</span>
-													</label>
-													
-													<div>
-														<div *ngIf="
-																!getApplyForm
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
 																	.get(
 																		'requirementsForm'
 																	)
 																	.get(
-																		'BIRNoticeForm'
-																	).value && !requirementsTypes['BIRNoticeForm'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'BIRNoticeForm',
-																	'bir-document'
-																)
+																		'AuthRepresentativeId'
+																	).value || ( hasRequirementsData && requirementsTypes['AuthRepresentativeId'].uploaded)
 															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
-																	onFileChanged(
-																		$event,
-																		'BIRNoticeForm',
-																		'bir-document'
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('AuthRepresentativeId').value, type: 'AuthRepresentativeId'}">
+															</ng-template>
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'AuthRepresentativeId'
 																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'BIRNoticeForm'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'BIRNoticeForm'
-																			)
-																			.touched) &&
-																	getApplyForm
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
+													</div>
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<label class="file-label">
+															BIR Notice of inclusion
+															in Top 20,000
+															Corporations and BIR
+															Form 2307 (if
+															applicable) 
+															<span *ngIf="requirementsTypes['BIRNoticeForm'].error" 
+															[ngClass]="requirementsTypes['BIRNoticeForm'].error.type == 'success' || 
+																	   requirementsTypes['BIRNoticeForm'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['BIRNoticeForm'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['BIRNoticeForm'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'BIRNoticeForm'
+																		).value && !requirementsTypes['BIRNoticeForm'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'BIRNoticeForm',
+																		'bir-document'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file"
+																[disabled]="getApplyForm.get('requirementsForm').get('BIRNoticeForm').disabled"
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																		onFileChanged(
+																			$event,
+																			'BIRNoticeForm',
+																			'bir-document'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'BIRNoticeForm'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'BIRNoticeForm'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2045,7 +1958,37 @@
 																			.get(
 																				'BIRNoticeForm'
 																			)
-																			.dirty ||
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'BIRNoticeForm'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'BIRNoticeForm'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'BIRNoticeForm'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2053,138 +1996,109 @@
 																			.get(
 																				'BIRNoticeForm'
 																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'BIRNoticeForm'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span class="file-inner-text">
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																	">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span class="file-inner-text">
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'BIRNoticeForm'
-																).value || ( hasRequirementsData && requirementsTypes['BIRNoticeForm'].uploaded)
-														">
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('BIRNoticeForm').value, type: 'BIRNoticeForm'}">
-														</ng-template>
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'BIRNoticeForm'
-																)
-															">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</div>
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<label class="file-label">
-														SEC
-														Registration/City/Municipality
-														Ordinance/Congressional
-														Bill/DTI Registration 
-														<span *ngIf="requirementsTypes['SECRegistration'].error" 
-														[ngClass]="requirementsTypes['SECRegistration'].error.type == 'success' || 
-																   requirementsTypes['SECRegistration'].error.type == 'uploading'? 'success-upload': ''">
-															{{ requirementsTypes['SECRegistration'].error?.msg }}
-															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['SECRegistration'].error.type == 'uploading'"></i>
-														</span>
-													</label>
-													
-													<div>
-														<div *ngIf="
-																!getApplyForm
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
 																	.get(
 																		'requirementsForm'
 																	)
 																	.get(
-																		'SECRegistration'
-																	).value && !requirementsTypes['SECRegistration'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'SECRegistration',
-																	'business-registration-document'
-																)
+																		'BIRNoticeForm'
+																	).value || ( hasRequirementsData && requirementsTypes['BIRNoticeForm'].uploaded)
 															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
-																	onFileChanged(
-																		$event,
-																		'SECRegistration',
-																		'business-registration-document'
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('BIRNoticeForm').value, type: 'BIRNoticeForm'}">
+															</ng-template>
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'BIRNoticeForm'
 																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'SECRegistration'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'SECRegistration'
-																			)
-																			.touched) &&
-																	getApplyForm
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
+													</div>
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<label class="file-label">
+															SEC
+															Registration/City/Municipality
+															Ordinance/Congressional
+															Bill/DTI Registration 
+															<span *ngIf="requirementsTypes['SECRegistration'].error" 
+															[ngClass]="requirementsTypes['SECRegistration'].error.type == 'success' || 
+																	   requirementsTypes['SECRegistration'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['SECRegistration'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['SECRegistration'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'SECRegistration'
+																		).value && !requirementsTypes['SECRegistration'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'SECRegistration',
+																		'business-registration-document'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file"
+																[disabled]="getApplyForm.get('requirementsForm').get('SECRegistration').disabled"
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																		onFileChanged(
+																			$event,
+																			'SECRegistration',
+																			'business-registration-document'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'SECRegistration'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'SECRegistration'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2192,146 +2106,121 @@
 																			.get(
 																				'SECRegistration'
 																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'SECRegistration'
-																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'SECRegistration'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span class="file-inner-text">
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'SECRegistration'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="showErrorPrompt && getApplyForm.get('requirementsForm').get('SECRegistration')?.errors">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span class="file-inner-text">
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'SECRegistration'
-																).value || ( hasRequirementsData && requirementsTypes['SECRegistration'].uploaded)
-														">
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('SECRegistration').value, type: 'SECRegistration'}">
-														</ng-template>
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'SECRegistration'
-																)
-															">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</div>
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<label class="file-label">
-														Articles of
-														Incorporation/Partnership
-														and By-Laws (if
-														applicable) 
-														<span *ngIf="requirementsTypes['IncorporationArticles'].error" 
-														[ngClass]="requirementsTypes['IncorporationArticles'].error.type == 'success' || 
-																   requirementsTypes['IncorporationArticles'].error.type == 'uploading'? 'success-upload': ''">
-															{{ requirementsTypes['IncorporationArticles'].error?.msg }}
-															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['IncorporationArticles'].error.type == 'uploading'"></i>
-														</span>
-													</label>
-													
-													<div>
-														<div *ngIf="
-																!getApplyForm
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
 																	.get(
 																		'requirementsForm'
 																	)
 																	.get(
-																		'IncorporationArticles'
-																	).value && !requirementsTypes['IncorporationArticles'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'IncorporationArticles',
-																	'incorporation-document'
-																)
+																		'SECRegistration'
+																	).value || ( hasRequirementsData && requirementsTypes['SECRegistration'].uploaded)
 															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
-																	onFileChanged(
-																		$event,
-																		'IncorporationArticles',
-																		'incorporation-document'
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('SECRegistration').value, type: 'SECRegistration'}">
+															</ng-template>
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'SECRegistration'
 																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'IncorporationArticles'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'IncorporationArticles'
-																			)
-																			.touched) &&
-																	getApplyForm
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
+													</div>
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<label class="file-label">
+															Articles of
+															Incorporation/Partnership
+															and By-Laws (if
+															applicable) 
+															<span *ngIf="requirementsTypes['IncorporationArticles'].error" 
+															[ngClass]="requirementsTypes['IncorporationArticles'].error.type == 'success' || 
+																	   requirementsTypes['IncorporationArticles'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['IncorporationArticles'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['IncorporationArticles'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'IncorporationArticles'
+																		).value && !requirementsTypes['IncorporationArticles'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'IncorporationArticles',
+																		'incorporation-document'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file"
+																[disabled]="getApplyForm.get('requirementsForm').get('IncorporationArticles').disabled"
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																		onFileChanged(
+																			$event,
+																			'IncorporationArticles',
+																			'incorporation-document'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'IncorporationArticles'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'IncorporationArticles'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2339,7 +2228,37 @@
 																			.get(
 																				'IncorporationArticles'
 																			)
-																			.dirty ||
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'IncorporationArticles'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'IncorporationArticles'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'IncorporationArticles'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2347,144 +2266,115 @@
 																			.get(
 																				'IncorporationArticles'
 																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'IncorporationArticles'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span class="file-inner-text">
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																	">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span class="file-inner-text">
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'IncorporationArticles'
-																).value || ( hasRequirementsData && requirementsTypes['IncorporationArticles'].uploaded)
-														">
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('IncorporationArticles').value, type: 'IncorporationArticles'}">
-														</ng-template>
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'IncorporationArticles'
-																)
-															">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</div>
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<label class="file-label">
-														Secretary's
-														Cretificate/Board
-														Resolution/Partnership
-														Resolution/Managing
-														Partners' Certificate/
-														Authorization of Owner
-														to the Authorize
-														Representative to
-														transact business with
-														Insular 
-														<span *ngIf="requirementsTypes['IdentityCertificate'].error" 
-														[ngClass]="requirementsTypes['IdentityCertificate'].error.type == 'success' || 
-																   requirementsTypes['IdentityCertificate'].error.type == 'uploading'? 'success-upload': ''">
-															{{ requirementsTypes['IdentityCertificate'].error?.msg }}
-															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['IdentityCertificate'].error.type == 'uploading'"></i>
-														</span>
-													</label>
-													
-													<div>
-														<div *ngIf="
-																!getApplyForm
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
 																	.get(
 																		'requirementsForm'
 																	)
 																	.get(
-																		'IdentityCertificate'
-																	).value && !requirementsTypes['IdentityCertificate'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'IdentityCertificate',
-																	'authorization-document'
-																)
+																		'IncorporationArticles'
+																	).value || ( hasRequirementsData && requirementsTypes['IncorporationArticles'].uploaded)
 															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}"  (change)="
-																	onFileChanged(
-																		$event,
-																		'IdentityCertificate',
-																		'authorization-document'
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('IncorporationArticles').value, type: 'IncorporationArticles'}">
+															</ng-template>
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'IncorporationArticles'
 																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'IdentityCertificate'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'IdentityCertificate'
-																			)
-																			.touched) &&
-																	getApplyForm
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
+													</div>
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<label class="file-label">
+															Secretary's
+															Cretificate/Board
+															Resolution/Partnership
+															Resolution/Managing
+															Partners' Certificate/
+															Authorization of Owner
+															to the Authorize
+															Representative to
+															transact business with
+															Insular 
+															<span *ngIf="requirementsTypes['IdentityCertificate'].error" 
+															[ngClass]="requirementsTypes['IdentityCertificate'].error.type == 'success' || 
+																	   requirementsTypes['IdentityCertificate'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['IdentityCertificate'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['IdentityCertificate'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'IdentityCertificate'
+																		).value && !requirementsTypes['IdentityCertificate'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'IdentityCertificate',
+																		'authorization-document'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file"
+																[disabled]="getApplyForm.get('requirementsForm').get('IdentityCertificate').disabled"
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}"  (change)="
+																		onFileChanged(
+																			$event,
+																			'IdentityCertificate',
+																			'authorization-document'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'IdentityCertificate'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'IdentityCertificate'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2492,145 +2382,120 @@
 																			.get(
 																				'IdentityCertificate'
 																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'IdentityCertificate'
-																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'IdentityCertificate'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span class="file-inner-text">
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'IdentityCertificate'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="showErrorPrompt && getApplyForm.get('requirementsForm').get('IdentityCertificate')?.errors">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span class="file-inner-text">
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'IdentityCertificate'
-																).value || ( hasRequirementsData && requirementsTypes['IdentityCertificate'].uploaded)
-														">
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('IdentityCertificate').value, type: 'IdentityCertificate'}">
-														</ng-template>
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'IdentityCertificate'
-																)
-															">
-															<i class="fa fa-trash"></i>
-														</button>
-													</div>
-												</div>
-												<div class="col-md-12 mb-3 uploadimgescustom">
-													<label class="file-label">
-														Post-Policy Issuance:
-														Individual Application
-														Forms (if applicable) 
-														<span *ngIf="requirementsTypes['PostPolicyForm'].error" 
-														[ngClass]="requirementsTypes['PostPolicyForm'].error.type == 'success' || 
-																   requirementsTypes['PostPolicyForm'].error.type == 'uploading'? 'success-upload': ''">
-															{{ requirementsTypes['PostPolicyForm'].error?.msg }}
-															<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['PostPolicyForm'].error.type == 'uploading'"></i>
-														</span>
-													</label>
-													
-													<div>
-														<div *ngIf="
-																!getApplyForm
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
 																	.get(
 																		'requirementsForm'
 																	)
 																	.get(
-																		'PostPolicyForm'
-																	).value && !requirementsTypes['PostPolicyForm'].uploaded
-															" class="uploadfilecontainer" (click)="
-																fileInput.click()
-															" appDragDrop (onFileDropped)="
-																onFileChanged(
-																	$event,
-																	'PostPolicyForm',
-																	'individual-applications'
-																)
+																		'IdentityCertificate'
+																	).value || ( hasRequirementsData && requirementsTypes['IdentityCertificate'].uploaded)
 															">
-															<input #fileInput hidden type="file" name="file"
-																accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
-																	onFileChanged(
-																		$event,
-																		'PostPolicyForm',
-																		'individual-applications'
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('IdentityCertificate').value, type: 'IdentityCertificate'}">
+															</ng-template>
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'IdentityCertificate'
 																	)
-																" [ngClass]="
-																	(submitted ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'PostPolicyForm'
-																			)
-																			.dirty ||
-																		getApplyForm
-																			.get(
-																				'requirementsForm'
-																			)
-																			.get(
-																				'PostPolicyForm'
-																			)
-																			.touched) &&
-																	getApplyForm
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
+													</div>
+													<div class="col-md-12 mb-3 uploadimgescustom">
+														<label class="file-label">
+															Post-Policy Issuance:
+															Individual Application
+															Forms (if applicable) 
+															<span *ngIf="requirementsTypes['PostPolicyForm'].error" 
+															[ngClass]="requirementsTypes['PostPolicyForm'].error.type == 'success' || 
+																	   requirementsTypes['PostPolicyForm'].error.type == 'uploading'? 'success-upload': ''">
+																{{ requirementsTypes['PostPolicyForm'].error?.msg }}
+																<i class="fa fa-spinner fa-pulse" *ngIf="requirementsTypes['PostPolicyForm'].error.type == 'uploading'"></i>
+															</span>
+														</label>
+														
+														<div>
+															<div *ngIf="
+																	!getApplyForm
 																		.get(
 																			'requirementsForm'
 																		)
 																		.get(
 																			'PostPolicyForm'
+																		).value && !requirementsTypes['PostPolicyForm'].uploaded
+																" class="uploadfilecontainer" (click)="
+																	fileInput.click()
+																" appDragDrop (onFileDropped)="
+																	onFileChanged(
+																		$event,
+																		'PostPolicyForm',
+																		'individual-applications'
+																	)
+																">
+																<input #fileInput hidden type="file" name="file"
+																[disabled]="getApplyForm.get('requirementsForm').get('PostPolicyForm').disabled"
+																	accept="{{ CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE }}" (change)="
+																		onFileChanged(
+																			$event,
+																			'PostPolicyForm',
+																			'individual-applications'
 																		)
-																		?.errors
-																		? 'is-invalid'
-																		: getApplyForm
+																	" [ngClass]="
+																		(submitted ||
+																			getApplyForm
 																				.get(
 																					'requirementsForm'
 																				)
 																				.get(
 																					'PostPolicyForm'
 																				)
-																				?.valid
-																		? 'is-valid'
-																		: ''
-																" />
-															<small class="errormsg" *ngIf="
-																	(submitted ||
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'PostPolicyForm'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2638,7 +2503,37 @@
 																			.get(
 																				'PostPolicyForm'
 																			)
-																			.dirty ||
+																			?.errors
+																			? 'is-invalid'
+																			: getApplyForm
+																					.get(
+																						'requirementsForm'
+																					)
+																					.get(
+																						'PostPolicyForm'
+																					)
+																					?.valid
+																			? 'is-valid'
+																			: ''
+																	" />
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'PostPolicyForm'
+																				)
+																				.dirty ||
+																			getApplyForm
+																				.get(
+																					'requirementsForm'
+																				)
+																				.get(
+																					'PostPolicyForm'
+																				)
+																				.touched) &&
 																		getApplyForm
 																			.get(
 																				'requirementsForm'
@@ -2646,72 +2541,67 @@
 																			.get(
 																				'PostPolicyForm'
 																			)
-																			.touched) &&
-																	getApplyForm
-																		.get(
-																			'requirementsForm'
-																		)
-																		.get(
-																			'PostPolicyForm'
-																		)
-																		?.errors
-																">
-																Please attach
-																your document
-															</small>
-															<div class="drag-text">
-																<h3>
-																	Click here
-																	to upload
-																	file
-																	<span class="file-inner-text">
-																		(.jpg,
-																		.png,
-																		.pdf,
-																		.xls,
-																		.doc /
-																		5MB max
+																			?.errors
+																	">
+																	Please attach
+																	your document
+																</small>
+																<div class="drag-text">
+																	<h3>
+																		Click here
+																		to upload
 																		file
-																		Size)
-																	</span>
-																</h3>
+																		<span class="file-inner-text">
+																			(.jpg,
+																			.png,
+																			.pdf,
+																			.xls,
+																			.doc /
+																			5MB max
+																			file
+																			Size)
+																		</span>
+																	</h3>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="identity-document-preview" *ngIf="
-															getApplyForm
-																.get(
-																	'requirementsForm'
-																)
-																.get(
-																	'PostPolicyForm'
-																).value || ( hasRequirementsData && requirementsTypes['PostPolicyForm'].uploaded)
-														">
-														<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
-																	[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('PostPolicyForm').value, type: 'PostPolicyForm'}">
-														</ng-template>
-														<button class="delete-file" (click)="
-																deleteImage(
-																	'PostPolicyForm'
-																)
+														<div class="identity-document-preview" *ngIf="
+																getApplyForm
+																	.get(
+																		'requirementsForm'
+																	)
+																	.get(
+																		'PostPolicyForm'
+																	).value || ( hasRequirementsData && requirementsTypes['PostPolicyForm'].uploaded)
 															">
-															<i class="fa fa-trash"></i>
-														</button>
+															<ng-template [ngTemplateOutlet]="fileTypeDispTemplate"
+																		[ngTemplateOutletContext]="{data: getApplyForm.get('requirementsForm').get('PostPolicyForm').value, type: 'PostPolicyForm'}">
+															</ng-template>
+															<button class="delete-file" (click)="
+																	deleteImage(
+																		'PostPolicyForm'
+																	)
+																">
+																<i class="fa fa-trash"></i>
+															</button>
+														</div>
 													</div>
 												</div>
-											</div>
+											</form>
+
+											<ng-template #fileTypeDispTemplate let-fileData="data" let-fileType="type">
+												<ng-container *ngIf="requirementsTypes[fileType].type != 'image'; else imgDisp">
+													<img [src]="requirementsTypes[fileType].fileInfo.loc"/>
+													<p>{{requirementsTypes[fileType].title}}</p>
+												</ng-container>
+												<ng-template #imgDisp>
+													<img [src]="requirementsTypes[fileType].fileInfo"/>
+												</ng-template>
+											</ng-template>
 											<div id="step3_head"></div>
 										</div>
 
-										<ng-template #fileTypeDispTemplate let-fileData="data" let-fileType="type">
-											<ng-container *ngIf="requirementsTypes[fileType].type != 'image'; else imgDisp">
-												<img [src]="requirementsTypes[fileType].fileInfo.loc"/>
-												<p>{{requirementsTypes[fileType].title}}</p>
-											</ng-container>
-											<ng-template #imgDisp>
-												<img [src]="requirementsTypes[fileType].fileInfo"/>
-											</ng-template>
-										</ng-template>
+										
 										<!-- step3 strat -->
 										<div class="formcoantiner declarationsection step3"
 											formGroupName="declarationsForm" *ngIf="((getApplyForm.get('requirementsForm')?.valid && showThirdStep) || (hasRequirementsData && showThirdStep))">
@@ -2808,7 +2698,7 @@
 															In accordance with the Insurance Commission’s Circular Letter No. 2016-54, your medical information will be uploaded to a Medical Information Database accessible to life insurance companies for the purpose of enhancing risk assessment and preventing fraud.
 															<br><br>
 															Once uploaded, all life insurance companies will only have limited access to your information in order to protect your right to privacy in accordance with law. A copy of Circular Letter No. 2016-54 may be accessed at the Insurance Commission’s website at www.insurance.gov.ph.&nbsp;
-															<a style="font-size: inherit;" class="p-link" href="https://www.insurance.gov.ph/" target="_blank">www.insurance.gov.ph.</a>
+															<a style="font-size: inherit;" class="p-link" href="javascript:void(0)" (click)="openNewWindow('https://www.insurance.gov.ph/')">www.insurance.gov.ph.</a>
 															<input type="checkbox" name=""  (change)="changedDeclartions($event, 'IsCheckDeclarationStatement')"
 																formControlName="IsCheckDeclarationStatement"
 																id="confirmcorrect" />
@@ -2963,11 +2853,8 @@
 											</div>
 											<div class="col-md-5 col-12">
 												<div class="btnsec text-right" *ngIf="!showThirdStep">
-													<button type="button" class="btn" [disabled]="isFileSizeError || 
-															!getApplyForm.get(
-																'requirementsForm'
-															)?.valid
-														" (click)="setShowThird()">
+													<button type="button" class="btn" [disabled]="(isFileSizeError || !getApplyForm.get('requirementsForm')?.valid) || hasQueue" 
+													(click)="setShowThird()">
 														Continue
 														<i class="material-icons">arrow_forward</i>
 													</button>
@@ -3013,7 +2900,7 @@
 								Description</u></a>
 					</div>
 					<div class="col-md-12 faq">
-						<a target="_blank" id="faq" routerLink="/faqs" [queryParams]="{ tab: 4}"
+						<a id="faq" href="javascript:void(0)" (click)="openNewWindow('/faqs?tab=4')"
 							style="text-decoration: underline;color: #e43e25">Frequently Asked Questions</a>
 					</div>
 				</div>
@@ -3040,4 +2927,3 @@
 		</div>
 	</div>
 </div>
-	

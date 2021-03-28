@@ -113,5 +113,7 @@
     <Build Include="Content\Tables\Faqs.sql" />
     <Build Include="Content\Tables\FaqCategories.sql" />
     <Build Include="PrimeSecure\Tables\Applications.sql" />
+    <Build Include="PrimeSecure\Tables\Customers.sql" />
+    <Build Include="PrimeSecure\Tables\Addresses.sql" />
   </ItemGroup>
 </Project>

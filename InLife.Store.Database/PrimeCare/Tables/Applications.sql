@@ -1,10 +1,9 @@
 ﻿CREATE TABLE [PrimeCare].[Applications] (
-    [Id]                      INT                IDENTITY (1, 1) NOT NULL,
+    [Id]                      UNIQUEIDENTIFIER   NOT NULL,
+    [CreatedDate]             DATETIMEOFFSET (7) CONSTRAINT [DF_InsuranceApplications_DateCreated] DEFAULT (sysdatetimeoffset()) NOT NULL,
+    [CompletedDate]           DATETIMEOFFSET (7) NULL,
     [ReferenceCode]           VARCHAR (36)       NULL,
     [PolicyNumber]            VARCHAR (50)       NULL,
-    [CustomerId]              INT                NOT NULL,
-    [DateCreated]             DATETIMEOFFSET (7) CONSTRAINT [DF_InsuranceApplications_DateCreated] DEFAULT (sysdatetimeoffset()) NOT NULL,
-    [DateCompleted]           DATETIMEOFFSET (7) NULL,
     [Status]                  VARCHAR (20)       NULL,
     [ProductName]             NVARCHAR (50)      NOT NULL,
     [ProductCode]             VARCHAR (20)       NOT NULL,
@@ -25,14 +24,22 @@
     [Question1]               VARCHAR (10)       NULL,
     [Question2]               VARCHAR (10)       NULL,
     [PolicyDeliveryOption]    VARCHAR (20)       NULL,
+    [CustomerId]              UNIQUEIDENTIFIER   NULL,
     [InsuredId]               UNIQUEIDENTIFIER   NOT NULL,
     [InsuredRelationship]     VARCHAR (20)       NULL,
     [BeneficiaryId]           UNIQUEIDENTIFIER   NOT NULL,
     [BeneficiaryRelationship] VARCHAR (20)       NULL,
     [BeneficiaryRight]        VARCHAR (20)       NULL,
     [BeneficiaryPriority]     VARCHAR (20)       NULL,
-    CONSTRAINT [PK_PrimeCare_Applications] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK_PrimeCare_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );
 
 
+
+
+
+
+GO
+CREATE CLUSTERED INDEX [CI_PrimeCare_Applications]
+    ON [PrimeCare].[Applications]([CreatedDate] ASC);
 

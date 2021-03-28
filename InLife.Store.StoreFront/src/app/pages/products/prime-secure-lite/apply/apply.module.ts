@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,7 +44,8 @@ import { ControlsModule } from '@app/controls/controls.module';
 		ApiService,
 		SessionStorageService,
 		GoogleAnalyticsService,
-		FacebookPixelService
+		FacebookPixelService,
+		TitleCasePipe
 	],
 	bootstrap: [ApplyComponent]
 })

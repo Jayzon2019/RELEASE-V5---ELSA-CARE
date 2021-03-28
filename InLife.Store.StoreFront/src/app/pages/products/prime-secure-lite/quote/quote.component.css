@@ -99,4 +99,10 @@ li::marker {
 	display: list-item;
 	content: " ";
   }
-  
+
+::ng-deep .my-tooltip {
+	font-size: 13px;
+	background: #000 !important;
+	white-space: pre-line !important;
+	padding: 1rem;
+}

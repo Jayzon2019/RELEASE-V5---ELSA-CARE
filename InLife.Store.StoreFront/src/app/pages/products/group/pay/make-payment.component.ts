@@ -1,3 +1,4 @@
+import { UtilitiesService } from './../services/utilities.service';
 import { environment } from '@environment';
 import { Injectable, Injector, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -77,7 +78,8 @@ export class MakePaymentComponent implements OnInit, OnDestroy
 		private sanitizer: DomSanitizer,
 		private formBuilder: FormBuilder,
 		private router: Router,
-		private payService_API: PayService
+		private payService_API: PayService,
+		private util: UtilitiesService
 	)
 	{
 		this.getApplyForm = this.formBuilder.group({
@@ -396,6 +398,8 @@ export class MakePaymentComponent implements OnInit, OnDestroy
 		window.location.href = targetUrl;
 	}
 
+	
+
 	handleError(error: any)
 	{
 		let errorMessage = '';
@@ -526,6 +530,10 @@ export class MakePaymentComponent implements OnInit, OnDestroy
 		//console.log(base64PdfString);
 
 		return base64PdfString;
+	}
+
+	openNewWindow(url: string) {
+		this.util.openNewWindow(url);
 	}
 	bank(){
 		console.log('bankwork');

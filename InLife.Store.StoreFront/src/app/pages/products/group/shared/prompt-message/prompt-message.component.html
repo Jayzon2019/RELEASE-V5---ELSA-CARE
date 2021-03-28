@@ -1,0 +1,8 @@
+<!-- <h1 mat-dialog-title>Hi!</h1> -->
+<div mat-dialog-content class="body">
+    <p>A new tab will be open for this action, would you like to proceed?</p>
+</div>
+<div mat-dialog-actions class="controls">
+    <button mat-button class="button button-primary" cdkFocusInitial (click)="onNoClick()">No Thanks</button>
+    <button mat-button class="button button-primary" cdkFocusInitial (click)="onYesClick()" >Proceed</button>
+</div>
