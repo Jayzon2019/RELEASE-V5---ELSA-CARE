@@ -218,27 +218,31 @@ $(document).ready(function () {
 
 		// Cookie consent
 		// memo
-		var memo = $(".memo");
-		var cookieConsentKey = "has-cookie-consent";
 
-		var hasCookieConsent = (Cookie ? Cookie.get(cookieConsentKey) : false);
+		setTimeout(function () {
+			var memo = $(".memo");
+			var cookieConsentKey = "has-cookie-consent";
 
-		console.log(hasCookieConsent, 'Cookie');
+			var hasCookieConsent = (Cookie ? Cookie.get(cookieConsentKey) : false);
 
-		if (!hasCookieConsent) {
-			memo.show();
-		}
+			console.log(hasCookieConsent, 'Cookie');
 
-		$(".memo-close").on("click", e => {
-			e.preventDefault();
-	
-			memo.hide();
-	
-			var expiration = new Date();
-			expiration = expiration.setDate(expiration.getDate() + 90);
-	
-			Cookie.set(cookieConsentKey, true, expiration);
-		});
+			if (!hasCookieConsent) {
+				memo.show();
+			}
+
+			$(".memo-close").on("click", e => {
+				e.preventDefault();
+		
+				memo.hide();
+		
+				var expiration = new Date();
+				expiration = expiration.setDate(expiration.getDate() + 90);
+		
+				Cookie.set(cookieConsentKey, true, expiration);
+			});
+		}, 3000);
+		
 		
 	});
 

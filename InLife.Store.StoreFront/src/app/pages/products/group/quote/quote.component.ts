@@ -1,3 +1,4 @@
+import { UtilitiesService } from './../services/utilities.service';
 import { StorageType } from '@app/services/storage-types.enum';
 import { environment } from '@environment';
 import { Injectable, Injector, OnDestroy } from '@angular/core';
@@ -80,7 +81,8 @@ export class QuoteComponent implements OnInit, OnDestroy
 		private quoteService_API: QuoteService,
 		private vps: ViewportScroller,
 		private http: HttpClient,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private util: UtilitiesService
 	)
 	{ 
 		this.ngxService.start();
@@ -544,6 +546,10 @@ export class QuoteComponent implements OnInit, OnDestroy
 		}
 	}
 
+	openNewWindow(url: string) {
+		this.util.openNewWindow(url);
+	}
+
 	downloadPlanDes() {
 		var filePath = "";
 		var pdfName = "";
@@ -559,7 +565,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			filePath = '../../../../../assets/documents/Students And Teachers_Plan Description.pdf';
 			pdfName = 'Students And Teachers_Plan Description';
 		}
-		window.open(filePath + '#page=' + 1, '_blank');
+		this.openNewWindow(filePath + '#page=' + 1);
 	}
 
 	getReferenceData(list: any[], item: any)

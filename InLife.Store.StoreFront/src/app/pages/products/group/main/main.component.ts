@@ -1,3 +1,5 @@
+import { PromptMessageComponent } from './../shared/prompt-message/prompt-message.component';
+import { UtilitiesService } from './../services/utilities.service';
 import { SessionStorageService } from '@app/services';
 import { Component, OnDestroy, OnInit, AfterViewInit, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import $ from "jquery";
 import { Subject } from 'rxjs';
 import { map, takeUntil, switchMap, filter } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 declare var require: any
 const FileSaver = require('file-saver');
 @Component
@@ -23,8 +26,10 @@ export class MainComponent implements OnInit, OnDestroy {
 	isStableApp = new Subject();
 	constructor(private router: Router, private route: ActivatedRoute, 
 		private apiService: ApiService, private sanitizer: DomSanitizer,  
+		private util: UtilitiesService,
 		private session: SessionStorageService,
-		private appRef: ApplicationRef) { }
+		private appRef: ApplicationRef,
+		private dialog: MatDialog) { }
 
 	ngOnInit(): void {
 		this.session.clear();
@@ -57,6 +62,11 @@ export class MainComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.destroy$.next(true);
 		this.destroy$.unsubscribe();
+	}
+
+
+	openNewWindow(url: string) {
+		this.util.openNewWindow(url);
 	}
 
 	planClick(id: string) {
@@ -118,33 +128,33 @@ export class MainComponent implements OnInit, OnDestroy {
 		// var filePath = '../../../../../assets/documents/Census Template_Prototype Plan-final.xlsx';
 		// var pdfName = 'Census Template_Prototype Plan-final';
 		// FileSaver.saveAs(filePath, pdfName);
-		window.open('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library');
 	}
 	adminForm() {
 		// var filePath = '../../../../../assets/documents/Entity Plan Admin Form.pdf';
 		// var pdfName = 'Entity Plan Admin Form';
 		// FileSaver.saveAs(filePath, pdfName);
-		window.open('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library');
 	}
 	IndividualApplicationForm() {
 		// var filePath = '../../../../../assets/documents/Application Form Group Plan_(For Individual Members).pdf';
 		// var pdfName = 'Application Form Group Plan_(For Individual Members)';
 		// FileSaver.saveAs(filePath, pdfName);
-		window.open('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library');
 	}
 
 	ciuForm() {
 		// var filePath = '../../../../../assets/documents/CIU Form.pdf';
 		// var pdfName = 'Application Form Group Plan_(For Individual Members)';
 		// FileSaver.saveAs(filePath, pdfName);
-		window.open('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library');
 	}
 
 	SecretarysCertificate() {
 		// var filePath = '../../../../../assets/documents/Secretary Certificate-Board Resolution.pdf';
 		// var pdfName = 'Secretary Certificate/Board Resolution';
 		// FileSaver.saveAs(filePath, pdfName);
-		window.open('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library');
 	}
 
 }

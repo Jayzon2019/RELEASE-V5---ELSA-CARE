@@ -17,7 +17,7 @@
 
     @media (max-width: 1080px) {
         .leftwrapsection {
-        padding: 36px 60px 36px 60px;
+            padding: 36px 30px 36px 30px;
         }
     }
 
@@ -32,9 +32,82 @@
         }
 
         .leftwrapsection {
-            padding: 36px;
+            padding: 15px;
         }
     }
 
-    
+    @media(max-width: 500px) {
+        .reviewbill {
+            padding: 5px !important;
+        }
+    }
+
+    @media(max-width: 380px) {
+        .reviewbill {
+            padding: 3px !important;
+        }
+
+        .titlebill p {
+            font-size: 14px;
+        }
+
+        .detailbill p {
+            font-size: 12px;
+            word-break: break-all;
+        }
+    }
+
+    .container {
+        display: table;
+        overflow: hidden;
+        width: 100%;
+        padding: 0;
+
+        .helper {
+            display: table-cell;
+            padding: 0 5px;
+
+            .title {
+                width: 200px;
+            }
+        }
+
+        .helper-2 {
+            display: table-cell;
+            vertical-align: bottom;
+            padding: 0 5px;
+
+            .content {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .helper {
+                .title {
+                    width: 160px;
+                }
+            }
+
+            .helper-2 {
+                .content {
+                    width: 200px;
+                }
+            }
+        }
+
+        @media (max-width: 400px) {
+            .helper {
+                .title {
+                    width: 122px;
+                }
+            }
+
+            .helper-2 {
+                .content {
+                    width: 160px;
+                }
+            }
+        }
+    }
 }

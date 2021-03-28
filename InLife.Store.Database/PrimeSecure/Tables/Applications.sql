@@ -25,7 +25,7 @@
     [Company]                 VARCHAR (50)       NULL,
     [Occupation]              VARCHAR (50)       NULL,
     [IncomeSource]            VARCHAR (50)       NULL,
-    [MonthlyIncome]           DECIMAL (19, 4)    NULL,
+    [IncomeAmount]            DECIMAL (19, 4)    NULL,
     [Height]                  DECIMAL (19, 4)    NULL,
     [Weight]                  DECIMAL (19, 4)    NULL,
     [DeclarationQuestion1]    BIT                NULL,
@@ -47,4 +47,11 @@
     CONSTRAINT [PK_PrimeSecure_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC),
     CONSTRAINT [UK_PrimeSecure_Applications] UNIQUE NONCLUSTERED ([ReferenceCode] ASC)
 );
+
+
+
+
+GO
+CREATE CLUSTERED INDEX [CI_PrimeSecure_Applications]
+    ON [PrimeSecure].[Applications]([CreatedDate] ASC);
 

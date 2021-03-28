@@ -1,3 +1,4 @@
+import { UtilitiesService } from './../services/utilities.service';
 import { environment } from '@environment';
 import { AfterViewInit, Injectable, Injector } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -72,7 +73,8 @@ export class PlanSummaryComponent implements OnInit {
 			private http: HttpClient,
 			private apiService: ApiService,
 			private ngxService: NgxUiLoaderService,
-			private sanitizer: DomSanitizer
+			private sanitizer: DomSanitizer,
+			private util: UtilitiesService
 		) {
 		const getApplyGroupFormData = this.session.get(StorageType.POST_GROUP_QUOTE) || "[]";
 		const getGroupQuoteFormData = this.session.get("selectedGroupPlanData") || "[]";
@@ -177,7 +179,7 @@ export class PlanSummaryComponent implements OnInit {
 		var filePath = '../../../../../assets/documents/Group Cancellation and Refund.pdf';
 		var pdfName = 'Group Cancellation and Refund';
 		// FileSaver.saveAs(filePath, pdfName);
-		window.open(filePath + '#page=' + 1, '_blank');
+		this.openNewWindow(filePath + '#page=' + 1);
 	}
 
 	downloadPlanDes() {
@@ -196,7 +198,7 @@ export class PlanSummaryComponent implements OnInit {
 			pdfName = 'Students And Teachers_Plan Description';
 		}
 		// FileSaver.saveAs(filePath, pdfName);
-		window.open(filePath + '#page=' + 1, '_blank');
+		this.openNewWindow(filePath + '#page=' + 1);
 	}
 	getFile() {
 		var url = "/Home/GetFiles";
@@ -217,6 +219,10 @@ export class PlanSummaryComponent implements OnInit {
 			this.createApplication();
 		else
 			this.callPaymentUrl();
+	}
+
+	openNewWindow(url: string) {
+		this.util.openNewWindow(url);
 	}
 
 	createApplication() {

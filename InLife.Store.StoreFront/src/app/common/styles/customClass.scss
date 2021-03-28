@@ -140,3 +140,7 @@ textarea.c-textarea {
 		opacity: 0.7;
 	}
 }
+
+.cdk-overlay-container {
+	z-index: 99999 !important;
+}

@@ -486,51 +486,41 @@ export class QuoteComponent implements OnInit
 		// LOG FOR DEBUGGING
 		//console.log(`Posting to ${endpoint}`);
 		this.session.set('PostQuote', data);
-
-		if(isEligible)
-		{
-			this.router.navigate(['/prime-care/apply']);
-		}
-		else
-		{
-			this.router.navigate(['/prime-care/ineligible']);
-			
-		}
-		// this.http
-		// 	.post(endpoint, body, options)
-		// 	.pipe(
-		// 		retry(1),
-		// 		catchError((error: HttpErrorResponse) =>
-		// 		{
-		// 			this.ngxService.stop();
-		// 			let errorMessage = '';
-		// 			if (error.error instanceof ErrorEvent)
-		// 			{
-		// 				// client-side error
-		// 				errorMessage = `Error: ${error.error.message}`;
-		// 			}
-		// 			else
-		// 			{
-		// 				// server-side error
-		// 				errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-		// 			}
-		// 			window.alert(errorMessage);
-		// 			return throwError(errorMessage);
-		// 		})
-		// 	)
-		// 	.subscribe((data: any) =>
-		// 	{
-		// 		let refNo = String(data.id).padStart(10, '0');
-		// 		this.session.set('refNo', refNo)
-		// 		if(isEligible)
-		// 		{
-		// 			this.router.navigate(['/prime-care/apply']);
-		// 		}
-		// 		else
-		// 		{
-		// 			location.href = "ineligible.html";
-		// 		}
-		// 	});
+		this.http
+			.post(endpoint, body, options)
+			.pipe(
+				retry(1),
+				catchError((error: HttpErrorResponse) =>
+				{
+					this.ngxService.stop();
+					let errorMessage = '';
+					if (error.error instanceof ErrorEvent)
+					{
+						// client-side error
+						errorMessage = `Error: ${error.error.message}`;
+					}
+					else
+					{
+						// server-side error
+						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+					}
+					window.alert(errorMessage);
+					return throwError(errorMessage);
+				})
+			)
+			.subscribe((data: any) =>
+			{
+				let refNo = String(data.id).padStart(10, '0');
+				this.session.set('refNo', refNo)
+				if(isEligible)
+				{
+					this.router.navigate(['/prime-care/apply']);
+				}
+				else
+				{
+					this.router.navigate(['/prime-care/ineligible']);
+				}
+			});
 	}
 
 	onChangeProviance(value)

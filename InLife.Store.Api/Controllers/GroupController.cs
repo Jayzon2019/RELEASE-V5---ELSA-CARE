@@ -219,10 +219,10 @@ namespace InLife.Store.Api
 		[DisableRequestSizeLimit]
 		public async Task<ActionResult> UploadFile(string refcode, string type, [FromHeader] RequestHeaders headers)
 		{
-			//try
-			//{
-				//if (!applicationProcessing.VerifySession(refcode, headers.Session))
-				//	return Unauthorized();
+			try
+			{
+				if (!applicationProcessing.VerifySession(refcode, headers.Session))
+					return Unauthorized();
 
 				var application = await applicationProcessing.UploadFile(refcode, type, Request.ContentType, Request.Body);
 
@@ -232,11 +232,11 @@ namespace InLife.Store.Api
 				var response = new BaseGroupResponse(application);
 
 				return Ok(response);
-			//}
-			//catch (Exception e)
-			//{
-			//	return GenericServerErrorResult(e);
-			//}
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 
 		// PUT /group/applications/:refcode/payment

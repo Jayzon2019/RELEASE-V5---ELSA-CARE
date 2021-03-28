@@ -48,6 +48,9 @@
 								</ul>
 							</div>
 						</div>
+						<div class="col-md-3 tabfull p-0 roghtwrapsection-wrapper only-in-mobile">
+							<app-prime-secure-lite-sidebar></app-prime-secure-lite-sidebar>
+						</div>
 						<div class="col-md-9 tabsamll">
 							<div class="stepdetail">
 								<h1>
@@ -62,10 +65,10 @@
 												
 												<!-- Birthdaye start-->
 												<div class="col-md-6 mb-3">
-													<label for=""
-														>Birthdate
+													<label for="">
+														Birthdate
 														<i class="fa fa-question-circle" matTooltip="You must be aged 18-60 to avail of Prime Secure Lite" matTooltipPosition="right" [matTooltipClass]="'my-tooltip'"></i>
-														</label>
+													</label>
 													<div
 														class="form-group mb-4"
 													>
@@ -979,7 +982,7 @@
 																let type of CONSTANTS.PROVIANCE;
 																let i = index
 															" [value]="type.id">
-															{{ type.Province }}
+															{{ type.Province | titlecase}}
 														</option>
 													</select>
 													<small class="errormsg" *ngIf="
@@ -1522,7 +1525,7 @@
 														</small>
 													</div>
 													
-													<div class="col-md-6 mb-9" *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value === '1'">
+													<div class="col-md-6 mb-9" *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value === '1' || '9'">
 														<label for="">Agent Name</label>
 														<div class="input-group">
 															<div class="fieldinnr50">
@@ -2929,7 +2932,7 @@
 											</ul>
 
 											<div class="form-row">
-												<div class="col-md-5 col-5">
+												<div class="col-md-6 col-12">
 													<div class="btnsec">
 														<button class="btn outlinedbtn text-left btn-back" (click)="backClicked()">
 															<i class="material-icons">arrow_backward</i>
@@ -2937,7 +2940,7 @@
 														</button>
 													</div>
 												</div>
-												<div class="col-6">
+												<div class="col-md-6 col-12">
 													<div class="btnsec text-right">
 														<button class="btn" (click)="submitQuoteForm()" [disabled]="getQuoteForm?.invalid">
 															Continue to apply
@@ -2955,7 +2958,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3 tabfull p-0 roghtwrapsection-wrapper">
+		<div class="col-md-3 tabfull p-0 roghtwrapsection-wrapper only-in-desktop">
 			<app-prime-secure-lite-sidebar></app-prime-secure-lite-sidebar>
 		</div>
 	</div>

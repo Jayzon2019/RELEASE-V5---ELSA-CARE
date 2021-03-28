@@ -91,6 +91,9 @@
 								</ul>
 							</div>
 						</div>
+						<div class="col-md-3 tabfull p-0 roghtwrapsection-wrapper only-in-mobile">
+							<app-prime-secure-lite-sidebar></app-prime-secure-lite-sidebar>
+						</div>
 						<div class="col-md-9 tabsamll">
 							<div class="stepdetail">
 								<div class="pagetitles">
@@ -150,7 +153,7 @@
 														<option value="">Region / Province</option>
 														<option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
 																[value]="type.id">
-															{{type.Province}}
+																{{ type.Province | titlecase }}
 														</option>
 													</select>
 													<small class="errormsg"
@@ -255,7 +258,7 @@
 														<option value="">Region / Province</option>
 														<option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
 																[value]="type.id">
-															{{type.Province}}
+															{{ type.Province | titlecase }}
 														</option>
 													</select>
 													<small class="errormsg"
@@ -710,7 +713,7 @@
 														<option value="">Select Region / Province</option>
 														<option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
 																[value]="type.id">
-															{{type.Province}}
+															{{ type.Province | titlecase}}
 														</option>
 													</select>
 													<small class="errormsg"
@@ -836,7 +839,7 @@
 														<option value="">Region / Province</option>
 														<option *ngFor="let type of CONSTANTS.PROVIANCE;let i = index"
 																[value]="type.id">
-															{{type.Province}}
+																{{ type.Province | titlecase }}
 														</option>
 													</select>
 													<small class="errormsg"
@@ -1418,7 +1421,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3 tabfull p-0 roghtwrapsection-wrapper">
+		<div class="col-md-3 tabfull p-0 roghtwrapsection-wrapper only-in-desktop">
 			<app-prime-secure-lite-sidebar></app-prime-secure-lite-sidebar>
 		</div>
 	</div>

@@ -22,13 +22,13 @@ export class RequirementsPendingComponent extends ApplicationStatusBaseComponent
   cities: any =[];
   requirementTypesTitle: any = ['EmployeeCesusForm', 'EntityPlanForm', 'AuthRepresentativeId', 'BIRNoticeForm', 'SECRegistration', 'IncorporationArticles', 'IdentityCertificate', 'PostPolicyForm'];
   requirementsTypes: any = {
-		EmployeeCesusForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		EntityPlanForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		AuthRepresentativeId: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
+		EmployeeCesusForm: { type: '', title: '', fileInfo: {}, error: { msg: '*Required' }, uploaded: false},
+		EntityPlanForm: { type: '', title: '', fileInfo: {}, error: { msg: '*Required' }, uploaded: false},
+		AuthRepresentativeId: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		BIRNoticeForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		SECRegistration: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
+		SECRegistration: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		IncorporationArticles: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
+		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		PostPolicyForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false}};
 
   constructor(router: Router, 

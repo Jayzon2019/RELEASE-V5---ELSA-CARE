@@ -1,3 +1,4 @@
+import { UtilitiesService } from './../services/utilities.service';
 import {  HeroSliderResolver } from '../../../../resolvers/home-sliders.resolver';
 import { ApplyService } from './../services/apply.service';
 import { ApplicationStatusService } from './../services/application-status.service';
@@ -27,6 +28,7 @@ import { ApplyComponent } from '../apply/apply.component';
 import { ReferenceMessageComponent } from '../shared/application-reference-message/reference-message.component';
 import { QuoteService } from '../services/quote.service';
 import { PayService } from '../services/pay.service';
+import { PromptMessageComponent } from '../shared/prompt-message/prompt-message.component';
 @NgModule
 ({
 	imports:
@@ -48,7 +50,8 @@ import { PayService } from '../services/pay.service';
 		MakePaymentComponent,
 		QuoteComponent,
 		ApplyComponent,
-		ReferenceMessageComponent
+		ReferenceMessageComponent,
+		PromptMessageComponent
 	],
 	providers:
 	[
@@ -56,6 +59,7 @@ import { PayService } from '../services/pay.service';
 		SessionStorageService,
 		GoogleAnalyticsService,
 		FacebookPixelService,
+		UtilitiesService,
 
 		ApplicationStatusService,
 		ApplyService,

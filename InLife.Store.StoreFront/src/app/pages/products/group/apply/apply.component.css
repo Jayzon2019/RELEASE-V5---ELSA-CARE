@@ -62,7 +62,7 @@ mat-datepicker-toggle.mat-datepicker-toggle {
 	margin: 20px 0;
 	position: relative;
 	display: block;
-	padding: 10px;
+	padding: 20px;
 	background: #ccc;
 	text-align: center;
 }
@@ -142,7 +142,8 @@ ol.life-products-ol-sub[type="a"] li {
 }
 
 .file-label span {
-	color: #e43e25;
+	color: red;
+	font-size: 12px;
 }
 .uploadimgescustom .drag-text h3 {
 	padding: 30px 0 !important;
@@ -303,6 +304,11 @@ h3#step_head {
 	font-size: 14px;
 	margin-bottom: 20px;
 }
+
+/* input[type=file]:disabled {
+	display: none;;
+} */
+
 .stepdetail .preminumform input,
 .stepdetail .preminumform select {
 	font-size: 16px;
@@ -362,7 +368,7 @@ ul.steplistmain li.active.complete::before {
 	}
 	.col-md-9.tabsamll form {
 		padding-left: 0x;
-		width: 77%;
+		/* width: 77%; */
 	}
 	.btnsec.text-right[_ngcontent-qiv-c134] {
 		margin-right: 66px;
