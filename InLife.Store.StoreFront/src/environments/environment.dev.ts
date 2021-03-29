@@ -42,6 +42,6 @@ export const environment =
 		requestSessionEndpoint: '/api/group/applications/{refcode}/request-session?otp={otp}'
 	},
 
-	paymentGatewayEndpoint: 'http://projectgrey.net/fake-payment-gateway.html'
-	/*paymentGatewayEndpoint: 'https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx'*/
+	/*paymentGatewayEndpoint: 'http://projectgrey.net/fake-payment-gateway.html'*/
+	paymentGatewayEndpoint: 'https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx'
 };

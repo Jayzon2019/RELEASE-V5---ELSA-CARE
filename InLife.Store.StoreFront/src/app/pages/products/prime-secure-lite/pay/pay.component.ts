@@ -88,7 +88,7 @@ export class PayComponent implements OnInit
 		this.identication = getQuoteFormData.identification;
 		this.getinnerForm = this.session.get("getinnerForm");
 		this.age = this.session.get("age");
-		// this.paymentAmount = this.getinnerForm.amount;
+		this.paymentAmount = this.getinnerForm.annual;
 		//image convert to pdf
 		// this.pdfblogImage = this.getinnerForm.pdfbasestring;
 		// this.landline = this.basicInformation.landline ? "+63" + this.basicInformation.landline : "";
@@ -355,9 +355,9 @@ export class PayComponent implements OnInit
 		// Numbers only
 		//let refNo = moment().format('YYYYMMDDHHmmssSSS');
 		let refNo = this.session.get('refNo') || "ASD12312312ASD";
-		let policyNo = this.policyNo;
-		let amount = String(this.paymentAmount).replace(/\D/g, '');
-
+		let policyNo = this.policyNo || "ASD12312312ASD";
+		let amount = this.paymentAmount.replace(/,/g, '') + '.00';
+		debugger
 		let endpoint = environment.paymentGatewayEndpoint;
 		let returnUrl = `${window.location.protocol}//${window.location.host}/prime-secure-lite/thank-you?target=payment-callback%26policy=${policyNo}`;
 		let targetUrl = `${endpoint}?RefNo=${refNo}&Amount=${amount}&RetURL=${returnUrl}`;

@@ -2982,7 +2982,7 @@ header.fixed.hide {
 
 		.section-hero:before {
 			content: "";
-			background: url(../images/bg-black.png) repeat-x center bottom !important;
+			/* background: url(../images/bg-black.png) repeat-x center bottom !important; */
 			position: absolute;
 			bottom: 0;
 			left: 0;

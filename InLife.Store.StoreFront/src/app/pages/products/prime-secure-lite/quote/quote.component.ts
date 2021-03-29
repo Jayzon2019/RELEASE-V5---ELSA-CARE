@@ -430,7 +430,7 @@ export class QuoteComponent implements OnInit
 		
 		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
-
+		debugger
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
 		{
@@ -491,46 +491,33 @@ export class QuoteComponent implements OnInit
 
 		var data =
 		{
-			"ProductCode": "AH0017",
-			"ProductName": "Prime Care",
-			"ProductFaceAmount": this.calPay(),
-			"PaymentMode": calcInfo.get('paymentMode').value == 'Monthly' ? 1 : 12,
-
-			"NamePrefix": this.getReferenceDataName(CONSTANTS.PREFIX, basicInfo.get('prefix')),
-			"NameSuffix": this.getReferenceDataName(CONSTANTS.SUFFIX, basicInfo.get('suffix')),
-			"FirstName": this.nullIfEmpty(basicInfo.get('fname').value),
-			"MiddleName": this.nullIfEmpty(basicInfo.get('mname').value),
-			"LastName": this.nullIfEmpty(basicInfo.get('lname').value),
-
-			"Gender": this.getReferenceDataName(CONSTANTS.GENDER, calcInfo.get('gender')),
-			"BirthDate": calcInfo.get('dateofbirth').value,
-
-			"EmailAddress": this.nullIfEmpty(String(basicInfo.get('email').value).toLowerCase()),
-			"MobileNumber": this.nullIfEmpty(basicInfo.get('mobile').value),
-			"PhoneNumber": this.nullIfEmpty(basicInfo.get('landline').value),
-			"Country": country,
-			"Region": region,
-			"City": city,
-
-			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": basicInfo.get('acode').value,
-			"AgentFirstName": basicInfo.get('afname').value,
-			"AgentLastName": basicInfo.get('alname').value,
-
-			"Health1": (health.healthCondition1 == 'Yes'),
-			"Health2": (health.healthCondition2 == 'Yes'),
-			"Health3": (health.healthCondition3 == 'Yes'),
-			"Health4": (health.healthCondition4 == 'Yes'),
-			"Health5": (health.healthCondition5 == 'Yes'),
-			"Health6": (health.healthCondition6 == 'Yes'),
-			"Health7": (health.healthCondition7 == 'Yes'),
-
-			"IsEligible": isEligible
+			planCode: 'PrimeSecureLite',
+			planVariantCode: 'PrimeSecureLite',
+			planFaceAmount: Number(calcInfo.get('totalCashBenefit').value),
+			planPremium: Number(this.eligiblePlan),
+			customerNamePrefix: basicInfo.get('prefix').value,
+			customerNameSuffix: basicInfo.get('suffix').value,
+			customerFirstName: basicInfo.get('fname').value,
+			customerMiddleName: basicInfo.get('mname').value,
+			customerLastName: basicInfo.get('lname').value,
+			customerPhoneNumber: basicInfo.get('landline').value,
+			customerMobileNumber: basicInfo.get('mobile').value,
+			customerEmailAddress: basicInfo.get('email').value,
+			height: 1,
+			weight: 1,
+			company: basicInfo.get('company').value,
+			occupation: basicInfo.get('occupation').value,
+			incomeSource: basicInfo.get('sourceOfFunds').value,
+			incomeAmount: basicInfo.get('monthlyIncome').value,
+			addressCity: basicInfo.get('municipality').value,
+			addressRegion: basicInfo.get('province').value,
+			addressCountry: basicInfo.get('country').value
 		};
+		console.log(data);
 
+		debugger
 		let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');
-		headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
 
 		let options =
 		{
@@ -539,7 +526,7 @@ export class QuoteComponent implements OnInit
 		};
 
 		let body = JSON.stringify(data);
-		let endpoint = environment.appApi.host + environment.appApi.quotesEndpoint;
+		let endpoint = environment.appApi.host +'/prime-secure/applications';
 
 		this.ngxService.start();
 
@@ -547,36 +534,38 @@ export class QuoteComponent implements OnInit
 
 		if(isEligible) {
 
-			// this.http
-			// .post(endpoint, body, options)
-			// .pipe(
-			// 	retry(1),
-			// 	catchError((error: HttpErrorResponse) =>
-			// 	{
-			// 		this.ngxService.stop();
-			// 		let errorMessage = '';
-			// 		if (error.error instanceof ErrorEvent)
-			// 		{
-			// 			// client-side error
-			// 			errorMessage = `Error: ${error.error.message}`;
-			// 		}
-			// 		else
-			// 		{
-			// 			// server-side error
-			// 			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-			// 		}
-			// 		window.alert(errorMessage);
-			// 		return throwError(errorMessage);
-			// 	})
-			// )
-			// .subscribe((data: any) =>
-			// {
-			// 	let refNo = String(data.id).padStart(10, '0');
-			// 	this.session.set('refNo', refNo)
-			// 	this.router.navigate(['prime-secure-lite/apply']);
+			this.http
+			.post(endpoint, body, options)
+			.pipe(
+				retry(1),
+				catchError((error: HttpErrorResponse) =>
+				{
+					this.ngxService.stop();
+					let errorMessage = '';
+					if (error.error instanceof ErrorEvent)
+					{
+						// client-side error
+						errorMessage = `Error: ${error.error.message}`;
+					}
+					else
+					{
+						// server-side error
+						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+					}
+					// window.alert(errorMessage);
+					return throwError(errorMessage);
+				})
+			)
+			.subscribe((data: any) =>
+			{
+				let refNo = String(data.id).padStart(10, '0');
+				this.session.set('refNo', refNo)
+				this.router.navigate(['prime-secure-lite/apply']);
 				
-			// });
-			this.router.navigate(['prime-secure-lite/apply']);
+			}, (error) =>{
+				this.session.set('refNo', 'QWEYERHGZX'+ Math.floor((Math.random() * 100) + 1));
+				this.router.navigate(['prime-secure-lite/apply']);
+			});
 			
 		} else {
 			// this.session.clear();
