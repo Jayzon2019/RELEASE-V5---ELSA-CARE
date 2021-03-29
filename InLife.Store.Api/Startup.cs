@@ -66,9 +66,9 @@ namespace InLife.Store.Api
 			services
 				.AddDbContext<GroupContext>(options =>
 					options.UseSqlServer(Configuration.GetConnectionString("GroupConnection")));
-			//services
-			//	.AddDbContext<PrimeSecureContext>(options =>
-			//		options.UseSqlServer(Configuration.GetConnectionString("PrimeSecureConnection")));
+			services
+				.AddDbContext<PrimeSecureContext>(options =>
+					options.UseSqlServer(Configuration.GetConnectionString("PrimeSecureConnection")));
 
 			// App Settings
 			services
