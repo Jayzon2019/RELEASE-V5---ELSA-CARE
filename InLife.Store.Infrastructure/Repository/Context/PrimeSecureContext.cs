@@ -67,30 +67,33 @@ namespace InLife.Store.Infrastructure.Repository
 				entity
 					.Property(e => e.PlanPremium)
 					.HasColumnType("decimal(18,4)");
-
-				// Shadow FK - CustomerId
-				entity.Property<Guid?>("CustomerId");
-				// Applications >> Customer
 				entity
-					.HasOne(application => application.Customer)
-					.WithOne()
-					.HasForeignKey("CustomerId");
+					.Property(e => e.IncomeAmount)
+					.HasColumnType("decimal(18,4)");
 
-				// Shadow FK - InsuredId
-				entity.Property<Guid?>("InsuredId");
-				// Applications >> Customer
-				entity
-					.HasOne(application => application.Insured)
-					.WithOne()
-					.HasForeignKey("InsuredId");
+				//// Shadow FK - CustomerId
+				//entity.Property<Guid?>("CustomerId");
+				//// Applications >> Customer
+				//entity
+				//	.HasOne(application => application.Customer)
+				//	.WithOne()
+				//	.HasForeignKey("CustomerId");
 
-				// Shadow FK - BeneficiaryId
-				entity.Property<Guid?>("BeneficiaryId");
-				// Applications >> Customer
-				entity
-					.HasOne(application => application.Beneficiary)
-					.WithOne()
-					.HasForeignKey("BeneficiaryId");
+				//// Shadow FK - InsuredId
+				//entity.Property<Guid?>("InsuredId");
+				//// Applications >> Customer
+				//entity
+				//	.HasOne(application => application.Insured)
+				//	.WithOne()
+				//	.HasForeignKey("InsuredId");
+
+				//// Shadow FK - BeneficiaryId
+				//entity.Property<Guid?>("BeneficiaryId");
+				//// Applications >> Customer
+				//entity
+				//	.HasOne(application => application.Beneficiary)
+				//	.WithOne()
+				//	.HasForeignKey("BeneficiaryId");
 			});
 
 			builder.Entity<PrimeSecurePerson>(entity =>
@@ -100,29 +103,29 @@ namespace InLife.Store.Infrastructure.Repository
 					.ToTable("Persons", Schema.PrimeSecure)
 					.HasKey(e => new { e.Id });
 
-				// Shadow FK - BirthAddressId
-				entity.Property<Guid?>("BirthAddressId");
-				// Customers == BirthAddress (Nullable)
-				entity
-					.HasOne(customer => customer.BirthAddress)
-					.WithOne()
-					.HasForeignKey("BirthAddressId");
+				//// Shadow FK - BirthAddressId
+				//entity.Property<Guid?>("BirthAddressId");
+				//// Customers == BirthAddress (Nullable)
+				//entity
+				//	.HasOne(customer => customer.BirthAddress)
+				//	.WithOne()
+				//	.HasForeignKey("BirthAddressId");
 
-				// Shadow FK - HomeAddressId
-				entity.Property<Guid?>("HomeAddressId");
-				// Customers == HomeAddress (Nullable)
-				entity
-					.HasOne(customer => customer.HomeAddress)
-					.WithOne()
-					.HasForeignKey("HomeAddressId");
+				//// Shadow FK - HomeAddressId
+				//entity.Property<Guid?>("HomeAddressId");
+				//// Customers == HomeAddress (Nullable)
+				//entity
+				//	.HasOne(customer => customer.HomeAddress)
+				//	.WithOne()
+				//	.HasForeignKey("HomeAddressId");
 
-				// Shadow FK - WorkAddressId
-				entity.Property<Guid?>("WorkAddressId");
-				// Customers == WorkAddress (Nullable)
-				entity
-					.HasOne(customer => customer.WorkAddress)
-					.WithOne()
-					.HasForeignKey("WorkAddressId");
+				//// Shadow FK - WorkAddressId
+				//entity.Property<Guid?>("WorkAddressId");
+				//// Customers == WorkAddress (Nullable)
+				//entity
+				//	.HasOne(customer => customer.WorkAddress)
+				//	.WithOne()
+				//	.HasForeignKey("WorkAddressId");
 			});
 
 			builder.Entity<PrimeSecureAddress>(entity =>

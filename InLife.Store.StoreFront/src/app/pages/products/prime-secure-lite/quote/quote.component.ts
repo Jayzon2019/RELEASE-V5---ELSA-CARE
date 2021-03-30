@@ -445,7 +445,8 @@ export class QuoteComponent implements OnInit
 				this.amount = parseFloat(this.amount.toString().replace(/,/g, ''));
 
 
-			let isEligible = (healthCondition.healthDeclaration1.toUpperCase() === 'NO' &&
+			let isEligible = (
+				healthCondition.healthDeclaration1.toUpperCase() === 'NO' &&
 				healthCondition.healthDeclaration2.toUpperCase() === 'NO' &&
 				healthCondition.healthDeclaration3.toUpperCase() === 'NO' &&
 				healthCondition.healthDeclaration4.toUpperCase() === 'NO' &&
@@ -458,8 +459,9 @@ export class QuoteComponent implements OnInit
 				covidForm.healthCondition6.toUpperCase() === 'YES' &&
 				covidForm.healthCondition7.toUpperCase() === 'NO' &&
 				this.getQuoteForm.value.basicInformation.country === '170' &&
-				(Number(this.bodyMassIndex) < 29));
-
+				(Number(this.bodyMassIndex) < 29) &&
+				this.isValidOccupation(this.getQuoteForm.get('basicInformation').get('occupation').value)
+			);
 
 			this.saveQuoteForm(isEligible);
 
@@ -468,6 +470,27 @@ export class QuoteComponent implements OnInit
 		{
 		}
 		return;
+	}
+
+	isValidOccupation(id): boolean {
+		const invalidOccupation = ['', '1', '4', '5', '8', '9', '11', '12', '13', '16', '18', '27', '29', '35', '39', '41', '42',
+						'47', '52', '54', '58', '59', '60', '61', '69', '70', '71', '74', '76', '79', '80', '85', '87',
+						'92', '94', '95', '100', '110', '112', '113', '116', '117', '120', '123', '125', '127', '132', '135', '139',
+						'140', '141', '144', '145', '146', '147', '149', '155', '156', '161', '164', '168', '170', '182', '183', '139',
+						'188', '189', '190', '191', '200', '201', '202', '203', '204', '205', '206', '298', '301', '307', '310', '313',
+						'316', '319', '321', '207', '208', '209', '210', '211', '212', '213', '214', '215', '216', '217', '219', '221',
+						'222', '223', '232', '233', '237', '238', '244', '246', '247', '248', '249', '250', '251', '253', '258', '259',
+						'260', '269', '270', '273', '274', '276', '279', '281', '286', '287'];
+
+		if(id) {
+			for(let i=0; i< invalidOccupation.length; i++) {
+				if(invalidOccupation[i] === id) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	saveQuoteForm(isEligible: boolean)
