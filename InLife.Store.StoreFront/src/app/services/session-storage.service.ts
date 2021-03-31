@@ -18,15 +18,15 @@ export class SessionStorageService
 
 	set(key: string | any, value: any)
 	{
-		sessionStorage.setItem(key, this.crypto.Encrypt(JSON.stringify(value), this.secrets.session.secret));
-		// sessionStorage.setItem(key, JSON.stringify(value));
+		// sessionStorage.setItem(key, this.crypto.Encrypt(JSON.stringify(value), this.secrets.session.secret));
+		sessionStorage.setItem(key, JSON.stringify(value));
 	}
 
 	get(key: string | any): any
 	{
 		let data = sessionStorage.getItem(key);
-		try { return JSON.parse(this.crypto.Decrypt(data, this.secrets.session.secret)); }
-		// try { return JSON.parse(data); }
+		// try { return JSON.parse(this.crypto.Decrypt(data, this.secrets.session.secret)); }
+		try { return JSON.parse(data); }
 		catch (ex) { return {}; }
 	}
 

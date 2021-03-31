@@ -77,12 +77,15 @@ export class QuoteComponent implements OnInit
 		if (this.affiliate?.agentCode)
 		{
 			this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
+
 			this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agentCode);
 			this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agentName);
+			this.getQuoteForm.get('basicInformation').get('agentBranchCode').setValue(this.affiliate?.branchCode);
 
 			this.getQuoteForm.get('basicInformation').get('acode').enable();
 			this.getQuoteForm.get('basicInformation').get('afname').enable();
 			this.getQuoteForm.get('basicInformation').get('alname').enable();
+			this.getQuoteForm.get('basicInformation').get('agentBranchCode').enable();
 
 			this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
 			this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
@@ -90,6 +93,8 @@ export class QuoteComponent implements OnInit
 		else if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1')
 		{
 			this.getQuoteForm.get('basicInformation').get('acode').disable();
+			this.getQuoteForm.get('basicInformation').get('agentBranchCode').disable();
+
 			this.getQuoteForm.get('basicInformation').get('afname').enable();
 			this.getQuoteForm.get('basicInformation').get('alname').enable();
 
@@ -99,6 +104,8 @@ export class QuoteComponent implements OnInit
 		else
 		{
 			this.getQuoteForm.get('basicInformation').get('acode').disable();
+			this.getQuoteForm.get('basicInformation').get('agentBranchCode').disable();
+
 			this.getQuoteForm.get('basicInformation').get('afname').disable();
 			this.getQuoteForm.get('basicInformation').get('alname').disable();
 		}
@@ -165,7 +172,7 @@ export class QuoteComponent implements OnInit
 				this.getQuoteForm.get('covidForm').get('privacyPolicy').updateValueAndValidity({emitEvent: false});
 			}
 		});
-		
+
 		this.getQuoteForm.get('covidForm').get('privacyPolicy2').valueChanges.subscribe( result => {
 			if (!result){
 				this.getQuoteForm.get('covidForm').get('privacyPolicy2').patchValue(null, {emitEvent: false} );
@@ -275,7 +282,7 @@ export class QuoteComponent implements OnInit
 	}
 
 	initForm(getQuoteFormData)
-	{	
+	{
 		this.getQuoteForm = this.formBuilder.group
 		({
 			calculatePremium: this.addCalculatePremium(getQuoteFormData?.calculatePremium || ''),
@@ -290,7 +297,7 @@ export class QuoteComponent implements OnInit
 			let bmi = Math.round(calculationBMI).toString();
 			this.bodyMassIndex = this.quoteDetails.hasOwnProperty('bmi') ? this.quoteDetails.bmi : bmi;
 		}
-		
+
 	}
 
 	addCalculatePremium(data)
@@ -385,6 +392,7 @@ export class QuoteComponent implements OnInit
 			acode: new FormControl(data.acode || '', Validators.required),
 			afname: new FormControl(data.afname || '', Validators.required),
 			alname: new FormControl(data.alname || '', Validators.required),
+			agentBranchCode: new FormControl(data.agentBranchCode || '', [Validators.maxLength(50)]),
 			/*email: new FormControl(data.email || '', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),*/
 			email: new FormControl(data.email || '', [Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
 			company: new FormControl(data.company || '', Validators.required),
@@ -423,7 +431,7 @@ export class QuoteComponent implements OnInit
 
 	submitQuoteForm()
 	{
-		
+
 		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
 		// TODO: Move eligibility checking on server
@@ -475,7 +483,7 @@ export class QuoteComponent implements OnInit
 						'222', '223', '232', '233', '237', '238', '244', '246', '247', '248', '249', '250', '251', '253', '258', '259',
 						'260', '269', '270', '273', '274', '276', '279', '281', '286', '287'];
 
-		
+
 			for(let i=0; i< invalidOccupation.length; i++) {
 				if(invalidOccupation[i] === id) {
 					return false;
@@ -580,17 +588,17 @@ export class QuoteComponent implements OnInit
 				let refNo = String(data.id).padStart(10, '0');
 				this.session.set('refNo', refNo)
 				this.router.navigate(['prime-secure-lite/apply']);
-				
+
 			}, (error)=>{
 				this.router.navigate(['prime-secure-lite/apply']);
 			});
-			
+
 		} else {
 			// this.session.clear();
 			this.router.navigate(['prime-secure-lite/ineligible']);
 		}
 
-		
+
 	}
 
 	onChangeProviance(value)
@@ -719,8 +727,8 @@ export class QuoteComponent implements OnInit
 	}
 
 
-	
-	private isBetween = (num1:number, num2: number, value: number) => value >= num1 && value <= num2 
+
+	private isBetween = (num1:number, num2: number, value: number) => value >= num1 && value <= num2
 
 	formatCurrency($event) {
 		const value = $event.target.value

@@ -8,5 +8,9 @@ namespace InLife.Store.Api.Messages
 		public string AgentName { get; set; }
 
 		public string AffCode { get; set; }
+
+		public string BranchCode { get; set; }
+
+		public string BranchName { get; set; }
 	}
 }
