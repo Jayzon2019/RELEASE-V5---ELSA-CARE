@@ -107,7 +107,9 @@ export class ApplyComponent implements OnInit, OnDestroy {
 			private util: UtilitiesService
 		) {
 		this.ngxService.start();
-		this.requests$.subscribe((request: PendingRequest) => this.execute(request));
+		this.requests$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((request: PendingRequest) => this.execute(request));
 		this.initForm();
 
 	}
@@ -185,13 +187,14 @@ export class ApplyComponent implements OnInit, OnDestroy {
 				// IsCheckLifeProducts: new FormControl( "", [Validators.required]),
 			})
 		});
+
+		console.log(this.getApplyForm.get('declarationsForm'));
 		if(getRequirementsData)  {
 			this.hasRequirementsData = true;
-			this.showErrorPrompt = true;
 			this.requirementsTypes = getRequirementsData;
 			let uploadedFilesArray = Object.entries(getRequirementsData);
 			uploadedFilesArray.map(([key, val]) => {
-				console.log(key, val);
+				this.showErrorPrompt = true;
 				let value: any= val;
 				if(value.type == 'image') {
 					this.getApplyForm.get('requirementsForm').get(key).patchValue(value.fileInfo);
@@ -200,6 +203,15 @@ export class ApplyComponent implements OnInit, OnDestroy {
 				}
 			});
 			this.showThirdStep = (this.getApplyForm.get('requirementsForm').valid) ? true : false;
+			if(this.showThirdStep) {
+				this.getApplyForm.get('declarationsForm').patchValue({
+					IsCheckDataPrivacy: true,
+					IsCheckDataUNSCR: true,
+					IsCheckDeclarationStatement: true,
+					IsCheckSubmittedPhlippinesApp: true,
+					IsCheckLifeProducts: true,
+				})
+			}
 		}
 
 		this.setMunicipalities(getQuoteFormData.Region.id);
@@ -314,6 +326,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 					}
 					this.requirementsTypes[requestData.type].uploaded = true;
 
+					// this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
 					this.validateIncompleteRequirement(requestData.type);
 				}, error => {
 					this.ngxService.stopAll();

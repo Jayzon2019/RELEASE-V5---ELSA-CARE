@@ -6,6 +6,9 @@ using System.Text;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
@@ -14,9 +17,7 @@ using Microsoft.Extensions.Options;
 using InLife.Store.Core.Models;
 using InLife.Store.Core.Settings;
 using InLife.Store.Core.Services;
-using System.Globalization;
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
+using InLife.Store.Resources;
 
 namespace InLife.Store.Infrastructure.Services
 {
@@ -71,7 +72,7 @@ namespace InLife.Store.Infrastructure.Services
 		{
 			var emailSettings = this.emailSettings.ErrorNotification;
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			var body = new StringBuilder(EmailTemplates.ErrorNotification)
 				.Replace("#ID#", model.Id.ToString())
 				.Replace("#TITLE#", model.Title)
 				.Replace("#DETAIL#", model.Detail)
@@ -107,26 +108,29 @@ namespace InLife.Store.Infrastructure.Services
 
 		public async Task SendPasswordAsync(MailAddress recipient, string password)
 		{
-			var emailSettings = this.emailSettings.SendPassword;
+			await Task.Delay(0);
+			throw new NotImplementedException();
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
-				.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
-				.Replace("#PASSWORD#", password)
-				.ToString();
+			//var emailSettings = this.emailSettings.SendPassword;
 
-			var sender = new MailAddress(emailSettings.SenderEmail, emailSettings.SenderName);
-			var recipients = new MailAddressCollection();
-			var subject = emailSettings.Subject;
+			//var body = new StringBuilder(EmailTemplates.SendPassword)
+			//	.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
+			//	.Replace("#PASSWORD#", password)
+			//	.ToString();
 
-			recipients.Add(new MailAddress(recipient.Address, recipient.DisplayName));
+			//var sender = new MailAddress(emailSettings.SenderEmail, emailSettings.SenderName);
+			//var recipients = new MailAddressCollection();
+			//var subject = emailSettings.Subject;
 
-			await this.SendAsync
-			(
-				sender,
-				recipients,
-				subject,
-				body
-			);
+			//recipients.Add(new MailAddress(recipient.Address, recipient.DisplayName));
+
+			//await this.SendAsync
+			//(
+			//	sender,
+			//	recipients,
+			//	subject,
+			//	body
+			//);
 		}
 
 		#endregion
@@ -360,7 +364,7 @@ namespace InLife.Store.Infrastructure.Services
 				? application.PlanCode.Split(" - ")[1]
 				: application.PlanCode;
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			var body = new StringBuilder(EmailTemplates.GroupApplicationPaymentProof)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
 				.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
 				//.Replace("#STATUS#", "Forwarded to InLife's Corporate Solutions")
@@ -372,7 +376,7 @@ namespace InLife.Store.Infrastructure.Services
 				.ToString();
 
 
-			
+
 
 			Stream InputStream = stream;
 			byte[] result;
@@ -432,7 +436,7 @@ namespace InLife.Store.Infrastructure.Services
 				? application.PlanCode.Split(" - ")[1]
 				: application.PlanCode;
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			var body = new StringBuilder(EmailTemplates.GroupApplicationCancel)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
 				.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
 
@@ -520,8 +524,7 @@ namespace InLife.Store.Infrastructure.Services
 
 			//this model is passed to the view (email)
 
-
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			var body = new StringBuilder(EmailTemplates.GroupApplicationReferenceCode)
 				//.Replace("#LOGO#", imgLogo)
 				.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
 				.Replace("#CODE#", application.ReferenceCode)
@@ -552,7 +555,7 @@ namespace InLife.Store.Infrastructure.Services
 				displayName: $"{application.RepresentativeNamePrefix} {application.RepresentativeFirstName} {application.RepresentativeLastName}".Trim()
 			);
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			var body = new StringBuilder(EmailTemplates.GroupApplicationOtp)
 				.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
 				.Replace("#CODE#", application.Otp)
 				.ToString();
@@ -600,7 +603,7 @@ namespace InLife.Store.Infrastructure.Services
 
 			var emailSettings = this.emailSettings.GroupApplicationCompleteAdmin;
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			var body = new StringBuilder(EmailTemplates.GroupApplicationCompleteAdmin)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
 				.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
 				.Replace("#COMPANY-NAME#", application.CompanyName)
@@ -640,13 +643,13 @@ namespace InLife.Store.Infrastructure.Services
 				adminRecipients.Add(new MailAddress(recipient));
 			}
 
-			await this.SendAsync
-			(
-				adminSender,
-				adminRecipients,
-				adminSubject,
-				body
-			);
+			//await this.SendAsync
+			//(
+			//	adminSender,
+			//	adminRecipients,
+			//	adminSubject,
+			//	body
+			//);
 
 			// Send email to customer
 
@@ -658,7 +661,7 @@ namespace InLife.Store.Infrastructure.Services
 				displayName: $"{application.RepresentativeNamePrefix} {application.RepresentativeFirstName} {application.RepresentativeLastName}".Trim()
 			);
 
-			body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			body = new StringBuilder(EmailTemplates.GroupApplicationThankYou)
 				.Replace("#RECIPIENT-NAME#", userRecipient.DisplayName)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
 				.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
@@ -717,7 +720,7 @@ namespace InLife.Store.Infrastructure.Services
 			if (application.TotalStudents.HasValue)
 				totalPremiums += application.TotalStudents.Value * application.PlanPremium;
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile)
+			var body = new StringBuilder(EmailTemplates.GroupApplicationFeedbackAdmin)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
 				.Replace("#TRANSACTION-DATE#", application.CompletedDate.ToString())
 				//.Replace("#TRANSACTION-STATUS#", application.Status)
@@ -756,7 +759,7 @@ namespace InLife.Store.Infrastructure.Services
 
 			var emailSettings = this.emailSettings.GroupApplicationsCompletedBatch;
 
-			var body = this.LoadEmailTemplate(emailSettings.TemplateFile);
+			var body = new StringBuilder(EmailTemplates.GroupApplicationsCompletedBatch);
 			var list = new StringBuilder();
 
 			list.Append(@"

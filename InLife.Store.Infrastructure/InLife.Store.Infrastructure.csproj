@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\InLife.Store.Core\InLife.Store.Core.csproj" />
+		<ProjectReference Include="..\InLife.Store.Resources\InLife.Store.Resources.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

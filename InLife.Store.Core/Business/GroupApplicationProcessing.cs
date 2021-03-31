@@ -250,7 +250,7 @@ namespace InLife.Store.Core.Business
 			application.Status = GetStatus(application).Id;
 			applicationRepository.Update(application);
 
-			if (application.Status == GroupApplicationStatus.Complete.Id || application.Status == GroupApplicationStatus.PaymentProof.Id) { 
+			if (application.Status == GroupApplicationStatus.Complete.Id || application.Status == GroupApplicationStatus.PaymentProof.Id) {
 				await sftpService.UploadGroupApplicationData(application);
 				await emailService.SendGroupApplicationPaymentProof(application, contentType, stream);
 			}
@@ -414,33 +414,39 @@ namespace InLife.Store.Core.Business
 
 		public async Task ProcessCompletedApplications()
 		{
-			try
-			{
-				// Check all completed (PaymentProof) but not submitted
-				var applications = applicationRepository
-					.GetAll()
-					.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
-					.ToList();
+			var applications = applicationRepository
+				.GetAll()
+				.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+				.ToList();
+			await emailService.SendGroupApplicationsCompletedBatch(applications);
 
-				// Upload to SFTP
-				await sftpService.UploadGroupApplicationsBatchData(applications);
+			//try
+			//{
+			//	// Check all completed (PaymentProof) but not submitted
+			//	var applications = applicationRepository
+			//		.GetAll()
+			//		.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+			//		.ToList();
 
-				// Send Notification
-				await emailService.SendGroupApplicationsCompletedBatch(applications);
+			//	// Upload to SFTP
+			//	await sftpService.UploadGroupApplicationsBatchData(applications);
 
-				// Set as exported
-				var currentDate = DateTimeOffset.Now;
-				applications.ForEach(x =>
-				{
-					x.ExportedDate = currentDate;
-				});
+			//	// Send Notification
+			//	await emailService.SendGroupApplicationsCompletedBatch(applications);
 
-				applicationRepository.Update(applications);
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
+			//	// Set as exported
+			//	var currentDate = DateTimeOffset.Now;
+			//	applications.ForEach(x =>
+			//	{
+			//		x.ExportedDate = currentDate;
+			//	});
+
+			//	applicationRepository.Update(applications);
+			//}
+			//catch (Exception ex)
+			//{
+			//	throw ex;
+			//}
 		}
 
 		private GroupFile ParseDataUri(GroupFile file, string dataUri, string fileName = null)

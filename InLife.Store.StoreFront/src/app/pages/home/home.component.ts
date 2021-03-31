@@ -40,11 +40,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 		
 		// this.getHomeSliders();
 		this.getProductsLst();
-		this.route.data
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((response) => {
-			this.sliders = response.HeroSliders;
-        });
+		 this.route.data
+		 	.pipe(takeUntil(this.destroy$))
+		 	.subscribe((response) => {
+		 	this.sliders = response.HeroSliders;
+         });
 	}
 
 	ngOnDestroy() {

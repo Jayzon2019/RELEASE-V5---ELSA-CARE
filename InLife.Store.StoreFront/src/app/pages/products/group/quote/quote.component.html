@@ -422,7 +422,7 @@
 																<div class="fieldinnr">
 																	<input type="text" class="form-control fname"
 																		   placeholder="First Name" formControlName="AuthFristName"
-																		   onkeypress="return (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || event.charCode == 45 || event.charCode == 39 || event.charCode == 32 || event.charCode == 46"
+																		
 																		   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthFristName').dirty || getQuoteForm.get('basicInformation').get('AuthFristName').touched) &&  getQuoteForm.get('basicInformation').get('AuthFristName')?.errors)?'is-invalid'
                                                                  :getQuoteForm.get('basicInformation').get('AuthFristName')?.valid?'is-valid':''
                                                                 ">
@@ -435,7 +435,7 @@
 																<div class="fieldinnr">
 																	<input type="text" class="form-control mname"
 																		   placeholder="Middle Name" formControlName="AuthMiddleName"
-																		   onkeypress="return (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || event.charCode == 45 || event.charCode == 39 || event.charCode == 32 || event.charCode == 46"
+																		
 																		   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthMiddleName').dirty || getQuoteForm.get('basicInformation').get('AuthMiddleName').touched) &&  getQuoteForm.get('basicInformation').get('AuthMiddleName')?.errors)?'is-invalid'
                                                                 :getQuoteForm.get('basicInformation').get('AuthMiddleName')?.valid && getQuoteForm.get('basicInformation').get('AuthMiddleName')?.value !==''  ?'is-valid':''
                                                                 ">
@@ -448,7 +448,7 @@
 																<div class="fieldinnr">
 																	<input type="text" class="form-control lname"
 																		   placeholder="Last Name" formControlName="AuthLastName"
-																		   onkeypress="return (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 65 && event.charCode <= 90) || event.charCode == 45 || event.charCode == 39 || event.charCode == 32 || event.charCode == 46"
+																		  
 																		   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('AuthLastName').dirty || getQuoteForm.get('basicInformation').get('AuthLastName').touched) &&  getQuoteForm.get('basicInformation').get('AuthLastName')?.errors)?'is-invalid'
                                                                 :getQuoteForm.get('basicInformation').get('AuthLastName')?.valid?'is-valid':''
                                                                 ">

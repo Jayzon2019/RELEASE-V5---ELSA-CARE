@@ -91,7 +91,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 		this.initForm();
 		
 		
-		this.route.queryParams.subscribe(params =>
+		this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params =>
 		{
 			if (params && (params.plan == '1' || params.plan == '2' || params.plan == '3'))
 			{
@@ -228,7 +228,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 				PlanType: new FormControl(this.hasData ? Number(group_plan.productType) : "", [Validators.required]),
 			}),
 			basicInformation :this.formBuilder.group({ 
-				CompanyName: new FormControl(this.hasData ? quote_form.CompanyName: "", [Validators.required, Validators.maxLength(50)]),
+				CompanyName: new FormControl(this.hasData ? quote_form.CompanyName: "", [Validators.required, Validators.pattern("[A-Za-zÑñ@0-9 ]+")]),
 				CompanyLandLineNo: new FormControl(this.hasData ? quote_form.CompanyLandLineNo: "", [Validators.required, Validators.pattern("^[0-9]{9}$")]),
 				CompanyMobileNo: new FormControl(this.hasData ? quote_form.CompanyMobileNo: "", [Validators.required,  Validators.pattern("^[1-9]{1}[0-9]{9}$")]),
 				StreetNumer: new FormControl(this.hasData ? quote_form.StreetNumer: "", [Validators.required,  Validators.maxLength(50)]),
@@ -239,9 +239,9 @@ export class QuoteComponent implements OnInit, OnDestroy
 				City: new FormControl(this.hasData ? quote_form.City.id:"", [Validators.required]),
 				ZipCode: new FormControl(this.hasData ? quote_form.ZipCode:"", [Validators.required, Validators.pattern("^[0-9]{1,5}$")]),
 				AuthPrefixName: new FormControl(this.hasData ? quote_form.AuthPrefixName.id:"", [Validators.required, Validators.maxLength(50)]),
-				AuthFristName: new FormControl(this.hasData ? quote_form.AuthFristName:"", [Validators.required, Validators.maxLength(50), Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
-				AuthMiddleName:new FormControl(this.hasData ? quote_form.AuthMiddleName:"", [Validators.maxLength(50), Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
-				AuthLastName: new FormControl(this.hasData ? quote_form.AuthLastName:"", [Validators.required, Validators.maxLength(50), Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
+				AuthFristName: new FormControl(this.hasData ? quote_form.AuthFristName:"", [Validators.required, Validators.maxLength(50), Validators.pattern("[A-Za-zÑñ@',.+& ]+")]),
+				AuthMiddleName:new FormControl(this.hasData ? quote_form.AuthMiddleName:"", [Validators.maxLength(50), Validators.pattern("[A-Za-zÑñ@',.+& ]+")]),
+				AuthLastName: new FormControl(this.hasData ? quote_form.AuthLastName:"", [Validators.required, Validators.maxLength(50), Validators.pattern("[A-Za-zÑñ@',.+& ]+")]),
 				AuthSuffixName: new FormControl(this.hasData ? quote_form.AuthSuffixName.id:"", [Validators.required, Validators.maxLength(50)]),
 				AuthEamilId: new FormControl(this.hasData ? quote_form.AuthEamilId:"", [Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
 				AuthMobileNumber: new FormControl(this.hasData ? quote_form.AuthMobileNumber:"", [Validators.required, Validators.pattern("^[1-9]{1}[0-9]{9}$")]),
@@ -361,10 +361,12 @@ export class QuoteComponent implements OnInit, OnDestroy
 	getFile()
 	{
 		var url = "/Home/GetFiles";
-		this.apiService.sendGetRequest(url).subscribe((responseBody) =>
-		{
-			this.privacyFile= "data:application/pdf;base64," + responseBody[0].primeCareFile;
-		});
+		this.apiService.sendGetRequest(url)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((responseBody) =>
+			{
+				this.privacyFile= "data:application/pdf;base64," + responseBody[0].primeCareFile;
+			});
 	}
 
 	sanitize(url: string)

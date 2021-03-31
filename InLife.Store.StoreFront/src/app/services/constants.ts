@@ -86,16 +86,16 @@ export const CONSTANTS =
 	],
 	PREFIX:
 	[
-		{ "id": "1", "name": "ATTY" },
-		{ "id": "2", "name": "DR" },
-		{ "id": "3", "name": "DRA" },
-		{ "id": "4", "name": "ENGR" },
-		{ "id": "5", "name": "HON" },
-		{ "id": "6", "name": "MR" },
-		{ "id": "7", "name": "MRS" },
-		{ "id": "8", "name": "MS" },
-		{ "id": "9", "name": "MSGR" },
-		{ "id": "10", "name": "REV" }
+		{ "id": "19", "name": "ATTY" },
+		{ "id": "20", "name": "DR" },
+		{ "id": "21", "name": "DRA" },
+		{ "id": "22", "name": "ENGR" },
+		{ "id": "23", "name": "HON" },
+		{ "id": "24", "name": "MR" },
+		{ "id": "25", "name": "MRS" },
+		{ "id": "26", "name": "MS" },
+		{ "id": "27", "name": "MSGR" },
+		{ "id": "28", "name": "REV" }
 	],
 	BENEFICIARY_PRIORITY:
 	[
@@ -108,15 +108,15 @@ export const CONSTANTS =
 	SUFFIX:
 	[
 		{ "id": "1", "name": "Not Applicable" },
-		{ "id": "2", "name": "II" },
-		{ "id": "3", "name": "III" },
-		{ "id": "4", "name": "IV" },
-		{ "id": "5", "name": "JR" },
-		{ "id": "6", "name": "MD" },
-		{ "id": "7", "name": "OP" },
-		{ "id": "8", "name": "PHD" },
-		{ "id": "9", "name": "SR" },
-		{ "id": "10", "name": "V" }
+		{ "id": "10", "name": "II" },
+		{ "id": "11", "name": "III" },
+		{ "id": "12", "name": "IV" },
+		{ "id": "13", "name": "JR" },
+		{ "id": "14", "name": "MD" },
+		{ "id": "15", "name": "OP" },
+		{ "id": "16", "name": "PHD" },
+		{ "id": "17", "name": "SR" },
+		{ "id": "18", "name": "V" }
 	],
 	CIVIL_STATUS:
 	[
@@ -126,7 +126,7 @@ export const CONSTANTS =
 		{ "id": "4", "name": "Married" },
 		{ "id": "5", "name": "Single" },
 		{ "id": "6", "name": "Widowed" },
-		{ "id": "7", "name": "Not Applicable" }
+		{ "id": "48", "name": "Not Applicable" }
 	],
 	GENDER:
 	[
@@ -143,7 +143,7 @@ export const CONSTANTS =
 		{ "id": "212", "name": "Interest Income" },
 		{ "id": "213", "name": "Investment" },
 		{ "id": "214", "name": "Remittance" },
-		{ "id": "216", "name": "Pension" }
+		{ "id": "215", "name": "Pension" }
 	],
 	ID_TYPE:
 	[

@@ -80,7 +80,7 @@ export class PlanSummaryComponent implements OnInit {
 		const getGroupQuoteFormData = this.session.get("selectedGroupPlanData") || "[]";
 		const groupExtension = this.session.get("groupExtensionData") || "[]";
 		this.selectedGroupPlanData = getGroupQuoteFormData;
-		this.getFile();
+		// this.getFile();
 		var suffix = getApplyGroupFormData.AuthSuffixTxt || "";
 		if (suffix == "Not Applicable") {
 			suffix = "";
@@ -209,151 +209,10 @@ export class PlanSummaryComponent implements OnInit {
 
 	}
 
-	sanitize(url: string) {
-		return this.sanitizer.bypassSecurityTrustUrl(url);
-	}
 
-
-	sendData() {
-		if (this.isNullOrWhiteSpace(this.groupPolicyNo))
-			this.createApplication();
-		else
-			this.callPaymentUrl();
-	}
 
 	openNewWindow(url: string) {
 		this.util.openNewWindow(url);
-	}
-
-	createApplication() {
-		var arrData =
-		{
-			"PlanCode": "AH0017",
-			"PlanName": this.productName,
-			"TotalMembers": this.totalMembers,
-			"PremiumPerHead": this.premiumPerHead,
-			"TotalPremium": this.totalPremium,
-			"CompanyName": this.companyName,
-			"Address": this.address,
-			"Country": this.country,
-			"City": this.cityZip,
-			"LandLineNumber": this.landline,
-			"MobileNumber": this.mobileNumber,
-			"CompanyEmail": this.companyEmail,
-
-			"RepresentativeName": this.representativeName,
-			"RepresentativeLandline": this.representativeLandline,
-			"RepresentativeMobileNumber": this.representativeMobileNumber,
-			"RepresentativeEmail": this.representativeEmail,
-
-
-			//this.LifeCoverageperHead = getApplyGroupFormData.LifeCoverageperHead;
-			//this.ADD_TPDCoverageperHead = getApplyGroupFormData.LifeCoverageperHead;
-			//this.groupPolicyNo = this.session.get("groupPolicyNo");
-
-			"ExistingOtherInsurance": this.extensionData,
-		}
-
-		let headers: HttpHeaders = new HttpHeaders();
-		headers = headers.append('Content-Type', 'application/json');
-		headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
-
-		let options =
-		{
-			headers: headers,
-			params: new HttpParams()
-		};
-
-		let body = JSON.stringify(arrData);
-		let endpoint = environment.primeCareApi.host + environment.primeCareApi.createApplicationEndpoint;
-
-		this.ngxService.start();
-
-		// LOG FOR DEBUGGING
-		//console.log(`Posting to ${endpoint}`);
-		this.session.set('CreateApplication', arrData);
-		//return;
-
-		this.http
-			.post(endpoint, body, options)
-			.pipe(
-				retry(1),
-				catchError((error: HttpErrorResponse) => {
-					this.ngxService.stop();
-					let errorMessage = '';
-					if (error.error instanceof ErrorEvent) {
-						// client-side error
-						errorMessage = `Error: ${error.error.message}`;
-					}
-					else {
-						// server-side error
-						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-					}
-
-					window.alert(errorMessage);
-					return throwError(errorMessage);
-				})
-			)
-			.subscribe(data => {
-				// TODO: Start a new ngxService with a different message
-				this.ngxService.stop();
-
-				this.groupPolicyNo = <string>data;
-
-				// LOG FOR DEBUGGING
-				this.session.set('groupPolicyNo', this.groupPolicyNo);
-				//this.session.set('amount', this.paymentAmount);
-				//console.log(`Policy Number: ${this.policyNo}`);
-				//console.log(`Amount: ${this.paymentAmount}`);
-
-				// Special case for PrimeCare API
-				// It returns STATUS OK 200 and an empty string for the policy number when there's an internal error in the API
-				// Show an error message if policy number is empty
-				if (this.isNullOrWhiteSpace(this.groupPolicyNo)) {
-					window.alert(`We apologize things don't appear to be working at the moment. Please try again later.`);
-					this.ngxService.stop();
-				}
-				else {
-					this.callPaymentUrl();
-				}
-			});
-	}
-
-	callPaymentUrl() {
-		this.ngxService.start();
-
-		// TODO: Change to OrderId from API
-		// Numbers only
-		//let refNo = moment().format('YYYYMMDDHHmmssSSS');
-		let refNo = this.session.get('refNo');
-		let groupPolicyNo = this.groupPolicyNo;
-		let amount = "";//String(this.paymentAmount).replace(/\D/g, '');
-
-		let endpoint = environment.paymentGatewayEndpoint;
-		let returnUrl = `${window.location.protocol}//${window.location.hostname}/redirect.html?target=payment-callback%26policy=${groupPolicyNo}`;
-		let targetUrl = `${endpoint}?RefNo=${refNo}&Amount=${amount}&RetURL=${returnUrl}`;
-
-		// LOG FOR DEBUGGING
-		//console.log(`Redirecting to the payment gateway:`);
-		//console.log(targetUrl);
-		this.session.set('PaymentGatewayURL', targetUrl);
-		//window.alert(`This is for debugging purpose only. You can now check the console logs before we redirect you to the payment gateway.`);
-
-		window.location.href = targetUrl;
-	}
-
-	handleError(error: any) {
-		let errorMessage = '';
-		if (error.error instanceof ErrorEvent) {
-			// client-side error
-			errorMessage = `Error: ${error.error.message}`;
-		}
-		else {
-			// server-side error
-			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-		}
-		window.alert(errorMessage);
-		return throwError(errorMessage);
 	}
 
 	formatDate(dateString: any): string {

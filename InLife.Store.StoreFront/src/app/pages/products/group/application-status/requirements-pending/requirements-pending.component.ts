@@ -19,7 +19,9 @@ export class RequirementsPendingComponent extends ApplicationStatusBaseComponent
   destroy$ = new Subject();
   groupPlan: any;
   groupQuoteData: any;
+  groupApplyData: any;
   cities: any =[];
+  isCompletedRequirements: boolean = true;
   requirementTypesTitle: any = ['EmployeeCesusForm', 'EntityPlanForm', 'AuthRepresentativeId', 'BIRNoticeForm', 'SECRegistration', 'IncorporationArticles', 'IdentityCertificate', 'PostPolicyForm'];
   requirementsTypes: any = {
 		EmployeeCesusForm: { type: '', title: '', fileInfo: {}, error: { msg: '*Required' }, uploaded: false},
@@ -76,7 +78,8 @@ export class RequirementsPendingComponent extends ApplicationStatusBaseComponent
           productType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
           productName: prodName.join(' '), // Employee Secure Plan
         }
-        this.groupQuoteData = {
+
+        let commonAttr = {
           AuthEamilId: data.representativeEmailAddress,
           AuthFristName: data.representativeFirstName,
           AuthLandlineNo: data.representativePhoneNumber,
@@ -84,31 +87,45 @@ export class RequirementsPendingComponent extends ApplicationStatusBaseComponent
           AuthMiddleName: data.representativeMiddleName,
           AuthMobileNumber: data.representativeMobileNumber,
           AuthPrefixName: this.getPrefixObject(data.representativeNamePrefix), 
-          AuthPrefixTxt: data.representativeNamePrefix,
           AuthSuffixName: this.getSuffixObject(data.representativeNameSuffix),
-          AuthSuffixTxt: data.representativeNameSuffix,
           Barangaya: data.companyTown,//"12",
-          BarangayaTxt: data.companyTown,
-          BusinessTxt: "",
           BusinessType: data.businessStructure,
           Region: this.getRegionObject(data.companyRegion),
-          RegionTxt: data.companyRegion,
           City: this.getCityObj(data.companyCity),
-          CityTxt: data.companyCity,
           CompanyLandLineNo: data.companyPhoneNumber,
           CompanyMobileNo: data.companyMobileNumber,
           CompanyName: data.companyName,
+          StreetNumer: data.companyAddress1,
+          VillageName: data.companyAddress1,
+          ZipCode: data.companyZipCode,
+          privacyPolicy: true,
+        }
+
+        this.groupQuoteData = {
+          ...commonAttr,
+          AuthPrefixTxt: data.representativeNamePrefix,
+          AuthSuffixTxt: data.representativeNameSuffix,
+          BarangayaTxt: data.companyTown,
+          BusinessTxt: "",
+          RegionTxt: data.companyRegion,
+          CityTxt: data.companyCity,
           PlanType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
           ProductName: prodName.join(' '),
           SelectedPlan: this.getPlan(data.planCode),
           Status: 1,
-          StreetNumer: data.companyAddress1,
           TotalNumberOfMembers: data.totalMembers,
           TotalNumberOfStudents: data.totalStudents || null,
           TotalNumberOfTeachers: data.totalTeachers || null,
-          VillageName: data.companyAddress1,
-          ZipCode: data.companyZipCode,
-          privacyPolicy: true,
+        }
+
+        this.groupApplyData = {
+          ...commonAttr,
+          Status: 2,
+          IsCheckDataPrivacy: true,
+          IsCheckDataUNSCR: true,
+          IsCheckDeclarationStatement: true,
+          IsCheckLifeProducts: true,
+          IsCheckSubmittedPhlippinesApp: true,
         }
 
         this.requirementTypesTitle.forEach(type => {
@@ -119,12 +136,12 @@ export class RequirementsPendingComponent extends ApplicationStatusBaseComponent
             lowerCaseType = type.charAt(0).toLowerCase() + type.slice(1);
           }
 
-          console.log(lowerCaseType);
-          
           if(data[lowerCaseType]) {
             this.mapRequirementsFileDetails(type, data[lowerCaseType]);
           } else {
-            console.log(this.requirementsTypes[type]);
+            if(this.requirementsTypes[type].error?.msg) { // Check if requiret file is not yet uploaded
+              this.isCompletedRequirements = false;
+            }
           }
           
         });
@@ -150,8 +167,13 @@ export class RequirementsPendingComponent extends ApplicationStatusBaseComponent
     this.session.set('selectedGroupPlanData', this.groupPlan);
     this.session.set(StorageType.POST_GROUP_QUOTE, this.groupQuoteData);
     this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
-    
-    this.router.navigate(['/group/apply']);
+
+    if(this.isCompletedRequirements) {
+      this.session.set(StorageType.GROUP_PLAN_DATA, this.groupApplyData);
+      this.router.navigate(['/group/plan-summary']);
+    } else {
+      this.router.navigate(['/group/apply']);    
+    }
   }
 
   getPrefixObject(prefix) {

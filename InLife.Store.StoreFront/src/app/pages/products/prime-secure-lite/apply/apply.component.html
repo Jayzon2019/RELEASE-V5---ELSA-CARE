@@ -1018,7 +1018,7 @@
 														Insular Life's <a style="font-size: inherit;" class="p-link"
 											  href="https://www.insularlife.com.ph/customer-charter"
 											  target="_blank">Customer Charter.</a>
-														<input type="checkbox" value="Yes" formControlName="declaration"> <span class="checkmark"></span>
+														<input type="checkbox" formControlName="declaration"> <span class="checkmark"></span>
 													</label>
 													<small class="errormsg"
 														   *ngIf="(submitted  || getApplyForm.get('declarationForm').get('declaration').dirty
@@ -1309,40 +1309,31 @@
 															United Nations Security Council Resolutions (UNSCR) Statement
 														</p>
 
-														<p class="mb-2">
-															During the effectivity of the contract/policy, the customer/client agrees to the following:
-														</p>
+														<label class="radio-container">
+															During the effectivity of the policy, I hereby agree to the following:
+															<input type="checkbox" formControlName="antimoneylaundary"
+																	id="antimoneylaundary"> <span class="checkmark"></span>
+														</label>
 														<div class="col-md-12 mb-3 pb-1">
 															<label class="radio-container">
-																1.&nbsp;&nbsp;In case the company is unable to comply with relevant Customer Due Diligence (CDD) measures, as required under the Anti-Money Laundering Act, as amended and relevant issuances, due to the fault of the client, the company may apply the following
-																<input type="checkbox" formControlName="antimoneylaundary"
-																	id="antimoneylaundary"> <span class="checkmark"></span>
+																1.&nbsp;&nbsp;In case Insular Life is unable to comply with the relevant CDD measures as required under Republic Act 9160 or the Anti-Money Laundering Act, as amended and relevant issuances due to my fault, Insular Life may apply the following:
+																
 															</label>
-															<p class="pl-5 mb-2">a.&nbsp;&nbsp;Measures to restrict the services available or prohibit any further transactions on the contract/policy until a full and proper CDD measures have been successfully conducted; and</p>
-															<p class="pl-5 mb-2">b.&nbsp;&nbsp;In case the foregoing is unsuccessful, terminate business relationship.</p>
+															<p class="pl-5 mb-2">a.&nbsp;&nbsp;Measures to restrict the services available or prohibit any further transactions on the policy until full and proper CDD measures have been successfully conducted; and</p>
+															<p class="pl-5 mb-2">b.&nbsp;&nbsp;In case the foregoing is unsuccessful, terminate business relationship. The exercise of Insular Life of this measure shall only entitle me to receive the unused portions of premium or withdrawal value, if any, whichever is applicable.</p>
 
-															<small class="errormsgs"
-																	*ngIf="(submitted  || getApplyForm.get('declarationForm').get('antimoneylaundary').dirty
+															
+														</div>
+														<div class="col-md-12 mb-3 pb-1">
+															<label class="radio-container">
+																2.&nbsp;&nbsp;Be bound by the obligations set out in relevant United Nations Security Council Resolutions (UNSCR) relating to the prevention and suppression of proliferation financing of Weapons of Mass Destruction (WMD), including the freezing and unfreezing actions as well as prohibitions from conducting transactions with designated persons and entities.
+															</label>
+														</div>
+														<small class="errormsgs" *ngIf="(submitted  || getApplyForm.get('declarationForm').get('antimoneylaundary').dirty
 															|| getApplyForm.get('declarationForm').get('antimoneylaundary').touched)
 															&&  getApplyForm.get('declarationForm').get('antimoneylaundary')?.errors">
-																This
-																is a required field
+																This is a required field
 															</small>
-														</div>
-														<div class="col-md-12 mb-3 pb-1">
-															<label class="radio-container">
-																2.&nbsp;&nbsp;Be bound by obligations set out in relevant United Nations Security Council Resolutions relating to the prevention and suppression of proliferation financing of weapons of mass destruction, including the freezing and unfreezing actions as well as prohibitions from conducting transactions with designated persons and entities.
-																<input type="checkbox" formControlName="obligations"
-																	id="obligations"> <span class="checkmark"></span>
-															</label>
-															<small class="errormsgs"
-																*ngIf="(submitted  || getApplyForm.get('declarationForm').get('obligations').dirty
-															|| getApplyForm.get('declarationForm').get('obligations').touched)
-															&&  getApplyForm.get('declarationForm').get('obligations')?.errors">
-																This
-																is a required field
-															</small>
-														</div>
 													</div>
 													<hr>
 													<div class="col-md-12 mb-5">
@@ -1406,7 +1397,7 @@
 											</div>
 											<div class="col-md-6 col-12">
 												<div class="btnsec text-right">
-													<button type="submit" [disabled]="getApplyForm.get('declarationForm')?.invalid || hasImage===false"
+													<button type="submit" [disabled]="getApplyForm.get('declarationForm')?.invalid || hasImage===false || !isValidFATCA()"
 															class="btn">
 														Continue to Pay <i class="material-icons">arrow_forward</i>
 													</button>

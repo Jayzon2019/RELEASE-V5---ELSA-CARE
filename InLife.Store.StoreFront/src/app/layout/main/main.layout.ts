@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 @Component
 	({
 		templateUrl: './main.layout.html',
-		styleUrls: ['./style.css']
+		styleUrls: ['./style.css', './main.layout.scss']
 	})
 export class MainLayoutComponent implements OnInit, OnDestroy {
 	public footerLinks: any;

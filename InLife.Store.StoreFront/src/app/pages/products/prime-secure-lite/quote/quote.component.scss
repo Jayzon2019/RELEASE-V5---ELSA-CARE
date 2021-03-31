@@ -68,5 +68,9 @@
             position: inherit;
         }
     }
-    
+    @media (min-width: 1600px){
+        ul.condtionslist li .opt {
+            font-size: 18px;
+        }
+    }
 }
