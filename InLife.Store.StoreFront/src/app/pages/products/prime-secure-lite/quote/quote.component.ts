@@ -404,8 +404,7 @@ export class QuoteComponent implements OnInit
 			healthDeclaration1: new FormControl(data.healthDeclaration1 || '', Validators.required),
 			healthDeclaration2: new FormControl(data.healthDeclaration2 || '', Validators.required),
 			healthDeclaration3: new FormControl(data.healthDeclaration3 || '', Validators.required),
-			healthDeclaration4: new FormControl(data.healthDeclaration4 || '', Validators.required),
-			healthDeclaration5: new FormControl(data.healthDeclaration5 || '', Validators.required),
+			healthDeclaration4: new FormControl(data.healthDeclaration4 || '', Validators.required)
 		});
 	}
 
@@ -417,9 +416,6 @@ export class QuoteComponent implements OnInit
 			healthCondition2: new FormControl(data.healthCondition2 || '', Validators.required),
 			healthCondition3: new FormControl(data.healthCondition3 || '', Validators.required),
 			healthCondition4: new FormControl(data.healthCondition4 || '', Validators.required),
-			healthCondition5: new FormControl(data.healthCondition5 || '', Validators.required),
-			healthCondition6: new FormControl(data.healthCondition6 || '', Validators.required),
-			healthCondition7: new FormControl(data.healthCondition7 || '', Validators.required),
 			privacyPolicy: new FormControl(data.privacyPolicy || '', Validators.required),
 			privacyPolicy2: new FormControl(data.privacyPolicy2 || '', Validators.required)
 		});
@@ -430,7 +426,6 @@ export class QuoteComponent implements OnInit
 		
 		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
-		debugger
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
 		{
@@ -454,10 +449,7 @@ export class QuoteComponent implements OnInit
 				covidForm.healthCondition1.toUpperCase() === 'NO' &&
 				covidForm.healthCondition2.toUpperCase() === 'NO' &&
 				covidForm.healthCondition3.toUpperCase() === 'YES' &&
-				covidForm.healthCondition4.toUpperCase() === 'YES' &&
-				covidForm.healthCondition5.toUpperCase() === 'YES' &&
-				covidForm.healthCondition6.toUpperCase() === 'YES' &&
-				covidForm.healthCondition7.toUpperCase() === 'NO' &&
+				covidForm.healthCondition4.toUpperCase() === 'NO' &&
 				this.getQuoteForm.value.basicInformation.country === '170' &&
 				(Number(this.bodyMassIndex) < 29) &&
 				this.isValidOccupation(this.getQuoteForm.get('basicInformation').get('occupation').value)
@@ -473,7 +465,8 @@ export class QuoteComponent implements OnInit
 	}
 
 	isValidOccupation(id): boolean {
-		const invalidOccupation = ['', '1', '4', '5', '8', '9', '11', '12', '13', '16', '18', '27', '29', '35', '39', '41', '42',
+		if(id) {
+			const invalidOccupation = ['', '1', '4', '5', '8', '9', '11', '12', '13', '16', '18', '27', '29', '35', '39', '41', '42',
 						'47', '52', '54', '58', '59', '60', '61', '69', '70', '71', '74', '76', '79', '80', '85', '87',
 						'92', '94', '95', '100', '110', '112', '113', '116', '117', '120', '123', '125', '127', '132', '135', '139',
 						'140', '141', '144', '145', '146', '147', '149', '155', '156', '161', '164', '168', '170', '182', '183', '139',
@@ -482,7 +475,7 @@ export class QuoteComponent implements OnInit
 						'222', '223', '232', '233', '237', '238', '244', '246', '247', '248', '249', '250', '251', '253', '258', '259',
 						'260', '269', '270', '273', '274', '276', '279', '281', '286', '287'];
 
-		if(id) {
+		
 			for(let i=0; i< invalidOccupation.length; i++) {
 				if(invalidOccupation[i] === id) {
 					return false;
@@ -512,12 +505,15 @@ export class QuoteComponent implements OnInit
 			city = this.getReferenceDataName(regionList.Municipality, basicInfo.get('municipality'));
 		}
 
-		var data =
+		let faceAmount = parseFloat(calcInfo.get('totalCashBenefit').value.substring(1).replace(/,/g, ''));
+		let monthlyIncome = parseFloat(basicInfo.get('monthlyIncome').value.substring(1).replace(/,/g, ''));
+
+		var dataInternalAPI =
 		{
-			planCode: 'PrimeSecureLite',
-			planVariantCode: 'PrimeSecureLite',
-			planFaceAmount: Number(calcInfo.get('totalCashBenefit').value),
-			planPremium: Number(this.eligiblePlan),
+			planCode: 'PSLite',
+			planVariantCode: 'PSLite' + this.eligiblePlan,
+			planFaceAmount: faceAmount,
+			planPremium: +this.eligiblePlan,
 			customerNamePrefix: basicInfo.get('prefix').value,
 			customerNameSuffix: basicInfo.get('suffix').value,
 			customerFirstName: basicInfo.get('fname').value,
@@ -531,16 +527,37 @@ export class QuoteComponent implements OnInit
 			company: basicInfo.get('company').value,
 			occupation: basicInfo.get('occupation').value,
 			incomeSource: basicInfo.get('sourceOfFunds').value,
-			incomeAmount: basicInfo.get('monthlyIncome').value,
-			addressCity: basicInfo.get('municipality').value,
-			addressRegion: basicInfo.get('province').value,
-			addressCountry: basicInfo.get('country').value
+			incomeAmount: monthlyIncome,
+			addressCity: city,
+			addressRegion: region,
+			addressCountry: country
 		};
-		console.log(data);
+		console.log(faceAmount);
+		var dataExternalAPI = {
+			InsuredPrefixId: +basicInfo.get('prefix').value,
+			InsuredFirstName: basicInfo.get('fname').value,
+			InsuredMiddleName: basicInfo.get('mname').value,
+			InsuredLastName: basicInfo.get('lname').value,
+			InsuredSuffixId: +basicInfo.get('suffix').value,
+			InsuredBirthday: new Date(calcInfo.get('dateofbirth').value),
+			InsuredGenderId: +calcInfo.get('gender').value,
+			PlanCode: 'PSLite',
+			PlanName: 'PSLite' + this.eligiblePlan,
+			PaymentMode: 1,
+			FaceAmount: faceAmount,
+			Premium: +this.eligiblePlan,
+			InsuredPrimaryOccupationId: +basicInfo.get('sourceOfFunds').value,
+			InsuredPrimaryOccupationMonthlyIncome: monthlyIncome,
+			Bmi: +this.bodyMassIndex
+		}
 
-		debugger
+		this.session.set('PostQuote', dataInternalAPI);
+
+		console.log(dataInternalAPI, dataExternalAPI);
+
 		let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');
+		headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
 
 		let options =
 		{
@@ -548,52 +565,29 @@ export class QuoteComponent implements OnInit
 			params: new HttpParams()
 		};
 
-		let body = JSON.stringify(data);
-		let endpoint = environment.appApi.host +'/prime-secure/applications';
-
+		let body = JSON.stringify(dataExternalAPI);
+		let endpoint = environment.primeCareApi.host + environment.primeCareApi.createQuoteEndpoint;
 		this.ngxService.start();
-
-		this.session.set('PostQuote', data);
+		this.session.set('PostQuote', dataInternalAPI);
 
 		if(isEligible) {
-
 			this.http
 			.post(endpoint, body, options)
-			.pipe(
-				retry(1),
-				catchError((error: HttpErrorResponse) =>
-				{
-					this.ngxService.stop();
-					let errorMessage = '';
-					if (error.error instanceof ErrorEvent)
-					{
-						// client-side error
-						errorMessage = `Error: ${error.error.message}`;
-					}
-					else
-					{
-						// server-side error
-						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-					}
-					// window.alert(errorMessage);
-					return throwError(errorMessage);
-				})
-			)
+			.pipe(retry(1))
 			.subscribe((data: any) =>
 			{
+				this.ngxService.stopAll();
 				let refNo = String(data.id).padStart(10, '0');
 				this.session.set('refNo', refNo)
 				this.router.navigate(['prime-secure-lite/apply']);
 				
-			}, (error) =>{
-				this.session.set('refNo', 'QWEYERHGZX'+ Math.floor((Math.random() * 100) + 1));
+			}, (error)=>{
 				this.router.navigate(['prime-secure-lite/apply']);
 			});
 			
 		} else {
 			// this.session.clear();
 			this.router.navigate(['prime-secure-lite/ineligible']);
-			// alert('ineligible');
 		}
 
 		

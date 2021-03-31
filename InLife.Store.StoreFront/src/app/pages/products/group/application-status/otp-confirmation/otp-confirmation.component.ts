@@ -143,7 +143,7 @@ export class OtpConfirmationComponent extends ApplicationStatusBaseComponent imp
         this.router.navigate(['../requirements-pending'],{relativeTo: this.activatedRoute});
         break;
       case 'Payment':
-        this.getApplicationSummary();
+        this.router.navigate(['../requirements-pending'],{relativeTo: this.activatedRoute});
         break;
       case 'PaymentProof':
         this.router.navigate(['../payment-pending'],{relativeTo: this.activatedRoute});
@@ -168,106 +168,6 @@ export class OtpConfirmationComponent extends ApplicationStatusBaseComponent imp
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-  }
-
-  numberWithCommas(amount) {
-    return amount.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-  getPlan(code) {
-    if(code === 'Administrative and Office-based') {
-      return '1';
-    } else if(code === 'Security Agencies') {
-      return '2';
-    } else {
-      return '3';
-    }
-  }
-
-  getApplicationSummary() {
-    this.ngxService.start();
-    this.appStatus_API.getApplicationSummary(this.referenceCode)
-      .pipe(
-        takeUntil(this.destroy$),
-        finalize(() => {
-          this.ngxService.stopAll();
-        })
-      )
-      .subscribe((data: Application) => {
-        let planVariantCodeArr = data.planVariantCode.split(' ');
-        let prodName = planVariantCodeArr.slice(0, planVariantCodeArr.length -1);
-        this.groupPlan = {
-          annualPremium: Number(data.planPremium),
-          insuranceCoverage: this.numberWithCommas(data.planFaceAmount.toString()),
-          totalPremium: this.numberWithCommas((data.planPremium * Number(data.totalMembers)).toString()),
-          planCode: this.getPlan(data.planCode) + ' - ' + data.planCode, // 1 - Administrative and Office-based
-          plan: this.getPlan(data.planCode),
-          productType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
-          productName: prodName.join(' '), // Employee Secure Plan
-        }
-        this.groupQuoteData = {
-          AuthEamilId: data.representativeEmailAddress,
-          AuthFristName: data.representativeFirstName,
-          AuthLandlineNo: data.representativePhoneNumber,
-          AuthLastName: data.representativeLastName,
-          AuthMiddleName: data.representativeMiddleName,
-          AuthMobileNumber: data.representativeMobileNumber,
-          AuthPrefixName: this.getPrefixObject(data.representativeNamePrefix), 
-          AuthPrefixTxt: data.representativeNamePrefix,
-          AuthSuffixName: this.getSuffixObject(data.representativeNameSuffix),
-          AuthSuffixTxt: data.representativeNameSuffix,
-          Barangaya: data.companyTown,//"12",
-          BarangayaTxt: data.companyTown,
-          BusinessTxt: "",
-          BusinessType: data.businessStructure,
-          Region: this.getRegionObject(data.companyRegion),
-          RegionTxt: data.companyRegion,
-          City: this.getCityObj(data.companyCity),
-          CityTxt: data.companyCity,
-          CompanyLandLineNo: data.companyPhoneNumber,
-          CompanyMobileNo: data.companyMobileNumber,
-          CompanyName: data.companyName,
-          PlanType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
-          ProductName: prodName.join(' '),
-          SelectedPlan: this.getPlan(data.planCode),
-          Status: 1,
-          StreetNumer: data.companyAddress1,
-          TotalNumberOfMembers: data.totalMembers,
-          TotalNumberOfStudents: data.totalStudents || null,
-          TotalNumberOfTeachers: data.totalTeachers || null,
-          VillageName: data.companyAddress1,
-          ZipCode: data.companyZipCode,
-          privacyPolicy: true,
-        }
-        this.session.set('selectedGroupPlanData', this.groupPlan);
-        this.session.set(StorageType.POST_GROUP_QUOTE, this.groupQuoteData);
-        this.router.navigate(['/group/pay']);
-      });
-  }
-
-  getPrefixObject(prefix) {
-    let prefixbj: any = CONSTANTS.PREFIX.filter(i => i.name == prefix )[0];
-    return prefixbj;
-  }
-
-  getSuffixObject(suffix) {
-    let suffixbj: any = CONSTANTS.SUFFIX.filter(i => i.name == suffix)[0];
-    return suffixbj;
-  }
-
-  getRegionObject(province) {
-    let provinceObj = CONSTANTS.PROVIANCE.filter(i => i.Province == province);
-    this.cities = provinceObj.map(i => i.Municipality);
-    let regionObj = {
-      id: Number(provinceObj.map(i => i.id)),
-      name: province
-    }
-    return regionObj;
-  }
-
-  getCityObj(city) {
-    let cityobj: any = this.cities[0].filter(i => i.name == city)[0];
-    return cityobj;
   }
 
 }

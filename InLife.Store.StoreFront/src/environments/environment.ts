@@ -18,6 +18,7 @@ export const environment =
 	{
 		subscriptionKey: 'a149d58ebd14432ea950e802a6d32783',
 		host: 'https://apim-uat.insularlife.com.ph/pg/v4',
+		createQuoteEndpoint: '/CreateUnderwritingStatus',
 		createApplicationEndpoint: '/CreateApplication',
 		savePaymentEndpoint: '/SavePayment'
 	},

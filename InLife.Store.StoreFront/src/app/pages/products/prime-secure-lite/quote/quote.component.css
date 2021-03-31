@@ -95,10 +95,6 @@ ul.condtionslist li {
 .form-control.is-valid {
 	background-image: url(/assets/images/check.png);
 }
-li::marker {
-	display: list-item;
-	content: " ";
-  }
 
 ::ng-deep .my-tooltip {
 	font-size: 13px;

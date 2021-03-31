@@ -52,6 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InLife.Store.Resources", "InLife.Store.Resources\InLife.Store.Resources.csproj", "{204E1A1B-7262-4377-9CC7-0738A1A53B24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{44FB54B9-985F-4473-A36C-448CCBF410CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44FB54B9-985F-4473-A36C-448CCBF410CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44FB54B9-985F-4473-A36C-448CCBF410CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{8EE0BEBE-B8AC-4008-8C6B-7F622832541E} = {B0D850C9-E6C8-465D-8704-EE4C4446E86D}
 		{BDB5D74C-82E8-40CB-806F-3386D8FB582F} = {FFB8B85C-5122-4E17-8933-C27755493F51}
 		{44FB54B9-985F-4473-A36C-448CCBF410CE} = {B0D850C9-E6C8-465D-8704-EE4C4446E86D}
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24} = {BC25F6F9-589D-48ED-8BCE-FF092EFE90FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC112424-056B-4E81-8ADF-A23CFD2207F3}

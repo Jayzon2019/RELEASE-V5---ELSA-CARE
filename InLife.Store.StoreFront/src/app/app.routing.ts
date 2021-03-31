@@ -18,9 +18,9 @@ const routes: Routes =
 			children:
 				[
 					{ path: '', loadChildren: () => import('@app/pages/home/home.module').then(m => m.HomeModule), 
-						resolve: {
-							HeroSliders: HeroSliderResolver
-						} 
+						 resolve: {
+						 	HeroSliders: HeroSliderResolver
+						 } 
 					},
 					{ path: 'faqs', loadChildren: () => import('@app/pages/faqs/faqs.module').then(m => m.FaqsModule) },
 					{ path: 'prime-care', loadChildren: () => import('@app/pages/products/prime-care/main/main.module').then(m => m.MainModule) },
@@ -72,7 +72,7 @@ const routes: Routes =
 
 @NgModule
 	({
-		imports: [RouterModule.forRoot(routes, { enableTracing: false, scrollPositionRestoration: 'enabled' })],
+		imports: [RouterModule.forRoot(routes, { enableTracing: false, scrollPositionRestoration: 'enabled'})],
 
 exports: [RouterModule]
 	})

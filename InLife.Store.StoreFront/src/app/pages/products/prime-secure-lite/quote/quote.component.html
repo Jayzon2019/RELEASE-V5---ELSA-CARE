@@ -2032,7 +2032,7 @@
 												<!-- HD 1 -->
 												<li class="clearfix">
 													<div class="ctnt" >
-														1. Have you either claimed or are in the process of claiming on any insurance policy (e.g. critical illness, hospitalization, total and permanent disability, etc.)?
+														1. Have you claimed or are you in the process of claiming on any insurance policy? (e.g. critical illness, hospitalization, TPD, etc.)?
 														<div class="form-row">
 															<div class="col-md-3">
 																<label class="radio-container">
@@ -2159,134 +2159,18 @@
 													" class="clearfix">
 													<span class="numr"></span>
 													<div class="ctnt">
-														3. In the past five (5) years, have you ever been:<br><br>
+														3. In the past 5 years, have you ever been:<br><br>
 														<ol class="health-declartions-list-items">
-															<li>a. Hospitalized or consulted with a medical practitioner for any medical condition, or been advised to have any
-																operation, tests or treatment (cough, common cold or fever can be ignored)?
-																<div class="form-row">
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			Yes
-																			<input type="radio" id="healthDeclaration3" formControlName="healthDeclaration3"
-																				value="Yes" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			No
-																			<input type="radio" id="healthDeclaration3" formControlName="healthDeclaration3"
-																				value="No" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-12">
-																		<small class="errormsg" *ngIf="
-																				(submitted ||
-																					getQuoteForm
-																						.get(
-																							'healthCondition'
-																						)
-																						.get(
-																							'healthDeclaration3'
-																						)
-																						.dirty ||
-																					getQuoteForm
-																						.get(
-																							'healthCondition'
-																						)
-																						.get(
-																							'healthDeclaration3'
-																						)
-																						.touched) &&
-																				getQuoteForm
-																					.get(
-																						'healthCondition'
-																					)
-																					.get(
-																						'healthDeclaration3'
-																					)
-																					?.errors
-																			">
-																			This is a
-																			required
-																			field
-																		</small>
-																	</div>
-																</div>
+															<li class="opt">hospitalized or consulted with a medical practitioner for any medical condition? (cough, common cold or fever can be ignored)
 															</li>
-															
-															<li>b. Advised to have any operation, tests or treatment?
-																<div class="form-row">
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			Yes
-																			<input type="radio" id="healthDeclaration4" formControlName="healthDeclaration4"
-																				value="Yes" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			No
-																			<input type="radio" id="healthDeclaration4" formControlName="healthDeclaration4"
-																				value="No" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-12">
-																		<small class="errormsg" *ngIf="
-																				(submitted ||
-																					getQuoteForm
-																						.get(
-																							'healthCondition'
-																						)
-																						.get(
-																							'healthDeclaration4'
-																						)
-																						.dirty ||
-																					getQuoteForm
-																						.get(
-																							'healthCondition'
-																						)
-																						.get(
-																							'healthDeclaration4'
-																						)
-																						.touched) &&
-																				getQuoteForm
-																					.get(
-																						'healthCondition'
-																					)
-																					.get(
-																						'healthDeclaration4'
-																					)
-																					?.errors
-																			">
-																			This is a
-																			required
-																			field
-																		</small>
-																	</div>
-																</div>
+															<li class="opt">advised to have any operation, tests or treatment?
 															</li>
 														</ol>
-													</div>
-												</li>
-												<!-- HD 4 -->
-												<li style="
-														padding-left: 0;
-														position: relative;
-														top: -2.1rem;
-														display: inline-table;
-													" class="clearfix">
-													<span class="numr"></span>
-													<div class="ctnt">
-														4. Do you have any immediate family (parents, brother,sister) who had any of the following before the age of sixty (6); cancer, diabetes, heart disease, stroke, or hereditary disease (such as polycystic kidney disease or Huntington’a Chorea)?
 														<div class="form-row">
 															<div class="col-md-3">
 																<label class="radio-container">
 																	Yes
-																	<input type="radio" id="healthDeclaration5" formControlName="healthDeclaration5"
+																	<input type="radio" id="healthDeclaration3" formControlName="healthDeclaration3"
 																		value="Yes" />
 																	<span class="checkmark"></span>
 																</label>
@@ -2294,7 +2178,7 @@
 															<div class="col-md-3">
 																<label class="radio-container">
 																	No
-																	<input type="radio" id="healthDeclaration5" formControlName="healthDeclaration5"
+																	<input type="radio" id="healthDeclaration3" formControlName="healthDeclaration3"
 																		value="No" />
 																	<span class="checkmark"></span>
 																</label>
@@ -2307,7 +2191,7 @@
 																					'healthCondition'
 																				)
 																				.get(
-																					'healthDeclaration5'
+																					'healthDeclaration3'
 																				)
 																				.dirty ||
 																			getQuoteForm
@@ -2315,7 +2199,7 @@
 																					'healthCondition'
 																				)
 																				.get(
-																					'healthDeclaration5'
+																					'healthDeclaration3'
 																				)
 																				.touched) &&
 																		getQuoteForm
@@ -2323,7 +2207,70 @@
 																				'healthCondition'
 																			)
 																			.get(
-																				'healthDeclaration5'
+																				'healthDeclaration3'
+																			)
+																			?.errors
+																	">
+																	This is a
+																	required
+																	field
+																</small>
+															</div>
+														</div>
+													</div>
+												</li>
+												<!-- HD 4 -->
+												<li style="
+														padding-left: 0;
+														position: relative;
+														top: -2.1rem;
+														display: inline-table;
+													" class="clearfix">
+													<span class="numr"></span>
+													<div class="ctnt">
+														4. Has any of your immediate family (parents, brother, sister) had any of the following before the age of sixty (60); cancer, diabetes, heart disease, stroke, or hereditary disease (such as polycystic kidney disease or Huntington’s Chorea)?
+														<div class="form-row">
+															<div class="col-md-3">
+																<label class="radio-container">
+																	Yes
+																	<input type="radio" id="healthDeclaration4" formControlName="healthDeclaration4"
+																		value="Yes" />
+																	<span class="checkmark"></span>
+																</label>
+															</div>
+															<div class="col-md-3">
+																<label class="radio-container">
+																	No
+																	<input type="radio" id="healthDeclaration4" formControlName="healthDeclaration4"
+																		value="No" />
+																	<span class="checkmark"></span>
+																</label>
+															</div>
+															<div class="col-md-12">
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getQuoteForm
+																				.get(
+																					'healthCondition'
+																				)
+																				.get(
+																					'healthDeclaration4'
+																				)
+																				.dirty ||
+																			getQuoteForm
+																				.get(
+																					'healthCondition'
+																				)
+																				.get(
+																					'healthDeclaration4'
+																				)
+																				.touched) &&
+																		getQuoteForm
+																			.get(
+																				'healthCondition'
+																			)
+																			.get(
+																				'healthDeclaration4'
 																			)
 																			?.errors
 																	">
@@ -2371,7 +2318,7 @@
 											<ul class="condtionslist">
 												<li class="clearfix">
 													<div class="ctnt">
-														Have you travelled outside the Philippines or in known local COVID-19 hotspots in the last fourteen (14) days?
+														Have you travelled outside the Philippines or in known local COVID-19 hotspots in the last 14 days?
 														<div class="form-row">
 															<div class="col-md-3">
 																<label class="radio-container">
@@ -2428,7 +2375,7 @@
 
 												<li class="clearfix">
 													<div class="ctnt">
-														Have you been in contact with or were directly exposed to a COVID-19 positive person/s in the last fourteen (14) days?
+														Have you been in contact with or were directly exposed to a COVID-19 positive person/s in the last 14 days?
 														<br />
 														<ul class="listinnevcondition"></ul>
 														<div class="form-row">
@@ -2489,232 +2436,75 @@
 													<div class="ctnt">
 														Have you complied with all the government mandated safety and health protocols, as follows:<br><br>
 														<ol class="health-declartions-list-items">
-															<li>Wearing and proper use of PPEs, if required? 
-																<div class="form-row">
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			Yes
-																			<input type="radio" formControlName="healthCondition3" id="healthCondition31"
-																				value="Yes" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			No
-																			<input type="radio" formControlName="healthCondition3" id="healthCondition32"
-																				value="No" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-12">
-																		<small class="errormsg" *ngIf="
-																				(submitted ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition3'
-																						)
-																						.dirty ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition3'
-																						)
-																						.touched) &&
-																				getQuoteForm
-																					.get(
-																						'covidForm'
-																					)
-																					.get(
-																						'healthCondition3'
-																					)
-																					?.errors
-																			">
-																			This is a
-																			required
-																			field
-																		</small>
-																	</div>
-																</div>
-															</li>
-															<li>Wearing of face masks and face shields in public?
-																<div class="form-row">
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			Yes
-																			<input type="radio" formControlName="healthCondition4" id="healthCondition31"
-																				value="Yes" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			No
-																			<input type="radio" formControlName="healthCondition4" id="healthCondition32"
-																				value="No" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-12">
-																		<small class="errormsg" *ngIf="
-																				(submitted ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition4'
-																						)
-																						.dirty ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition4'
-																						)
-																						.touched) &&
-																				getQuoteForm
-																					.get(
-																						'covidForm'
-																					)
-																					.get(
-																						'healthCondition4'
-																					)
-																					?.errors
-																			">
-																			This is a
-																			required
-																			field
-																		</small>
-																	</div>
-																</div>
-															</li>
-															<li>Physical distancing in all places?
-																<div class="form-row">
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			Yes
-																			<input type="radio" formControlName="healthCondition5" id="healthCondition31"
-																				value="Yes" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			No
-																			<input type="radio" formControlName="healthCondition5" id="healthCondition32"
-																				value="No" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-12">
-																		<small class="errormsg" *ngIf="
-																				(submitted ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition5'
-																						)
-																						.dirty ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition5'
-																						)
-																						.touched) &&
-																				getQuoteForm
-																					.get(
-																						'covidForm'
-																					)
-																					.get(
-																						'healthCondition5'
-																					)
-																					?.errors
-																			">
-																			This is a
-																			required
-																			field
-																		</small>
-																	</div>
-																</div>
-															</li>
-															<li>Did not attend any gathering with at least 10 people present?
-																<div class="form-row">
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			Yes
-																			<input type="radio" formControlName="healthCondition6" id="healthCondition31"
-																				value="Yes" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-3">
-																		<label class="radio-container">
-																			No
-																			<input type="radio" formControlName="healthCondition6" id="healthCondition32"
-																				value="No" />
-																			<span class="checkmark"></span>
-																		</label>
-																	</div>
-																	<div class="col-md-12">
-																		<small class="errormsg" *ngIf="
-																				(submitted ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition6'
-																						)
-																						.dirty ||
-																					getQuoteForm
-																						.get(
-																							'covidForm'
-																						)
-																						.get(
-																							'healthCondition6'
-																						)
-																						.touched) &&
-																				getQuoteForm
-																					.get(
-																						'covidForm'
-																					)
-																					.get(
-																						'healthCondition6'
-																					)
-																					?.errors
-																			">
-																			This is a
-																			required
-																			field
-																		</small>
-																	</div>
-																</div>
-															</li>
+															<li class="opt">Wearing and proper use of PPEs, if required?</li>
+															<li class="opt">Wearing of face masks and face shields in public?</li>
+															<li class="opt">Physical distancing in all places?</li>
+															<li class="opt">Did not attend any gathering with at least 10 people present?</li>
 														</ol>
+														<div class="form-row">
+															<div class="col-md-3">
+																<label class="radio-container">
+																	Yes
+																	<input type="radio" formControlName="healthCondition3" id="healthCondition31"
+																		value="Yes" />
+																	<span class="checkmark"></span>
+																</label>
+															</div>
+															<div class="col-md-3">
+																<label class="radio-container">
+																	No
+																	<input type="radio" formControlName="healthCondition3" id="healthCondition32"
+																		value="No" />
+																	<span class="checkmark"></span>
+																</label>
+															</div>
+															<div class="col-md-12">
+																<small class="errormsg" *ngIf="
+																		(submitted ||
+																			getQuoteForm
+																				.get(
+																					'covidForm'
+																				)
+																				.get(
+																					'healthCondition3'
+																				)
+																				.dirty ||
+																			getQuoteForm
+																				.get(
+																					'covidForm'
+																				)
+																				.get(
+																					'healthCondition3'
+																				)
+																				.touched) &&
+																		getQuoteForm
+																			.get(
+																				'covidForm'
+																			)
+																			.get(
+																				'healthCondition3'
+																			)
+																			?.errors
+																	">
+																	This is a
+																	required
+																	field
+																</small>
+															</div>
+														</div>
 													</div>
 												</li>
 												<!-- c -->
 												<li class="clearfix">
 													<div class="ctnt">
-														Have you exhibited any of the following symptoms in the last fourteen (14) days, including but not limited to: fever, cough, malaise (body weakness), rhinorrhea (mucus discharge from the nose), headache and/or flu-like symptoms, sore throat, shortness of breath, loss of taste, loss of smell, nausea, vomiting, diarrhea?
+														Have you exhibited any of the following symptoms in the last 14 days, including but not limited to: fever, cough, malaise (body weakness), rhinorrhea (mucus discharge from the nose), headache and/or flu-like symptoms, sore throat, shortness of breath, loss of taste, loss of smell, nausea, vomiting, diarrhea?
 														<div class="form-row">
 															<div class="col-md-3">
 																<label class="radio-container">
 																	Yes
 																	<input
 																		type="radio"
-																		formControlName="healthCondition7"
+																		formControlName="healthCondition4"
 																		id="healthCondition31"
 																		value="Yes"
 																	/>
@@ -2728,7 +2518,7 @@
 																	No
 																	<input
 																		type="radio"
-																		formControlName="healthCondition7"
+																		formControlName="healthCondition4"
 																		id="healthCondition32"
 																		value="No"
 																	/>
@@ -2745,7 +2535,7 @@
 																					'covidForm'
 																				)
 																				.get(
-																					'healthCondition7'
+																					'healthCondition4'
 																				)
 																				.dirty ||
 																			getQuoteForm
@@ -2753,7 +2543,7 @@
 																					'covidForm'
 																				)
 																				.get(
-																					'healthCondition7'
+																					'healthCondition4'
 																				)
 																				.touched) &&
 																		getQuoteForm
@@ -2761,7 +2551,7 @@
 																				'covidForm'
 																			)
 																			.get(
-																				'healthCondition7'
+																				'healthCondition4'
 																			)
 																			?.errors
 																	">
@@ -2792,7 +2582,7 @@
 														<div style="
 																margin-left: 42px;
 															">
-															<span>
+															<span class="font-italic">
 																I hereby declare that all my answers to this health questionnaire are true to the best of my knowledge and belief, and that misrepresentation or concealment of any information shall be a reason for the cancellation of the insurance application or shall render my policy, if issued, null and void.<br/>
 																Before the policy is delivered to me, I undertake to inform Insular Life of any change in my medical or physical condition, of any medical consultation or treatment I may have undergone, or of any intervening event that may affect my physical or financial condition as well as my security, occurring within the period from the execution of this application until the delivery of the policy to me.<br/>
 																I further authorize InLife to make the necessary disclosure to the appropriate government agency in compliance with the mandate of applicable laws and issuances (e.g. Republic Act No. 11332, etc.).

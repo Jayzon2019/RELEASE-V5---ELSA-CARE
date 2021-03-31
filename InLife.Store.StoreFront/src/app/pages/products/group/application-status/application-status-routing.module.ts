@@ -18,7 +18,7 @@ const routes: Routes = [
       children: [
         { path: '', redirectTo: 'otp-confirmation', pathMatch: 'full' },
         { path: 'otp-confirmation', component: OtpConfirmationComponent },
-        { path: 'requirements-pending', component: RequirementsPendingComponent },
+        { path: 'requirements-pending', component: RequirementsPendingComponent},
         { path: 'payment-pending', component: PaymentPendingComponent },
         { path: 'payment-confirm', component: PaymentConfirmationComponent },
         { path: 'cancel-application', component: CancelApplicationComponent },

@@ -468,7 +468,7 @@
 					   name="code"
 					   [ngClass]="{invalid: this.submitted && reference_code.invalid}"
 					   #reference_code="ngModel" [ngModel]="referenceCode"
-					   (ngModelChange)="referenceCode = $event.toUpperCase()"
+					   (ngModelChange)="referenceCode = $event"
 					   required>
 				<input type="submit" class="check-status-btn" value="Check">
 			</form>
