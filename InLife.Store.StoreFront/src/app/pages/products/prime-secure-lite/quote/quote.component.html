@@ -62,7 +62,7 @@
 										<h3>Calculate Premium</h3>
 										<div class="preminumform">
 											<div class="form-row">
-												
+
 												<!-- Birthdaye start-->
 												<div class="col-md-6 mb-3">
 													<label for="">
@@ -205,7 +205,7 @@
 														is a required field
 													</small>
 												</div>
-												
+
 												<!-- Life Insurance Benefit start -->
 												<div class="col-md-6 mb-3">
 													<label for=""
@@ -246,7 +246,7 @@
 																: ''
 														"
 													/>
-													
+
 													<small
 														class="errormsg"
 														*ngIf="
@@ -308,7 +308,7 @@
 																: ''
 														"
 													/>
-													
+
 													<small
 														class="errormsg"
 														*ngIf="
@@ -476,11 +476,11 @@
 													<label for="">Full Name</label>
 												</div>
 												<div class="col-md-2 mb-3">
-													<select 
+													<select
 														class="form-control" id="" formControlName="prefix"
-															[ngClass]="((submitted 
-																|| getQuoteForm.get('basicInformation').get('prefix').dirty 
-																|| getQuoteForm.get('basicInformation').get('prefix').touched) 
+															[ngClass]="((submitted
+																|| getQuoteForm.get('basicInformation').get('prefix').dirty
+																|| getQuoteForm.get('basicInformation').get('prefix').touched)
 																&&  getQuoteForm.get('basicInformation').get('prefix')?.errors)?'is-invalid'
                                                          :getQuoteForm.get('basicInformation').get('prefix')?.valid?'is-valid black':''
                                                         ">
@@ -767,14 +767,14 @@
 														</div>
 														<input type="text" maxlength="9" class="form-control pnumber"
 															   placeholder="Landline" formControlName="landline"
-															   [ngClass]="((submitted  
-																	   	|| getQuoteForm.get('basicInformation').get('landline').dirty 
-																	   	|| getQuoteForm.get('basicInformation').get('landline').touched) 
-																	   	&&  getQuoteForm.get('basicInformation').get('landline')?.errors) 
+															   [ngClass]="((submitted
+																	   	|| getQuoteForm.get('basicInformation').get('landline').dirty
+																	   	|| getQuoteForm.get('basicInformation').get('landline').touched)
+																	   	&&  getQuoteForm.get('basicInformation').get('landline')?.errors)
 																	   	? 'is-invalid'
-																		   : getQuoteForm.get('basicInformation').get('landline')?.valid 
-																		   && getQuoteForm.get('basicInformation').get('landline')?.value 
-																		   !=='' 
+																		   : getQuoteForm.get('basicInformation').get('landline')?.valid
+																		   && getQuoteForm.get('basicInformation').get('landline')?.value
+																		   !==''
 																		   ? 'is-valid'
 																		   :''
 																	"
@@ -1377,7 +1377,7 @@
 																(submitted ||
 																	getQuoteForm
 																		.get(
-																			'basicInformation' 
+																			'basicInformation'
 																		)
 																		.get(
 																			'monthlyIncome'
@@ -1524,7 +1524,7 @@
 															field
 														</small>
 													</div>
-													
+
 													<div class="col-md-6 mb-9" *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value === '1'">
 														<label for="">Agent Name</label>
 														<div class="input-group">
@@ -1678,26 +1678,18 @@
 
 												<ng-container *ngIf="affiliate?.agentCode">
 													<div class="col-md-6 mb-3">
-														<label for="">I learned about
-															Prime Care
-															through:</label>
-														<input type="text" class="form-control" value="REFERRAL OF INSULAR LIFE ADVISOR/ AGENT"
-															readonly />
+														<label for="">I learned about Prime Secure Lite through:</label>
+														<input type="text" class="form-control" value="REFERRAL OF INSULAR LIFE ADVISOR/ AGENT" readonly />
 													</div>
 													<div class="col-md-6 mb-3">
 														<label for="">Agent Name</label>
-														<input type="text" class="form-control" formControlName="afname" [value]="
-																affiliate.agentName
-															" readonly />
+														<input type="text" class="form-control" formControlName="afname" [value]="affiliate.agentName" readonly />
 													</div>
 													<input type="hidden" formControlName="primeCare" value="1" />
-													<input type="hidden" formControlName="acode" [value]="
-															affiliate?.agentCode
-														" />
-													<input type="hidden" formControlName="afname" [value]="
-															affiliate?.agentName
-														" />
+													<input type="hidden" formControlName="acode" [value]="affiliate?.agentCode" />
+													<input type="hidden" formControlName="afname" [value]="affiliate?.agentName" />
 													<input type="hidden" formControlName="alname" value="" />
+													<input type="hidden" formControlName="agentBranchCode" [value]="affiliate?.branchCode" />
 												</ng-container>
 
 												<div
@@ -1837,7 +1829,7 @@
 																<div
 																	class="col-md-6"
 																>
-																	<input 
+																	<input
 																		class="form-control"
 																		ng-required="isRequired"
 																		type="number"

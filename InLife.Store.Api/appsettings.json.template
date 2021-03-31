@@ -99,32 +99,28 @@
 			[
 				"info@projectgrey.net"
 			],
-			"Subject": "InLife Store API : An error has occurred",
-			"TemplateFile": "ErrorNotification.html"
+			"Subject": "InLife Store API : An error has occurred"
 		},
 
 		"GroupApplicationReferenceCode":
 		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Subject": "InLife Group Application Reference Code",
-			"TemplateFile": "GroupApplicationReferenceCode.html"
+			"Subject": "InLife Group Application Reference Code"
 		},
 
 		"GroupApplicationOtp":
 		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Subject": "Verification",
-			"TemplateFile": "GroupApplicationOtp.html"
+			"Subject": "Verification"
 		},
 
 		"GroupApplicationThankYou":
 		{
 			"SenderName": "InLife Store",
 			"SenderEmail": "do-not-reply@projectgrey.net",
-			"Subject": "Thank you for your InLife Group Application",
-			"TemplateFile": "GroupApplicationThankYou.html"
+			"Subject": "Thank you for your InLife Group Application"
 		},
 
 		"GroupApplicationFeedbackAdmin":
@@ -138,8 +134,7 @@
 				"tj@projectgrey.net",
 				"abbelandres@insular.com.ph"
 			],
-			"Subject": "InLife Store Group Insurance Feedback - #REFERENCE-CODE#",
-			"TemplateFile": "GroupApplicationFeedbackAdmin.html"
+			"Subject": "InLife Store Group Insurance Feedback - #REFERENCE-CODE#"
 		},
 
 		"GroupApplicationCompleteAdmin":
@@ -153,8 +148,7 @@
 				"tj@projectgrey.net",
 				"abbelandres@insular.com.ph"
 			],
-			"Subject": "InLife Store Group Insurance Application - #REFERENCE-CODE#",
-			"TemplateFile": "GroupApplicationCompleteAdmin.html"
+			"Subject": "InLife Store Group Insurance Application - #REFERENCE-CODE#"
 		},
 
 		"GroupApplicationCancel":
@@ -168,8 +162,7 @@
 				"tj@projectgrey.net",
 				"abbelandres@insular.com.ph"
 			],
-			"Subject": "InLife Store Group Insurance Cancel - #REFERENCE-CODE#",
-			"TemplateFile": "GroupApplicationCancel.html"
+			"Subject": "InLife Store Group Insurance Cancel - #REFERENCE-CODE#"
 		},
 
 		"GroupApplicationPaymentProof":
@@ -184,8 +177,7 @@
 				"abbelandres@insular.com.ph",
 				"abuseropaw@gmail.com"
 			],
-			"Subject": "InLife Store Group Insurance Proof of Payment - #REFERENCE-CODE#",
-			"TemplateFile": "GroupApplicationPaymentProof.html"
+			"Subject": "InLife Store Group Insurance Proof of Payment - #REFERENCE-CODE#"
 		},
 
 		"GroupApplicationsCompletedBatch":
@@ -199,8 +191,7 @@
 				"tj@projectgrey.net",
 				"abbelandres@insular.com.ph"
 			],
-			"Subject": "InLife Store Group Applications",
-			"TemplateFile": "GroupApplicationsCompletedBatch.html"
+			"Subject": "InLife Store Group Applications"
 		}
 	}
 }

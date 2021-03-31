@@ -50,7 +50,9 @@
 			{
 				const productPages =
 				{
-					'prime-care': 'prime-care.html'
+					'prime-care':        'prime-care',
+					'prime-secure':      'prime-secure',
+					'prime-secure-lite': 'prime-secure-lite'
 				};
 
 				const params = new URLSearchParams(window.location.search);
@@ -65,7 +67,10 @@
 					? productPages[product]
 					: '/';
 
-				var endpoint = `${api}affiliates/${code}`;
+				const path = window.location.pathname;
+				const dir = path.substring(0, path.lastIndexOf('/'));
+				var endpoint = `${dir}/api/affiliates/${code}`;
+
 				$.ajax
 				({
 					url: endpoint,

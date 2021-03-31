@@ -29,16 +29,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="EmailTemplates\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="EmailTemplates\**">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\InLife.Store.Core\InLife.Store.Core.csproj" />
 		<ProjectReference Include="..\InLife.Store.Infrastructure\InLife.Store.Infrastructure.csproj" />
 	</ItemGroup>

@@ -33,14 +33,4 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="EmailTemplates\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="EmailTemplates\**">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
 </Project>

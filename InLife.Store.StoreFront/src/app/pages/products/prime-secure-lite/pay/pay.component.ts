@@ -272,7 +272,9 @@ export class PayComponent implements OnInit
 
 		// 	"AgentCode": this.basicInformation.acode,
 		// 	"RefFirstName": this.basicInformation.afname,
-		// 	"RefLastName": this.basicInformation.alname
+		// 	"RefLastName": this.basicInformation.alname,
+		// 	"IsBanca": (this.basicInformation.agentBranchCode) ? 1 : 0,
+		// 	"ServicingAgentBranchCode": this.basicInformation.agentBranchCode
 		// }
 
 		// let headers: HttpHeaders = new HttpHeaders();
