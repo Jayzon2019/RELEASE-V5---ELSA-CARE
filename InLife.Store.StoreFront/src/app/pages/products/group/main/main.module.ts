@@ -60,7 +60,6 @@ import { PromptMessageComponent } from '../shared/prompt-message/prompt-message.
 		GoogleAnalyticsService,
 		FacebookPixelService,
 		UtilitiesService,
-
 		ApplicationStatusService,
 		ApplyService,
 		QuoteService,
@@ -69,6 +68,7 @@ import { PromptMessageComponent } from '../shared/prompt-message/prompt-message.
 		HeroSliderResolver
 		
 	],
+	entryComponents: [PromptMessageComponent],
 	bootstrap: [MainComponent]
 })
 export class MainModule { }

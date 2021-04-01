@@ -92,7 +92,7 @@ export class PayComponent implements OnInit
 		//image convert to pdf
 		// this.pdfblogImage = this.getinnerForm.pdfbasestring;
 		// this.landline = this.basicInformation.landline ? "+63" + this.basicInformation.landline : "";
-		this.policyNo = this.session.get("policyNo");
+		this.policyNo = this.session.get("policyNo").policyNo;
 		// this.health1 = this.healthCondition.healthCondition1;
 		// this.health2 = this.healthCondition.healthCondition2;
 		// this.health3 = this.healthCondition.healthCondition3;

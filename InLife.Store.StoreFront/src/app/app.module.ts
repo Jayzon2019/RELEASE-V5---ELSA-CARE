@@ -20,6 +20,7 @@ import { SaveQuoteComponent } from './pages/save-quote/save-quote.component';
 import { PaymentRecievedComponent } from './pages/payment-recieved/payment-recieved.component';
 import { ControlsModule } from './controls/controls.module';
 import { CryptographyService } from './services/cryptography.service';
+import { SharedModule } from './shared/shared.module';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig =
 {
@@ -74,6 +75,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 			AppRoutingModule,
 			HttpClientModule,
 			ControlsModule,
+			SharedModule,
 		  NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
 		],
 	providers:

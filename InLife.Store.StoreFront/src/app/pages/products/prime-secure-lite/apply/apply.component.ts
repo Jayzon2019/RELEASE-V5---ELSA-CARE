@@ -444,6 +444,7 @@ export class ApplyComponent implements OnInit
 			const PostQuote = this.session.get("PostQuote");
 			const getQuoteForm = this.session.get("getQuoteForm");
 			const extensionData = this.session.get("extensionData");
+			const underwritingstatus = this.session.get("UnderWritingStatus");
 			console.log(PostQuote);
 			console.log(getQuoteForm);
 			console.log(this.getApplyForm.value);
@@ -471,9 +472,9 @@ export class ApplyComponent implements OnInit
 			"OwnerResidencePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//12345678,
 			"OwnerMobileNo": this.nullIfZero(getQuoteForm.basicInformation.mobile),//1234567,
 			"PlanCode": "AH0017",
-			"PlanName": "Prime Care",
-			"PaymentMode": this.nullIfZero(getQuoteForm.calculatePremium.gender),//12,
-			"FaceAmount": getQuoteForm.calculatePremium.totalCashBenefit,//720000, ñ
+			"PlanName": "Prime Secure Lite",
+			"PaymentMode": 1,//12,
+			"FaceAmount": parseFloat(getQuoteForm.calculatePremium.totalCashBenefit.substring(1).replace(/,/g, '')),//720000, ñ ;
 			"Health1": getQuoteForm.healthCondition.healthDeclaration1,//"0",healthCondition
 			"Health2": getQuoteForm.healthCondition.healthDeclaration2,//"0",
 			"Health3": getQuoteForm.healthCondition.healthDeclaration3,//"0",
@@ -507,7 +508,7 @@ export class ApplyComponent implements OnInit
 			"PolicyDeliveryOption": "digitalhard",
 			"ServicingAgentBranchCode": "DO6437",
 			"IsBanca": false,
-			"ProposalId": 44670,
+			"ProposalId": underwritingstatus.proposalId,
 			"Beneficiary": [{
 				"FirstName": this.getApplyForm.get('beneficiaryDetails').get('fname').value,//"SampleBeneFname",
 				"MiddleName": this.getApplyForm.get('beneficiaryDetails').get('mname').value,//"SampleBeneMname",
@@ -536,6 +537,7 @@ export class ApplyComponent implements OnInit
 
 			let headers: HttpHeaders = new HttpHeaders();
 			headers = headers.append('Content-Type', 'application/json');
+			headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
 	
 			let options =
 			{
@@ -545,7 +547,7 @@ export class ApplyComponent implements OnInit
 	
 			let body = JSON.stringify(payload);
 
-			let endpoint = environment.appApi.host  + `/prime-secure/applications/${refNo}`;
+			let endpoint = environment.primeCareApi.host  + environment.primeCareApi.createApplicationEndpoint;
 
 			this.http
 			.post(endpoint, body, options)
@@ -565,6 +567,7 @@ export class ApplyComponent implements OnInit
 			}, (error) =>{
 				console.log('error');
 				console.log(error);
+				this.ngxService.stop();
 				this.router.navigate(['prime-secure-lite/pay']);
 			});
 		}

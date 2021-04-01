@@ -15,6 +15,8 @@ import { retry, catchError } from 'rxjs/operators';
 import { CONSTANTS } from '@app/services/constants';
 import { ApiService, SessionStorageService } from '@app/services';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { GeneralMessagePromptComponent } from '@app/shared/component/prompt-message/general-message-prompt.component';
 @Component
 ({
 	selector: 'app-quote',
@@ -59,7 +61,8 @@ export class QuoteComponent implements OnInit
 		private vps: ViewportScroller,
 		private http: HttpClient,
 		private sanitizer: DomSanitizer,
-		private currencyPipe: CurrencyPipe
+		private currencyPipe: CurrencyPipe,
+		private dialog: MatDialog
 	)
 	{
 		this.ngxService.start();
@@ -585,12 +588,34 @@ export class QuoteComponent implements OnInit
 			.subscribe((data: any) =>
 			{
 				this.ngxService.stopAll();
-				let refNo = String(data.id).padStart(10, '0');
-				this.session.set('refNo', refNo)
-				this.router.navigate(['prime-secure-lite/apply']);
-
+				if(data.underwritingStatus === 'CLEAN_CASE') {
+					this.session.set('UnderWritingStatus', data)
+					this.router.navigate(['prime-secure-lite/apply']);
+				} else {
+					const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
+						width: '300px',
+						data: {
+							message: `You applications status is ${data.underwritingStatus} which means it did not pass the application requirements.`
+						}
+					});
+					dialogRef.afterClosed().pipe().subscribe(data => {
+						if(data) {
+							this.router.navigate(['prime-secure-lite/ineligible']);
+						}
+					})
+				}
 			}, (error)=>{
-				this.router.navigate(['prime-secure-lite/apply']);
+				 this.router.navigate(['prime-secure-lite/apply']);
+
+				//const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
+				//	width: '300px',
+				//	data: {message: "You applications status is reffered which means it did not pass the application requirements."}
+				//});
+				//dialogRef.afterClosed().pipe().subscribe(data => {
+				//	if(data) {
+				//		this.router.navigate(['prime-secure-lite/ineligible']);
+				//	}
+				//})
 			});
 
 		} else {
