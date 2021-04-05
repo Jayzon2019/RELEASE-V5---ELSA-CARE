@@ -176,7 +176,7 @@
 													<div class="mt-3" *ngIf="eligiblePlan">
 														<div class="form-group">
 															<h3 class="mb-2 mt-4">Prime Secure Lite Plan {{eligiblePlan}}</h3>
-															<span style="color: #42414d; font-size: 14px;">Your age is <strong>{{calulatedAge}}</strong></span>
+															<span style="color: #42414d; font-size: 14px;">Your age is <strong>{{calulatedAge}}</strong>.</span>
 														</div>
 													</div>
 												</div>
@@ -2010,7 +2010,7 @@
 													</div>
 													<div class="row mt-3" *ngIf="bodyMassIndex">
 														<div class="form-group col-md-6 mb-3">
-															<span>Your Body Mass Index (BMI) is <strong>{{ bodyMassIndex }}</strong> </span>
+															<span>Your Body Mass Index (BMI) is <strong>{{ bodyMassIndex }}</strong>.</span>
 														</div>
 													</div>
 												</li>
@@ -2304,13 +2304,13 @@
 
 									<div class="formcoantiner step3" formGroupName="covidForm" *ngIf="getQuoteForm.get('calculatePremium').valid && getQuoteForm.get('basicInformation').valid && getQuoteForm.get('healthCondition').valid  && showForthStep">
 										<h3 id="step4_head">
-											Covid Questionnaire
+											COVID-19 Questionnaire
 										</h3>
 										<div class="preminumform">
 											<ul class="condtionslist">
 												<li class="clearfix">
 													<div class="ctnt">
-														Have you travelled outside the Philippines or in known local COVID-19 hotspots in the last 14 days?
+														1. Have you travelled outside the Philippines or in known local COVID-19 hotspots in the last 14 days?
 														<div class="form-row">
 															<div class="col-md-3">
 																<label class="radio-container">
@@ -2367,7 +2367,7 @@
 
 												<li class="clearfix">
 													<div class="ctnt">
-														Have you been in contact with or were directly exposed to a COVID-19 positive person/s in the last 14 days?
+														2. Have you been in contact with or were directly exposed to a COVID-19 positive person/s in the last 14 days?
 														<br />
 														<ul class="listinnevcondition"></ul>
 														<div class="form-row">
@@ -2426,7 +2426,7 @@
 
 												<li class="clearfix">
 													<div class="ctnt">
-														Have you complied with all the government mandated safety and health protocols, as follows:<br><br>
+														3. Have you complied with all the government mandated safety and health protocols, as follows:<br><br>
 														<ol class="health-declartions-list-items">
 															<li class="opt">Wearing and proper use of PPEs, if required?</li>
 															<li class="opt">Wearing of face masks and face shields in public?</li>
@@ -2489,7 +2489,7 @@
 												<!-- c -->
 												<li class="clearfix">
 													<div class="ctnt">
-														Have you exhibited any of the following symptoms in the last 14 days, including but not limited to: fever, cough, malaise (body weakness), rhinorrhea (mucus discharge from the nose), headache and/or flu-like symptoms, sore throat, shortness of breath, loss of taste, loss of smell, nausea, vomiting, diarrhea?
+														4. Have you exhibited any of the following symptoms in the last 14 days, including but not limited to: fever, cough, malaise (body weakness), rhinorrhea (mucus discharge from the nose), headache and/or flu-like symptoms, sore throat, shortness of breath, loss of taste, loss of smell, nausea, vomiting, diarrhea?
 														<div class="form-row">
 															<div class="col-md-3">
 																<label class="radio-container">

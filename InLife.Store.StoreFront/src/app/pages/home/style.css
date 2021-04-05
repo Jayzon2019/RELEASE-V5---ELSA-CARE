@@ -527,17 +527,17 @@ header .burger-menu.active .burger-close-icon {
   width: 50%;
   padding: 30px 36px 48px;
   margin-bottom: 20px;
-  -webkit-box-shadow: 0px 10px 30px 6px rgba(0, 0, 0, 0);
-  box-shadow: 0px 10px 30px 6px rgba(0, 0, 0, 0);
-  -webkit-transition: all 300ms ease;
-  transition: all 300ms ease;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  transition: none;
 }
 
 .feature-list li:hover {
-  -webkit-transform: translateY(-8px);
-          transform: translateY(-8px);
-  -webkit-box-shadow: 0px 8px 29px 6px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 8px 29px 6px rgba(0, 0, 0, 0.05);
+  -webkit-transform: none;
+          transform: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
   border-radius: 5px;
 }
 
@@ -1503,7 +1503,8 @@ padding: 30px 0;
 
 	.section-about .about-checklist li {
 		position: relative;
-		font-size: 18px;
+    font-size: 20px;
+    line-height: 30px;
 		padding: 15px 0 15px 10px;
 		margin-bottom: 0px;
 		min-height: 106px;
@@ -1551,11 +1552,11 @@ padding: 30px 0;
   }
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .section-about .about-checklist li {
     font-size: 16px;
   }
-}
+} */
 @media (max-width: 426px) {
 	.section-about .about-checklist li {
     /* font-size: 2.69vw; */
