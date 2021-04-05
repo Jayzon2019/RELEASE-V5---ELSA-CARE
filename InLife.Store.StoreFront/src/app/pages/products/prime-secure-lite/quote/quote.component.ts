@@ -550,11 +550,11 @@ export class QuoteComponent implements OnInit
 			InsuredMiddleName: basicInfo.get('mname').value,
 			InsuredLastName: basicInfo.get('lname').value,
 			InsuredSuffixId: +basicInfo.get('suffix').value,
-			InsuredBirthday: new Date(calcInfo.get('dateofbirth').value),
+			InsuredBirthday: new Date(calcInfo.get('dateofbirth').value).toLocaleDateString(),
 			InsuredGenderId: +calcInfo.get('gender').value,
-			PlanCode: 'PSLite',
-			PlanName: 'PSLite' + this.eligiblePlan,
-			PaymentMode: 1,
+			PlanCode: 'TR0091',
+			PlanName: 'Prime Secure Lite',
+			PaymentMode: 12,
 			FaceAmount: faceAmount,
 			Premium: +this.eligiblePlan,
 			InsuredPrimaryOccupationId: +basicInfo.get('sourceOfFunds').value,
@@ -589,6 +589,7 @@ export class QuoteComponent implements OnInit
 			{
 				this.ngxService.stopAll();
 				if(data.underwritingStatus === 'CLEAN_CASE') {
+					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 101).toString()));
 					this.session.set('UnderWritingStatus', data)
 					this.router.navigate(['prime-secure-lite/apply']);
 				} else {
@@ -606,16 +607,6 @@ export class QuoteComponent implements OnInit
 				}
 			}, (error)=>{
 				 this.router.navigate(['prime-secure-lite/apply']);
-
-				//const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
-				//	width: '300px',
-				//	data: {message: "You applications status is reffered which means it did not pass the application requirements."}
-				//});
-				//dialogRef.afterClosed().pipe().subscribe(data => {
-				//	if(data) {
-				//		this.router.navigate(['prime-secure-lite/ineligible']);
-				//	}
-				//})
 			});
 
 		} else {

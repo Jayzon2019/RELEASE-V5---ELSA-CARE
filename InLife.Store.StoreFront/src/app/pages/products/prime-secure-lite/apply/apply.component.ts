@@ -17,6 +17,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { environment } from '@environment';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { GeneralMessagePromptComponent } from '@app/shared/component/prompt-message/general-message-prompt.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component
 ({
@@ -66,6 +68,7 @@ export class ApplyComponent implements OnInit
 		private session: SessionStorageService,
 		private ngxService: NgxUiLoaderService,
 		private http: HttpClient,
+		private dialog: MatDialog
 	)
 	{
 		this.ngxService.start();
@@ -390,7 +393,7 @@ export class ApplyComponent implements OnInit
 			relation: new FormControl(data.relation || '', Validators.required),
 			prefix: new FormControl(data.prefix || '', Validators.required),
 			fname: new FormControl(data.fname || '', Validators.required),
-			mname: new FormControl(data.mname || ''),
+			mname: new FormControl(data.mname || '', Validators.required),
 			lname: new FormControl(data.lname || '', Validators.required),
 			suffix: new FormControl(data.suffix || '', Validators.required),
 			insuredStreet: new FormControl(data.insuredStreet || '', Validators.required),
@@ -436,6 +439,7 @@ export class ApplyComponent implements OnInit
 		this.submitted = true;
 		if (this.getApplyForm.valid && this.isValidFATCA())
 		{
+			this.ngxService.start();
 			this.session.set("getApplyForm", this.getApplyForm.value);
 			this.session.set("extensionData", this.dynamicArray);
 			this.session.set("insuredIdentityDocumentImageData", this.insuredIdentityDocumentImageData);
@@ -450,89 +454,95 @@ export class ApplyComponent implements OnInit
 			console.log(this.getApplyForm.value);
 			console.log(extensionData);
 
+			let bday = new Date(getQuoteForm.calculatePremium.dateofbirth).toLocaleDateString();
+
 			let payload = {
-			"InsuredFirstName": this.getApplyForm.get('beneficiaryDetails').get('fname').value,//"TestFLead3",
-			"InsuredMiddleName": this.getApplyForm.get('beneficiaryDetails').get('mname').value,//"TestMLead3",
-			"InsuredLastName": this.getApplyForm.get('beneficiaryDetails').get('lname').value,//"TestLLead",
-			"InsuredBirthday": this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value,//"01/01/1980",
-			"InsuredGenderId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredGender').value),//8,
-			"InsuredPrefixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('prefix').value),//24,
-			"InsuredEmailAddress": getQuoteForm.basicInformation.email,//"test@gmail1.com",
-			"InsuredResidencePhoneNumber": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredLandline').value),//12345678,
-			"InsuredMobileNo": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredMobile').value),//12345567,
-			"OwnerIsInsured": 1,
-			"OwnerRelationToInsuredId": 24,
-			"OwnerPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
-			"OwnerFirstName": getQuoteForm.basicInformation.fname,//"testFaname",
-			"OwnerLastName": getQuoteForm.basicInformation.lname,//"testLName",
-			"OwnerMiddleName": getQuoteForm.basicInformation.mname,//"testMName",
-			"OwnerBirthday": getQuoteForm.calculatePremium.dateofbirth,//"01/01/1980",
-			"OwnerGenderId": this.nullIfZero(getQuoteForm.calculatePremium.gender),//8,
-			"OwnerEmailAddress": getQuoteForm.basicInformation.email,//"test@gmail1.com",
-			"OwnerResidencePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//12345678,
-			"OwnerMobileNo": this.nullIfZero(getQuoteForm.basicInformation.mobile),//1234567,
-			"PlanCode": "AH0017",
-			"PlanName": "Prime Secure Lite",
-			"PaymentMode": 1,//12,
-			"FaceAmount": parseFloat(getQuoteForm.calculatePremium.totalCashBenefit.substring(1).replace(/,/g, '')),//720000, ñ ;
-			"Health1": getQuoteForm.healthCondition.healthDeclaration1,//"0",healthCondition
-			"Health2": getQuoteForm.healthCondition.healthDeclaration2,//"0",
-			"Health3": getQuoteForm.healthCondition.healthDeclaration3,//"0",
-			"InsuredResidenceAddress1": this.getApplyForm.get('beneficiaryDetails').get('insuredStreet').value,//"Add1",
-			"InsuredResidenceAddress2": this.getApplyForm.get('beneficiaryDetails').get('insuredVillage').value,//"Add2",
-			"InsuredResidenceAddress3": this.getApplyForm.get('beneficiaryDetails').get('insuredBarangay').value,//"Add3",
-			"InsuredResidenceMunicipalityId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').value),//1,
-			"InsuredResidenceProvinceId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredProvince').value),//1,
-			"InsuredResidenceZipCode": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredZipCode').value),//4118,
-			"Fatca1": this.getApplyForm.get('declarationForm').get('uslawpersion').value,//"No",
-			"Fatca2": this.getApplyForm.get('declarationForm').get('usnotlaw').value,//"No",
-			"InsuredCitizenshipId" : 170,
-			"InsuredCivilStatusId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').value),//5,
-			"InsuredPrimaryOccupationCompanyName": getQuoteForm.basicInformation.company,//"testcompanyname",
-			"InsuredPrimaryOccupationId": this.nullIfZero(getQuoteForm.basicInformation.company),//3,
-			"InsuredPrimaryOccupationMonthlyIncome": this.nullIfZero(getQuoteForm.basicInformation.monthlyIncome),//50000,
-			"InsuredFundSourceId": this.nullIfZero(getQuoteForm.basicInformation.sourceOfFunds),//122,
-			"InsuredPreferredMailingAddress": "Home",
-			"InsuredPrimaryOccupationAddress1": this.getApplyForm.get('personalInformation').get('street').value,//"Address1",
-			"InsuredPrimaryOccupationAddress2": this.getApplyForm.get('personalInformation').get('village').value,//"Address2",
-			"InsuredPrimaryOccupationAddress3": this.getApplyForm.get('personalInformation').get('barangay').value,//"Address3",
-			"InsuredPrimaryOccupationZipCode": this.getApplyForm.get('personalInformation').get('zipCode').value,//"4118",
-			"InsuredPrimaryOccupationProvinceId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('province').value),//1,
-			"InsuredPrimaryOccupationMunicipalityId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('municipality').value),//1,
-			"InsuredOfficePhoneNumber": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredLandline').value),//1234567,
-			"InsuredTinNo": this.nullIfZero(this.getApplyForm.get('identification').get('secondaryLegalIdNumber').value),//123456789,
-			"InsuredOtherIdNoType": this.getApplyForm.get('identification').get('legalIdType').value,//"Driver's License",legalIdType
-			"InsuredSpouseOtherIdNo": this.getApplyForm.get('identification').get('LegalIdNumber').value,//"12345678",
-			"Question1": getQuoteForm.covidForm.privacyPolicy ? "Yes" : "No",//"No",
-			"Question2": getQuoteForm.covidForm.privacyPolicy2 ? "Yes" : "No",//"No",
-			"PolicyDeliveryOption": "digitalhard",
-			"ServicingAgentBranchCode": "DO6437",
-			"IsBanca": false,
-			"ProposalId": underwritingstatus.proposalId,
-			"Beneficiary": [{
-				"FirstName": this.getApplyForm.get('beneficiaryDetails').get('fname').value,//"SampleBeneFname",
-				"MiddleName": this.getApplyForm.get('beneficiaryDetails').get('mname').value,//"SampleBeneMname",
-				"LastName": this.getApplyForm.get('beneficiaryDetails').get('lname').value,//"SampleBeneLastName",
-				"AddressType": 2,//2,Permanent
-				"Address1": this.getApplyForm.get('beneficiaryDetails').get('insuredStreet').value,//"Address1",
-				"Address2": this.getApplyForm.get('beneficiaryDetails').get('insuredVillage').value,//"Address2",
-				"Address3": this.getApplyForm.get('beneficiaryDetails').get('insuredBarangay').value,//"Address3",
-				"ProvinceId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredProvince').value),//1,
-				"MunicipalityId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').value),//1,
-				"ZipCode": this.getApplyForm.get('beneficiaryDetails').get('insuredZipCode').value,//"4118",
-				"LandLineNumber": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredLandline').value),//1234567,
-				"CivilStatusId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').value),//5,
-				"GenderId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredGender').value),//8,
-				"Birthday": this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value,//"01/01/1980",
-				"RelationToInsuredId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('relation').value),//25,
-				"Priority": this.getApplyForm.get('beneficiaryDetails').get('designation').value,//0,
-				"Right": this.getApplyForm.get('beneficiaryDetails').get('type').value//0
-			}],
-			"ExistingOtherInsurance": extensionData,
-			"InsuredValidIdImage": this.getApplyForm.get('identification').get('file').value,//"XXXXXXXXXXXXXXX",
-			"OwnerValidIdImage": this.getApplyForm.get('identification').get('file').value,//"XXXXXXXXXXXXX",
-			"RefFirstName": getQuoteForm.basicInformation.afname ? getQuoteForm.basicInformation.afname : "",//"SampleFName",
-			"RefLastName": getQuoteForm.basicInformation.alname ? getQuoteForm.basicInformation.alname : "",//"SampleLName"
+				"PlanCode": "TR0091",
+				"PlanName": "Prime Secure Lite",
+				"PaymentMode": 12,//12,
+				"FaceAmount": parseFloat(getQuoteForm.calculatePremium.totalCashBenefit.substring(1).replace(/,/g, '')),//720000, ñ ;
+				"Health1": getQuoteForm.healthCondition.healthDeclaration1 === 'No' ? "0" : "1",//"0",healthCondition
+				"Health2": getQuoteForm.healthCondition.healthDeclaration2 === 'No' ? "0" : "1",//"0",
+				"Health3": getQuoteForm.healthCondition.healthDeclaration3 === 'No' ? "0" : "1",//"0",
+				"Fatca1": this.getApplyForm.get('declarationForm').get('uslawpersion').value,//"No",
+				"Fatca2": this.getApplyForm.get('declarationForm').get('usnotlaw').value,//"No",
+				"Question1": getQuoteForm.covidForm.privacyPolicy ? "Yes" : "No",//"No",
+				"Question2": getQuoteForm.covidForm.privacyPolicy2 ? "Yes" : "No",//"No",
+				"PolicyDeliveryOption": "digitalhard",
+				"ServicingAgentBranchCode": "DO6437",
+				"IsBanca": false,
+				"ProposalId": underwritingstatus?.proposalId || 50148,
+				
+				"OwnerIsInsured": 1,
+				"OwnerRelationToInsuredId": 24,
+				"OwnerPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
+				"OwnerFirstName": getQuoteForm.basicInformation.fname,//"testFaname",
+				"OwnerLastName": getQuoteForm.basicInformation.lname,//"testLName",
+				"OwnerMiddleName": getQuoteForm.basicInformation.mname,//"testMName",
+				"OwnerBirthday": bday,//"01/01/1980",
+				"OwnerGenderId": this.nullIfZero(getQuoteForm.calculatePremium.gender),//8,
+				"OwnerEmailAddress": getQuoteForm.basicInformation.email,//"test@gmail1.com",
+				"OwnerResidencePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//12345678,
+				"OwnerMobileNo": this.nullIfZero(getQuoteForm.basicInformation.mobile),//1234567,
+
+				"InsuredFirstName": getQuoteForm.basicInformation.fname,//"TestFLead3",
+				"InsuredMiddleName": getQuoteForm.basicInformation.mname,//"TestMLead3",
+				"InsuredLastName": getQuoteForm.basicInformation.lname,//"TestLLead",
+				"InsuredBirthday": bday,//"01/01/1980",
+				"InsuredGenderId": this.nullIfZero(getQuoteForm.calculatePremium.gender),//8,
+				"InsuredPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
+				"InsuredEmailAddress": getQuoteForm.basicInformation.email,//"test@gmail1.com",
+				"InsuredResidencePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//12345678,
+				"InsuredMobileNo": this.nullIfZero(getQuoteForm.basicInformation.mobile),//12345567,
+				"InsuredResidenceAddress1": this.getApplyForm.get('personalInformation').get('street').value,//"Add1",
+				"InsuredResidenceAddress2": this.getApplyForm.get('personalInformation').get('village').value,//"Add2",
+				"InsuredResidenceAddress3": this.getApplyForm.get('personalInformation').get('barangay').value,//"Add3",
+				"InsuredResidenceMunicipalityId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('municipality').value),//1,
+				"InsuredResidenceProvinceId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('province').value),//1,
+				"InsuredResidenceZipCode": this.nullIfZero(this.getApplyForm.get('personalInformation').get('zipCode').value),//4118,
+				"InsuredCitizenshipId" : 170,
+				"InsuredCivilStatusId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('civilStatus').value),//5,
+				"InsuredPrimaryOccupationCompanyName": getQuoteForm.basicInformation.company,//"testcompanyname",
+				"InsuredPrimaryOccupationId": this.nullIfZero(getQuoteForm.basicInformation.occupation),//3,
+				"InsuredPrimaryOccupationMonthlyIncome": parseFloat(getQuoteForm.basicInformation.monthlyIncome.substring(1).replace(/,/g, '')),//50000,
+				"InsuredFundSourceId": this.nullIfZero(getQuoteForm.basicInformation.sourceOfFunds),//122,
+				"InsuredPreferredMailingAddress": "Home",
+				"InsuredPrimaryOccupationAddress1": this.getApplyForm.get('personalInformation').get('street').value,//"Address1",
+				"InsuredPrimaryOccupationAddress2": this.getApplyForm.get('personalInformation').get('village').value,//"Address2",
+				"InsuredPrimaryOccupationAddress3": this.getApplyForm.get('personalInformation').get('barangay').value,//"Address3",
+				"InsuredPrimaryOccupationZipCode": this.getApplyForm.get('personalInformation').get('zipCode').value,//"4118",
+				"InsuredPrimaryOccupationProvinceId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('province').value),//1,
+				"InsuredPrimaryOccupationMunicipalityId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('municipality').value),//1,
+				"InsuredOfficePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//1234567,
+				"InsuredTinNo": this.nullIfZero(this.getApplyForm.get('identification').get('secondaryLegalIdNumber').value),//123456789,
+				"InsuredOtherIdNoType": this.getApplyForm.get('identification').get('legalIdType').value,//"Driver's License",legalIdType
+				"InsuredSpouseOtherIdNo": this.getApplyForm.get('identification').get('LegalIdNumber').value,//"12345678",
+
+				"Beneficiary": [{
+					"FirstName": this.getApplyForm.get('beneficiaryDetails').get('fname').value,//"SampleBeneFname",
+					"MiddleName": this.getApplyForm.get('beneficiaryDetails').get('mname').value,//"SampleBeneMname",
+					"LastName": this.getApplyForm.get('beneficiaryDetails').get('lname').value,//"SampleBeneLastName",
+					"AddressType": 2,//2,Permanent
+					"Address1": this.getApplyForm.get('beneficiaryDetails').get('insuredStreet').value,//"Address1",
+					"Address2": this.getApplyForm.get('beneficiaryDetails').get('insuredVillage').value,//"Address2",
+					"Address3": this.getApplyForm.get('beneficiaryDetails').get('insuredBarangay').value,//"Address3",
+					"ProvinceId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredProvince').value),//1,
+					"MunicipalityId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').value),//1,
+					"ZipCode": this.getApplyForm.get('beneficiaryDetails').get('insuredZipCode').value,//"4118",
+					"LandLineNumber": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredLandline').value),//1234567,
+					"CivilStatusId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').value),//5,
+					"GenderId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredGender').value),//8,
+					"Birthday": new Date(this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value).toLocaleDateString(),//"01/01/1980", 
+					"RelationToInsuredId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('relation').value),//25,
+					"Priority": this.getApplyForm.get('beneficiaryDetails').get('designation').value,//0,
+					"Right": this.getApplyForm.get('beneficiaryDetails').get('type').value//0
+				}],
+
+				"ExistingOtherInsurance": extensionData,
+				"InsuredValidIdImage": this.insuredIdentityDocumentImageData,//"XXXXXXXXXXXXXXX",
+				"OwnerValidIdImage": this.insuredIdentityDocumentImageData,//"XXXXXXXXXXXXX",
+				"RefFirstName": getQuoteForm.basicInformation.afname ? getQuoteForm.basicInformation.afname : "",//"SampleFName",
+				"RefLastName": getQuoteForm.basicInformation.alname ? getQuoteForm.basicInformation.alname : "",//"SampleLName"
 			};
 
 			let headers: HttpHeaders = new HttpHeaders();
@@ -548,7 +558,7 @@ export class ApplyComponent implements OnInit
 			let body = JSON.stringify(payload);
 
 			let endpoint = environment.primeCareApi.host  + environment.primeCareApi.createApplicationEndpoint;
-
+			
 			this.http
 			.post(endpoint, body, options)
 			.pipe(
@@ -558,11 +568,24 @@ export class ApplyComponent implements OnInit
 			{
 				//let refNo = String(data.id).padStart(10, '0');
 				let policyNo = data;
-				console.log('policyNo');
-				console.log(policyNo);
-				this.session.set('policyNo', policyNo);
-				this.router.navigate(['prime-secure-lite/pay']);
 				this.ngxService.stop();
+				if (this.isNullOrWhiteSpace(policyNo))
+				{
+					const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
+						width: '300px',
+						data: {
+							message: `We apologize things don't appear to be working at the moment. Please try again.`
+						}
+					});
+				}
+				else
+				{
+					this.session.set('policyNo', policyNo);
+					this.router.navigate(['prime-secure-lite/pay']);
+				}
+
+				
+				
 				
 			}, (error) =>{
 				console.log('error');
@@ -606,6 +629,13 @@ export class ApplyComponent implements OnInit
 			}
 
 		}
+	}
+	isNullOrWhiteSpace(value: string)
+	{
+		if (typeof value === 'undefined' || value == null)
+			return true;
+
+		return value.replace(/\s/g, '').length < 1;
 	}
 
 	onChangeProviances(value)

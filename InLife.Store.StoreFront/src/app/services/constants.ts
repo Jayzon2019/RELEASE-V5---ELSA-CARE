@@ -135,7 +135,6 @@ export const CONSTANTS =
 	],
 	FUND_SOURCE:
 	[
-		{ "id": "0", "name": "Business Income" },
 		{ "id": "121", "name": "Family Income" },
 		{ "id": "122", "name": "Income from Employment" },
 		{ "id": "123", "name": "Savings" },
