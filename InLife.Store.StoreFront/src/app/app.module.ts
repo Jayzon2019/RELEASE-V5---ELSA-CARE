@@ -57,37 +57,34 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 @NgModule
 ({
 	declarations:
-		[
-			AppComponent,
-			MainLayoutComponent,
-			GetProductLayoutComponent,
-			CancalApplicationComponent,
-			SaveQuoteComponent,
-			PaymentRecievedComponent,
-		
-		],
-	imports:
-
 	[
-			BrowserAnimationsModule,
-			CarouselModule,
-			BrowserModule,
-			AppRoutingModule,
-			HttpClientModule,
-			ControlsModule,
-			SharedModule,
-		  NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-		],
+		AppComponent,
+		MainLayoutComponent,
+		GetProductLayoutComponent,
+		CancalApplicationComponent,
+		SaveQuoteComponent,
+		PaymentRecievedComponent
+	],
+	imports:
+	[
+		BrowserAnimationsModule,
+		CarouselModule,
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		ControlsModule,
+		SharedModule,
+		NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+	],
 	providers:
-		[
-			ApiService,
-			SessionStorageService,
-			CryptographyService,
-			GoogleAnalyticsService,
-			FacebookPixelService,
-
-			HeroSliderResolver
-		],
+	[
+		ApiService,
+		SessionStorageService,
+		CryptographyService,
+		GoogleAnalyticsService,
+		FacebookPixelService,
+		HeroSliderResolver
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

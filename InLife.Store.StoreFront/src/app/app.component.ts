@@ -19,7 +19,7 @@ export class AppComponent
 	title = 'InLife Store';
 
 	constructor
-		(
+	(
 		@Inject(PLATFORM_ID) private platformId: Object,
 		@Inject(APP_ID) private appId: string,
 		public router: Router,
@@ -36,22 +36,20 @@ export class AppComponent
 				console.log(event.urlAfterRedirects);
 				this.ngxService.stopAll();
 
-				//gtag('config', 'UA-173350504-1',
-				//{
-				//	'page_path': event.urlAfterRedirects
-				//});
 				this.googleAnalyticsService.config
-					({
-						'page_path': event.urlAfterRedirects
-					});
+				({
+					'page_path': event.urlAfterRedirects
+				});
 
-				//fbq('track', 'PageView');
 				this.facebookPixelService.track('PageView');
-			} else if (event instanceof NavigationStart) {
-				if(event.id !== 1) { // if not first load
+			}
+			else if (event instanceof NavigationStart)
+			{
+				 // if not first load
+				if (event.id !== 1)
+				{
 					this.ngxService.start();
 				}
-				
 			}
 		});
 	}

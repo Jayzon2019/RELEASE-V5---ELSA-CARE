@@ -61,6 +61,10 @@
             margin-left: 25%;
             max-width: 75%;
         }
+
+        .content-wrapper{
+            margin-left: 26%;
+        }
     }
 
     @media (max-width: 800px) {
@@ -73,4 +77,12 @@
             font-size: 18px;
         }
     }
+
+    @media (max-width: 1250px) {
+        .steplist ul.steplistmain li ul.innerlist {
+            width: 150px;
+        }
+    }
+
+  
 }

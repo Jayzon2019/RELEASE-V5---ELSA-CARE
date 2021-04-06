@@ -45,7 +45,7 @@ namespace InLife.Store.Core.Services
 
 		Task SendGroupApplicationPaymentProof(GroupApplication application, string contentType, Stream stream);
 
-		Task SendGroupApplicationsCompletedBatch(IEnumerable<GroupApplication> applications);
+		Task SendGroupApplicationsCompletedBatch(ICollection<GroupApplication> applications);
 
 		#endregion
 	}

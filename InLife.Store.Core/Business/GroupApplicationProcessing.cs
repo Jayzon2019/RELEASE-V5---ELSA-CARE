@@ -194,7 +194,7 @@ namespace InLife.Store.Core.Business
 			return application;
 		}
 
-		public async Task<GroupApplication> UploadFile(string refcode, string documentType, string contentType, Stream stream)
+		public async Task<GroupApplication> UploadFile(string refcode, string documentType, string contentType, string filename, Stream stream)
 		{
 			var application = applicationRepository.GetByReferenceCode(refcode);
 
@@ -203,16 +203,18 @@ namespace InLife.Store.Core.Business
 
 			documentType = documentType.ToLower();
 
-			//var companyName = application.CompanyName.Replace("  ", " ");
-			//foreach (char c in Path.GetInvalidFileNameChars())
-			//	companyName = companyName.Replace(c, Char.MinValue);
+			var companyName = application.CompanyName.Replace("  ", " ");
+			foreach (char c in Path.GetInvalidFileNameChars())
+				companyName = companyName.Replace(c, Char.MinValue);
 
-			//var directory = $"{application.ReferenceCode} - {companyName}";
-			//var filename = documentType + "." + MediaType.FromId(contentType).Extension;
+			var directory = $"{application.ReferenceCode} - {companyName}";
 
-			//await this.sftpService.UploadGroupFile(directory, filename, stream);
+			if (String.IsNullOrWhiteSpace(filename))
+				filename = documentType + "." + MediaType.FromId(contentType).Extension;
 
-			var filename = await sftpService.UploadGroupFile(application, documentType, contentType, stream);
+			await this.sftpService.UploadGroupFile(directory, filename, stream);
+
+			//await sftpService.UploadGroupFile(application, documentType, contentType, stream);
 
 			switch (documentType)
 			{
@@ -414,39 +416,49 @@ namespace InLife.Store.Core.Business
 
 		public async Task ProcessCompletedApplications()
 		{
-			var applications = applicationRepository
-				.GetAll()
-				.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
-				.ToList();
-			await emailService.SendGroupApplicationsCompletedBatch(applications);
+			// For testing purposes only
+			// This will not mark the applications as exported
+			//var applications = applicationRepository
+			//	.GetAll()
+			//	.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+			//	.ToList();
+			//await emailService.SendGroupApplicationsCompletedBatch(applications);
 
-			//try
-			//{
-			//	// Check all completed (PaymentProof) but not submitted
-			//	var applications = applicationRepository
-			//		.GetAll()
-			//		.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
-			//		.ToList();
+			try
+			{
+				// Check all completed (PaymentProof) but not submitted
+				var applications = applicationRepository
+					.GetAll()
+					.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+					.ToList();
 
-			//	// Upload to SFTP
-			//	await sftpService.UploadGroupApplicationsBatchData(applications);
+				if (applications.Count == 0)
+				{
+					// Notify admin that the task is still running but no new data
+					await emailService.SendGroupApplicationsCompletedBatch(applications);
+				}
+				else
+				{
+					// Upload to SFTP
+					await sftpService.UploadGroupApplicationsBatchData(applications);
 
-			//	// Send Notification
-			//	await emailService.SendGroupApplicationsCompletedBatch(applications);
+					// Send Notification
+					await emailService.SendGroupApplicationsCompletedBatch(applications);
 
-			//	// Set as exported
-			//	var currentDate = DateTimeOffset.Now;
-			//	applications.ForEach(x =>
-			//	{
-			//		x.ExportedDate = currentDate;
-			//	});
+					// Set as exported
+					var currentDate = DateTimeOffset.Now;
+					applications.ForEach(x =>
+					{
+						x.ExportedDate = currentDate;
+					});
 
-			//	applicationRepository.Update(applications);
-			//}
-			//catch (Exception ex)
-			//{
-			//	throw ex;
-			//}
+					applicationRepository.Update(applications);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		private GroupFile ParseDataUri(GroupFile file, string dataUri, string fileName = null)

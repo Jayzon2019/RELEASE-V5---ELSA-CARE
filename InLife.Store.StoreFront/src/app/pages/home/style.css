@@ -3506,7 +3506,11 @@ del:after {content: ' '; font-size: inherit; display: block; position: absolute;
     top: 34%; bottom: 53%; border-top: 3px solid #000; border-bottom: 3px solid #000;}
 .plan-slider ul.list-check li del:after {border-color: #696969; top: 39%;bottom: 37%; border-width: 2px;}
 .plan-carousel-mobile { display: none!important; }
-
+header nav .sub-menu a img {
+  float: left;
+  max-width: 115px;
+  height: 70px;
+}
 
 /* header nav .sub-menu a { display: inline-block; width: 100%; }
 header nav .sub-menu a img {float: left; max-width: 115px;}

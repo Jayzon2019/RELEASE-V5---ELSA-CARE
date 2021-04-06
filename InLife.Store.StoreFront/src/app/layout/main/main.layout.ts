@@ -29,7 +29,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 					let url = r.urlAfterRedirects.split('/');
 					console.log(url);
 					if(url.length > 1 && (url[1] == 'group' || url[1] == 'feedback')) {
-						
+
 						if(url.length > 2) {
 							this.isGroupChild = true;
 							this.isShowFooterandHeader = false;
@@ -49,7 +49,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 					this.mobileMenuClick();
 				}
 
-				
+
 			});
 
 		this.apiService.getFooterHeaderStatus().subscribe(data => {

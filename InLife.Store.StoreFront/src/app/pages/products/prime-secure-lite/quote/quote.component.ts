@@ -17,6 +17,7 @@ import { ApiService, SessionStorageService } from '@app/services';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { GeneralMessagePromptComponent } from '@app/shared/component/prompt-message/general-message-prompt.component';
+import { MatTooltip } from '@angular/material/tooltip';
 @Component
 ({
 	selector: 'app-quote',
@@ -49,7 +50,8 @@ export class QuoteComponent implements OnInit
 	bodyMassIndex: string;
 	eligiblePlan: string;
 	localMontlyIncome: number;
-
+	@ViewChild(MatTooltip) tooltip: MatTooltip;
+	
 	constructor
 	(
 		private router: Router,
@@ -188,6 +190,10 @@ export class QuoteComponent implements OnInit
 		this.showForthStep=this.getQuoteForm.get('healthCondition').valid;
 		this.getAge(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value);
 		this.ngxService.stop();
+	}
+
+	showBirthTooltip(){
+		this.tooltip.show(0);
 	}
 
 	getAnualPremium() {
@@ -557,7 +563,7 @@ export class QuoteComponent implements OnInit
 			PaymentMode: 12,
 			FaceAmount: faceAmount,
 			Premium: +this.eligiblePlan,
-			InsuredPrimaryOccupationId: +basicInfo.get('sourceOfFunds').value,
+			InsuredPrimaryOccupationId: +basicInfo.get('occupation').value,
 			InsuredPrimaryOccupationMonthlyIncome: monthlyIncome,
 			Bmi: +this.bodyMassIndex
 		}
