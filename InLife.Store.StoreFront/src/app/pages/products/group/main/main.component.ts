@@ -24,15 +24,15 @@ export class MainComponent implements OnInit, OnDestroy {
 	public mobHeroBg: any;
 	destroy$ = new Subject();
 	isStableApp = new Subject();
-	constructor(private router: Router, private route: ActivatedRoute, 
-		private apiService: ApiService, private sanitizer: DomSanitizer,  
+	constructor(private router: Router, private route: ActivatedRoute,
+		private apiService: ApiService, private sanitizer: DomSanitizer,
 		private util: UtilitiesService,
 		private session: SessionStorageService,
 		private appRef: ApplicationRef,
 		private dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.session.clear();
+		//this.session.clear();
 		// this.getGroupHeroSlider();
 
 		// this.route.data
@@ -42,9 +42,9 @@ export class MainComponent implements OnInit, OnDestroy {
         // });
 		this.route.queryParams
 			.pipe(
-				map(params => { 
-					if (params?.refCode) 
-						this.referenceCode = params.refCode; 
+				map(params => {
+					if (params?.refCode)
+						this.referenceCode = params.refCode;
 				}),
 				switchMap(() => this.appRef.isStable),
 				filter(stable => stable),
@@ -98,7 +98,7 @@ export class MainComponent implements OnInit, OnDestroy {
 		document.getElementById(el).scrollIntoView({
 			behavior: 'smooth'
 		});
-		
+
 	}
 	sanitize(url: string) {
 

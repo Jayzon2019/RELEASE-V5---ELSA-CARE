@@ -217,14 +217,14 @@ namespace InLife.Store.Api
 			"application/zip", "application/gzip", "application/x-7z-compressed", "application/vnd.rar"
 		})]
 		[DisableRequestSizeLimit]
-		public async Task<ActionResult> UploadFile(string refcode, string type, [FromHeader] RequestHeaders headers)
+		public async Task<ActionResult> UploadFile(string refcode, string type, [FromHeader] FileUploadRequestHeaders headers)
 		{
 			try
 			{
 				if (!applicationProcessing.VerifySession(refcode, headers.Session))
 					return Unauthorized();
 
-				var application = await applicationProcessing.UploadFile(refcode, type, Request.ContentType, Request.Body);
+				var application = await applicationProcessing.UploadFile(refcode, type, Request.ContentType, headers.Filename, Request.Body);
 
 				if (application == null)
 					return NotFound();

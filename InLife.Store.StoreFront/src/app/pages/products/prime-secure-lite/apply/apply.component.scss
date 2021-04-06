@@ -71,11 +71,20 @@
             margin-left: 25%;
             max-width: 75%;
         }
+        .content-wrapper{
+            margin-left: 26%;
+        }
     }
 
     @media (max-width: 800px) {
         .steplist-wrapper > .steplist{
             position: inherit;
+        }
+    }
+
+    @media (max-width: 1250px) {
+        .steplist ul.steplistmain li ul.innerlist {
+            width: 150px;
         }
     }
 }

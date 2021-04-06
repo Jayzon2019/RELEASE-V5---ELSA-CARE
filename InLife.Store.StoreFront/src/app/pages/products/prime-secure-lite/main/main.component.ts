@@ -6,72 +6,86 @@ import { ApiService } from '../../../../services/api.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component
-	({
-		templateUrl: './main.component.html',
-		styleUrls: ['./style.css']
-	})
-export class MainComponent implements OnInit {
+({
+	templateUrl: './main.component.html',
+	styleUrls: ['./style.css']
+})
+export class MainComponent implements OnInit
+{
 	public slider: any;
 	public heroBg: any;
 	public mobHeroBg: any;
-	customOptions: OwlOptions = {
+
+	customOptions: OwlOptions =
+		{
 		center: true,
 		items: 2,
 		loop: false,
 		margin: 20,
 		dots: true,
 		slideBy: 2,
-		responsive: {
-			320: {
+		responsive:
+		{
+			320:
+			{
 				items: 4,
 			}
 		},
 		nav: true
 	}
 
-	planCarousel: any = {
+	planCarousel: any =
+	{
 		center: true,
 		items: 1,
 		loop: false,
 		margin: 20,
 		dots: true,
 		nav: true,
-		responsive: {
-			320: {
+		responsive:
+		{
+			320:
+			{
 				items: 1,
 				stagePadding: 0,
 				center: false,
 			},
-			1025: {
+			1025:
+			{
 				items: 1,
 				center: false,
 				margin: 50,
 			},
-			1701: {
+			1701:
+			{
 				items: 2
 			}
 		}
 	}
 
-	planCarouselMobile: any = {
+	planCarouselMobile: any =
+	{
 		center: false,
 		items: 1,
 		loop: false,
 		margin: 20,
 		dots: true,
 		nav: true,
-		responsive: {
-			320: {
+		responsive:
+		{
+			320:
+			{
 				items: 1,
 			},
-			768: {
+			768:
+			{
 				items: 1,
 			}
 		}
 	}
 
-	
-	OwlOptions: any = {
+	OwlOptions: any =
+	{
 		center: true,
 		items: 2,
 		loop: false,
@@ -79,52 +93,59 @@ export class MainComponent implements OnInit {
 		dots: true,
 		nav: true,
 		slideBy: 2,
-		responsive: {
-			320: {
+		responsive:
+		{
+			320:
+			{
 				items: 4,
 			}
 		}
 	}
 
-
 	constructor(private router: Router, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
 
-	ngOnInit(): void {
+	ngOnInit(): void
+	{
 		this.getPrimeSecureLiteHeroSlider();
-		this.session.clear();
+		//this.session.clear();
 	}
 
-	getPrimeSecureLiteHeroSlider() {
+	getPrimeSecureLiteHeroSlider()
+	{
 		var url = "/PrimeHero/GetPrimeHeroSliders";
-		this.apiService.sendGetRequest(url).subscribe((responseBody) => {
+		this.apiService.sendGetRequest(url).subscribe((responseBody) =>
+		{
 			this.slider = responseBody[0];
 		});
 	}
 
-	sanitize(url: string) {
-
-		if (url) {
+	sanitize(url: string)
+	{
+		if (url)
+		{
 			return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${url}`);
 		}
 	}
 
-
-	getUrl(url: string) {
+	getUrl(url: string)
+	{
 		return "url('data:image/png;base64," + url + "')";
 	}
 
-	getColor(color: string) {
-		if (window.innerWidth < 768) {
+	getColor(color: string)
+	{
+		if (window.innerWidth < 768)
+		{
 			color = "#ffffff";
 		}
 		return color;
 	}
 
-
-	getPosition(position: string) {
-		if (position != undefined && (position == "Right" && window.innerWidth > 768)) {
+	getPosition(position: string)
+	{
+		if (position != undefined && (position == "Right" && window.innerWidth > 768))
+		{
 			return "position: relative; left:700px;";
 		}
 	}
-
 }

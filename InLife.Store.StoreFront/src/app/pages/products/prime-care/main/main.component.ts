@@ -34,38 +34,44 @@ export class MainComponent implements OnInit
 	ngOnInit(): void
 	{
 		this.getPrimeHeroSlider();
-		this.session.clear();
+		//this.session.clear();
 	}
 
-	getPrimeHeroSlider() {
+	getPrimeHeroSlider()
+	{
 		var url = "/PrimeHero/GetPrimeHeroSliders";
-		this.apiService.sendGetRequest(url).subscribe((responseBody) => {
+		this.apiService.sendGetRequest(url).subscribe((responseBody) =>
+		{
 			this.slider = responseBody[0];
 		});
 	}
 
-	sanitize(url: string) {
-
-		if (url) {
+	sanitize(url: string)
+	{
+		if (url)
+		{
 			return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${url}`);
 		}
 	}
 
-
-	getUrl(url: string) {
+	getUrl(url: string)
+	{
 		return "url('data:image/png;base64," + url + "')";
 	}
 
-	getColor(color: string) {
-		if (window.innerWidth < 768) {
+	getColor(color: string)
+	{
+		if (window.innerWidth < 768)
+		{
 			color = "#ffffff";
 		}
 		return color;
 	}
 
-
-	getPosition(position: string) {
-		if (position != undefined && (position == "Right" && window.innerWidth > 768)) {
+	getPosition(position: string)
+	{
+		if (position != undefined && (position == "Right" && window.innerWidth > 768))
+		{
 			return "position: relative; left:700px;";
 		}
 	}

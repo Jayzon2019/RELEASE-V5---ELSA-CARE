@@ -591,7 +591,12 @@ export class ApplyComponent implements OnInit
 				console.log('error');
 				console.log(error);
 				this.ngxService.stop();
-				this.router.navigate(['prime-secure-lite/pay']);
+				const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
+					width: '300px',
+					data: {
+						message: `We apologize things don't appear to be working at the moment. Please try again.`
+					}
+				});
 			});
 		}
 		else

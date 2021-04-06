@@ -13,7 +13,7 @@ namespace InLife.Store.Core.Business
 		Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form);
 		Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form);
 
-		Task<GroupApplication> UploadFile(string refcode, string documentType, string contentType, Stream stream);
+		Task<GroupApplication> UploadFile(string refcode, string documentType, string contentType, string filename, Stream stream);
 
 		Task<GroupApplication> SetPaymentMode(string refcode, PaymentMode mode);
 

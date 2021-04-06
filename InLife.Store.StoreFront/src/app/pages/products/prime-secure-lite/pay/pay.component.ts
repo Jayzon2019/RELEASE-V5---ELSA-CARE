@@ -243,5 +243,5 @@ export class PayComponent implements OnInit
 		return null;
 	}
 
-	
+
 }

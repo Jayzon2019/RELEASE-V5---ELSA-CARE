@@ -718,16 +718,23 @@ namespace InLife.Store.Infrastructure.Services
 			);
 		}
 
-		public async Task SendGroupApplicationsCompletedBatch(IEnumerable<GroupApplication> applications)
+		public async Task SendGroupApplicationsCompletedBatch(ICollection<GroupApplication> applications)
 		{
 			// Send email to admin
 
 			var emailSettings = this.emailSettings.GroupApplicationsCompletedBatch;
+			StringBuilder body;
 
-			var body = new StringBuilder(EmailTemplates.GroupApplicationsCompletedBatch);
-			var list = new StringBuilder();
+			if (applications.Count == 0)
+			{
+				body = new StringBuilder(EmailTemplates.GroupApplicationsCompletedBatchEmpty);
+			}
+			else
+			{
+				body = new StringBuilder(EmailTemplates.GroupApplicationsCompletedBatch);
+				var list = new StringBuilder();
 
-			list.Append(@"
+				list.Append(@"
 				<table style=""border-collapse:collapse; font-size:0.8em;"">
 					<thead>
 						<tr>
@@ -741,13 +748,13 @@ namespace InLife.Store.Infrastructure.Services
 						</thead>
 						<tbody>");
 
-			foreach (var application in applications)
-			{
-				var totalMembers = "Schools and Universities".Equals(application.PlanCode, StringComparison.OrdinalIgnoreCase)
-					? $"{application.TotalTeachers} Teachers and {application.TotalStudents} Students"
-					: $"{application.TotalMembers}";
+				foreach (var application in applications)
+				{
+					var totalMembers = "Schools and Universities".Equals(application.PlanCode, StringComparison.OrdinalIgnoreCase)
+						? $"{application.TotalTeachers} Teachers and {application.TotalStudents} Students"
+						: $"{application.TotalMembers}";
 
-				decimal totalPremiums = 0;
+					decimal totalPremiums = 0;
 					if (application.TotalMembers.HasValue)
 						totalPremiums += application.TotalMembers.Value * application.PlanPremium;
 					if (application.TotalTeachers.HasValue)
@@ -755,7 +762,7 @@ namespace InLife.Store.Infrastructure.Services
 					if (application.TotalStudents.HasValue)
 						totalPremiums += application.TotalStudents.Value * application.PlanPremium;
 
-				list.Append(@"
+					list.Append(@"
 					<tr>
 						<td style=""border:solid 1px #ccc; padding:2px 4px; text-align:center;"">
 							#REFERENCE-CODE#
@@ -776,19 +783,20 @@ namespace InLife.Store.Infrastructure.Services
 							#TOTAL-MEMBERS#
 						</td>
 					</tr>")
-					.Replace("#REFERENCE-CODE#", application.ReferenceCode)
-					.Replace("#TRANSACTION-DATE#", application.CompletedDate.HasValue ? application.CompletedDate.Value.ToOffset(TimeSpan.FromHours(8)).ToString() : "")
-					.Replace("#COMPANY#", application.CompanyName)
-					.Replace("#PLAN-CODE#", application.PlanCode)
-					.Replace("#PLAN-VARIANT-CODE#", application.PlanVariantCode)
-					.Replace("#TOTAL-MEMBERS#", totalMembers);
-			}
+						.Replace("#REFERENCE-CODE#", application.ReferenceCode)
+						.Replace("#TRANSACTION-DATE#", application.CompletedDate.HasValue ? application.CompletedDate.Value.ToOffset(TimeSpan.FromHours(8)).ToString() : "")
+						.Replace("#COMPANY#", application.CompanyName)
+						.Replace("#PLAN-CODE#", application.PlanCode)
+						.Replace("#PLAN-VARIANT-CODE#", application.PlanVariantCode)
+						.Replace("#TOTAL-MEMBERS#", totalMembers);
+				}
 
-			list.Append(@"
+				list.Append(@"
 					</tbody>
 				</table>");
 
-			body.Replace("#BATCH-LIST#", list.ToString());
+				body.Replace("#BATCH-LIST#", list.ToString());
+			}
 
 			var adminSubject = emailSettings.Subject;
 			var adminSender = new MailAddress(emailSettings.SenderEmail, emailSettings.SenderName);

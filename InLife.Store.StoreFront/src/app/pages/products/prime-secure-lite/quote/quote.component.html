@@ -51,7 +51,7 @@
 						<div class="col-md-3 tabfull p-0 roghtwrapsection-wrapper only-in-mobile">
 							<app-prime-secure-lite-sidebar></app-prime-secure-lite-sidebar>
 						</div>
-						<div class="col-md-9 tabsamll">
+						<div class="col-md-9 tabsamll content-wrapper">
 							<div class="stepdetail">
 								<h1>
 									Get One-Year of Protection With Prime Secure
@@ -67,7 +67,7 @@
 												<div class="col-md-6 mb-3">
 													<label for="">
 														Birthdate
-														<i class="fa fa-question-circle" matTooltip="You must be aged 18-60 to avail of Prime Secure Lite" matTooltipPosition="right" [matTooltipClass]="'my-tooltip'"></i>
+														<i class="fa fa-question-circle" #tooltip matTooltip="You must be aged 18-60 to avail of Prime Secure Lite" matTooltipPosition="right" [matTooltipClass]="'my-tooltip'" (click)="showBirthTooltip()"></i>
 													</label>
 													<div
 														class="form-group mb-4"
@@ -2575,8 +2575,8 @@
 																margin-left: 42px;
 															">
 															<span class="font-italic">
-																I hereby declare that all my answers to this health questionnaire are true to the best of my knowledge and belief, and that misrepresentation or concealment of any information shall be a reason for the cancellation of the insurance application or shall render my policy, if issued, null and void.<br/>
-																Before the policy is delivered to me, I undertake to inform Insular Life of any change in my medical or physical condition, of any medical consultation or treatment I may have undergone, or of any intervening event that may affect my physical or financial condition as well as my security, occurring within the period from the execution of this application until the delivery of the policy to me.<br/>
+																I hereby declare that all my answers to this health questionnaire are true to the best of my knowledge and belief, and that misrepresentation or concealment of any information shall be a reason for the cancellation of the insurance application or shall render my policy, if issued, null and void.<br/><br/>
+																Before the policy is delivered to me, I undertake to inform Insular Life of any change in my medical or physical condition, of any medical consultation or treatment I may have undergone, or of any intervening event that may affect my physical or financial condition as well as my security, occurring within the period from the execution of this application until the delivery of the policy to me.<br/><br/>
 																I further authorize InLife to make the necessary disclosure to the appropriate government agency in compliance with the mandate of applicable laws and issuances (e.g. Republic Act No. 11332, etc.).
 															</span>
 

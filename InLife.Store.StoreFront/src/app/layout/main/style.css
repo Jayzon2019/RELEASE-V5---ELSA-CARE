@@ -385,7 +385,8 @@ header nav ul li:hover > a {
 }
 
 header nav ul li:hover a + .sub-menu {
-  display: block;
+  visibility: visible; 
+  opacity: 1;
 }
 
 header nav ul .sub-menu {
@@ -395,6 +396,8 @@ header nav ul .sub-menu {
   left: 0;
   background: #fff;
   width: 100%;
+  visibility: hidden;
+  opacity: 0;
 }
 
 @media (min-width: 1025px) {
@@ -405,8 +408,13 @@ header nav ul .sub-menu {
   }
 }
 
+header nav ul li:hover .sub-menu .sub-menu-content {
+  visibility: visible;
+  opacity: 1;
+}
+
 header nav ul .sub-menu .sub-menu-content {
-  max-width: 250px;
+  /* max-width: 250px; */
   margin: auto;
   padding: 0;
   display: block;
@@ -414,6 +422,9 @@ header nav ul .sub-menu .sub-menu-content {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+          visibility: hidden;
+  opacity: 0;   
+  transition: .1s;
 }
 
 @media (min-width: 1025px) {
@@ -421,7 +432,9 @@ header nav ul .sub-menu .sub-menu-content {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    max-width: 1695px;
+    /* visibility: hidden; */
+    opacity: 0;
+    /* max-width: 1695px; */
     padding: 0 20px;
   }
 }
@@ -3563,7 +3576,7 @@ del:after {content: ' '; font-size: inherit; display: block; position: absolute;
 
 
 header nav .sub-menu a { display: inline-block; width: 100%; }
-header nav .sub-menu a img {float: left; max-width: 115px;}
+header nav .sub-menu a img {float: left; max-width: 115px; height: 70px;}
 header nav .sub-menu a .sub-menu-cnt{float: left; width: 72%; padding-left: 15px; box-sizing: border-box; text-align:left;}
 header nav .sub-menu .sub-menu-cnt .sub-heading {font-size: 18px; font-weight: 600; color: #333; margin-bottom: 7px;}
 header nav .sub-menu .sub-menu-cnt p{font-size: 15px; color: #696969; line-height: 22px}
