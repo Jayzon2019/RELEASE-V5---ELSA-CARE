@@ -15,10 +15,11 @@ import { ApiService, SessionStorageService } from '@app/services';
 import { DynamicGrid } from './extension.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '@environment';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, finalize, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { GeneralMessagePromptComponent } from '@app/shared/component/prompt-message/general-message-prompt.component';
+import { GeneralMessagePromptComponent } from '@app/shared/component/general-message-prompt/general-message-prompt.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 @Component
 ({
@@ -68,7 +69,8 @@ export class ApplyComponent implements OnInit
 		private session: SessionStorageService,
 		private ngxService: NgxUiLoaderService,
 		private http: HttpClient,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private util: UtilitiesService
 	)
 	{
 		this.ngxService.start();
@@ -559,44 +561,31 @@ export class ApplyComponent implements OnInit
 
 			let endpoint = environment.primeCareApi.host  + environment.primeCareApi.createApplicationEndpoint;
 			
+			let errData = {
+				message: `We apologize things don't appear to be working at the moment. Please try again.`
+			}
+
 			this.http
 			.post(endpoint, body, options)
 			.pipe(
 				retry(1),
+				finalize(() => this.ngxService.stopAll())
 			)
 			.subscribe((data: any) =>
 			{
-				//let refNo = String(data.id).padStart(10, '0');
 				let policyNo = data;
 				this.ngxService.stop();
 				if (this.isNullOrWhiteSpace(policyNo))
 				{
-					const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
-						width: '300px',
-						data: {
-							message: `We apologize things don't appear to be working at the moment. Please try again.`
-						}
-					});
+					this.util.ShowGeneralMessagePrompt(errData);
 				}
 				else
 				{
 					this.session.set('policyNo', policyNo);
 					this.router.navigate(['prime-secure-lite/pay']);
 				}
-
-				
-				
-				
 			}, (error) =>{
-				console.log('error');
-				console.log(error);
-				this.ngxService.stop();
-				const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
-					width: '300px',
-					data: {
-						message: `We apologize things don't appear to be working at the moment. Please try again.`
-					}
-				});
+				this.util.ShowGeneralMessagePrompt(errData);
 			});
 		}
 		else

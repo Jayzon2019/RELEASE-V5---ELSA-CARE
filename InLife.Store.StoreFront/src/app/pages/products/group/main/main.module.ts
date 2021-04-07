@@ -1,4 +1,3 @@
-import { UtilitiesService } from './../services/utilities.service';
 import {  HeroSliderResolver } from '../../../../resolvers/home-sliders.resolver';
 import { ApplyService } from './../services/apply.service';
 import { ApplicationStatusService } from './../services/application-status.service';
@@ -28,7 +27,7 @@ import { ApplyComponent } from '../apply/apply.component';
 import { ReferenceMessageComponent } from '../shared/application-reference-message/reference-message.component';
 import { QuoteService } from '../services/quote.service';
 import { PayService } from '../services/pay.service';
-import { PromptMessageComponent } from '../shared/prompt-message/prompt-message.component';
+import { PromptMessageComponent } from '../../../../shared/component/prompt-message/prompt-message.component';
 @NgModule
 ({
 	imports:
@@ -50,8 +49,7 @@ import { PromptMessageComponent } from '../shared/prompt-message/prompt-message.
 		MakePaymentComponent,
 		QuoteComponent,
 		ApplyComponent,
-		ReferenceMessageComponent,
-		PromptMessageComponent
+		ReferenceMessageComponent
 	],
 	providers:
 	[
@@ -59,7 +57,6 @@ import { PromptMessageComponent } from '../shared/prompt-message/prompt-message.
 		SessionStorageService,
 		GoogleAnalyticsService,
 		FacebookPixelService,
-		UtilitiesService,
 		ApplicationStatusService,
 		ApplyService,
 		QuoteService,
@@ -68,7 +65,7 @@ import { PromptMessageComponent } from '../shared/prompt-message/prompt-message.
 		HeroSliderResolver
 		
 	],
-	entryComponents: [PromptMessageComponent],
+	entryComponents: [],
 	bootstrap: [MainComponent]
 })
 export class MainModule { }

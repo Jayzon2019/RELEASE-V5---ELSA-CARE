@@ -1,4 +1,3 @@
-import { UtilitiesService } from './../services/utilities.service';
 import { StorageType } from '@app/services/storage-types.enum';
 import { environment } from '@environment';
 import { Injectable, Injector, OnDestroy } from '@angular/core';
@@ -16,6 +15,7 @@ import $ from "jquery";
 import { CONSTANTS } from '@app/services/constants';
 import { ApiService, SessionStorageService } from '@app/services';
 import { QuoteService } from '../services/quote.service';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 @Component
 ({

@@ -1,4 +1,3 @@
-import { UtilitiesService } from './../services/utilities.service';
 import { environment } from '@environment';
 import { AfterViewInit, Injectable, Injector } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +14,7 @@ import { ApiService, SessionStorageService } from '@app/services';
 import { CONSTANTS } from '@app/services/constants';
 import { parse } from 'url';
 import { StorageType } from '@app/services/storage-types.enum';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 declare var require: any
 const FileSaver = require('file-saver');

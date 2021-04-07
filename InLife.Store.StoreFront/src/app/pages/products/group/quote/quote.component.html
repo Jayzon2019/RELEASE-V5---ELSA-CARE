@@ -586,7 +586,7 @@
 												<div class="form-row" style="margin-top: 80px;margin-bottom: 60px;">
 													<div class="col-md-7 col-12">
 														<div class="btnsec">
-															<button class="btn outlinedbtn text-left btn-back" (click)="backtoGroupPage()">
+															<button type="button" class="btn outlinedbtn text-left btn-back" (click)="backtoGroupPage()">
 																<i class="material-icons">arrow_backward</i> Back
 															</button>
 															<button class="btn savebtns outlinedbtn" type="btn" (click)="conformSave()" [disabled]="!getQuoteForm.get('basicInformation')?.valid || !getQuoteForm.get('basicInformation').value.privacyPolicy">

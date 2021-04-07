@@ -1,1 +1,16 @@
 a { color:#e43e25; }
+.mainwrapper{
+    padding: 100px 300px;
+
+    @media (max-width: 1250px) {
+        padding: 100px
+    }
+    @media (max-width: 650px) {
+        padding: 25px;
+
+        // .pagetitles span h1 {
+        //     font-size: 25px;
+        // }
+    }
+
+}

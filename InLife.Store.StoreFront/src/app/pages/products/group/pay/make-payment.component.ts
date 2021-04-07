@@ -1,4 +1,3 @@
-import { UtilitiesService } from './../services/utilities.service';
 import { environment } from '@environment';
 import { Injectable, Injector, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -18,6 +17,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { PayService } from '../services/pay.service';
 import { StorageType } from '@app/services/storage-types.enum';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 @Injectable({ providedIn: 'root' })
 
