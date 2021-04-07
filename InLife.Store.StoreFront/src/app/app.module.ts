@@ -1,3 +1,5 @@
+import { PaymentFailedComponent } from './pages/payment/payment-failed/payment-failed.component';
+import { PaymentCallbackComponent } from './pages/payment/payment-callback/payment-callback.component';
 import { HeroSliderResolver } from './resolvers/home-sliders.resolver';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,6 +23,7 @@ import { PaymentRecievedComponent } from './pages/payment-recieved/payment-recie
 import { ControlsModule } from './controls/controls.module';
 import { CryptographyService } from './services/cryptography.service';
 import { SharedModule } from './shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig =
 {
@@ -63,13 +66,16 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 		GetProductLayoutComponent,
 		CancalApplicationComponent,
 		SaveQuoteComponent,
-		PaymentRecievedComponent
+		PaymentRecievedComponent,
+		PaymentCallbackComponent,
+		PaymentFailedComponent
 	],
 	imports:
 	[
+		// CommonModule,
+		BrowserModule,
 		BrowserAnimationsModule,
 		CarouselModule,
-		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
 		ControlsModule,

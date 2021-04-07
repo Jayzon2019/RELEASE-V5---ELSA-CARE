@@ -50,7 +50,8 @@ export class PaymentPendingComponent extends ApplicationStatusBaseComponent impl
 		let url = environment.appApi.host + `/group/applications/${this.referenceCode}/files/payment-proof`;
 		let data = this.requirementsForm.get('ProofOfPayment').value;
 		if(this.sizeError) return;
-		this.applySerice_API.uploadRequirement(url, data, data.type)
+
+		this.applySerice_API.uploadRequirement(url, data, data.type, data.name)
 			.pipe(
 				takeUntil(this.destroy$)
 			)

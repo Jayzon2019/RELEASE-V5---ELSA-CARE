@@ -1,49 +1,34 @@
 <div class="mainpagewrap">
 	<div class="row m-0">
-		<div class="col-md-9 p-0">
-			<div class="leftwrapsection">
+		<div class="col-md-12 p-0">
+			<div class="mainwrapper">
 				<div class="logotitlebar">
 					<div class="row">
-						<div class="col-md-3">
-
-							<div class="logo-sec"><a href="#"><img src="assets/images/logo.png"></a></div>
-						</div>
-						<div class="col-md-9">
-							<div class="pagetitel-sec">
-
-							</div>
+						<div class="col-md-12">
+							<div class="logo-sec text-center"><a href="javascript:void(0)"><img width="200px" src="assets/images/logo.png"></a></div>
 						</div>
 					</div>
 				</div>
 				<div class="mainwizard">
 					<div class="row">
-						<div class="col-md-3">
-
-						</div>
-						<div class="col-md-9">
+						<div class="col-md-12">
 							<div class="stepdetail">
 								<div class="pagetitles">
-									<span style="margin-left:200px !important;">  <h1>Processing please wait....</h1></span>
-									<!--   <h1>Welcome to the InLife Family!
-										  Thank you for availing of Prime Care!</h1>
-									  <h5>Your future is now secured against the adverse impact of medical expenses due to
-										  a critical illness. Below are your transaction details:</h5> -->
+									<span class="wow fadeInUp">
+										<h1>{{message}}</h1>
+									</span>
+										<div class="controls mt-5 wow fadeInUp" *ngIf="hasErrorSavingPayment">
+											<button type="button" mat-button class="button button-primary button-outlined" style="font-size: 12px;" (click)="tryAgain()" >Try Again</button>
+										</div>
 
 								</div>
 
-								<!-- step9 strat -->
-
-								<div class="formcoantiner step9">
-
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
 			</div>
-		</div>
-		<div class="col-md-3 p-0">
 		</div>
 	</div>
 

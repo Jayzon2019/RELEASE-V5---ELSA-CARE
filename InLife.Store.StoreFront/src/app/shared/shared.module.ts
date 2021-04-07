@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
-import { GeneralMessagePromptComponent } from "./component/prompt-message/general-message-prompt.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { GeneralMessagePromptComponent } from "./component/general-message-prompt/general-message-prompt.component";
+import { UtilitiesService } from "./services/utilities.service";
 
 @NgModule({
   imports: [
-    
+    MatDialogModule
   ],
   declarations: [
     GeneralMessagePromptComponent
@@ -12,6 +14,7 @@ import { GeneralMessagePromptComponent } from "./component/prompt-message/genera
     GeneralMessagePromptComponent
   ],
   providers: [
+    UtilitiesService
   ],
   entryComponents: [GeneralMessagePromptComponent]
 })

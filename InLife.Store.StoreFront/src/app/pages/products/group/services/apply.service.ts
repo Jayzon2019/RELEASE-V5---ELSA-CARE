@@ -13,14 +13,16 @@ export class ApplyService extends ApiBaseService
 	}
 
     // Upload file
-    uploadRequirement(url: any, data: any, fileType: any) {
+    uploadRequirement(url: any, data: any, fileType: any, fileName: any) {
       let newHeaders = this.headerWithSession();
       newHeaders = newHeaders.append('Content-Type', fileType);
-        return this.http.put(url, data, {headers: newHeaders})
-        .pipe(
-          map((response) => <any>response),
-          catchError(this.handleError)
-        );
+      newHeaders = newHeaders.append('Filename', fileName);
+
+      return this.http.put(url, data, {headers: newHeaders})
+      .pipe(
+        map((response) => <any>response),
+        catchError(this.handleError)
+      );
     }
     
 }

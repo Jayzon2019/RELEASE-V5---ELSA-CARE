@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import * as moment from 'moment';
@@ -30,7 +30,9 @@ export class PaymentCallbackComponent implements OnInit
 	identication: any;
 	age: any;
 	getinnerForm: any;
-
+	hasErrorSavingPayment: boolean = false;
+	params: any;
+	message: string = "Processing please wait....";
 	constructor
 	(
 		private ngxService: NgxUiLoaderService,
@@ -40,7 +42,7 @@ export class PaymentCallbackComponent implements OnInit
 		private http: HttpClient
 	)
 	{
-		this.ngxService.start();
+		// this.ngxService.start();
 		const getQuoteFormData = JSON.parse(localStorage.getItem("getQuoteForm") || "[]");
 		const getApplyFormData = JSON.parse(localStorage.getItem("getApplyForm") || "[]");
 		this.basicInformation = getQuoteFormData.basicInformation;
@@ -56,6 +58,20 @@ export class PaymentCallbackComponent implements OnInit
 
 	ngOnInit(): void
 	{
+		this.route.queryParams.subscribe(params =>
+		{
+			this.params = params;
+
+			setTimeout(() => {
+				this.savePayment(this.params);
+			}, 10000);
+			
+		});
+	}
+
+
+	savePayment(params) {
+
 		let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');
 		headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
@@ -65,16 +81,13 @@ export class PaymentCallbackComponent implements OnInit
 			headers: headers,
 			params: new HttpParams()
 		};
-
-		this.route.queryParams.subscribe(params =>
-		{
-			var arr =
+		var arr =
 			{
 				"PolicyNo": params.policy,
 				"MerchantTxnRef": params.vpc_MerchTxnRef,
 				"OrderInfo": params.vpc_OrderInfo,
 				"AmountPaid": params.vpc_Amount,
-				"TransactionDate": new Date(),
+				"TransactionDate": this.formatDate(new Date()),
 				"TxnResponseCodeDesc": this.getTransactionCodeDescription(params.vpc_TxnResponseCode),
 				"TxnResponseCode": params.vpc_TxnResponseCode,
 				"PaymentServerMessage": params.vpc_Message,
@@ -88,26 +101,39 @@ export class PaymentCallbackComponent implements OnInit
 			let body = JSON.stringify(arr);
 			let endpoint = environment.primeCareApi.host + environment.primeCareApi.savePaymentEndpoint;
 
-			//console.log(arr);
 			this.session.set('PaymentResponse', arr);
 
 			this.http
 				.post(endpoint, body, options)
-				.pipe(catchError(this.handleError))
+				.pipe(finalize(() => this.ngxService.stopAll()))
 				.subscribe(data =>
 				{
-					this.ngxService.stop();
-
-					if (params.vpc_TxnResponseCode == 0)
+					if (params.vpc_TxnResponseCode === 0 || params.vpc_TxnResponseCode === "0")
 					{
-						this.routerlink.navigate(['thank-you']);
+						this.routerlink.navigate(['prime-secure-lite/thank-you']);
 					}
 					else
 					{
 						this.routerlink.navigate(['payment-failed', params.vpc_TxnResponseCode]);
 					}
+				}, (error) => {
+					this.message = "We apologize things don't appear to be working at the moment. Please try again.";
+					this.hasErrorSavingPayment = true;
 				});
-		});
+	}
+
+	tryAgain() {
+		// this.ngxService.start();
+		this.message = "Processing please wait....";
+		this.hasErrorSavingPayment = false;
+		this.savePayment(this.params);
+	}
+
+	formatDate(dateString: any): string
+	{
+		let date = moment(dateString);
+		let formatted = date.format('MM/DD/YYYY');
+		return formatted;
 	}
 
 	handleError(error: any)

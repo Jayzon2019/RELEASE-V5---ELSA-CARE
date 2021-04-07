@@ -10,14 +10,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, finalize } from 'rxjs/operators';
 
 import { CONSTANTS } from '@app/services/constants';
 import { ApiService, SessionStorageService } from '@app/services';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
-import { GeneralMessagePromptComponent } from '@app/shared/component/prompt-message/general-message-prompt.component';
+import { GeneralMessagePromptComponent } from '@app/shared/component/general-message-prompt/general-message-prompt.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 @Component
 ({
 	selector: 'app-quote',
@@ -62,6 +63,7 @@ export class QuoteComponent implements OnInit
 		private ngxService: NgxUiLoaderService,
 		private vps: ViewportScroller,
 		private http: HttpClient,
+		private util: UtilitiesService,
 		private sanitizer: DomSanitizer,
 		private currencyPipe: CurrencyPipe,
 		private dialog: MatDialog
@@ -570,8 +572,6 @@ export class QuoteComponent implements OnInit
 
 		this.session.set('PostQuote', dataInternalAPI);
 
-		console.log(dataInternalAPI, dataExternalAPI);
-
 		let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');
 		headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
@@ -590,33 +590,25 @@ export class QuoteComponent implements OnInit
 		if(isEligible) {
 			this.http
 			.post(endpoint, body, options)
-			.pipe(retry(1))
+			.pipe(retry(1), finalize(() => this.ngxService.stopAll()))
 			.subscribe((data: any) =>
 			{
 				this.ngxService.stopAll();
 				if(data.underwritingStatus === 'CLEAN_CASE') {
-					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 101).toString()));
+					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
 					this.session.set('UnderWritingStatus', data)
 					this.router.navigate(['prime-secure-lite/apply']);
 				} else {
-					const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
-						width: '300px',
-						data: {
-							message: `You applications status is ${data.underwritingStatus} which means it did not pass the application requirements.`
-						}
-					});
-					dialogRef.afterClosed().pipe().subscribe(data => {
-						if(data) {
-							this.router.navigate(['prime-secure-lite/ineligible']);
-						}
-					})
+					this.router.navigate(['prime-secure-lite/ineligible']);
 				}
-			}, (error)=>{
-				 this.router.navigate(['prime-secure-lite/apply']);
+			}, (error) => {
+				let data = {
+					message: `We apologize things don't appear to be working at the moment. Please try again.`
+				}
+				this.util.ShowGeneralMessagePrompt(data);
 			});
 
 		} else {
-			// this.session.clear();
 			this.router.navigate(['prime-secure-lite/ineligible']);
 		}
 

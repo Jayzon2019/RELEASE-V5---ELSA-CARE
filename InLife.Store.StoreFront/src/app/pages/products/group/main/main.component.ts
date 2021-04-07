@@ -1,5 +1,4 @@
-import { PromptMessageComponent } from './../shared/prompt-message/prompt-message.component';
-import { UtilitiesService } from './../services/utilities.service';
+import { PromptMessageComponent } from '../../../../shared/component/prompt-message/prompt-message.component';
 import { SessionStorageService } from '@app/services';
 import { Component, OnDestroy, OnInit, AfterViewInit, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +8,7 @@ import $ from "jquery";
 import { Subject } from 'rxjs';
 import { map, takeUntil, switchMap, filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 declare var require: any
 const FileSaver = require('file-saver');
 @Component

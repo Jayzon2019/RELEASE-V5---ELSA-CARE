@@ -154,7 +154,7 @@ export class PayComponent implements OnInit
 		let policyNo = this.policyNo;
 		let amount = this.paymentAmount.replace(/,/g, '') + '00';
 		let endpoint = environment.paymentGatewayEndpoint;
-		let returnUrl = `${window.location.protocol}//${window.location.host}/prime-secure-lite/thank-you?target=payment-callback%26policy=${policyNo}`;
+		let returnUrl = `${window.location.protocol}//${window.location.host}/payment-callback?policy=${policyNo}`;
 		let targetUrl = `${endpoint}?RefNo=${refNo}&Amount=${amount}&RetURL=${returnUrl}`;
 
 		// LOG FOR DEBUGGING

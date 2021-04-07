@@ -64,4 +64,12 @@ export class PaymentFailedComponent implements OnInit
 		this.text = responseCode[this.responseCode];
 	}
 
+	routeToSpecificPage() {
+		this.routerlink.navigate(['prime-secure-lite/pay']);
+	}
+
+	routeToHomePage() {
+		this.routerlink.navigate(['/']);
+	}
+
 }

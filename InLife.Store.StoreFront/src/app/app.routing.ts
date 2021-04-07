@@ -5,6 +5,8 @@ import { SaveQuoteComponent } from './pages/save-quote/save-quote.component';
 import { PaymentRecievedComponent } from './pages/payment-recieved/payment-recieved.component';
 import { MainLayoutComponent, GetProductLayoutComponent } from '@app/layout';
 import {  HeroSliderResolver } from './resolvers/home-sliders.resolver';
+import { PaymentCallbackComponent } from './pages/payment/payment-callback/payment-callback.component';
+import { PaymentFailedComponent } from './pages/payment/payment-failed/payment-failed.component';
 
 const routes: Routes =
 	[
@@ -12,6 +14,9 @@ const routes: Routes =
 		{ path: 'cancel-application', component: CancalApplicationComponent },
 		{ path: 'save-quote', component: SaveQuoteComponent },
 		{ path: 'payment-received', component: PaymentRecievedComponent },
+		// { path: 'thank-you', loadChildren: '@app/pages/thank-you.module#ThankYouModule' },
+		{ path: 'payment-callback', component: PaymentCallbackComponent },
+		{ path: 'payment-failed/:id', component: PaymentFailedComponent },
 		{
 			path: '',
 			component: MainLayoutComponent,
@@ -26,7 +31,7 @@ const routes: Routes =
 					{ path: 'prime-care', loadChildren: () => import('@app/pages/products/prime-care/main/main.module').then(m => m.MainModule) },
 					// { path: 'prime-secure',loadChildren: () => import('@app/pages/products/prime-secure/main/main.module').then(m => m.MainModule) },
 					{ path: 'prime-secure-lite',loadChildren: () => import('@app/pages/products/prime-secure-lite/main/main.module').then(m => m.MainModule) },
-					// { path: 'group',loadChildren: () => import('@app/pages/products/group/main/main.module').then(m => m.MainModule) },
+					//{ path: 'group',loadChildren: () => import('@app/pages/products/group/main/main.module').then(m => m.MainModule) },
 					{ path: 'feedback', loadChildren: () => import('@app/pages/feedback/feedback.module').then(m => m.FeedbackModule) },
 					{ path: 'prime-care/ineligible', loadChildren: () => import('@app/pages/products/prime-care/ineligible/ineligible.module').then(m => m.IneligibleModule) },
 				]
@@ -57,10 +62,7 @@ const routes: Routes =
 					//{ path: 'group/ineligible', loadChildren: () => import('@app/pages/products/group/ineligible/ineligible.module').then(m => m.IneligibleModule) },
 					//{ path: 'group/**',         redirectTo: 'group' },
 
-					// { path: 'thank-you', loadChildren: '@app/pages/thank-you.module#ThankYouModule' },
-
-					//{ path: 'payment-callback', component: PaymentCallbackComponent },
-					//{ path: 'payment-failed/:id', component: PaymentFailedComponent },
+					
 				]
 		},
 

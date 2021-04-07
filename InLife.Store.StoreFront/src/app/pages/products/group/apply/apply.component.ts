@@ -20,7 +20,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { catchError, finalize, retry, takeUntil, switchMap } from 'rxjs/operators';
 import { throwError, Subject, Observable } from 'rxjs';
 import { finished } from 'stream';
-import { UtilitiesService } from '../services/utilities.service';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 @Component
 	({
@@ -302,7 +302,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 			let url = environment.appApi.host + `/group/applications/${this.accessData.referenceCode}/files/${requestData.dbType}`;
 			let formData = new FormData();
 			formData.append("file", requestData.fileData);
-			const req = this.apply_API.uploadRequirement(url, formData, requestData.fileData.type)
+			const req = this.apply_API.uploadRequirement(url, formData, requestData.fileData.type, requestData.fileData.name)
 				.pipe(
 					takeUntil(this.destroy$),
 					finalize(() => { 
