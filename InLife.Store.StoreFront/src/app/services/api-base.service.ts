@@ -61,10 +61,21 @@ export abstract class ApiBaseService {
     return environment.appApi.host;
   }
 
+  protected baseURLPayment() {
+    return environment.primeCareApi.host;
+  }
+
   protected headerWithSession() {
     const token = this.session.get(StorageType.SESSION);
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Session', token);
+    return headers;
+  }
+
+  protected headerPaymentGateWay() {
+    let headers: HttpHeaders = new HttpHeaders();
+		headers = headers.append('Content-Type', 'application/json');
+		headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
     return headers;
   }
 }

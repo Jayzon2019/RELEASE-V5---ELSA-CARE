@@ -6,7 +6,9 @@
     }
 
     .leftwrapsection {
-        padding: 36px 250px 36px 150px;
+        padding: 36px 250px 36px 250px;
+
+        
     }
 
     @media (max-width: 1670px) {
@@ -35,6 +37,10 @@
             }
     
             @media (max-width: 500px) {
+
+                .pagetitles > .thank-you-header{
+                    font-size: 25px;
+                }
                 .helper {
                     .title {
                         width: 160px;
@@ -57,7 +63,21 @@
     
                 .helper-2 {
                     .content {
-                        width: 160px;
+                        width: 140px;
+                    }
+                }
+            }
+    
+            @media (max-width: 310px) {
+                .helper {
+                    .title {
+                        width: 114px;
+                    }
+                }
+    
+                .helper-2 {
+                    .content {
+                        width: 110px;
                     }
                 }
             }
@@ -76,7 +96,7 @@
         }
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 950px) {
         .steplist-wrapper > .steplist{
             position: inherit;
         }

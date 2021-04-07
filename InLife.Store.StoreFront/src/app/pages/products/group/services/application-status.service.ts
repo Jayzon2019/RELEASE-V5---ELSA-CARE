@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiBaseService } from './api-base.service';
+import { ApiBaseService } from '../../../../services/api-base.service';
 
 @Injectable()
 export class ApplicationStatusService extends ApiBaseService

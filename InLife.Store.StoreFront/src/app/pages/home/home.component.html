@@ -9,7 +9,9 @@
 						<div style="{{getPosition(slide.contentPostion)}}" class="hero-content">
 							<h2 style="{{'color:' + getColor(slide.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slide.headingColor) + '!important;'}}">{{slide.heading }}<br class="only-in-mobile" /></h2>
 							<p style="{{'color:' + getColor(slide.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slide.subHeadingColor) + '!important;'}}">{{ slide.subHeading }}</p>
-							<a [href]="slide.btnTxtLink" class="btn-orange">{{slide.heroBtnTxt }}</a>
+							<a [href]="slide.btnTxtLink == 'feature-plan' ? 
+								'javascript:void(0)' :
+								slide.btnTxtLink" (click)="scrollToFeatured(slide.btnTxtLink)" class="btn-orange">{{slide.heroBtnTxt }}</a>
 						</div>
 					</div>
 					<img [src]="sanitize(slide.heroMobBg)" class="only-in-mobile">

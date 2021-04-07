@@ -1,3 +1,4 @@
+import { PSLiteService } from './../../../../shared/services/pslite.servce';
 import { environment } from '@environment';
 
 import { Injectable, Injector } from '@angular/core';
@@ -7,8 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/scroll/scroll-strategy';
 
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { Observable, Subject, throwError } from 'rxjs';
+import { retry, catchError, map, switchMap, takeUntil, finalize, filter } from 'rxjs/operators';
 
 import * as moment from 'moment';
 import { jsPDF } from 'jspdf';
@@ -16,6 +17,8 @@ import { jsPDF } from 'jspdf';
 import { ApiService, SessionStorageService } from '@app/services';
 import { CONSTANTS } from '@app/services/constants';
 import { Router } from '@angular/router';
+import { StorageType } from '@app/services/storage-types.enum';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 
 @Injectable({ providedIn: 'root' })
 
@@ -52,6 +55,7 @@ export class PayComponent implements OnInit
 	health3: string;
 	privacyFile: any;
 	policy: any;
+	destroy$ = new Subject();
 
 	constructor
 	(
@@ -61,7 +65,9 @@ export class PayComponent implements OnInit
 		private http: HttpClient,
 		private apiService: ApiService,
 		private ngxService: NgxUiLoaderService,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private psLiteService_API: PSLiteService,
+		private util: UtilitiesService
 	)
 	{
 		// const getQuoteFormData = JSON.parse(this.session.get("getQuoteForm") || "[]");
@@ -70,7 +76,6 @@ export class PayComponent implements OnInit
 		const getQuoteFormData = this.session.get("getQuoteForm") || "[]";
 		const getApplyFormData = this.session.get("getApplyForm") || "[]";
 		const extension = this.session.get("extensionData") || "[]";
-		console.log(getQuoteFormData, getApplyFormData)
 		this.getFile();
 		this.basicInformation = getQuoteFormData.basicInformation;
 		this.calculationInformation = getQuoteFormData.calculatePremium;
@@ -92,10 +97,8 @@ export class PayComponent implements OnInit
 		//image convert to pdf
 		// this.pdfblogImage = this.getinnerForm.pdfbasestring;
 		// this.landline = this.basicInformation.landline ? "+63" + this.basicInformation.landline : "";
-		this.policyNo = this.session.get("policyNo");
-		// this.health1 = this.healthCondition.healthCondition1;
-		// this.health2 = this.healthCondition.healthCondition2;
-		// this.health3 = this.healthCondition.healthCondition3;
+		this.policyNo = this.session.get(StorageType.POLICYNO);
+
 	}
 
 	ngOnInit(): void
@@ -140,13 +143,77 @@ export class PayComponent implements OnInit
 
 	createApplication()
 	{
-		this.callPaymentUrl();
+		if(!this.policyNo) {
+			const quoteExternalData = JSON.stringify(this.session.get(StorageType.QUOTE_EXTERNAL_DATA));
+			const quoteInternalData = JSON.stringify(this.session.get(StorageType.QUOTE_INTERNAL_DATA));
+			const applyData = this.session.get(StorageType.APPLY_DATA);
+			const underws = this.session.get('UnderWritingStatus');
+
+			this.ngxService.start();
+
+			let errorMsg =  `We apologize things don't appear to be working at the moment. Please try again.`;
+
+			if(underws) { // If in the first request of requestPolicyNo returns nothing then rerequest it again
+				this.psLiteService_API.requestPolicyNo(JSON.stringify(applyData))
+					.pipe(takeUntil(this.destroy$))
+					.subscribe(policyNo => {
+						if (this.isNullOrWhiteSpace(policyNo)) {
+							//prompt user to try again
+							this.ngxService.stopAll();
+							this.util.ShowGeneralMessagePrompt({message: errorMsg});
+						} else {
+							this.session.set(StorageType.POLICYNO, policyNo);
+							this.policyNo = policyNo;
+							this.callPaymentUrl();
+						}
+					}, (error) => {
+						this.ngxService.stopAll();
+						this.util.ShowGeneralMessagePrompt({message: errorMsg});
+					})
+			} else { // Create underwritingstatus and request Policy No
+				this.psLiteService_API.createUnderWritingStatus(quoteExternalData)
+				.pipe(
+					map((data: any) => {
+						if(data.underwritingStatus === 'CLEAN_CASE') {
+							this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
+							this.session.set('UnderWritingStatus', data)
+							applyData.ProposalId = data.proposalId;
+							this.session.set(StorageType.APPLY_DATA, applyData);
+						} else {
+							this.destroy$.next(true);
+							this.router.navigate(['prime-secure-lite/ineligible']);
+						}
+						return data;
+					}),
+					filter((data: any) => data.underwritingStatus === 'CLEAN_CASE'),
+					switchMap((data) => this.psLiteService_API.requestPolicyNo(JSON.stringify(applyData))),
+					takeUntil(this.destroy$)
+				)
+				.subscribe(policyNo => {
+					if (this.isNullOrWhiteSpace(policyNo)) {
+						//prompt user to try again
+						this.ngxService.stopAll();
+						this.util.ShowGeneralMessagePrompt({message: errorMsg});
+					} else {
+						this.session.set(StorageType.POLICYNO, policyNo);
+						this.policyNo = policyNo;
+						this.callPaymentUrl();
+					}
+				}, (error) => {
+					this.ngxService.stopAll();
+					this.util.ShowGeneralMessagePrompt({message: errorMsg});
+				})
+			}
+
+			
+		} else {
+			this.callPaymentUrl(); // Recall payment after unsuccesful transaction
+		}
 	}
+
 
 	callPaymentUrl()
 	{
-		this.ngxService.start();
-
 		// TODO: Change to OrderId from API
 		// Numbers only
 		//let refNo = moment().format('YYYYMMDDHHmmssSSS');
@@ -165,22 +232,15 @@ export class PayComponent implements OnInit
 		window.location.href = targetUrl;
 	}
 
-	handleError(error: any)
+
+	isNullOrWhiteSpace(value: string)
 	{
-		let errorMessage = '';
-		if (error.error instanceof ErrorEvent)
-		{
-			// client-side error
-			errorMessage = `Error: ${error.error.message}`;
-		}
-		else
-		{
-			// server-side error
-			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-		}
-		window.alert(errorMessage);
-		return throwError(errorMessage);
+		if (typeof value === 'undefined' || value == null)
+			return true;
+
+		return value.replace(/\s/g, '').length < 1;
 	}
+
 
 	formatDate(dateString: any): string
 	{

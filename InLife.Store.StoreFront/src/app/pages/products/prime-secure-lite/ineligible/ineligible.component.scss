@@ -1,4 +1,10 @@
 /*--- 10-march-2021 css start  ---*/
+
+.leftwrapsection {
+	padding: 36px 350px;
+	
+}
+
 .stepdetail h1 {
 	font-size: 42px;
 	font-weight: bold;
@@ -24,8 +30,12 @@
 	font-size: 15px;
 	line-height: 24px;
 }
+.pagetitles h1 {
+	color: #070752;
+}
 .pagetitles h5 {
 	line-height: 26px;
+	color: #42414d;
 }
 .wealth-section .wealth-box .box-content h5 {
 	font-size: 18px;
@@ -83,3 +93,26 @@ p, h5 {
     line-height: 30px;
 }
 
+@media (max-width: 1550px) {
+	.leftwrapsection {
+		padding: 36px 100px;
+	}
+}
+
+@media (max-width: 1080px) {
+	.leftwrapsection {
+		padding: 36px 15px;
+	}
+}
+
+
+@media (max-width: 767px) {
+	.feature-list-item .plan-tab {
+		width: 50%;
+	}
+}
+@media (max-width: 500px) {
+	.feature-list-item .plan-tab {
+		width: 100%;
+	}
+}

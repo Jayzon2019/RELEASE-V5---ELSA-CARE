@@ -51,7 +51,7 @@
 													</div>
 													<div class="col-6 helper-2">
 														<div class="content">
-															<p>{{ basicInformation.fname }} {{ basicInformation.mname }} {{ basicInformation.lname }}</p>
+															<p style="word-break: break-all">{{ basicInformation.fname }} {{ basicInformation.mname }} {{ basicInformation.lname }}</p>
 														</div>
 													</div>
 												</div>
@@ -71,7 +71,7 @@
 													</div>
 													<div class="col-6 helper-2">
 														<div class="content">
-															<p>{{ basicInformation.email }}</p>
+															<p style="word-break: break-all;">{{ basicInformation.email }}</p>
 														</div>
 													</div>
 												</div>
@@ -99,9 +99,9 @@
 													<div class="col-6 helper-2">
 														<div class="content">
 															<p>
-																+63{{ basicInformation.mobile }}
+																{{ basicInformation.mobile ? '+63' + basicInformation.mobile : ''}}
 																<br />
-																+63{{ basicInformation.landline }}
+																{{ basicInformation.landline ? '+63' +  basicInformation.landline : ''}}
 															</p>
 														</div>
 													</div>
@@ -222,7 +222,7 @@
 													<div class="col-6 helper">
 														<div class="title">
 															<p>
-																Extended Spouse Coverage:
+																Extended Spouse Accident Coverage:
 															</p>
 														</div>
 													</div>
@@ -287,20 +287,20 @@
 												target="_blank"
 												download="Policy Provisions and Exclusions of Prime Secure Lite.pdf"
 											>
-												Download the Policy Provisions
+												Policy Provisions
 											</a>
 											<a
 												[href]="sanitize(privacyFile)"
 												target="_blank"
 												download="Policy on Cancellation and Refund.pdf"
 											>
-												Click here for Policy on
+												Policy on
 												Cancellation and Refund
 											</a>
 											<a
 												href="https://www.insularlife.com.ph/customer-charter"
 												target="_blank"
-												>Link to Customer Charter
+												>Customer Charter
 											</a>
 										</p>
 									</div>
@@ -322,6 +322,7 @@
 													[routerLink]="[
 														'/prime-secure-lite/quote'
 													]"
+													*ngIf="!policyNo"
 												>
 													<i class="material-icons"
 														>arrow_backward</i

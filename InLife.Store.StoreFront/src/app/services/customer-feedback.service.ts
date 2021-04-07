@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { StorageType } from '@app/services/storage-types.enum';
 import { environment } from '@environment';
-import { ApiBaseService } from '@app/pages/products/group/services/api-base.service';
+import { ApiBaseService } from '@app/services/api-base.service';
 
 @Injectable()
 export class CustomerFeedBackService extends ApiBaseService

@@ -310,106 +310,8 @@
 											</div>
 
 										</div>
+										<span id="personal-info-anchor"></span>
 									</div>
-
-									<!-- step5 strat -->
-
-									<!--<div class="formcoantiner step5" formGroupName="employment"
-										 *ngIf="getApplyForm.get('personalInformation')?.valid && showSecondStep">
-										<h3 id="step2_head">Business / Employment</h3>
-										<div class="preminumform">
-											<div class="form-row">
-												<div class="col-md-4 mb-3">
-													<label for="">Company </label>
-													<input type="text" class="form-control" disabled="true"
-														   *ngIf="getApplyForm.get('employment').get('occupation').value==='1'">
-													<input type="text" class="form-control"
-														   *ngIf="getApplyForm.get('employment').get('occupation').value!=='1'"
-														   placeholder="Enter company name" formControlName="company" [ngClass]="((submitted  || getApplyForm.get('employment').get('company').dirty
-                                                || getApplyForm.get('employment').get('company').touched)
-                                                &&  getApplyForm.get('employment').get('company')?.errors)?'is-invalid'
-                                                :getApplyForm.get('employment').get('company')?.valid?'is-valid':''
-                                                ">
-													<small class="errormsg"
-														   *ngIf="(submitted  || getApplyForm.get('employment').get('company').dirty || getApplyForm.get('employment').get('company').touched) &&  getApplyForm.get('employment').get('company')?.errors">
-														This is a required field
-													</small>
-												</div>
-												<div class="col-md-4 mb-3">
-													<label for="">Occupation </label>
-													<select class="form-control" id="" formControlName="occupation"
-															[ngClass]="((submitted
-                                                        || getApplyForm.get('employment').get('occupation').dirty
-                                                        || getApplyForm.get('employment').get('occupation').touched)
-                                                        &&  getApplyForm.get('employment').get('occupation')?.errors)?'is-invalid'
-                                                        :getApplyForm.get('employment').get('occupation')?.valid?'is-valid black':''
-                                                        ">
-														<option value="">Select occupation</option>
-														<option *ngFor="let type of CONSTANTS.OCCUPATION;let i = index"
-																[value]="type.id">
-															{{type.name}}
-														</option>
-													</select>
-													<small class="errormsg"
-														   *ngIf="(submitted  || getApplyForm.get('employment').get('occupation').dirty || getApplyForm.get('employment').get('occupation').touched) &&  getApplyForm.get('employment').get('occupation')?.errors">
-														This is a required field
-													</small>
-												</div>
-											</div>
-											<div class="form-row">
-												<div class="col-md-4 mb-3">
-													<label for="">Source of funds</label>
-													<select class="form-control" id="" formControlName="fundSource"
-															[ngClass]="((submitted  || getApplyForm.get('employment').get('fundSource').dirty || getApplyForm.get('employment').get('fundSource').touched) &&  getApplyForm.get('employment').get('fundSource')?.errors)?'is-invalid'
-                                                         :getApplyForm.get('employment').get('fundSource')?.valid?'is-valid black':''
-                                                        ">
-														<option value="">Select source of funds</option>
-														<option *ngFor="let type of CONSTANTS.FUND_SOURCE;let i = index"
-																[value]="type.id">
-															{{type.name}}
-														</option>
-													</select>
-													<small class="errormsg"
-														   *ngIf="(submitted  || getApplyForm.get('employment').get('fundSource').dirty || getApplyForm.get('employment').get('fundSource').touched) &&  getApplyForm.get('employment').get('fundSource')?.errors">
-														This is a required field
-													</small>
-												</div>
-												<div class="col-md-4 mb-3">
-													<label for="">Monthly Income </label>
-													<input type="text" class="form-control" disabled="true"
-														   *ngIf="getApplyForm.get('employment').get('occupation').value==='1'">
-													<input type="number" maxlength="6"
-														   *ngIf="getApplyForm.get('employment').get('occupation').value!=='1'"
-														   class="form-control" required placeholder="Enter monthly income"
-														   formControlName="monthlyIncome" [ngClass]="((submitted  || getApplyForm.get('employment').get('monthlyIncome').dirty || getApplyForm.get('employment').get('monthlyIncome').touched) &&  getApplyForm.get('employment').get('monthlyIncome')?.errors)?'is-invalid'
-                                                        :getApplyForm.get('employment').get('monthlyIncome')?.valid?'is-valid':''
-                                                        ">
-													<small class="errormsg"
-														   *ngIf="(submitted
-                                                        || getApplyForm.get('employment').get('monthlyIncome').dirty
-                                                         || getApplyForm.get('employment').get('monthlyIncome').touched)
-                                                         &&  getApplyForm.get('employment').get('monthlyIncome')?.errors && getApplyForm.get('employment').get('occupation').value!=='1'">
-														Required/Format
-														is incorrect
-													</small>
-												</div>
-												<div class="col-12" *ngIf="!showThirdStep">
-													<div class="btnsec text-right">
-														<button type="button" class="btn"
-																[disabled]="!getApplyForm.get('employment')?.valid"
-																(click)="setShowThird();">
-															Continue
-															<i class="material-icons">arrow_forward</i>
-														</button>
-													</div>
-												</div>
-
-											</div>
-
-										</div>
-									</div>-->
-
-									<!-- step6 strat -->
 
 									<div class="formcoantiner step6" formGroupName="identification" *ngIf="(getApplyForm.get('personalInformation')?.valid && showThirdStep)">
 										<h3 id="step3_head">Identification</h3>
@@ -490,11 +392,11 @@
 													<label>
 														<small class="errormsgs" *ngIf="sizeError">File size exceeded.</small>
 													</label>
-													<div [hidden]="hasImage">
-														<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="onFileChanged($event)">
+													<div [hidden]="hasImage || pdfName != ''">
+														<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="onFileChanged($event)">
 															<input #fileInput hidden type="file"
 																   name="file"
-																   accept="image/*"
+																   accept=".pdf, .jpg, .png"
 																   formControlName="file"
 																   (change)="onFileChanged($event)"
 																   [ngClass]="((
@@ -517,15 +419,20 @@
 															</small>
 															<div class="drag-text">
 																<h3>
-																	Drop files here or click to upload
+																	Click here to upload your file.
 																	<span>(.jpg, .png, .pdf / 5MB max file size)</span>
 																</h3>
 															</div>
 														</div>
 
 													</div>
-													<div class="identity-document-preview" *ngIf="hasImage">
-														<img [src]="insuredIdentityDocumentImagePreview" />
+													<div class="identity-document-preview" *ngIf="hasImage || pdfName != ''">
+														<img [src]="insuredIdentityDocumentImagePreview" *ngIf="hasImage" />
+														<p class="pdf-preview" *ngIf="pdfName != ''">
+															<img class="pdf-icon" src="assets/images/pdf.png" />
+															<span class="pdf-name">{{pdfName}}</span>
+														</p>
+														
 														<button class="delete-file" (click)="deleteImage()">
 															<i class="fa fa-trash"></i>
 														</button>
@@ -535,7 +442,7 @@
 												<div class="col-12" *ngIf="!showFourthStep">
 													<div class="btnsec text-right">
 														<button type="button" class="btn"
-																[disabled]="!getApplyForm.get('identification')?.valid || hasImage === false"
+																[disabled]="getApplyForm.get('identification')?.invalid && (!hasImage || pdfName === '')"
 																(click)="setShowFourth();">
 															Continue
 															<i class="material-icons">arrow_forward</i>
@@ -544,6 +451,7 @@
 												</div>
 											</div>
 										</div>
+										<span id="id-anchor"></span>
 									</div>
 
 									<!-- step7 strat -->
@@ -1002,13 +910,14 @@
 
 											</div>
 										</div>
+										<span id="bd-anchor"></span>
 									</div>
 
 									<!-- step8 strat -->
 
 									<div class="formcoantiner declarationsection step8" formGroupName="declarationForm"
 										 *ngIf="getApplyForm.get('beneficiaryDetails')?.valid && showFifthStep">
-										<h3 id="step5_head">Customer Due Diligence (CDD) Requirements</h3>
+										<h3 id="step5_head">Declaration</h3>
 										<div class="preminumform">
 											<div class="form-row">
 												<div class="col-md-12">
@@ -1306,7 +1215,7 @@
 													</div>
 													<div class="col-md-12">
 														<p class="mb-2" style="text-decoration: underline;">
-															United Nations Security Council Resolutions (UNSCR) Statement
+															Customer Due Diligence (CDD) Requirements
 														</p>
 
 														<label class="radio-container">
@@ -1397,7 +1306,7 @@
 											</div>
 											<div class="col-md-6 col-12">
 												<div class="btnsec text-right">
-													<button type="submit" [disabled]="getApplyForm.get('declarationForm')?.invalid || hasImage===false || !isValidFATCA()"
+													<button type="submit" [disabled]="getApplyForm.get('declarationForm')?.invalid || (!hasImage && pdfName === '') || !isValidFATCA()"
 															class="btn">
 														Continue to Pay <i class="material-icons">arrow_forward</i>
 													</button>

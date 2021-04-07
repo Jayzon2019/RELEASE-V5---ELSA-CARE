@@ -1,7 +1,7 @@
 import { environment } from '@environment';
 
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
@@ -42,7 +42,6 @@ export class PaymentCallbackComponent implements OnInit
 		private http: HttpClient
 	)
 	{
-		// this.ngxService.start();
 		const getQuoteFormData = JSON.parse(localStorage.getItem("getQuoteForm") || "[]");
 		const getApplyFormData = JSON.parse(localStorage.getItem("getApplyForm") || "[]");
 		this.basicInformation = getQuoteFormData.basicInformation;
@@ -61,9 +60,13 @@ export class PaymentCallbackComponent implements OnInit
 		this.route.queryParams.subscribe(params =>
 		{
 			this.params = params;
-
-			setTimeout(() => {
-				this.savePayment(this.params);
+			setTimeout(() => { //  Wait 10s before execute save payment or redirect
+				if (params.vpc_TxnResponseCode === 0 || 
+					params.vpc_TxnResponseCode === "0") {
+					this.savePayment(this.params);
+				} else {
+					this.routerlink.navigate(['payment-failed', params.vpc_TxnResponseCode]);
+				}
 			}, 10000);
 			
 		});
@@ -81,49 +84,44 @@ export class PaymentCallbackComponent implements OnInit
 			headers: headers,
 			params: new HttpParams()
 		};
-		var arr =
+		var arr = {
+			"PolicyNo": params.policy,
+			"MerchantTxnRef": params.vpc_MerchTxnRef,
+			"OrderInfo": params.vpc_OrderInfo,
+			"AmountPaid": params.vpc_Amount,
+			"TransactionDate": this.formatDate(new Date()),
+			"TxnResponseCodeDesc": this.getTransactionCodeDescription(params.vpc_TxnResponseCode),
+			"TxnResponseCode": params.vpc_TxnResponseCode,
+			"PaymentServerMessage": params.vpc_Message,
+			"AcqResponseCode": params.vpc_AcqResponseCode,
+			"ReceiptNo": params.vpc_ReceiptNo,
+			"AuthorizationID": params.vpc_AuthorizeId,
+			"OrderID": params.vpc_TransactionNo,
+			"CardType": params.vpc_Card,
+		}
+		let errorMsg = "We apologize things don't appear to be working at the moment. Please try again.";
+		let body = JSON.stringify(arr);
+		let endpoint = environment.primeCareApi.host + environment.primeCareApi.savePaymentEndpoint;
+		this.http
+			.post(endpoint, body, options)
+			.pipe(finalize(() => this.ngxService.stopAll()))
+			.subscribe(data =>
 			{
-				"PolicyNo": params.policy,
-				"MerchantTxnRef": params.vpc_MerchTxnRef,
-				"OrderInfo": params.vpc_OrderInfo,
-				"AmountPaid": params.vpc_Amount,
-				"TransactionDate": this.formatDate(new Date()),
-				"TxnResponseCodeDesc": this.getTransactionCodeDescription(params.vpc_TxnResponseCode),
-				"TxnResponseCode": params.vpc_TxnResponseCode,
-				"PaymentServerMessage": params.vpc_Message,
-				"AcqResponseCode": params.vpc_AcqResponseCode,
-				"ReceiptNo": params.vpc_ReceiptNo,
-				"AuthorizationID": params.vpc_AuthorizeId,
-				"OrderID": params.vpc_TransactionNo,
-				"CardType": params.vpc_Card,
-			}
-
-			let body = JSON.stringify(arr);
-			let endpoint = environment.primeCareApi.host + environment.primeCareApi.savePaymentEndpoint;
-
-			this.session.set('PaymentResponse', arr);
-
-			this.http
-				.post(endpoint, body, options)
-				.pipe(finalize(() => this.ngxService.stopAll()))
-				.subscribe(data =>
-				{
-					if (params.vpc_TxnResponseCode === 0 || params.vpc_TxnResponseCode === "0")
-					{
-						this.routerlink.navigate(['prime-secure-lite/thank-you']);
-					}
-					else
-					{
-						this.routerlink.navigate(['payment-failed', params.vpc_TxnResponseCode]);
-					}
-				}, (error) => {
-					this.message = "We apologize things don't appear to be working at the moment. Please try again.";
+				if(data || data === "true") {
+					this.session.set('PaymentResponse', arr);
+					this.routerlink.navigate(['prime-secure-lite/thank-you']);
+				} else {
+					this.message = errorMsg;
 					this.hasErrorSavingPayment = true;
-				});
+				}
+				
+			}, (error) => {
+				this.message = errorMsg;
+				this.hasErrorSavingPayment = true;
+			});
 	}
 
 	tryAgain() {
-		// this.ngxService.start();
 		this.message = "Processing please wait....";
 		this.hasErrorSavingPayment = false;
 		this.savePayment(this.params);
@@ -135,18 +133,6 @@ export class PaymentCallbackComponent implements OnInit
 		let formatted = date.format('MM/DD/YYYY');
 		return formatted;
 	}
-
-	handleError(error: any)
-	{
-		let errMsg =
-			(error.message) ? error.messagess
-				: error.status ? `${error.status} - ${error.statusText}`
-					: 'API error';
-
-		console.error(errMsg);
-		return throwError(error);
-	}
-
 	getTransactionCodeDescription(id: string)
 	{
 		const list = CONSTANTS.PAYMENT_TRANSACTION_RESPONSE;

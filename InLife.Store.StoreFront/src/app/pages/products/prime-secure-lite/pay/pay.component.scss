@@ -11,7 +11,7 @@
     
     @media (max-width: 1280px) {
         .leftwrapsection {
-        padding-right: 150px;
+        padding: 36px;
         }
     }
 
@@ -21,7 +21,7 @@
         }
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 950px) {
         .steplist-wrapper > .steplist{
             position: inherit;
         }
@@ -39,6 +39,10 @@
     @media(max-width: 500px) {
         .reviewbill {
             padding: 5px !important;
+        }
+
+        .pagetitles h1{
+            font-size: 25px;
         }
     }
 
@@ -105,7 +109,21 @@
 
             .helper-2 {
                 .content {
-                    width: 160px;
+                    width: 140px;
+                }
+            }
+        }
+
+        @media (max-width: 310px) {
+            .helper {
+                .title {
+                    width: 114px;
+                }
+            }
+
+            .helper-2 {
+                .content {
+                    width: 110px;
                 }
             }
         }

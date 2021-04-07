@@ -19,6 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GeneralMessagePromptComponent } from '@app/shared/component/general-message-prompt/general-message-prompt.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { StorageType } from '@app/services/storage-types.enum';
 @Component
 ({
 	selector: 'app-quote',
@@ -75,7 +76,7 @@ export class QuoteComponent implements OnInit
 	ngOnInit(): void
 	{
 		this.affiliate = this.affiliate = this.session.get('affiliate');
-
+		this.session.remove(StorageType.POLICYNO);
 		const getQuoteFormData = this.session.get('getQuoteForm');
 		this.quoteDetails = this.session.get('getinnerForm');
 		this.initForm(getQuoteFormData);
@@ -347,7 +348,7 @@ export class QuoteComponent implements OnInit
 
 		setTimeout(function ()
 		{
-			document.querySelector('#step2_head').scrollIntoView
+			document.querySelector('#calculate-premium-anchor').scrollIntoView
 			({
 				behavior: 'smooth'
 			});
@@ -360,7 +361,7 @@ export class QuoteComponent implements OnInit
 
 		setTimeout(function ()
 		{
-			document.querySelector('#step3_head').scrollIntoView
+			document.querySelector('#basic-info-anchor').scrollIntoView
 			({
 				behavior: 'smooth'
 			});
@@ -373,7 +374,7 @@ export class QuoteComponent implements OnInit
 
 		setTimeout(function ()
 		{
-			document.querySelector('#step4_head').scrollIntoView
+			document.querySelector('#health-decl-anchor').scrollIntoView
 			({
 				behavior: 'smooth'
 			});
@@ -390,7 +391,7 @@ export class QuoteComponent implements OnInit
 		({
 			prefix: new FormControl(data.prefix || '', Validators.required),
 			fname: new FormControl(data.fname || '', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z -]+$")]),
-			mname: new FormControl(data.mname || '', [Validators.maxLength(50), Validators.pattern("^[A-Za-z -]+$")]),
+			mname: new FormControl(data.mname || '', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z -]+$")]),
 			lname: new FormControl(data.lname || '', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z -]+$")]),
 			suffix: new FormControl(data.suffix || '', Validators.required),
 			landline: new FormControl(data.landline || '', [Validators.pattern("^[0-9]{9}$")]),
@@ -485,15 +486,15 @@ export class QuoteComponent implements OnInit
 
 	isValidOccupation(id): boolean {
 		if(id) {
-			const invalidOccupation = ['', '1', '4', '5', '8', '9', '11', '12', '13', '16', '18', '27', '29', '35', '39', '41', '42',
+			const invalidOccupation = [
+				        '', '1', '4', '5', '8', '9', '11', '12', '13', '16', '18', '27', '29', '35', '39', '41', '42',
 						'47', '52', '54', '58', '59', '60', '61', '69', '70', '71', '74', '76', '79', '80', '85', '87',
-						'92', '94', '95', '100', '110', '112', '113', '116', '117', '120', '123', '125', '127', '132', '135', '139',
-						'140', '141', '144', '145', '146', '147', '149', '155', '156', '161', '164', '168', '170', '182', '183', '139',
-						'188', '189', '190', '191', '200', '201', '202', '203', '204', '205', '206', '298', '301', '307', '310', '313',
-						'316', '319', '321', '207', '208', '209', '210', '211', '212', '213', '214', '215', '216', '217', '219', '221',
-						'222', '223', '232', '233', '237', '238', '244', '246', '247', '248', '249', '250', '251', '253', '258', '259',
+						'92', '94', '95', '100', '110', '112', '113', '116', '117', '120', '123', '125', '130', '135', '138', '142',
+						'143', '144', '147', '148', '149', '150', '152', '158', '159', '164', '167', '171', '173',
+						'185', '186', '191', '192', '193', '194', '203', '204', '205', '206', '207', '208', '209', '315', '316', '318',
+						'319', '320', '321', '322', '323', '210', '211', '212', '213', '214', '215', '216', '217', '218', '219', '220',
+						'222', '232', '233', '234', '235', '236', '247', '249', '250', '251', '252', '253', '254', '126', '258', '259',
 						'260', '269', '270', '273', '274', '276', '279', '281', '286', '287'];
-
 
 			for(let i=0; i< invalidOccupation.length; i++) {
 				if(invalidOccupation[i] === id) {
@@ -529,8 +530,8 @@ export class QuoteComponent implements OnInit
 
 		var dataInternalAPI =
 		{
-			planCode: 'PSLite',
-			planVariantCode: 'PSLite' + this.eligiblePlan,
+			planCode: 'TR0091',
+			planVariantCode: 'Prime Secure Lite',
 			planFaceAmount: faceAmount,
 			planPremium: +this.eligiblePlan,
 			customerNamePrefix: basicInfo.get('prefix').value,
@@ -541,6 +542,8 @@ export class QuoteComponent implements OnInit
 			customerPhoneNumber: basicInfo.get('landline').value,
 			customerMobileNumber: basicInfo.get('mobile').value,
 			customerEmailAddress: basicInfo.get('email').value,
+			customerBirthday: new Date(calcInfo.get('dateofbirth').value).toLocaleDateString(),
+			customerGender: +calcInfo.get('gender').value,
 			height: 1,
 			weight: 1,
 			company: basicInfo.get('company').value,
@@ -549,7 +552,8 @@ export class QuoteComponent implements OnInit
 			incomeAmount: monthlyIncome,
 			addressCity: city,
 			addressRegion: region,
-			addressCountry: country
+			addressCountry: country,
+			bmi: +this.bodyMassIndex
 		};
 		console.log(faceAmount);
 		var dataExternalAPI = {
@@ -569,44 +573,12 @@ export class QuoteComponent implements OnInit
 			InsuredPrimaryOccupationMonthlyIncome: monthlyIncome,
 			Bmi: +this.bodyMassIndex
 		}
+		this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
+		this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
 
-		this.session.set('PostQuote', dataInternalAPI);
-
-		let headers: HttpHeaders = new HttpHeaders();
-		headers = headers.append('Content-Type', 'application/json');
-		headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
-
-		let options =
-		{
-			headers: headers,
-			params: new HttpParams()
-		};
-
-		let body = JSON.stringify(dataExternalAPI);
-		let endpoint = environment.primeCareApi.host + environment.primeCareApi.createQuoteEndpoint;
 		this.ngxService.start();
-		this.session.set('PostQuote', dataInternalAPI);
-
 		if(isEligible) {
-			this.http
-			.post(endpoint, body, options)
-			.pipe(retry(1), finalize(() => this.ngxService.stopAll()))
-			.subscribe((data: any) =>
-			{
-				this.ngxService.stopAll();
-				if(data.underwritingStatus === 'CLEAN_CASE') {
-					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
-					this.session.set('UnderWritingStatus', data)
-					this.router.navigate(['prime-secure-lite/apply']);
-				} else {
-					this.router.navigate(['prime-secure-lite/ineligible']);
-				}
-			}, (error) => {
-				let data = {
-					message: `We apologize things don't appear to be working at the moment. Please try again.`
-				}
-				this.util.ShowGeneralMessagePrompt(data);
-			});
+			this.router.navigate(['prime-secure-lite/apply']);
 
 		} else {
 			this.router.navigate(['prime-secure-lite/ineligible']);

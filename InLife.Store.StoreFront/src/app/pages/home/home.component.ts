@@ -91,6 +91,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 		return color;
 	}
 
+	scrollToFeatured(type) {
+		if(type == 'feature-plan')
+			setTimeout(function ()
+			{
+				document.querySelector('#section-prime-secure').scrollIntoView
+				({
+					behavior: 'smooth'
+				});
+			}, 100);
+	}
+
 
 	getPosition(position: string) {
 		if (position != undefined && (position == "Right" && window.innerWidth > 768)) {
