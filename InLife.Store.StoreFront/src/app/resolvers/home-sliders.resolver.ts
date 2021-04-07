@@ -3,7 +3,7 @@ import { Resolve } from '@angular/router';
 import { ApiService, SessionStorageService } from '@app/services';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiBaseService } from '../pages/products/group/services/api-base.service';
+import { ApiBaseService } from '../services/api-base.service';
 
 @Injectable()
 export class HeroSliderResolver extends ApiBaseService implements Resolve<Observable<null>>  {

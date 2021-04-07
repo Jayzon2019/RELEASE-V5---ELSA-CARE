@@ -77,7 +77,7 @@ export class ThankYouComponent implements OnInit, OnDestroy
 		const getQuoteFormData = this.session.get("getQuoteForm") || "[]";
 		const getApplyFormData = this.session.get("getApplyForm") || "[]";
 		const extension = this.session.get("extensionData") || "[]";
-		console.log(getQuoteFormData, getApplyFormData)
+		const paymentResponse = this.session.get("PaymentResponse") || "[]";
 		this.getFile();
 		this.basicInformation = getQuoteFormData.basicInformation;
 		this.calculationInformation = getQuoteFormData.calculatePremium;
@@ -95,106 +95,34 @@ export class ThankYouComponent implements OnInit, OnDestroy
 		this.identication = getQuoteFormData.identification;
 		this.getinnerForm = this.session.get("getinnerForm");
 		this.age = this.session.get("age");
+
+		this.mapResponse(paymentResponse);
 	}
+	
 
 	ngOnInit(): void
 	{
 		this.dateNow = new Date().toLocaleString();
-
-		// this.activatedRouteSubscription$ = this.activatedRoute.queryParams.subscribe((params)=>{
-			
-		// 	if(params['target'] === 'payment-callback') {
-		// 		this.ngxService.start();
-
-		// 		this.txn.MerchTxnRef = params['vpc_MerchTxnRef'];
-		// 		this.txn.OrderInfo = params['vpc_OrderInfo'];
-		// 		this.txn.Amount = params['vpc_Amount'];
-		// 		this.txn.TransactionDate = this.formatDate(new Date());
-		// 		this.txn.txnResponseCode = params['vpc_TxnResponseCode'];
-		// 		this.txn.TxnResponseCodeDesc = CONSTANTS.PAYMENT_TRANSACTION_RESPONSE.find(x => x.id === params['vpc_TxnResponseCode']).name;
-		// 		this.txn.Message = params['vpc_Message'];
-		// 		this.txn.AcqResponseCode = params['vpc_AcqResponseCode'];
-		// 		this.txn.ReceiptNo = params['vpc_ReceiptNo'];
-		// 		this.txn.AuthorizeId = params['vpc_AuthorizeId'];
-		// 		this.txn.TransactionNo = params['vpc_TransactionNo'];
-		// 		this.txn.Card = params['vpc_Card'];
-		// 		this.txn.policy = params['policy'];
-				
-		// 		if(this.txn.txnResponseCode === '0') { //Transaction Success
-
-		// 			let payload = {
-		// 				"MerchantTxnRef": this.txn.MerchTxnRef,
-		// 				"OrderInfo": this.txn.OrderInfo,
-		// 				"AmountPaid": this.txn.Amount,
-		// 				"TransactionDate": this.txn.TransactionDate,
-		// 				"TxnResponseCodeDesc": this.txn.TxnResponseCodeDesc,
-		// 				"TxnResponseCode": this.txn.txnResponseCode,
-		// 				"PaymentServerMessage": this.txn.Message,
-		// 				"AcqResponseCode": this.txn.AcqResponseCode,
-		// 				"ReceiptNo": this.txn.ReceiptNo,
-		// 				"AuthorizationID": this.txn.AuthorizeId,
-		// 				"OrderID": this.txn.TransactionNo,
-		// 				"CardType": this.txn.Card,
-		// 				"PolicyNo": this.txn.policy
-		// 			};
-
-		// 			let headers: HttpHeaders = new HttpHeaders();
-		// 			headers = headers.append('Content-Type', 'application/json');
-		// 			headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
-			
-		// 			let options =
-		// 			{
-		// 				headers: headers,
-		// 				params: new HttpParams()
-		// 			};
-			
-		// 			let body = JSON.stringify(payload);
-
-		// 			let endpoint = environment.primeCareApi.host  + environment.primeCareApi.savePaymentEndpoint;
-					
-		// 			this.http
-		// 			.post(endpoint, body, options)
-		// 			.pipe(
-		// 				retry(1),
-		// 			)
-		// 			.subscribe((data: any) =>
-		// 			{
-		// 				console.log('success save');
-		// 				console.log(data);
-
-		// 				let isSuccess = data;
-		// 				this.ngxService.stopAll();
-		// 				if (this.isNullOrWhiteSpace(isSuccess))
-		// 				{
-		// 					const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
-		// 						width: '300px',
-		// 						data: {
-		// 							message: `We apologize things don't appear to be working at the moment. Please try again.`
-		// 						}
-		// 					});
-		// 				}
-		// 			}, (error) =>{
-		// 				console.log('error');
-		// 				console.log(error);
-		// 				this.ngxService.stopAll();
-		// 				const dialogRef = this.dialog.open(GeneralMessagePromptComponent, {
-		// 					width: '300px',
-		// 					data: {
-		// 						message: `We apologize things don't appear to be working at the moment. Please try reload the page.`
-		// 					}
-		// 				});
-		// 			});
-		// 		}
-		// 		else {//Failed - return to Plan Summary
-		// 			this.ngxService.stopAll();
-		// 			this.router.navigate(['prime-secure-lite/pay']);
-		// 		}
-		// 	}
-		// });
 	}
 
 	ngOnDestroy() {
 		if (this.activatedRouteSubscription$) this.activatedRouteSubscription$.unsubscribe();
+	}
+
+	mapResponse(params) {
+		this.txn.MerchTxnRef = params['vpc_MerchTxnRef'];
+		this.txn.OrderInfo = params['vpc_OrderInfo'];
+		this.txn.Amount = params['vpc_Amount'];
+		this.txn.TransactionDate = this.formatDate(new Date());
+		this.txn.txnResponseCode = params['vpc_TxnResponseCode'];
+		this.txn.TxnResponseCodeDesc = CONSTANTS.PAYMENT_TRANSACTION_RESPONSE.find(x => x.id === params['vpc_TxnResponseCode']).name;
+		this.txn.Message = params['vpc_Message'];
+		this.txn.AcqResponseCode = params['vpc_AcqResponseCode'];
+		this.txn.ReceiptNo = params['vpc_ReceiptNo'];
+		this.txn.AuthorizeId = params['vpc_AuthorizeId'];
+		this.txn.TransactionNo = params['vpc_TransactionNo'];
+		this.txn.Card = params['vpc_Card'];
+		this.txn.policy = params['policy'];
 	}
 
 	getFile()

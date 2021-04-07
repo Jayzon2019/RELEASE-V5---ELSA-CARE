@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService, SessionStorageService } from '@app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -29,12 +29,16 @@ export class MainComponent implements OnInit
 			}
 		}
 	}
-	constructor(private router: Router, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
+	constructor(private router: Router, private activateRoute: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
 
 	ngOnInit(): void
 	{
 		this.getPrimeHeroSlider();
-		//this.session.clear();
+		this.session.clear();
+
+		if(this.activateRoute.snapshot.fragment === 'ihc')
+			this.scroll();
+
 	}
 
 	getPrimeHeroSlider()
@@ -57,6 +61,17 @@ export class MainComponent implements OnInit
 	getUrl(url: string)
 	{
 		return "url('data:image/png;base64," + url + "')";
+	}
+
+	scroll()
+	{
+		setTimeout(function ()
+		{
+			document.querySelector('#ihc').scrollIntoView
+			({
+				behavior: 'smooth'
+			});
+		}, 100);
 	}
 
 	getColor(color: string)

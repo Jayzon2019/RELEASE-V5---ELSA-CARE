@@ -32,7 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
 		private dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		//this.session.clear();
+		this.session.clear();
 		// this.getGroupHeroSlider();
 
 		// this.route.data

@@ -7,7 +7,7 @@
 				<div style="{{getPosition(slider?.contentPostion)}}" class="hero-content">
 					<h2 style="{{'color:' + getColor(slider?.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.headingColor) + '!important;'}}">{{slider?.heading }}<br class="only-in-mobile" /></h2>
 					<p style="{{'color:' + getColor(slider?.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.subHeadingColor) + '!important;'}}">{{ slider?.subHeading }}</p>
-					<a [href]="slider?.btnTxtLink" class="btn-orange">{{slider?.primeHeroBtnTxt }}</a>
+					<a href="javascript:void(0)" (click)="scroll()" class="btn-orange">{{slider?.primeHeroBtnTxt }}</a>
 				</div>
 			</div>
 			<img [src]="sanitize(slider?.primeHeroMobBg)" class="only-in-mobile">

@@ -417,7 +417,7 @@ export class ApplyComponent implements OnInit
 		return this.formBuilder.group({
 			street: new FormControl(data.street || '', Validators.required),
 			village: new FormControl(data.village || '', Validators.required),
-			zipCode: new FormControl(data.zipCode || '', Validators.required),
+			zipCode: new FormControl(data.zipCode || '', [Validators.required, Validators.pattern("^[0-9]{1,5}$")]),
 			civilStatus: new FormControl(data.civilStatus || '', Validators.required),
 			country: new FormControl(data.country || '170', Validators.required),
 			province: new FormControl(data.province || this.getQuoteFormData.basicInformation.province),
@@ -510,114 +510,6 @@ export class ApplyComponent implements OnInit
 
 			const getApplyFormData = this.session.get("getApplyForm") || "[]";
 			const getQuoteForm = this.session.get("getQuoteForm") || "[]";
-
-			const bookData = {} as any;
-			bookData.InsuredPrefixId = 0;
-			bookData.InsuredFirstName = 0;
-			bookData.InsuredMiddleName = 0;
-			bookData.InsuredLastName = 0;
-			bookData.InsuredSuffixId = 0;
-			bookData.InsuredBirthday = 0;
-			bookData.InsuredGenderId = 0;
-			bookData.InsuredEmailAddress = 0;
-			bookData.InsuredResidencePhoneNumber = 0;
-			bookData.InsuredMobileNo = 0;
-			bookData.OwnerIsInsured = true;
-			bookData.OwnerRelationToInsuredId = 0;
-			bookData.OwnerPrefixId = 0;
-			bookData.OwnerFirstName = 0;
-			bookData.OwnerMiddleName = 0;
-			bookData.OwnerLastName = 0;
-			bookData.OwnerSuffixId = 0;
-			bookData.OwnerBirthday = 0;
-			bookData.OwnerGenderId = 0;
-			bookData.OwnerEmailAddress = 0;
-			bookData.OwnerResidencePhoneNumber = 0;
-			bookData.InsuredSuffixId = 0;
-			bookData.InsuredBirthday = 0;
-			bookData.InsuredGenderId = 0;
-			bookData.InsuredEmailAddress = 0;
-			bookData.InsuredResidencePhoneNumber = 0;
-			bookData.InsuredMobileNo = 0;
-			bookData.OwnerIsInsured = true;
-			bookData.OwnerRelationToInsuredId = 0;
-			bookData.OwnerPrefixId = 0;
-			bookData.OwnerFirstName = 0;
-			bookData.OwnerMiddleName = 0;
-			bookData.OwnerLastName = 0;
-			bookData.OwnerSuffixId = 0;
-			bookData.OwnerBirthday = 0;
-			bookData.OwnerGenderId = 0;
-			bookData.OwnerEmailAddress = 0;
-			bookData.OwnerResidencePhoneNumber = 0;
-			bookData.OwnerMobileNo = 0;
-			bookData.OwnerMobileNo = 0;
-			bookData.PlanName = 0;
-			bookData.PaymentMode = 0;
-			bookData.FaceAmount = 0;
-			bookData.Premium = 0;
-			bookData.Health1 = 0;
-			bookData.Health2 = 0;
-			bookData.Health3 = 0;
-			bookData.InsuredResidenceAddress1 = 0;
-			bookData.InsuredResidenceAddress2 = 0;
-			bookData.InsuredResidenceAddress3 = 0;
-			bookData.InsuredResidenceMunicipalityId = 0;
-			bookData.InsuredResidenceProvinceId = 0;
-			bookData.InsuredResidenceZipCode = 0;
-			bookData.Fatca1 = 0;
-			bookData.Fatca2 = 0;
-			bookData.InsuredCitizenshipId = 0;
-			bookData.InsuredCivilStatusId = 0;
-			bookData.InsuredPrimaryOccupationCompanyName = 0;
-			bookData.InsuredPrimaryOccupationMonthlyIncome = 0;
-			bookData.InsuredFundSourceId = 0;
-			bookData.InsuredPreferredMailingAddress = 0;
-			bookData.InsuredPrimaryOccupationAddress1 = 0;
-			bookData.InsuredPrimaryOccupationAddress2 = 0;
-			bookData.InsuredPrimaryOccupationAddress3 = 0;
-			bookData.InsuredPrimaryOccupationZipCode = 0;
-			bookData.InsuredPrimaryOccupationProvinceId = 0;
-			bookData.InsuredPrimaryOccupationMunicipalityId = 0;
-			bookData.InsuredOfficePhoneNumber = 0;
-			bookData.InsuredTinNo = 0;
-			bookData.InsuredOtherIdNoType = 0;
-			bookData.InsuredOtherIdNo = 0;
-			bookData.Question1 = 0;
-			bookData.Question2 = 0;
-			const beneficiary = {} as any;
-			bookData.FirstName = 0;
-			bookData.MiddleName = 0;
-			bookData.LastName = 0;
-			bookData.SuffixId = 0;
-			bookData.AddressType = 0;
-			bookData.Address1 = 0;
-			bookData.Address2 = 0;
-			bookData.Address3 = 0;
-			bookData.ProvinceId = 0;
-			bookData.MunicipalityId = 0;
-			bookData.ZipCode = 0;
-			bookData.LandLineNumber = 0;
-			bookData.CivilStatusId = 0;
-			bookData.GenderId = 0;
-			bookData.Birthday = 0;
-			bookData.RelationToInsuredId = 0;
-			bookData.Priority = 0;
-			bookData.Right = 0;
-			bookData.Beneficiary = [beneficiary];
-
-			const existingOtherInsurance = {} as any;
-			bookData.Id = 0;
-			bookData.InsuredId = 0;
-			bookData.CompanyName = 0;
-			bookData.LifeFaceAmount = 0;
-			bookData.DreadDiseaseFaceAmount = 0;
-			bookData.AccidentalFaceAmount = 0;
-			bookData.IssueYear = 0;
-			bookData.ExistingOtherInsurance = [existingOtherInsurance];
-
-			bookData.RefFirstName = 0;
-			bookData.RefLastName = 0;
 
 			this.router.navigate(['prime-care/pay']);
 

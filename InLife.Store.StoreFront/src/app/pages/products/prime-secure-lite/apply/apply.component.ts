@@ -20,6 +20,7 @@ import { throwError } from 'rxjs';
 import { GeneralMessagePromptComponent } from '@app/shared/component/general-message-prompt/general-message-prompt.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { StorageType } from '@app/services/storage-types.enum';
 
 @Component
 ({
@@ -61,6 +62,8 @@ export class ApplyComponent implements OnInit
 	showFourthStep: Boolean = false;
 	showFifthStep: Boolean = false;
 	sizeError: boolean = false;
+	pdfName: string = '';
+	pdfBase64 = '';
 
 	constructor
 	(
@@ -79,6 +82,7 @@ export class ApplyComponent implements OnInit
 
 		this.insuredIdentityDocumentImagePreview = this.session.get("insuredIdentityDocumentImagePreview");
 		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData");
+		
 		if (this.insuredIdentityDocumentImageData)
 		{
 			this.hasImage = true;
@@ -299,7 +303,7 @@ export class ApplyComponent implements OnInit
 		this.showThirdStep = true;
 		setTimeout(function ()
 		{
-			document.querySelector('#step3_head').scrollIntoView({
+			document.querySelector('#personal-info-anchor').scrollIntoView({
 				behavior: 'smooth'
 			});
 		}, 100);
@@ -310,7 +314,7 @@ export class ApplyComponent implements OnInit
 		this.showFourthStep = true;
 		setTimeout(function ()
 		{
-			document.querySelector('#step4_head').scrollIntoView({
+			document.querySelector('#id-anchor').scrollIntoView({
 				behavior: 'smooth'
 			});
 		}, 100);
@@ -322,7 +326,7 @@ export class ApplyComponent implements OnInit
 		this.showFifthStep = true;
 		setTimeout(function ()
 		{
-			document.querySelector('#step5_head').scrollIntoView({
+			document.querySelector('#bd-anchor').scrollIntoView({
 				behavior: 'smooth'
 			});
 		}, 100);
@@ -446,15 +450,11 @@ export class ApplyComponent implements OnInit
 			this.session.set("extensionData", this.dynamicArray);
 			this.session.set("insuredIdentityDocumentImageData", this.insuredIdentityDocumentImageData);
 			this.session.set("insuredIdentityDocumentImagePreview", this.insuredIdentityDocumentImagePreview);
+			
 			const refNo = this.session.get("refNo");
-			const PostQuote = this.session.get("PostQuote");
 			const getQuoteForm = this.session.get("getQuoteForm");
 			const extensionData = this.session.get("extensionData");
 			const underwritingstatus = this.session.get("UnderWritingStatus");
-			console.log(PostQuote);
-			console.log(getQuoteForm);
-			console.log(this.getApplyForm.value);
-			console.log(extensionData);
 
 			let bday = new Date(getQuoteForm.calculatePremium.dateofbirth).toLocaleDateString();
 
@@ -478,6 +478,7 @@ export class ApplyComponent implements OnInit
 				"OwnerIsInsured": 1,
 				"OwnerRelationToInsuredId": 24,
 				"OwnerPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
+				"OwnerSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
 				"OwnerFirstName": getQuoteForm.basicInformation.fname,//"testFaname",
 				"OwnerLastName": getQuoteForm.basicInformation.lname,//"testLName",
 				"OwnerMiddleName": getQuoteForm.basicInformation.mname,//"testMName",
@@ -493,6 +494,7 @@ export class ApplyComponent implements OnInit
 				"InsuredBirthday": bday,//"01/01/1980",
 				"InsuredGenderId": this.nullIfZero(getQuoteForm.calculatePremium.gender),//8,
 				"InsuredPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
+				"InsuredSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
 				"InsuredEmailAddress": getQuoteForm.basicInformation.email,//"test@gmail1.com",
 				"InsuredResidencePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//12345678,
 				"InsuredMobileNo": this.nullIfZero(getQuoteForm.basicInformation.mobile),//12345567,
@@ -501,7 +503,7 @@ export class ApplyComponent implements OnInit
 				"InsuredResidenceAddress3": this.getApplyForm.get('personalInformation').get('barangay').value,//"Add3",
 				"InsuredResidenceMunicipalityId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('municipality').value),//1,
 				"InsuredResidenceProvinceId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('province').value),//1,
-				"InsuredResidenceZipCode": this.nullIfZero(this.getApplyForm.get('personalInformation').get('zipCode').value),//4118,
+				"InsuredResidenceZipCode": this.getApplyForm.get('personalInformation').get('zipCode').value,//4118,
 				"InsuredCitizenshipId" : 170,
 				"InsuredCivilStatusId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('civilStatus').value),//5,
 				"InsuredPrimaryOccupationCompanyName": getQuoteForm.basicInformation.company,//"testcompanyname",
@@ -524,6 +526,8 @@ export class ApplyComponent implements OnInit
 					"FirstName": this.getApplyForm.get('beneficiaryDetails').get('fname').value,//"SampleBeneFname",
 					"MiddleName": this.getApplyForm.get('beneficiaryDetails').get('mname').value,//"SampleBeneMname",
 					"LastName": this.getApplyForm.get('beneficiaryDetails').get('lname').value,//"SampleBeneLastName",
+					"SuffixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('suffix').value),
+					"PrefixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('prefix').value),
 					"AddressType": 2,//2,Permanent
 					"Address1": this.getApplyForm.get('beneficiaryDetails').get('insuredStreet').value,//"Address1",
 					"Address2": this.getApplyForm.get('beneficiaryDetails').get('insuredVillage').value,//"Address2",
@@ -541,52 +545,14 @@ export class ApplyComponent implements OnInit
 				}],
 
 				"ExistingOtherInsurance": extensionData,
-				"InsuredValidIdImage": this.insuredIdentityDocumentImageData,//"XXXXXXXXXXXXXXX",
-				"OwnerValidIdImage": this.insuredIdentityDocumentImageData,//"XXXXXXXXXXXXX",
-				"RefFirstName": getQuoteForm.basicInformation.afname ? getQuoteForm.basicInformation.afname : "",//"SampleFName",
-				"RefLastName": getQuoteForm.basicInformation.alname ? getQuoteForm.basicInformation.alname : "",//"SampleLName"
+				"InsuredValidIdImage": this.insuredIdentityDocumentImageData || this.pdfBase64,//"XXXXXXXXXXXXXXX",
+				"OwnerValidIdImage": this.insuredIdentityDocumentImageData || this.pdfBase64,//"XXXXXXXXXXXXX",
+				"RefFirstName": getQuoteForm.basicInformation.afname || "",//"SampleFName",
+				"RefLastName": getQuoteForm.basicInformation.alname || "",//"SampleLName"
 			};
 
-			let headers: HttpHeaders = new HttpHeaders();
-			headers = headers.append('Content-Type', 'application/json');
-			headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
-	
-			let options =
-			{
-				headers: headers,
-				params: new HttpParams()
-			};
-	
-			let body = JSON.stringify(payload);
-
-			let endpoint = environment.primeCareApi.host  + environment.primeCareApi.createApplicationEndpoint;
-			
-			let errData = {
-				message: `We apologize things don't appear to be working at the moment. Please try again.`
-			}
-
-			this.http
-			.post(endpoint, body, options)
-			.pipe(
-				retry(1),
-				finalize(() => this.ngxService.stopAll())
-			)
-			.subscribe((data: any) =>
-			{
-				let policyNo = data;
-				this.ngxService.stop();
-				if (this.isNullOrWhiteSpace(policyNo))
-				{
-					this.util.ShowGeneralMessagePrompt(errData);
-				}
-				else
-				{
-					this.session.set('policyNo', policyNo);
-					this.router.navigate(['prime-secure-lite/pay']);
-				}
-			}, (error) =>{
-				this.util.ShowGeneralMessagePrompt(errData);
-			});
+			this.session.set(StorageType.APPLY_DATA, payload);
+			this.router.navigate(['prime-secure-lite/pay']);
 		}
 		else
 		{
@@ -613,7 +579,6 @@ export class ApplyComponent implements OnInit
 	/* START: For Personal information */
 	onChangeProviance(value)
 	{
-		//console.log(value);
 		for (let i = 0; i < CONSTANTS.PROVIANCE.length; i++)
 		{
 			if (CONSTANTS.PROVIANCE[i].id == value)
@@ -634,7 +599,6 @@ export class ApplyComponent implements OnInit
 
 	onChangeProviances(value)
 	{
-		//console.log(value);
 		for (let i = 0; i < CONSTANTS.PROVIANCE.length; i++)
 		{
 			if (CONSTANTS.PROVIANCE[i].id == value)
@@ -662,7 +626,6 @@ export class ApplyComponent implements OnInit
 
 	onChangeBeneficiaryProviances(value)
 	{
-		//console.log(value);
 		for (let i = 0; i < CONSTANTS.PROVIANCE.length; i++)
 		{
 			if (CONSTANTS.PROVIANCE[i].id == value)
@@ -712,14 +675,27 @@ export class ApplyComponent implements OnInit
 	{
 		let reader = e.target;
 		this.imageSrc = reader.result;
-		console.log(this.imageSrc)
+	}
+
+	async checkFileBase64(file): Promise<string> {
+        let promise = this.getBase64(file);
+        return await promise;
+    }
+
+	getBase64(file): Promise<any> {
+		return new Promise(function (resolve, reject) {
+            let reader = new FileReader();
+            reader.onload = function () { 
+				resolve(reader.result); 
+			};
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
 	}
 
 	onFileChanged(event)
 	{
 		//const fileSizeLimit = 512000; // 500KB
-		//const fileSizeLimit = 5242880; // 5MB
-
 		const limitFileSize = 512000; // 500KB
 		const limitWidth = 2000;
 		const limitHeight = 2000;
@@ -731,88 +707,100 @@ export class ApplyComponent implements OnInit
 		{
 			const file = event.target.files[0];
 
-			this.sizeError = false;
-			reader.onloadend = (event) =>
-			{
-				// Get the event.target.result from the reader (base64 of the image)
-				let uploadedImage = event.target.result;
-				//this.insuredIdentityDocumentImagePreview = event.target.result;
+			if(file.type === 'application/pdf'){ //PDF
+				const fileSizeLimit = 5242880; // 5MB
 
-				const image = new Image();
-				image.onload = (event) =>
+				if(file.size <= fileSizeLimit) {
+					this.pdfName = file.name;
+					this.checkFileBase64(file).then(res => {
+						this.pdfBase64 = res.split(',')[1];
+					});
+				}
+				else {
+					this.deleteImage();
+					this.util.ShowGeneralMessagePrompt({
+						message: `File size exceeds the allowable limit of 5MB.`
+					});
+				}
+
+			} else { //JPEG or PNG
+				this.sizeError = false;
+				reader.onloadend = (event) =>
 				{
-					// Fit image to bounding box
-					let scaleFactor = (limitWidth / image.width < limitHeight / image.height)
-						? (limitWidth / image.width)
-						: (limitHeight / image.height);
+					// Get the event.target.result from the reader (base64 of the image)
+					let uploadedImage = event.target.result;
+					//this.insuredIdentityDocumentImagePreview = event.target.result;
 
-					let newWidth = image.width * scaleFactor;
-					let newHeight = image.height * scaleFactor;
-
-					const canvas = document.createElement('canvas');
-					canvas.width = newWidth;
-					canvas.height = newHeight;
-
-					const ctx = canvas.getContext('2d');
-					ctx.drawImage(image, 0, 0, newWidth, newHeight);
-
-					let newDataUrl = '';
-					let newBase64ImageString = '';
-					let newFileSize = 0;
-					let newImageQuality = 100;
-
-					// Degrade image until file size is less than the limit
-					do
+					const image = new Image();
+					image.onload = (event) =>
 					{
-						newDataUrl = canvas.toDataURL(imageType, newImageQuality / 100);
-						newBase64ImageString = newDataUrl.split(',')[1];
-						newFileSize = Math.round(newBase64ImageString.length * 3 / 4);
+						// Fit image to bounding box
+						let scaleFactor = (limitWidth / image.width < limitHeight / image.height)
+							? (limitWidth / image.width)
+							: (limitHeight / image.height);
 
-						//console.log(newImageQuality);
-						//console.log(newFileSize.toFixed(2));
-						//console.log(newBase64ImageString);
+						let newWidth = image.width * scaleFactor;
+						let newHeight = image.height * scaleFactor;
 
-						newImageQuality -= (newImageQuality > 10)
-							? 5
-							: 1;
+						const canvas = document.createElement('canvas');
+						canvas.width = newWidth;
+						canvas.height = newHeight;
 
-					} while (newFileSize > limitFileSize && newImageQuality > 0);
+						const ctx = canvas.getContext('2d');
+						ctx.drawImage(image, 0, 0, newWidth, newHeight);
 
-					this.insuredIdentityDocumentImagePreview = newDataUrl;
+						let newDataUrl = '';
+						let newBase64ImageString = '';
+						let newFileSize = 0;
+						let newImageQuality = 100;
 
-					// Convert to PDF
-					const doc = new jsPDF
-						({
-							orientation: (newWidth > newHeight) ? 'l' : 'p',
-							unit: 'px',
-							format: [newWidth, newHeight]
-						});
+						// Degrade image until file size is less than the limit
+						do
+						{
+							newDataUrl = canvas.toDataURL(imageType, newImageQuality / 100);
+							newBase64ImageString = newDataUrl.split(',')[1];
+							newFileSize = Math.round(newBase64ImageString.length * 3 / 4);
 
-					doc.addImage(newBase64ImageString, 0, 0, newWidth, newHeight);
+							newImageQuality -= (newImageQuality > 10)
+								? 5
+								: 1;
 
-					// Output PDF to base64 string and strip to DATA only
-					const base64PdfString = (doc.output('datauristring') as string).split(',')[1];
-					//console.log(base64PdfString);
+						} while (newFileSize > limitFileSize && newImageQuality > 0);
 
-					this.insuredIdentityDocumentImageData = base64PdfString;
-					this.hasImage = true;
+						this.insuredIdentityDocumentImagePreview = newDataUrl;
+
+						// Convert to PDF
+						const doc = new jsPDF
+							({
+								orientation: (newWidth > newHeight) ? 'l' : 'p',
+								unit: 'px',
+								format: [newWidth, newHeight]
+							});
+
+						doc.addImage(newBase64ImageString, 0, 0, newWidth, newHeight);
+
+						// Output PDF to base64 string and strip to DATA only
+						const base64PdfString = (doc.output('datauristring') as string).split(',')[1];
+
+						this.insuredIdentityDocumentImageData = base64PdfString;
+						this.hasImage = true;
+					};
+
+					image.src = uploadedImage;
 				};
 
-				image.src = uploadedImage;
-			};
-
-			reader.readAsDataURL(file);
+				reader.readAsDataURL(file);
+			}
 		}
-
-		console.log(event);
 	}
 
 	deleteImage()
 	{
 		this.hasImage = false;
 		this.insuredIdentityDocumentImageData = "";
-		this.insuredIdentityDocumentImagePreview = ""
-		console.log(this.fileinput);
+		this.insuredIdentityDocumentImagePreview = "";
+		this.pdfName = '';
+		this.pdfBase64 = '';
 		// this.onFileChanged("");
 		this.fileinput.nativeElement.value = '';
 	}
@@ -859,10 +847,6 @@ export class ApplyComponent implements OnInit
 			const newBase64ImageString = dataUrl.split(',')[1];
 			const newFileSize = Math.round(newBase64ImageString.length * 3 / 4);
 
-			console.log('DEGRADE /////////////////////////////////////////////');
-			console.log(newBase64ImageString);
-			console.log(newFileSize);
-
 			if (newFileSize > limit)
 				this.degradeImageToLimit(newDataUrl, imageType, imageQuality, limit, callback);
 			else
@@ -875,6 +859,5 @@ export class ApplyComponent implements OnInit
 	{
 		let limit = 1024 * 1024 * 5; // 5 MB
 		let remSpace = limit - unescape(encodeURIComponent(JSON.stringify(sessionStorage))).length;
-		console.log(remSpace);
 	}
 }

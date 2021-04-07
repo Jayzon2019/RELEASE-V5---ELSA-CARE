@@ -1,4 +1,9 @@
 .ps-lite-apply-page {
+
+    .step6, .step7, .step8 {
+        margin-top: 75px !important;
+    }
+
     label.id-secondary {
         display: none;
 
@@ -42,6 +47,30 @@
     .steplist-wrapper {
         .steplist{
             position: fixed;
+        }
+    }
+
+    .identity-document-preview > .pdf-preview {
+        display: flex;
+
+        img.pdf-icon {
+            height: 100px;
+        }
+
+        span.pdf-name {
+            font-size: 16px;
+            margin-top: 10px;
+            padding-right: 50px;
+            align-self: center;
+        }
+
+        @media (max-width: 500px) {
+            display: inline-grid;
+            justify-items: center;
+
+            span.pdf-name {
+                padding-right: 0;
+            }
         }
     }
 
