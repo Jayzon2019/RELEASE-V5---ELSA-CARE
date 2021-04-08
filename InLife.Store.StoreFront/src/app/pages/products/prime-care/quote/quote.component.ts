@@ -72,8 +72,8 @@ export class QuoteComponent implements OnInit
 		//try { this.affiliate = JSON.parse(sessionStorage.getItem("affiliate")); }
 		//catch(ex) { this.affiliate = {}; }
 
-		const getQuoteFormData = this.session.get('getQuoteForm');
-		//const getQuoteFormData = JSON.parse(this.session.get("getQuoteForm") || "[]");
+		const getQuoteFormData = this.session.get('getQuoteForm_PC');
+		//const getQuoteFormData = JSON.parse(this.session.get('getQuoteForm_PC') || "[]");
 		this.initForm(getQuoteFormData);
 		this.getFile();
 
@@ -169,20 +169,19 @@ export class QuoteComponent implements OnInit
 			if (this.getQuoteForm.get('calculatePremium').valid)
 			{
 				this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-				//this.session.set("getinnerForm",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-				this.session.set('getinnerForm',
+				this.session.set('getinnerForm_PC',
 					{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
 			}
 			else
 			{
-				const getQuoteFormData1 = this.session.get('getinnerForm');
-				//const getQuoteFormData1 = this.session.get("getinnerForm");
+				const getQuoteFormData1 = this.session.get('getinnerForm_PC');
+				//const getQuoteFormData1 = this.session.get("getinnerForm_PC");
 				if(!getQuoteFormData1)
 				{
 					this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: 0 });
-					this.session.set('getinnerForm',
+					this.session.set('getinnerForm_PC',
 						{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-					//this.session.set("getinnerForm",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
+					//this.session.set("getinnerForm_PC",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
 				}
 			}
 		});
@@ -238,7 +237,7 @@ export class QuoteComponent implements OnInit
 			gender = paymentMode[1].Female;
 
 		let age = this.getAge(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value);
-		this.session.set('age', { age: age });
+		this.session.set('age_PC', { age: age });
 		//this.session.set("age",{ age:age  });
 		let price = 0;
 
@@ -377,7 +376,7 @@ export class QuoteComponent implements OnInit
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
 		{
-			this.session.set('getQuoteForm', this.getQuoteForm.value);
+			this.session.set('getQuoteForm_PC', this.getQuoteForm.value);
 			//this.session.set("getQuoteForm", JSON.stringify(this.getQuoteForm.value));
 			const healthCondition = this.getQuoteForm.get('healthCondition').value;
 

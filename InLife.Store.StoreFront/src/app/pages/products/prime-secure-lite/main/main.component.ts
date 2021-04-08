@@ -107,7 +107,7 @@ export class MainComponent implements OnInit
 	ngOnInit(): void
 	{
 		this.getPrimeSecureLiteHeroSlider();
-		this.session.clear();
+		// this.session.clear();
 	}
 
 	getPrimeSecureLiteHeroSlider()

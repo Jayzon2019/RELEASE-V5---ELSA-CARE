@@ -65,11 +65,11 @@ export class ApplyComponent implements OnInit
 	)
 	{
 		this.ngxService.start();
-		this.getQuoteFormData = this.session.get("getQuoteForm") || "[]";
-		const getApplyFormData = this.session.get("getApplyForm") || "[]";
+		this.getQuoteFormData = this.session.get('getQuoteForm_PC') || "[]";
+		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
 
-		this.insuredIdentityDocumentImagePreview = this.session.get("insuredIdentityDocumentImagePreview");
-		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData");
+		this.insuredIdentityDocumentImagePreview = this.session.get("insuredIdentityDocumentImagePreview_PC");
+		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData_PC");
 		if (this.insuredIdentityDocumentImageData)
 		{
 			this.hasImage = true;
@@ -503,13 +503,13 @@ export class ApplyComponent implements OnInit
 		this.submitted = true;
 		if (this.getApplyForm.valid)
 		{
-			this.session.set("getApplyForm", this.getApplyForm.value);
-			this.session.set("extensionData", this.dynamicArray);
-			this.session.set("insuredIdentityDocumentImageData", this.insuredIdentityDocumentImageData);
-			this.session.set("insuredIdentityDocumentImagePreview", this.insuredIdentityDocumentImagePreview);
+			this.session.set("getApplyForm_PC", this.getApplyForm.value);
+			this.session.set("extensionData_PC", this.dynamicArray);
+			this.session.set("insuredIdentityDocumentImageData_PC", this.insuredIdentityDocumentImageData);
+			this.session.set("insuredIdentityDocumentImagePreview_PC", this.insuredIdentityDocumentImagePreview);
 
-			const getApplyFormData = this.session.get("getApplyForm") || "[]";
-			const getQuoteForm = this.session.get("getQuoteForm") || "[]";
+			const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
+			const getQuoteForm = this.session.get('getQuoteForm_PC') || "[]";
 
 			this.router.navigate(['prime-care/pay']);
 
@@ -540,7 +540,7 @@ export class ApplyComponent implements OnInit
 
 	backClicked()
 	{
-		this.session.set("getApplyForm", this.getApplyForm.value);
+		this.session.set("getApplyForm_PC", this.getApplyForm.value);
 		this.location.back();
 	}
 
