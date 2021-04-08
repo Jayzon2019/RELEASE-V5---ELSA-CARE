@@ -1,272 +1,323 @@
-<app-inner-header></app-inner-header>
+<div class="mainpagewrap ps-lite-thankyou-page">
+	<div class="row m-0">
+		<div class="col-md-12 tabfull p-0">
+			<div class="leftwrapsection">
+				<!-- <app-prime-secure-lite-header></app-prime-secure-lite-header> -->
 				<div class="mainwizard">
 					<div class="row">
-						<div class="col-md-3">
-						</div>
-						<div class="col-md-9">
+						<!-- <div class="col-md-3"></div> -->
+						<div class="col-md-12">
 							<div class="stepdetail">
-								<div class="pagetitles">
-									<h1>
-										Welcome to the InLife Family!
-										Thank you for availing of Prime Care!
+								<div
+									class="pagetitles"
+									style="margin-bottom: 55px !important"
+								>
+									<h1 class="mb-6 thank-you-header">
+										Welcome to the Inlife Family.<br />
+										Thank You for Availing of Prime Secure
+										Lite.
 									</h1>
-									<h5>
-										Your future is now secured against the adverse impact of medical expenses due to
-										a critical illness. Below are your transaction details:
+
+									<h5
+										class="text my-5"
+										style="
+											color: #070752;
+											line-height: 28px;
+										"
+									>
+									You have secured your loved ones by availing of a protection plan that provides financial benefits in the event of many uncertainties we face today.
 									</h5>
 
-								</div>
+									<!-- step9 strat -->
 
-
-								<!-- step9 strat -->
-
-								<div class="formcoantiner step9">
-									<div class="reviewbill">
-										<div class="row">
-											<div class="col-md-4 titlebill">
-												<p> Transaction Details </p>
-											</div>
-											<div class="col-md-8 detailbill">
-												<div class="row m-0">
-													<div class="col-6">
-														<p> Reference Number:</p>
-													</div>
-													<div class="col-6">
-														<p>{{transactionReference}}</p>
-													</div>
-
-												</div>
-
-												<div class="row m-0">
-
-													<div class="col-6">
-														<p> Transaction Date:</p>
-													</div>
-													<div class="col-6">
-														<p>{{transactionDate|date}}</p>
-													</div>
-												</div>
-
-											</div>
-										</div>
-
-
-										<br> <br>
-
-										<div class="row">
-											<div class="col-md-4 titlebill">
-												<p> Plan Details </p>
-											</div>
-											<div class="col-md-8 detailbill">
-												<div class="row m-0">
-													<div class="col-6">
-														<p> Product Name:</p>
-													</div>
-													<div class="col-6">
-														<p>Prime Care</p>
-													</div>
-												</div>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Plan:</p>
-													</div>
-													<div class="col-6">
-														<p *ngIf="calculationInformation.totalCashBenefit==='1800000'">
-															Plan 50 (&#8369; 1,800,000)
-														</p>
-														<p *ngIf="calculationInformation.totalCashBenefit==='1080000'">
-															Plan 30 (&#8369; 1,080,000)
-														</p>
-													</div>
-												</div>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Current Age:</p>
-													</div>
-													<div class="col-6">
-														<p>{{age.age}}</p>
-													</div>
-												</div>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Gender:</p>
-													</div>
-													<div class="col-6">
-														<p>{{gender}}</p>
-													</div>
-												</div>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Mode of Payment</p>
-													</div>
-													<div class="col-6">
-														<p> {{calculationInformation.paymentMode}}</p>
-													</div>
-												</div>
-												<br>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Initial Premium Amount</p>
-													</div>
-													<div class="col-6">
-														<p>&#8369; {{getinnerForm.amount||'0.00'}}</p>
-													</div>
-												</div>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Initial Lump Sum Benefit:</p>
-													</div>
-													<div class="col-6">
-														<p *ngIf="calculationInformation.totalCashBenefit==='1080000'">
-															&#8369; 180,000.00
-														</p>
-														<p *ngIf="calculationInformation.totalCashBenefit==='1800000'">
-															&#8369; 300,000.00
-														</p>
-													</div>
-												</div>
-
-
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Total Monthly Allowance:</p>
-													</div>
-													<div class="col-6">
-														<p *ngIf="calculationInformation.totalCashBenefit==='1080000'">
-															&#8369; 30,000.00
-														</p>
-														<p *ngIf="calculationInformation.totalCashBenefit==='1800000'">
-															&#8369; 50,000.00
-														</p>
-													</div>
-												</div>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Total & Permanent Disability Benefit:</p>
-													</div>
-													<div class="col-6">
-														<p *ngIf="calculationInformation.totalCashBenefit==='1080000'">
-															&#8369; 1,080,000.00
-														</p>
-														<p *ngIf="calculationInformation.totalCashBenefit==='1800000'">
-															&#8369; 1,800,000.00
-														</p>
-													</div>
-												</div>
-
-
-											</div>
-										</div>
-										<br> <br>
-										<div class="row">
-											<div class="col-md-4 titlebill">
-												<p> Payment Details </p>
-											</div>
-											<div class="col-md-8 detailbill">
-												<div class="row m-0">
-													<div class="col-6">
-														<p> Receipt Number:</p>
-													</div>
-													<div class="col-6">
-														<p>{{receiptNumber}}</p>
-													</div>
-												</div>
-												<div class="row m-0">
-													<div class="col-6">
-														<p> Amount:</p>
-													</div>
-													<div class="col-6">
-														<p>&#8369; {{getinnerForm.amount||'0.00'}}</p>
-													</div>
-												</div>
-											</div>
-
-										</div>
-
+									<div class="formcoantiner step9 text-left">
 										<div class="reviewbill">
+											<div class="row">
+												<div class="col-md-4 titlebill">
+													<p>Transaction Details</p>
+												</div>
 
-											<br> <br>
-											<p>
-												Please be advised that you will be automatically enrolled to the InLife
-												Customer Portal. Your policy contract will be sent to you via your
-												Customer Portal account within 24 to 48 hours (except holidays and
-												weekends) if all requirements are submitted and complete. An InLife
-												representative shall get in touch with you, if necessary, for questions
-												or additional details.
-											</p>
-											<p>
-												Important Reminders:<br>
-												Pay your succeeding annual and monthly premiums using your Mastercard or
-												VISA credit cards through our Automatic Charging Option (ACO) facility,
-												which can be accessed after you log-in to your InLife Customer Portal
-												account. By enrolling at our ACO facility, you have the peace of mind
-												that succeeding annual and monthly payments are paid on or before the
-												due date to keep your policy in force.
-											</p>
-
-											<p>
-												For inquiries, please get in touch with us through
-												<a href="mailto:customercare@insular.com.ph">customercare@insular.com.ph</a>
-												or call our Customer Care Hotline Numbers <a href="tel:+63288761800">(02) 8-876-1-800</a> for Metro Manila
-												or <a href="tel:+1800104678527">1-800-10-INSULAR (1-800-10-4678527)</a>
-												Provincial Toll-Free Number.
-												Our business hours are from 7am to 5pm, Mondays
-												to Fridays, except Holidays.
-											</p>
-
-											<p>Connect with us:</p>
-
-											<div class="social-links">
-												<a href="https://www.facebook.com/InsularLifePH" target="_blank">
-													<i class="fa fa-facebook-official"></i>
-												</a>
-												<a href="https://twitter.com/Insular_Life" target="_blank">
-													<i class="fa fa-twitter"></i>
-												</a>
-												<a href="https://www.instagram.com/insular_life" target="_blank">
-													<i class="fa fa-instagram"></i>
-												</a>
+												<div
+													class="col-md-8 detailbill">
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Reference Number:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content" style="word-break: break-all;">
+																<p>{{txn.MerchTxnRef}}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Transaction Date:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{dateNow}}</p>
+															</div>
+														</div>
+													</div>
+												</div>
 											</div>
+											<br />
+											<br />
+											<div class="row">
+												<div class="col-md-4 titlebill">
+													<p>Plan Details</p>
+												</div>
+												<div class="col-md-8 detailbill">
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Product Name:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>PRIME SECURE LITE</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Plan Type:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ age.age <= 47 ? 'Plan 2500' : 'Plan 3000' }}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Current Age:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ age.age }}</p>
+															</div>
+														</div>
+													</div>
+	
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Gender:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>
+																	{{
+																		getReferenceDataById(
+																			CONSTANTS.GENDER,
+																			calculationInformation.gender
+																		).name
+																	}}
+																</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Mode of Payment:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>Annual</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Sum Assured:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.totalCashBenefit }}</p>
+															</div>
+														</div>
+													</div>
+	
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>
+																	Extended Spouse Accident Coverage:
+																</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.esc }}</p>
+															</div>
+														</div>
+													</div>
+	
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>
+																	Cancer, Heart Attack
+																	and Stroke Coverage:
+																</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.chas }}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>
+																	COVID-19 Insurance
+																	Benefit (6-month
+																	Coverage):
+																</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.covid }}</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br />
 
+											<div class="row">
+												<div class="col-md-4 titlebill">
+													<p>Payment Details</p>
+												</div>
+												<div
+													class="col-md-8 detailbill">
+
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Receipt Number:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{txn.ReceiptNo}}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Amount:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>&#8369;{{ age.age <= 47 ? '2,500.00' : '3,000.00' }}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Payment Status:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{txn.Message}}</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br />
+											<br />
+											<br />
+											<p>
+												Please be advised that you will
+												be automatically enrolled to the
+												InLife Customer Portal. Your
+												policy contract will be sent to
+												you via your Customer Portal
+												account within 48 hours (except
+												holidays and weekends) if all
+												requirements are submitted and
+												complete.
+											</p>
+											<p>
+												An InLife representative shall
+												get in touch with you, if
+												necessary, for questions or
+												additional details.
+											</p>
+											<br />
+											<p>
+												For inquiries, please get in
+												touch with us through
+												customercare@insular.com.ph or
+												call our Customer Care Hotline
+												Numbers (02) 8-876-1-800 for
+												Metro Manila or
+												1-800-10-INSULAR (1-800-10-4678527) Provincial
+												Toll-Free Number. Our business
+												hours are from 7am to
+												5pm, Mondays to Fridays, except
+												Holidays.
+											</p>
+											<br />
+											<br />
+											<p>Connect with us:</p>
+											<img
+												class="m-2"
+												src="assets\images\fb-icon.png"
+											/>
+											<img
+												class="m-2"
+												src="assets\images\twitter-icon.png"
+											/>
+											<img
+												class="m-2"
+												src="assets\images\insta-icon.png"
+											/>
 										</div>
-
-
-
 									</div>
 
-
+									<div class="form-row text-center mb-5">
+										<div class="col-12">
+											<div class="btnsec text-center">
+												<a class="btn outlinedbtn" [routerLink]="['/']">
+													<i class="material-icons"
+														>arrow_backward</i
+													>
+													BACK TO HOME PAGE
+												</a>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="row footer-links">
-						<div class="col-md-3">
-							&nbsp;
-						</div>
-						<div class="col-md-9">
-							<p>
-								Go back to <a href="/prime-care.html">Prime Care</a> or to <a href="/">
-									InLife Online
-									Store Home
-								</a> page.
-							</p>
-						</div>
-					</div>
-
 				</div>
 			</div>
-			<div class="col-md-3 p-0">
-			</div>
 		</div>
-
 	</div>
 </div>

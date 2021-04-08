@@ -34,7 +34,7 @@ export class MainComponent implements OnInit
 	ngOnInit(): void
 	{
 		this.getPrimeHeroSlider();
-		this.session.clear();
+		// this.session.clear();
 
 		if(this.activateRoute.snapshot.fragment === 'ihc')
 			this.scroll();

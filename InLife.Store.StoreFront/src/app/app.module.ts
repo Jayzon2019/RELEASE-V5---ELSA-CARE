@@ -24,6 +24,7 @@ import { ControlsModule } from './controls/controls.module';
 import { CryptographyService } from './services/cryptography.service';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig =
 {
@@ -68,7 +69,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 		SaveQuoteComponent,
 		PaymentRecievedComponent,
 		PaymentCallbackComponent,
-		PaymentFailedComponent
+		PaymentFailedComponent,
+		ThankYouComponent
 	],
 	imports:
 	[

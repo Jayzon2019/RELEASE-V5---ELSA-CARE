@@ -40,7 +40,7 @@ export class PayComponent implements OnInit
 	employment: any;
 	identication: any;
 	age: any;
-	getinnerForm: any;
+	getinnerForm_PC: any;
 	pdfblogImage: any;
 	totalCashBenefit: any;
 	paymentAmount: string;
@@ -62,9 +62,9 @@ export class PayComponent implements OnInit
 		private sanitizer: DomSanitizer
 	)
 	{
-		const getQuoteFormData = this.session.get("getQuoteForm") || "[]";
-		const getApplyFormData = this.session.get("getApplyForm") || "[]";
-		const extension = this.session.get("extensionData") || "[]";
+		const getQuoteFormData = this.session.get('getQuoteForm_PC') || "[]";
+		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
+		const extension = this.session.get("extensionData_PC") || "[]";
 		this.getFile();
 		this.basicInformation = getQuoteFormData.basicInformation;
 		this.calculationInformation = getQuoteFormData.calculatePremium;
@@ -76,17 +76,17 @@ export class PayComponent implements OnInit
 		this.identificationFormInformation = getApplyFormData.identification;
 		this.personalInformation = getApplyFormData.personalInformation;
 		this.extensionData = extension;
-		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData");
+		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData_PC");
 
 		this.employment = getQuoteFormData.employment;
 		this.identication = getQuoteFormData.identification;
-		this.getinnerForm = this.session.get("getinnerForm");
-		this.age = this.session.get("age");
-		this.paymentAmount = this.getinnerForm.amount;
+		this.getinnerForm_PC = this.session.get("getinnerForm_PC");
+		this.age = this.session.get("age_PC");
+		this.paymentAmount = this.getinnerForm_PC.amount;
 		//image convert to pdf
-		this.pdfblogImage = this.getinnerForm.pdfbasestring;
+		this.pdfblogImage = this.getinnerForm_PC.pdfbasestring;
 		this.landline = this.basicInformation.landline ? "+63" + this.basicInformation.landline : "";
-		this.policyNo = this.session.get("policyNo");
+		this.policyNo = this.session.get("policyNo_PC");
 		this.health1 = this.healthCondition.healthCondition1;
 		this.health2 = this.healthCondition.healthCondition2;
 		this.health3 = this.healthCondition.healthCondition3;
@@ -288,7 +288,7 @@ export class PayComponent implements OnInit
 
 		// LOG FOR DEBUGGING
 		//console.log(`Posting to ${endpoint}`);
-		this.session.set('CreateApplication', arrData);
+		this.session.set('CreateApplication_PC', arrData);
 		//return;
 
 		this.http
@@ -322,8 +322,8 @@ export class PayComponent implements OnInit
 				this.policyNo = <string>data;
 
 				// LOG FOR DEBUGGING
-				this.session.set('policyNo', this.policyNo);
-				this.session.set('amount', this.paymentAmount);
+				this.session.set('policyNo_PC', this.policyNo);
+				this.session.set('amount_PC', this.paymentAmount);
 				//console.log(`Policy Number: ${this.policyNo}`);
 				//console.log(`Amount: ${this.paymentAmount}`);
 
@@ -349,7 +349,7 @@ export class PayComponent implements OnInit
 		// TODO: Change to OrderId from API
 		// Numbers only
 		//let refNo = moment().format('YYYYMMDDHHmmssSSS');
-		let refNo = this.session.get('refNo');
+		let refNo = this.session.get('refNo_PC');
 		let policyNo = this.policyNo;
 		let amount = String(this.paymentAmount).replace(/\D/g, '');
 
@@ -360,7 +360,7 @@ export class PayComponent implements OnInit
 		// LOG FOR DEBUGGING
 		//console.log(`Redirecting to the payment gateway:`);
 		//console.log(targetUrl);
-		this.session.set('PaymentGatewayURL', targetUrl);
+		this.session.set('PaymentGatewayURL_PC', targetUrl);
 		//window.alert(`This is for debugging purpose only. You can now check the console logs before we redirect you to the payment gateway.`);
 
 		window.location.href = targetUrl;

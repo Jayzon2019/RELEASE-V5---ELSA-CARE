@@ -81,7 +81,6 @@ export class ThankYouComponent implements OnInit, OnDestroy
 		this.getFile();
 		this.basicInformation = getQuoteFormData.basicInformation;
 		this.calculationInformation = getQuoteFormData.calculatePremium;
-		//this.totalCashBenefit = this.calculationInformation.totalCashBenefit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		this.healthCondition = getQuoteFormData.healthCondition;
 		this.beneficialInformation = getApplyFormData.beneficiaryDetails;
 		this.declarationFormInformation = getApplyFormData.declarationForm;
@@ -110,19 +109,19 @@ export class ThankYouComponent implements OnInit, OnDestroy
 	}
 
 	mapResponse(params) {
-		this.txn.MerchTxnRef = params['vpc_MerchTxnRef'];
-		this.txn.OrderInfo = params['vpc_OrderInfo'];
-		this.txn.Amount = params['vpc_Amount'];
-		this.txn.TransactionDate = this.formatDate(new Date());
-		this.txn.txnResponseCode = params['vpc_TxnResponseCode'];
-		this.txn.TxnResponseCodeDesc = CONSTANTS.PAYMENT_TRANSACTION_RESPONSE.find(x => x.id === params['vpc_TxnResponseCode']).name;
-		this.txn.Message = params['vpc_Message'];
-		this.txn.AcqResponseCode = params['vpc_AcqResponseCode'];
-		this.txn.ReceiptNo = params['vpc_ReceiptNo'];
-		this.txn.AuthorizeId = params['vpc_AuthorizeId'];
-		this.txn.TransactionNo = params['vpc_TransactionNo'];
-		this.txn.Card = params['vpc_Card'];
-		this.txn.policy = params['policy'];
+		this.txn.MerchTxnRef = params.MerchantTxnRef;
+		this.txn.OrderInfo = params.OrderInfo;
+		this.txn.Amount = params.AmountPaid;
+		this.txn.TransactionDate = params.TransactionDate;
+		this.txn.txnResponseCode = params.TxnResponseCode;
+		this.txn.TxnResponseCodeDesc = params.TxnResponseCodeDesc;
+		this.txn.Message = params.PaymentServerMessage;
+		this.txn.AcqResponseCode = params.AcqResponseCode;
+		this.txn.ReceiptNo = params.ReceiptNo;
+		this.txn.AuthorizeId = params.AuthorizationID;
+		this.txn.TransactionNo = params.OrderID;
+		this.txn.Card = params.CardType;
+		this.txn.policy = params.PolicyNo;
 	}
 
 	getFile()

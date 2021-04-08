@@ -3,12 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subscription, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import * as moment from 'moment';
 
 import { SessionStorageService, FacebookPixelService } from '@app/services';
+import { CONSTANTS } from '@app/services/constants';
 
 
 @Component
@@ -19,24 +20,35 @@ import { SessionStorageService, FacebookPixelService } from '@app/services';
 })
 export class ThankYouComponent implements OnInit
 {
+	CONSTANTS = CONSTANTS;
 	basicInformation: any;
 	calculationInformation: any;
-	title: any;
+	healthCondition: any;
 	beneficialInformation: any;
 	personalInformation: any;
+	declarationFormInformation: any;
+	employmentFormInformation: any;
+	identificationFormInformation: any;
+	insuredIdentityDocumentImageData: string;
+	extensionData: any;
 	employment: any;
 	identication: any;
 	age: any;
 	getinnerForm: any;
-	policyNo: string;
-	transactionDate: any;
-	transactionReference: any;
-	transactionNo: any;
-	amount: any;
-	paymentResponse: any;
+	pdfblogImage: any;
+	totalCashBenefit: any;
 	paymentAmount: string;
-	gender: string;
-	receiptNumber: any;
+	landline: string;
+	policyNo: string;
+	health1: string;
+	health2: string;
+	health3: string;
+	privacyFile: any;
+	policy: any;
+	dateNow: string;
+	gender: any;
+	activatedRouteSubscription$: Subscription;
+	txn = {} as any;
 
 	constructor
 	(
@@ -46,95 +58,56 @@ export class ThankYouComponent implements OnInit
 		private facebookPixelService: FacebookPixelService
 	)
 	{
-		const getQuoteFormData = JSON.parse(this.session.get("getQuoteForm") || "[]");
-		const getApplyFormData = JSON.parse(this.session.get("getApplyForm") || "[]");
-		const paymentResponse = this.session.get("PaymentResponse");
-
-		this.transactionReference = paymentResponse.MerchantTxnRef;
-		this.transactionDate = paymentResponse.TransactionDate;
-		this.receiptNumber = paymentResponse.ReceiptNo;
-
+		const getQuoteFormData = this.session.get("getQuoteForm") || "[]";
+		const getApplyFormData = this.session.get("getApplyForm") || "[]";
+		const extension = this.session.get("extensionData") || "[]";
+		const paymentResponse = this.session.get("PaymentResponse") || "[]";
 		this.basicInformation = getQuoteFormData.basicInformation;
 		this.calculationInformation = getQuoteFormData.calculatePremium;
-
+		this.healthCondition = getQuoteFormData.healthCondition;
 		this.beneficialInformation = getApplyFormData.beneficiaryDetails;
+		this.declarationFormInformation = getApplyFormData.declarationForm;
+		this.employmentFormInformation = getApplyFormData.employment;
+		this.identificationFormInformation = getApplyFormData.identification;
 		this.personalInformation = getApplyFormData.personalInformation;
-		this.employment = getApplyFormData.employment;
-		this.identication = getApplyFormData.identification;
+		this.extensionData = extension;
+		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData");
+
+		this.employment = getQuoteFormData.employment;
+		this.identication = getQuoteFormData.identification;
 		this.getinnerForm = this.session.get("getinnerForm");
 		this.age = this.session.get("age");
-		this.policyNo = this.session.get('policyNo');
-		this.paymentAmount = paymentResponse.AmountPaid;
 		this.gender = this.calculationInformation.gender == 7 ? "Female" : "Male";
+		this.mapResponse(paymentResponse);
+		
 		this.resetForm();
 	}
 
 	resetForm()
 	{
-		// this.session.set("getQuoteForm", "");
-		// this.session.set("getApplyForm", "");
-		// this.session.set("extensionData", "");
-		// this.session.set("insuredIdentityDocumentImageData", "");
-		// this.session.set("getinnerForm", "");
-		// this.session.set("age", "");
-		// this.session.set("PostQuote", "");
-		// this.session.set("insuredIdentityDocumentImagePreview", "");
-		// this.session.set("CreateApplication", "");
 		this.session.clear();
+	}
+
+	mapResponse(params) {
+		this.txn.MerchTxnRef = params.MerchantTxnRef;
+		this.txn.OrderInfo = params.OrderInfo;
+		this.txn.Amount = params.AmountPaid;
+		this.txn.TransactionDate = params.TransactionDate;
+		this.txn.txnResponseCode = params.TxnResponseCode;
+		this.txn.TxnResponseCodeDesc = params.TxnResponseCodeDesc;
+		this.txn.Message = params.PaymentServerMessage;
+		this.txn.AcqResponseCode = params.AcqResponseCode;
+		this.txn.ReceiptNo = params.ReceiptNo;
+		this.txn.AuthorizeId = params.AuthorizationID;
+		this.txn.TransactionNo = params.OrderID;
+		this.txn.Card = params.CardType;
+		this.txn.policy = params.PolicyNo;
 	}
 
 	ngOnInit(): void
 	{
 		this.facebookPixelService.track('Purchase');
 
-		// let headers: HttpHeaders = new HttpHeaders();
-		// headers = headers.append('Content-Type', 'application/json');
-		// headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
-
-		// let options =
-		// {
-		// 	headers: headers,
-		// 	params: new HttpParams()
-		// };
-
-		// this.route.queryParams.subscribe(params => {
-		// 	let arr =
-		// 	{
-		// 		"PolicyNo": this.policyNo,
-		// 		"MerchantTxnRef": params.vpc_MerchTxnRef,
-		// 		"OrderInfo": params.vpc_OrderInfo,
-		// 		"AmountPaid": params.vpc_Amount,
-		// 		"TransactionDate": new Date(),
-		// 		"TxnResponseCodeDesc": params.vpc_AcqAVSRespCode,
-		// 		"TxnResponseCode": params.vpc_TxnResponseCode,
-		// 		"PaymentServerMessage": params.vpc_Message,
-		// 		"AcqResponseCode": params.vpc_AcqResponseCode,
-		// 		"ReceiptNo": params.vpc_ReceiptNo,
-		// 		"AuthorizationID": params.vpc_AuthorizeId,
-		// 		"OrderID": params.vpc_TransactionNo,
-		// 		"CardType": params.vpc_Card
-		// 	}
-
-		// 	let body = JSON.stringify(arr);
-		// 	let endpoint = environment.primeCareApi.host + environment.primeCareApi.savePaymentEndpoint;
-
-		// 	this.transactionReference = arr["OrderID"];
-		// 	this.transactionNo = arr["ReceiptNo"];
-		// 	this.amount = arr["AmountPaid"];
-		// 	let date = moment();
-		// 	let formatted = date.format('MM/DD/YYYY');
-		// 	this.transactionDate = formatted;
-
-		// 	console.log(arr);
-		// 	this.session.set('SavePayment', arr);
-
-		// 	this.http
-		// 		.post(endpoint, body, options)
-		// 		.pipe(catchError(this.handleError))
-		// 		.subscribe(data => {
-		// 			console.log(data);
-		// 		});
-		// });
 	}
 
 	handleError(error: any)
@@ -146,6 +119,30 @@ export class ThankYouComponent implements OnInit
 
 		console.error(errMsg);
 		return throwError(error);
+	}
+
+	formatDate(dateString: any): string
+	{
+		let date = moment(dateString);
+		let formatted = date.format('MM/DD/YYYY');
+		return formatted;
+	}
+
+	getReferenceDataById(list: any[], id: any): any
+	{
+		let refId: number = Number(id);
+
+		// If 0 return null
+		if (refId === 0)
+			return null;
+
+		// Return match
+		for (var i = 0; i < list.length; i++)
+			if (Number(list[i].id) === refId)
+				return list[i];
+
+		// If no match return null
+		return null;
 	}
 
 }
