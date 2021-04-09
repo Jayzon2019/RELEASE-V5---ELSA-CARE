@@ -1,3 +1,4 @@
+import { PSLiteService } from './../../../../shared/services/pslite.servce';
 import { environment } from '@environment';
 
 import { Injectable, Injector, ElementRef } from '@angular/core';
@@ -67,7 +68,8 @@ export class QuoteComponent implements OnInit
 		private util: UtilitiesService,
 		private sanitizer: DomSanitizer,
 		private currencyPipe: CurrencyPipe,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private psLiteService_API: PSLiteService
 	)
 	{
 		this.ngxService.start();
@@ -76,7 +78,7 @@ export class QuoteComponent implements OnInit
 	ngOnInit(): void
 	{
 		this.affiliate = this.affiliate = this.session.get('affiliate');
-		this.session.remove(StorageType.POLICYNO);
+		
 		const getQuoteFormData = this.session.get('getQuoteForm');
 		this.quoteDetails = this.session.get('getinnerForm');
 		this.initForm(getQuoteFormData);
@@ -555,7 +557,6 @@ export class QuoteComponent implements OnInit
 			addressCountry: country,
 			bmi: +this.bodyMassIndex
 		};
-		console.log(faceAmount);
 		var dataExternalAPI = {
 			InsuredPrefixId: +basicInfo.get('prefix').value,
 			InsuredFirstName: basicInfo.get('fname').value,
@@ -573,12 +574,34 @@ export class QuoteComponent implements OnInit
 			InsuredPrimaryOccupationMonthlyIncome: monthlyIncome,
 			Bmi: +this.bodyMassIndex
 		}
-		this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
-		this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
 
 		this.ngxService.start();
+		const oldDataExternalAPI = this.session.get(StorageType.QUOTE_EXTERNAL_DATA);
+		let errorMsg = `We apologize things don't appear to be working at the moment. Please try again.`;
+
 		if(isEligible) {
-			this.router.navigate(['prime-secure-lite/apply']);
+			if(JSON.stringify(oldDataExternalAPI) !== JSON.stringify(dataExternalAPI)) {
+				let data = JSON.stringify(dataExternalAPI);
+				this.psLiteService_API.createUnderWritingStatus(data)
+				.pipe(retry(1), finalize(() => this.ngxService.stopAll()))
+				.subscribe((data: any) =>
+				{
+					if(data.underwritingStatus === 'CLEAN_CASE') {
+						this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
+						this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
+						this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
+						this.session.set('UnderWritingStatus', data)
+						this.router.navigate(['prime-secure-lite/apply']);
+					} else {
+						this.router.navigate(['prime-secure-lite/ineligible']);
+					}
+				}, (error) => {
+					this.util.ShowGeneralMessagePrompt({message: errorMsg});
+				});
+			} else {
+				this.router.navigate(['prime-secure-lite/apply']);
+			}
+			
 
 		} else {
 			this.router.navigate(['prime-secure-lite/ineligible']);

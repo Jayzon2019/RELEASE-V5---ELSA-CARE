@@ -455,10 +455,17 @@ export class ApplyComponent implements OnInit
 			const getQuoteForm = this.session.get("getQuoteForm");
 			const extensionData = this.session.get("extensionData");
 			const underwritingstatus = this.session.get("UnderWritingStatus");
+			const healthCon = getQuoteForm.healthCondition;
 
 			let bday = new Date(getQuoteForm.calculatePremium.dateofbirth).toLocaleDateString();
 
-			let payload = {
+			let ownerSuffixID = this.nullIfZero(getQuoteForm.basicInformation.suffix);
+			let insuredSuffixId = this.nullIfZero(getQuoteForm.basicInformation.suffix);
+			let benefSuffixId = this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('suffix').value);
+
+			let totalInches = Math.round(healthCon.heightInFeet * 12) + healthCon.heightInInches;
+
+			let payload: any = {
 				"PlanCode": "TR0091",
 				"PlanName": "Prime Secure Lite",
 				"PaymentMode": 12,//12,
@@ -478,7 +485,7 @@ export class ApplyComponent implements OnInit
 				"OwnerIsInsured": 1,
 				"OwnerRelationToInsuredId": 24,
 				"OwnerPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
-				"OwnerSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
+				// "OwnerSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
 				"OwnerFirstName": getQuoteForm.basicInformation.fname,//"testFaname",
 				"OwnerLastName": getQuoteForm.basicInformation.lname,//"testLName",
 				"OwnerMiddleName": getQuoteForm.basicInformation.mname,//"testMName",
@@ -494,7 +501,7 @@ export class ApplyComponent implements OnInit
 				"InsuredBirthday": bday,//"01/01/1980",
 				"InsuredGenderId": this.nullIfZero(getQuoteForm.calculatePremium.gender),//8,
 				"InsuredPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
-				"InsuredSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
+				// "InsuredSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
 				"InsuredEmailAddress": getQuoteForm.basicInformation.email,//"test@gmail1.com",
 				"InsuredResidencePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//12345678,
 				"InsuredMobileNo": this.nullIfZero(getQuoteForm.basicInformation.mobile),//12345567,
@@ -518,15 +525,16 @@ export class ApplyComponent implements OnInit
 				"InsuredPrimaryOccupationProvinceId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('province').value),//1,
 				"InsuredPrimaryOccupationMunicipalityId": this.nullIfZero(this.getApplyForm.get('personalInformation').get('municipality').value),//1,
 				"InsuredOfficePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//1234567,
-				"InsuredTinNo": this.nullIfZero(this.getApplyForm.get('identification').get('secondaryLegalIdNumber').value),//123456789,
+				"InsuredIdTypeId": this.nullIfZero(this.getApplyForm.get('identification').get('secondaryLegalIdType').value),
+				"InsuredTinNo": this.getApplyForm.get('identification').get('secondaryLegalIdNumber').value,//123456789,
 				"InsuredOtherIdNoType": this.getApplyForm.get('identification').get('legalIdType').value,//"Driver's License",legalIdType
-				"InsuredSpouseOtherIdNo": this.getApplyForm.get('identification').get('LegalIdNumber').value,//"12345678",
+				"InsuredOtherIdNo": this.getApplyForm.get('identification').get('LegalIdNumber').value,//"12345678",
 
 				"Beneficiary": [{
 					"FirstName": this.getApplyForm.get('beneficiaryDetails').get('fname').value,//"SampleBeneFname",
 					"MiddleName": this.getApplyForm.get('beneficiaryDetails').get('mname').value,//"SampleBeneMname",
 					"LastName": this.getApplyForm.get('beneficiaryDetails').get('lname').value,//"SampleBeneLastName",
-					"SuffixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('suffix').value),
+					// "SuffixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('suffix').value),
 					"PrefixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('prefix').value),
 					"AddressType": 2,//2,Permanent
 					"Address1": this.getApplyForm.get('beneficiaryDetails').get('insuredStreet').value,//"Address1",
@@ -543,13 +551,24 @@ export class ApplyComponent implements OnInit
 					"Priority": this.getApplyForm.get('beneficiaryDetails').get('designation').value,//0,
 					"Right": this.getApplyForm.get('beneficiaryDetails').get('type').value//0
 				}],
-
+				// "clientId": 123123,
 				"ExistingOtherInsurance": extensionData,
 				"InsuredValidIdImage": this.insuredIdentityDocumentImageData || this.pdfBase64,//"XXXXXXXXXXXXXXX",
 				"OwnerValidIdImage": this.insuredIdentityDocumentImageData || this.pdfBase64,//"XXXXXXXXXXXXX",
 				"RefFirstName": getQuoteForm.basicInformation.afname || "",//"SampleFName",
-				"RefLastName": getQuoteForm.basicInformation.alname || "",//"SampleLName"
+				"RefLastName": getQuoteForm.basicInformation.alname || "",//"SampleLName",
+				"InsuredHeight": totalInches,
+				"InsuredWeight": getQuoteForm.healthCondition.weight
 			};
+
+			// Do not include in request body if suffix is not applicable
+			if(ownerSuffixID !== 1)
+				payload.OwnerSuffixId = ownerSuffixID
+			if(insuredSuffixId !== 1)
+				payload.InsuredSuffixId = insuredSuffixId;
+
+			if(benefSuffixId !== 1)
+				payload.Beneficiary[0].SuffixId = benefSuffixId;
 
 			this.session.set(StorageType.APPLY_DATA, payload);
 			this.router.navigate(['prime-secure-lite/pay']);

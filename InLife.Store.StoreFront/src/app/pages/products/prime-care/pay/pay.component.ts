@@ -1,3 +1,5 @@
+import { UtilitiesService } from './../../../../shared/services/utilities.service';
+import { Router } from '@angular/router';
 import { environment } from '@environment';
 
 import { Injectable, Injector } from '@angular/core';
@@ -15,6 +17,7 @@ import { jsPDF } from 'jspdf';
 
 import { ApiService, SessionStorageService } from '@app/services';
 import { CONSTANTS } from '@app/services/constants';
+import { StorageType } from '@app/services/storage-types.enum';
 
 @Injectable({ providedIn: 'root' })
 
@@ -40,7 +43,7 @@ export class PayComponent implements OnInit
 	employment: any;
 	identication: any;
 	age: any;
-	getinnerForm_PC: any;
+	getinnerForm: any;
 	pdfblogImage: any;
 	totalCashBenefit: any;
 	paymentAmount: string;
@@ -57,12 +60,14 @@ export class PayComponent implements OnInit
 		private injector: Injector,
 		public session: SessionStorageService,
 		private http: HttpClient,
+		private router: Router,
 		private apiService: ApiService,
 		private ngxService: NgxUiLoaderService,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private util: UtilitiesService
 	)
 	{
-		const getQuoteFormData = this.session.get('getQuoteForm_PC') || "[]";
+		const getQuoteFormData = this.session.get('getQuoteForm') || "[]";
 		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
 		const extension = this.session.get("extensionData_PC") || "[]";
 		this.getFile();
@@ -80,13 +85,13 @@ export class PayComponent implements OnInit
 
 		this.employment = getQuoteFormData.employment;
 		this.identication = getQuoteFormData.identification;
-		this.getinnerForm_PC = this.session.get("getinnerForm_PC");
-		this.age = this.session.get("age_PC");
-		this.paymentAmount = this.getinnerForm_PC.amount;
+		this.getinnerForm = this.session.get("getinnerForm");
+		this.age = this.session.get("age");
+		this.paymentAmount = this.getinnerForm.amount;
 		//image convert to pdf
-		this.pdfblogImage = this.getinnerForm_PC.pdfbasestring;
+		this.pdfblogImage = this.getinnerForm.pdfbasestring;
 		this.landline = this.basicInformation.landline ? "+63" + this.basicInformation.landline : "";
-		this.policyNo = this.session.get("policyNo_PC");
+		this.policyNo = this.session.get(StorageType.POLICYNO);
 		this.health1 = this.healthCondition.healthCondition1;
 		this.health2 = this.healthCondition.healthCondition2;
 		this.health3 = this.healthCondition.healthCondition3;
@@ -288,58 +293,48 @@ export class PayComponent implements OnInit
 
 		// LOG FOR DEBUGGING
 		//console.log(`Posting to ${endpoint}`);
-		this.session.set('CreateApplication_PC', arrData);
+		this.session.set('CreateApplication', arrData);
 		//return;
+		let errorMsg = `We apologize things don't appear to be working at the moment. Please try again.`;
 
-		this.http
+		if(!this.policyNo) { // If policy no if null means new application
+			this.http
 			.post(endpoint, body, options)
 			.pipe(
 				retry(1),
-				catchError((error: HttpErrorResponse) =>
-				{
-					this.ngxService.stop();
-					let errorMessage = '';
-					if (error.error instanceof ErrorEvent)
-					{
-						// client-side error
-						errorMessage = `Error: ${error.error.message}`;
-					}
-					else
-					{
-						// server-side error
-						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-					}
-
-					window.alert(errorMessage);
-					return throwError(errorMessage);
-				})
 			)
 			.subscribe(data =>
 			{
 				// TODO: Start a new ngxService with a different message
-				this.ngxService.stop();
-
 				this.policyNo = <string>data;
 
 				// LOG FOR DEBUGGING
-				this.session.set('policyNo_PC', this.policyNo);
-				this.session.set('amount_PC', this.paymentAmount);
-				//console.log(`Policy Number: ${this.policyNo}`);
-				//console.log(`Amount: ${this.paymentAmount}`);
+				
 
 				// Special case for PrimeCare API
 				// It returns STATUS OK 200 and an empty string for the policy number when there's an internal error in the API
 				// Show an error message if policy number is empty
 				if (this.isNullOrWhiteSpace(this.policyNo))
 				{
-					window.alert(`We apologize things don't appear to be working at the moment. Please try again later.`);
-					this.ngxService.stop();
+					this.util.ShowGeneralMessagePrompt({message: errorMsg});
+					this.ngxService.stopAll();
 				}
 				else
 				{
+					this.session.set(StorageType.POLICYNO, this.policyNo);
+					this.session.set('amount', this.paymentAmount);
+					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
+					this.session.set(StorageType.ACQUIRED_PLAN, {plan: 'PrimeCare', variant: ''});
 					this.callPaymentUrl();
 				}
+			}, error => {
+				this.ngxService.stopAll();
+				this.util.ShowGeneralMessagePrompt({message: errorMsg});
 			});
+		} else { // Call payment request after payment transaction fails
+			this.callPaymentUrl();
+		}
+		
 	}
 
 	callPaymentUrl()
@@ -349,12 +344,12 @@ export class PayComponent implements OnInit
 		// TODO: Change to OrderId from API
 		// Numbers only
 		//let refNo = moment().format('YYYYMMDDHHmmssSSS');
-		let refNo = this.session.get('refNo_PC');
+		let refNo = this.session.get('refNo');
 		let policyNo = this.policyNo;
 		let amount = String(this.paymentAmount).replace(/\D/g, '');
 
 		let endpoint = environment.paymentGatewayEndpoint;
-		let returnUrl = `${window.location.protocol}//${window.location.hostname}/redirect.html?target=payment-callback%26policy=${policyNo}`;
+		let returnUrl = `${window.location.protocol}//${window.location.host}/payment-callback?policy=${policyNo}`;
 		let targetUrl = `${endpoint}?RefNo=${refNo}&Amount=${amount}&RetURL=${returnUrl}`;
 
 		// LOG FOR DEBUGGING

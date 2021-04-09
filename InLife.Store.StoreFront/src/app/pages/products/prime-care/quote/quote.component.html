@@ -95,10 +95,14 @@
 													<label for="">Birthdate</label>
 													<div class="form-group mb-4">
 														<div class="datepicker date input-group">
-															<input type="text" matInput [max]="today"
-																   class="form-control" id="dateofbirth"
-																   formControlName="dateofbirth" [matDatepicker]="picker"
+															<input type="text" matInput 
+																   [max]="today"
+																   class="form-control" 
+																   id="dateofbirth"
+																   formControlName="dateofbirth" 
+																   [matDatepicker]="picker"
 																   readonly
+																   placeholder="MM/DD/YYYY"
 																   [ngClass]="(
                                                                     (submitted
                                                                     || getQuoteForm.get('calculatePremium').get('dateofbirth').dirty
@@ -217,7 +221,7 @@
 																   ">
 															<small class="errormsg"
 																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('mname').dirty || getQuoteForm.get('basicInformation').get('mname').touched) &&  getQuoteForm.get('basicInformation').get('mname')?.errors">
-																   Middle name is invalid
+																   This is a required field
 															</small>
 														</div>
 														<div class="fieldinnr">
@@ -248,7 +252,7 @@
 
 												<div class="col-md-4 mb-3">
 													<label for="">Email Address</label>
-													<input type="email" class="form-control" placeholder="Email Address"
+													<input type="email" class="form-control" placeholder="username@domain.com" 
 														   formControlName="email"
 														   [ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('email').dirty || getQuoteForm.get('basicInformation').get('email').touched) &&  getQuoteForm.get('basicInformation').get('email')?.errors)?'is-invalid'
                                                            :getQuoteForm.get('basicInformation').get('email')?.valid?'is-valid':''
@@ -291,7 +295,7 @@
 														<small class="errormsg"
 															   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('mobile').dirty
                                                             || getQuoteForm.get('basicInformation').get('mobile').touched)">
-															<span *ngIf="getQuoteForm.get('basicInformation').get('mobile')?.errors">Mobile number is invalid</span>
+															<span *ngIf="getQuoteForm.get('basicInformation').get('mobile')?.errors">This is a required field</span>
 														</small>
 
 													</div>

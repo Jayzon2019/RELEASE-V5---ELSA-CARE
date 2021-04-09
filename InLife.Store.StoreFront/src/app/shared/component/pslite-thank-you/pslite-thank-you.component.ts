@@ -1,33 +1,24 @@
-import { environment } from '@environment';
-
 import { Injectable, Injector, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
-import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/scroll/scroll-strategy';
-
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { Observable, Subscription, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-
+import { Subscription } from 'rxjs';
 import * as moment from 'moment';
-import { jsPDF } from 'jspdf';
-
 import { ApiService, SessionStorageService } from '@app/services';
 import { CONSTANTS } from '@app/services/constants';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { GeneralMessagePromptComponent } from '@app/shared/component/general-message-prompt/general-message-prompt.component';
 
 @Injectable({ providedIn: 'root' })
 @Component
 ({
-	selector: 'app-thank-you',
-	templateUrl: './thank-you.component.html',
-	styleUrls: ['./thank-you.component.css', './thank-you.component.scss'],
+	selector: 'pslite-thank-you',
+	templateUrl: './pslite-thank-you.component.html',
+	styleUrls: ['./pslite-thank-you.component.css', './pslite-thank-you.component.scss'],
 	providers: []
 })
-export class ThankYouComponent implements OnInit, OnDestroy
+export class PSLiteThankYouComponent implements OnInit, OnDestroy
 {
 	CONSTANTS = CONSTANTS;
 	basicInformation: any;

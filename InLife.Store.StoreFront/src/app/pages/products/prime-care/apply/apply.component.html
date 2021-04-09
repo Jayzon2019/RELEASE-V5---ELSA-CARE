@@ -892,7 +892,7 @@
 														<div class="datepicker date input-group">
 															<input type="text" matInput [max]="maxYear"
 																   class="form-control" id="insuredDateofbirth"
-																   formControlName="insuredDateofbirth"
+																   formControlName="insuredDateofbirth" placeholder="MM/DD/YYYY"
 																   [matDatepicker]="picker" readonly [ngClass]="((submitted  || getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').dirty || getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').touched) &&  getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth')?.errors)?'is-invalid'
                                                                  :getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth')?.valid?'is-valid':''
                                                                 " (click)="picker.open()">

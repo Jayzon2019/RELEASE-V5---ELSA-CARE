@@ -65,7 +65,7 @@ export class ApplyComponent implements OnInit
 	)
 	{
 		this.ngxService.start();
-		this.getQuoteFormData = this.session.get('getQuoteForm_PC') || "[]";
+		this.getQuoteFormData = this.session.get('getQuoteForm') || "[]";
 		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
 
 		this.insuredIdentityDocumentImagePreview = this.session.get("insuredIdentityDocumentImagePreview_PC");
@@ -509,7 +509,7 @@ export class ApplyComponent implements OnInit
 			this.session.set("insuredIdentityDocumentImagePreview_PC", this.insuredIdentityDocumentImagePreview);
 
 			const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
-			const getQuoteForm = this.session.get('getQuoteForm_PC') || "[]";
+			const getQuoteForm = this.session.get('getQuoteForm') || "[]";
 
 			this.router.navigate(['prime-care/pay']);
 

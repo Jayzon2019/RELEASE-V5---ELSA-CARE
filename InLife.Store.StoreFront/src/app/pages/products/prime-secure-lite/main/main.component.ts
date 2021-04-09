@@ -4,6 +4,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Router } from '@angular/router';
 import { ApiService } from '../../../../services/api.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { StorageType } from '@app/services/storage-types.enum';
 
 @Component
 ({
@@ -107,7 +108,14 @@ export class MainComponent implements OnInit
 	ngOnInit(): void
 	{
 		this.getPrimeSecureLiteHeroSlider();
-		// this.session.clear();
+		// Remove policy no for verification of new application
+		this.session.remove(StorageType.POLICYNO);
+		this.session.remove('UnderWritingStatus');
+		this.session.remove('age');
+		this.session.remove('getinnerForm');
+		this.session.remove(StorageType.QUOTE_INTERNAL_DATA);
+		this.session.remove(StorageType.QUOTE_EXTERNAL_DATA);
+		this.session.remove(StorageType.ACQUIRED_PLAN);
 	}
 
 	getPrimeSecureLiteHeroSlider()

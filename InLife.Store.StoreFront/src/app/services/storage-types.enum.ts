@@ -17,7 +17,8 @@ export enum StorageType {
     APPLY_PC_DATA = 'APPLY_PC_DATA',
 
     //GENERIC
-    POLICYNO = 'POLICYNO'
+    POLICYNO = 'POLICYNO',
+    ACQUIRED_PLAN = 'ACQUIRED_PLAN'
   }
   
   export enum WebStorageType {

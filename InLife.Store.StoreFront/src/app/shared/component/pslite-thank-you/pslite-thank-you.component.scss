@@ -1,4 +1,3 @@
-.ps-lite-thankyou-page{
     .steplist-wrapper {
         .steplist{
             position: fixed;
@@ -9,6 +8,14 @@
         padding: 36px 250px 36px 250px;
 
         
+    }
+
+    .titlebill p {
+        font-weight: bold;
+    }
+
+    .container {
+        margin-bottom: 10px !important;
     }
 
     @media (max-width: 1670px) {
@@ -126,4 +133,3 @@
             font-size: 12px;
         }
     }
-}

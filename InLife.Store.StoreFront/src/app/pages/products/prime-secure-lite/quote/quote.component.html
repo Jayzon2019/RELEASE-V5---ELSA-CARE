@@ -572,7 +572,7 @@
 																   ">
 															<small class="errormsg"
 																   *ngIf="(submitted  || getQuoteForm.get('basicInformation').get('mname').dirty || getQuoteForm.get('basicInformation').get('mname').touched) &&  getQuoteForm.get('basicInformation').get('mname')?.errors">
-																   Middle name is invalid
+																   This is a required field
 															</small>
 														</div>
 														<div class="fieldinnr">
@@ -886,8 +886,7 @@
 																		)
 																		?.errors
 																"
-																>Mobile number
-																is invalid</span
+																>This is a required field</span
 															>
 														</small>
 													</div>
