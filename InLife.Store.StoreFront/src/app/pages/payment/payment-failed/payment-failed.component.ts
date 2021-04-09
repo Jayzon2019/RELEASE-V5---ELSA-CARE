@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SessionStorageService } from '@app/services';
+import { StorageType } from '@app/services/storage-types.enum';
 
 @Component
 ({
@@ -65,7 +66,15 @@ export class PaymentFailedComponent implements OnInit
 	}
 
 	routeToSpecificPage() {
-		this.routerlink.navigate(['prime-secure-lite/pay']);
+		const planAcquired = this.session.get(StorageType.ACQUIRED_PLAN);
+
+		if(planAcquired.plan === 'PrimeSecureLite') {
+			this.routerlink.navigate(['prime-secure-lite/pay']);
+		} else if(planAcquired.plan === 'PrimeCare') {
+			this.routerlink.navigate(['prime-care/pay']);
+		} else {
+			// Navigate to prime secure pay page
+		}
 	}
 
 	routeToHomePage() {

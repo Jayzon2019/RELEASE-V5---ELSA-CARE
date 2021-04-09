@@ -143,13 +143,14 @@ export class PayComponent implements OnInit
 
 	createApplication()
 	{
+		this.ngxService.start();
 		if(!this.policyNo) {
 			const quoteExternalData = JSON.stringify(this.session.get(StorageType.QUOTE_EXTERNAL_DATA));
 			const quoteInternalData = JSON.stringify(this.session.get(StorageType.QUOTE_INTERNAL_DATA));
 			const applyData = this.session.get(StorageType.APPLY_DATA);
 			const underws = this.session.get('UnderWritingStatus');
 
-			this.ngxService.start();
+			
 
 			let errorMsg =  `We apologize things don't appear to be working at the moment. Please try again.`;
 

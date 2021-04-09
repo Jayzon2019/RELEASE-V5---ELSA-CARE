@@ -29,6 +29,7 @@ export class ThankYouComponent implements OnInit
 	constructor
 	(
 		private session: SessionStorageService,
+		private router: Router,
 		private route: ActivatedRoute,
 		private http: HttpClient,
 		private facebookPixelService: FacebookPixelService
@@ -39,6 +40,19 @@ export class ThankYouComponent implements OnInit
 
 	resetForm()
 	{
+		this.session.remove(StorageType.POLICYNO);
+		this.session.remove('age');
+		this.session.remove('getinnerForm');
+		this.session.remove('getQuoteForm');
+		this.session.remove('UnderWritingStatus');
+		this.session.remove(StorageType.QUOTE_INTERNAL_DATA);
+		this.session.remove(StorageType.QUOTE_EXTERNAL_DATA);
+		this.session.remove(StorageType.ACQUIRED_PLAN);
+	}
+
+	backToHome() {
+		this.resetForm();
+		this.router.navigate(['/']);
 	}
 
 	ngOnInit(): void
