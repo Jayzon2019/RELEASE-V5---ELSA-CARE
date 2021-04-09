@@ -109,7 +109,7 @@ export class PaymentCallbackComponent implements OnInit
 			{
 				if(data || data === "true") {
 					this.session.set('PaymentResponse', arr);
-					this.routerlink.navigate(['prime-secure-lite/thank-you']);
+					this.routerlink.navigate(['/thank-you']);
 				} else {
 					this.message = errorMsg;
 					this.hasErrorSavingPayment = true;

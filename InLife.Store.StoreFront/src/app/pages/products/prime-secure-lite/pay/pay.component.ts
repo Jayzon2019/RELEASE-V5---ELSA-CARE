@@ -153,7 +153,7 @@ export class PayComponent implements OnInit
 
 			let errorMsg =  `We apologize things don't appear to be working at the moment. Please try again.`;
 
-			if(underws) { // If in the first request of requestPolicyNo returns nothing then rerequest it again
+			if(underws) {
 				this.psLiteService_API.requestPolicyNo(JSON.stringify(applyData))
 					.pipe(takeUntil(this.destroy$))
 					.subscribe(policyNo => {
@@ -163,6 +163,7 @@ export class PayComponent implements OnInit
 							this.util.ShowGeneralMessagePrompt({message: errorMsg});
 						} else {
 							this.session.set(StorageType.POLICYNO, policyNo);
+							this.session.set(StorageType.ACQUIRED_PLAN, {plan: 'PrimeSecureLite', variant: ''});
 							this.policyNo = policyNo;
 							this.callPaymentUrl();
 						}
@@ -170,40 +171,62 @@ export class PayComponent implements OnInit
 						this.ngxService.stopAll();
 						this.util.ShowGeneralMessagePrompt({message: errorMsg});
 					})
-			} else { // Create underwritingstatus and request Policy No
-				this.psLiteService_API.createUnderWritingStatus(quoteExternalData)
-				.pipe(
-					map((data: any) => {
-						if(data.underwritingStatus === 'CLEAN_CASE') {
-							this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
-							this.session.set('UnderWritingStatus', data)
-							applyData.ProposalId = data.proposalId;
-							this.session.set(StorageType.APPLY_DATA, applyData);
-						} else {
-							this.destroy$.next(true);
-							this.router.navigate(['prime-secure-lite/ineligible']);
-						}
-						return data;
-					}),
-					filter((data: any) => data.underwritingStatus === 'CLEAN_CASE'),
-					switchMap((data) => this.psLiteService_API.requestPolicyNo(JSON.stringify(applyData))),
-					takeUntil(this.destroy$)
-				)
-				.subscribe(policyNo => {
-					if (this.isNullOrWhiteSpace(policyNo)) {
-						//prompt user to try again
-						this.ngxService.stopAll();
-						this.util.ShowGeneralMessagePrompt({message: errorMsg});
-					} else {
-						this.session.set(StorageType.POLICYNO, policyNo);
-						this.policyNo = policyNo;
-						this.callPaymentUrl();
-					}
-				}, (error) => {
-					this.ngxService.stopAll();
-					this.util.ShowGeneralMessagePrompt({message: errorMsg});
-				})
 			}
+
+			// COMMENTED LAST APRIL 8, 2021
+			// if(underws) { // If in the first request of requestPolicyNo returns nothing then rerequest it again
+			// 	this.psLiteService_API.requestPolicyNo(JSON.stringify(applyData))
+			// 		.pipe(takeUntil(this.destroy$))
+			// 		.subscribe(policyNo => {
+			// 			if (this.isNullOrWhiteSpace(policyNo)) {
+			// 				//prompt user to try again
+			// 				this.ngxService.stopAll();
+			// 				this.util.ShowGeneralMessagePrompt({message: errorMsg});
+			// 			} else {
+			// 				this.session.set(StorageType.POLICYNO, policyNo);
+			// 				this.policyNo = policyNo;
+			// 				this.callPaymentUrl();
+			// 			}
+			// 		}, (error) => {
+			// 			this.ngxService.stopAll();
+			// 			this.util.ShowGeneralMessagePrompt({message: errorMsg});
+			// 		})
+			// } else { // Create underwritingstatus and request Policy No
+			// 	this.psLiteService_API.createUnderWritingStatus(quoteExternalData)
+			// 	.pipe(
+			// 		map((data: any) => {
+			// 			if(data.underwritingStatus === 'CLEAN_CASE') {
+			// 				this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
+			// 				this.session.set('UnderWritingStatus', data)
+			// 				applyData.ProposalId = data.proposalId;
+			// 				this.session.set(StorageType.APPLY_DATA, applyData);
+			// 			} else {
+			// 				this.destroy$.next(true);
+			// 				this.router.navigate(['prime-secure-lite/ineligible']);
+			// 			}
+			// 			return data;
+			// 		}),
+			// 		filter((data: any) => data.underwritingStatus === 'CLEAN_CASE'),
+			// 		switchMap((data) => this.psLiteService_API.requestPolicyNo(JSON.stringify(applyData))),
+			// 		takeUntil(this.destroy$)
+			// 	)
+			// 	.subscribe(policyNo => {
+			// 		if (this.isNullOrWhiteSpace(policyNo)) {
+			// 			//prompt user to try again
+			// 			this.ngxService.stopAll();
+			// 			this.util.ShowGeneralMessagePrompt({message: errorMsg});
+			// 		} else {
+			// 			this.session.set(StorageType.POLICYNO, policyNo);
+			// 			this.session.set(StorageType.ACQUIRED_PLAN, {plan: 'PrimeSecureLite', variant: ''});
+			// 			this.policyNo = policyNo;
+			// 			this.callPaymentUrl();
+			// 		}
+			// 	}, (error) => {
+			// 		this.ngxService.stopAll();
+			// 		this.util.ShowGeneralMessagePrompt({message: errorMsg});
+
+			// 	})
+			// }
 
 			
 		} else {

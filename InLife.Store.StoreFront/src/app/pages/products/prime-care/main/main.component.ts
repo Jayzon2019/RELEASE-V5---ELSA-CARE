@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService, SessionStorageService } from '@app/services';
 import { DomSanitizer } from '@angular/platform-browser';
+import { StorageType } from '@app/services/storage-types.enum';
 
 @Component
 ({
@@ -34,7 +35,12 @@ export class MainComponent implements OnInit
 	ngOnInit(): void
 	{
 		this.getPrimeHeroSlider();
-		// this.session.clear();
+		// Remove policy no for verification of new application
+		this.session.remove(StorageType.POLICYNO);
+		this.session.remove('age');
+		this.session.remove('getinnerForm');
+		this.session.remove('getQuoteForm');
+		this.session.remove(StorageType.ACQUIRED_PLAN);
 
 		if(this.activateRoute.snapshot.fragment === 'ihc')
 			this.scroll();

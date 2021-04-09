@@ -356,7 +356,7 @@
 													<label for="" class="id-secondary">TIN/SSS/GSIS ID</label>
 													<select class="form-control" id="secondaryLegalIdType" formControlName="secondaryLegalIdType"
 															[ngClass]="((submitted  || getApplyForm.get('identification').get('secondaryLegalIdType').dirty || getApplyForm.get('identification').get('secondaryLegalIdType').touched) &&  getApplyForm.get('identification').get('secondaryLegalIdType')?.errors)?'is-invalid'
-                                                         :getApplyForm.get('identification').get('secondaryLegalIdType')?.valid && getApplyForm.get('identification').get('secondaryLegalIdType')?.value !=='' ?'is-valid':''
+                                                         :getApplyForm.get('identification').get('secondaryLegalIdType')?.valid && getApplyForm.get('identification').get('secondaryLegalIdType')?.value !=='' ?'is-valid black':''
                                                         ">
 														<option value="">Select TIN/SSS/GSIS ID</option>
 														<option *ngFor="let type of CONSTANTS.TINS;let i = index"

@@ -28,8 +28,8 @@
 							<div class="stepdetail">
 								<div class="pagetitles">
 									<h1>
-										Please review your plan details before
-										proceeding to payment.
+										Please Review Your Plan Details Before
+										Proceeding To Payment.
 									</h1>
 								</div>
 
@@ -42,22 +42,27 @@
 												<p>Proposed Insured</p>
 											</div>
 											<div class="col-md-8 detailbill">
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Insured Name:</p>
+
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Insured Name:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>
-															{{
-																basicInformation.fname
-															}}
-															{{
-																basicInformation.mname
-															}}
-															{{
-																basicInformation.lname
-															}}
-														</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p style="word-break: break-all;">
+																{{
+																	basicInformation.fname
+																}}
+																{{
+																	basicInformation.mname
+																}}
+																{{
+																	basicInformation.lname
+																}}
+															</p>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -68,44 +73,48 @@
 												<p>Personal Information</p>
 											</div>
 											<div class="col-md-8 detailbill">
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Email Address:</p>
+
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p style="word-break: break-all;">Email Address:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>
-															{{
-																basicInformation.email
-															}}
-														</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>{{ basicInformation.email }}</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Birthdate:</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Birthdate:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>
-															{{
-																calculationInformation.dateofbirth
-																	| date
-															}}
-														</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>{{ calculationInformation.dateofbirth | date }}</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Contact Number:</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Contact Number:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>
-															+63{{
-																basicInformation.mobile
-															}}<br />
-															{{ landline }}
-														</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>
+																+63{{
+																	basicInformation.mobile
+																}}<br />
+																{{ landline }}
+															</p>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -116,106 +125,109 @@
 												<p>Plan Details</p>
 											</div>
 											<div class="col-md-8 detailbill">
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Product Name:</p>
+
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Product Name:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>Prime Care</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>Prime Care</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Plan:</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Plan:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p
-															*ngIf="
-																calculationInformation.totalCashBenefit ===
-																'1080000'
-															"
-														>
-															Plan 30 (&#8369;
-															1,080,000)
-														</p>
-														<p
-															*ngIf="
-																calculationInformation.totalCashBenefit ===
-																'1800000'
-															"
-														>
-															Plan 50 (&#8369;
-															1,800,000)
-														</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p *ngIf="calculationInformation.totalCashBenefit ==='1080000'">
+																Plan 30 <span style="display: inline-block;">(&#8369; 1,080,000)</span>
+															</p>
+															<p
+																*ngIf="
+																	calculationInformation.totalCashBenefit ===
+																	'1800000'
+																"
+															>
+																Plan 50 <span style="display: inline-block;">(&#8369; 1,800,000)</span>
+															</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Current Age:</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Current Age:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>{{ age.age }}</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>{{ age.age }}</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Gender:</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Gender:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>
-															{{
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>{{
 																getReferenceDataById(
 																	CONSTANTS.GENDER,
 																	calculationInformation.gender
 																).name
-															}}
-														</p>
+															}}</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>Mode of Payment</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Mode of Payment: </p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>
-															{{
-																calculationInformation.paymentMode
-															}}
-														</p>
-													</div>
-												</div>
-
-												<div class="row m-0">
-													<div class="col-6">
-														<p>
-															Initial Premium
-															Amount
-														</p>
-													</div>
-													<div class="col-6">
-														<p>
-															&#8369;
-															{{
-																paymentAmount ||
-																	"0.00"
-															}}
-														</p>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>{{ calculationInformation.paymentMode }}</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>
-															Initial Lump Sum
-															Benefit:
-														</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Initial Premium Amount:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p>&#8369; {{ paymentAmount || "0.00" }} </p>
+														</div>
+													</div>
+												</div>
+
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Initial Lump Sum Benefit:</p>
+														</div>
+													</div>
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p
 															*ngIf="
 																calculationInformation.totalCashBenefit ===
 																'1080000'
@@ -231,45 +243,47 @@
 														>
 															&#8369; 300,000.00
 														</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>
-															Total Monthly
-															Allowance:
-														</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Total Monthly Allowance:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p
 															*ngIf="
 																calculationInformation.totalCashBenefit ===
 																'1080000'
 															"
-														>
-															&#8369; 30,000.00
-														</p>
-														<p
-															*ngIf="
-																calculationInformation.totalCashBenefit ===
-																'1800000'
-															"
-														>
-															&#8369; 50,000.00
-														</p>
+															>
+																&#8369; 30,000.00
+															</p>
+															<p
+																*ngIf="
+																	calculationInformation.totalCashBenefit ===
+																	'1800000'
+																"
+															>
+																&#8369; 50,000.00
+															</p>
+														</div>
 													</div>
 												</div>
 
-												<div class="row m-0">
-													<div class="col-6">
-														<p>
-															Total & Permenent
-															Disability Benefit:
-														</p>
+												<div class="row m-0 container">
+													<div class="col-6 helper">
+														<div class="title">
+															<p>Total & Permanent Disability Benefit:</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p
+													<div class="col-6 helper-2">
+														<div class="content">
+															<p
 															*ngIf="
 																calculationInformation.totalCashBenefit ===
 																'1080000'
@@ -285,6 +299,7 @@
 														>
 															&#8369; 1,800,000.00
 														</p>
+														</div>
 													</div>
 												</div>
 											</div>

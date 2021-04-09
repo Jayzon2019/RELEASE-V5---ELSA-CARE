@@ -7,7 +7,7 @@ import { MainLayoutComponent, GetProductLayoutComponent } from '@app/layout';
 import {  HeroSliderResolver } from './resolvers/home-sliders.resolver';
 import { PaymentCallbackComponent } from './pages/payment/payment-callback/payment-callback.component';
 import { PaymentFailedComponent } from './pages/payment/payment-failed/payment-failed.component';
-import { ThankYouComponent } from './pages/thank-you/thank-you.component';
+import { ThankYouComponent } from './shared/component/thank-you/thank-you.component';
 
 const routes: Routes =
 	[
@@ -16,6 +16,7 @@ const routes: Routes =
 		{ path: 'save-quote', component: SaveQuoteComponent },
 		{ path: 'payment-received', component: PaymentRecievedComponent },
 		// { path: 'thank-you', loadChildren: '@app/pages/thank-you.module#ThankYouModule' },
+		{ path: 'thank-you', component: ThankYouComponent},
 		{ path: 'payment-callback', component: PaymentCallbackComponent },
 		{ path: 'payment-failed/:id', component: PaymentFailedComponent },
 		{
@@ -50,10 +51,10 @@ const routes: Routes =
 					{ path: 'prime-secure-lite/apply', loadChildren: () => import('@app/pages/products/prime-secure-lite/apply/apply.module').then(m => m.ApplyModule) },
 					{ path: 'prime-secure-lite/pay', loadChildren: () => import('@app/pages/products/prime-secure-lite/pay/pay.module').then(m => m.PayModule) },
 					{ path: 'prime-secure-lite/ineligible', loadChildren: () => import('@app/pages/products/prime-secure-lite/ineligible/ineligible.module').then(m => m.IneligibleModule) },
-					{ path: 'prime-secure-lite/thank-you', loadChildren: () => import('@app/pages/products/prime-secure-lite/thank-you/thank-you.module').then(m => m.ThankYouModule) },
+					// { path: 'prime-secure-lite/thank-you', loadChildren: () => import('@app/pages/products/prime-secure-lite/thank-you/thank-you.module').then(m => m.ThankYouModule) },
 					{ path: 'prime-care/**', redirectTo: 'prime-care' },
 					{ path: 'prime-secure-lite/**', redirectTo: 'prime-secure-lite' },
-					{ path: 'thank-you', component: ThankYouComponent},
+					
 
 					//{ path: 'group/quote',      loadChildren: () => import('@app/pages/products/group/quote/quote.module').then(m => m.QuoteModule) },
 					//{ path: 'group/apply',      loadChildren: () => import('@app/pages/products/group/apply/apply.module').then(m => m.ApplyModule) },

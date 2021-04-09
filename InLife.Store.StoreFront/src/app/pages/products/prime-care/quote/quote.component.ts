@@ -72,8 +72,8 @@ export class QuoteComponent implements OnInit
 		//try { this.affiliate = JSON.parse(sessionStorage.getItem("affiliate")); }
 		//catch(ex) { this.affiliate = {}; }
 
-		const getQuoteFormData = this.session.get('getQuoteForm_PC');
-		//const getQuoteFormData = JSON.parse(this.session.get('getQuoteForm_PC') || "[]");
+		const getQuoteFormData = this.session.get('getQuoteForm');
+		//const getQuoteFormData = JSON.parse(this.session.get('getQuoteForm') || "[]");
 		this.initForm(getQuoteFormData);
 		this.getFile();
 
@@ -169,19 +169,19 @@ export class QuoteComponent implements OnInit
 			if (this.getQuoteForm.get('calculatePremium').valid)
 			{
 				this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-				this.session.set('getinnerForm_PC',
+				this.session.set('getinnerForm',
 					{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
 			}
 			else
 			{
-				const getQuoteFormData1 = this.session.get('getinnerForm_PC');
-				//const getQuoteFormData1 = this.session.get("getinnerForm_PC");
+				const getQuoteFormData1 = this.session.get('getinnerForm');
+				//const getQuoteFormData1 = this.session.get("getinnerForm");
 				if(!getQuoteFormData1)
 				{
 					this.apiService.setMessage({ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: 0 });
-					this.session.set('getinnerForm_PC',
+					this.session.set('getinnerForm',
 						{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
-					//this.session.set("getinnerForm_PC",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
+					//this.session.set("getinnerForm",{ annual: this.getQuoteForm.get('calculatePremium').get('paymentMode').value, amount: this.calPay() });
 				}
 			}
 		});
@@ -237,7 +237,7 @@ export class QuoteComponent implements OnInit
 			gender = paymentMode[1].Female;
 
 		let age = this.getAge(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value);
-		this.session.set('age_PC', { age: age });
+		this.session.set('age', { age: age });
 		//this.session.set("age",{ age:age  });
 		let price = 0;
 
@@ -338,9 +338,9 @@ export class QuoteComponent implements OnInit
 		return this.formBuilder.group
 		({
 			prefix: new FormControl(data.prefix || '', Validators.required),
-			fname: new FormControl(data.fname || '', [Validators.required, Validators.maxLength(50), Validators.pattern("[a-zA-Z]+")]),
-			mname: new FormControl(data.mname || '', [Validators.maxLength(50), Validators.pattern("[a-zA-Z]+")]),
-			lname: new FormControl(data.lname || '', [Validators.required, Validators.maxLength(50), Validators.pattern("[a-zA-Z]+")]),
+			fname: new FormControl(data.fname || '', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z -]+$")]),
+			mname: new FormControl(data.mname || '', [Validators.maxLength(50), Validators.pattern("^[A-Za-z -]+$")]),
+			lname: new FormControl(data.lname || '', [Validators.required, Validators.maxLength(50), Validators.pattern("^[A-Za-z -]+$")]),
 			suffix: new FormControl(data.suffix || '', Validators.required),
 			landline: new FormControl(data.landline || '', [Validators.pattern("^[0-9]{9}$")]),
 			mobile: new FormControl(data.mobile || '', [Validators.required, Validators.pattern("^[1-9]{1}[0-9]{9}$")]),
@@ -376,7 +376,7 @@ export class QuoteComponent implements OnInit
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
 		{
-			this.session.set('getQuoteForm_PC', this.getQuoteForm.value);
+			this.session.set('getQuoteForm', this.getQuoteForm.value);
 			//this.session.set("getQuoteForm", JSON.stringify(this.getQuoteForm.value));
 			const healthCondition = this.getQuoteForm.get('healthCondition').value;
 

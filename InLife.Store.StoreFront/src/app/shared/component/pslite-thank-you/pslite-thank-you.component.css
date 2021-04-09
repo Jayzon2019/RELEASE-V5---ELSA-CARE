@@ -1,9 +1,32 @@
-.reviewbill .detailbill p {
-	margin-bottom: 0;
+.leftwrapsection {
+    padding: 36px 250px 36px 250px;
 }
 
-p.linkdpay {
+@media (max-width: 1200px) {
+	.leftwrapsection {
+		padding: 36px 100px 36px 100px;
+	}
+}
+@media (max-width: 767px) {
+	.leftwrapsection {
+		padding: 18px;
+	}
+}
+
+.fa {
+	font-size: 2rem;
+	margin-right: 0.3em;
+}
+
+.footer-links p {
+	display: block;
 	text-align: center;
+	padding: 48px 0;
+}
+
+.social-links {
+	display: block;
+	width: 100%;
 }
 /*-- css changes 04-march-2021 start here --*/
 .stepdetail h1 {
@@ -28,7 +51,7 @@ p.linkdpay {
 .steplist ul.steplistmain li ul.innerlist li.active a {
 	color: #070752;
 }
-/* .steplist ul.steplistmain li ul.innerlist li a, */
+.steplist ul.steplistmain li ul.innerlist li a,
 .stepdetail .preminumform input,
 .stepdetail .preminumform select,
 .checkbox-wrap .pf-list-item label span {
@@ -94,19 +117,7 @@ ul.condtionslist li {
 	font-size: 15px;
 	color: #e43e25;
 }
-.steplist ul.steplistmain li.active.complete:before {
-	color: #fff;
-}
 .steplist ul.steplistmain li:hover:before,
 .steplist ul.steplistmain li.active:before {
 	color: #01a7e0;
-}
-.form-control:focus,
-.form-control:hover {
-	border-color: #01a7e0 !important;
-}
-p.linkdpay a,
-p.linkdpay a:hover {
-	text-decoration: none;
-	margin: auto 14px;
 }

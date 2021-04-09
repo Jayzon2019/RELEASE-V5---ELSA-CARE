@@ -4,7 +4,6 @@ html,body,.mainpagewrap,.mainpagewrap .row.m-0{
 height: 100%;
 }
 
-
 .mainpagewrap .step9 .row.m-0 , .mainpagewrap .step9 .row{height:auto}
 .form-row{    margin-right: -8px;
     margin-left: -8px;}
@@ -78,8 +77,9 @@ small.errormsg {
     text-align: center;
     color: #070752;
     font-size: 42px;
-    font-weight: 600; margin-bottom: 80px;    letter-spacing: -1px;
-
+    font-weight: bold; 
+    margin-bottom: 80px;    
+    letter-spacing: -1px;
 }
 .pagetitles h1{  margin-bottom: 10px;}
 .pagetitles h5{font-size: 18px; color: #42414d}
@@ -222,7 +222,7 @@ small.errormsg {
 }
 
 .steplist ul{list-style: none;padding: 0px;margin: 0px;}
-.steplist  ul.steplistmain li{padding-left: 45px;font-size: 22px;color: #ababab;margin-bottom: 30px;position: relative}
+.steplist  ul.steplistmain li{padding-left: 45px;font-size: 22px;color: #ababab;margin-bottom: 30px;position: relative;font-weight: 600;}
 
 .steplist  ul.steplistmain li:before{    content: "1";
     position: absolute;
@@ -319,10 +319,14 @@ small.errormsg {
     top: -15px;}*/
 
 
-.steplist  ul.steplistmain li.active,.steplist  ul.steplistmain li:hover{color: #333;}
+.steplist  ul.steplistmain li.active,.steplist  ul.steplistmain li:hover{color: #070752; font-weight: 600;}
 .steplist  ul.steplistmain li ul.innerlist li{padding: 0px; margin: 10px 0;font-weight: 500;}
-.steplist  ul.steplistmain li ul.innerlist li a{color: #ababab; font-size: 14px;font-weight: 500;}
-.steplist  ul.steplistmain li ul.innerlist li a:hover,.steplist  ul.steplistmain li ul.innerlist li.active a{color: #333;cursor: auto;}
+.steplist  ul.steplistmain li ul.innerlist li a{color: #ababab; font-size: 15px;font-weight: 500;}
+.steplist  ul.steplistmain li ul.innerlist li a:hover,.steplist  ul.steplistmain li ul.innerlist li.active a{
+    color: #070752; cursor: auto;
+    font-size: 15px;
+    font-weight: 500;
+}
 .roghtwrapsection {
     padding: 36px 94px 36px 36px;
     background: #f5f7fd;position: relative;height: 100%;
@@ -612,7 +616,7 @@ a.p-link{
 
 .roghtwrapsection h4{font-size: 14px; margin-bottom: 15px; color:#7e7e7e;text-transform: uppercase;letter-spacing: 1px;}
 .roghtwrapsection h2{font-size:40px; ; margin-bottom: 15px; color:#070752;text-transform: uppercase;font-weight: 700;    letter-spacing: -1px;}
-.roghtwrapsection p{font-size: 14px;line-height: 26px; margin-bottom: 15px; color:#42414d ;    letter-spacing: -0.5px;}
+.roghtwrapsection p{font-size: 14px;line-height: 26px; margin: 10px 0 5px; color:#42414d ;    letter-spacing: -0.5px;}
 .roghtwrapsection p a{font-size: 14px; margin-bottom: 15px; color:#e43e25 ;text-decoration: none;border-bottom:2px solid #e43e25}
 
 
@@ -624,8 +628,13 @@ a.p-link{
 }
 .outerdesclaimer  p,
 .reviewbill p{color: #7e7e7e;    font-size: 14px;}
-.reviewbill .titlebill p {color: #7e7e7e}
-.reviewbill .detailbill p{color: #333333}
+.reviewbill .titlebill p {
+    color: #42414d;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+.reviewbill .detailbill p{color: #42414d; font-size: 15px;}
 .reviewbill p.linkdpay a{font-size: 12px;display: inline-block; margin-right:10px;    color: #e43e25;text-decoration: underline}
 .outerdesclaimer {text-align: center; padding: 40px 25px}
 
@@ -693,7 +702,7 @@ a.p-link{
 .roghtwrapsection p,
     .roghtwrapsection p{font-size: 15px;}
     .stepdetail .preminumform input, .stepdetail .preminumform select{font-size: 18px;}
-    .steplist ul.steplistmain li ul.innerlist li a {font-size: 17px;}
+    /* .steplist ul.steplistmain li ul.innerlist li a {font-size: 17px; font-weight: 500;} */
     .stepdetail .preminumform label {
     font-size: 16px;
 }
@@ -715,7 +724,8 @@ a.p-link{
 }
 @media (max-width: 1280px) {.leftwrapsection {    padding: 36px 36px 36px 50px;}
     .roghtwrapsection {     padding: 36px 50px 36px 36px;}
-    .steplist ul.steplistmain li ul.innerlist li a{font-size: 12px;}
+    /* .steplist ul.steplistmain li ul.innerlist li a{    font-size: 15px;
+        font-weight: 500;} */
     .checkbox-wrap.smallgender .pf-list-item label span, .smallgender .pf-list-item {
     width: 100px;}
     .stepdetail .declarationsection label.radio-container, .stepdetail .declarationsection p, .stepdetail .declarationsection li {
@@ -741,8 +751,8 @@ a.p-link{
      -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;}
-     .steplist ul.steplistmain li ul.innerlist li a,
-     .stepdetail .preminumform label{font-size: 14px;}
+     /* .steplist ul.steplistmain li ul.innerlist li a,
+     .stepdetail .preminumform label{font-size: 14px;} */
 }
 @media (max-width: 767px) {
     .btnsec.text-right, .btnsec.text-left{text-align: center!important}
@@ -752,7 +762,7 @@ a.p-link{
     .customlabel.bigsmall,
     .customlabel.bigcol{    width: 100%;
     padding-right: 0px;    margin-bottom: 15px;}
-    .stepdetail h1{font-size: 30px;}
+    /* .stepdetail h1{font-size: 30px;} */
     .customrowform.labelss label{display: none;}
     #customfieldsss.customrowform label{display:block;}
     .checkbox-wrap.smallgender .pf-list-item label span, .smallgender .pf-list-item {
@@ -769,10 +779,10 @@ a.p-link{
     border-color:#01a7e0  !important;
 }
 @media (min-width: 1600px) {
-.stepdetail h1{font-size: 46px;}
+/* .stepdetail h1{font-size: 46px;} */
 }
 @media (max-width: 1600px) {
-.stepdetail h1{font-size: 38px;}
+/* .stepdetail h1{font-size: 38px;} */
 }
 
 @media (max-width: 680px) {
