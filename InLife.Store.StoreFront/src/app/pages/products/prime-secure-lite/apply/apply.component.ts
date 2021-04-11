@@ -544,6 +544,7 @@ export class ApplyComponent implements OnInit
 					"MunicipalityId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredMunicipality').value),//1,
 					"ZipCode": this.getApplyForm.get('beneficiaryDetails').get('insuredZipCode').value,//"4118",
 					"LandLineNumber": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredLandline').value),//1234567,
+					"MobileNumber": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredMobile').value),
 					"CivilStatusId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').value),//5,
 					"GenderId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredGender').value),//8,
 					"Birthday": new Date(this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value).toLocaleDateString(),//"01/01/1980", 

@@ -893,10 +893,7 @@
 												</div>
 
 												<div class="col-md-4 mb-3">
-													<label for=""
-														>Country of
-														Residence</label
-													>
+													<label for="">Country of Residence</label>
 													<select class="form-control" id="" formControlName="country"
 															[ngClass]="((submitted  || getQuoteForm.get('basicInformation').get('country').dirty || getQuoteForm.get('basicInformation').get('country').touched) &&  getQuoteForm.get('basicInformation').get('country')?.errors)?'is-invalid'
                                                        :getQuoteForm.get('basicInformation').get('country')?.valid?'is-valid black':''
@@ -934,8 +931,7 @@
 														field</small>
 												</div>
 												<div class="col-md-4 mb-3">
-													<label for="">Province of
-														Residence</label>
+													<label for="">Province of Residence</label>
 													<select class="form-control" id="" formControlName="province" [ngClass]="
 															(submitted ||
 																getQuoteForm
@@ -1013,8 +1009,7 @@
 													</small>
 												</div>
 												<div class="col-md-4 mb-3">
-													<label for="">Municipality of
-														Residence</label>
+													<label for="">Municipality of Residence</label>
 													<select class="form-control" id="" formControlName="municipality" [ngClass]="
 															(submitted ||
 																getQuoteForm
@@ -1096,8 +1091,7 @@
 															.get('country')
 															.value != '170'
 													">
-													<label for="">Province of
-														Residence</label>
+													<label for="">Province of Residence</label>
 													<select class="form-control" id="" formControlName="province"></select>
 												</div>
 												<div class="col-md-4 mb-3" *ngIf="
@@ -1108,8 +1102,7 @@
 															.get('country')
 															.value != '170'
 													">
-													<label for="">Municipality of
-														Residence</label>
+													<label for="">Municipality of Residence</label>
 													<select class="form-control" id="" formControlName="municipality"></select>
 												</div>
 												<div class="form-row col-12">
@@ -1440,11 +1433,9 @@
 													</div>
 												</div>
 
-												<ng-container>
+												<ng-container *ngIf="!affiliate?.agentCode">
 													<div class="col-md-6 mb-3">
-														<label for="">I learned about
-															Prime Secure Lite
-															through:</label>
+														<label for="">I learned about Prime Secure Lite through:</label>
 														<select class="form-control" id="" formControlName="primeCare" [ngClass]="
 																(submitted ||
 																	getQuoteForm
@@ -1524,7 +1515,6 @@
 															field
 														</small>
 													</div>
-
 													<div class="col-md-6 mb-9" *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value === '1'">
 														<label for="">Agent Name</label>
 														<div class="input-group">
@@ -1677,14 +1667,26 @@
 												</ng-container>
 
 												<ng-container *ngIf="affiliate?.agentCode">
-													<div class="col-md-6 mb-3">
-														<label for="">I learned about Prime Secure Lite through:</label>
-														<input type="text" class="form-control" value="REFERRAL OF INSULAR LIFE ADVISOR/ AGENT" readonly />
-													</div>
-													<div class="col-md-6 mb-3">
-														<label for="">Agent Name</label>
-														<input type="text" class="form-control" formControlName="afname" [value]="affiliate.agentName" readonly />
-													</div>
+													<ng-container *ngIf="!affiliate?.branchCode">
+														<div class="col-md-6 mb-3">
+															<label for="">I learned about Prime Secure Lite through:</label>
+															<input type="text" class="form-control" value="REFERRAL OF INSULAR LIFE ADVISOR/ AGENT" readonly />
+														</div>
+														<div class="col-md-6 mb-3">
+															<label for="">Agent Name</label>
+															<input type="text" class="form-control" [value]="affiliate?.agentName" readonly />
+														</div>
+													</ng-container>
+													<ng-container *ngIf="affiliate?.branchCode">
+														<div class="col-md-6 mb-3">
+															<label for="">I learned about Prime Secure Lite through:</label>
+															<input type="text" class="form-control" value="REFERRAL FROM UNIONBANK BRANCH" readonly />
+														</div>
+														<div class="col-md-6 mb-3">
+															<label for="">Branch Name</label>
+															<input type="text" class="form-control" [value]="affiliate?.branchName" readonly />
+														</div>
+													</ng-container>
 													<input type="hidden" formControlName="primeCare" value="1" />
 													<input type="hidden" formControlName="acode" [value]="affiliate?.agentCode" />
 													<input type="hidden" formControlName="afname" [value]="affiliate?.agentName" />
@@ -1692,13 +1694,8 @@
 													<input type="hidden" formControlName="agentBranchCode" [value]="affiliate?.branchCode" />
 												</ng-container>
 
-												<div
-													class="col-12"
-													*ngIf="!showThirdStep"
-												>
-													<div
-														class="btnsec text-right"
-													>
+												<div class="col-12" *ngIf="!showThirdStep">
+													<div class="btnsec text-right">
 														<button
 															type="button"
 															class="btn"
@@ -2300,7 +2297,7 @@
 											</div>
 											<span id="health-decl-anchor" class="mt-2"></span>
 										</div>
-										
+
 									</div>
 
 									<!-- step4 strat -->

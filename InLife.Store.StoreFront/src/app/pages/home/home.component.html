@@ -4,17 +4,22 @@
 							#slickModal="slick-carousel"
 							[config]="slideConfig">
 			<div ngxSlickItem *ngFor="let slide of sliders; let i = index" class="slide">
-				<div [ngStyle]="{'background-image': getUrl(slide.heroBg)}" style="background-size: cover;" class="{{'section section-hero wow fadeInUp hero-slide-' + i}}">
-					<div class="container">
-						<div style="{{getPosition(slide.contentPostion)}}" class="hero-content">
-							<h2 style="{{'color:' + getColor(slide.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slide.headingColor) + '!important;'}}">{{slide.heading }}<br class="only-in-mobile" /></h2>
-							<p style="{{'color:' + getColor(slide.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slide.subHeadingColor) + '!important;'}}">{{ slide.subHeading }}</p>
+				<div [ngStyle]="{'background-image': getUrl(slide.heroBg)}" style="background-size: cover;" 
+					 class="{{'section section-hero wow fadeInUp hero-slide-' + i}}">
+					<div class="container" [ngClass]="{'main-banner': i === 0}"> 
+						<div style="{{ getPosition(slide.contentPostion) }}" class="hero-content">
+
+							<!-- Main banner -->
+							<h2 *ngIf="i === 0" [ngClass]="{'main-banner': i === 0}">{{slide.heading }}<br class="only-in-mobile" /></h2>
+							 <!-- PSLite & PrimeCare banner -->
+							<img *ngIf="i != 0" [src]="slide.heroLogo" style="margin-bottom: 20px;"/>
+
+							<p [ngClass]="{'main-banner': i === 0}">{{ slide.subHeading }}</p>
 							<a [href]="slide.btnTxtLink == 'feature-plan' ? 
-								'javascript:void(0)' :
-								slide.btnTxtLink" (click)="scrollToFeatured(slide.btnTxtLink)" class="btn-orange">{{slide.heroBtnTxt }}</a>
+								'javascript:void(0)' : slide.btnTxtLink" (click)="scrollToFeatured(slide.btnTxtLink)" class="btn-orange">{{slide.heroBtnTxt }}</a>
 						</div>
 					</div>
-					<img [src]="sanitize(slide.heroMobBg)" class="only-in-mobile">
+					<img [src]="slide.heroMobBg" class="only-in-mobile">
 				</div>
 			</div>
 		</ngx-slick-carousel>

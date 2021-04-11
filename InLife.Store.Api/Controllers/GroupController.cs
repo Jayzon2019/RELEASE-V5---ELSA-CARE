@@ -374,5 +374,6 @@ namespace InLife.Store.Api
 			await applicationProcessing.ProcessCompletedApplications();
 			return Ok();
 		}
+
 	}
 }

@@ -2,6 +2,15 @@
 	width: 100%;
 }
 
+.step5, .step6, .step7 {
+	margin-bottom: 0px !important;
+	margin-top: 90px !important;
+}
+
+.step8 {
+	margin-top: 90px !important;
+}
+
 mat-datepicker-toggle.mat-datepicker-toggle {
 	position: absolute;
 	right: 1.4%;

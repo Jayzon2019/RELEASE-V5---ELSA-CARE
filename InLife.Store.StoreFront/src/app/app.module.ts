@@ -1,3 +1,4 @@
+import { CustomPreloaderService } from './services/customer-preloader.service';
 import { PaymentFailedComponent } from './pages/payment/payment-failed/payment-failed.component';
 import { PaymentCallbackComponent } from './pages/payment/payment-callback/payment-callback.component';
 import { HeroSliderResolver } from './resolvers/home-sliders.resolver';
@@ -23,6 +24,8 @@ import { PaymentRecievedComponent } from './pages/payment-recieved/payment-recie
 import { ControlsModule } from './controls/controls.module';
 import { CryptographyService } from './services/cryptography.service';
 import { SharedModule } from './shared/shared.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig =
 {
@@ -80,14 +83,19 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 		HttpClientModule,
 		ControlsModule,
 		NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+		// ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
 	],
 	providers:
 	[
+		//Service
 		ApiService,
 		SessionStorageService,
 		CryptographyService,
 		GoogleAnalyticsService,
 		FacebookPixelService,
+		CustomPreloaderService,
+
+		//Resolver
 		HeroSliderResolver
 	],
 	bootstrap: [AppComponent]

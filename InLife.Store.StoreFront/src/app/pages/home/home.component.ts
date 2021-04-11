@@ -1,3 +1,4 @@
+import { CONSTANTS } from '@app/services/constants';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { ApiService } from '../../services/api.service';
@@ -40,11 +41,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 		
 		// this.getHomeSliders();
 		this.getProductsLst();
-		 this.route.data
-		 	.pipe(takeUntil(this.destroy$))
-		 	.subscribe((response) => {
-		 	this.sliders = response.HeroSliders;
-         });
+		//  this.route.data
+		//  	.pipe(takeUntil(this.destroy$))
+		//  	.subscribe((response) => {
+		//  	this.sliders = CONSTANTS.HERO_SLIDERS;
+        //  });
+
+		 this.sliders = CONSTANTS.HERO_SLIDERS;
 	}
 
 	ngOnDestroy() {
@@ -81,7 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	getUrl(url: string) {
-		return "url('data:image/jpeg;base64," + url + "')";
+		return "url('" + url + "')";
 	}
 
 	getColor(color: string) {

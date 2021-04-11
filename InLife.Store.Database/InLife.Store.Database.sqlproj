@@ -115,5 +115,6 @@
     <Build Include="PrimeSecure\Tables\Applications.sql" />
     <Build Include="PrimeSecure\Tables\Customers.sql" />
     <Build Include="PrimeSecure\Tables\Addresses.sql" />
+    <Build Include="dbo\Tables\ReferenceCodes.sql" />
   </ItemGroup>
 </Project>

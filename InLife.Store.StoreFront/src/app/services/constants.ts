@@ -3385,5 +3385,50 @@ export const CONSTANTS =
 			spouse: 80_00,
 			spouseFormatted: (80_000).toLocaleString('en-PH', { style: 'currency', currency: 'PHP', minimumFractionDigits: 0 }),
 		},
-	}
+	},
+
+
+	HERO_SLIDERS: [
+		{
+			btnTxtLink: "feature-plan",
+			contentPostion: "Left",
+			heading: "Welcome to the InLife Store",
+			headingColor: "#070752",
+			heroBg: "assets/images/hero-home2.jpg",
+			heroBtnTxt: "GET STARTED",
+			heroMobBg: "assets/images/hero-home-mobile2.jpg",
+			heroTitle: "Slider01",
+			id: 1009,
+			subHeading: "Online insurance shopping made easy, fast, and convenient!",
+			subHeadingColor: "#42414d"
+		},
+		{
+			btnTxtLink: "/prime-secure-lite#getpslite",
+			contentPostion: "Left",
+			heading: "Get Health Protection and More",
+			headingColor: "#070752",
+			heroBg: "assets/images/hero-prime-secure-lite2.jpg",
+			heroBtnTxt: "Get Prime Secure Lite Now",
+			heroMobBg: "assets/images/hero-prime-secure-lite-mobile3.jpg",
+			heroTitle: "Prime Secure Lite",
+			id: 1011,
+			subHeading: "Prime Secure Lite is an affordable health and COVID-19 insurance package with life insurance coverage.",
+			subHeadingColor: "#42414d",
+			heroLogo: "/assets/images/prime-secure-lite-banner-logo.png"
+		},
+		{
+			btnTxtLink: "/prime-care#ihc",
+			contentPostion: "Left",
+			heading: "Protect Your Finances from Critical Illness",
+			headingColor: "#070752",
+			heroBg: "assets/images/hero-prime-care2.jpg",
+			heroBtnTxt: "GET PRIME CARE NOW",
+			heroMobBg: "assets/images/hero-prime-care-mobile2.jpg",
+			heroTitle: "Slider02",
+			id: 1010,
+			subHeading: "Prime Care Critical Illness Insurance provides financial security in the event of a critical illness diagnosis so you can focus on your recovery & getting well.",
+			subHeadingColor: "#42414d",
+			heroLogo: "/assets/images/prime-logo.png"
+		}
+	]
 };

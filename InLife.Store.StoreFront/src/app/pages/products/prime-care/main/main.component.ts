@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService, SessionStorageService } from '@app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { StorageType } from '@app/services/storage-types.enum';
+import { CONSTANTS } from '@app/services/constants';
 
 @Component
 ({
@@ -49,11 +50,13 @@ export class MainComponent implements OnInit
 
 	getPrimeHeroSlider()
 	{
-		var url = "/PrimeHero/GetPrimeHeroSliders";
-		this.apiService.sendGetRequest(url).subscribe((responseBody) =>
-		{
-			this.slider = responseBody[0];
-		});
+		// var url = "/PrimeHero/GetPrimeHeroSliders";
+		// this.apiService.sendGetRequest(url).subscribe((responseBody) =>
+		// {
+		// 	this.slider = responseBody[0];
+		// });
+
+		this.slider = CONSTANTS.HERO_SLIDERS[2];
 	}
 
 	sanitize(url: string)
@@ -66,7 +69,7 @@ export class MainComponent implements OnInit
 
 	getUrl(url: string)
 	{
-		return "url('data:image/png;base64," + url + "')";
+		return "url('" + url + "')";
 	}
 
 	scroll()
@@ -77,7 +80,7 @@ export class MainComponent implements OnInit
 			({
 				behavior: 'smooth'
 			});
-		}, 100);
+		}, 1000);
 	}
 
 	getColor(color: string)

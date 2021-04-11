@@ -817,7 +817,7 @@ transform: translateY(-8px);
 transform-origin: 50% 50% 0px; transition: all 300ms ease;
 }
 .product-list-item li .product-list-content {
-   box-shadow: 0px 6px 20px 2px rgba(0,0,0,0.05);
+   box-shadow: 0px 6px 20px 2px rgb(0 0 0 / 20%);
   display: inline-block;
   width: 100%;
   box-sizing: border-box;
@@ -838,7 +838,7 @@ transform-origin: 50% 50% 0px; transition: all 300ms ease;
 
 .product-list-item li .product-subtitle {
 	font-size: 12px;
-    color: #696969;
+    color: #42414d;
     margin-bottom: 10px;
     display: inline-block;
     font-weight: 500;
@@ -1333,15 +1333,9 @@ padding: 30px 0;
     letter-spacing: 0;
   }
 
-  .section-hero .hero-content h2,
-  .section-hero.section-hero-care .hero-content h2 {
-	color: #fff;
-    -webkit-text-fill-color: #fff;
-  }
-
   .section-hero .hero-content p {
-	  color: #070752;
-    -webkit-text-fill-color: #070752;
+	  color: #42414d;
+    -webkit-text-fill-color: #42414d;
   }
 }
 
@@ -1358,7 +1352,7 @@ padding: 30px 0;
 } */
 
 .section-hero .hero-content p {
-  color: #696969;
+  color: #42414d;
   font-size: 16px;
   line-height: 1.5;
 }
@@ -2971,7 +2965,7 @@ margin-bottom: 25px;}
 		.section-hero .hero-content p {
 			font-size: 32px;
 			line-height: 1.5;
-      color: #070752!important;
+      color: #42414d!important;
 		}
 
 		.section-hero.section-hero-care.hero-slide-2 .btn-orange, .section-hero.section-hero-care .btn-orange {
@@ -3143,7 +3137,7 @@ margin-bottom: 25px;}
     .section-hero .hero-content p {
       font-size: 20px;
       line-height: 1.5 !important;
-      color: #070752!important;
+      color: #42414d!important;
       text-align: left;
 		}
 	}
@@ -3575,7 +3569,7 @@ margin-bottom: 25px;}
 
 .section-hero .hero-content {padding-top: 110px;}
 .section-hero .hero-content h2 {font-size: 56px; margin-bottom: 20px; line-height: 60px;}
-.section-hero .hero-content p {font-weight: 400; line-height: 30px; letter-spacing: -0.1px; color: #070752!important; margin-top: 15px;}
+.section-hero .hero-content p {font-weight: 400; line-height: 30px; letter-spacing: -0.1px; color: #42414d!important; margin-top: 15px;}
 header nav ul li { margin-right: 45px; padding-right: 0px; }
 .new-features-section .feature-list-item { text-align: center; }
 .new-features-section .feature-list-item li {width: 33%; float: none; display: inline-block; vertical-align: top;}
@@ -3728,7 +3722,7 @@ header nav ul li { margin-right: 45px; padding-right: 0px; }
 
 .product-list-item li .pay-only {
 	font-size: 13px;
-	color: #696969;
+	color: #42414d;
 	align-self: center;
 	font-weight: 500;
 }
@@ -3873,8 +3867,6 @@ top: 72px; font-size: 16px;}
 	margin-right: 85px;
 }
 .list-check {margin-bottom: 11px;}
-.hero-prime-secure .section-hero .hero-content h2, .hero-prime-secure .section-hero .hero-content p, .hero-prime-secure-lite .section-hero .hero-content h2, .hero-prime-secure-lite .section-hero .hero-content p {color: #fff!important; -webkit-text-fill-color: #fff!important;}
-
 .hero-group-insurence { position: relative; }
 .hero-group-insurence .section-hero {  background: url("/assets/images/hero-group-insurance.jpg") right center no-repeat; position: relative;}
 .hero-bottom-area { background: rgba(277,60,35,0.9); display: inline-block; width: 100%; position: absolute; bottom: 0px; left: 0; padding:0;}
@@ -4043,7 +4035,7 @@ section#plan-section-3::after { left: 79%; }
 .plan-carousel.product-list-item li {padding: 0 60px;}
 .plan-carousel.product-list-item .plan {left: -66px; top: 63px; padding: 15px 25px; font-size: 32px;}
 .plan-carousel.product-list-item li .product-price {font-size: 46px; line-height: 1.7; margin-bottom: 15px;}
-.plan-carousel.product-list-item li .product-subtitle {font-size: 16px; color: #070752; margin-bottom: 44px; display: inline-block; font-weight: 500; margin-top: 7px;}
+.plan-carousel.product-list-item li .product-subtitle {font-size: 16px; color: #42414d; margin-bottom: 44px; display: inline-block; font-weight: 500; margin-top: 7px;}
 .plan-carousel.product-list-item li p {color: #696969; font-size: 18px; line-height: 1.7; text-align: left;}    
 .plan-carousel.product-list-item li .btn-orange {font-size:14px; }
 .only-in-mobile.only-in-mobile-hidden { display: none!important; }
@@ -4063,7 +4055,7 @@ header nav .sub-menu .sub-menu-cnt .sub-heading {font-size: 15px;}
 .plan-carousel.only-in-desktop { display: none!important; }
   .plan-carousel-mobile { display: block!important; }
   .plan-carousel-mobile { max-width: 95%; }
-  .plan-carousel-mobile.product-list-item li { padding: 0 60px; }
+  .plan-carousel-mobile.product-list-item li { padding: 20px 60px; }
   .plan-carousel-mobile.product-list-item li p { text-align: center; font-size: 16px; word-break: break-word;}
   .plan-carousel-mobile.product-list-item .plan {left: -6vw; top: 8.28vw; padding: 2.59vw 2.99vw 2.24vw; font-size: 2.5vw;}
   .plan-carousel-mobile.product-list-item .plan {  left: -22px;  top: 68px;  padding: 9px 8px 3px 8px;  font-size: 18px;  min-width: 121px;
@@ -4076,7 +4068,7 @@ header nav .sub-menu .sub-menu-cnt .sub-heading {font-size: 15px;}
     .hero-prime-secure .section-hero, .hero-prime-secure-lite .section-hero {min-height: 58vh} 
     .product-list-item.plan-carousel-tablet { display: none!important; }
     .hero-bottom-area { position: relative;}
-    .hero-group-insurence .section-hero .hero-content p { color: #070752;  -webkit-text-fill-color: #fff;}
+    .hero-group-insurence .section-hero .hero-content p { color: #42414d;  -webkit-text-fill-color: #42414d;}
     .special-section .col-left, .special-section .package-area .col-left {  padding-left: 0;}
     .special-section .col-right {  padding-right: 0;  padding-top: 0px !important;}
     .special-section .h-prime-contant-area .btn-orange {  width: auto;}
@@ -4166,7 +4158,7 @@ header nav .sub-menu .sub-menu-cnt .sub-heading {font-size: 15px;}
 .package-area .col3 span { font-size: 12px;  line-height: 17px;}
 .package-area .col3{font-size: 10px; line-height: 14px;}
 .plan-carousel-mobile.product-list-item li {
-	padding: 0 42px;
+	padding: 20px 42px;
 }
 .plan-carousel-mobile.product-list-item .plan {
 	left: -40px;
@@ -4188,7 +4180,7 @@ header nav .sub-menu .sub-menu-cnt .sub-heading {font-size: 15px;}
 		font-size: 15px !important
 	}
 	.product-list-item li .product-benefit-amount {
-		font-size: 28px;
+		font-size: 26px;
 	}
 	.product-list-item li .product-price {
 		font-size: 28px;
@@ -4200,6 +4192,11 @@ header nav .sub-menu .sub-menu-cnt .sub-heading {font-size: 15px;}
 @media (max-width: 350px) {
 	.product-list-item li .product-footer {
 		font-size: 12px !important;
+	}
+}
+@media (max-width: 300px) {
+	.product-list-item li .product-benefit-amount {
+		font-size: 22px;
 	}
 }
 

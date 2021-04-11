@@ -39,7 +39,6 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.session.clear();
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }

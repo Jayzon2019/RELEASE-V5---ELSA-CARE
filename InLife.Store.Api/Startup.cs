@@ -137,6 +137,7 @@ namespace InLife.Store.Api
 			// General
 			services.AddTransient<IEmailService, EmailService>();
 			services.AddTransient<ISftpService, SftpService>();
+			services.AddScoped<IReferenceCodeRepository, ReferenceCodeRepository>();
 
 			// Product - PrimeCare
 			services.AddScoped<IPrimeCareApplicationRepository, PrimeCareApplicationRepository>();

@@ -54,7 +54,7 @@ export class QuoteComponent implements OnInit
 	eligiblePlan: string;
 	localMontlyIncome: number;
 	@ViewChild(MatTooltip) tooltip: MatTooltip;
-	
+
 	constructor
 	(
 		private router: Router,
@@ -77,8 +77,8 @@ export class QuoteComponent implements OnInit
 
 	ngOnInit(): void
 	{
-		this.affiliate = this.affiliate = this.session.get('affiliate');
-		
+		this.affiliate = this.session.get('affiliate');
+
 		const getQuoteFormData = this.session.get('getQuoteForm');
 		this.quoteDetails = this.session.get('getinnerForm');
 		this.initForm(getQuoteFormData);
@@ -601,7 +601,7 @@ export class QuoteComponent implements OnInit
 			} else {
 				this.router.navigate(['prime-secure-lite/apply']);
 			}
-			
+
 
 		} else {
 			this.router.navigate(['prime-secure-lite/ineligible']);

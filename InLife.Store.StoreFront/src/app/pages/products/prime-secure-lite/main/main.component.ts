@@ -1,7 +1,7 @@
 import { SessionStorageService } from '@app/services';
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../../services/api.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { StorageType } from '@app/services/storage-types.enum';
@@ -103,7 +103,7 @@ export class MainComponent implements OnInit
 		}
 	}
 
-	constructor(private router: Router, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
+	constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
 
 	ngOnInit(): void
 	{
@@ -113,9 +113,22 @@ export class MainComponent implements OnInit
 		this.session.remove('UnderWritingStatus');
 		this.session.remove('age');
 		this.session.remove('getinnerForm');
+		this.session.remove('getQuoteForm');
 		this.session.remove(StorageType.QUOTE_INTERNAL_DATA);
 		this.session.remove(StorageType.QUOTE_EXTERNAL_DATA);
 		this.session.remove(StorageType.ACQUIRED_PLAN);
+
+		if (this.route.snapshot.fragment === 'getpslite')
+			this.scroll();
+	}
+
+	scroll() {
+		setTimeout(function () {
+			document.querySelector('#getpslite').scrollIntoView
+				({
+					behavior: 'smooth'
+				});
+		}, 1000);
 	}
 
 	getPrimeSecureLiteHeroSlider()
