@@ -1,9 +1,18 @@
 using System;
+using Nanoid;
+using Newtonsoft.Json;
 
 namespace InLife.Store.Core.Utilities
 {
-	public static class ReferenceCode
+	public static class KeyGenerator
 	{
+		private const string charSet = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+
+		public static string NewReferenceCode()
+		{
+			return Nanoid.Nanoid.Generate(charSet, 10);
+		}
+
 		public static string NewReferenceCode(Guid? guid = null)
 		{
 			if (!guid.HasValue)

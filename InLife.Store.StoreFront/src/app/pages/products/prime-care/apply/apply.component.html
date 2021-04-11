@@ -354,12 +354,12 @@
 
 										</div>
 									</div>
-
+									<span id="step2_head"></span>
 									<!-- step5 strat -->
 
 									<div class="formcoantiner step5" formGroupName="employment"
 										 *ngIf="getApplyForm.get('personalInformation')?.valid && showSecondStep">
-										<h3 id="step2_head">Business / Employment</h3>
+										<h3>Business / Employment</h3>
 										<div class="preminumform">
 											<div class="form-row">
 												<div class="col-md-4 mb-3">
@@ -452,13 +452,13 @@
 
 										</div>
 									</div>
-
+									<span id="step3_head"></span>
 									<!-- step6 strat -->
 
 									<div class="formcoantiner step6" formGroupName="identification" *ngIf="(getApplyForm.get('employment').get('occupation').value==='1'
                                                 && getApplyForm.get('employment').get('fundSource').value!=='' && showThirdStep)
                                                 || (getApplyForm.get('employment')?.valid && showThirdStep)">
-										<h3 id="step3_head">Identification</h3>
+										<h3>Identification</h3>
 										<div class="preminumform">
 											<div class="form-row">
 												<div class="col-md-4 mb-3">
@@ -599,12 +599,12 @@
 											</div>
 										</div>
 									</div>
-
+									<span id="step4_head"></span>
 									<!-- step7 strat -->
 
 									<div class="formcoantiner step7" formGroupName="beneficiaryDetails"
 										 *ngIf="getApplyForm.get('identification')?.valid && showFourthStep">
-										<h3 id="step4_head">Beneficiary Details</h3>
+										<h3>Beneficiary Details</h3>
 										<div class="preminumform">
 											<div class="form-row">
 												<div class="col-md-4 mb-3">
@@ -1108,12 +1108,12 @@
 											</div>
 										</div>
 									</div>
-
+									<span id="step5_head"></span>
 									<!-- step8 strat -->
 
 									<div class="formcoantiner declarationsection step8" formGroupName="declarationForm"
 										 *ngIf="getApplyForm.get('beneficiaryDetails')?.valid && showFifthStep">
-										<h3 id="step5_head">Declarations <small>(All fields are required)</small></h3>
+										<h3>Declarations <small>(All fields are required)</small></h3>
 										<div class="preminumform">
 											<div class="form-row">
 												<div class="col-md-12">

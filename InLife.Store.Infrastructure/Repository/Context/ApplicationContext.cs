@@ -42,6 +42,9 @@ namespace InLife.Store.Infrastructure.Repository
 		DbSet<Feedback> Feedback { get; set; }
 		DbSet<ApplyDocuments> ApplyDocuments { get; set; }
 		DbSet<PaymentStatus> PaymentStatus { get; set; }
+
+		// Key Generator
+		DbSet<ReferenceCode> ReferenceCodes { get; set; }
 	}
 
 	public class ApplicationContext : DbContext, IApplicationContext
@@ -361,6 +364,19 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.ToTable("TblPaymentStatus");
 				entity.HasKey(e => new { e.Id });
 			});
+
+			// Key Generation
+			builder.Entity<ReferenceCode>(entity =>
+			{
+				entity
+					.ToTable("ReferenceCodes")
+					.HasKey(e => new { e.Id });
+
+				entity
+					.Property(e => e.CreatedDate)
+					.HasDefaultValue(DateTime.UtcNow)
+					.ValueGeneratedOnAdd();
+			});
 		}
 
 		public override int SaveChanges()
@@ -440,5 +456,7 @@ namespace InLife.Store.Infrastructure.Repository
 		public DbSet<ApplyDocuments> ApplyDocumnets { get; set; }
 		public DbSet<PaymentStatus> PaymentStatus { get; set; }
 		public DbSet<ApplyDocuments> ApplyDocuments { get; set; }
+
+		public DbSet<ReferenceCode> ReferenceCodes { get; set; }
 	}
 }

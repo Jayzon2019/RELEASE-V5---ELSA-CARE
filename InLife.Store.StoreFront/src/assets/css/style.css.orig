@@ -1163,7 +1163,7 @@ padding: 30px 0;
     background: linear-gradient(to right, #3c51a0 0%, #e23e27 100%);
     color: #fff;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: #fff;
+    /* -webkit-text-fill-color: #fff; */
     margin-bottom: 25px;
     font-size: 24px;
     letter-spacing: -3px;

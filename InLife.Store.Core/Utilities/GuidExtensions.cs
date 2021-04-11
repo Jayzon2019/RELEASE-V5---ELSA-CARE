@@ -12,7 +12,7 @@ namespace InLife.Store.Core.Utilities
 
 		public static string ToReferenceCode(this Guid guid)
 		{
-			return ReferenceCode.NewReferenceCode(guid);
+			return KeyGenerator.NewReferenceCode(guid);
 		}
 	}
 }

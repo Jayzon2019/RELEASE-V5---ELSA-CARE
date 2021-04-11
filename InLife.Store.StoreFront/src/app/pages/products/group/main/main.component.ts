@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 import { map, takeUntil, switchMap, filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
+import { StorageType } from '@app/services/storage-types.enum';
 declare var require: any
 const FileSaver = require('file-saver');
 @Component
@@ -32,6 +33,11 @@ export class MainComponent implements OnInit, OnDestroy {
 		private dialog: MatDialog) { }
 
 	ngOnInit(): void {
+		this.session.remove('selectedGroupPlanData');
+		this.session.remove(StorageType.POST_GROUP_QUOTE);
+		this.session.remove(StorageType.GROUP_PLAN_DATA);
+		this.session.remove(StorageType.REQUIREMENTS_DATA);
+		this.session.remove(StorageType.STUDENTS_TEACHERS_BENEFITS);
 		// this.session.clear();
 		// this.getGroupHeroSlider();
 
@@ -128,33 +134,33 @@ export class MainComponent implements OnInit, OnDestroy {
 		// var filePath = '../../../../../assets/documents/Census Template_Prototype Plan-final.xlsx';
 		// var pdfName = 'Census Template_Prototype Plan-final';
 		// FileSaver.saveAs(filePath, pdfName);
-		this.openNewWindow('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library?&scroll=group-insurance-downloadable');
 	}
 	adminForm() {
 		// var filePath = '../../../../../assets/documents/Entity Plan Admin Form.pdf';
 		// var pdfName = 'Entity Plan Admin Form';
 		// FileSaver.saveAs(filePath, pdfName);
-		this.openNewWindow('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library?&scroll=group-insurance-downloadable');
 	}
 	IndividualApplicationForm() {
 		// var filePath = '../../../../../assets/documents/Application Form Group Plan_(For Individual Members).pdf';
 		// var pdfName = 'Application Form Group Plan_(For Individual Members)';
 		// FileSaver.saveAs(filePath, pdfName);
-		this.openNewWindow('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library?&scroll=group-insurance-downloadable');
 	}
 
 	ciuForm() {
 		// var filePath = '../../../../../assets/documents/CIU Form.pdf';
 		// var pdfName = 'Application Form Group Plan_(For Individual Members)';
 		// FileSaver.saveAs(filePath, pdfName);
-		this.openNewWindow('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library?&scroll=group-insurance-downloadable');
 	}
 
 	SecretarysCertificate() {
 		// var filePath = '../../../../../assets/documents/Secretary Certificate-Board Resolution.pdf';
 		// var pdfName = 'Secretary Certificate/Board Resolution';
 		// FileSaver.saveAs(filePath, pdfName);
-		this.openNewWindow('https://www.insularlife.com.ph/form-library');
+		this.openNewWindow('https://www.insularlife.com.ph/form-library?&scroll=group-insurance-downloadable');
 	}
 
 }

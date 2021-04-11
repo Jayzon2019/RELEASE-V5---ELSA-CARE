@@ -677,6 +677,8 @@ namespace InLife.Store.Infrastructure.Services
 				? $"{application.TotalTeachers} Teachers and {application.TotalStudents} Students"
 				: $"{application.TotalMembers}";
 
+			var status = "Forwarded to InLife's Corporate Solution";
+
 			decimal totalPremiums = 0;
 			if (application.TotalMembers.HasValue)
 				totalPremiums += application.TotalMembers.Value * application.PlanPremium;
@@ -685,10 +687,13 @@ namespace InLife.Store.Infrastructure.Services
 			if (application.TotalStudents.HasValue)
 				totalPremiums += application.TotalStudents.Value * application.PlanPremium;
 
+			if (application.Status.Equals("PaymentProof"))
+				status = "Pending Payment";
+
 			var body = new StringBuilder(EmailTemplates.GroupApplicationFeedbackAdmin)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
 				.Replace("#TRANSACTION-DATE#", application.CompletedDate.ToString())
-				//.Replace("#TRANSACTION-STATUS#", application.Status)
+				.Replace("#TRANSACTION-STATUS#", status)
 				.Replace("#COMPANY-NAME#", application.CompanyName)
 
 				.Replace("#FEEDBACK-RATING#", application.FeedbackRating.ToString())

@@ -734,7 +734,7 @@ transform: translateY(-8px);
 transform-origin: 50% 50% 0px; transition: all 300ms ease;
 }
 .product-list-item li .product-list-content {
-   box-shadow: 0px 6px 20px 2px rgba(0,0,0,0.05);
+   box-shadow:0px 6px 20px 2px rgb(0 0 0 / 20%);
   display: inline-block;
   width: 100%;
   box-sizing: border-box;
@@ -1233,12 +1233,6 @@ padding: 30px 0;
   .section-hero .hero-content h2 {
     font-size: 7vw;
     letter-spacing: 0;
-  }
-
-  .section-hero .hero-content h2,
-  .section-hero.section-hero-care .hero-content h2 {
-	color: #fff;
-    -webkit-text-fill-color: #fff;
   }
 
   .section-hero .hero-content p {
@@ -3708,7 +3702,6 @@ top: 72px; font-size: 16px;}
 	margin-right: 85px;
 }
 .list-check {margin-bottom: 11px;}
-.hero-prime-secure .section-hero .hero-content h2, .hero-prime-secure .section-hero .hero-content p, .hero-prime-secure-lite .section-hero .hero-content h2, .hero-prime-secure-lite .section-hero .hero-content p {color: #fff!important; -webkit-text-fill-color: #fff!important;}
 
 .hero-group-insurence { position: relative; }
 .hero-group-insurence .section-hero {  background: url("/assets/images/hero-group-insurance.jpg") right center no-repeat; position: relative;}

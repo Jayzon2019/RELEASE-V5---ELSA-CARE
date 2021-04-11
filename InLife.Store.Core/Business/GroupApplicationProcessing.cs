@@ -19,20 +19,20 @@ namespace InLife.Store.Core.Business
 	public class GroupApplicationProcessing : IGroupApplicationProcessing
 	{
 		private readonly IGroupApplicationRepository applicationRepository;
-		private readonly IGroupFileRepository fileRepository;
+		private readonly IReferenceCodeRepository referenceCodeRepository;
 		private readonly IEmailService emailService;
 		private readonly ISftpService sftpService;
 
 		public GroupApplicationProcessing
 		(
 			IGroupApplicationRepository applicationRepository,
-			IGroupFileRepository fileRepository,
+			IReferenceCodeRepository referenceCodeRepository,
 			IEmailService emailService,
 			ISftpService sftpService
 		)
 		{
 			this.applicationRepository = applicationRepository;
-			this.fileRepository = fileRepository;
+			this.referenceCodeRepository = referenceCodeRepository;
 			this.emailService = emailService;
 			this.sftpService = sftpService;
 		}
@@ -47,7 +47,19 @@ namespace InLife.Store.Core.Business
 			Contract.Requires(form != null);
 
 			var id = Guid.NewGuid();
-			var referenceCode = id.ToReferenceCode();
+			var referenceCode = String.Empty;
+			var isReferenceCodeExisting = true;
+
+			// Check for reference code collisions
+			while (isReferenceCodeExisting)
+			{
+				referenceCode = KeyGenerator.NewReferenceCode();
+				isReferenceCodeExisting = referenceCodeRepository.Get(referenceCode) != null;
+			}
+			referenceCodeRepository.Create(new ReferenceCode
+			{
+				Id = referenceCode
+			});
 
 			var application = new GroupApplication
 			{
