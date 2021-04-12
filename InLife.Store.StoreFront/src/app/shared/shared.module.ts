@@ -1,3 +1,4 @@
+import { ApplicationStatusService } from './../pages/products/group/services/application-status.service';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -30,7 +31,8 @@ import { ThankYouComponent } from './component/thank-you/thank-you.component';
   ],
   providers: [
     UtilitiesService,
-    PSLiteService
+    PSLiteService,
+    ApplicationStatusService
   ],
   entryComponents: [GeneralMessagePromptComponent]
 })
