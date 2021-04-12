@@ -607,8 +607,3 @@ $ dotnet publish -c Release
 * **To all database tables** - Go to `InLife.Store.Database/Scripts/FreshDatabase.sql` then execute the script on your database.
 * **To set CMS user data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Users.sql` then execute the script on your database.
 * **To set CMS content data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content.sql` then execute the script on your database.
-* **To set CMS content (PrimeCare Files) data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content-PrimeCareFiles.sql` then execute the script on your database.
-* **To set CMS content (IHC Products) data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content-IHCProducts.sql` then execute the script on your database.
-* **To set CMS content (FAQs) data to factory default** - Go to `InLife.Store.Database/Scripts/FreshCmsTables-Content-FAQs.sql` then execute the script on your database.
-
-
