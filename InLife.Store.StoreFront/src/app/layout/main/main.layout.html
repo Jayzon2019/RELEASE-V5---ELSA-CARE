@@ -46,13 +46,14 @@
 						</div>
 						<div class="dropdown-bg"></div>
 					</li>
-					<li><a routerLink="/group">Group</a></li>
+					<!-- <li><a routerLink="/group">Group</a></li> -->
 					<li>
 						<a routerLink="/faqs">FAQs</a>
 						
 					</li>
 					<li><a href="https://www.insularlife.com.ph/contact-us" target="_blank">Contact Us</a></li>
 					<li><a href="https://www.insularlife.com.ph/" target="_blank">InLife Main Site</a></li>
+					<li><a class="a2hs-button" *ngIf="isShowButton" (click)="addToHomescreen()">Add to Home Screen</a></li>
 				</ul>
 			</nav>
 		</ng-container>

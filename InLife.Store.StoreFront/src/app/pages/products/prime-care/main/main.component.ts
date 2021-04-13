@@ -41,7 +41,12 @@ export class MainComponent implements OnInit
 		this.session.remove('age');
 		this.session.remove('getinnerForm');
 		this.session.remove('getQuoteForm');
+		this.session.remove('getApplyForm');
+		this.session.remove('extensionData');
+		this.session.remove('insuredIdentityDocumentImageData');
+		this.session.remove('insuredIdentityDocumentImagePreview');
 		this.session.remove(StorageType.ACQUIRED_PLAN);
+		this.session.remove(StorageType.APPLY_PC_DATA);
 
 		if(this.activateRoute.snapshot.fragment === 'ihc')
 			this.scroll();

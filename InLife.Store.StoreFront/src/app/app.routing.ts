@@ -9,6 +9,7 @@ import { PaymentCallbackComponent } from './pages/payment/payment-callback/payme
 import { PaymentFailedComponent } from './pages/payment/payment-failed/payment-failed.component';
 import { ThankYouComponent } from './shared/component/thank-you/thank-you.component';
 import { CustomPreloaderService } from './services/customer-preloader.service';
+import { ApplicationStatusModule } from './pages/products/group/application-status/application-status.module';
 
 const routes: Routes =
 	[
@@ -33,12 +34,10 @@ const routes: Routes =
 					{ path: 'faqs', loadChildren: () => import('@app/pages/faqs/faqs.module').then(m => m.FaqsModule) },
 					{ path: 'prime-care', loadChildren: () => import('@app/pages/products/prime-care/main/main.module').then(m => m.MainModule) },
 					// { path: 'prime-secure',loadChildren: () => import('@app/pages/products/prime-secure/main/main.module').then(m => m.MainModule) },
-					{ path: 'group/application-status', loadChildren: () => import('@app/pages/products/group/application-status/application-status.module').then(m => m.ApplicationStatusModule),
-					//  data: { preload: true}  
-					},
+					// { path: 'group/application-status', loadChildren: () => import('@app/pages/products/group/application-status/application-status.module').then(m => m.ApplicationStatusModule), data: { preload: true}  },
 					{ path: 'prime-secure-lite',loadChildren: () => import('@app/pages/products/prime-secure-lite/main/main.module').then(m => m.MainModule) },
-					{ path: 'group',loadChildren: () => import('@app/pages/products/group/main/main.module').then(m => m.MainModule)},
-					{ path: 'feedback', loadChildren: () => import('@app/pages/feedback/feedback.module').then(m => m.FeedbackModule) },
+					// { path: 'group',loadChildren: () => import('@app/pages/products/group/main/main.module').then(m => m.MainModule)},
+					{ path: 'feedback', loadChildren: () => import('@app/pages/feedback/feedback.module').then(m => m.FeedbackModule)},
 					{ path: 'prime-care/ineligible', loadChildren: () => import('@app/pages/products/prime-care/ineligible/ineligible.module').then(m => m.IneligibleModule) },
 				]
 		},

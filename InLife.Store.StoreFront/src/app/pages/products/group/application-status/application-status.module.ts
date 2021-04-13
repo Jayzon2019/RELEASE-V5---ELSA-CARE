@@ -1,5 +1,3 @@
-import { ApiService } from './../../../../services/api.service';
-import { SessionStorageService } from './../../../../services/session-storage.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +11,7 @@ import { PaymentPendingComponent } from './payment-pending/payment-pending.compo
 import { CancelApplicationComponent } from './cancel-application/cancel-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { ApplicationCancelledComponent } from './application-cancelled/application-cancelled.component';
-import { FacebookPixelService, GoogleAnalyticsService } from '@app/services';
+import { ApplyService } from '../services/apply.service';
 
 @NgModule({
   imports: [ 
@@ -31,15 +29,8 @@ import { FacebookPixelService, GoogleAnalyticsService } from '@app/services';
     PaymentConfirmationComponent,
     ApplicationCancelledComponent,
   ],
-  exports: [ 
-    ApplicationStatusComponent 
-  ],
   providers: [
-    ApiService,
-		SessionStorageService,
-		GoogleAnalyticsService,
-		FacebookPixelService
-  ],
-  bootstrap: [ApplicationStatusComponent]
+    ApplyService
+  ]
 })
 export class ApplicationStatusModule { }

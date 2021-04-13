@@ -1,17 +1,8 @@
 import { StorageType } from '@app/services/storage-types.enum';
-import { environment } from '@environment';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-
-import { Observable, Subscription, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
-import * as moment from 'moment';
-
+import { HttpClient } from '@angular/common/http';
 import { SessionStorageService, FacebookPixelService } from '@app/services';
-import { CONSTANTS } from '@app/services/constants';
-
 
 @Component
 ({
@@ -30,8 +21,6 @@ export class ThankYouComponent implements OnInit
 	(
 		private session: SessionStorageService,
 		private router: Router,
-		private route: ActivatedRoute,
-		private http: HttpClient,
 		private facebookPixelService: FacebookPixelService
 	)
 	{
@@ -61,8 +50,33 @@ export class ThankYouComponent implements OnInit
 
 		if(planAcquired.plan === 'PrimeSecureLite') {
 			this.isPrimeSecureLite = true;
+			// Remove policy no for verification of new application
+			this.session.remove(StorageType.POLICYNO);
+			this.session.remove('UnderWritingStatus');
+			this.session.remove('age');
+			this.session.remove('getinnerForm');
+			this.session.remove('getQuoteForm');
+			this.session.remove('getApplyForm');
+			this.session.remove('extensionData');
+			this.session.remove('insuredIdentityDocumentImageData');
+			this.session.remove('insuredIdentityDocumentImagePreview');
+			this.session.remove(StorageType.QUOTE_INTERNAL_DATA);
+			this.session.remove(StorageType.QUOTE_EXTERNAL_DATA);
+			this.session.remove(StorageType.ACQUIRED_PLAN);
+			this.session.remove(StorageType.APPLY_DATA);
 		} else if(planAcquired.plan === 'PrimeCare') {
 			this.isPrimeCare = true;
+			// Remove policy no for verification of new application
+			this.session.remove(StorageType.POLICYNO);
+			this.session.remove('age');
+			this.session.remove('getinnerForm');
+			this.session.remove('getQuoteForm');
+			this.session.remove('getApplyForm');
+			this.session.remove('extensionData');
+			this.session.remove('insuredIdentityDocumentImageData');
+			this.session.remove('insuredIdentityDocumentImagePreview');
+			this.session.remove(StorageType.ACQUIRED_PLAN);
+			this.session.remove(StorageType.APPLY_PC_DATA);
 		} else {
 			this.isPrimeSecure = true;
 		}
@@ -71,7 +85,4 @@ export class ThankYouComponent implements OnInit
 					"Prime Care" : "Prime Secure";
 		this.facebookPixelService.track('Purchase');
 	}
-
-	
-
 }

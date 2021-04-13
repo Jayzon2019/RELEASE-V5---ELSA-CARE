@@ -2535,6 +2535,7 @@ header.fixed.hide {
 	float: left;
 	background-color: #fff;
 	width: 310px;
+	display: grid;
 }
 
 /* Style the buttons inside the tab */
@@ -3163,7 +3164,7 @@ header.fixed.hide {
 
 		.tab button {
 			display: inline-block;
-			margin: 0 15px;
+			margin: 10px 25px;
 			width: auto;
 			padding: 0;
 		}
@@ -3377,9 +3378,15 @@ header.fixed.hide {
 		}
 	}
 
+	@media (max-width: 640px) {
+		.tab button {
+			margin: 10px 12px;
+		}
+	}
+
 	@media (max-width: 500px) {
 		.tab button {
-			font-size: 19px;
+			font-size: 20px;
 		}
 
 		.tab-section .palet h3 {
@@ -3408,8 +3415,7 @@ header.fixed.hide {
 
 	@media (max-width: 390px) {
 		.tab button {
-			font-size: 16px;
-			margin: 0 10px;
+			margin: 5px 15px;
 		}
 	}
 

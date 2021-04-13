@@ -27,7 +27,7 @@ const routes: Routes =
 		path:'pay',
 		component: MakePaymentComponent
 	},
-	{ path: 'application-status', loadChildren: () => import('@app/pages/products/group/application-status/application-status.module').then(m => m.ApplicationStatusModule), data: { preload: true}  },
+	// { path: 'application-status', loadChildren: () => import('@app/pages/products/group/application-status/application-status.module').then(m => m.ApplicationStatusModule), data: { preload: true}  },
 	{ path: 'application-reference/:referenceCode', component: ReferenceMessageComponent},
 	
 	{ path: 'plan-summary', loadChildren: () => import('@app/pages/products/group/plan-summary/plan-summary.module').then(m => m.PlanSummaryModule) },
