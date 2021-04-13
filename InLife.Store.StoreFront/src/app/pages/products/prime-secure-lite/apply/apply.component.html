@@ -359,7 +359,7 @@
                                                          :getApplyForm.get('identification').get('secondaryLegalIdType')?.valid && getApplyForm.get('identification').get('secondaryLegalIdType')?.value !=='' ?'is-valid black':''
                                                         ">
 														<option value="">Select TIN/SSS/GSIS ID</option>
-														<option *ngFor="let type of CONSTANTS.TINS;let i = index"
+														<option *ngFor="let type of TINS; let i = index"
 																[value]="type.id">
 															{{type.name}}
 														</option>

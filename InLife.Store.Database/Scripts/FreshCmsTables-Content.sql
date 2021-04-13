@@ -112,52 +112,52 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblFaqCategories]') AND type in (N'U'))
 ALTER TABLE [dbo].[TblFaqCategories] DROP CONSTRAINT IF EXISTS [DF_TblFaqCategories_CreatedDate]
 GO
-/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblProducts]
 GO
-/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblProductDetails]
 GO
-/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblPrimeHeroes]
 GO
-/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblPrimeCare]
 GO
-/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblHeroes]
 GO
-/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFooterLinks]
 GO
-/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFaqs]
 GO
-/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFaqCategories]
 GO
-/****** Object:  Table [Content].[Heroes]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[Heroes]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [Content].[Heroes]
 GO
-/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [Content].[HealthCareProducts]
 GO
-/****** Object:  Table [Content].[Files]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[Files]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [Content].[Files]
 GO
-/****** Object:  Table [Content].[Faqs]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[Faqs]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [Content].[Faqs]
 GO
-/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP TABLE IF EXISTS [Content].[FaqCategories]
 GO
-/****** Object:  Schema [Content]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Schema [Content]    Script Date: 4/13/2021 8:16:36 PM ******/
 DROP SCHEMA IF EXISTS [Content]
 GO
-/****** Object:  Schema [Content]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Schema [Content]    Script Date: 4/13/2021 8:16:36 PM ******/
 CREATE SCHEMA [Content]
 GO
-/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,7 +176,7 @@ CREATE TABLE [Content].[FaqCategories](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[Faqs]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[Faqs]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,7 +197,7 @@ CREATE TABLE [Content].[Faqs](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[Files]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[Files]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -219,7 +219,7 @@ CREATE TABLE [Content].[Files](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -299,7 +299,7 @@ CREATE TABLE [Content].[HealthCareProducts](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[Heroes]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [Content].[Heroes]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -324,7 +324,7 @@ CREATE TABLE [Content].[Heroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,7 +345,7 @@ CREATE TABLE [dbo].[TblFaqCategories](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -368,7 +368,7 @@ CREATE TABLE [dbo].[TblFaqs](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -404,7 +404,7 @@ CREATE TABLE [dbo].[TblFooterLinks](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -433,7 +433,7 @@ CREATE TABLE [dbo].[TblHeroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -455,7 +455,7 @@ CREATE TABLE [dbo].[TblPrimeCare](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -484,7 +484,7 @@ CREATE TABLE [dbo].[TblPrimeHeroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -560,7 +560,7 @@ CREATE TABLE [dbo].[TblProductDetails](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/12/2021 5:00:09 PM ******/
+/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1444,35 +1444,41 @@ INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [Update
 GO
 INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1075, CAST(N'2021-03-11T10:15:58.3399701+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 7, N'For Students and Teachers Plan, who among the faculty members are eligible for the plan?', N'<p>Only the teaching personnel are considered eligible faculty members to be registered under the said plan.<br></p>', 0, 0, 23)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1076, CAST(N'2021-03-23T05:54:16.5220222+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-03-23T05:56:14.7593928+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', 6, N'How does Prime Secure Lite work?', N'<p>Prime Secure Lite is a one (1) year term plan that includes both life protection and other health insurance benefits. Here are the main benefits provided by the plan:</p><ul><li>Life Insurance</li><li>Extended Spouse Coverage</li><li>Cancer, Heart Attack and Stroke Benefit</li><li>Additional Covid-19 Insurance Benefit</li></ul><p>These benefits can be explained further in this FAQ.</p><p>Prime Secure Lite is a simple issue offer and available in the InLife Store (<a href="www.inlifestore.com.ph" target="_blank">www.inlifestore.com.ph</a>) with only a few screening questions to answer to get protected.</p><p>Following three (3) steps, Get Quote, Apply and Pay Online, you can get protected in a safe and convenient way with these requirements:</p><ul><li>Filipino citizenship and you are currently residing in the Philippines (applications of Filipinos currently abroad or residing abroad cannot be accepted);</li><li>Valid government-issued ID; and</li><li>Credit / debit card for online payment.</li></ul><p>You may only have one (1) Prime Secure Lite Policy in effect at any time.</p>', 0, 0, 1)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1076, CAST(N'2021-03-23T05:54:16.5220222+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:35:03.9648718+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'How does Prime Secure Lite work?', N'<p>Prime Secure Lite is a one (1) year term plan that includes both life protection and other health insurance benefits. Here are the main benefits provided by the plan:</p><ul><li>Life Insurance</li><li>Extended Spouse Coverage</li><li>Cancer, Heart Attack, and Stroke Benefit</li><li>Additional COVID-19 Insurance Benefit</li></ul><p>These benefits can be explained further in this FAQ.</p><p>Prime Secure Lite is a simple issue offer and available in the InLife Store (<a href="www.inlifestore.com.ph" target="_blank">www.inlifestore.com.ph</a>) with only a few screening questions to answer to get protected.</p><p>Following three (3) steps, Get Quote, Apply, and Pay Online, you can get protected in a safe and convenient way with these requirements:</p><ul><li>Filipino citizenship and you are currently residing in the Philippines (applications of Filipinos currently abroad or residing abroad cannot be accepted);</li><li>Valid government-issued ID; and</li><li>Credit / debit card for online payment.</li></ul><p>You may only have one (1) Prime Secure Lite policy in effect at any time.</p>', 0, 0, 1)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1077, CAST(N'2021-03-23T05:57:17.7461239+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'How can Prime Secure Lite help me?', N'<p>There is no question that life insurance is the cornerstone of a person’s financial journey as it readily provides financial independence in the face of untimely death of a family’s provider.&nbsp;</p><p>What makes Prime Secure Lite the right plan for you is that it offers many protection benefits at an affordable price. Coupled with a simplified application process, you can get protected from many of the uncertainties that threaten Filipinos today.</p>', 0, 0, 2)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1077, CAST(N'2021-03-23T05:57:17.7461239+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:35:43.6652974+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'How can Prime Secure Lite help me?', N'<p>There is no question that life insurance is the cornerstone of a person’s financial journey as it readily provides financial independence in the face of untimely death of a family’s provider.&nbsp;</p><p>What makes Prime Secure Lite the right plan for you is that it offers many protection benefits at an affordable price. Coupled with a simplified application process, you can get protected from the many uncertainties that threaten Filipinos today.</p>', 0, 0, 2)
 GO
 INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1078, CAST(N'2021-03-23T05:58:58.1423540+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-09T04:45:55.0203592+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', 6, N'How much protection benefits can Prime Secure Lite provide?', N'<p class="MsoNoSpacing" style="margin: 0cm 0cm 0cm 27pt; font-size: 11pt; font-family: Calibri, sans-serif; letter-spacing: normal; text-align: justify;"><span lang="EN-US" style="font-size: 10pt; font-family: Inter, sans-serif;">Actual coverage amounts are based on age of applicant<o:p></o:p></span></p><table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="letter-spacing: normal; margin-left: 27pt; border: none;"><tbody><tr><td width="98" valign="top" style="width: 73.2pt; border-width: 1pt; border-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><br></p></td><td width="77" valign="top" style="width: 57.65pt; border-top-width: 1pt; border-top-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; border-bottom-width: 1pt; border-bottom-color: windowtext; border-left: none; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Plan 2500<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top-width: 1pt; border-top-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; border-bottom-width: 1pt; border-bottom-color: windowtext; border-left: none; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Plan 3000<o:p></o:p></span></p></td></tr><tr><td width="98" valign="top" style="width: 73.2pt; border-right-width: 1pt; border-right-color: windowtext; border-bottom-width: 1pt; border-bottom-color: windowtext; border-left-width: 1pt; border-left-color: windowtext; border-top: none; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Life Insurance<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱300,000<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱200,000<o:p></o:p></span></p></td></tr><tr><td width="98" valign="top" style="width: 73.2pt; border-right-width: 1pt; border-right-color: windowtext; border-bottom-width: 1pt; border-bottom-color: windowtext; border-left-width: 1pt; border-left-color: windowtext; border-top: none; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Extended Spouse Coverage<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱300,000<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱200,000<o:p></o:p></span></p></td></tr><tr><td width="98" valign="top" style="width: 73.2pt; border-right-width: 1pt; border-right-color: windowtext; border-bottom-width: 1pt; border-bottom-color: windowtext; border-left-width: 1pt; border-left-color: windowtext; border-top: none; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Cancer, Heart Attack and Stroke (CHAS) Benefit<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱150,000<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱80,000<o:p></o:p></span></p><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">&nbsp;</span></p></td></tr><tr><td width="98" valign="top" style="width: 73.2pt; border-right-width: 1pt; border-right-color: windowtext; border-bottom-width: 1pt; border-bottom-color: windowtext; border-left-width: 1pt; border-left-color: windowtext; border-top: none; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Covid-19 Death Benefit (6 Months Coverage only)<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱150,000<o:p></o:p></span></p><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">&nbsp;</span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱80,000<o:p></o:p></span></p><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">&nbsp;</span></p><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">&nbsp;</span></p></td></tr><tr><td width="98" valign="top" style="width: 73.2pt; border-right-width: 1pt; border-right-color: windowtext; border-bottom-width: 1pt; border-bottom-color: windowtext; border-left-width: 1pt; border-left-color: windowtext; border-top: none; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Potential Total Benefit from Prime Secure Lite<o:p></o:p></span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱750,000<o:p></o:p></span></p><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">&nbsp;</span></p></td><td width="77" valign="top" style="width: 57.65pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: windowtext; border-right-width: 1pt; border-right-color: windowtext; padding: 0cm 5.4pt;"><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Up to ₱480,000*<o:p></o:p></span></p><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; text-align: justify;"><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">&nbsp;</span></p></td></tr></tbody></table><p class="MsoNoSpacing" style="margin: 0cm; font-size: 11pt; font-family: Calibri, sans-serif; letter-spacing: normal; text-align: justify;"><span lang="EN-US" style="font-size: 10pt; font-family: Inter, sans-serif;">*</span><span lang="EN-US" style="font-size: 9pt; font-family: Inter, sans-serif;">Extended Spouse Coverage applied<o:p></o:p></span></p>', 0, 0, 3)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1079, CAST(N'2021-03-23T06:00:05.5403560+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-03-23T06:02:11.3501762+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', 6, N'I am nearing the end of my Prime Secure Lite coverage period, how do I extend my coverage period?', N'<p>If you are interested in another year of protection, we encourage you to re-apply for Prime Secure Lite via The InLife Store (<a href="www.inlifestore.com.ph" target="_blank">www.inlifestore.com.ph</a>).</p><p>Alternatively, if you feel the need for longer protection, you may contact us at these numbers to assist you with your needs:</p><p>(632) 8-876-1-800 or Toll-Free 1-800-10-INSULAR (4678527)</p>', 0, 0, 7)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1079, CAST(N'2021-03-23T06:00:05.5403560+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:39:59.5128591+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'I am nearing the end of my Prime Secure Lite coverage period, how do I extend my coverage period?', N'<p>If you are interested in another year of protection, we encourage you to re-apply for Prime Secure Lite via the InLife Store (<a href="www.inlifestore.com.ph" target="_blank">www.inlifestore.com.ph</a>).</p><p>Alternatively, if you feel the need for longer protection, you may contact us at these numbers to assist you with your needs:</p><p>(632) 8-876-1800 or Toll-Free 1-800-10-INSULAR (4678527)</p>', 0, 0, 7)
 GO
 INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1080, CAST(N'2021-03-23T06:03:25.3107377+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'What is Extended Spouse Coverage?', N'<p>This feature pays an additional lumpsum equal to the sum insured to the beneficiary in the event that both the insured and his/her legal spouse passes away due to the same accident. The time of passing of both spouses may not be more than 180 days from the date of the accident in order to claim the additional sum insured.&nbsp; &nbsp;<br></p>', 0, 0, 4)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1081, CAST(N'2021-03-23T06:04:31.1249436+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'How does the Cancer, Heart Attack and Stroke (CHAS) Benefit work?', N'<p>According to the Philippine Statistics Office as of 2018, Cancer, Heart Attack and Stroke are the top 3 causes of mortality for Filipinos. Prime Secure Lite is a way to provide financial security to your loves ones in case any of these three medical conditions happen to you.&nbsp;</p><p>You may claim the CHAS benefit detailed in your policy data page after thirty (30) days of receiving your diagnosis.&nbsp;</p><p>You may get full details by downloading the policy provisions and exceptions document.</p>', 0, 0, 5)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1081, CAST(N'2021-03-23T06:04:31.1249436+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:37:34.9549754+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'How does the Cancer, Heart Attack, and Stroke (CHAS) Benefit work?', N'<p>According to the Philippine Statistics Office as of 2018, Cancer, Heart Attack, and Stroke are the top 3 causes of mortality for Filipinos. Prime Secure Lite is a way to provide financial security to your loved ones in case any of these three medical conditions happen to you.&nbsp;</p><p>You may claim the CHAS benefit detailed in your policy data page thirty (30) days after receiving your diagnosis.&nbsp;</p><p>You may get full details by downloading the Policy Provisions and Exclusions document.</p>', 0, 0, 5)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1082, CAST(N'2021-03-23T06:08:58.3541791+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'Can I buy for another person?', N'<p>Applicant-owner and insured should be one and the same person. ID presented should also be from same person.<br></p>', 0, 0, 8)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1082, CAST(N'2021-03-23T06:08:58.3541791+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:41:06.6132131+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'Can I buy for another person?', N'<p>Applicant-Owner and Insured should be one and the same person. ID presented should also be from the same person.<br></p>', 0, 0, 8)
 GO
 INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1083, CAST(N'2021-03-23T06:09:41.3404334+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 3, N'How do I pay for the policy?', N'<p>You may pay using your Visa or Mastercard credit card or debit card.</p>', 0, 0, 9)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1084, CAST(N'2021-03-23T06:10:29.3485990+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'Can I pay using someone else’s credit card or debit card?', N'<p>We allow the authorized use of credit cards of the following immediate family members: spouse, children, parents, brothers and sisters of the policyholder.</p><p>For applications to renew the coverage period of Prime Secure Lite, you will need to input your payment details again.</p>', 0, 0, 10)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1084, CAST(N'2021-03-23T06:10:29.3485990+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:42:00.4169451+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'Can I pay using someone else’s credit card or debit card?', N'<p>We allow the authorized use of credit cards of the following immediate family members: spouse, children, parents, brothers and sisters of the policyholder.</p>', 0, 0, 10)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1085, CAST(N'2021-03-23T06:12:14.8182974+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'How do I receive my policy?', N'<p>You will receive your policy thru your Customer Portal access which will be provided after a successful purchase of Prime Secure Lite. This is InLife’s on-line policy servicing facility, where you can access your policy information and enjoy online end-to- end policy servicing.</p><p>You will receive the policy documents inside your Customer Portal account within 24-48 hours after purchase.</p><p>You may also refer to our <a href="https://www.insularlife.com.ph/customer-charter" target="_blank">Customer Charter</a> for details.</p>', 0, 0, 11)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1085, CAST(N'2021-03-23T06:12:14.8182974+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:43:37.3410252+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'How do I receive my policy?', N'<p>You will receive your policy through your Customer Portal account which will be provided after a successful purchase of Prime Secure Lite. This is InLife’s online policy servicing facility, where you can access your policy information and enjoy online end-to-end policy servicing.</p><p>You will receive the policy documents inside your Customer Portal account within 24-48 hours after purchase.</p><p>You may also refer to our <a href="https://www.insularlife.com.ph/customer-charter" target="_blank">Customer Charter</a> for details.</p>', 0, 0, 11)
 GO
 INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1086, CAST(N'2021-03-23T06:13:29.5562011+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 3, N'How do I make a claim?', N'<p>For claims procedures, please go to Policy Servicing Requirements in <a href="www.insularlife.com.ph" target="_blank">www.insularlife.com.ph</a> for more details. Or contact the following:&nbsp;</p><p>(632) 8-876-1-800 or Toll-Free 1-800-10-INSULAR (4678527)</p><p>You may also refer to our <a href="https://www.insularlife.com.ph/customer-charter" target="_blank">Customer Charter</a> for details.</p>', 0, 0, 12)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1087, CAST(N'2021-03-23T06:14:20.2374182+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'How do I change my contact and/or beneficiary details after the policy issuance?', N'<p>You may change your contact details or policy details by contacting the following:&nbsp;</p><p>(632) 8-876-1-800 or Toll-Free 1-800-10-INSULAR (4678527)</p><p>You may also refer to our Customer Charter for details.</p>', 0, 0, 13)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1087, CAST(N'2021-03-23T06:14:20.2374182+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:44:35.9824233+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'How do I change my contact and/or beneficiary details after the policy issuance?', N'<p>You may change your contact details or policy details by contacting the following:&nbsp;</p><p>(632) 8-876-1800 or Toll-Free 1-800-10-INSULAR (4678527)</p>', 0, 0, 13)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1088, CAST(N'2021-03-23T06:15:10.5759281+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'How can I cancel my policy anytime with full refund of premium?', N'<p>Under the Cooling Off or Free Look Period, you are given 15 days from the time the policy contract was sent to you to review and cancel your policy. If you decide to cancel your policy, you may contact the following:&nbsp;</p><p>(632) 8-876-1-800 or Toll-Free 1-800-10-INSULAR (4678527)</p>', 0, 0, 14)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1088, CAST(N'2021-03-23T06:15:10.5759281+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:47:00.1018966+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'How can I cancel my policy, and can I request for a refund?', N'<ul style="margin-top:0in" type="disc">
+ </ul><p style="margin-left: 0in;">Under the Free-Look
+     Period provision, you are given 15 days to review your policy from the
+     time that you received the policy contract. Should you decide to cancel
+     your policy, you may send your cancellation request to <a href="mailto:UWpool@insular.com.ph">UWpool@insular.com.ph</a>. We will
+     then refund your premium payment, minus applicable charges, if any.<o:p></o:p></p><ul style="margin-top:0in" type="disc">
+</ul>', 0, 0, 14)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1089, CAST(N'2021-03-23T06:16:15.6576450+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'If I have other questions, whom shall I contact?', N'<p>You may refer to our FAQs (Frequently Asked Questions) However, in case there are concerns that are not readily answered or covered by the FAQs, you may contact us at:</p><p>(632) 8-876-1-800 or Toll-Free 1-800-10-INSULAR (4678527)</p><p>You may also refer to our Customer Charter for details.</p>', 0, 0, 15)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1089, CAST(N'2021-03-23T06:16:15.6576450+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:48:20.9517563+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'If I have other questions, whom shall I contact?', N'<p>In case there are concerns that were not covered by these FAQs, you may contact us at:</p><p>(632) 8-876-1800 or Toll-Free 1-800-10-INSULAR (4678527)</p><p>You may also refer to our <a href="https://www.insularlife.com.ph/customer-charter" target="_blank">Customer Charter</a> for details.</p>', 0, 0, 15)
 GO
-INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1090, CAST(N'2021-03-23T06:21:14.1400255+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', NULL, NULL, 6, N'How does the Covid-19 death benefit work?', N'<p>Aside from the benefits to be paid in case the insured passes away, there is additional cash benefits to be given to the beneficiary in case the cause of death of the insured is Covid-19.&nbsp;<br></p>', 0, 0, 6)
+INSERT [dbo].[TblFaqs] ([Id], [CreatedDate], [CreatedBy], [UpdatedDate], [UpdatedBy], [CategoryId], [Question], [Answer], [IsActive], [IsArchived], [SortNum]) VALUES (1090, CAST(N'2021-03-23T06:21:14.1400255+00:00' AS DateTimeOffset), N'ee79e4ca-8c8c-439c-b6e6-90f9f25f66a3', CAST(N'2021-04-13T07:39:07.5127098+00:00' AS DateTimeOffset), N'8ad40930-cbf5-41cf-91ff-24fe48d25314', 6, N'How does the COVID-19 death benefit work?', N'<p>Aside from the benefits to be paid in case the insured passes away, there is additional cash benefits to be given to the beneficiary in case the cause of death of the insured is COVID-19.&nbsp;<br></p>', 0, 0, 6)
 GO
 SET IDENTITY_INSERT [dbo].[TblFaqs] OFF
 GO

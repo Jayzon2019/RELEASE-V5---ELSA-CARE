@@ -3430,5 +3430,36 @@ export const CONSTANTS =
 			subHeadingColor: "#42414d",
 			heroLogo: "/assets/images/prime-logo.png"
 		}
-	]
+	],
+
+	PSLITE_TINS:
+	[
+		{
+			UAT:[
+				{ "id": "178", "name": "TIN" },
+				{ "id": "179", "name": "SSS" },
+				{ "id": "180", "name": "GSIS" }
+			]
+		},
+		{
+			PROD:[
+				{ "id": "200", "name": "TIN" },
+				{ "id": "201", "name": "SSS" },
+				{ "id": "202", "name": "GSIS" }
+			]
+		}
+	],
+
+	PSLITE_FUND_SOURCE:
+	[
+		{ "id": "121", "name": "Family Income" },
+		{ "id": "122", "name": "Income from Employment" },
+		{ "id": "123", "name": "Savings" },
+		{ "id": "124", "name": "Others" },
+		{ "id": "210", "name": "Rental Income" },
+		{ "id": "212", "name": "Interest Income" },
+		{ "id": "213", "name": "Investment" },
+		{ "id": "214", "name": "Remittance" },
+		{ "id": "215", "name": "Pension" }
+	],
 };

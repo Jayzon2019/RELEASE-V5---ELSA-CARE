@@ -29,27 +29,9 @@ export class ThankYouComponent implements OnInit
 
 	resetForm()
 	{
-		this.session.remove(StorageType.POLICYNO);
-		this.session.remove('age');
-		this.session.remove('getinnerForm');
-		this.session.remove('getQuoteForm');
-		this.session.remove('UnderWritingStatus');
-		this.session.remove(StorageType.QUOTE_INTERNAL_DATA);
-		this.session.remove(StorageType.QUOTE_EXTERNAL_DATA);
-		this.session.remove(StorageType.ACQUIRED_PLAN);
-	}
-
-	backToHome() {
-		this.resetForm();
-		this.router.navigate(['/']);
-	}
-
-	ngOnInit(): void
-	{
 		const planAcquired = this.session.get(StorageType.ACQUIRED_PLAN);
 
 		if(planAcquired.plan === 'PrimeSecureLite') {
-			this.isPrimeSecureLite = true;
 			// Remove policy no for verification of new application
 			this.session.remove(StorageType.POLICYNO);
 			this.session.remove('UnderWritingStatus');
@@ -65,7 +47,6 @@ export class ThankYouComponent implements OnInit
 			this.session.remove(StorageType.ACQUIRED_PLAN);
 			this.session.remove(StorageType.APPLY_DATA);
 		} else if(planAcquired.plan === 'PrimeCare') {
-			this.isPrimeCare = true;
 			// Remove policy no for verification of new application
 			this.session.remove(StorageType.POLICYNO);
 			this.session.remove('age');
@@ -77,6 +58,22 @@ export class ThankYouComponent implements OnInit
 			this.session.remove('insuredIdentityDocumentImagePreview');
 			this.session.remove(StorageType.ACQUIRED_PLAN);
 			this.session.remove(StorageType.APPLY_PC_DATA);
+		}
+	}
+
+	backToHome() {
+		this.resetForm();
+		this.router.navigate(['/']);
+	}
+
+	ngOnInit(): void
+	{
+		const planAcquired = this.session.get(StorageType.ACQUIRED_PLAN);
+
+		if(planAcquired.plan === 'PrimeSecureLite') {
+			this.isPrimeSecureLite = true;
+		} else if(planAcquired.plan === 'PrimeCare') {
+			this.isPrimeCare = true;
 		} else {
 			this.isPrimeSecure = true;
 		}
