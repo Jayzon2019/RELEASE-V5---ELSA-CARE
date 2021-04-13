@@ -110,13 +110,18 @@ export class MainComponent implements OnInit
 		this.getPrimeSecureLiteHeroSlider();
 		// Remove policy no for verification of new application
 		this.session.remove(StorageType.POLICYNO);
-		this.session.remove('UnderWritingStatus');
-		this.session.remove('age');
-		this.session.remove('getinnerForm');
-		this.session.remove('getQuoteForm');
-		this.session.remove(StorageType.QUOTE_INTERNAL_DATA);
-		this.session.remove(StorageType.QUOTE_EXTERNAL_DATA);
-		this.session.remove(StorageType.ACQUIRED_PLAN);
+			this.session.remove('UnderWritingStatus');
+			this.session.remove('age');
+			this.session.remove('getinnerForm');
+			this.session.remove('getQuoteForm');
+			this.session.remove('getApplyForm');
+			this.session.remove('extensionData');
+			this.session.remove('insuredIdentityDocumentImageData');
+			this.session.remove('insuredIdentityDocumentImagePreview');
+			this.session.remove(StorageType.QUOTE_INTERNAL_DATA);
+			this.session.remove(StorageType.QUOTE_EXTERNAL_DATA);
+			this.session.remove(StorageType.ACQUIRED_PLAN);
+			this.session.remove(StorageType.APPLY_DATA);
 
 		if (this.route.snapshot.fragment === 'getpslite')
 			this.scroll();

@@ -29,8 +29,7 @@
 
 	<link rel="icon" type="image/x-icon" href="favicon.ico"/>
 	<link rel="shortcut icon" href="favicon.ico"/>
-
-
+	<link rel="manifest" crossorigin="use-credentials" href="manifest.json">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"/>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&amp;display=swap"/>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
@@ -194,8 +193,28 @@
 	</script>
 	<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3450499675048071&ev=PageView&noscript=1" /></noscript>
 	<!-- End Facebook Pixel Code -->
-  <!-- <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#fff"> -->
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <meta name="theme-color" content="#fff">
+  <script>
+    let isIOS = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    if (isIOS) {
+      // in iOS fullscreen mode
+      document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=contain');
+
+      // in iOS statusbar color black
+      var meta = document.createElement('meta');
+      meta.name = "apple-mobile-web-app-status-bar-style";
+      meta.content = "black";
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    }
+  </script>
+  <script type="module">
+    let isIOS = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    if (isIOS) {
+      // in iOS add import to pwacompat
+      import('https://unpkg.com/pwacompat');
+    }
+  </script>
 </head>
 
 <body>

@@ -1,10 +1,11 @@
 import { takeUntil } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import $ from 'jquery';
-import { Router, ActivatedRoute, NavigationEnd, NavigationCancel, RouteConfigLoadEnd, NavigationError, RouteConfigLoadStart, NavigationStart, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 @Component
 	({
 		templateUrl: './main.layout.html',
@@ -15,11 +16,21 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 	isShowFooterandHeader = true;
 	isGroupChild: boolean = false;
 	destroy$ = new Subject();
+	deferredPrompt: any;
+	isShowButton = false;
+    isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    isIOS = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    isSafari = navigator.vendor && 
+	  		   navigator.userAgent &&
+			   navigator.vendor.indexOf('Apple') > -1 &&
+               navigator.userAgent.indexOf('CriOS') == -1 &&
+               navigator.userAgent.indexOf('FxiOS') == -1;
+
 	constructor(
 		private router: Router,
-		private route: ActivatedRoute,
 		private apiService: ApiService,
-		private ngxService: NgxUiLoaderService, ) {
+		private ngxService: NgxUiLoaderService,
+		private util: UtilitiesService ) {
 		this.ngxService.start();
 		this.router.events
 			.pipe(takeUntil(this.destroy$))
@@ -60,8 +71,44 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.getFooterLinks();
 		this.ngxService.stop();
+		
+        if (this.isIOS && this.isSafari) {
+			// check if app is already installed
+			if (!this.isStandalone) {
+			  setTimeout(() => {
+				this.isShowButton = true;
+			  }, 15000);
+			}
+		  }
 	}
 
+	@HostListener('window:beforeinstallprompt', ['$event'])
+    onbeforeinstallprompt(e) {
+      console.log(e);
+      e.preventDefault();
+      this.deferredPrompt = e;
+      this.isShowButton = true;
+    }
+
+    addToHomescreen() {
+      if (this.isIOS && this.isSafari) {
+		this.util.ShowGeneralMessagePrompt({message: `Install InLife Store on your home screen for quick and easy access. Just tap 'Share button' then 'Add to Home Screen'.`});
+	  } 
+	  else {
+		this.isShowButton = false;
+        this.deferredPrompt.prompt();
+        this.deferredPrompt.userChoice
+          .then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the A2HS prompt');
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            this.deferredPrompt = null;
+          });
+        }
+    }
+	
 	ngOnDestroy() {
 		this.destroy$.next(true);
 		this.destroy$.unsubscribe();

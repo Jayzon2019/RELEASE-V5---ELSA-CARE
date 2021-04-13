@@ -619,8 +619,12 @@ a.p-link{
 .roghtwrapsection p{font-size: 14px;line-height: 26px; margin: 10px 0 5px; color:#42414d ;    letter-spacing: -0.5px;}
 .roghtwrapsection p a{font-size: 14px; margin-bottom: 15px; color:#e43e25 ;text-decoration: none;border-bottom:2px solid #e43e25}
 
+/* FAQ page */
 .section-faq .container .tab-section .MsoTableGrid tbody tr td { border: 1px solid !important; width: 119px !important; }
 .section-faq .container .tab-section .MsoTableGrid tbody tr td p { text-align: left !important; }
+.section-faq .container .tab-section .MsoTableGrid tbody tr td { border: 1px solid !important; width: 119px !important; }
+.section-faq .container .tab-section .MsoTableGrid tbody tr:nth-child(1) td:nth-child(2) p,
+.section-faq .container .tab-section .MsoTableGrid tbody tr:nth-child(1) td:nth-child(3) p { text-align: center !important; }
 /* paypage*/
 
 .reviewbill {
