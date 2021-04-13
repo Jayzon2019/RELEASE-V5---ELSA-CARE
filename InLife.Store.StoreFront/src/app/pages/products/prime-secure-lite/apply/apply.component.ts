@@ -64,6 +64,7 @@ export class ApplyComponent implements OnInit
 	sizeError: boolean = false;
 	pdfName: string = '';
 	pdfBase64 = '';
+	TINS = {};
 
 	constructor
 	(
@@ -283,6 +284,8 @@ export class ApplyComponent implements OnInit
 		this.showThirdStep = this.getApplyForm.get('personalInformation').valid;
 		this.showFourthStep = this.getApplyForm.get('identification').valid;
 		this.showFifthStep = this.getApplyForm.get('beneficiaryDetails').valid;
+
+		this.TINS = (environment.appApi.host === 'https://www.inlifestore.com.ph/api') ? CONSTANTS.PSLITE_TINS[0].PROD : CONSTANTS.PSLITE_TINS[0].UAT;
 
 		this.ngxService.stop();
 	}
