@@ -228,7 +228,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 				PlanType: new FormControl(this.hasData ? Number(group_plan.productType) : "", [Validators.required]),
 			}),
 			basicInformation :this.formBuilder.group({ 
-				CompanyName: new FormControl(this.hasData ? quote_form.CompanyName: "", [Validators.required, Validators.pattern("[A-Za-zÑñ@0-9 ]+")]),
+				CompanyName: new FormControl(this.hasData ? quote_form.CompanyName: "", [Validators.required, Validators.pattern("[A-Za-zÑñ@',.+&0-9 ]+")]),
 				CompanyLandLineNo: new FormControl(this.hasData ? quote_form.CompanyLandLineNo: "", [Validators.required, Validators.pattern("^[0-9]{9}$")]),
 				CompanyMobileNo: new FormControl(this.hasData ? quote_form.CompanyMobileNo: "", [Validators.required,  Validators.pattern("^[1-9]{1}[0-9]{9}$")]),
 				StreetNumer: new FormControl(this.hasData ? quote_form.StreetNumer: "", [Validators.required,  Validators.maxLength(50)]),

@@ -10,7 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { environment } from '@environment';
 import { Subject, throwError } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { catchError, finalize, takeUntil } from 'rxjs/operators';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { StorageType } from '@app/services/storage-types.enum';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -49,19 +49,21 @@ export class PaymentPendingComponent extends ApplicationStatusBaseComponent impl
 		this.hasError = false;
 		let url = environment.appApi.host + `/group/applications/${this.referenceCode}/files/payment-proof`;
 		let data = this.requirementsForm.get('ProofOfPayment').value;
-		if(this.sizeError) return;
+		if(this.sizeError) {
+			this.ngxService.stopAll();
+			return; 
+		}
 
 		this.applySerice_API.uploadRequirement(url, data, data.type, data.name)
 			.pipe(
-				takeUntil(this.destroy$)
+				takeUntil(this.destroy$),
+				finalize(() => this.ngxService.stopAll())
 			)
 			.subscribe(data => {
 				this.isPaymentUploaded = true;
-				this.ngxService.stopAll();
 			}, error => {
 				this.hasError = true;
 				this.errorMsg = error.message;
-				this.ngxService.stopAll();
 			});
 	}
 
@@ -155,7 +157,7 @@ export class PaymentPendingComponent extends ApplicationStatusBaseComponent impl
 							title: file.name,
 							image: newDataUrl
 						}
-						this.sizeError = (file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE) ? true : false;
+						// this.sizeError = (file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE) ? true : false;
 						// Convert to PDF
 						const doc = new jsPDF
 							({

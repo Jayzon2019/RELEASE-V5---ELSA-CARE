@@ -186,7 +186,7 @@ namespace InLife.Store.Infrastructure.Services
 				for (var icol = 1; icol <= columns.Length; icol++)
 				{
 					var value = application.GetType().GetProperty(columns[icol - 1]).GetValue(application, null);
-					worksheet.Cell(irow, icol).Value = value.ToString();
+					worksheet.Cell(irow, icol).Value = value?.ToString();
 					worksheet.Cell(irow, icol).DataType = XLDataType.Text;
 				}
 				irow++;

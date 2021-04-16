@@ -504,10 +504,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 							type: 'image',
 							title: '',
 							fileInfo : newDataUrl,
-							error: (file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE) ? {
-								type: 'size',
-								msg: '(File size exceeded.)'
-							} : {
+							error: {
 								type: 'uploading',
 								msg: '(Uploading file...)'
 							}

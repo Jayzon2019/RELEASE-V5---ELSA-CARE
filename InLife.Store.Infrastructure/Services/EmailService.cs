@@ -749,6 +749,7 @@ namespace InLife.Store.Infrastructure.Services
 							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Plan</th>
 							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Variant</th>
 							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Members</th>
+							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Status</th>
 						</tr>
 						</thead>
 						<tbody>");
@@ -787,13 +788,17 @@ namespace InLife.Store.Infrastructure.Services
 						<td style=""border:solid 1px #ccc; padding:2px 4px; text-align:center;"">
 							#TOTAL-MEMBERS#
 						</td>
+						<td style=""border:solid 1px #ccc; padding:2px 4px; text-align:center;"">
+							#STATUS#
+						</td>
 					</tr>")
 						.Replace("#REFERENCE-CODE#", application.ReferenceCode)
 						.Replace("#TRANSACTION-DATE#", application.CompletedDate.HasValue ? application.CompletedDate.Value.ToOffset(TimeSpan.FromHours(8)).ToString() : "")
 						.Replace("#COMPANY#", application.CompanyName)
 						.Replace("#PLAN-CODE#", application.PlanCode)
 						.Replace("#PLAN-VARIANT-CODE#", application.PlanVariantCode)
-						.Replace("#TOTAL-MEMBERS#", totalMembers);
+						.Replace("#TOTAL-MEMBERS#", totalMembers)
+						.Replace("#STATUS#", application.Status);
 				}
 
 				list.Append(@"

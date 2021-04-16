@@ -166,7 +166,7 @@ $(document).ready(function () {
 				}
 			}
 			else {
-				header.classList.add("fixed");
+				// header.classList.add("fixed");
 			}
 		}
 

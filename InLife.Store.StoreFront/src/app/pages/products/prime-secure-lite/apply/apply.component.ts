@@ -481,7 +481,8 @@ export class ApplyComponent implements OnInit
 				"Question1": getQuoteForm.covidForm.privacyPolicy ? "Yes" : "No",//"No",
 				"Question2": getQuoteForm.covidForm.privacyPolicy2 ? "Yes" : "No",//"No",
 				"PolicyDeliveryOption": "digitalhard",
-				"ServicingAgentBranchCode": "DO6437",
+				"ServicingAgentBranchCode": getQuoteForm.basicInformation.agentBranchCode,
+				"AgentCode": getQuoteForm.basicInformation.acode,
 				"IsBanca": false,
 				"ProposalId": underwritingstatus?.proposalId || 50148,
 				
