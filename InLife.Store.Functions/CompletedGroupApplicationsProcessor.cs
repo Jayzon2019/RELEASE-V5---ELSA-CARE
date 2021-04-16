@@ -22,10 +22,13 @@ namespace InLife.Store.Functions
 			this.applicationProcessing = applicationProcessing;
 		}
 
-		// Default value = Daily @ 12AM Manila Time "0 0 16 * * *"
-		// Dev Test value = Every 1 hour "0 0 * * * *"
+		// Every CRON schedule has been adjusted from UTC to Manila Time
+		// Dev test value = Daily @ 12AM                  "0 0 16 * * *"
+		// Dev test value = Every 1 hour                  "0 0 * * * *"
+		// Dev test value = Every 12AM, 6AM, 12PM, 6PM    "0 0 4,10,16,22 * * *"
+		// Prod values    = 6AM and 12PM                  "0 0 4,22 * * *"
 		[FunctionName("CompletedGroupApplicationsProcessor")]
-		public async Task Run([TimerTrigger("0 0 * * * *")] TimerInfo timer, ILogger log)
+		public async Task Run([TimerTrigger("0 0 4,10,16,22 * * *")] TimerInfo timer, ILogger log)
 		{
 			await applicationProcessing.ProcessCompletedApplications();
 			log.LogInformation($"Processed completed group applications: {DateTime.Now}");

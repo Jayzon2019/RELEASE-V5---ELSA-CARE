@@ -7,10 +7,10 @@ namespace InLife.Store.Core.Models
 		public static GroupApplicationStatus Quote               = new GroupApplicationStatus("Quote", "Quote");
 		public static GroupApplicationStatus Application         = new GroupApplicationStatus("Application", "Application");
 		public static GroupApplicationStatus Payment             = new GroupApplicationStatus("Payment", "Payment");
-		public static GroupApplicationStatus PaymentProof        = new GroupApplicationStatus("PaymentProof", "Payment Proof");
+		public static GroupApplicationStatus PaymentProof        = new GroupApplicationStatus("PaymentProof", "Pending Payment");
 		public static GroupApplicationStatus PaymentConfirmation = new GroupApplicationStatus("PaymentConfirmation", "Payment Confirmation");
 		public static GroupApplicationStatus Cancelled           = new GroupApplicationStatus("Cancelled", "Cancelled");
-		public static GroupApplicationStatus Complete            = new GroupApplicationStatus("Complete", "Complete");
+		public static GroupApplicationStatus Complete            = new GroupApplicationStatus("Complete", "Forwarded to InLife's Corporate Solution");
 
 		public GroupApplicationStatus() { }
 

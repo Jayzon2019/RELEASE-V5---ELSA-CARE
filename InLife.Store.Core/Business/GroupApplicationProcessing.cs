@@ -444,6 +444,13 @@ namespace InLife.Store.Core.Business
 					.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
 					.ToList();
 
+				// Map the correct application status from id to name
+				applications.ForEach(x =>
+				{
+					x.Status = GroupApplicationStatus.FromId(x.Status).Name;
+				});
+
+
 				if (applications.Count == 0)
 				{
 					// Notify admin that the task is still running but no new data

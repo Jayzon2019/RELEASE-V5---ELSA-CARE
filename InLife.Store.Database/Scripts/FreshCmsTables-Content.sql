@@ -112,52 +112,52 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TblFaqCategories]') AND type in (N'U'))
 ALTER TABLE [dbo].[TblFaqCategories] DROP CONSTRAINT IF EXISTS [DF_TblFaqCategories_CreatedDate]
 GO
-/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblProducts]
 GO
-/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblProductDetails]
 GO
-/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblPrimeHeroes]
 GO
-/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblPrimeCare]
 GO
-/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblHeroes]
 GO
-/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFooterLinks]
 GO
-/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFaqs]
 GO
-/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [dbo].[TblFaqCategories]
 GO
-/****** Object:  Table [Content].[Heroes]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[Heroes]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [Content].[Heroes]
 GO
-/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [Content].[HealthCareProducts]
 GO
-/****** Object:  Table [Content].[Files]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[Files]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [Content].[Files]
 GO
-/****** Object:  Table [Content].[Faqs]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[Faqs]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [Content].[Faqs]
 GO
-/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP TABLE IF EXISTS [Content].[FaqCategories]
 GO
-/****** Object:  Schema [Content]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Schema [Content]    Script Date: 4/14/2021 4:00:41 PM ******/
 DROP SCHEMA IF EXISTS [Content]
 GO
-/****** Object:  Schema [Content]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Schema [Content]    Script Date: 4/14/2021 4:00:41 PM ******/
 CREATE SCHEMA [Content]
 GO
-/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[FaqCategories]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,7 +176,7 @@ CREATE TABLE [Content].[FaqCategories](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[Faqs]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[Faqs]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,7 +197,7 @@ CREATE TABLE [Content].[Faqs](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[Files]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[Files]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -219,7 +219,7 @@ CREATE TABLE [Content].[Files](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[HealthCareProducts]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -299,7 +299,7 @@ CREATE TABLE [Content].[HealthCareProducts](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [Content].[Heroes]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [Content].[Heroes]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -324,7 +324,7 @@ CREATE TABLE [Content].[Heroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblFaqCategories]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,7 +345,7 @@ CREATE TABLE [dbo].[TblFaqCategories](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblFaqs]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -368,7 +368,7 @@ CREATE TABLE [dbo].[TblFaqs](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblFooterLinks]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -404,7 +404,7 @@ CREATE TABLE [dbo].[TblFooterLinks](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblHeroes]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -433,7 +433,7 @@ CREATE TABLE [dbo].[TblHeroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblPrimeCare]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -455,7 +455,7 @@ CREATE TABLE [dbo].[TblPrimeCare](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblPrimeHeroes]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -484,7 +484,7 @@ CREATE TABLE [dbo].[TblPrimeHeroes](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblProductDetails]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -560,7 +560,7 @@ CREATE TABLE [dbo].[TblProductDetails](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/13/2021 8:16:36 PM ******/
+/****** Object:  Table [dbo].[TblProducts]    Script Date: 4/14/2021 4:00:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

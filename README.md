@@ -7,10 +7,10 @@
 ### Preparation
 
 1. Download and install NodeJS (needed by Angular project) from <a href="https://nodejs.org/" target="_blank">**https://nodejs.org/**</a>
-
 2. Download and install .NET Core SDK (needed by the API project) from <a href="https://dotnet.microsoft.com/download" target="_blank">**https://dotnet.microsoft.com/download**</a>
-
 3. Download and install Visual Studio 2019 (needed for comparing and updating the database schema) from  <a href="https://visualstudio.microsoft.com/downloads" target="_blank">**https://visualstudio.microsoft.com/downloads/**</a>
+4. Download and install the latest PowerShell (needed for running terminal commands) <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows">**https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows**</a>
+5. Install Azure Az PowerShell module <a href="https://docs.microsoft.com/en-us/powershell/azure/new-azureps-module-az" target="_blank">**https://docs.microsoft.com/en-us/powershell/azure/new-azureps-module-az**</a>
 
 
 
@@ -557,7 +557,28 @@ $ dotnet publish -c Release
 
 11. Save the file.
 
-12. Copy the files from the published folder `/bin/Release/netcoreapp3.1/publish` to the designated Azure Function
+12. Go to `/CompletedGroupApplicationsProcessor` folder.
+
+13. Open `function.json` in your text editor.
+
+14. Change the `schedule` value with your preferred schedule in running the Azure Function. The value is in CRON format.
+
+15. Change `runOnStartup` value to `true`.
+```json
+{
+	"type": "timerTrigger",
+	"schedule": "0 0 14,20 * * *",
+	"useMonitor": true,
+	"runOnStartup": true,
+	"name": "timer"
+}
+```
+
+16. Save the file.
+
+17. Go back to the root published folder `/bin/Release/netcoreapp3.1/publish` and ZIP all files using the format `YYYY.MM.DD.HHmm.zip` (i.e 2021.01.14.2300.zip).
+
+12. Upload the ZIP file to the designated Azure Function
 
 13. Restart the App Service
 
