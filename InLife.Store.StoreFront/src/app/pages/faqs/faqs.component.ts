@@ -49,8 +49,8 @@ export class FaqsComponent implements OnInit {
 		if (this.faqsCat.length > 0 && this.faqs.length > 0) {
 			var faqTabs = "<div class=\"tab\">";
 			for (var i = 0; i < this.faqsCat.length; i++) {
-				// if(this.faqsCat[i].id !== 7 && this.faqsCat[i].id !== 5) { //hide group insurance and prime secure in faq
-				if(this.faqsCat[i].id !== 6 && this.faqsCat[i].id !== 5) { // hide ps lite
+				if(this.faqsCat[i].id !== 7 && this.faqsCat[i].id !== 5) { //hide group insurance and prime secure in faq
+				// if(this.faqsCat[i].id !== 6 && this.faqsCat[i].id !== 5) { // hide ps lite
 					var id = this.faqsCat[i].name;
 					id = id.replace(/\s/g, '');
 					faqTabs = faqTabs + "<button class=\"tablinks " + id + "\">" + this.faqsCat[i].name + "</button>"
