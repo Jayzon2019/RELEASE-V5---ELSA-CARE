@@ -28,6 +28,12 @@ import { ReferenceMessageComponent } from '../shared/application-reference-messa
 import { QuoteService } from '../services/quote.service';
 import { PayService } from '../services/pay.service';
 import { PromptMessageComponent } from '../../../../shared/component/prompt-message/prompt-message.component';
+import { ApplicationCancelledComponent } from '../application-status/application-cancelled/application-cancelled.component';
+import { CancelApplicationComponent } from '../application-status/cancel-application/cancel-application.component';
+import { OtpConfirmationComponent } from '../application-status/otp-confirmation/otp-confirmation.component';
+import { PaymentConfirmationComponent } from '../application-status/payment-confirmation/payment-confirmation.component';
+import { PaymentPendingComponent } from '../application-status/payment-pending/payment-pending.component';
+import { RequirementsPendingComponent } from '../application-status/requirements-pending/requirements-pending.component';
 @NgModule
 ({
 	imports:
@@ -49,7 +55,14 @@ import { PromptMessageComponent } from '../../../../shared/component/prompt-mess
 		MakePaymentComponent,
 		QuoteComponent,
 		ApplyComponent,
-		ReferenceMessageComponent
+		ReferenceMessageComponent,
+
+		OtpConfirmationComponent
+    	// RequirementsPendingComponent,
+		// PaymentPendingComponent,
+		// CancelApplicationComponent,
+		// PaymentConfirmationComponent,
+		// ApplicationCancelledComponent
 	],
 	providers:
 	[

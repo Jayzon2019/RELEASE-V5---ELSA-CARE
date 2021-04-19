@@ -1,4 +1,6 @@
+@import './../styles.scss';
 
+@include main-style-group-application-status;
 
 .group-otp-confirm-page {
     .error-msg {

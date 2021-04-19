@@ -149,7 +149,12 @@ export class PayComponent implements OnInit
 
 	createApplication()
 	{
-		var arrData =
+
+		let ownerSuffixID = this.nullIfZero(this.basicInformation.suffix);
+		let insuredSuffixId = this.nullIfZero(this.basicInformation.suffix);
+		let benefSuffixId = this.nullIfZero(this.beneficialInformation.suffix);
+		debugger
+		let arrData: any =
 		{
 			"PlanCode": "AH0017",
 			"PlanName": "Prime Care",
@@ -161,7 +166,7 @@ export class PayComponent implements OnInit
 			"OwnerRelationToInsuredId": 24, // Same Person
 
 			"OwnerPrefixId": this.nullIfZero(this.basicInformation.prefix),
-			"OwnerSuffixId": this.nullIfZero(this.basicInformation.suffix),
+			// "OwnerSuffixId": this.nullIfZero(this.basicInformation.suffix),
 			"OwnerFirstName": this.basicInformation.fname,
 			"OwnerLastName": this.basicInformation.lname,
 			"OwnerMiddleName": this.basicInformation.mname,
@@ -174,7 +179,7 @@ export class PayComponent implements OnInit
 			"OwnerMobileNo": this.basicInformation.mobile,
 
 			"InsuredPrefixId": this.nullIfZero(this.basicInformation.prefix),
-			"InsuredSuffixId": this.nullIfZero(this.basicInformation.suffix),
+			// "InsuredSuffixId": this.nullIfZero(this.basicInformation.suffix),
 			"InsuredFirstName": this.basicInformation.fname,
 			"InsuredMiddleName": this.basicInformation.mname,
 			"InsuredLastName": this.basicInformation.lname,
@@ -226,7 +231,7 @@ export class PayComponent implements OnInit
 
 			"Beneficiary":
 				[{
-					"SuffixId": this.nullIfZero(this.beneficialInformation.suffix),
+					// "SuffixId": this.nullIfZero(this.beneficialInformation.suffix),
 					"FirstName": this.beneficialInformation.fname,
 					"MiddleName": this.beneficialInformation.mname,
 					"LastName": this.beneficialInformation.lname,
@@ -275,6 +280,15 @@ export class PayComponent implements OnInit
 			"RefFirstName": this.basicInformation.afname,
 			"RefLastName": this.basicInformation.alname
 		}
+
+		// Do not include in request body if suffix is not applicable
+		if(ownerSuffixID !== 1)
+			arrData.OwnerSuffixId = ownerSuffixID
+		if(insuredSuffixId !== 1)
+			arrData.InsuredSuffixId = insuredSuffixId;
+
+		if(benefSuffixId !== 1)
+			arrData.Beneficiary[0].SuffixId = benefSuffixId;
 
 		let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');

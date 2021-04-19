@@ -15,9 +15,9 @@
 			"Port": "22",
 			"Username": "root",
 			"Password": "",
-			"PrivateKey": "C:\\Users\\chris\\.ssh\\InLife-Group-SFTP-OPENSSH",
+			"PrivateKey": "D:\\home\\.ssh\\InLife-Group-SFTP-OPENSSH",
 			"Passphrase": "P@ssw0rd",
-			"Directory":  "/home/group-applications/"
+			"Directory": "/home/group-applications/"
 		}
 	},
 

@@ -224,7 +224,9 @@ namespace InLife.Store.Core.Business
 			if (String.IsNullOrWhiteSpace(filename))
 				filename = documentType + "." + MediaType.FromId(contentType).Extension;
 
-			await this.sftpService.UploadGroupFile(directory, filename, stream);
+			var uploadFilename = $"{documentType} - {filename}";
+
+			await this.sftpService.UploadGroupFile(directory, uploadFilename, stream);
 
 			//await sftpService.UploadGroupFile(application, documentType, contentType, stream);
 
@@ -264,8 +266,9 @@ namespace InLife.Store.Core.Business
 			application.Status = GetStatus(application).Id;
 			applicationRepository.Update(application);
 
-			if (application.Status == GroupApplicationStatus.Complete.Id || application.Status == GroupApplicationStatus.PaymentProof.Id) {
-				await sftpService.UploadGroupApplicationData(application);
+			if (application.Status == GroupApplicationStatus.Complete.Id || application.Status == GroupApplicationStatus.PaymentProof.Id)
+			{
+				//await sftpService.UploadGroupApplicationData(application);
 				await emailService.SendGroupApplicationPaymentProof(application, contentType, stream);
 			}
 

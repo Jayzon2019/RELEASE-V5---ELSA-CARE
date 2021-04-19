@@ -1,3 +1,7 @@
+@import './../styles.scss';
+
+@include main-style-group-application-status;
+
 .cancel-application-wrapper {
 
     p, label, textarea {

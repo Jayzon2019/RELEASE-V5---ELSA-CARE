@@ -1,3 +1,4 @@
+import { PrimeCareSliderResolver } from './resolvers/prime-care-sliders.resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CancalApplicationComponent } from './pages/cancal-application/cancal-application.component';
@@ -32,9 +33,12 @@ const routes: Routes =
 						//   } 
 					},
 					{ path: 'faqs', loadChildren: () => import('@app/pages/faqs/faqs.module').then(m => m.FaqsModule) },
-					{ path: 'prime-care', loadChildren: () => import('@app/pages/products/prime-care/main/main.module').then(m => m.MainModule) },
+					{ path: 'prime-care', loadChildren: () => import('@app/pages/products/prime-care/main/main.module').then(m => m.MainModule), 
+						resolve: {
+							HeroSliders: PrimeCareSliderResolver
+						} 
+					},
 					// { path: 'prime-secure',loadChildren: () => import('@app/pages/products/prime-secure/main/main.module').then(m => m.MainModule) },
-					// { path: 'group/application-status', loadChildren: () => import('@app/pages/products/group/application-status/application-status.module').then(m => m.ApplicationStatusModule)},
 					{ path: 'prime-secure-lite',loadChildren: () => import('@app/pages/products/prime-secure-lite/main/main.module').then(m => m.MainModule) },
 					// { path: 'group',loadChildren: () => import('@app/pages/products/group/main/main.module').then(m => m.MainModule)},
 					{ path: 'feedback', loadChildren: () => import('@app/pages/feedback/feedback.module').then(m => m.FeedbackModule)},

@@ -92,7 +92,7 @@ export class MainComponent implements OnInit, OnDestroy {
 	checkReferenceCode(valid: boolean) {
 		this.submitted = true;
 		if (!valid) return;
-		this.router.navigate(['group/application-status', this.referenceCode]);
+		this.router.navigate(['group/application-status/otp-confirmation'], { queryParams: { referenceCode: this.referenceCode}});
 	}
 	// getGroupHeroSlider() {
 	// 	var url = "/PrimeHero/GetPrimeHeroSliders";

@@ -1,16 +1,15 @@
 <main>
 
 	<section class="hero-slider section-hero-care-area">
-		<div [ngStyle]="{'background-image': getUrl(slider.heroBg)}" style="background-size: cover;" class="{{'section section-hero wow fadeInUp hero-slide-'}}">
+		<div style="background: url(/assets/images/hero-prime-care.jpg) 100% 100% no-repeat; background-size: cover;" class="{{'section section-hero wow fadeInUp hero-slide-'}}">
 			<div class="container">
-				<div class="hero-content">
-					<img [src]="slider.heroLogo" />
-					<p >{{ slider.subHeading }}</p>
-					<a [href]="slider.btnTxtLink == 'feature-plan' ? 
-						'javascript:void(0)' : slider.btnTxtLink" (click)="scroll()" class="btn-orange">{{slider.heroBtnTxt }}</a>
+				<div style="{{getPosition(slider?.contentPostion)}}" class="hero-content">
+					<h2 style="{{'color:' + getColor(slider?.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.headingColor) + '!important;'}}">{{slider?.heading }}<br class="only-in-mobile" /></h2>
+					<p style="{{'color:' + getColor(slider?.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.subHeadingColor) + '!important;'}}">{{ slider?.subHeading }}</p>
+					<a href="javascript:void(0)" (click)="scroll()" class="btn-orange">{{slider?.primeHeroBtnTxt }}</a>
 				</div>
 			</div>
-			<img [src]="slider?.heroMobBg" class="only-in-mobile">
+			<img [src]="sanitize(slider?.primeHeroMobBg)" class="only-in-mobile">
 		</div>
 	</section>
 

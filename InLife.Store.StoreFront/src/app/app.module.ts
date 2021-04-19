@@ -1,3 +1,4 @@
+import { PrimeCareSliderResolver } from './resolvers/prime-care-sliders.resolver';
 import { CustomPreloaderService } from './services/customer-preloader.service';
 import { PaymentFailedComponent } from './pages/payment/payment-failed/payment-failed.component';
 import { PaymentCallbackComponent } from './pages/payment/payment-callback/payment-callback.component';
@@ -96,7 +97,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 		CustomPreloaderService,
 
 		//Resolver
-		HeroSliderResolver
+		HeroSliderResolver,
+		PrimeCareSliderResolver
 	],
 	bootstrap: [AppComponent]
 })

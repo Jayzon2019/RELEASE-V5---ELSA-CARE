@@ -14,7 +14,9 @@ export class ApplicationStatusBaseComponent {
         public router: Router,
         public activatedRoute: ActivatedRoute,
     ) {
-        this.referenceCode = this.activatedRoute.snapshot.paramMap.get("referenceCode");
+        this.activatedRoute.queryParams.pipe().subscribe(data => {
+          this.referenceCode = data.referenceCode;
+        })
      }
 
 

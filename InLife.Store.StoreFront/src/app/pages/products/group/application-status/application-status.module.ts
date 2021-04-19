@@ -1,9 +1,11 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ApplicationStatusComponent } from './application-status.component';
-import { ApplicationStatusRoutingModule } from './application-status-routing.module';
+import { ASroutes } from './application-status-routing.module';
 
 import { OtpConfirmationComponent } from './otp-confirmation/otp-confirmation.component';
 import { RequirementsPendingComponent } from './requirements-pending/requirements-pending.component';
@@ -18,19 +20,20 @@ import { ApplyService } from '../services/apply.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ApplicationStatusRoutingModule
+    RouterModule.forChild(ASroutes)
   ],
   declarations: [ 
-    ApplicationStatusComponent,
-    OtpConfirmationComponent,
-    RequirementsPendingComponent,
-    PaymentPendingComponent,
-    CancelApplicationComponent,
-    PaymentConfirmationComponent,
-    ApplicationCancelledComponent,
+    // ApplicationStatusComponent,
+    // OtpConfirmationComponent,
+    // RequirementsPendingComponent,
+    // PaymentPendingComponent,
+    // CancelApplicationComponent,
+    // PaymentConfirmationComponent,
+    // ApplicationCancelledComponent,
   ],
   providers: [
     ApplyService
-  ]
+  ],
+  bootstrap: [OtpConfirmationComponent]
 })
 export class ApplicationStatusModule { }

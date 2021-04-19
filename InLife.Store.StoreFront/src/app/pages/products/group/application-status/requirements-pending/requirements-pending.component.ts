@@ -1,8 +1,7 @@
 import { ApplicationStatusService } from './../../services/application-status.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
-import { ApplicationStatusBaseComponent } from '../application-status-base.component';
 import { Subject } from 'rxjs';
 import { takeUntil, map, finalize } from 'rxjs/operators';
 import { Application } from '../../model/application.model';
@@ -15,12 +14,13 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   templateUrl: './requirements-pending.component.html',
   styleUrls: ['../styles.scss','./requirements-pending.component.scss']
 })
-export class RequirementsPendingComponent extends ApplicationStatusBaseComponent implements OnInit, OnDestroy {
+export class RequirementsPendingComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   groupPlan: any;
   groupQuoteData: any;
   groupApplyData: any;
   cities: any =[];
+  referenceCode: any;
   isCompletedRequirements: boolean = true;
   requirementTypesTitle: any = ['EmployeeCesusForm', 'EntityPlanForm', 'AuthRepresentativeId', 'BIRNoticeForm', 'SECRegistration', 'IncorporationArticles', 'IdentityCertificate', 'PostPolicyForm'];
   requirementsTypes: any = {
@@ -33,22 +33,31 @@ export class RequirementsPendingComponent extends ApplicationStatusBaseComponent
 		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		PostPolicyForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false}};
 
-  constructor(router: Router, 
-              activatedRoute: ActivatedRoute, 
+  constructor(private router: Router, 
               private ngxService: NgxUiLoaderService,
               private session: SessionStorageService,
+              private activatedRoute: ActivatedRoute,
               private appStatusService_API: ApplicationStatusService) { 
-    super(router, activatedRoute);
   }
 
   ngOnInit(): void {
-    this.getApplicationSummary();
+    
+
+    this.activatedRoute.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((param: Params) => {
+        this.referenceCode = param["referenceCode"];
+        this.getApplicationSummary();
+      });
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
 
+  backToHome() {
+    this.router.navigate(['/']);
+  }
   numberWithCommas(amount) {
     return amount.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   }

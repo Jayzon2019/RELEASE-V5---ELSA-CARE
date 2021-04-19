@@ -27,3 +27,26 @@ input.c-large {
     color: black;
 
 }
+
+@mixin main-style-group-application-status {
+    .application-status-section {
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 80px;
+        }
+    }
+    
+    @media (min-width: 1025px) {
+        .application-status-section {
+            padding: 15px 0 !important;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .application-status-section {
+            padding-top: 30px !important;
+        }
+    }
+}

@@ -1,4 +1,7 @@
 
+@import './../styles.scss';
+
+@include main-style-group-application-status;
 
 .group-payment-confirm {
 

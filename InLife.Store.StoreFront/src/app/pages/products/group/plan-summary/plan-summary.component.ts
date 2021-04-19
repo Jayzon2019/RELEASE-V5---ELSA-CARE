@@ -155,7 +155,7 @@ export class PlanSummaryComponent implements OnInit {
 	cancel() {
 		document.getElementById("closeModal").click();
 		const refCode = this.session.get(StorageType.ACCESS_DATA);
-		this.router.navigate([`/group/application-status/${refCode.referenceCode}/cancel-application`]);
+		this.router.navigate([`/group/application-status/cancel-application`], { queryParams: {referenceCode: refCode.referenceCode}});
 	}
 	pay() {
 		if(this.StudentsTeachersOtherBenefits) {

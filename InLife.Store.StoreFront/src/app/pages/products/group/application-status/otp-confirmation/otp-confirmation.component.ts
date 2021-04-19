@@ -1,16 +1,14 @@
 import { ApplicationStatusService } from './../../services/application-status.service';
 import { StorageType } from './../../../../../services/storage-types.enum';
-import { interval, Subject, Subscription } from 'rxjs';
+import { interval, Subject } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { ApplicationStatusBaseComponent } from '../application-status-base.component';
 import { ApiService, SessionStorageService } from '@app/services';
-import { map, takeUntil, switchMap, take, finalize } from 'rxjs/operators';
-import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
+import { map, takeUntil, switchMap, finalize } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { CONSTANTS } from '@app/services/constants';
-import { Application } from '../../model/application.model';
 
 @Component({
   selector: 'group-otp-confirmation',
@@ -53,7 +51,7 @@ export class OtpConfirmationComponent extends ApplicationStatusBaseComponent imp
   ngOnInit(): void {
     this.placeholder = 'enter OTP here';
     this.hasCompletedOTPRequest = false;
-    this.activatedRoute.params
+    this.activatedRoute.queryParams
       .pipe(takeUntil(this.destroy$))
       .subscribe((param: Params) => {
         this.refCode = param["referenceCode"];
@@ -140,19 +138,19 @@ export class OtpConfirmationComponent extends ApplicationStatusBaseComponent imp
   evaluateStatus(status: any = '') {
     switch(status) {
       case 'Application':
-        this.router.navigate(['../requirements-pending'],{relativeTo: this.activatedRoute});
+        this.router.navigate(['group/application-status/requirements-pending'],{ queryParamsHandling: 'preserve' });
         break;
       case 'Payment':
-        this.router.navigate(['../requirements-pending'],{relativeTo: this.activatedRoute});
+        this.router.navigate(['group/application-status/requirements-pending'],{ queryParamsHandling: 'preserve' });
         break;
       case 'PaymentProof':
-        this.router.navigate(['../payment-pending'],{relativeTo: this.activatedRoute});
+        this.router.navigate(['group/application-status/payment-pending'],{ queryParamsHandling: 'preserve' });
         break;
       case 'Complete':
-        this.router.navigate(['../payment-confirm'],{relativeTo: this.activatedRoute});
+        this.router.navigate(['group/application-status/payment-confirm'],{ queryParamsHandling: 'preserve' });
         break;
       case 'Cancelled':
-        this.router.navigate(['../application-cancelled'],{relativeTo: this.activatedRoute});
+        this.router.navigate(['group/application-status/application-cancelled'],{ queryParamsHandling: 'preserve' });
         break;
       case 'Feedback':
         this.router.navigate(['feedback', this.refCode]);

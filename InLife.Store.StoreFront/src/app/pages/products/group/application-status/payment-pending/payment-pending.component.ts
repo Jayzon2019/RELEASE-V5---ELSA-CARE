@@ -2,17 +2,15 @@ import { ApplyService } from './../../services/apply.service';
 import { jsPDF } from 'jspdf';
 import { SessionStorageService } from './../../../../../services/session-storage.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ApplicationStatusBaseComponent } from '../application-status-base.component';
 import { CONSTANTS } from '@app/services/constants';
 import { FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { environment } from '@environment';
-import { Subject, throwError } from 'rxjs';
-import { catchError, finalize, takeUntil } from 'rxjs/operators';
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { StorageType } from '@app/services/storage-types.enum';
+import { Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 @Component({
 	selector: 'group-payment-pending',

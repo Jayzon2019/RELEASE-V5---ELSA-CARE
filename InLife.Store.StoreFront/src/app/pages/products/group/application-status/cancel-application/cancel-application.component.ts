@@ -1,8 +1,8 @@
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ApplicationStatusService } from './../../services/application-status.service';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ApplicationStatusBaseComponent } from '../application-status-base.component';

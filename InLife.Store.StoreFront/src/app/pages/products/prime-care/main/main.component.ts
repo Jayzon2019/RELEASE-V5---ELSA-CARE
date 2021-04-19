@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService, SessionStorageService } from '@app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { StorageType } from '@app/services/storage-types.enum';
 import { CONSTANTS } from '@app/services/constants';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component
 ({
 	templateUrl: './main.component.html',
 	styleUrls: ['./style.css']
 })
-export class MainComponent implements OnInit
+export class MainComponent implements OnInit, OnDestroy
 {
 	public slider: any;
 	public heroBg: any;
@@ -31,6 +33,7 @@ export class MainComponent implements OnInit
 			}
 		}
 	}
+	destroy$ = new Subject();
 	constructor(private router: Router, private activateRoute: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
 
 	ngOnInit(): void
@@ -52,6 +55,10 @@ export class MainComponent implements OnInit
 			this.scroll();
 
 	}
+	ngOnDestroy() {
+		this.destroy$.next(true);
+		this.destroy$.unsubscribe();
+	}
 
 	getPrimeHeroSlider()
 	{
@@ -59,9 +66,17 @@ export class MainComponent implements OnInit
 		// this.apiService.sendGetRequest(url).subscribe((responseBody) =>
 		// {
 		// 	this.slider = responseBody[0];
+		// 	console.log(this.slider);
 		// });
+		 this.activateRoute.data
+		 	.pipe(takeUntil(this.destroy$))
+		 	.subscribe((response) => {
+				 console.log(response)
+		 	this.slider = response.HeroSliders[0];
+			 console.log(this.slider)
+         });
 
-		this.slider = CONSTANTS.HERO_SLIDERS[2];
+		// this.slider = CONSTANTS.HERO_SLIDERS[2];
 	}
 
 	sanitize(url: string)
@@ -74,7 +89,7 @@ export class MainComponent implements OnInit
 
 	getUrl(url: string)
 	{
-		return "url('" + url + "')";
+		return "url('data:image/png;base64," + url + "')";
 	}
 
 	scroll()

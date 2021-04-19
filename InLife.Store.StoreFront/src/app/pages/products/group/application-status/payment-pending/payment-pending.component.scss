@@ -1,3 +1,7 @@
+@import './../styles.scss';
+
+@include main-style-group-application-status;
+
   .file-upload-content {
     display: none;
     text-align: center;

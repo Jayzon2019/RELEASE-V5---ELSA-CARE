@@ -1,3 +1,7 @@
+@import './../styles.scss';
+
+@include main-style-group-application-status;
+
 .group-cancelled-page {
     a {
         color: #e43d24;
