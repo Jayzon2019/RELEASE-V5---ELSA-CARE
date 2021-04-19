@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { PrimeCareSliderResolver } from './resolvers/prime-care-sliders.resolver';
 import { CustomPreloaderService } from './services/customer-preloader.service';
 import { PaymentFailedComponent } from './pages/payment/payment-failed/payment-failed.component';
@@ -80,6 +81,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 		BrowserAnimationsModule,
 		CarouselModule,
 		AppRoutingModule,
+		FormsModule,
 		SharedModule,
 		HttpClientModule,
 		ControlsModule,

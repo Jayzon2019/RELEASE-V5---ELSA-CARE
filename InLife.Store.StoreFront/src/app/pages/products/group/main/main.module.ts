@@ -58,11 +58,6 @@ import { RequirementsPendingComponent } from '../application-status/requirements
 		ReferenceMessageComponent,
 
 		OtpConfirmationComponent
-    	// RequirementsPendingComponent,
-		// PaymentPendingComponent,
-		// CancelApplicationComponent,
-		// PaymentConfirmationComponent,
-		// ApplicationCancelledComponent
 	],
 	providers:
 	[

@@ -20,14 +20,14 @@ const routes: Routes =
 	{ path:'pay', component: MakePaymentComponent },
 
 	// Application status checking
-	{ path: 'application-reference/:referenceCode', component: ReferenceMessageComponent},
-	{ path: 'application-status/otp-confirmation', component: OtpConfirmationComponent },
-	{ path: 'application-status/requirements-pending', loadChildren: () => import('@app/pages/products/group/application-status/requirements-pending/requirements-pending.module').then(m => m.RequirementsPendingModule)},
-	{ path: 'application-status/payment-pending', loadChildren: () => import('@app/pages/products/group/application-status/payment-pending/payment-pending.module').then(m => m.PaymentPendingModule)},
+	// { path: 'application-reference/:referenceCode', component: ReferenceMessageComponent},
+	// { path: 'application-status/otp-confirmation', component: OtpConfirmationComponent },
+	// { path: 'application-status/requirements-pending', loadChildren: () => import('@app/pages/products/group/application-status/requirements-pending/requirements-pending.module').then(m => m.RequirementsPendingModule)},
+	// { path: 'application-status/payment-pending', loadChildren: () => import('@app/pages/products/group/application-status/payment-pending/payment-pending.module').then(m => m.PaymentPendingModule)},
 	
-	{ path: 'application-status/payment-confirm', loadChildren: () => import('@app/pages/products/group/application-status/payment-confirmation/payment-confirmation.module').then(m => m.PaymentConfirmationModule)},
-	{ path: 'application-status/cancel-application', loadChildren: () => import('@app/pages/products/group/application-status/cancel-application/cancel-application.module').then(m => m.CancelApplicationModule)},
-	{ path: 'application-status/application-cancelled', loadChildren: () => import('@app/pages/products/group/application-status/application-cancelled/application-cancelled.module').then(m => m.ApplicationCancelledModule)},
+	// { path: 'application-status/payment-confirm', loadChildren: () => import('@app/pages/products/group/application-status/payment-confirmation/payment-confirmation.module').then(m => m.PaymentConfirmationModule)},
+	// { path: 'application-status/cancel-application', loadChildren: () => import('@app/pages/products/group/application-status/cancel-application/cancel-application.module').then(m => m.CancelApplicationModule)},
+	// { path: 'application-status/application-cancelled', loadChildren: () => import('@app/pages/products/group/application-status/application-cancelled/application-cancelled.module').then(m => m.ApplicationCancelledModule)},
 
 	{ path: 'plan-summary', loadChildren: () => import('@app/pages/products/group/plan-summary/plan-summary.module').then(m => m.PlanSummaryModule) },
 	{ path: 'thank-you', loadChildren: () => import('@app/pages/products/group/thank-you/thank-you.module').then(m => m.ThankYouModule) },
