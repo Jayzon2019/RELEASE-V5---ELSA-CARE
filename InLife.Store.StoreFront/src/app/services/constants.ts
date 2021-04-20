@@ -3402,20 +3402,20 @@ export const CONSTANTS =
 			subHeading: "Online insurance shopping made easy, fast, and convenient!",
 			subHeadingColor: "#42414d"
 		},
-		{
-			btnTxtLink: "/prime-secure-lite#getpslite",
-			contentPostion: "Left",
-			heading: "Get Health Protection and More",
-			headingColor: "#070752",
-			heroBg: "assets/images/hero-prime-secure-lite2.jpg",
-			heroBtnTxt: "Get Prime Secure Lite Now",
-			heroMobBg: "assets/images/hero-prime-secure-lite-mobile3.jpg",
-			heroTitle: "Prime Secure Lite",
-			id: 1011,
-			subHeading: "Prime Secure Lite is an affordable health and COVID-19 insurance package with life insurance coverage.",
-			subHeadingColor: "#42414d",
-			heroLogo: "/assets/images/prime-secure-lite-banner-logo.png"
-		},
+		// {
+		// 	btnTxtLink: "/prime-secure-lite#getpslite",
+		// 	contentPostion: "Left",
+		// 	heading: "Get Health Protection and More",
+		// 	headingColor: "#070752",
+		// 	heroBg: "assets/images/hero-prime-secure-lite2.jpg",
+		// 	heroBtnTxt: "Get Prime Secure Lite Now",
+		// 	heroMobBg: "assets/images/hero-prime-secure-lite-mobile3.jpg",
+		// 	heroTitle: "Prime Secure Lite",
+		// 	id: 1011,
+		// 	subHeading: "Prime Secure Lite is an affordable health and COVID-19 insurance package with life insurance coverage.",
+		// 	subHeadingColor: "#42414d",
+		// 	heroLogo: "/assets/images/prime-secure-lite-banner-logo.png"
+		// },
 		{
 			btnTxtLink: "/prime-care#ihc",
 			contentPostion: "Left",
