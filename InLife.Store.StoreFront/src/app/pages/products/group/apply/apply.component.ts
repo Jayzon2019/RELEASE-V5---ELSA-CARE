@@ -426,7 +426,6 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		const imageType = 'image/jpeg';
 
 		const reader: any = new FileReader();
-		console.log(event.target.files[0]);
 		if (event.target.files.length !== 0) {
 			const file = event.target.files[0];
 			const generalType = file.type.split('/')[0];
@@ -510,11 +509,11 @@ export class ApplyComponent implements OnInit, OnDestroy {
 							}
 						}
 						this.evaluateFiles();
-						if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
+						// if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
 							this.getApplyForm.get('requirementsForm').get(type).disable();
 							this.getApplyForm.get('requirementsForm').get(type).updateValueAndValidity();
 							this.uploadByFile(file, type, dbType);
-						}
+						// }
 						//	this.insuredIdentityDocumentImagePreview = newDataUrl;
 	
 						// Convert to PDF

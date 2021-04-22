@@ -582,16 +582,16 @@ namespace InLife.Store.Core.Business
 			// Security Agencies
 
 			if ("SecurityGuardPlan1".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱25,000", "Accidental Death and Disability: ₱25,000" };
+				return new string[] { "Life Coverage: ₱25,000", "Accidental Death and Disability: ₱25,000", "Burial Benefit: ₱5,000" };
 
 			if ("SecurityGuardPlan2".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱35,000", "Accidental Death and Disability: ₱35,000" };
+				return new string[] { "Life Coverage: ₱35,000", "Accidental Death and Disability: ₱35,000", "Burial Benefit: ₱5,000" };
 
 			if ("SecurityGuardPlan3".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱55,000", "Accidental Death and Disability: ₱55,000" };
+				return new string[] { "Life Coverage: ₱55,000", "Accidental Death and Disability: ₱55,000", "Burial Benefit: ₱5,000" };
 
 			if ("SecurityGuardPlan4".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱65,000", "Accidental Death and Disability: ₱65,000" };
+				return new string[] { "Life Coverage: ₱65,000", "Accidental Death and Disability: ₱65,000", "Burial Benefit: ₱5,000" };
 
 			// Schools and Universities
 

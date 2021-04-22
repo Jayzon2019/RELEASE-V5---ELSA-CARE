@@ -2,7 +2,7 @@ import { StorageType } from '@app/services/storage-types.enum';
 import { environment } from '@environment';
 import { Injectable, Injector, OnDestroy } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
+import { DecimalPipe, ViewportScroller } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
@@ -47,6 +47,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 	totalPremium: any = '00000';
 	insuranceCoverage: any = '00000';
 	annualPremium: any = '00000';
+	annualPremiumStr: any = '00000';
 	lc1:any = 0;
 	lc2: any = 0;
 	lc3: any = 0;
@@ -82,12 +83,11 @@ export class QuoteComponent implements OnInit, OnDestroy
 		private vps: ViewportScroller,
 		private http: HttpClient,
 		private sanitizer: DomSanitizer,
-		private util: UtilitiesService
+		private util: UtilitiesService,
+		private decimalPipe: DecimalPipe
 	)
 	{ 
 		this.ngxService.start();
-		// this.apiService.isShowFooterandHeader$.next(false);
-		console.log("CONSTANTS",CONSTANTS);
 		this.initForm();
 		
 		
@@ -132,13 +132,13 @@ export class QuoteComponent implements OnInit, OnDestroy
 						break;
 					case '3':
 						this.lc1 = "10,000";
-						this.Pr1 = 25.5;
+						this.Pr1 = 25.50;
 						this.lc2 = "20,000";
-						this.Pr2 = 55.5;
+						this.Pr2 = 55.50;
 						this.lc3 = "25,000";
-						this.Pr3 = 70.5;
+						this.Pr3 = 70.50;
 						this.lc4 = "35,000";
-						this.Pr4 = 100.5;
+						this.Pr4 = 100.50;
 						// this.totalPremium = 25.5;
 						// this.insuranceCoverage = 10000;
 						// this.annualPremium = 25.5;
@@ -259,84 +259,96 @@ export class QuoteComponent implements OnInit, OnDestroy
 		this.productType = type;
 		this.isValidTotalPremium = false;
 		this.groupPackageCtrl.patchValue({ PlanType: type});
-		let total_premium = 0;
+		let total_premium:any = 0;
 		switch(type){
 			case 1:
 				console.log(this.groupPackageCtrl);
 				if(this.plan == '1') {
-					total_premium = Number(400 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 400 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.0-0');
 					this.insuranceCoverage = "100,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 400;
+					this.annualPremiumStr = '400';
 				} else if(this.plan == '2') {
-					total_premium = Number(184.75 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1));
-					this.totalPremium = total_premium.toLocaleString(); 
+					total_premium = 184.75 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2'); 
 					this.insuranceCoverage = "25,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 184.75;
+					this.annualPremiumStr = '184.75';
 				} else if(this.plan == '3') {
-					total_premium = Number(25.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					debugger
+					total_premium = 25.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "10,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = 25.5;
+					this.annualPremium = '25.5';
+					this.annualPremiumStr = '25.50';
 				}
 				
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
-				console.log(this.isValidTotalPremium)
 				break;
 			case 2:
 				if(this.plan == '1') {
-					total_premium = Number(600 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 600 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.0-0');
 					this.insuranceCoverage = "150,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 				    this.annualPremium = 600;
+					this.annualPremiumStr = '600';
 				} else if( this.plan == '2') {
-					total_premium = Number(261.25 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1))
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 261.25 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1)
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "35,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 261.25;
+					this.annualPremiumStr = '261.25';
 				} else if(this.plan == '3') {
-					total_premium = Number(55.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 55.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "20,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = 55.5;
+					this.annualPremium = '55.5';
+					this.annualPremiumStr = '55.50';
 				}
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
 				break;
 			case 3:
 				if(this.plan == '1') {
-					total_premium = Number(800 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 800 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.0-0');
 					this.insuranceCoverage = "200,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 800;
+					this.annualPremiumStr = '800';
 				} else if( this.plan == '2') {
-					total_premium = Number(394.25 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1))
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 394.25 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "55,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 394.25;
+					this.annualPremiumStr = '394.25';
 				} else if(this.plan == '3') {
-					total_premium = Number(70.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 70.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "25,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = 70.5;
+					this.annualPremium = '70.5';
+					this.annualPremiumStr = '70.50';
 				}
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
 				break;
 			case 4:
 				if(this.plan == '1') {
-					total_premium = Number(1000 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 1000 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.0-0');
 					this.insuranceCoverage = "250,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 1000;
+					this.annualPremiumStr = '1000';
 				} else if( this.plan == '2') {
-					total_premium = Number(460.75 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 460.75 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "65,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 460.75;
+					this.annualPremiumStr = '460.75';
 				} else if(this.plan == '3') {
-					total_premium = Number(100.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1));
-					this.totalPremium = total_premium.toLocaleString();
+					total_premium = 100.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "35,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = 100.5 
+					this.annualPremium = '100.5';
+					this.annualPremiumStr = '100.50';
 				}
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
 				break;

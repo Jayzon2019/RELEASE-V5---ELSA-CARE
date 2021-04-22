@@ -386,12 +386,14 @@
 													</div>
 													<div class="row m-0">
 														<div class="col-6">
-															<p class="pb-0" *ngIf="selectedGroupPlanData.plan === '1'">
+															<p class="pb-0" *ngIf="selectedGroupPlanData.plan !== '2'; else guard">
 																Accidental Death and Disability/Total and Permanent Disability Benefit
 															</p>
-															<p class="pb-0" *ngIf="selectedGroupPlanData.plan === '2'">
-																Accidental Death and Disability
-															</p>
+															<ng-template #guard>
+																<p class="pb-0">
+																	Accidental Death and Disability
+																</p>
+															</ng-template>
 														</div>
 														<div class="col-6">
 															<p>
@@ -400,6 +402,7 @@
 															</p>
 														</div>
 													</div>
+
 												</ng-container>
 												<ng-container *ngIf="selectedGroupPlanData.plan == '3'">
 													<div class="row m-0">
@@ -500,14 +503,14 @@
 												</ng-container>
 												
 												
-												<!-- <div class="row m-0" *ngIf="selectedGroupPlanData.plan !== '1'">
+												<div class="row m-0" *ngIf="selectedGroupPlanData.plan === '2'">
 													<div class="col-6">
 														<p class="pb-0">Burial Benefit</p>
 													</div>
 													<div class="col-6">
-														<p>&#8369; {{ LifeCoverageperHead}}</p>
+														<p>&#8369; 5,000</p>
 													</div>
-												</div> -->
+												</div>
 											</div>
 										</div>
 										<br />
