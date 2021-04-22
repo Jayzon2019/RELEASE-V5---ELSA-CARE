@@ -470,7 +470,7 @@ export class QuoteComponent implements OnInit
 
 				covidForm.healthCondition1.toUpperCase() === 'NO' &&
 				covidForm.healthCondition2.toUpperCase() === 'NO' &&
-				covidForm.healthCondition3.toUpperCase() === 'YES' &&
+				covidForm.healthCondition3.toUpperCase() === 'NO' &&
 				covidForm.healthCondition4.toUpperCase() === 'NO' &&
 				this.getQuoteForm.value.basicInformation.country === '170' &&
 				(Number(this.bodyMassIndex) < 29) &&
