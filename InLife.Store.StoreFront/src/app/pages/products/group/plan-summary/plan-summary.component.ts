@@ -109,7 +109,7 @@ export class PlanSummaryComponent implements OnInit {
 		this.totalMembers = getApplyGroupFormData.TotalNumberOfMembers;
 		this.totalStudents = getApplyGroupFormData.TotalNumberOfStudents;
 		this.totalTeachers = getApplyGroupFormData.TotalNumberOfTeachers;
-		this.premiumPerHead = Number(getGroupQuoteFormData.annualPremium).toLocaleString();
+		this.premiumPerHead = getGroupQuoteFormData.annualPremium;
 		if (!this.totalMembers) {
 			this.totalMembers = "0";
 		}

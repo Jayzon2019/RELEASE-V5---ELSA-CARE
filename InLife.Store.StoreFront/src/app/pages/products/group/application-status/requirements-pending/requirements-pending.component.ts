@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { ApplicationStatusService } from './../../services/application-status.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -37,6 +38,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
               private ngxService: NgxUiLoaderService,
               private session: SessionStorageService,
               private activatedRoute: ActivatedRoute,
+              private decimalPipe: DecimalPipe,
               private appStatusService_API: ApplicationStatusService) { 
   }
 
@@ -78,10 +80,14 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
       .subscribe((data: Application) => {
         let planVariantCodeArr = data.planVariantCode.split(' ');
         let prodName = planVariantCodeArr.slice(0, planVariantCodeArr.length -1);
+        let totalMembers = data.totalMembers !== 0 ? data.totalMembers : data.totalStudents;
+        let selectedPlan = this.getPlan(data.planCode);
+        debugger
         this.groupPlan = {
-          annualPremium: Number(data.planPremium),
+          annualPremium:  selectedPlan === '1' ? Number(data.planPremium): this.decimalPipe.transform(data.planPremium, '1.2-2'),
           insuranceCoverage: this.numberWithCommas(data.planFaceAmount.toString()),
-          totalPremium: this.numberWithCommas((data.planPremium * Number(data.totalMembers)).toString()),
+          // totalPremium: this.numberWithCommas((data.planPremium * Number(totalMembers)).toString()),
+          totalPremium: selectedPlan === '1' ? this.decimalPipe.transform(data.planPremium * Number(totalMembers), '1.0-2'): this.decimalPipe.transform(data.planPremium * Number(totalMembers), '1.2-2'),
           planCode: this.getPlan(data.planCode) + ' - ' + data.planCode, // 1 - Administrative and Office-based
           plan: this.getPlan(data.planCode),
           productType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
@@ -120,7 +126,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
           CityTxt: data.companyCity,
           PlanType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
           ProductName: prodName.join(' '),
-          SelectedPlan: this.getPlan(data.planCode),
+          SelectedPlan: selectedPlan,
           Status: 1,
           TotalNumberOfMembers: data.totalMembers,
           TotalNumberOfStudents: data.totalStudents || null,

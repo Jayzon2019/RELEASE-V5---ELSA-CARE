@@ -139,7 +139,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		const getGroupPlanData = this.session.get(StorageType.GROUP_PLAN_DATA);
 		const getRequirementsData = this.session.get(StorageType.REQUIREMENTS_DATA);
 		this.selectedPlan = getQuoteFormData.SelectedPlan || '';
-		this.onPlan(getQuoteFormData.TotalNumberOfMembers, getQuoteFormData.PlanType);
+		this.onPlan(getQuoteFormData.TotalNumberOfMembers, getQuoteFormData.SelectedPlan);
 		this.getApplyForm = this.formBuilder.group({
 			basicInformation: this.formBuilder.group({
 				CompanyName: new FormControl(getQuoteFormData.CompanyName || '', [Validators.required]),

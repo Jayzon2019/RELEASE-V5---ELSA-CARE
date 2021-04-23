@@ -256,6 +256,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 		
 	}
 	onPlan(type){
+		debugger
 		this.productType = type;
 		this.isValidTotalPremium = false;
 		this.groupPackageCtrl.patchValue({ PlanType: type});
@@ -276,11 +277,11 @@ export class QuoteComponent implements OnInit, OnDestroy
 					this.annualPremium = 184.75;
 					this.annualPremiumStr = '184.75';
 				} else if(this.plan == '3') {
-					debugger
+					
 					total_premium = 25.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
 					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "10,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = '25.5';
+					this.annualPremium = '25.50';
 					this.annualPremiumStr = '25.50';
 				}
 				
@@ -303,7 +304,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 					total_premium = 55.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
 					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "20,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = '55.5';
+					this.annualPremium = '55.50';
 					this.annualPremiumStr = '55.50';
 				}
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
@@ -325,7 +326,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 					total_premium = 70.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
 					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "25,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = '70.5';
+					this.annualPremium = '70.50';
 					this.annualPremiumStr = '70.50';
 				}
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
@@ -347,7 +348,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 					total_premium = 100.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
 					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "35,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = '100.5';
+					this.annualPremium = '100.50';
 					this.annualPremiumStr = '100.50';
 				}
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
