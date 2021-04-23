@@ -596,7 +596,7 @@ export class QuoteComponent implements OnInit
 						this.router.navigate(['prime-secure-lite/ineligible']);
 					}
 				}, (error) => {
-					this.util.ShowGeneralMessagePrompt({message: errorMsg});
+					this.util.ShowGeneralMessagePrompt({message: error});
 				});
 			} else {
 				this.router.navigate(['prime-secure-lite/apply']);
