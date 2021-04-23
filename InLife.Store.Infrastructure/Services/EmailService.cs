@@ -427,8 +427,8 @@ namespace InLife.Store.Infrastructure.Services
 			decimal totalPremiums = 0;
 			if (application.TotalMembers.HasValue)
 				totalPremiums += application.TotalMembers.Value * application.PlanPremium;
-			if (application.TotalTeachers.HasValue)
-				totalPremiums += application.TotalStudents.Value * application.PlanPremium;
+			//if (application.TotalTeachers.HasValue)
+			//	totalPremiums += application.TotalStudents.Value * application.PlanPremium;
 			if (application.TotalStudents.HasValue)
 				totalPremiums += application.TotalStudents.Value * application.PlanPremium;
 
@@ -682,8 +682,8 @@ namespace InLife.Store.Infrastructure.Services
 			decimal totalPremiums = 0;
 			if (application.TotalMembers.HasValue)
 				totalPremiums += application.TotalMembers.Value * application.PlanPremium;
-			if (application.TotalTeachers.HasValue)
-				totalPremiums += application.TotalTeachers.Value * application.PlanPremium;
+			//if (application.TotalTeachers.HasValue)
+			//	totalPremiums += application.TotalTeachers.Value * application.PlanPremium;
 			if (application.TotalStudents.HasValue)
 				totalPremiums += application.TotalStudents.Value * application.PlanPremium;
 
