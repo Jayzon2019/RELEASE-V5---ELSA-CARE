@@ -187,7 +187,11 @@ namespace InLife.Store.Infrastructure.Services
 				{
 					var value = application.GetType().GetProperty(columns[icol - 1]).GetValue(application, null);
 					worksheet.Cell(irow, icol).Value = value?.ToString();
-					worksheet.Cell(irow, icol).DataType = XLDataType.Text;
+
+					if (icol == 2 || icol == 3)
+						worksheet.Cell(irow, icol).DataType = XLDataType.DateTime;
+					else
+						worksheet.Cell(irow, icol).DataType = XLDataType.Text;
 				}
 				irow++;
 			}
