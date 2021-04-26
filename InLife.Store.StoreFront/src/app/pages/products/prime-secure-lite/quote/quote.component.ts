@@ -594,7 +594,7 @@ export class QuoteComponent implements OnInit
 					}
 				}, (error) => {
 					console.log(error);
-					let errorMsg = (error) ? error : 'Error occured';
+					let errorMsg = (error) ? error.message : 'Error occured';
 					this.util.ShowGeneralMessagePrompt({message: errorMsg});
 				});
 			} else {
