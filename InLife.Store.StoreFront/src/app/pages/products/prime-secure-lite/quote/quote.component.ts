@@ -489,14 +489,11 @@ export class QuoteComponent implements OnInit
 	isValidOccupation(id): boolean {
 		if(id) {
 			const invalidOccupation = [
-				        '', '1', '4', '5', '8', '9', '11', '12', '13', '16', '18', '27', '29', '35', '39', '41', '42',
-						'47', '52', '54', '58', '59', '60', '61', '69', '70', '71', '74', '76', '79', '80', '85', '87',
-						'92', '94', '95', '100', '110', '112', '113', '116', '117', '120', '123', '125', '130', '135', '138', '142',
-						'143', '144', '147', '148', '149', '150', '152', '158', '159', '164', '167', '171', '173',
-						'185', '186', '191', '192', '193', '194', '203', '204', '205', '206', '207', '208', '209', '315', '316', '318',
-						'319', '320', '321', '322', '323', '210', '211', '212', '213', '214', '215', '216', '217', '218', '219', '220',
-						'222', '232', '233', '234', '235', '236', '247', '249', '250', '251', '252', '253', '254', '126', '258', '259',
-						'260', '269', '270', '273', '274', '276', '279', '281', '286', '287'];
+				        '', '1', '4', '8', '9', '11', '12', '16', '18', '29', '41', '59', '61', '69', '76', '79', '85', '87',
+						'92', '95', '116', '117', '123', '125', '130', '135', '138', '144', '147', '149', '152', '158', '159', '173',
+						'185', '193', '194', '203', '206', '207', '208', '209', '315', '318', '320', '321', '211', '212', '213', '214', '215',
+						'216', '217', '218', '219', '232', '233', '234', '249', '250', '251', '252', '253',  '126', '258',
+						'260', '270', '273', '274', '281', '286', '287'];
 
 			for(let i=0; i< invalidOccupation.length; i++) {
 				if(invalidOccupation[i] === id) {
@@ -570,7 +567,7 @@ export class QuoteComponent implements OnInit
 			PaymentMode: 12,
 			FaceAmount: faceAmount,
 			Premium: +this.eligiblePlan,
-			InsuredPrimaryOccupationId: +basicInfo.get('occupation').value,
+			InsuredPrimaryOccupationId: +basicInfo.get('sourceOfFunds').value,
 			InsuredPrimaryOccupationMonthlyIncome: monthlyIncome,
 			Bmi: +this.bodyMassIndex
 		}
@@ -596,6 +593,7 @@ export class QuoteComponent implements OnInit
 						this.router.navigate(['prime-secure-lite/ineligible']);
 					}
 				}, (error) => {
+					console.log(error);
 					let errorMsg = (error) ? error : 'Error occured';
 					this.util.ShowGeneralMessagePrompt({message: errorMsg});
 				});
