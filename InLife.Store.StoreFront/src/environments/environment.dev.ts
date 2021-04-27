@@ -1,7 +1,6 @@
 export const environment =
 {
 	production: true,
-
 	appApi:
 	{
 		host: 'https://dev-inlife-estore.azurewebsites.net/api',
