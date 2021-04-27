@@ -29,6 +29,7 @@ import { StorageType } from '@app/services/storage-types.enum';
 })
 export class QuoteComponent implements OnInit
 {
+	FUND_SOURCE: any;
 	getQuoteForm: FormGroup;
 	submitted = false;
 	today = new Date(new Date().setFullYear(new Date().getFullYear() - 18));
@@ -77,6 +78,7 @@ export class QuoteComponent implements OnInit
 
 	ngOnInit(): void
 	{
+		this.FUND_SOURCE = (environment.uat) ? CONSTANTS.FUND_SOURCE : CONSTANTS.PSLITE_FUND_SOURCE;
 		this.affiliate = this.session.get('affiliate');
 
 		const getQuoteFormData = this.session.get('getQuoteForm');

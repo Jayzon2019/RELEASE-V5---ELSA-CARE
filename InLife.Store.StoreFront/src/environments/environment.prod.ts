@@ -1,7 +1,7 @@
 export const environment =
 {
 	production: true,
-
+	uat: false,
 	appApi:
 	{
 		host: 'https://www.inlifestore.com.ph/api',

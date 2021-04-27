@@ -5,10 +5,11 @@
 export const environment =
 {
 	production: false,
-
+	uat: false,
 	appApi:
 	{
 		host: 'https://dev-inlife-estore.azurewebsites.net/api',
+		// host: 'https://localhost:44328',
 		quotesEndpoint: '/quotes',
 		ordersEndpoint: '/orders',
 		affiliatesEndpoint: '/affiliates'
