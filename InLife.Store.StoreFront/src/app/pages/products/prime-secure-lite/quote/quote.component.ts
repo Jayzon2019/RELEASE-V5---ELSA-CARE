@@ -567,7 +567,7 @@ export class QuoteComponent implements OnInit
 			PaymentMode: 12,
 			FaceAmount: faceAmount,
 			Premium: +this.eligiblePlan,
-			InsuredPrimaryOccupationId: +basicInfo.get('sourceOfFunds').value,
+			InsuredPrimaryOccupationId: +basicInfo.get('occupation').value,
 			InsuredPrimaryOccupationMonthlyIncome: monthlyIncome,
 			Bmi: +this.bodyMassIndex
 		}
