@@ -1,7 +1,6 @@
 export const environment =
 {
 	production: true,
-	uat: false,
 	appApi:
 	{
 		host: 'https://localhost:5100',

@@ -1,7 +1,6 @@
 export const environment =
 {
 	production: true,
-	uat: true,
 	appApi:
 	{
 		host: 'https://uat-inlifestore.insularlife.com.ph/api',

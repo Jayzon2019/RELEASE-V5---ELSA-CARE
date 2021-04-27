@@ -78,7 +78,7 @@ export class QuoteComponent implements OnInit
 
 	ngOnInit(): void
 	{
-		this.FUND_SOURCE = (environment.uat) ? CONSTANTS.FUND_SOURCE : CONSTANTS.PSLITE_FUND_SOURCE;
+		this.FUND_SOURCE = (environment.appApi.host === 'https://www.inlifestore.com.ph/api') ? CONSTANTS.PSLITE_FUND_SOURCE : CONSTANTS.FUND_SOURCE;
 		this.affiliate = this.session.get('affiliate');
 
 		const getQuoteFormData = this.session.get('getQuoteForm');

@@ -3456,10 +3456,10 @@ export const CONSTANTS =
 		{ "id": "122", "name": "Income from Employment" },
 		{ "id": "123", "name": "Savings" },
 		{ "id": "124", "name": "Others" },
-		{ "id": "210", "name": "Rental Income" },
+		// { "id": "210", "name": "Rental Income" },
 		{ "id": "212", "name": "Interest Income" },
 		{ "id": "213", "name": "Investment" },
 		{ "id": "214", "name": "Remittance" },
-		{ "id": "215", "name": "Pension" }
+		{ "id": "216", "name": "Pension" }
 	],
 };
