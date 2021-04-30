@@ -444,7 +444,7 @@ namespace InLife.Store.Core.Business
 				// Check all completed (PaymentProof) but not submitted
 				var applications = applicationRepository
 					.GetAll()
-					.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+					.Where(x => !x.ExportedDate.HasValue)
 					.ToList();
 
 				// Map the correct application status from id to name
