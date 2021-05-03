@@ -20,7 +20,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InLife.Store.Identity", "InLife.Store.Identity\InLife.Store.Identity.csproj", "{8EE0BEBE-B8AC-4008-8C6B-7F622832541E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InLife.Store.StoreFront", "InLife.Store.StoreFront\InLife.Store.StoreFront.csproj", "{44215618-FB84-464C-86A5-5A136C361492}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "InLife.Store.StoreFront", "InLife.Store.StoreFront\", "{BDB5D74C-82E8-40CB-806F-3386D8FB582F}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_59087"
+		Debug.AspNetCompiler.PhysicalPath = "InLife.Store.StoreFront\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59087\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_59087"
+		Release.AspNetCompiler.PhysicalPath = "InLife.Store.StoreFront\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59087\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "59087"
+		SlnRelativePath = "InLife.Store.StoreFront\"
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InLife.Store.Functions", "InLife.Store.Functions\InLife.Store.Functions.csproj", "{44FB54B9-985F-4473-A36C-448CCBF410CE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CC38E53F-9EFF-4F19-8BE8-62010DB98F23} = {CC38E53F-9EFF-4F19-8BE8-62010DB98F23}
+		{C759859A-1C76-4A3C-A38B-7944E30B8D14} = {C759859A-1C76-4A3C-A38B-7944E30B8D14}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A90D6254-1F0D-4ADD-98FA-F1FB2D214DBA}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InLife.Store.Resources", "InLife.Store.Resources\InLife.Store.Resources.csproj", "{204E1A1B-7262-4377-9CC7-0738A1A53B24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,21 +86,31 @@ Global
 		{8EE0BEBE-B8AC-4008-8C6B-7F622832541E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EE0BEBE-B8AC-4008-8C6B-7F622832541E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EE0BEBE-B8AC-4008-8C6B-7F622832541E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44215618-FB84-464C-86A5-5A136C361492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44215618-FB84-464C-86A5-5A136C361492}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44215618-FB84-464C-86A5-5A136C361492}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44215618-FB84-464C-86A5-5A136C361492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB5D74C-82E8-40CB-806F-3386D8FB582F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB5D74C-82E8-40CB-806F-3386D8FB582F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB5D74C-82E8-40CB-806F-3386D8FB582F}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{44FB54B9-985F-4473-A36C-448CCBF410CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44FB54B9-985F-4473-A36C-448CCBF410CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44FB54B9-985F-4473-A36C-448CCBF410CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44FB54B9-985F-4473-A36C-448CCBF410CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{87FF9D25-917F-4407-9C18-AE6BF6611799} = {BC25F6F9-589D-48ED-8BCE-FF092EFE90FD}
 		{91D0C391-0202-4D71-B9B0-15CD613B9490} = {B0D850C9-E6C8-465D-8704-EE4C4446E86D}
 		{C759859A-1C76-4A3C-A38B-7944E30B8D14} = {BC25F6F9-589D-48ED-8BCE-FF092EFE90FD}
 		{CC38E53F-9EFF-4F19-8BE8-62010DB98F23} = {BC25F6F9-589D-48ED-8BCE-FF092EFE90FD}
 		{CEF7BF34-71F0-41E3-963E-3C7591C3A76C} = {FFB8B85C-5122-4E17-8933-C27755493F51}
 		{8EE0BEBE-B8AC-4008-8C6B-7F622832541E} = {B0D850C9-E6C8-465D-8704-EE4C4446E86D}
-		{44215618-FB84-464C-86A5-5A136C361492} = {FFB8B85C-5122-4E17-8933-C27755493F51}
+		{BDB5D74C-82E8-40CB-806F-3386D8FB582F} = {FFB8B85C-5122-4E17-8933-C27755493F51}
+		{44FB54B9-985F-4473-A36C-448CCBF410CE} = {B0D850C9-E6C8-465D-8704-EE4C4446E86D}
+		{204E1A1B-7262-4377-9CC7-0738A1A53B24} = {BC25F6F9-589D-48ED-8BCE-FF092EFE90FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC112424-056B-4E81-8ADF-A23CFD2207F3}
@@ -78,45 +120,5 @@ Global
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 		$0.TextStylePolicy = $23
-		$9.inheritsSet = null
-		$9.scope = text/x-cshtml-web
-		$0.HTMLFormattingPolicy = $12
-		$10.inheritsSet = null
-		$10.scope = text/x-cshtml-web
-		$11.inheritsSet = null
-		$11.scope = text/x-html
-		$12.FormatOnPaste = True
-		$12.XHTMLCodingStyle = True
-		$12.scope = text/x-html
-		$13.EolMarker = Unix
-		$13.scope = text/x-web
-		$13.inheritsSet = null
-		$14.inheritsSet = null
-		$14.scope = text/x-csharp
-		$0.CSharpFormattingPolicy = $15
-		$15.scope = text/x-csharp
-		$16.EolMarker = Unix
-		$16.scope = text/plain
-		$17.inheritsSet = null
-		$17.scope = text/x-vs
-		$18.inheritsSet = null
-		$18.scope = text/x-css
-		$0.CSSFormattingPolicy = $19
-		$19.AutomaticFormatting = True
-		$19.FormatOnPaste = True
-		$19.HierarchicalIndentation = True
-		$19.scope = text/x-css
-		$20.inheritsSet = null
-		$20.scope = text/x-javascript
-		$21.inheritsSet = null
-		$21.scope = text/x-json
-		$0.JSONFormattingPolicy = $22
-		$22.AutoStructureCompletion = True
-		$22.BracePositions = Expanded
-		$22.FormatOnPaste = True
-		$22.scope = text/x-json
-		$23.inheritsSet = null
-		$23.scope = text/x-jsts
-		$0.StandardHeader = $24
 	EndGlobalSection
 EndGlobal

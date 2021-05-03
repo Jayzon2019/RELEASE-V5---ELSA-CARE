@@ -1,0 +1,270 @@
+.reviewbill .detailbill p {
+	margin-bottom: 0.5rem;
+}
+
+p.linkdpay {
+	text-align: center;
+}
+
+.wealth-box {
+	text-align: center;
+	border: 2px solid #d5d5d5;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.icon {
+	font-size: 60px;
+}
+
+.bank {
+	margin: 29px 0px 7px;
+	font-weight: 500;
+}
+
+.icon-box {
+	padding: 30px 11px 20px;
+}
+
+/* .wealth-box:hover{
+	cursor: pointer;
+	background-color: dodgerblue;
+	color: #fff;
+} */
+
+.error-msg {
+    display: flex;
+	justify-content: center;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.error-msg span {
+	padding: 10px 60px;
+	background: #e45d25;
+	color: white;
+}
+.selected-li {
+	cursor: pointer;
+	background-color: #2895df;
+	color: #fff;
+	border: 2px solid #2895df;
+}
+
+.message {
+	text-align: center;
+	background: #f5f7fd;
+	padding: 64px;
+	line-height: 1.4;
+	margin: 30px 0 30px 0;
+}
+.first-line {
+	margin-bottom: 50px;
+	font-weight: normal;
+	color: #070752;
+}
+
+.second-line {
+	font-weight: normal;
+	color: #070752;
+}
+/* 
+::ng-deep .main-nav {
+	display: none;
+}
+
+::ng-deep footer {
+	display: none;
+} */
+/*-- css changes by Designer 05-02-21 --*/
+.steplist ul.steplistmain li ul.innerlist li a {
+	font-size: 17px;
+}
+.wealth-box .icon-box {
+	padding: 30px 7px 20px;
+}
+.wealth-box .icon-box img {
+	height: 77px;
+}
+.wealth-box .icon-box img.img-white {
+	display: none;
+}
+.wealth-box.selected-li .icon-box img.img-white {
+	display: block;
+	text-align: center;
+	margin: auto;
+}
+.wealth-box.selected-li .icon-box img {
+	display: none;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+ul.steplistmain li.active.complete::before {
+	color: #fff !important;
+}
+@media (max-width: 1600px) {
+	.stepdetail h1 {
+		font-size: 42px;
+	}
+}
+
+/*--  css start by Designer here --*/
+button.btn.outlinedbtn.btn-back.cus-but {
+	width: 293px !important;
+	text-align: center !important;
+	align-items: center;
+	justify-content: left;
+}
+button.btn.outlinedbtn.btn-back.cus-but i.material-icons {
+	width: 100px;
+	float: left;
+	text-align: left;
+}
+/*-- bank transfer css start here --*/
+.reviewbill.bank-transfar p {
+	font-size: 16px;
+	line-height: 1.5rem;
+	color: #42414d;
+}
+/*--css by Designer start 15-feb-2020 --*/
+@media screen and (max-width: 1279px) and (min-width: 1024px) {
+	.right-panel {
+		position: absolute;
+		padding-top: 100px;
+	}
+	.leftwrapsection {
+		padding: 30px;
+	}
+	.stepdetail h1 {
+		font-size: 34px;
+		margin-bottom: 45px;
+		text-align: left;
+	}
+	.col-md-9.tabsamll {
+		max-width: 66.6% !important;
+	}
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.col-md-9.tabsamll form {
+		padding-left: 0x;
+		width: 77%;
+	}
+	.btnsec.text-right[_ngcontent-qiv-c134] {
+		margin-right: 66px;
+	}
+
+	button.btn {
+		margin: 10px auto;
+	}
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+	.leftwrapsection {
+		padding: 30px;
+	}
+	.col-md-9.tabsamll {
+		max-width: 70% !important;
+	}
+	.col-md-2.col-12.tabsamll,
+	.col-md-3.tabsamll {
+		max-width: 30% !important;
+	}
+	.stepdetail {
+		margin-right: 0 !important ;
+	}
+	.right-panel {
+		min-width: 10px !important;
+		padding: 25px;
+		position: relative !important;
+	}
+	.steplist ul.steplistmain li {
+		font-size: 20px;
+	}
+
+	.steplist ul.steplistmain li a {
+		font-size: 14px !important;
+	}
+	.stepdetail h1 {
+		font-size: 32px;
+		margin-bottom: 45px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+		font-size: 18px;
+	}
+	button.btn.outlinedbtn.btn-back.cus-but {
+		width: auto !important;
+	}
+
+	input.form-control.ng-untouched.ng-pristine.ng-invalid,
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		height: 46px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 20px;
+		margin-left: 0;
+	}
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		font-size: 14px;
+	}
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.wealth-box h2 {
+		font-size: 24px !important;
+	}
+	.preminumform .col-md-4 {
+		max-width: 100%;
+	}
+}
+@media screen and (max-width: 767px) {
+	.btnsec.text-right {
+		margin-right: 0 !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-left: 0;
+	}
+	.steplist {
+		position: relative !important;
+	}
+	.steplist,
+	.right-panel {
+		position: relative !important;
+	}
+
+	.tabsamll {
+		padding: 25px 15px;
+	}
+	.stepdetail h1 {
+		font-size: 30px !important;
+		margin-bottom: 50px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+	}
+	.stepdetail .preminumform label {
+		margin-bottom: 0.5rem;
+	}
+	.stepdetail {
+		margin: auto auto 35px !important;
+	}
+	.packageavail ul.row {
+		margin: auto !important;
+	}
+	.right-panel {
+		padding: 25px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 30px !important;
+	}
+}

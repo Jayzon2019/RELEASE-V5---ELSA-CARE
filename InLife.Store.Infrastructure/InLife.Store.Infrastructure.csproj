@@ -5,14 +5,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ClosedXML" Version="0.95.4" />
+		<PackageReference Include="DocumentFormat.OpenXml" Version="2.12.1" />
 		<PackageReference Include="MailKit" Version="2.9.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.9" />
+		<PackageReference Include="SSH.NET" Version="2020.0.1" />
+		<PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\InLife.Store.Core\InLife.Store.Core.csproj" />
+		<ProjectReference Include="..\InLife.Store.Resources\InLife.Store.Resources.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,0 +1,197 @@
+{
+	"Logging":
+	{
+		"LogLevel":
+		{
+			"Default": "Information",
+			"Microsoft": "Warning",
+			"Microsoft.Hosting.Lifetime": "Information"
+		}
+	},
+
+	"AllowedHosts": "*",
+
+	"AllowedOrigins":
+	[
+		"http://localhost:4200",
+		"https://localhost:4200",
+		"https://dev-inlife-estore.azurewebsites.net"
+	],
+
+	"CustomDomain":
+	{
+		"Protocol": "https",
+		"Host": "dev-inlifestore.projectgrey.net",
+		"PathBase": "/api"
+	},
+
+	"ConnectionStrings":
+	{
+		"DefaultConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true",
+		"PrimeCareConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true",
+		"GroupConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true",
+		"PrimeSecureConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true"
+	},
+
+	"ExternalServices":
+	{
+		"PrimeCareApi":
+		{
+			"SubscriptionKey": "SUBSCRIPTION-KEY",
+			"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
+			"CreateApplicationEndpoint": "/CreateApplication",
+			"SavePaymentEndpoint": "/SavePayment"
+		},
+
+		"AffiliateApi":
+		{
+			"ClientId": "CLIENT-ID",
+			"ClientSecret": "CLIENT-SECRET",
+			"Host": "https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
+			"AgentInfoEndpoint": "/info"
+		},
+
+		"GroupApi":
+		{
+			"SubscriptionKey": "SUBSCRIPTION-KEY",
+			"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
+			"CreateApplicationEndpoint": "/CreateApplication",
+			"SavePaymentEndpoint": "/SavePayment"
+		},
+
+		"GroupSftp":
+		{
+			"Host": "127.0.0.1",
+			"Port": "22",
+			"Username": "root",
+			"Password": "",
+			"PrivateKey": "D:\\home\\.ssh\\InLife-Group-SFTP-OPENSSH",
+			"Passphrase": "passphrase"
+		},
+
+		"PrimeSecureApi":
+		{
+			"SubscriptionKey": "SUBSCRIPTION-KEY",
+			"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
+			"CreateApplicationEndpoint": "/CreateApplication",
+			"SavePaymentEndpoint": "/SavePayment"
+		},
+
+		"PaymentGateway": "https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx"
+	},
+
+	"Smtp":
+	{
+		"Host": "smtp-relay.sendinblue.com",
+		"Port": 587,
+		"Username": "",
+		"Password": "",
+		"EnableSsl": true
+	},
+
+	"Email":
+	{
+		"ErrorNotification":
+		{
+			"SenderName": "InLife Store API - #SERVER#",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"info@projectgrey.net"
+			],
+			"Subject": "InLife Store API : An error has occurred"
+		},
+
+		"GroupApplicationReferenceCode":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Subject": "InLife Group Application Reference Code"
+		},
+
+		"GroupApplicationOtp":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Subject": "Verification"
+		},
+
+		"GroupApplicationThankYou":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Subject": "Thank you for your InLife Group Application"
+		},
+
+		"GroupApplicationFeedbackAdmin":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"christian@projectgrey.net",
+				"glen@projectgrey.net",
+				"tj@projectgrey.net",
+				"abbelandres@insular.com.ph"
+			],
+			"Subject": "InLife Store Group Insurance Feedback - #REFERENCE-CODE#"
+		},
+
+		"GroupApplicationCompleteAdmin":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"christian@projectgrey.net",
+				"glen@projectgrey.net",
+				"tj@projectgrey.net",
+				"abbelandres@insular.com.ph"
+			],
+			"Subject": "InLife Store Group Insurance Application - #REFERENCE-CODE#"
+		},
+
+		"GroupApplicationCancel":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"christian@projectgrey.net",
+				"glen@projectgrey.net",
+				"tj@projectgrey.net",
+				"abbelandres@insular.com.ph"
+			],
+			"Subject": "InLife Store Group Insurance Cancel - #REFERENCE-CODE#"
+		},
+
+		"GroupApplicationPaymentProof":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"christian@projectgrey.net",
+				"glen@projectgrey.net",
+				"tj@projectgrey.net",
+				"abbelandres@insular.com.ph",
+				"abuseropaw@gmail.com"
+			],
+			"Subject": "InLife Store Group Insurance Proof of Payment - #REFERENCE-CODE#"
+		},
+
+		"GroupApplicationsCompletedBatch":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"christian@projectgrey.net",
+				"glen@projectgrey.net",
+				"tj@projectgrey.net",
+				"abbelandres@insular.com.ph"
+			],
+			"Subject": "InLife Store Group Applications"
+		}
+	}
+}

@@ -1,0 +1,119 @@
+.ps-lite-apply-page {
+
+    .step6, .step7, .step8 {
+        margin-top: 75px !important;
+    }
+
+    label.id-secondary {
+        display: none;
+
+        
+    }
+
+    @media (max-width: 767px) {
+        label.id-secondary {
+            display: block;
+        }
+
+        .id-secondary {
+            display: none;
+        }
+    }
+
+    .drag-text {
+        h3 {
+            color: #ababab;
+        }
+    }
+
+    .radio-container.customcheckcircle input:checked ~ .checkmark:after {
+        background-color: #2895df;
+    }
+    
+    .pf-list-item:hover {
+        background-color: #2895df;
+        border-color: #2895df;
+    }
+
+    .steplist ul.steplistmain li ul.innerlist{
+        li.active:after {
+            height: 60px;
+        }
+        li:after {
+            height: 60px;
+        }
+    } 
+
+    .steplist-wrapper {
+        .steplist{
+            position: fixed;
+        }
+    }
+
+    .identity-document-preview > .pdf-preview {
+        display: flex;
+
+        img.pdf-icon {
+            height: 100px;
+        }
+
+        span.pdf-name {
+            font-size: 16px;
+            margin-top: 10px;
+            padding-right: 50px;
+            align-self: center;
+        }
+
+        @media (max-width: 500px) {
+            display: inline-grid;
+            justify-items: center;
+
+            span.pdf-name {
+                padding-right: 0;
+            }
+        }
+    }
+
+    .roghtwrapsection-wrapper {
+        &.only-in-mobile {
+            display: none;
+        }
+
+        &.only-in-desktop {
+            display: block;
+        }
+
+        @media (max-width: 1080px) {
+            &.only-in-mobile {
+                display: block !important;    
+                padding-bottom: 45px !important;
+                margin-top: -20px !important;
+            }
+            &.only-in-desktop {
+                display: none !important;
+            }
+        }
+    }
+
+    @media (max-width: 1080px) and (min-width: 801px) {
+        .roghtwrapsection-wrapper {
+            margin-left: 25%;
+            max-width: 75%;
+        }
+        .content-wrapper{
+            margin-left: 26%;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .steplist-wrapper > .steplist{
+            position: inherit;
+        }
+    }
+
+    @media (max-width: 1250px) {
+        .steplist ul.steplistmain li ul.innerlist {
+            width: 150px;
+        }
+    }
+}

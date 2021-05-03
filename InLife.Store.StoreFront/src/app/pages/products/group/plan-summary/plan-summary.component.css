@@ -1,0 +1,388 @@
+.reviewbill .detailbill p {
+	margin-bottom: 0.5rem;
+}
+
+p.linkdpay {
+	text-align: center;
+}
+
+.wealth-box {
+	text-align: center;
+	box-shadow: 0 0 3px #ccc;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.icon {
+	font-size: 60px;
+}
+
+.bank {
+	margin: 20px 0px;
+	font-weight: 600;
+}
+
+.icon-box {
+	padding: 20px 20px;
+}
+
+.wealth-box:hover {
+	cursor: pointer;
+	background-color: dodgerblue;
+	color: #fff;
+}
+
+.message {
+	text-align: center;
+	background: #80808030;
+	padding: 64px;
+	line-height: 1.4;
+	margin: 30px 0 30px 0;
+}
+.first-line {
+	margin-bottom: 50px;
+	font-weight: 500;
+	color: #3951a2;
+}
+
+.second-line {
+	font-weight: 500;
+	color: #3951a2;
+}
+
+.stepdetail .preminumform select {
+	color: #ababab;
+}
+
+.black {
+	color: #000 !important;
+}
+
+@media (min-width: 1025px) {
+	body {
+		padding-top: 0;
+	}
+}
+
+.headerColor {
+	color: #2895df !important;
+	font-size: 16px !important;
+}
+
+.text,
+p {
+	font-size: 12px !important;
+
+	line-height: 16px;
+	color: #42414d !important;
+}
+
+p {
+	margin-bottom: 5px;
+}
+
+.checkbox-wrap .pf-list-item input:checked + span {
+	background-color: #2895df !important;
+	color: #fff !important;
+	border: 1px solid #2895df !important;
+}
+
+.checkbox-wrap .pf-list-item:first-child input:checked + span,
+.checkbox-wrap .pf-list-item:last-child input:checked + span {
+	width: 12vw;
+}
+
+.checkbox-wrap .pf-list-item:hover {
+	background-color: #2895df !important;
+	border: 1px solid #2895df !important;
+	color: #fff !important;
+	cursor: pointer;
+}
+
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	content: "1";
+	position: absolute;
+	left: 0;
+	width: 30px;
+	height: 30px;
+	color: #2895df;
+	border: 2px solid #2895df;
+	border-radius: 100%;
+	text-align: center;
+	font-size: 15px;
+	line-height: 28px;
+	font-weight: 600;
+}
+
+.steplist ul.steplistmain li ul.innerlist li.active:before,
+.steplist ul.steplistmain li ul.innerlist li:hover:before {
+	position: absolute;
+	left: -34px;
+	width: 10px;
+	height: 10px;
+	border: 2px solid #2895df;
+	border-radius: 100%;
+	text-align: center;
+	top: 13px;
+}
+
+.steplist ul.steplistmain li ul.innerlist li.active:after,
+.steplist ul.steplistmain li ul.innerlist li:hover:after {
+	background: #2895df;
+	content: "";
+	position: absolute;
+	left: -30px;
+	width: 2px;
+	height: 34px;
+	top: -21px;
+}
+
+.radio-container input:checked ~ .checkmark {
+	background-color: #2895df;
+	border: 1px solid #2895df;
+}
+
+.is-invalid {
+	border-color: #dc3545 !important;
+}
+
+.steplist ul.steplistmain li.complete.active:before {
+	background: #2895df;
+	content: "\e876";
+	font-family: "Material Icons";
+	font-weight: normal;
+	font-style: normal;
+	color: #fff;
+}
+
+.stepdetail h1 {
+	text-align: center;
+	color: #070752;
+	font-size: 46px;
+	font-weight: 600;
+	margin-bottom: 80px;
+	letter-spacing: -1px;
+}
+
+.radio-container {
+	font-size: 14px;
+	color: #42414d;
+	padding-top: 5px;
+}
+
+.stepdetail .preminumform label {
+	font-size: 12px !important;
+	color: #42414d !important;
+}
+
+.pagetitles h5 {
+	font-size: 18px;
+	color: #42414d !important;
+}
+
+.reviewbill .titlebill p {
+	color: #42414d !important;
+}
+
+.savebtns {
+	margin-left: 20px;
+}
+.savebtns:hover,
+.savebtns {
+	padding: 1em 2em;
+}
+/*-- css changes by Designer 05-02-21 --*/
+.stepdetail {
+	margin-right: 25px;
+}
+h3#step_head {
+	font-size: 20px !important;
+}
+.steplist ul.steplistmain li ul.innerlist li a {
+	font-size: 14px;
+}
+.stepdetail .preminumform label {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	font-size: 16px;
+}
+input.form-control.is-valid.ng-untouched.ng-pristine.ng-valid {
+	border-color: #2895df;
+}
+.preminumform .col-md-12.mb-3.uploadimgescustom {
+	padding: 0;
+}
+.preminumform h4,
+.right-panel h1.subprice {
+	font-size: 18px;
+}
+.right-panel label.label {
+	font-size: 14px;
+}
+.btnsec button.btn.outlinedbtn {
+	padding: 1em 1.5em;
+}
+.col-md-4.titlebill p {
+	font-size: 18px !important;
+	line-height: normal;
+}
+.reviewbill .detailbill p,
+.reviewbill p,
+p.pb-3.pt-4.text-center {
+	font-size: 14px !important;
+	line-height: normal;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #42414d;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+ul.steplistmain li.active.complete::before {
+	color: #fff !important;
+}
+
+.colornew {
+	color: #42414d !important;
+}
+@media (max-width: 1600px) {
+	.stepdetail h1.titlestep {
+		font-size: 42px;
+	}
+}
+/*--css by Designer start 15-feb-2020 --*/
+@media screen and (max-width: 1279px) and (min-width: 1024px) {
+	.right-panel {
+		position: absolute;
+		padding-top: 100px;
+	}
+	.leftwrapsection {
+		padding: 30px;
+	}
+	.stepdetail h1 {
+		font-size: 34px;
+		margin-bottom: 45px;
+		text-align: left;
+	}
+	.col-md-9.tabsamll {
+		max-width: 66.6% !important;
+	}
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.col-md-9.tabsamll form {
+		padding-left: 0x;
+		width: 77%;
+	}
+	.btnsec.text-right[_ngcontent-qiv-c134] {
+		margin-right: 66px;
+	}
+
+	button.btn {
+		margin: 10px auto;
+	}
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+	.leftwrapsection {
+		padding: 30px;
+	}
+	.col-md-9.tabsamll {
+		max-width: 70%;
+	}
+	.col-md-2.col-12.tabsamll,
+	.col-md-3.tabsamll {
+		max-width: 30%;
+	}
+	.stepdetail {
+		margin-right: 0 !important ;
+	}
+	.right-panel {
+		min-width: 10px !important;
+		padding: 25px;
+		position: relative !important;
+	}
+	.steplist ul.steplistmain li {
+		font-size: 20px;
+	}
+	.steplist ul.steplistmain li a {
+		font-size: 14px !important;
+	}
+	.stepdetail h1 {
+		font-size: 32px;
+		margin-bottom: 45px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+		font-size: 18px;
+	}
+
+	input.form-control.ng-untouched.ng-pristine.ng-invalid,
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		height: 46px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 20px;
+		margin-left: 0;
+	}
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		font-size: 14px;
+	}
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.wealth-box h2 {
+		font-size: 24px !important;
+	}
+	.preminumform .col-md-4 {
+		max-width: 100%;
+	}
+}
+@media screen and (max-width: 767px) {
+	.btnsec.text-right {
+		margin-right: 0 !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-left: 0;
+	}
+	.steplist,
+	.right-panel {
+		position: relative !important;
+	}
+
+	.tabsamll {
+		padding: 25px 15px;
+	}
+	.stepdetail h1 {
+		font-size: 30px !important;
+		margin-bottom: 50px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+	}
+	.stepdetail .preminumform label {
+		margin-bottom: 0.5rem;
+	}
+	.stepdetail {
+		margin: auto auto 35px !important;
+	}
+	.packageavail ul.row {
+		margin: auto !important;
+	}
+	.right-panel {
+		padding: 25px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 30px !important;
+	}
+}

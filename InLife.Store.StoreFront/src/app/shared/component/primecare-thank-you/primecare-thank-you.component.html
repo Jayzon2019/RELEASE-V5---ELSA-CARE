@@ -1,0 +1,260 @@
+
+<div class="row">
+	<div class="col-md-4 titlebill">
+		<p>Transaction Details</p>
+	</div>
+
+	<div
+		class="col-md-8 detailbill">
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Reference Number:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content" style="word-break: break-all;">
+					<p>{{txn.MerchTxnRef}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Transaction Date:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>{{dateNow}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<div class="row">
+	<div class="col-md-4 titlebill">
+		<p>Plan Details</p>
+	</div>
+	<div class="col-md-8 detailbill">
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Product Name:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>PRIME CARE</p>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Plan Type:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<ng-container *ngIf="calculationInformation.totalCashBenefit ==='1080000'; else otherPlan">
+						<p *ngIf="calculationInformation.totalCashBenefit ==='1080000'"> Plan 30 (&#8369;1,080,000)
+						</p>
+					</ng-container>
+					<ng-template #otherPlan>
+						<p *ngIf="calculationInformation.totalCashBenefit === '1800000'">Plan 50 (&#8369;1,800,000)</p>
+					</ng-template>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Current Age:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>{{ age.age }}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Gender:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>
+						{{
+							getReferenceDataById(
+								CONSTANTS.GENDER,
+								calculationInformation.gender
+							).name
+						}}
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Mode of Payment:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>{{calculationInformation.paymentMode}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Initial Premium Amount:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>&#8369;{{ paymentAmount || "0.00" }}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>
+						Initial Lump Sum Benefit:
+					</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p
+						*ngIf="
+							calculationInformation.totalCashBenefit ===
+							'1080000'
+						"
+					>
+						&#8369; 180,000.00
+					</p>
+					<p
+						*ngIf="
+							calculationInformation.totalCashBenefit ===
+							'1800000'
+						"
+					>
+						&#8369; 300,000.00
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>
+						Total Monthly Allowance:
+					</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p *ngIf="calculationInformation.totalCashBenefit === '1080000'">
+						&#8369; 30,000.00
+					</p>
+					<p
+						*ngIf="
+							calculationInformation.totalCashBenefit ===
+							'1800000'
+						"
+					>
+						&#8369; 50,000.00
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>
+						Total & Permanent Disability Benefit:
+					</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p
+						*ngIf="
+							calculationInformation.totalCashBenefit ===
+							'1080000'
+						"
+					>
+						&#8369; 1,080,000.00
+					</p>
+					<p
+						*ngIf="
+							calculationInformation.totalCashBenefit ===
+							'1800000'
+						"
+					>
+						&#8369; 1,800,000.00
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+
+<div class="row">
+	<div class="col-md-4 titlebill">
+		<p>Payment Details</p>
+	</div>
+	<div
+		class="col-md-8 detailbill">
+
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Receipt Number:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>{{txn.ReceiptNo}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Amount:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>&#8369;{{ paymentAmount || "0.00" }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row m-0 container">
+			<div class="col-6 helper">
+				<div class="title">
+					<p>Payment Status:</p>
+				</div>
+			</div>
+			<div class="col-6 helper-2">
+				<div class="content">
+					<p>{{txn.Message}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

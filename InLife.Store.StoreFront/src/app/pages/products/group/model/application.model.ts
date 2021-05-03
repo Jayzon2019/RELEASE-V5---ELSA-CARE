@@ -1,0 +1,31 @@
+export interface Application {
+    referenceCode : string;
+    status : string;
+    planCode : string;
+    planVariantCode : string;
+    planFaceAmount:  number;
+    planPremium: number;
+    totalMembers: number;
+    totalStudents: number;
+    totalTeachers: number;
+    companyName: string;
+    companyPhoneNumber: string;
+    companyMobileNumber: string;
+    companyEmailAddress: string;
+    representativeNamePrefix: string;
+    representativeNameSuffix: string;
+    representativeFirstName: string;
+    representativeMiddleName: string;
+    representativeLastName: string;
+    representativePhoneNumber: string;
+    representativeMobileNumber: string;
+    representativeEmailAddress: string;
+    companyAddress1: string;
+    companyAddress2: string;
+    companyTown: string;
+    companyCity: string;
+    companyRegion: string;
+    companyZipCode: string;
+    companyCountry: string;
+    businessStructure: string;
+}

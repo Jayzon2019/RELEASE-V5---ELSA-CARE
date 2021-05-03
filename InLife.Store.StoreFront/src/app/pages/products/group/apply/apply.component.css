@@ -1,0 +1,473 @@
+.datepicker-custom {
+	width: 100%;
+}
+
+mat-datepicker-toggle.mat-datepicker-toggle {
+	position: absolute;
+	right: 1.4%;
+	padding-top: 1%;
+	padding-right: 1%;
+}
+
+.uploadfilecontainer {
+	background-repeat: no-repeat;
+	background-size: 100px;
+	background-position: center;
+	height: 100px;
+	width: 80%;
+	margin: 20px auto;
+	border: 2px dashed #111111;
+	border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+	border: 2px dashed #2895df;
+	cursor: pointer;
+	/* background-color:#9ecbec !important; */
+	opacity: 0.8;
+}
+
+.files-list {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin: 10px auto;
+	background: #ffffff;
+	border: 1px dashed;
+	border-radius: 12px;
+	padding: 5px;
+	color: #111111;
+}
+
+.files-list .delete-file {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.files-list .delete-file img {
+	width: 30px;
+}
+
+.errormsgs {
+	position: absolute;
+	bottom: 0px;
+	color: #e43e25;
+	width: 100%;
+	font-size: 80%;
+	font-weight: 400;
+}
+
+.identity-document-preview {
+	margin: 20px 0;
+	position: relative;
+	display: block;
+	padding: 20px;
+	background: #ccc;
+	text-align: center;
+}
+
+.identity-document-preview > img {
+	display: block;
+	width: 100%;
+}
+
+.error-msg {
+    display: flex;
+	justify-content: center;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.error-msg span {
+	padding: 10px 60px;
+	background: #e45d25;
+	color: white;
+}
+
+.success-upload {
+	color: #2895df !important;
+}
+
+.caveat {
+	display: block;
+	margin-top: 5px;
+	font-size: smaller;
+
+}
+
+ol.life-products-ol {
+	margin-top: 15px;
+	padding-left: 15px;
+}
+
+ol.life-products-ol-sub {
+	margin-top: 15px;
+	padding-left: 30px;
+}
+ol li::marker {
+	padding-right: 10px !important;
+}
+
+ol.life-products-ol[type="1"] li {
+	list-style: decimal;
+	list-style-position: inside;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+
+ol.life-products-ol-sub[type="a"] li {
+	list-style: lower-alpha;
+	list-style-position: inside;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+
+
+
+.identity-document-preview > button {
+	display: block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 0;
+	background: #e43e25;
+	color: #fff;
+}
+.file-label {
+	margin-bottom: 0px !important;
+	margin-top: 30px;
+}
+
+.file-label span {
+	color: red;
+	font-size: 12px;
+}
+.uploadimgescustom .drag-text h3 {
+	padding: 30px 0 !important;
+	text-transform: inherit !important;
+}
+.last-contact {
+	margin-top: 12px;
+}
+
+#back-btn {
+	margin-right: 30px;
+}
+
+#step_head {
+	font-size: 18px;
+	color: #070752;
+	font-weight: 600;
+	margin-bottom: 40px;
+}
+
+.pagetitles {
+	line-height: 1.4;
+}
+
+.radio-container {
+	padding-left: 50px;
+	line-height: 1.4;
+	font-weight: 500;
+}
+
+.anti-money {
+	margin-bottom: 20px;
+}
+
+.right-panel {
+	background: #f5f7fd;
+	padding: 140px 20px 20px;
+	top: 0;
+	z-index: 9999;
+	min-width: 242px;
+	right: 0px;
+}
+
+/* ::ng-deep .main-nav{
+ 	  display: none;
+   } */
+
+h1 {
+	color: #070752;
+}
+
+.right-panel .col-md-12 {
+	padding: 0px;
+}
+.totalprice {
+	color: #070752;
+	font-size: 30px;
+	font-weight: 800;
+	margin: 13px 0 16px;
+	text-transform: uppercase;
+}
+.subprice {
+	color: #070752;
+	font-size: 12px;
+	font-weight: 600;
+	margin: 10px 0 15px;
+	text-transform: uppercase;
+}
+.subprice1 {
+	color: #070752;
+	font-size: 12px;
+	font-weight: 600;
+	margin: 10px 0 15px;
+	text-transform: uppercase;
+}
+.faq #faq {
+	font-size: 14px;
+}
+.stepdetail .preminumform label {
+	color: #42414d;
+}
+.packageavail h5,
+.packageavail p,
+.packageavail h2 {
+	color: #42414d;
+}
+.selected-li h5,
+.selected-li p,
+.selected-li h2 {
+	color: #fff;
+}
+.packageavail p {
+	font-size: 15px;
+}
+
+.packageavail li.col-md-3 {
+	padding: 0 7px;
+}
+.ppolcy span {
+	line-height: 23px;
+}
+.savebtns:hover,
+.savebtns {
+	padding: 1em 2em;
+}
+.stepdetail .black {
+	color: #070755 !important;
+}
+.stepdetail h4 {
+	color: #070752;
+}
+
+.label {
+	color: #7e7e7e;
+	font-size: 12px;
+	margin-bottom: 0.5rem;
+	margin-top: 0.5rem;
+	font-weight: 400;
+}
+
+.faq {
+	font-size: 12px;
+	margin-top: 40px;
+	cursor: pointer;
+}
+
+.total {
+	margin-top: 50px;
+}
+img {
+	max-width: 70px !important;
+	margin: auto !important;
+}
+/* ::ng-deep .main-nav {
+	display: none;
+}
+
+::ng-deep footer {
+	display: none;
+} */
+.text-dowload {
+	float: right;
+	margin: 30px 0px 5px 5px;
+	color: red !important;
+	font-size: 13px;
+}
+/*-- css changes by Designer 05-02-21 --*/
+.stepdetail {
+	margin-right: 25px;
+}
+h3#step_head {
+	font-size: 20px !important;
+}
+.steplist ul.steplistmain li ul.innerlist li a {
+	font-size: 14px;
+}
+.stepdetail .preminumform label {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+/* input[type=file]:disabled {
+	display: none;;
+} */
+
+.stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	font-size: 16px;
+}
+input.form-control.is-valid.ng-untouched.ng-pristine.ng-valid {
+	border-color: #2895df;
+}
+.preminumform .col-md-12.mb-3.uploadimgescustom {
+	padding: 0;
+}
+.preminumform h4,
+.right-panel h1.subprice {
+	font-size: 18px;
+}
+.right-panel label.label {
+	font-size: 14px;
+}
+.btnsec button.btn.outlinedbtn {
+	padding: 1em 1.5em;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+ul.steplistmain li.active.complete::before {
+	color: #fff !important;
+}
+.form-control.is-valid,
+.was-validated .form-control:valid {
+	background-image: url("/assets/images/check.png");
+}
+/*--css by Designer start 15-feb-2020 --*/
+@media screen and (max-width: 1279px) and (min-width: 1024px) {
+	.right-panel {
+		position: absolute;
+		padding-top: 100px;
+	}
+	.leftwrapsection {
+		padding: 30px 0;
+	}
+	.stepdetail h1 {
+		font-size: 34px;
+		margin-bottom: 45px;
+		text-align: left;
+	}
+	.col-md-9.tabsamll {
+		max-width: 66.6% !important;
+	}
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.col-md-9.tabsamll form {
+		padding-left: 0x;
+		/* width: 77%; */
+	}
+	.btnsec.text-right[_ngcontent-qiv-c134] {
+		margin-right: 66px;
+	}
+
+	button.btn {
+		margin: 10px auto;
+	}
+}
+
+@media screen and (max-width: 1080px) and (min-width: 768px) {
+	.leftwrapsection {
+		padding: 30px 15px;
+	}
+	.col-md-9.tabsamll {
+		max-width: 70%;
+	}
+	.col-md-2.col-12.tabsamll,
+	.col-md-3.tabsamll {
+		max-width: 30%;
+	}
+	.stepdetail {
+		margin-right: 0 !important ;
+	}
+	.right-panel {
+		z-index: 99;
+		min-width: 92vw !important;
+		padding: 25px;
+		position: relative !important;
+	}
+	.steplist ul.steplistmain li {
+		font-size: 20px;
+	}
+	.steplist ul.steplistmain li a {
+		font-size: 14px !important;
+	}
+	.stepdetail h1 {
+		font-size: 32px;
+		margin-bottom: 45px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+		font-size: 18px;
+	}
+
+	input.form-control.ng-untouched.ng-pristine.ng-invalid,
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		height: 46px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 20px;
+	}
+	.stepdetail .preminumform input,
+	.stepdetail .preminumform select {
+		font-size: 14px;
+	}
+	li.wow.fadeInUp.col-md-3.plan-card.animated {
+		max-width: 50%;
+	}
+	.wealth-box h2 {
+		font-size: 24px !important;
+	}
+	.preminumform .col-md-4 {
+		max-width: 100%;
+	}
+}
+@media screen and (max-width: 767px) {
+	.btnsec.text-right {
+		margin-right: 0 !important;
+	}
+	.steplist,
+	.right-panel {
+		position: relative !important;
+	}
+
+	.tabsamll {
+		padding: 25px 0 0;
+	}
+	.stepdetail h1 {
+		font-size: 30px !important;
+		margin-bottom: 50px;
+	}
+	.stepdetail h3 {
+		margin-bottom: 20px;
+	}
+	.stepdetail .preminumform label {
+		margin-bottom: 0.5rem;
+	}
+	.stepdetail {
+		margin: auto auto 35px !important;
+	}
+	.packageavail ul.row {
+		margin: auto !important;
+	}
+	.right-panel {
+		padding: 25px !important;
+	}
+	button.btn.savebtns.outlinedbtn {
+		margin-top: 30px !important;
+	}
+}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -13,18 +13,20 @@ namespace InLife.Store.Infrastructure.Repository
 	public abstract class EntityRepository<T> : IEntityRepository<T>
 		where T : BaseEntity
 	{
-		protected IApplicationContext context;
+		protected IContext context;
 		protected DbSet<T> dbset;
 
 		protected IQueryable<T> dataset;
 
-		public EntityRepository(IApplicationContext context)
+		public EntityRepository(IContext context)
 		{
 			this.context = context
 				?? throw new ArgumentNullException("Context cannot be null");
 
 			this.dbset = this.context.Set<T>();
 		}
+
+		#region Data Access
 
 		public virtual T Get(object id)
 		{
@@ -40,6 +42,15 @@ namespace InLife.Store.Infrastructure.Repository
 		{
 			return this.dbset.Find(id);
 		}
+
+		public virtual IQueryable<T> GetAll()
+		{
+			return this.dataset;
+		}
+
+		#endregion Data Access
+
+		#region Data Manipulation
 
 		public virtual void Create(T entity)
 		{
@@ -58,7 +69,6 @@ namespace InLife.Store.Infrastructure.Repository
 			this.dbset.AddRange(entities);
 			this.context.SaveChanges();
 		}
-
 
 		public virtual void Update(T entity)
 		{
@@ -96,10 +106,12 @@ namespace InLife.Store.Infrastructure.Repository
 			this.context.SaveChanges();
 		}
 
-		public virtual IQueryable<T> GetAll()
+		public virtual int SaveChanges()
 		{
-			return this.dataset;
+			return this.context.SaveChanges();
 		}
+
+		#endregion Data Manipulation
 
 		protected virtual void InitializeDataSet(IQueryable<T> dataset)
 		{

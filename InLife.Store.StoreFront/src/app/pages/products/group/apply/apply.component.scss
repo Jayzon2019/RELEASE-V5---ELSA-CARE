@@ -1,0 +1,41 @@
+.group-apply-page {
+
+    .uploadimgescustom {
+        .requirement-label-wrapper {
+            display: flex;
+            justify-content: space-between;
+
+            a {
+                text-align: right;
+            }
+        }
+    }
+
+
+
+    @media (max-width: 1540px) {
+        ul.innerlist > li {
+            width: 75%;
+        }
+
+        .steplist ul.steplistmain li ul.innerlist li.active:after {
+            height: 75px !important;
+        }
+
+        
+    }
+
+    @media (max-width: 890px) {
+
+        .steplist ul.steplistmain li ul.innerlist li.active:after {
+            height: 75px !important;
+        }
+        .steplist ul.steplistmain li ul.innerlist li:after { 
+            // top: 15px
+        }
+
+        .steplist {
+            position: absolute;
+        }
+    }
+}

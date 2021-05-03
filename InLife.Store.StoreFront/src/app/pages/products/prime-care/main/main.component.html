@@ -1,0 +1,668 @@
+<main>
+
+	<section class="hero-slider section-hero-care-area">
+		<div style="background: url(/assets/images/hero-prime-care.jpg) 100% 100% no-repeat; background-size: cover;" class="{{'section section-hero wow fadeInUp hero-slide-'}}">
+			<div class="container">
+				<div style="{{getPosition(slider?.contentPostion)}}" class="hero-content">
+					<h2 style="{{'color:' + getColor(slider?.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.headingColor) + '!important;'}}">{{slider?.heading }}<br class="only-in-mobile" /></h2>
+					<p style="{{'color:' + getColor(slider?.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.subHeadingColor) + '!important;'}}">{{ slider?.subHeading }}</p>
+					<a href="javascript:void(0)" (click)="scroll()" class="btn-orange">{{slider?.primeHeroBtnTxt }}</a>
+				</div>
+			</div>
+			<img [src]="sanitize(slider?.primeHeroMobBg)" class="only-in-mobile">
+		</div>
+	</section>
+
+	<section class="section section-features">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">
+				Your Dependable Partner in Case <br />Critical Illness Strikes
+			</h2>
+
+			<!-- <ul class="feature-list" style="display: none;">
+				<li class="feature-item wow fadeInUp">
+					<img src="assets/images/features-icon-3.png"
+						 alt="Get the latest deals"><span>Exclusive product offerings</span>
+				</li>
+				<li class="feature-item wow fadeInUp">
+					<img src="assets/images/features-icon-1.png"
+						 alt="Buy online fast and hassle-free"><span>Fast and hassle-free application</span>
+				</li>
+				<li class="feature-item wow fadeInUp">
+					<img src="assets/images/features-icon-2.png"
+						 alt="No long interview and paperwork"><span>No long interview and paperwork</span>
+				</li>
+				<li class="feature-item wow fadeInUp">
+					<img src="assets/images/features-icon-4.png"
+						 alt="Safe and secured transaction"><span>Safe and secured transaction</span>
+				</li>
+			</ul> -->
+			<ul class="feature-list-item" id="product-benefits">
+				<li class="">
+					<div class="feature-list-col">
+						<div class="feature-img case-icon">
+							<img src="assets/images/Cash-Benefit.svg"
+								 alt="GCash Benefit">
+						</div>
+						<div class="feature-content">
+							<span>Cash Benefit</span>
+							<p>
+								If you are diagnosed by a doctor with any of the <a href="#covered-critical"
+															rel="modal:open">35 covered critical illnesses</a>, receive a lump sum along
+								with a monthly cash allowance up to 30 months.
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="">
+					<div class="feature-list-col">
+						<div class="feature-img disability-icon">
+							<img src="assets/images/Disability-Benefit.svg"
+								 alt="Disability Benefit">
+						</div>
+						<div class="feature-content">
+							<span>Total and Permanent Disability Benefit</span>
+							<p>
+								While receiving the monthly cash allowance and you become totally and permanently
+								disabled due to the diagnosed critical illnesses, you will receive a lump sum amount
+								equivalent to thirty-six (36) times the monthly cash allowance.
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="">
+					<div class="feature-list-col">
+						<div class="feature-img death-icon">
+							<img src="assets/images/Death-Benefit.svg"
+								 alt="Life Insurance Benefit">
+						</div>
+						<div class="feature-content">
+							<span>Life Insurance Benefit</span>
+							<p>
+								If you pass away while receiving the monthly cash allowance, your beneficiary/ies
+								shall receive a lump sum equal to all unpaid monthly cash allowances.
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="">
+					<div class="feature-list-col">
+						<div class="feature-img medical-icon">
+							<img src="assets/images/Medical-Expert-Opinion.svg"
+								 alt="Medical Expert Opinion">
+						</div>
+						<div class="feature-content">
+							<span>Medical Expert Opinion</span>
+							<p>
+								Receive expert medical advice and opinion to help you make the best decision on
+								treatments through <a href="https://bestdoctors.com/southeast-asia/"
+									  target="_blank">Best Doctors™</a>.
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="section-about-heading">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">For as low as <del>P</del>1,300* a month</h2>
+			<p class="wow fadeInUp">
+				*For female, 18 years old, Plan 1M, ₱1 million coverage <br />*Renewal Premiums shall be
+				based on insured’s desired coverage and attained age
+			</p>
+		</div>
+	</section>
+
+	<section class="section section-about" style="padding-bottom: 0; ">
+		<div class="container">
+			<div class="only-in-desktop about-desktop-banner"></div>
+			<div class="container-half">
+				<h2 class="section-header  wow fadeInUp">InLife Store Checklist <br />Before You Get Started </h2>
+				<ul class="about-checklist">
+					<li class="wow fadeInUp">
+						Filipino citizenship and currently residing <br />in the Philippines
+					</li>
+					<li class="wow fadeInUp">Valid government-issued ID</li>
+					<li class="wow fadeInUp">Credit/debit card for online payment</li>
+				</ul>
+			</div>
+		</div>
+		<p class="only-in-mobile mb00"><img src="assets/images/about-bg.jpg" alt="" class="about-banner"></p>
+	</section>
+
+	<section class="section-easy-step">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">Easy 3-Step Application Process</h2>
+			<div class="three-step">
+				<!-- <div class="line-svg" style="display: none;">
+					<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+						 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+						 xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+						 xmlns:xlink="http://www.w3.org/1999/xlink"
+						 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+						 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="mysvg" version="1.1"
+						 inkscape:version="0.48.5 r10040" width="1225.7102" height="254.88278"
+						 sodipodi:docname="animation-with-color.svg">
+						<style>
+							#path3765 {
+								animation: dash 3s linear forwards;
+								fill: none;
+								stroke: url(#linearGradient3810);
+								stroke-width: 3.50000000000000000;
+								stroke-linecap: butt;
+								stroke-linejoin: miter;
+								stroke-miterlimit: 4;
+								stroke-opacity: 1;
+								stroke-dasharray: none
+							}
+
+							#path2995-1 {
+								animation: dash1 3s;
+								fill: #ed8327;
+								fill-opacity: 1;
+								fill-rule: evenodd;
+								stroke: none;
+							}
+
+							@keyframes dash {
+								from {
+									stroke-dasharray: 1631;
+									stroke-dashoffset: 1631;
+								}
+
+								to {
+									stroke-dasharray: 1631;
+									stroke-dashoffset: 0;
+								}
+							}
+
+							@keyframes dash1 {
+								0% {
+									opacity: 0;
+								}
+
+								99% {
+									opacity: 0;
+								}
+
+								100% {
+									opacity: 1;
+								}
+							}
+						</style>
+
+						<defs id="defs2989">
+							<linearGradient id="linearGradient3812">
+								<stop id="stop3814" offset="0" style="stop-color:#1f97d3;stop-opacity:1;" />
+								<stop style="stop-color:#3755a5;stop-opacity:1;" offset="0.47854841"
+									  id="stop3816" />
+								<stop id="stop3818" offset="0.51287097"
+									  style="stop-color:#9d3953;stop-opacity:1;" />
+								<stop id="stop3820" offset="1" style="stop-color:#ed8327;stop-opacity:1;" />
+							</linearGradient>
+							<linearGradient id="linearGradient3798">
+								<stop style="stop-color:#1f97d3;stop-opacity:1;" offset="0" id="stop3800" />
+								<stop id="stop3806" offset="0.50715053"
+									  style="stop-color:#3755a5;stop-opacity:1;" />
+								<stop style="stop-color:#9d3953;stop-opacity:1;" offset="0.51188737"
+									  id="stop3808" />
+								<stop style="stop-color:#ed8327;stop-opacity:1;" offset="1" id="stop3802" />
+							</linearGradient>
+							<linearGradient inkscape:collect="always" xlink:href="#linearGradient3798"
+											id="linearGradient3804" x1="-3.7402344e-006" y1="127.44139" x2="1225.7103"
+											y2="127.44139" gradientUnits="userSpaceOnUse" />
+							<linearGradient inkscape:collect="always" xlink:href="#linearGradient3812"
+											id="linearGradient3810" gradientUnits="userSpaceOnUse" x1="-3.7402344e-006"
+											y1="127.44139" x2="1225.7103" y2="127.44139" />
+						</defs>
+
+						<g id="g3785" style="stroke:url(#linearGradient3804)">
+							<path transform="translate(-356.52042,-401.72872)"
+								  d="m 372.29648,529.33746 a 7.888031,7.888031 0 1 1 -15.77606,0 7.888031,7.888031 0 1 1 15.77606,0 z"
+								  sodipodi:ry="7.888031" sodipodi:rx="7.888031" sodipodi:cy="529.33746"
+								  sodipodi:cx="364.40845" id="path2995"
+								  style="fill:#1f97d3;fill-opacity:1;fill-rule:evenodd;stroke:none"
+								  sodipodi:type="arc" />
+							<path sodipodi:nodetypes="cccccccc" inkscape:connector-curvature="0" id="path3765"
+								  d="m 13.663124,127.8062 110.933856,-0.61974 c 3.14694,-163.678674 243.80304,-170.780854 249.13638,0 l 113.41283,-0.61975 c 14.15146,168.45232 240.14839,168.84987 253.47459,0.61974 l 112.7931,0 c 1.8597,-154.527964 236.71002,-179.176924 251.61532,0.61975 l 108.4549,-0.61975"
+								  style="fill:none;stroke:url(#linearGradient3810);stroke-width:3.50000000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+							<path transform="translate(853.41378,-401.3905)"
+								  d="m 372.29648,529.33746 a 7.888031,7.888031 0 1 1 -15.77606,0 7.888031,7.888031 0 1 1 15.77606,0 z"
+								  sodipodi:ry="7.888031" sodipodi:rx="7.888031" sodipodi:cy="529.33746"
+								  sodipodi:cx="364.40845" id="path2995-1"
+								  style="fill:#ed8327;fill-opacity:1;fill-rule:evenodd;stroke:none"
+								  sodipodi:type="arc" />
+						</g>
+					</svg>
+				</div> -->
+				<ul>
+					<li>
+						<div class="step-icon-wrap"><img src="assets/images/step01.svg" alt="Step one"></div>
+						<div class="step-title">STEP 1: Get a Quote</div>
+					<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
+					</li>
+					<li>
+						<div class="step-icon-wrap"><img src="assets/images/step02.svg" alt="Step one"></div>
+						<div class="step-title">STEP 2: Apply</div>
+					<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
+					</li>
+					<li>
+						<div class="step-icon-wrap"><img src="assets/images/step03.svg" alt="Step one"></div>
+						<div class="step-title">STEP 3: Pay</div>
+					<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-products pad-bottom-0 ctb" id="ihc">
+		<div class="container">
+			<h2 class="section-header wow fadeInUp">Choose the Best Plan for You</h2>
+			<!-- <p class="section-lead wow fadeInUp" style="display: none;">
+				Because life happens, InLife Health Care -
+				every Filipino’s partner in getting convenient, <br />affordable, and medically-appropriate health
+				services - is ready to support you through it.
+			</p> -->
+
+			<ul class="product-list-item only-in-desktop plan-slider">
+				<li class=""> 
+					<div class="plan">PLAN 30</div>
+					<div class="product-list-content">
+						<span class="product-price-prime">P1,080,000</span>
+						<span class="product-subtitle">Total Cash Benefit</span>
+						<div class="product-item-inner-content"><p>Inclusive of Lump Sum worth P180,000 and 30-monthly cash allowance of P30,000</p></div>
+						<a [routerLink]="['/prime-care/quote']" [queryParams]="{ plan: 'plan_30'}"
+						   class="btn-orange button-center  wow fadeInUp" id="">Choose Plan</a>
+
+					</div>
+				</li>
+				<li class="">
+					<div class="plan other-bg">PLAN 50</div>
+					<div class="product-list-content">
+						<span class="product-price-prime">P1,800,000</span>
+						<span class="product-subtitle">Total Cash Benefit</span>
+						<div class="product-item-inner-content"><p>Inclusive of Lump Sum worth P300,000 and 30-monthly cash allowance of P50,000</p></div>
+						<a [routerLink]="['/prime-care/quote']" [queryParams]="{ plan: 'plan_50'}"
+						   class="btn-orange button-center  wow fadeInUp" id="">Choose Plan</a>
+					</div>
+				</li>
+			</ul>
+			<owl-carousel-o class="owl-carousel owl-theme plan-carousel-mobile product-list-item only-in-desktop plan-slider" [options]="planCarouselMobile">
+				<ng-template carouselSlide>
+					<div class="item">
+						<ul class="">
+							<li class="">
+
+								<div class="plan">PLAN 30</div>
+								<div class="product-list-content">
+									<span class="product-price-prime">P1,080,000</span>
+									<span class="product-subtitle">Total Cash Benefit</span>
+									<div class="product-item-inner-content"><p>Inclusive of Lump Sum worth P180,000 and 30-monthly cash allowance of P30,000</p></div>
+									<a [routerLink]="['/prime-care/quote']" [queryParams]="{ plan: 'plan_30'}"
+									   class="btn-orange button-center  wow fadeInUp" id="">Choose Plan 1</a>
+								</div>
+
+							</li>
+
+						</ul>
+					</div>
+				</ng-template>
+				<ng-template carouselSlide>
+					<div class="item">
+						<ul>
+							<li class="">
+
+								<div class="plan other-bg">PLAN 50</div>
+								<div class="product-list-content">
+									<span class="product-price-prime">P1,800,000</span>
+									<span class="product-subtitle">Total Cash Benefit</span>
+									<div class="product-item-inner-content"><p>Inclusive of Lump Sum worth P300,000 and 30-monthly cash allowance of P50,000</p></div>
+									<a [routerLink]="['/prime-care/quote']" [queryParams]="{ plan: 'plan_50'}"
+									   class="btn-orange button-center  wow fadeInUp" id="">Choose Plan</a>
+								</div>
+
+							</li>
+						</ul>
+					</div>
+				</ng-template>
+			</owl-carousel-o>
+
+			<ul class="product-list-item only-in-mobile plan-slider-sp only-in-mobile-hidden">
+				<li class="">
+					<div class="plan">PLAN 30</div>
+					<div class="product-list-content">
+						<span class="product-price-prime">P1,080,000</span>
+						<span class="product-subtitle">Total Cash Benefit</span>
+						<div class="product-item-inner-content"><p>Inclusive of Lump Sum worth P180,000 and 30-monthly cash allowance of P30,000</p></div>
+
+						<a [routerLink]="['/prime-care/quote']" [queryParams]="{ plan: 'plan_30'}"
+						   class="btn-orange button-center  wow fadeInUp" id="">Choose Plan</a>
+					</div>
+				</li>
+				<li class="">
+					<div class="plan other-bg">PLAN 50</div>
+					<div class="product-list-content">
+						<span class="product-price-prime">P1,800,000</span>
+						<span class="product-subtitle">Total Cash Benefit</span>
+						<div class="product-item-inner-content"><p>Inclusive of Lump Sum worth P300,000 and 30-monthly cash allowance of P50,000</p></div>
+						<a [routerLink]="['/prime-care/quote']" [queryParams]="{ plan: 'plan_50'}"
+						   class="btn-orange button-center  wow fadeInUp" id="">Choose Plan</a>
+					</div>
+				</li>
+			</ul>
+
+			<!-- <ul class="product-list" style="display: none;">
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#all-in-80" rel="modal:open">
+							<img src="assets/images/card-encare-allin-adults.png" alt="ER Care All-In 80 Adults">
+							<span class="product-title">ER Care All-In 80 Adults</span>
+							<span class="product-price">P1,350.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#all-in-100" rel="modal:open">
+							<img src="assets/images/card-encare-allin-adults-100.png" alt="ER Care All-In 100 Adults">
+							<span class="product-title">ER Care All-In 100 Adults</span>
+							<span class="product-price">P1,750.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#all-in-60-kids" rel="modal:open">
+							<img src="assets/images/er_care_basic_all_in_-_kids_er_care_all_in_60_kids-card.png"
+								 alt="ER Care All-In 60 Kids">
+							<span class="product-title">ER Care All-In 60 Kids</span>
+							<span class="product-price">P3,150.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#care-all-in-100-kids" rel="modal:open">
+							<img src="assets/images/er_care_basic_all_in_-_kids_er_care_all_in_100_kids-card.png"
+								 alt="ER Care All-In 100 Kids">
+							<span class="product-title">ER Care All-In 100 Kids</span>
+							<span class="product-price">P5,150.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#care-all-in-80-kids" rel="modal:open">
+							<img src="assets/images/er_care_basic_all_in_-_kids_er_care_all_in_80_kids-card.png"
+								 alt="ER Care All-In 80 Kids">
+							<span class="product-title">ER Care All-In 80 Kids</span>
+							<span class="product-price">P4,150.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#care-basic-50" rel="modal:open">
+							<img src="assets/images/er_care_basic_50_er_care_basic-card.png" alt="ER Care Basic 50">
+							<span class="product-title">ER Care Basic 50</span>
+							<span class="product-price">P700.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#care-booster-60" rel="modal:open">
+							<img src="assets/images/er_care_booster_er_care_booster_60_adults-card.png"
+								 alt="ER Care Booster 60">
+							<span class="product-title">ER Care Booster 60</span>
+							<span class="product-price">P800.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#care-booster-80" rel="modal:open">
+							<img src="assets/images/er_care_booster_er_care_booster_80_adults-card.png"
+								 alt="ER Care Booster 80">
+							<span class="product-title">ER Care Booster 80</span>
+							<span class="product-price">P900.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#care-booster-100" rel="modal:open">
+							<img src="assets/images/er_care_booster_er_care_booster_100_adults-card.png"
+								 alt="ER Care Booster 100">
+							<span class="product-title">ER Care Booster 100</span>
+							<span class="product-price">P1,000.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#medconsult-adults" rel="modal:open">
+							<img src="assets/images/medconsult_medconsult_adults-card.png" alt="MedConsult Adults">
+							<span class="product-title">MedConsult Adults</span>
+							<span class="product-price">P2,500.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#medconsult-kids" rel="modal:open">
+							<img src="assets/images/medconsult_medconsult_kids-card.png" alt="MedConsult Kids">
+							<span class="product-title">MedConsult Kids</span>
+							<span class="product-price">P3,000.00</span>
+						</a>
+					</div>
+				</li>
+				<li class="product-item  wow fadeInUp">
+					<div class="product-card">
+						<a href="#medconsult-seniors" rel="modal:open">
+							<img src="assets/images/medconsult_medconsult_seniors-card.png" alt="MedConsult Seniors">
+							<span class="product-title">MedConsult Seniors</span>
+							<span class="product-price">P3,500.00</span>
+						</a>
+					</div>
+				</li>
+			</ul> -->
+
+		</div>
+	</section>
+
+	<!-- <section class="section section-newsletter" style="display: none;">
+		<div class="container">
+			<h2 class="section-header">Need Help?</h2>
+			<p class="section-lead">Hotline: (632) 8-876-1800<br> Toll-Free: 1-800-10-INSULAR (4678527)</p>
+		</div>
+	</section> -->
+
+</main>
+
+<div id="covered-critical" class="modal">
+	<div>
+		<a href="#" class="modal-close" rel="modal:close"><i class="fa fa-times" aria-hidden="true"></i></a>
+		<div class="modal-header">
+			<h3 class="modal-product-name">Critical Illness</h3>
+			<p class="modal-product-code">Critical Illness refers to any of the following:</p>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div class="col84s">
+			<div class="col8e">
+				<table class="tables2">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>Critical Illness</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Alzheimer’s Disease / Severe Dementia</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Aplastic Anaemia</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>Bacterial Meningitis​</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>Benign Brain Tumour</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>Blindness (Profound Vision Loss)</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>Brain Surgery</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>Cancer</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>Coma</td>
+						</tr>
+						<tr>
+							<td>9</td>
+							<td>Coronary Artery By-pass Graft</td>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td>Deafness (Loss of Hearing)</td>
+						</tr>
+						<tr>
+							<td>11</td>
+							<td>End-Stage Liver Disease</td>
+						</tr>
+						<tr>
+							<td>12</td>
+							<td>End-Stage Lung Disease</td>
+						</tr>
+						<tr>
+							<td>13</td>
+							<td>Fulminant Hepatitis</td>
+						</tr>
+						<tr>
+							<td>14</td>
+							<td>Heart Attack (Myocardial Infarction​)</td>
+						</tr>
+						<tr>
+							<td>15</td>
+							<td>Heart Valve Surgery</td>
+						</tr>
+						<tr>
+							<td>16</td>
+							<td>HIV due to Blood Transfusion</td>
+						</tr>
+						<tr>
+							<td>17</td>
+							<td>HIV Infection contracted in an Eligible Occupation</td>
+						</tr>
+						<tr>
+							<td>18</td>
+							<td>Kidney Failure</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col4e">
+				<table class="tables2">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>Critical Illness</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>19</td>
+							<td>Loss of Limbs</td>
+						</tr>
+						<tr>
+							<td>20</td>
+							<td>Loss of Speech</td>
+						</tr>
+						<tr>
+							<td>21</td>
+							<td>Major Burns (Third-Degree Burns)</td>
+						</tr>
+						<tr>
+							<td>22</td>
+							<td>Major Head Trauma</td>
+						</tr>
+						<tr>
+							<td>23</td>
+							<td>Major Organ / Bone Marrow Transplantation</td>
+						</tr>
+						<tr>
+							<td>24</td>
+							<td>Motor Neurone Disease</td>
+						</tr>
+						<tr>
+							<td>25</td>
+							<td>Multiple Sclerosis</td>
+						</tr>
+						<tr>
+							<td>26</td>
+							<td>Muscular Dystrophy</td>
+						</tr>
+						<tr>
+							<td>27</td>
+							<td>Paralysis / Paraplegia</td>
+						</tr>
+						<tr>
+							<td>28</td>
+							<td>Parkinson’s Disease</td>
+						</tr>
+						<tr>
+							<td>29</td>
+							<td>Persistent Vegetative State</td>
+						</tr>
+						<tr>
+							<td>30</td>
+							<td>Poliomyelitis</td>
+						</tr>
+						<tr>
+							<td>31</td>
+							<td>Primary Cardiomyopathy</td>
+						</tr>
+						<tr>
+							<td>32</td>
+							<td>Primary Pulmonary Arterial Hypertension</td>
+						</tr>
+						<tr>
+							<td>33</td>
+							<td>Stroke</td>
+						</tr>
+						<tr>
+							<td>34</td>
+							<td>Surgery to Aorta</td>
+						</tr>
+						<tr>
+							<td>35</td>
+							<td>Terminal Illness</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<p class="modal-footer-text">
+			Specific definitions and exclusions of each of the critical illness listed
+			above can be found in the Critical Illness Definitions and Specific Exclusions portion of the contract.
+		</p>
+	</div>
+</div>

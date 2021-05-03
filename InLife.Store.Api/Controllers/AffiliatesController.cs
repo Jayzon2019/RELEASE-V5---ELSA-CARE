@@ -60,9 +60,7 @@ namespace InLife.Store.Api
 				var resultObject = JsonConvert.DeserializeObject<AffiliateInfoResponse>(resultJson);
 
 				if (resultObject.Result.Success)
-				{
 					return Ok(resultObject.Agent);
-				}
 
 				return NotFound();
 			}

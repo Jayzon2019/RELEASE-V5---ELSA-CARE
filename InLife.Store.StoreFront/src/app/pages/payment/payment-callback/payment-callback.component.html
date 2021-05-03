@@ -1,0 +1,35 @@
+<div class="mainpagewrap">
+	<div class="row m-0">
+		<div class="col-md-12 p-0">
+			<div class="mainwrapper">
+				<div class="logotitlebar">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="logo-sec text-center"><a href="javascript:void(0)"><img width="200px" src="assets/images/logo.png"></a></div>
+						</div>
+					</div>
+				</div>
+				<div class="mainwizard">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="stepdetail">
+								<div class="pagetitles">
+									<span class="wow fadeInUp">
+										<h1>{{message}}</h1>
+									</span>
+										<div class="controls mt-5 wow fadeInUp" *ngIf="hasErrorSavingPayment">
+											<button type="button" mat-button class="button button-primary button-outlined" style="font-size: 12px;" (click)="tryAgain()" >Try Again</button>
+										</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>

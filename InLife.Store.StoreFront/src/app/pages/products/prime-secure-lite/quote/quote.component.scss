@@ -1,0 +1,88 @@
+::ng-deep .my-tooltip {
+    font-size: 13px;
+    background: #000 !important;
+    white-space: pre-line !important;
+    padding: 1rem;
+}
+
+.ps-lite-quote-page {
+    .steplist ul.steplistmain li ul.innerlist{
+        li.active:after {
+            height: 60px;
+        }
+        li:after {
+            height: 60px;
+        }
+    }
+
+    .formcontainer.step2, .formcontainer.step3 {
+        padding-top: 25px !important;
+    }
+
+    .steplist-wrapper {
+        .steplist{
+            position: fixed;
+        }
+    }
+
+    .health-declartions-list-items {
+        list-style-type: inherit; 
+        list-style: disc;
+		list-style-position: inside;
+        padding-left: 15px;
+        li {
+            margin-bottom: 5px;
+        }
+    }
+
+    .roghtwrapsection-wrapper {
+        &.only-in-mobile {
+            display: none;
+        }
+
+        &.only-in-desktop {
+            display: block;
+        }
+
+        @media (max-width: 1080px) {
+            &.only-in-mobile {
+                display: block !important;    
+                padding-bottom: 45px !important;
+                margin-top: -20px !important;
+            }
+            &.only-in-desktop {
+                display: none !important;
+            }
+        }
+    }
+    
+    @media (max-width: 1080px) and (min-width: 801px) {
+        .roghtwrapsection-wrapper {
+            margin-left: 25%;
+            max-width: 75%;
+        }
+
+        .content-wrapper{
+            margin-left: 26%;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .steplist-wrapper > .steplist{
+            position: inherit;
+        }
+    }
+    @media (min-width: 1600px){
+        ul.condtionslist li .opt {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 1250px) {
+        .steplist ul.steplistmain li ul.innerlist {
+            width: 150px;
+        }
+    }
+
+  
+}

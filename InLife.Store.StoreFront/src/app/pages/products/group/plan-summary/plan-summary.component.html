@@ -1,0 +1,318 @@
+<div class="mainpagewrap">
+	<div class="row m-0">
+		<div class="col-md-10 tabfull p-0">
+			<div class="leftwrapsection">
+				<!--<app-inner-header></app-inner-header>-->
+				<div class="mainwizard">
+					<div class="row">
+						<div class="col-md-3 tabsamll">
+							<div class="steplist" style="position:fixed;">
+								<ul class="steplistmain">
+									<li class="active complete">Get a Quote </li>
+									<li class="active complete">
+										Apply
+									</li>
+									<li class="active">
+										Pay
+										<ul class="innerlist">
+											<li class="active">
+												<a href="javascript:void(0)">View Summary</a>
+											</li>
+											<li>
+												<a href="javascript:void(0)">Pay</a>
+											</li>
+										</ul>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-9" id="plan-summary-section">
+							<div class="stepdetail">
+								<div class="pagetitles">
+									<h1 class="mb-3 titlestep">
+										Finalize Your Application
+									</h1>
+								</div>
+
+
+								<!-- step9 strat -->
+
+
+								<div class="formcoantiner step9">
+									<div class="reviewbill">
+
+										<div class="row">
+											<div class="col-md-4 titlebill">
+												<p> Company Information </p>
+											</div>
+											<div class="col-md-8 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0" style="margin-bottom: 0 !important"> Company Name:</p>
+													</div>
+													<div class="col-6" style="margin-bottom: 0 !important">
+														<p>{{companyName}}</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0" style="margin-bottom: 0 !important"> Company Address:</p>
+													</div>
+													<div class="col-6" style="margin-bottom: 0 !important">
+														<p>
+															{{address}}, {{countryTxt}}, {{cityZip}}.
+														</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0" style="margin-bottom: 0 !important"> Contact Number:</p>
+													</div>
+													<div class="col-6" style="margin-bottom: 0 !important">
+														<p>{{landline}}</p>
+														<p>{{mobileNumber}}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<br>
+										<div class="row">
+											<div class="col-md-4 titlebill">
+												<p> Authorized Representative </p>
+											</div>
+											<div class="col-md-8 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0" style="margin-bottom: 0 !important"> Name:</p>
+													</div>
+													<div class="col-6" style="margin-bottom: 0 !important">
+														<p>{{representativeName}}</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0" style="margin-bottom: 0 !important"> Contact Number:</p>
+													</div>
+													<div class="col-6" style="margin-bottom: 0 !important">
+														<p>{{representativeLandline}}</p>
+														<p>{{representativeMobileNumber}}</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0" style="margin-bottom: 0 !important"> Email Address:</p>
+													</div>
+													<div class="col-6" style="margin-bottom: 0 !important; word-break: break-all;">
+														<p>{{representativeEmail}}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-4 titlebill">
+												<p> Plan Details </p>
+											</div>
+											<div class="col-md-8 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p> Product Name:</p>
+													</div>
+													<div class="col-6">
+														<p>{{productName}}</p>
+													</div>
+												</div>
+
+												<div class="row m-0">
+													<div class="col-6">
+														<p>Plan No:</p>
+													</div>
+													<div class="col-6">
+														<p>{{planNo}}</p>
+													</div>
+												</div>
+
+												<div class="row m-0" *ngIf="selectedGroupPlanData.plan !== '3'; else studentsandTeachers">
+													<div class="col-6">
+														<p>Total Number of Members:</p>
+													</div>
+													<div class="col-6">
+														<p>{{totalMembers}}</p>
+													</div>
+												</div>
+												<ng-template #studentsandTeachers>
+													<div class="row m-0" >
+														<div class="col-6">
+															<p>Total Number of Students:</p>
+														</div>
+														<div class="col-6">
+															<p>{{totalStudents}}</p>
+														</div>
+													</div>
+													<div class="row m-0" >
+														<div class="col-6">
+															<p>Total Number of Teachers:</p>
+														</div>
+														<div class="col-6">
+															<p>{{totalTeachers}}</p>
+														</div>
+													</div>
+												</ng-template>
+												<div class="row m-0">
+													<div class="col-6">
+														<p>
+															Premium
+														</p>
+													</div>
+													<div class="col-6">
+														<p>&#8369; {{premiumPerHead}}</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p>
+															Total Premium
+														</p>
+													</div>
+													<div class="col-6">
+														<p>&#8369; {{totalPremium}}</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<br>
+										<div class="row mb-3">
+											<div class="col-md-4 titlebill">
+												<p>Benefits per Member </p>
+											</div>
+											<div class="col-md-8 detailbill">
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0">Life Coverage</p>
+													</div>
+													<div class="col-6">
+														<p>&#8369; {{LifeCoverageperHead}}</p>
+													</div>
+												</div>
+												<div class="row m-0">
+													<div class="col-6">
+														<p class="pb-0" *ngIf="selectedGroupPlanData.plan !== '2'; else guard">
+															Accidental Death and Disability/Total and Permanent Disability Benefit
+														</p>
+														<ng-template #guard>
+															<p class="pb-0">
+																Accidental Death and Disability
+															</p>
+														</ng-template>
+														
+													</div>
+													<div class="col-6">
+														<p>&#8369; {{ADD_TPDCoverageperHead}}</p>
+													</div>
+												</div>
+												<div class="row m-0" *ngIf="selectedGroupPlanData.plan !== '1'">
+													<div class="col-6">
+														<p class="pb-0">Burial Benefit</p>
+													</div>
+													<div class="col-6">
+														<p>&#8369; {{ BurialCoverageperHead}}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<br>
+										<div class="space mt-4"></div>
+										<div class="row">
+											<div class="col-md-3 text-center">
+												<p>
+													<a class="text-danger" href="javascript:Void(0);" (click)="downloadPlanDes()">
+														Plan Description
+													</a>
+												</p>
+											</div>
+											<div class="col-md-6 text-center">
+												<p>
+													<a class="text-danger" href="javascript:Void(0);" (click)="downloadPrivacyFile()">
+														Cancellation and Refund Policy
+													</a>
+												</p>
+											</div>
+											<div class="col-md-3 text-center">
+												<p>
+													<a class="text-danger" (click)="openNewWindow('https://www.insularlife.com.ph/customer-charter')" href="javascript:void(0)">Customer Charter </a>
+												</p>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="form-row p-4 pb-0" style="padding-bottom: 0px !important;">
+									<div class="col-md-12">
+										<label class="radio-container">
+											I have read and understood the Plan Description, Cancellation and Refund Policy and Customer Charter.
+											<input type="checkbox" 
+											[(ngModel)]="IsAlreadyRead" />
+											<span class="checkmark"></span>
+										</label>
+									</div>
+								</div>
+								<p class="pb-3 pt-4 colornew text-center">
+									If you wish to change anything related to your application, click Edit Details. If everything’s good, click Pay Now.
+								</p>
+								<div class="form-row">
+									<div class="col-md-8 col-12">
+										<div class="btnsec text-left">
+											<button type="button" class="btn outlinedbtn" (click)="quote()">
+												<i class="material-icons">arrow_backward</i> EDIT DETAILS
+											</button>
+											<button class="btn savebtns outlinedbtn" (click)="conformSave()">
+												CANCEL APPLICATION
+											</button>
+											<a id="conformBtn" style="display:none" href="#Conform" rel="modal:open">
+												Alert
+											</a>
+										</div>
+									</div>
+									<div class="col-md-4 col-12">
+										<div class="btnsec text-right">
+											<button type="button" (click)="pay()" [disabled]="!IsAlreadyRead"
+													class="btn">
+												PAY NOW
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="col-md-2 tabfull p-0 right-panel">
+			<!--<app-inner-sidebar></app-inner-sidebar>-->
+		</div>
+	</div>
+
+</div>
+<div id="Conform" class="modal" style="max-width: 600px;height: 300px;padding: 100px 50px;">
+	<p class="confirmation-text" style="text-align:center;font-size:20px!important;color:#42414d;">
+		Are you sure you want to cancel the application?
+	</p>
+	<br /><br />
+	<div class="row" style="margin-top:40px;">
+		<div class="col-md-6  col-12 text-center text-md-right" style="margin: 5px 0;">
+			<a id="closeModal" class="btn savebtns outlinedbtn" style="top: 0px;position: relative;padding: 1.0em 4em;font-size: 14px;letter-spacing: 2px;font-weight: 700;margin: auto;border-radius: 6px;text-transform: uppercase;cursor: pointer;" href="#" rel="modal:close">
+				NO
+			</a>
+		</div>
+		<div class="col-md-6  col-12 text-center text-md-left" style="margin: 5px 0;">
+			<button class="button button-primary" (click)="cancel()" data-proceed-button href="#" style="padding: 1.2em 4em;font-size: 14px;">Yes</button>
+		</div>
+	</div>
+</div>

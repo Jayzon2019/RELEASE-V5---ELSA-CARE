@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Mail;
-
+using System.Collections.ObjectModel;
 using InLife.Store.Core.Models;
+using System.IO;
 
 namespace InLife.Store.Core.Services
 {
@@ -10,7 +11,7 @@ namespace InLife.Store.Core.Services
 	{
 		#region General
 
-		Task SendAsync(MailAddress sender, MailAddressCollection recipients, string subject, string body);
+		Task SendAsync(MailAddress sender, MailAddressCollection recipients, string subject, string body, Collection<Attachment> attachments = null);
 
 		Task SendErrorNotificationAsync(ErrorLog errorLog);
 
@@ -22,11 +23,29 @@ namespace InLife.Store.Core.Services
 
 		#endregion
 
-		#region Business
+		#region Business - General
 
-		Task SendQuoteRequestAsync(Quote quote);
+		//Task SendQuoteRequestAsync(Quote quote);
 
-		Task SendOrderConfirmationAsync(Order order);
+		//Task SendOrderConfirmationAsync(Order order);
+
+		#endregion
+
+		#region Business - Group
+
+		Task SendGroupApplicationReferenceCode(GroupApplication application);
+
+		Task SendGroupApplicationOtp(GroupApplication application);
+
+		Task SendGroupApplicationCancel(GroupApplication application);
+
+		Task SendGroupApplicationThankYou(GroupApplication application, string[] benefits);
+
+		Task SendGroupApplicationFeedback(GroupApplication application);
+
+		Task SendGroupApplicationPaymentProof(GroupApplication application, string contentType, Stream stream);
+
+		Task SendGroupApplicationsCompletedBatch(ICollection<GroupApplication> applications);
 
 		#endregion
 	}

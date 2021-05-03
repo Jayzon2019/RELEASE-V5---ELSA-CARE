@@ -1,0 +1,26 @@
+.steplist ul.steplistmain li.active:before {
+    color: #01a7e0;
+}
+
+.form-control.is-valid {
+    background-image: url(/assets/images/check.png);
+}
+
+.steplist-wrapper {
+    .steplist{
+        position: fixed;
+    }
+}
+
+@media (max-width: 1080px) and (min-width: 801px) {
+    .roghtwrapsection-wrapper {
+        margin-left: 25%;
+        max-width: 75%;
+    }
+}
+
+@media (max-width: 800px) {
+    .steplist-wrapper > .steplist{
+        position: inherit;
+    }
+}

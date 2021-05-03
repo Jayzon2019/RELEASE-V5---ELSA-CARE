@@ -1,0 +1,217 @@
+
+											<div class="row">
+												<div class="col-md-4 titlebill">
+													<p>Transaction Details</p>
+												</div>
+
+												<div
+													class="col-md-8 detailbill">
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Reference Number:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content" style="word-break: break-all;">
+																<p>{{txn.MerchTxnRef}}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Transaction Date:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{dateNow}}</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br />
+											<br />
+											<div class="row">
+												<div class="col-md-4 titlebill">
+													<p>Plan Details</p>
+												</div>
+												<div class="col-md-8 detailbill">
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Product Name:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>PRIME SECURE LITE</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Plan Type:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ age.age <= 47 ? 'Plan 2500' : 'Plan 3000' }}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Current Age:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ age.age }}</p>
+															</div>
+														</div>
+													</div>
+	
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Gender:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>
+																	{{
+																		getReferenceDataById(
+																			CONSTANTS.GENDER,
+																			calculationInformation.gender
+																		).name
+																	}}
+																</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Mode of Payment:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>Annual</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Sum Assured:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.totalCashBenefit }}</p>
+															</div>
+														</div>
+													</div>
+	
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>
+																	Extended Spouse Accident Coverage:
+																</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.esc }}</p>
+															</div>
+														</div>
+													</div>
+	
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>
+																	Cancer, Heart Attack
+																	and Stroke Coverage:
+																</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.chas }}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>
+																	COVID-19 Insurance
+																	Benefit (6-month
+																	Coverage):
+																</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{ calculationInformation.covid }}</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br />
+
+											<div class="row">
+												<div class="col-md-4 titlebill">
+													<p>Payment Details</p>
+												</div>
+												<div
+													class="col-md-8 detailbill">
+
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Receipt Number:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{txn.ReceiptNo}}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Amount:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>&#8369;{{ age.age <= 47 ? '2,500.00' : '3,000.00' }}</p>
+															</div>
+														</div>
+													</div>
+													<div class="row m-0 container">
+														<div class="col-6 helper">
+															<div class="title">
+																<p>Payment Status:</p>
+															</div>
+														</div>
+														<div class="col-6 helper-2">
+															<div class="content">
+																<p>{{txn.Message}}</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>

@@ -57,19 +57,27 @@ namespace InLife.Store.Cms
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var connectionString = Configuration.GetConnectionString("DefaultConnection");
+			// DB Context
+			var defaultConnectionString = Configuration.GetConnectionString("DefaultConnection");
 
-			services.AddDbContext<ApplicationContext>(options =>
-				options.UseSqlServer(connectionString));
-
-			services.AddDbContext<IdentityContext>(options =>
-				options.UseSqlServer(connectionString));
+			services
+				.AddDbContext<IdentityContext>(options =>
+					options.UseSqlServer(defaultConnectionString));
+			services
+				.AddDbContext<ApplicationContext>(options =>
+					options.UseSqlServer(defaultConnectionString));
+			services
+				.AddDbContext<PrimeCareContext>(options =>
+					options.UseSqlServer(Configuration.GetConnectionString("PrimeCareConnection")));
+			services
+				.AddDbContext<GroupContext>(options =>
+					options.UseSqlServer(Configuration.GetConnectionString("GroupConnection")));
+			//services
+			//	.AddDbContext<PrimeSecureContext>(options =>
+			//		options.UseSqlServer(Configuration.GetConnectionString("PrimeSecureConnection")));
 
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IUserSessionRepository, UserSessionRepository>();
-
-			services.AddTransient<ICustomerRepository, CustomerRepository>();
-			services.AddTransient<IQuoteRepository, QuoteRepository>();
 
 			services.AddTransient<IActivityLogRepository, ActivityLogRepository>();
 			services.AddTransient<IKeyMetricRepository, KeyMetricRepository>();
@@ -82,7 +90,7 @@ namespace InLife.Store.Cms
 			services.AddTransient<IProductDetailRepository, ProductDetailRepository>();
 			services.AddTransient<IProductRepository, ProductRepository>();
 
-			services.AddTransient<IContentManagement, ContentManagement>();
+			//services.AddTransient<IContentManagement, ContentManagement>();
 
 			services.AddTransient<IEmailService, EmailService>();
 

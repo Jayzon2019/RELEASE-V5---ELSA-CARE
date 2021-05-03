@@ -1,0 +1,105 @@
+.stepdetail .preminumform select {
+	color: #ababab;
+}
+
+.black {
+	color: #000 !important;
+}
+.checkbox-wrap .pf-list-item input:checked + span {
+	background-color: #01a7e0 !important;
+	width: 126px;
+	color: #fff;
+	border: 1px solid #01a7e0 !important;
+}
+.checkbox-wrap .pf-list-item:hover {
+	background-color: #01a7e0 !important;
+	border: 1px solid #01a7e0 !important;
+	color: #fff;
+}
+/*-- css changes 04-march-2021 start here --*/
+.stepdetail h1 {
+	font-size: 42px;
+	font-weight: bold;
+}
+.stepdetail h3 {
+	color: #070752;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+.stepdetail .preminumform label {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+.steplist ul.steplistmain li {
+	font-weight: 600;
+}
+.steplist ul.steplistmain li.active,
+.steplist ul.steplistmain li:hover,
+.steplist ul.steplistmain li ul.innerlist li a:hover,
+.steplist ul.steplistmain li ul.innerlist li.active a {
+	color: #070752;
+}
+.steplist ul.steplistmain li ul.innerlist li a,
+.stepdetail .preminumform input,
+.stepdetail .preminumform select,
+.checkbox-wrap .pf-list-item label span {
+	font-size: 15px;
+	font-weight: 500;
+}
+/* .stepdetail .preminumform input,
+.stepdetail .preminumform select {
+	color: #ababab;
+} */
+.stepdetail .preminumform input:visited,
+.stepdetail .preminumform select:visited {
+	border: 2px solid #2895df;
+}
+input#inputEmail4 {
+	background: #f6f7f8;
+}
+input#inputEmail4::placeholder {
+	color: #070752 !important;
+}
+.stepdetail .preminumform p {
+	line-height: 24px !important;
+	color: #42414d;
+}
+ul.condtionslist li {
+	color: #42414d;
+	line-height: 24px;
+}
+.step6,
+.step7,
+.step8,
+.step5,
+.step2,
+.step3,
+.step4 {
+	margin-bottom: 60px !important;
+}
+.formcoantiner.step3 {
+	margin-top: 75px !important;
+	margin-bottom: 0 !important;
+}
+.pagetitel-sec h3 {
+	display: none;
+}
+.steplist ul.steplistmain li:hover:before,
+.steplist ul.steplistmain li.active:before {
+	color: #01a7e0;
+}
+.form-control:focus,
+.form-control:hover {
+	border-color: #01a7e0 !important;
+}
+
+.form-control.is-valid {
+	background-image: url(/assets/images/check.png);
+}
+
+::ng-deep .my-tooltip {
+	font-size: 13px;
+	background: #000 !important;
+	white-space: pre-line !important;
+	padding: 1rem;
+}

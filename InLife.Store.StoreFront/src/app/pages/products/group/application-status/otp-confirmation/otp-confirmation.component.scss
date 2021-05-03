@@ -1,0 +1,65 @@
+@import './../styles.scss';
+
+@include main-style-group-application-status;
+
+.group-otp-confirm-page {
+    .error-msg {
+        display: block;
+        margin-top: 29px;
+        text-align: center;
+    
+        span {
+            padding: 5px 60px;
+            background: #e45d25;
+            color: white;
+        }
+    }
+
+    .section-header {
+        font-size: 35px !important;
+    }
+    
+    @media (max-width: 1200px) {
+        
+        .section-header {
+            font-size: 25px !important;
+        }
+        p, label, textarea {
+            font-size: 15px;
+        }
+
+        form > input[type=text] {
+            font-size: 25px !important;
+        }
+    
+    }
+    @media (max-width: 600px) {
+        .section-header {
+            font-size: 20px !important;
+        }
+    
+        .controls {
+                font-size: 12px;
+                display: block !important;
+                text-align: center !important;
+        }
+        p, .cancel-feedback-option, textarea, label, a {
+            font-size: 13px;
+        }
+
+        p.ref-code, form > a {
+            margin-top: 25px !important;
+            font-size: 14px;
+        }
+
+        form > input[type=text] {
+            font-size: 18px !important;
+        }
+
+        
+    }
+
+    @media (max-width: 400px) {
+        
+    }
+}

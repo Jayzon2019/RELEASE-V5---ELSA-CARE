@@ -1,0 +1,60 @@
+{
+	"ConnectionStrings":
+	{
+		"DefaultConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+		"PrimeCareConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+		"GroupConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+		"PrimeSecureConnection": "Server=tcp:projectgrey.database.windows.net,1433;Initial Catalog=InLife.Store;Persist Security Info=False;User ID=projectgrey;Password=Wzs9uDKDkwUhoqxf8kjRmkRyxwkjTDer;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+	},
+
+	"ExternalServices":
+	{
+		"GroupSftp":
+		{
+			"Host": "165.232.171.10",
+			"Port": "22",
+			"Username": "root",
+			"Password": "",
+			"PrivateKey": "D:\\home\\.ssh\\InLife-Group-SFTP-OPENSSH",
+			"Passphrase": "P@ssw0rd",
+			"Directory": "/home/group-applications/"
+		}
+	},
+
+	"Smtp":
+	{
+		"Host": "smtp-relay.sendinblue.com",
+		"Port": 587,
+		"Username": "glen@projectgrey.net",
+		"Password": "xsmtpsib-e2798c39c436060c3c59ddce9a852142d3c5f2dd1932c8d36c9e935c05145440-8FIT7ygJcBqs94p3",
+		"EnableSsl": true
+	},
+
+	"Email":
+	{
+		"ErrorNotification":
+		{
+			"SenderName": "InLife Store Functions - #SERVER#",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"info@projectgrey.net"
+			],
+			"Subject": "InLife Store Functions : An error has occurred"
+		},
+
+		"GroupApplicationsCompletedBatch":
+		{
+			"SenderName": "InLife Store",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"christian@projectgrey.net",
+				"glen@projectgrey.net",
+				"tj@projectgrey.net",
+				"abbelandres@insular.com.ph"
+			],
+			"Subject": "InLife Store Group Applications"
+		}
+	}
+}

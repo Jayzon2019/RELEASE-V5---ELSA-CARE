@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,6 +16,17 @@ namespace InLife.Store.Core.Settings
 		public EmailDetails OrderConfirmation { get; set; }
 		public EmailDetails PaymentReminderAdmin { get; set; }
 		public EmailDetails PaymentReminder { get; set; }
+
+		public EmailDetails GroupApplicationReferenceCode { get; set; }
+		public EmailDetails GroupApplicationOtp { get; set; }
+		public EmailDetails GroupApplicationCancel { get; set; }
+		public EmailDetails GroupApplicationThankYou { get; set; }
+		public EmailDetails GroupApplicationFeedbackAdmin { get; set; }
+		public EmailDetails GroupApplicationCompleteAdmin { get; set; }
+
+		public EmailDetails GroupApplicationPaymentProof { get; set; }
+
+		public EmailDetails GroupApplicationsCompletedBatch { get; set; }
 	}
 
 	public class EmailDetails

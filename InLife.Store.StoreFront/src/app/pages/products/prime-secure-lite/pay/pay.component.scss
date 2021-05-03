@@ -1,0 +1,131 @@
+.ps-lite-pay-page{
+    .steplist-wrapper {
+        .steplist{
+            position: fixed;
+        }
+    }
+
+    .leftwrapsection {
+        padding: 36px 250px 36px 150px;
+    }
+    
+    @media (max-width: 1280px) {
+        .leftwrapsection {
+        padding: 36px;
+        }
+    }
+
+    @media (max-width: 1080px) {
+        .leftwrapsection {
+            padding: 36px 30px 36px 30px;
+        }
+    }
+
+    @media (max-width: 950px) {
+        .steplist-wrapper > .steplist{
+            position: inherit;
+        }
+
+        .main-conten-wrapper {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .leftwrapsection {
+            padding: 15px;
+        }
+    }
+
+    @media(max-width: 500px) {
+        .reviewbill {
+            padding: 5px !important;
+        }
+
+        .pagetitles h1{
+            font-size: 25px;
+        }
+    }
+
+    @media(max-width: 380px) {
+        .reviewbill {
+            padding: 3px !important;
+        }
+
+        .titlebill p {
+            font-size: 14px;
+        }
+
+        .detailbill p {
+            font-size: 12px;
+            word-break: break-word;
+        }
+    }
+
+    .container {
+        display: table;
+        overflow: hidden;
+        width: 100%;
+        padding: 0;
+
+        .helper {
+            display: table-cell;
+            padding: 0 5px;
+
+            .title {
+                width: 200px;
+            }
+        }
+
+        .helper-2 {
+            display: table-cell;
+            vertical-align: bottom;
+            padding: 0 5px;
+
+            .content {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .helper {
+                .title {
+                    width: 160px;
+                }
+            }
+
+            .helper-2 {
+                .content {
+                    width: 200px;
+                }
+            }
+        }
+
+        @media (max-width: 400px) {
+            .helper {
+                .title {
+                    width: 122px;
+                }
+            }
+
+            .helper-2 {
+                .content {
+                    width: 140px;
+                }
+            }
+        }
+
+        @media (max-width: 310px) {
+            .helper {
+                .title {
+                    width: 114px;
+                }
+            }
+
+            .helper-2 {
+                .content {
+                    width: 110px;
+                }
+            }
+        }
+    }
+}

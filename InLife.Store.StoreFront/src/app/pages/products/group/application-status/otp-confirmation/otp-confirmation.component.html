@@ -1,0 +1,50 @@
+<!-- <main>
+	<section class="section application-status-section">
+		<div class="container">
+            <main class="group-otp-confirm-page">
+                <ng-container *ngIf="hasCompletedOTPRequest && !invalidReferenceCode">
+                    <h2 class="section-header wow fadeInUp">
+                        Welcome Back!
+                    </h2>
+                    <p class="sub-title wow fadeInUp mt-5">
+                        Please enter your one-time pin sent to your mobile number and e-mail address to proceed with your <br>
+                        group application status.
+                    </p>
+                    <p class="sub-title ref-code wow fadeInUp mt-5 font-weight-bold">
+                        {{refCode}}
+                    </p>
+                    <form #f="ngForm" (ngSubmit)="validateOtp(f.form.valid)" novalidate autocomplete="off" class="mt-4 d-flex flex-column align-items-center" >
+                        <input type="text" 
+                                class="c-large"
+                                placeholder="{{placeholder}}"
+                                name="otpCode"
+                                [ngClass]="{invalid: this.submitted && otp_code.invalid}"
+                                #otp_code="ngModel" [(ngModel)]="otpCode"
+                                required
+                                >
+                            <a href="javascript:void(0)" class="sub-title wow fadeInUp font-weight-bold text-warning" (click)="sendOTPRequest(refCode)">
+                                Resend Code
+                            </a>
+                        <input type="submit" class="btn-fill controls wow fadeInUp" value="Submit" >
+                    </form>
+                </ng-container>
+                <ng-container *ngIf="hasCompletedOTPRequest && invalidReferenceCode">
+                    <h2 class="section-header wow fadeInUp">
+                        Invalid Reference Code
+                    </h2>
+                    <p class="sub-title wow fadeInUp mt-2">
+                        Please enter again a valid reference code in InLife's Group tab.
+                    </p>
+                    <div class="d-flex flex-column align-items-center">
+                        <button class="btn-fill wow fadeInUp controls" (click)="backToGroup()">Back to Group</button>
+                    </div>
+                </ng-container>
+                
+            </main>
+        </div>
+    </section>
+</main>
+
+
+
+ -->

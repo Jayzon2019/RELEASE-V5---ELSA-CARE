@@ -1,0 +1,26 @@
+<div class="roghtwrapsection">
+	<div class="ps-lit-logo">
+		<img class="logo" src="assets\images\prime-logo.png" alt="prime-care" width="90%"/>
+	</div>
+	<p *ngIf="status == 0">YOUR {{ subscription.annual | uppercase }} PREMIUM IS</p>
+	<h2 *ngIf="status == 0">₱{{ subscription.amount || "0.00" }}</h2>
+
+	<p *ngIf="status == 1 && subscriptions">YOUR {{ subscriptions.annual | uppercase }} PREMIUM IS</p>
+	<h2 *ngIf="status == 1 && subscriptions">₱{{ subscriptions.amount || "0.00" }}</h2>
+
+	<p class="">
+		Prime Care Critical Illness Insurance is a yearly renewable term plan.
+		Succeeding premiums will be based on the attained age of the insured.
+	</p>
+	<p>
+		<a
+			id="policy"
+			href="assets/documents/policy-provisions.pdf"
+			download="Policy Provisions and Exclusions.pdf"
+			>Policy Provisions and Exclusions</a
+		>
+	</p>
+	<p>
+		<a href="javascript:void(0)" [routerLink]="['/faqs']" [queryParams]="{ tab: 1}" target="_blank" >Frequently Asked Questions</a>
+	</p>
+</div>

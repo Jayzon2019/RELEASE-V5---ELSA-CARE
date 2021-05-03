@@ -1,0 +1,65 @@
+{
+	"Logging":
+	{
+		"LogLevel":
+		{
+			"Default": "Information",
+			"Microsoft": "Warning",
+			"Microsoft.Hosting.Lifetime": "Information"
+		}
+	},
+
+	"ConnectionStrings":
+	{
+		"DefaultConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true",
+		"PrimeCareConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true",
+		"GroupConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true",
+		"PrimeSecureConnection": "Server=localhost;Database=InLife.Store;Trusted_Connection=True;MultipleActiveResultSets=true"
+	},
+
+	//"CustomDomain":
+	//{
+	//	"Protocol": "https",
+	//	"Host": "dev-inlifestore.projectgrey.net",
+	//	"PathBase": "/cms"
+	//},
+
+	"Smtp":
+	{
+		"Host": "smtp-relay.sendinblue.com",
+		"Port": 587,
+		"Username": "@projectgrey.net",
+		"Password": "",
+		"EnableSsl": true
+	},
+
+	"Authentication":
+	{
+		"Authority": "https://localhost:5000",
+		"ClientId": "inlife.store.cms",
+		"ClientSecret": "InLife.Store-AC9A8C5D-15A6-4813-8D3D-A89FAC591DEC"
+	},
+
+	"Email":
+	{
+		"ErrorNotification":
+		{
+			"SenderName": "InLife Store CMS - #SERVER#",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Recipients":
+			[
+				"info@projectgrey.net"
+			],
+			"Subject": "InLife Store CMS : An error has occurred",
+			"TemplateFile": "ErrorNotification.html"
+		},
+
+		"SendPassword":
+		{
+			"SenderName": "InLife Store Admin",
+			"SenderEmail": "do-not-reply@projectgrey.net",
+			"Subject": "Here's your temporary password",
+			"TemplateFile": "SendPassword.html"
+		}
+	}
+}
