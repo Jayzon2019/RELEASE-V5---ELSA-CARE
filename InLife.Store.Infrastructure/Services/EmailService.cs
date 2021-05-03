@@ -798,7 +798,7 @@ namespace InLife.Store.Infrastructure.Services
 						.Replace("#PLAN-CODE#", application.PlanCode)
 						.Replace("#PLAN-VARIANT-CODE#", application.PlanVariantCode)
 						.Replace("#TOTAL-MEMBERS#", totalMembers)
-						.Replace("#STATUS#", application.Status);
+						.Replace("#STATUS#", GroupApplicationStatus.FromId(application.Status).Name);
 				}
 
 				list.Append(@"
