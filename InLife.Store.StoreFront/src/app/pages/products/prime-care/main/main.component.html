@@ -1,18 +1,25 @@
 <main>
 
 	<section class="hero-slider section-hero-care-area">
-		<div style="background: url(/assets/images/hero-prime-care.jpg) 100% 100% no-repeat; background-size: cover;" class="{{'section section-hero wow fadeInUp hero-slide-'}}">
+		<div style="background: url(assets/images/hero-prime-care2.jpg) 100% 100% no-repeat;
+		           background-size: cover;"
+			 class="{{ 'section section-hero wow fadeInUp hero-slide-' }}">
 			<div class="container">
-				<div style="{{getPosition(slider?.contentPostion)}}" class="hero-content">
-					<h2 style="{{'color:' + getColor(slider?.headingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.headingColor) + '!important;'}}">{{slider?.heading }}<br class="only-in-mobile" /></h2>
-					<p style="{{'color:' + getColor(slider?.subHeadingColor) + '!important; background:none; -webkit-text-fill-color:' + getColor(slider?.subHeadingColor) + '!important;'}}">{{ slider?.subHeading }}</p>
-					<a href="javascript:void(0)" (click)="scroll()" class="btn-orange">{{slider?.primeHeroBtnTxt }}</a>
+				<div class="hero-content">
+					<img src="/assets/images/prime-logo.png" />
+					<p class="hero-content-text">
+						Prime Care Critical Illness Insurance provides financial security in the event of a critical illness diagnosis so you can focus on your recovery & getting well.
+					</p>
+					<a href="javascript:void(0)" (click)="scroll()" class="btn-orange">
+						GET PRIME CARE NOW
+					</a>
 				</div>
 			</div>
-			<img [src]="sanitize(slider?.primeHeroMobBg)" class="only-in-mobile">
+			<img src="assets/images/hero-prime-care-mobile2.jpg"
+				 class="only-in-mobile" />
 		</div>
 	</section>
-
+	
 	<section class="section section-features">
 		<div class="container">
 			<h2 class="section-header wow fadeInUp">
@@ -241,17 +248,17 @@
 					<li>
 						<div class="step-icon-wrap"><img src="assets/images/step01.svg" alt="Step one"></div>
 						<div class="step-title">STEP 1: Get a Quote</div>
-					<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
+						<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
 					</li>
 					<li>
 						<div class="step-icon-wrap"><img src="assets/images/step02.svg" alt="Step one"></div>
 						<div class="step-title">STEP 2: Apply</div>
-					<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
+						<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
 					</li>
 					<li>
 						<div class="step-icon-wrap"><img src="assets/images/step03.svg" alt="Step one"></div>
 						<div class="step-title">STEP 3: Pay</div>
-					<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
+						<!--	<p>Lorem ipsum dolor sit amet, consectetur aliquam adipiscing elit.</p>-->
 					</li>
 				</ul>
 			</div>
@@ -268,7 +275,7 @@
 			</p> -->
 
 			<ul class="product-list-item only-in-desktop plan-slider">
-				<li class=""> 
+				<li class="">
 					<div class="plan">PLAN 30</div>
 					<div class="product-list-content">
 						<span class="product-price-prime">P1,080,000</span>
