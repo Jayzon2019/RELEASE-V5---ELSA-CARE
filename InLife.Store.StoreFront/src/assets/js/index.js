@@ -19,15 +19,6 @@ $(document).ready(function () {
 
 
 		//$('.btnLearn').click(function () {
-		$(document).on('click', '.btnLearn', function (event) {
-			var link = $(this).attr("data-buy-link");
-			$("#confirmation2").prop("href", link);
-		});
-
-		$(document).on('click', '.btnBuy', function (event) {
-			var link = $(this).attr("data-buy-link");
-			$("#confirmation").prop("href", link);
-		});
 		/*var windowSize = $(window).width();
 	
 		if(windowSize <= 2560 && windowSize >= 1921) {
@@ -120,7 +111,15 @@ $(document).ready(function () {
 	});
 
 
-	
+	$(document).on('click', '.btnLearn', function (event) {
+		var link = $(this).attr("data-buy-link");
+		$("[data-proceed-button]").attr("href", link);
+	});
+
+	$(document).on('click', '.btnBuy', function (event) {
+		var link = $(this).attr("data-buy-link");
+		$("[data-proceed-button]").attr("href", link);
+	});
 
 
 	window.onload = function () {
