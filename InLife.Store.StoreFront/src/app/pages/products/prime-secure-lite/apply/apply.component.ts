@@ -11,7 +11,7 @@ import { jsPDF } from 'jspdf';
 
 import { CONSTANTS } from '@app/services/constants';
 import { Enumerations } from '@app/common/enumerations';
-import { ApiService, SessionStorageService } from '@app/services';
+import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 import { DynamicGrid } from './extension.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '@environment';
@@ -74,7 +74,8 @@ export class ApplyComponent implements OnInit
 		private ngxService: NgxUiLoaderService,
 		private http: HttpClient,
 		private dialog: MatDialog,
-		private util: UtilitiesService
+		private util: UtilitiesService,
+		private facebookPixelService: FacebookPixelService,
 	)
 	{
 		this.ngxService.start();
@@ -446,6 +447,7 @@ export class ApplyComponent implements OnInit
 	submitApplyForm()
 	{
 		this.submitted = true;
+		this.facebookPixelService.track('Lead');
 		if (this.getApplyForm.valid && this.isValidFATCA())
 		{
 			this.ngxService.start();

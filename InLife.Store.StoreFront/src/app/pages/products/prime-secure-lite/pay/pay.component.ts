@@ -14,7 +14,7 @@ import { retry, catchError, map, switchMap, takeUntil, finalize, filter } from '
 import * as moment from 'moment';
 import { jsPDF } from 'jspdf';
 
-import { ApiService, SessionStorageService } from '@app/services';
+import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 import { CONSTANTS } from '@app/services/constants';
 import { Router } from '@angular/router';
 import { StorageType } from '@app/services/storage-types.enum';
@@ -67,7 +67,8 @@ export class PayComponent implements OnInit
 		private ngxService: NgxUiLoaderService,
 		private sanitizer: DomSanitizer,
 		private psLiteService_API: PSLiteService,
-		private util: UtilitiesService
+		private util: UtilitiesService,
+		private facebookPixelService: FacebookPixelService,
 	)
 	{
 		// const getQuoteFormData = JSON.parse(this.session.get("getQuoteForm") || "[]");
@@ -241,6 +242,7 @@ export class PayComponent implements OnInit
 		// TODO: Change to OrderId from API
 		// Numbers only
 		//let refNo = moment().format('YYYYMMDDHHmmssSSS');
+		this.facebookPixelService.track('InitiateCheckout');
 		let refNo = this.session.get('refNo');
 		let policyNo = this.policyNo;
 		let amount = this.paymentAmount.replace(/,/g, '') + '00';

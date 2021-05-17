@@ -70,16 +70,22 @@ export class ThankYouComponent implements OnInit
 	{
 		const planAcquired = this.session.get(StorageType.ACQUIRED_PLAN);
 
-		if(planAcquired.plan === 'PrimeSecureLite') {
+		let amount = "0.00";
+
+		if (planAcquired.plan === 'PrimeSecureLite') {
 			this.isPrimeSecureLite = true;
-		} else if(planAcquired.plan === 'PrimeCare') {
+			let age = this.session.get('age');
+			amount = age.age <= 47 ? "2500" : "3000";
+
+		} else if (planAcquired.plan === 'PrimeCare') {
 			this.isPrimeCare = true;
+			amount = this.session.get('getinnerForm').amount;
 		} else {
 			this.isPrimeSecure = true;
 		}
-		this.plan = (planAcquired.plan == 'PrimeSecureLite') ? 
-					"Prime Secure Lite" : (planAcquired.plan == 'PrimeCare') ? 
-					"Prime Care" : "Prime Secure";
-		this.facebookPixelService.track('Purchase');
+		this.plan = (planAcquired.plan == 'PrimeSecureLite') ?
+			"Prime Secure Lite" : (planAcquired.plan == 'PrimeCare') ?
+				"Prime Care" : "Prime Secure";
+		this.facebookPixelService.track('Purchase', { value: parseInt(amount).toFixed(2), currency: 'USD' });
 	}
 }

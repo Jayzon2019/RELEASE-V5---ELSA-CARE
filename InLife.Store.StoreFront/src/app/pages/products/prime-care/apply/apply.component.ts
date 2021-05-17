@@ -11,7 +11,7 @@ import { jsPDF } from 'jspdf';
 
 import { CONSTANTS } from '@app/services/constants';
 import { Enumerations } from '@app/common/enumerations';
-import { ApiService, SessionStorageService } from '@app/services';
+import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 import { DynamicGrid } from './extension.model';
 
 @Component
@@ -61,7 +61,8 @@ export class ApplyComponent implements OnInit
 		private apiService: ApiService,
 		private session: SessionStorageService,
 		private ngxService: NgxUiLoaderService,
-		private vps: ViewportScroller
+		private vps: ViewportScroller,
+		private facebookPixelService: FacebookPixelService,
 	)
 	{
 		this.ngxService.start();
@@ -501,6 +502,7 @@ export class ApplyComponent implements OnInit
 	submitApplyForm()
 	{
 		this.submitted = true;
+		this.facebookPixelService.track('Lead');
 		if (this.getApplyForm.valid)
 		{
 			this.session.set("getApplyForm_PC", this.getApplyForm.value);

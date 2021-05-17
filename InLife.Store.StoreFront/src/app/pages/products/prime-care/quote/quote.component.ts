@@ -14,7 +14,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { CONSTANTS } from '@app/services/constants';
-import { ApiService, SessionStorageService } from '@app/services';
+import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 
 @Component
 ({
@@ -48,7 +48,8 @@ export class QuoteComponent implements OnInit
 		private ngxService: NgxUiLoaderService,
 		private vps: ViewportScroller,
 		private http: HttpClient,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private facebookPixelService: FacebookPixelService,
 	)
 	{
 		this.ngxService.start();
@@ -372,6 +373,7 @@ export class QuoteComponent implements OnInit
 	{
 		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
+		this.facebookPixelService.track('Lead');
 
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
