@@ -15,7 +15,7 @@ import { retry, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
 import { jsPDF } from 'jspdf';
 
-import { ApiService, SessionStorageService } from '@app/services';
+import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 import { CONSTANTS } from '@app/services/constants';
 import { StorageType } from '@app/services/storage-types.enum';
 
@@ -64,7 +64,8 @@ export class PayComponent implements OnInit
 		private apiService: ApiService,
 		private ngxService: NgxUiLoaderService,
 		private sanitizer: DomSanitizer,
-		private util: UtilitiesService
+		private util: UtilitiesService,
+		private facebookPixelService: FacebookPixelService,
 	)
 	{
 		const getQuoteFormData = this.session.get('getQuoteForm') || "[]";
@@ -153,7 +154,7 @@ export class PayComponent implements OnInit
 		let ownerSuffixID = this.nullIfZero(this.basicInformation.suffix);
 		let insuredSuffixId = this.nullIfZero(this.basicInformation.suffix);
 		let benefSuffixId = this.nullIfZero(this.beneficialInformation.suffix);
-		debugger
+		
 		let arrData: any =
 		{
 			"PlanCode": "AH0017",
@@ -354,7 +355,7 @@ export class PayComponent implements OnInit
 	callPaymentUrl()
 	{
 		this.ngxService.start();
-
+		this.facebookPixelService.track('InitiateCheckout');
 		// TODO: Change to OrderId from API
 		// Numbers only
 		//let refNo = moment().format('YYYYMMDDHHmmssSSS');

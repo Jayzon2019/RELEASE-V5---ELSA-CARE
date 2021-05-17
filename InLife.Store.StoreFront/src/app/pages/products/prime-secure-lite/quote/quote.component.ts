@@ -14,7 +14,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError, finalize } from 'rxjs/operators';
 
 import { CONSTANTS } from '@app/services/constants';
-import { ApiService, SessionStorageService } from '@app/services';
+import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { GeneralMessagePromptComponent } from '@app/shared/component/general-message-prompt/general-message-prompt.component';
@@ -70,7 +70,8 @@ export class QuoteComponent implements OnInit
 		private sanitizer: DomSanitizer,
 		private currencyPipe: CurrencyPipe,
 		private dialog: MatDialog,
-		private psLiteService_API: PSLiteService
+		private psLiteService_API: PSLiteService,
+		private facebookPixelService: FacebookPixelService,
 	)
 	{
 		this.ngxService.start();
@@ -450,6 +451,8 @@ export class QuoteComponent implements OnInit
 
 		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
+		this.facebookPixelService.track('Lead');
+
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
 		{
