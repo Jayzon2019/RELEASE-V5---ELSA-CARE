@@ -1,3 +1,4 @@
+import { UtilitiesService } from './../../../../shared/services/utilities.service';
 import { StorageType } from '@app/services/storage-types.enum';
 import { environment } from '@environment';
 
@@ -50,6 +51,7 @@ export class QuoteComponent implements OnInit
 		private http: HttpClient,
 		private sanitizer: DomSanitizer,
 		private facebookPixelService: FacebookPixelService,
+		private util: UtilitiesService
 	)
 	{
 		this.ngxService.start();
