@@ -470,17 +470,39 @@ export class QuoteComponent implements OnInit
 			"IsEligible": isEligible
 		};
 
-		// let body = JSON.stringify(data);
-		// let endpoint = environment.appApi.host + '/prime-care/applications';
+		let headers: HttpHeaders = new HttpHeaders();
+		headers = headers.append('Content-Type', 'application/json');
+
+		let options =
+		{
+			headers: headers,
+			params: new HttpParams()
+		};
+
+		let body = JSON.stringify(data);
+		let endpoint = environment.appApi.host + '/prime-care';
 		
 		this.ngxService.start();
-
+		let errorMsg = `We apologize things don't appear to be working at the moment. Please try again.`;
 		// LOG FOR DEBUGGING
 		//console.log(`Posting to ${endpoint}`);
 		this.session.set(StorageType.QUOTE_PC_DATA, data);
 
+		
+
 		if(isEligible) {
-			this.router.navigate(['/prime-care/apply']);
+			this.http
+			.post(endpoint, body, options)
+			.pipe(
+				retry(1),
+			)
+			.subscribe(data =>
+			{
+				this.router.navigate(['/prime-care/apply']);
+			}, error => {
+				this.ngxService.stopAll();
+				this.util.ShowGeneralMessagePrompt({message: errorMsg});
+			});
 		} else {
 			this.router.navigate(['/prime-care/ineligible']);
 		}
