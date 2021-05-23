@@ -20,7 +20,8 @@ export const environment =
 		host: 'https://apim-uat.insularlife.com.ph/pg/v4',
 		createQuoteEndpoint: '/CreateUnderwritingStatus',
 		createApplicationEndpoint: '/CreateApplication',
-		savePaymentEndpoint: '/SavePayment'
+		savePaymentEndpoint: '/SavePayment',
+		quoteEndpoint: '/prime-care/applications'
 	},
 
 	groupApi:

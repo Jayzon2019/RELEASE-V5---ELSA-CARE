@@ -435,12 +435,14 @@ export class QuoteComponent implements OnInit
 			city = this.getReferenceDataName(regionList.Municipality, basicInfo.get('municipality'));
 		}
 
+		let plan = this.plan.replace('_', ' ').toUpperCase();
+
 		var data =
 		{
-			"ProductCode": "AH0017",
-			"ProductName": "Prime Care",
+			"PlanCode": plan,
+			"PlanName": plan,
 			"ProductFaceAmount": this.calPay(),
-			"PaymentMode": calcInfo.get('paymentMode').value == 'Monthly' ? 1 : 12,
+			"PaymentFrequency": calcInfo.get('paymentMode').value,
 
 			"NamePrefix": this.getReferenceDataName(CONSTANTS.PREFIX, basicInfo.get('prefix')),
 			"NameSuffix": this.getReferenceDataName(CONSTANTS.SUFFIX, basicInfo.get('suffix')),
@@ -470,20 +472,66 @@ export class QuoteComponent implements OnInit
 			"IsEligible": isEligible
 		};
 
-		// let body = JSON.stringify(data);
-		// let endpoint = environment.appApi.host + '/prime-care/applications';
-		
+		let headers: HttpHeaders = new HttpHeaders();
+		headers = headers.append('Content-Type', 'application/json');
+		//headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
+
+		let options =
+		{
+			headers: headers,
+			params: new HttpParams()
+		};
+
+		let body = JSON.stringify(data);
+		let endpoint = environment.appApi.host + environment.primeCareApi.quoteEndpoint;
+
 		this.ngxService.start();
 
 		// LOG FOR DEBUGGING
 		//console.log(`Posting to ${endpoint}`);
 		this.session.set(StorageType.QUOTE_PC_DATA, data);
 
-		if(isEligible) {
-			this.router.navigate(['/prime-care/apply']);
-		} else {
-			this.router.navigate(['/prime-care/ineligible']);
-		}
+		// if(isEligible) {
+		// 	this.router.navigate(['/prime-care/apply']);
+		// } else {
+		// 	this.router.navigate(['/prime-care/ineligible']);
+		// }
+
+		this.http
+			.post(endpoint, body, options)
+			.pipe(
+				retry(1),
+				catchError((error: HttpErrorResponse) =>
+				{
+					this.ngxService.stop();
+					let errorMessage = '';
+					if (error.error instanceof ErrorEvent)
+					{
+						// client-side error
+						errorMessage = `Error: ${error.error.message}`;
+					}
+					else
+					{
+						// server-side error
+						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+					}
+					window.alert(errorMessage);
+					return throwError(errorMessage);
+				})
+			)
+			.subscribe((data: any) =>
+			{
+				let refNo = String(data.id).padStart(10, '0');
+				this.session.set('refNo', refNo)
+				if(isEligible)
+				{
+					this.router.navigate(['/prime-care/apply']);
+				}
+				else
+				{
+					this.router.navigate(['/prime-care/ineligible']);
+				}
+			});
 	}
 
 	onChangeProviance(value)

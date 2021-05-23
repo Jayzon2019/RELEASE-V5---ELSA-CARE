@@ -13,6 +13,7 @@ namespace InLife.Store.Core.Models
 		public string ProductCode { get; set; }
 		public string ProductName { get; set; }
 		public string PlanCode { get; set; }
+		public string PlanName { get; set; }
 		public string PlanVariantCode { get; set; }
 		public decimal PlanFaceAmount { get; set; }
 		public decimal PlanPremium { get; set; }

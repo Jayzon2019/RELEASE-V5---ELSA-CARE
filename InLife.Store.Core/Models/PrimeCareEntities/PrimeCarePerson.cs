@@ -5,6 +5,8 @@ namespace InLife.Store.Core.Models
 {
 	public class PrimeCarePerson : Entity<Guid>
 	{
+		public DateTimeOffset CreatedDate { get; set; }
+
 		// Personal Information
 		public string NamePrefix { get; set; }
 		public string NameSuffix { get; set; }
