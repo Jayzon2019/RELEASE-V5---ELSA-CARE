@@ -140,6 +140,7 @@ namespace InLife.Store.Api
 			services.AddScoped<IReferenceCodeRepository, ReferenceCodeRepository>();
 
 			// Product - PrimeCare
+			services.AddScoped<IPrimeCareApplicationProcessing, PrimeCareApplicationProcessing>();
 			services.AddScoped<IPrimeCareApplicationRepository, PrimeCareApplicationRepository>();
 
 			// Product - Group

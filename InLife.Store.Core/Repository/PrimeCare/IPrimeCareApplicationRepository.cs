@@ -10,5 +10,6 @@ namespace InLife.Store.Core.Repository
 {
 	public interface IPrimeCareApplicationRepository : IEntityRepository<PrimeCareApplication>
 	{
+		PrimeCareApplication GetByReferenceCode(string refcode);
 	}
 }

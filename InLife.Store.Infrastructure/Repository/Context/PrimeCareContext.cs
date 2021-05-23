@@ -54,13 +54,19 @@ namespace InLife.Store.Infrastructure.Repository
 				entity.HasKey(e => new { e.Id });
 
 				// Shadow FK - CustomerId
-				entity.Property<int>("CustomerId");
+				//entity.Property<Guid?>("CustomerId");
+
+				// ReferenceId
+				entity
+					.Property(e => e.ReferenceId)
+					.ValueGeneratedOnAdd()
+					.Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
 				// Applications >> Customer
 				entity
 					.HasOne(application => application.Customer)
 					.WithMany(customer => customer.Applications)
-					.HasForeignKey("CustomerId");
+					.HasForeignKey(e => e.CustomerId);
 
 				// Timestamp
 				entity
@@ -82,17 +88,35 @@ namespace InLife.Store.Infrastructure.Repository
 				// Table mapping
 				entity.ToTable("Persons", Schema.PrimeCare);
 
-				// Shadow FK - HomeAddressId
-				entity.Property<Guid?>(c => c.HomeAddressId);
-
 				// PK - Id
 				entity.HasKey(e => new { e.Id });
+
+				// Timestamp
+				entity
+					.Property(e => e.CreatedDate)
+					.HasDefaultValue(DateTimeOffset.UtcNow)
+					.ValueGeneratedOnAdd();
+
+				// Shadow FK - HomeAddressId
+				//entity.Property<Guid?>(c => c.HomeAddressId);
 
 				// Customers == HomeAddress (Nullable)
 				entity
 					.HasOne(customer => customer.HomeAddress)
 					.WithOne()
 					.HasForeignKey<PrimeCarePerson>(c => c.HomeAddressId);
+
+				// Customers == WorkAddress (Nullable)
+				entity
+					.HasOne(customer => customer.WorkAddress)
+					.WithOne()
+					.HasForeignKey<PrimeCarePerson>(c => c.WorkAddressId);
+
+				// Customers == BirthAddress (Nullable)
+				entity
+					.HasOne(customer => customer.BirthAddress)
+					.WithOne()
+					.HasForeignKey<PrimeCarePerson>(c => c.BirthAddressId);
 			});
 
 			builder.Entity<PrimeCareAddress>(entity =>
@@ -102,6 +126,12 @@ namespace InLife.Store.Infrastructure.Repository
 
 				// PK - Id
 				entity.HasKey(e => new { e.Id });
+
+				// Timestamp
+				entity
+					.Property(e => e.CreatedDate)
+					.HasDefaultValue(DateTimeOffset.UtcNow)
+					.ValueGeneratedOnAdd();
 			});
 		}
 

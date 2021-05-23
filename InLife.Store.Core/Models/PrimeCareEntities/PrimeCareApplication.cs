@@ -5,7 +5,16 @@ namespace InLife.Store.Core.Models
 {
 	public class PrimeCareApplication : Application
 	{
+		public PrimeCareApplication()
+		{
+			ProductCode = "AH0017";
+			ProductName = "Prime Care";
+		}
+
 		//public Guid CustomerId { get; set; }
+		public int ReferenceId { get; set; }
+
+		public Guid? CustomerId { get; set; }
 		public virtual PrimeCarePerson Customer { get; set; }
 
 		// Quote
@@ -31,8 +40,8 @@ namespace InLife.Store.Core.Models
 		public bool Question2 { get; set; }
 
 
-		public virtual ICollection<PrimeCarePerson> Beneficiaries { get; set; }
+		//public virtual ICollection<PrimeCarePerson> Beneficiaries { get; set; }
 
-		public virtual ICollection<PrimeCareOtherInsurance> OtherInsurances { get; set; }
+		//public virtual ICollection<PrimeCareOtherInsurance> OtherInsurances { get; set; }
 	}
 }

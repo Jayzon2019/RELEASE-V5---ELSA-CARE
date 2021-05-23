@@ -2,6 +2,7 @@
     [Id]                      UNIQUEIDENTIFIER   NOT NULL,
     [CreatedDate]             DATETIMEOFFSET (7) CONSTRAINT [DF_PrimeSecure_Applications_CreatedDate] DEFAULT (sysdatetimeoffset()) NOT NULL,
     [CompletedDate]           DATETIMEOFFSET (7) NULL,
+    [ReferenceId]             INT                IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
     [ReferenceCode]           VARCHAR (36)       NULL,
     [PolicyNumber]            VARCHAR (50)       NULL,
     [Status]                  VARCHAR (30)       NOT NULL,
@@ -13,7 +14,7 @@
     [PlanPremium]             DECIMAL (19, 4)    NOT NULL,
     [PaymentMode]             VARCHAR (20)       NULL,
     [PaymentFrequency]        VARCHAR (20)       NULL,
-    [AgentFirstCode]          VARCHAR (50)       NULL,
+    [AgentCode]               VARCHAR (50)       NULL,
     [AgentFirstName]          NVARCHAR (50)      NULL,
     [AgentLastName]           NVARCHAR (50)      NULL,
     [ReferralSource]          NVARCHAR (50)      NULL,
@@ -47,6 +48,8 @@
     CONSTRAINT [PK_PrimeSecure_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC),
     CONSTRAINT [UK_PrimeSecure_Applications] UNIQUE NONCLUSTERED ([ReferenceCode] ASC)
 );
+
+
 
 
 
