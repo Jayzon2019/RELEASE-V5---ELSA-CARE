@@ -1,4 +1,3 @@
-import { UtilitiesService } from './../../../../shared/services/utilities.service';
 import { StorageType } from '@app/services/storage-types.enum';
 import { environment } from '@environment';
 
@@ -51,7 +50,6 @@ export class QuoteComponent implements OnInit
 		private http: HttpClient,
 		private sanitizer: DomSanitizer,
 		private facebookPixelService: FacebookPixelService,
-		private util: UtilitiesService
 	)
 	{
 		this.ngxService.start();
@@ -437,12 +435,14 @@ export class QuoteComponent implements OnInit
 			city = this.getReferenceDataName(regionList.Municipality, basicInfo.get('municipality'));
 		}
 
+		let plan = this.plan.replace('_', ' ').toUpperCase();
+
 		var data =
 		{
-			"ProductCode": "AH0017",
-			"ProductName": "Prime Care",
+			"PlanCode": plan,
+			"PlanName": plan,
 			"ProductFaceAmount": this.calPay(),
-			"PaymentMode": calcInfo.get('paymentMode').value == 'Monthly' ? 1 : 12,
+			"PaymentFrequency": calcInfo.get('paymentMode').value,
 
 			"NamePrefix": this.getReferenceDataName(CONSTANTS.PREFIX, basicInfo.get('prefix')),
 			"NameSuffix": this.getReferenceDataName(CONSTANTS.SUFFIX, basicInfo.get('suffix')),
@@ -474,6 +474,7 @@ export class QuoteComponent implements OnInit
 
 		let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');
+		//headers = headers.append('Ocp-Apim-Subscription-Key', environment.primeCareApi.subscriptionKey);
 
 		let options =
 		{
@@ -482,32 +483,55 @@ export class QuoteComponent implements OnInit
 		};
 
 		let body = JSON.stringify(data);
-		let endpoint = environment.appApi.host + '/prime-care';
-		
+		let endpoint = environment.appApi.host + environment.primeCareApi.quoteEndpoint;
+
 		this.ngxService.start();
-		let errorMsg = `We apologize things don't appear to be working at the moment. Please try again.`;
+
 		// LOG FOR DEBUGGING
 		//console.log(`Posting to ${endpoint}`);
 		this.session.set(StorageType.QUOTE_PC_DATA, data);
 
-		
+		// if(isEligible) {
+		// 	this.router.navigate(['/prime-care/apply']);
+		// } else {
+		// 	this.router.navigate(['/prime-care/ineligible']);
+		// }
 
-		if(isEligible) {
-			this.http
+		this.http
 			.post(endpoint, body, options)
 			.pipe(
 				retry(1),
+				catchError((error: HttpErrorResponse) =>
+				{
+					this.ngxService.stop();
+					let errorMessage = '';
+					if (error.error instanceof ErrorEvent)
+					{
+						// client-side error
+						errorMessage = `Error: ${error.error.message}`;
+					}
+					else
+					{
+						// server-side error
+						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+					}
+					window.alert(errorMessage);
+					return throwError(errorMessage);
+				})
 			)
-			.subscribe(data =>
+			.subscribe((data: any) =>
 			{
-				this.router.navigate(['/prime-care/apply']);
-			}, error => {
-				this.ngxService.stopAll();
-				this.util.ShowGeneralMessagePrompt({message: errorMsg});
+				let refNo = String(data.id).padStart(10, '0');
+				this.session.set('refNo', refNo)
+				if(isEligible)
+				{
+					this.router.navigate(['/prime-care/apply']);
+				}
+				else
+				{
+					this.router.navigate(['/prime-care/ineligible']);
+				}
 			});
-		} else {
-			this.router.navigate(['/prime-care/ineligible']);
-		}
 	}
 
 	onChangeProviance(value)

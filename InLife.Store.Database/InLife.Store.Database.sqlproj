@@ -97,7 +97,6 @@
     <Build Include="PrimeCare\Tables\OtherInsurances.sql" />
     <Build Include="PrimeCare\Tables\Customers.sql" />
     <Build Include="PrimeCare\Tables\Addresses.sql" />
-    <Build Include="PrimeCare\Tables\Quotes.sql" />
     <Build Include="PrimeCare\Tables\Persons.sql" />
     <Build Include="Security\PrimeSecure.sql" />
     <Build Include="Security\PrimeCare.sql" />

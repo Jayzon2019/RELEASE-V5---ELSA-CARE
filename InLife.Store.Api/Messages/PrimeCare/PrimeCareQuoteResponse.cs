@@ -1,12 +1,17 @@
 using System;
+using InLife.Store.Core.Models;
 
 namespace InLife.Store.Api.Messages
 {
-	public class PrimeCareQuoteResponse
+	public class PrimeCareQuoteResponse : BasePrimeCareResponse
 	{
-		public string ReferenceCode { get; set; }
+		public PrimeCareQuoteResponse() : base()
+		{
+		}
 
-		public string Status { get; set; }
+		public PrimeCareQuoteResponse(PrimeCareApplication model) : base(model)
+		{
+		}
 
 		public bool IsEligible { get; set; }
 	}
