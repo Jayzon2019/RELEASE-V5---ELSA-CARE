@@ -437,7 +437,7 @@ export class QuoteComponent implements OnInit
 
 		let plan = this.plan.replace('_', ' ').toUpperCase();
 
-		var data =
+		var data: any =
 		{
 			"PlanCode": plan,
 			"PlanName": plan,
@@ -445,7 +445,6 @@ export class QuoteComponent implements OnInit
 			"PaymentFrequency": calcInfo.get('paymentMode').value,
 
 			"NamePrefix": this.getReferenceDataName(CONSTANTS.PREFIX, basicInfo.get('prefix')),
-			"NameSuffix": this.getReferenceDataName(CONSTANTS.SUFFIX, basicInfo.get('suffix')),
 			"FirstName": this.nullIfEmpty(basicInfo.get('fname').value),
 			"MiddleName": this.nullIfEmpty(basicInfo.get('mname').value),
 			"LastName": this.nullIfEmpty(basicInfo.get('lname').value),
@@ -471,6 +470,9 @@ export class QuoteComponent implements OnInit
 
 			"IsEligible": isEligible
 		};
+
+		if(basicInfo.get('suffix').value !== '1')
+			data.NameSuffix = this.getReferenceDataName(CONSTANTS.SUFFIX, basicInfo.get('suffix'));
 
 		let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');
