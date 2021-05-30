@@ -1,7 +1,7 @@
 import { PSLiteService } from './../../../../shared/services/pslite.servce';
 import { environment } from '@environment';
 
-import { Injectable, Injector, ElementRef } from '@angular/core';
+import { Injectable, Injector, ElementRef, OnDestroy } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewportScroller, CurrencyPipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,8 +10,8 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpParams, HttpErrorResponse } 
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError, finalize } from 'rxjs/operators';
+import { Observable, Subject, throwError } from 'rxjs';
+import { retry, catchError, finalize, switchMap, takeUntil } from 'rxjs/operators';
 
 import { CONSTANTS } from '@app/services/constants';
 import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
@@ -27,7 +27,7 @@ import { StorageType } from '@app/services/storage-types.enum';
 	templateUrl: './quote.component.html',
 	styleUrls: ['./quote.component.css', './quote.component.scss']
 })
-export class QuoteComponent implements OnInit
+export class QuoteComponent implements OnInit, OnDestroy
 {
 	FUND_SOURCE: any;
 	getQuoteForm: FormGroup;
@@ -45,6 +45,7 @@ export class QuoteComponent implements OnInit
 	calulatedAge:number=0;
 	privacyFile:any;
 	affiliate:any;
+	destroy$ = new Subject();
 
 	quoteDetails: any;
 	subscription:any;
@@ -198,6 +199,11 @@ export class QuoteComponent implements OnInit
 		this.showForthStep=this.getQuoteForm.get('healthCondition').valid;
 		this.getAge(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value);
 		this.ngxService.stop();
+	}
+
+	ngOnDestroy() {
+		this.destroy$.next(true);
+		this.destroy$.unsubscribe();
 	}
 
 	showBirthTooltip(){
@@ -512,7 +518,7 @@ export class QuoteComponent implements OnInit
 
 	saveQuoteForm(isEligible: boolean)
 	{
-		const health = this.getQuoteForm.get('healthCondition').value;
+		const health = this.getQuoteForm.get('healthCondition');
 		const basicInfo  = this.getQuoteForm.get('basicInformation');
 		const calcInfo = this.getQuoteForm.get('calculatePremium');
 
@@ -531,7 +537,7 @@ export class QuoteComponent implements OnInit
 
 		let faceAmount = parseFloat(calcInfo.get('totalCashBenefit').value.substring(1).replace(/,/g, ''));
 		let monthlyIncome = parseFloat(basicInfo.get('monthlyIncome').value.substring(1).replace(/,/g, ''));
-
+		debugger
 		var dataInternalAPI =
 		{
 			planCode: 'TR0091',
@@ -548,8 +554,8 @@ export class QuoteComponent implements OnInit
 			customerEmailAddress: basicInfo.get('email').value,
 			customerBirthday: new Date(calcInfo.get('dateofbirth').value).toLocaleDateString(),
 			customerGender: +calcInfo.get('gender').value,
-			height: 1,
-			weight: 1,
+			height: this.feetToInches(health.get('heightInFeet').value) + health.get('heightInInches').value,
+			weight: health.get('weight').value,
 			company: basicInfo.get('company').value,
 			occupation: basicInfo.get('occupation').value,
 			incomeSource: basicInfo.get('sourceOfFunds').value,
@@ -557,7 +563,12 @@ export class QuoteComponent implements OnInit
 			addressCity: city,
 			addressRegion: region,
 			addressCountry: country,
-			bmi: +this.bodyMassIndex
+			bmi: +this.bodyMassIndex,
+
+			agentCode: basicInfo.get('acode').value,
+			agentFirstName: basicInfo.get('afname').value,
+			agentLastName: basicInfo.get('alname').value,
+			referralSource: basicInfo.get('primeCare').value,
 		};
 		var dataExternalAPI = {
 			InsuredPrefixId: +basicInfo.get('prefix').value,
@@ -579,15 +590,40 @@ export class QuoteComponent implements OnInit
 
 		this.ngxService.start();
 		const oldDataExternalAPI = this.session.get(StorageType.QUOTE_EXTERNAL_DATA);
-		let errorMsg = `We apologize things don't appear to be working at the moment. Please try again.`;
 
+		let internalData = JSON.stringify(dataInternalAPI);
+		let data = JSON.stringify(dataExternalAPI);
+
+		// this.psLiteService_API.saveQuoteInternalAPI(internalData).subscribe(
+		// 	resp => {
+		// 		this.psLiteService_API.createUnderWritingStatus(data)
+		// 		.pipe(retry(1), finalize(() => this.ngxService.stopAll()))
+		// 		.subscribe((data: any) =>
+		// 		{
+		// 			if(data.underwritingStatus === 'CLEAN_CASE') {
+		// 				this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
+		// 				this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
+		// 				this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
+		// 				this.session.set('UnderWritingStatus', data)
+		// 				this.router.navigate(['prime-secure-lite/apply']);
+		// 			} else {
+		// 				this.router.navigate(['prime-secure-lite/ineligible']);
+		// 			}
+		// 		}, (error) => {
+		// 			let errorMsg = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
+		// 			this.util.ShowGeneralMessagePrompt({message: errorMsg});
+		// 		});
+		// 	}, error => {
+		// 		let errorMsg = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
+		// 			this.util.ShowGeneralMessagePrompt({message: errorMsg});
+		// 	});
 		if(isEligible) {
 			if(JSON.stringify(oldDataExternalAPI) !== JSON.stringify(dataExternalAPI)) {
-				let data = JSON.stringify(dataExternalAPI);
-				this.psLiteService_API.createUnderWritingStatus(data)
-				.pipe(retry(1), finalize(() => this.ngxService.stopAll()))
-				.subscribe((data: any) =>
-				{
+				this.psLiteService_API.saveQuoteInternalAPI(internalData)
+				.pipe(
+					switchMap((resp) => this.psLiteService_API.createUnderWritingStatus(data)),
+					takeUntil(this.destroy$)
+				).subscribe((data: any) => {
 					if(data.underwritingStatus === 'CLEAN_CASE') {
 						this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
 						this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
@@ -598,19 +634,17 @@ export class QuoteComponent implements OnInit
 						this.router.navigate(['prime-secure-lite/ineligible']);
 					}
 				}, (error) => {
-					console.log(error);
-					let errorMsg = (error) ? error.message : 'Error occured';
+					this.ngxService.stopAll();
+					let errorMsg = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
 					this.util.ShowGeneralMessagePrompt({message: errorMsg});
-				});
+				})
 			} else {
 				this.router.navigate(['prime-secure-lite/apply']);
 			}
-
-
 		} else {
 			this.router.navigate(['prime-secure-lite/ineligible']);
 		}
-
+		
 
 	}
 
