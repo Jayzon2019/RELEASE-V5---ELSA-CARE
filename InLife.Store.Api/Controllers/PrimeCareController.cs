@@ -43,24 +43,24 @@ namespace InLife.Store.Api
 		[HttpPost("applications")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesErrorResponseType(typeof(ProblemDetails))]
-		public async Task<ActionResult> Post([FromBody]PrimeCareQuoteRequest request)
+		public async Task<ActionResult> RequestQuote([FromBody]PrimeCareQuoteRequest request)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
 
-			//try
-			//{
+			try
+			{
 				var quoteForm = request.Map();
 				var application = await applicationProcessing.RequestQuote(quoteForm);
 
 				var response = new PrimeCareQuoteResponse(application);
 
 				return Ok(response);
-			//}
-			//catch (Exception e)
-			//{
-			//	return GenericServerErrorResult(e);
-			//}
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 	}
 }
