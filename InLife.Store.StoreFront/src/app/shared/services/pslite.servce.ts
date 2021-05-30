@@ -16,7 +16,7 @@ export class PSLiteService extends ApiBaseService
   saveQuoteInternalAPI(data: any) {
     let headers: HttpHeaders = new HttpHeaders();
 		headers = headers.append('Content-Type', 'application/json');
-    return this.http.post(`${this.baseURLPayment()}${environment.appApi}`+`/prime-secure-lite`, data, {headers: headers})
+    return this.http.post(`${this.baseURL()}/prime-secure-lite/applications`, data, {headers: headers})
     .pipe(
       map((response) => <any>response),
       catchError(this.handleError)

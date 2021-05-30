@@ -537,7 +537,6 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		let faceAmount = parseFloat(calcInfo.get('totalCashBenefit').value.substring(1).replace(/,/g, ''));
 		let monthlyIncome = parseFloat(basicInfo.get('monthlyIncome').value.substring(1).replace(/,/g, ''));
-		debugger
 		var dataInternalAPI =
 		{
 			planCode: 'TR0091',
