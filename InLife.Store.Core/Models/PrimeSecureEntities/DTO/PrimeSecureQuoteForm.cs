@@ -9,7 +9,7 @@ namespace InLife.Store.Core.Models
 		#region Product Details
 
 		public string PlanCode { get; set; }
-		public string PlanVariantCode { get; set; }
+		public string PlanName { get; set; }
 		public decimal PlanFaceAmount { get; set; }
 		public decimal PlanPremium { get; set; }
 
@@ -56,15 +56,22 @@ namespace InLife.Store.Core.Models
 
 		#endregion Referrer
 
-		#region Health Condition
+		#region Health Declarations
 
-		// Health Condition
-		public bool? Health1 { get; set; }
-		public bool? Health2 { get; set; }
-		public bool? Health3a { get; set; }
-		public bool? Health3b { get; set; }
-		public bool? Health4 { get; set; }
+		public bool? HealthDeclaration1 { get; set; }
+		public bool? HealthDeclaration2 { get; set; }
+		public bool? HealthDeclaration3 { get; set; }
+		public bool? HealthDeclaration4 { get; set; }
 
-		#endregion Health Condition
+		#endregion Health Declarations
+
+		#region COVID Questions
+
+		public bool? CovidQuestion1 { get; set; }
+		public bool? CovidQuestion2 { get; set; }
+		public bool? CovidQuestion3 { get; set; }
+		public bool? CovidQuestion4 { get; set; }
+
+		#endregion COVID Questions
 	}
 }

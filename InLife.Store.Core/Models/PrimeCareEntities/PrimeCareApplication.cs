@@ -11,9 +11,9 @@ namespace InLife.Store.Core.Models
 			ProductName = "Prime Care";
 		}
 
-		//public Guid CustomerId { get; set; }
 		public int ReferenceId { get; set; }
 
+		// Customer
 		public Guid? CustomerId { get; set; }
 		public virtual PrimeCarePerson Customer { get; set; }
 
