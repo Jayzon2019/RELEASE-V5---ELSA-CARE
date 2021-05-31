@@ -1,6 +1,6 @@
 import { SessionStorageService } from '@app/services';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { ApiBaseService } from '../../services/api-base.service';
 import { environment } from '@environment';
@@ -12,6 +12,16 @@ export class PSLiteService extends ApiBaseService
 	{
         super(session);
 	}
+
+  saveQuoteInternalAPI(data: any) {
+    let headers: HttpHeaders = new HttpHeaders();
+		headers = headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this.baseURL()}/prime-secure/applications`, data, {headers: headers})
+    .pipe(
+      map((response) => <any>response),
+      catchError(this.handleError)
+    );
+  }
 
   createUnderWritingStatus(data: any) {
     let newHeaders = this.headerPaymentGateWay();
