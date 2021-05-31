@@ -19,15 +19,18 @@ namespace InLife.Store.Core.Business
 	public class PrimeSecureApplicationProcessing : IPrimeSecureApplicationProcessing
 	{
 		private readonly IPrimeSecureApplicationRepository applicationRepository;
+		private readonly IReferenceCodeRepository referenceCodeRepository;
 		private readonly IEmailService emailService;
 
 		public PrimeSecureApplicationProcessing
 		(
 			IPrimeSecureApplicationRepository applicationRepository,
+			IReferenceCodeRepository referenceCodeRepository,
 			IEmailService emailService
 		)
 		{
 			this.applicationRepository = applicationRepository;
+			this.referenceCodeRepository = referenceCodeRepository;
 			this.emailService = emailService;
 		}
 
@@ -41,41 +44,36 @@ namespace InLife.Store.Core.Business
 			Contract.Requires(form != null);
 
 			var id = Guid.NewGuid();
-			var referenceCode = id.ToReferenceCode();
-
-			var customer = new PrimeSecurePerson
-			{
-				NamePrefix = form.CustomerNamePrefix,
-				NameSuffix = form.CustomerNameSuffix,
-				FirstName = form.CustomerFirstName,
-				MiddleName = form.CustomerMiddleName,
-				LastName = form.CustomerLastName,
-				MobileNumber = form.CustomerMobileNumber,
-				EmailAddress = form.CustomerEmailAddress,
-
-				HomeAddress  = new PrimeCareAddress
-				{
-					PhoneNumber = form.CustomerPhoneNumber,
-					City = form.AddressCity,
-					Region = form.AddressRegion,
-					Country = form.AddressCountry
-				}
-			};
 
 			var application = new PrimeSecureApplication
 			{
 				Id = id,
-				ReferenceCode = referenceCode,
+				Status = PrimeSecureApplicationStatus.Quote.Name,
 
-				PlanCode = form.PlanCode.Contains(" - ")
-					? form.PlanCode.Split(" - ")[1]
-					: form.PlanCode,
-				PlanVariantCode = form.PlanVariantCode,
+				PlanCode = form.PlanCode,
+				PlanName = form.PlanName,
+				PlanVariantCode = form.PlanCode,
 				PlanFaceAmount = form.PlanFaceAmount,
 				PlanPremium = form.PlanPremium,
 
-				Customer = customer,
-				Insured = customer,
+				Customer = new PrimeSecurePerson
+				{
+					NamePrefix = form.CustomerNamePrefix,
+					NameSuffix = form.CustomerNameSuffix,
+					FirstName = form.CustomerFirstName,
+					MiddleName = form.CustomerMiddleName,
+					LastName = form.CustomerLastName,
+					MobileNumber = form.CustomerMobileNumber,
+					EmailAddress = form.CustomerEmailAddress,
+
+					HomeAddress = new PrimeSecureAddress
+					{
+						PhoneNumber = form.CustomerPhoneNumber,
+						City = form.AddressCity,
+						Region = form.AddressRegion,
+						Country = form.AddressCountry
+					}
+				},
 
 				Height = form.Height,
 				Weight = form.Weight,
@@ -90,20 +88,27 @@ namespace InLife.Store.Core.Business
 				AgentLastName = form.AgentLastName,
 				ReferralSource = form.ReferralSource,
 
-				Health1 = form.Health1,
-				Health2 = form.Health2,
-				Health3a = form.Health3a,
-				Health3b = form.Health3b,
-				Health4 = form.Health4
+				HealthDeclaration1 = form.HealthDeclaration1,
+				HealthDeclaration2 = form.HealthDeclaration2,
+				HealthDeclaration3 = form.HealthDeclaration3,
+				HealthDeclaration4 = form.HealthDeclaration4,
+
+				CovidQuestion1 = form.CovidQuestion1,
+				CovidQuestion2 = form.CovidQuestion2,
+				CovidQuestion3 = form.CovidQuestion3,
+				CovidQuestion4 = form.CovidQuestion4
 			};
 
 			//application.Status = GetStatus(application).Id;
 
 			applicationRepository.Create(application);
 
-			await Task.Delay(0);
+			application.ReferenceCode = application.ReferenceId.ToString().PadLeft(10, '0');
+			applicationRepository.Update(application);
+
 			//await emailService.SendPrimeSecureApplicationReferenceCode(application);
 
+			await Task.Delay(0);
 			return application;
 		}
 

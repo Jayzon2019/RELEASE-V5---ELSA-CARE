@@ -37,12 +37,12 @@ namespace InLife.Store.Core.Business
 			this.sftpService = sftpService;
 		}
 
-		public PrimeCareApplication GetPrimeCareApplication(Guid id)
+		public PrimeCareApplication GetApplication(Guid id)
 		{
 			return applicationRepository.Get(id);
 		}
 
-		public PrimeCareApplication GetPrimeCareApplication(string refcode)
+		public PrimeCareApplication GetApplication(string refcode)
 		{
 			return applicationRepository.GetByReferenceCode(refcode);
 		}
