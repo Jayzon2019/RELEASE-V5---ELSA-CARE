@@ -521,6 +521,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 		const health = this.getQuoteForm.get('healthCondition');
 		const basicInfo  = this.getQuoteForm.get('basicInformation');
 		const calcInfo = this.getQuoteForm.get('calculatePremium');
+		const convidInfo = this.getQuoteForm.get('covidForm');
 
 		let planDetails = { annual: this.getAnualPremium(), amount: this.calPay(), bmi: this.bodyMassIndex };
 		this.session.set('getinnerForm', planDetails);
@@ -534,17 +535,17 @@ export class QuoteComponent implements OnInit, OnDestroy
 			region = String(regionList.Province).toUpperCase();
 			city = this.getReferenceDataName(regionList.Municipality, basicInfo.get('municipality'));
 		}
-
 		let faceAmount = parseFloat(calcInfo.get('totalCashBenefit').value.substring(1).replace(/,/g, ''));
 		let monthlyIncome = parseFloat(basicInfo.get('monthlyIncome').value.substring(1).replace(/,/g, ''));
 		var dataInternalAPI =
 		{
-			planCode: 'TR0091',
-			planVariantCode: 'Prime Secure Lite',
+			planCode: 'PLAN ' + this.eligiblePlan,
+			planName: 'PLAN ' + this.eligiblePlan,
+			// planVariantCode: 'Prime Secure Lite',
 			planFaceAmount: faceAmount,
 			planPremium: +this.eligiblePlan,
-			customerNamePrefix: basicInfo.get('prefix').value,
-			customerNameSuffix: basicInfo.get('suffix').value,
+			customerNamePrefix: this.getReferenceDataName(CONSTANTS.PREFIX, basicInfo.get('prefix')),
+			customerNameSuffix: this.getReferenceDataName(CONSTANTS.SUFFIX, basicInfo.get('suffix')),
 			customerFirstName: basicInfo.get('fname').value,
 			customerMiddleName: basicInfo.get('mname').value,
 			customerLastName: basicInfo.get('lname').value,
@@ -552,12 +553,12 @@ export class QuoteComponent implements OnInit, OnDestroy
 			customerMobileNumber: basicInfo.get('mobile').value,
 			customerEmailAddress: basicInfo.get('email').value,
 			customerBirthday: new Date(calcInfo.get('dateofbirth').value).toLocaleDateString(),
-			customerGender: +calcInfo.get('gender').value,
+			customerGender: this.getReferenceDataName(CONSTANTS.GENDER, calcInfo.get('gender')),
 			height: this.feetToInches(health.get('heightInFeet').value) + health.get('heightInInches').value,
 			weight: health.get('weight').value,
 			company: basicInfo.get('company').value,
-			occupation: basicInfo.get('occupation').value,
-			incomeSource: basicInfo.get('sourceOfFunds').value,
+			occupation: this.getReferenceDataName(CONSTANTS.OCCUPATION, basicInfo.get('occupation')),
+			incomeSource: this.getReferenceDataName(this.FUND_SOURCE, basicInfo.get('sourceOfFunds')),
 			incomeAmount: monthlyIncome,
 			addressCity: city,
 			addressRegion: region,
@@ -567,7 +568,17 @@ export class QuoteComponent implements OnInit, OnDestroy
 			agentCode: basicInfo.get('acode').value,
 			agentFirstName: basicInfo.get('afname').value,
 			agentLastName: basicInfo.get('alname').value,
-			referralSource: basicInfo.get('primeCare').value,
+			referralSource: this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
+
+			healthDeclaration1: health.get('healthDeclaration1').value === 'Yes',
+			healthDeclaration2: health.get('healthDeclaration2').value === 'Yes',
+			healthDeclaration3: health.get('healthDeclaration3').value === 'Yes',
+			healthDeclaration4: health.get('healthDeclaration4').value === 'Yes',
+
+			covidQuestion1: convidInfo.get('healthCondition1').value === 'Yes',
+			covidQuestion2: convidInfo.get('healthCondition2').value === 'Yes',
+			covidQuestion3: convidInfo.get('healthCondition3').value === 'Yes',
+			covidQuestion4: convidInfo.get('healthCondition4').value === 'Yes',
 		};
 		var dataExternalAPI = {
 			InsuredPrefixId: +basicInfo.get('prefix').value,

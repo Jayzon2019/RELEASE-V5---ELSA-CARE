@@ -4,6 +4,10 @@ namespace InLife.Store.Core.Models
 {
 	public class PrimeSecureAddress : Entity<Guid>
 	{
+		public DateTimeOffset CreatedDate { get; set; }
+
+		//public virtual PrimeSecurePerson Person { get; set; }
+
 		public string PhoneNumber { get; set; }
 
 		public string Address1 { get; set; }

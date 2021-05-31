@@ -9,6 +9,7 @@
     [ProductCode]             VARCHAR (50)       NOT NULL,
     [ProductName]             VARCHAR (50)       NOT NULL,
     [PlanCode]                VARCHAR (50)       NOT NULL,
+    [PlanName]                VARCHAR (50)       NOT NULL,
     [PlanVariantCode]         VARCHAR (50)       NOT NULL,
     [PlanFaceAmount]          DECIMAL (19, 4)    NOT NULL,
     [PlanPremium]             DECIMAL (19, 4)    NOT NULL,
@@ -29,10 +30,10 @@
     [IncomeAmount]            DECIMAL (19, 4)    NULL,
     [Height]                  DECIMAL (19, 4)    NULL,
     [Weight]                  DECIMAL (19, 4)    NULL,
-    [DeclarationQuestion1]    BIT                NULL,
-    [DeclarationQuestion2]    BIT                NULL,
-    [DeclarationQuestion3]    BIT                NULL,
-    [DeclarationQuestion4]    BIT                NULL,
+    [HealthDeclaration1]      BIT                NULL,
+    [HealthDeclaration2]      BIT                NULL,
+    [HealthDeclaration3]      BIT                NULL,
+    [HealthDeclaration4]      BIT                NULL,
     [CovidQuestion1]          BIT                NULL,
     [CovidQuestion2]          BIT                NULL,
     [CovidQuestion3]          BIT                NULL,
@@ -41,6 +42,7 @@
     [CovidQuestion6]          BIT                NULL,
     [CovidQuestion7]          BIT                NULL,
     [CovidQuestion8]          BIT                NULL,
+    [IsEligible]              BIT                NULL,
     [Otp]                     VARCHAR (10)       NULL,
     [OtpExpiration]           DATETIMEOFFSET (7) NULL,
     [Session]                 VARCHAR (300)      NULL,
@@ -48,6 +50,8 @@
     CONSTRAINT [PK_PrimeSecure_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC),
     CONSTRAINT [UK_PrimeSecure_Applications] UNIQUE NONCLUSTERED ([ReferenceCode] ASC)
 );
+
+
 
 
 

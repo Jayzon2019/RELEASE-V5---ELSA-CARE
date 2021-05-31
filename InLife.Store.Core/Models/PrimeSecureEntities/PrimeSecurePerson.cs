@@ -5,6 +5,8 @@ namespace InLife.Store.Core.Models
 {
 	public class PrimeSecurePerson : Entity<Guid>
 	{
+		public DateTimeOffset CreatedDate { get; set; }
+
 		// Personal Information
 		public string NamePrefix { get; set; }
 		public string NameSuffix { get; set; }
@@ -22,16 +24,16 @@ namespace InLife.Store.Core.Models
 		public string MobileNumber { get; set; }
 
 		// Addresses
-		//public Guid? BirthAddressId { get; set; }
+		public Guid? BirthAddressId { get; set; }
 		public virtual PrimeSecureAddress BirthAddress { get; set; }
 
-		//public Guid? HomeAddressId { get; set; }
-		public virtual PrimeCareAddress HomeAddress { get; set; }
+		public Guid? HomeAddressId { get; set; }
+		public virtual PrimeSecureAddress HomeAddress { get; set; }
 
-		//public Guid? WorkAddressId { get; set; }
-		public virtual PrimeCareAddress WorkAddress { get; set; }
+		public Guid? WorkAddressId { get; set; }
+		public virtual PrimeSecureAddress WorkAddress { get; set; }
 
 
-		//public virtual ICollection<PrimeCareApplication> Applications { get; set; }
+		public virtual ICollection<PrimeSecureApplication> Applications { get; set; }
 	}
 }

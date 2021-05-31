@@ -7,9 +7,18 @@ namespace InLife.Store.Core.Models
 	{
 		public PrimeSecureApplication()
 		{
-			ProductCode = "PrimeSecure";
-			ProductName = "PrimeSecure";
+			ProductCode = "TR0091";
+			ProductName = "Prime Secure Lite";
 		}
+
+		public int ReferenceId { get; set; }
+
+		// Customer
+		public Guid? CustomerId { get; set; }
+		public virtual PrimeSecurePerson Customer { get; set; }
+
+		// Quote
+		public bool IsEligible { get; set; }
 
 		// Referrer
 		public string AgentCode { get; set; }
@@ -18,11 +27,16 @@ namespace InLife.Store.Core.Models
 		public string ReferralSource { get; set; }
 
 		// Health Condition
-		public bool? Health1 { get; set; }
-		public bool? Health2 { get; set; }
-		public bool? Health3a { get; set; }
-		public bool? Health3b { get; set; }
-		public bool? Health4 { get; set; }
+		public bool? HealthDeclaration1 { get; set; }
+		public bool? HealthDeclaration2 { get; set; }
+		public bool? HealthDeclaration3 { get; set; }
+		public bool? HealthDeclaration4 { get; set; }
+
+		public bool? CovidQuestion1 { get; set; }
+		public bool? CovidQuestion2 { get; set; }
+		public bool? CovidQuestion3 { get; set; }
+		public bool? CovidQuestion4 { get; set; }
+
 
 		public string Company { get; set; }
 		public string Occupation { get; set; }
@@ -33,14 +47,10 @@ namespace InLife.Store.Core.Models
 		public int? Height { get; set; }
 		public int? Weight { get; set; }
 
-		public bool IsEligible { get; set; }
+		//public virtual PrimeSecurePerson Insured { get; set; }
+		//public string InsuredRelationship { get; set; }
 
-		public virtual PrimeSecurePerson Customer { get; set; }
-
-		public virtual PrimeSecurePerson Insured { get; set; }
-		public string InsuredRelationship { get; set; }
-
-		public virtual PrimeSecurePerson Beneficiary { get; set; }
-		public string BeneficiaryRelationship { get; set; }
+		//public virtual PrimeSecurePerson Beneficiary { get; set; }
+		//public string BeneficiaryRelationship { get; set; }
 	}
 }

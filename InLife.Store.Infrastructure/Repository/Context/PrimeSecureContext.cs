@@ -31,7 +31,6 @@ namespace InLife.Store.Infrastructure.Repository
 		public PrimeSecureContext(DbContextOptions<PrimeSecureContext> options)
 		   : base(options)
 		{
-
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -60,6 +59,21 @@ namespace InLife.Store.Infrastructure.Repository
 					.HasDefaultValue(DateTimeOffset.UtcNow)
 					.ValueGeneratedOnAdd();
 
+				// ReferenceId
+				entity
+					.Property(e => e.ReferenceId)
+					.ValueGeneratedOnAdd()
+					.Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+
+				// Shadow FK - CustomerId
+				//entity.Property<Guid?>("CustomerId");
+
+				// Applications >> Customer
+				entity
+					.HasOne(application => application.Customer)
+					.WithMany(customer => customer.Applications)
+					.HasForeignKey(e => e.CustomerId);
+
 				// Decimal Types
 				entity
 					.Property(e => e.PlanFaceAmount)
@@ -70,30 +84,6 @@ namespace InLife.Store.Infrastructure.Repository
 				entity
 					.Property(e => e.IncomeAmount)
 					.HasColumnType("decimal(18,4)");
-
-				//// Shadow FK - CustomerId
-				//entity.Property<Guid?>("CustomerId");
-				//// Applications >> Customer
-				//entity
-				//	.HasOne(application => application.Customer)
-				//	.WithOne()
-				//	.HasForeignKey("CustomerId");
-
-				//// Shadow FK - InsuredId
-				//entity.Property<Guid?>("InsuredId");
-				//// Applications >> Customer
-				//entity
-				//	.HasOne(application => application.Insured)
-				//	.WithOne()
-				//	.HasForeignKey("InsuredId");
-
-				//// Shadow FK - BeneficiaryId
-				//entity.Property<Guid?>("BeneficiaryId");
-				//// Applications >> Customer
-				//entity
-				//	.HasOne(application => application.Beneficiary)
-				//	.WithOne()
-				//	.HasForeignKey("BeneficiaryId");
 			});
 
 			builder.Entity<PrimeSecurePerson>(entity =>
@@ -103,29 +93,29 @@ namespace InLife.Store.Infrastructure.Repository
 					.ToTable("Persons", Schema.PrimeSecure)
 					.HasKey(e => new { e.Id });
 
-				//// Shadow FK - BirthAddressId
-				//entity.Property<Guid?>("BirthAddressId");
-				//// Customers == BirthAddress (Nullable)
-				//entity
-				//	.HasOne(customer => customer.BirthAddress)
-				//	.WithOne()
-				//	.HasForeignKey("BirthAddressId");
+				// Timestamp
+				entity
+					.Property(e => e.CreatedDate)
+					.HasDefaultValue(DateTimeOffset.UtcNow)
+					.ValueGeneratedOnAdd();
 
-				//// Shadow FK - HomeAddressId
-				//entity.Property<Guid?>("HomeAddressId");
-				//// Customers == HomeAddress (Nullable)
-				//entity
-				//	.HasOne(customer => customer.HomeAddress)
-				//	.WithOne()
-				//	.HasForeignKey("HomeAddressId");
+				// Customers == HomeAddress (Nullable)
+				entity
+					.HasOne(customer => customer.HomeAddress)
+					.WithOne()
+					.HasForeignKey<PrimeSecurePerson>(c => c.HomeAddressId);
 
-				//// Shadow FK - WorkAddressId
-				//entity.Property<Guid?>("WorkAddressId");
-				//// Customers == WorkAddress (Nullable)
-				//entity
-				//	.HasOne(customer => customer.WorkAddress)
-				//	.WithOne()
-				//	.HasForeignKey("WorkAddressId");
+				// Customers == WorkAddress (Nullable)
+				entity
+					.HasOne(customer => customer.WorkAddress)
+					.WithOne()
+					.HasForeignKey<PrimeSecurePerson>(c => c.WorkAddressId);
+
+				// Customers == BirthAddress (Nullable)
+				entity
+					.HasOne(customer => customer.BirthAddress)
+					.WithOne()
+					.HasForeignKey<PrimeSecurePerson>(c => c.BirthAddressId);
 			});
 
 			builder.Entity<PrimeSecureAddress>(entity =>
@@ -134,6 +124,12 @@ namespace InLife.Store.Infrastructure.Repository
 				entity
 					.ToTable("Addresses", Schema.PrimeSecure)
 					.HasKey(e => new { e.Id });
+
+				// Timestamp
+				entity
+					.Property(e => e.CreatedDate)
+					.HasDefaultValue(DateTimeOffset.UtcNow)
+					.ValueGeneratedOnAdd();
 			});
 		}
 

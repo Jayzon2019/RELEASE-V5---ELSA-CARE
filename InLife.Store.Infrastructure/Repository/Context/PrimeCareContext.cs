@@ -48,13 +48,15 @@ namespace InLife.Store.Infrastructure.Repository
 			builder.Entity<PrimeCareApplication>(entity =>
 			{
 				// Table mapping
-				entity.ToTable("Applications", Schema.PrimeCare);
+				entity
+					.ToTable("Applications", Schema.PrimeCare)
+					.HasKey(e => new { e.Id });
 
-				// PK - Id
-				entity.HasKey(e => new { e.Id });
-
-				// Shadow FK - CustomerId
-				//entity.Property<Guid?>("CustomerId");
+				// Timestamp
+				entity
+					.Property(e => e.CreatedDate)
+					.HasDefaultValue(DateTimeOffset.UtcNow)
+					.ValueGeneratedOnAdd();
 
 				// ReferenceId
 				entity
@@ -62,17 +64,14 @@ namespace InLife.Store.Infrastructure.Repository
 					.ValueGeneratedOnAdd()
 					.Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
+				// Shadow FK - CustomerId
+				//entity.Property<Guid?>("CustomerId");
+
 				// Applications >> Customer
 				entity
 					.HasOne(application => application.Customer)
 					.WithMany(customer => customer.Applications)
 					.HasForeignKey(e => e.CustomerId);
-
-				// Timestamp
-				entity
-					.Property(e => e.CreatedDate)
-					.HasDefaultValue(DateTimeOffset.UtcNow)
-					.ValueGeneratedOnAdd();
 
 				// Decimal Types
 				entity
@@ -86,10 +85,9 @@ namespace InLife.Store.Infrastructure.Repository
 			builder.Entity<PrimeCarePerson>(entity =>
 			{
 				// Table mapping
-				entity.ToTable("Persons", Schema.PrimeCare);
-
-				// PK - Id
-				entity.HasKey(e => new { e.Id });
+				entity
+					.ToTable("Persons", Schema.PrimeCare)
+					.HasKey(e => new { e.Id });
 
 				// Timestamp
 				entity
@@ -122,10 +120,9 @@ namespace InLife.Store.Infrastructure.Repository
 			builder.Entity<PrimeCareAddress>(entity =>
 			{
 				// Table mapping
-				entity.ToTable("Addresses", Schema.PrimeCare);
-
-				// PK - Id
-				entity.HasKey(e => new { e.Id });
+				entity
+					.ToTable("Addresses", Schema.PrimeCare)
+					.HasKey(e => new { e.Id });
 
 				// Timestamp
 				entity

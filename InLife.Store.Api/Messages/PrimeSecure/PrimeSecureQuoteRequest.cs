@@ -12,7 +12,7 @@ namespace InLife.Store.Api.Messages
 				model = new PrimeSecureQuoteForm();
 
 			model.PlanCode = PlanCode;
-			model.PlanVariantCode = PlanVariantCode;
+			model.PlanName = PlanName;
 			model.PlanFaceAmount = PlanFaceAmount;
 			model.PlanPremium = PlanPremium;
 
@@ -37,6 +37,16 @@ namespace InLife.Store.Api.Messages
 			model.AddressRegion = AddressRegion;
 			model.AddressCountry = AddressCountry;
 
+			model.HealthDeclaration1 = HealthDeclaration1;
+			model.HealthDeclaration2 = HealthDeclaration2;
+			model.HealthDeclaration3 = HealthDeclaration3;
+			model.HealthDeclaration4 = HealthDeclaration4;
+
+			model.CovidQuestion1 = CovidQuestion1;
+			model.CovidQuestion2 = CovidQuestion2;
+			model.CovidQuestion3 = CovidQuestion3;
+			model.CovidQuestion4 = CovidQuestion4;
+
 			return model;
 		}
 
@@ -49,7 +59,7 @@ namespace InLife.Store.Api.Messages
 
 		[Required]
 		[StringLength(50)]
-		public string PlanVariantCode { get; set; }
+		public string PlanName { get; set; }
 
 		[Required]
 		public decimal PlanFaceAmount { get; set; }
@@ -127,5 +137,31 @@ namespace InLife.Store.Api.Messages
 		public string AddressCountry { get; set; }
 
 		#endregion Address
+
+		#region Health Declarations
+
+		[Required]
+		public bool HealthDeclaration1 { get; set; }
+		[Required]
+		public bool HealthDeclaration2 { get; set; }
+		[Required]
+		public bool HealthDeclaration3 { get; set; }
+		[Required]
+		public bool HealthDeclaration4 { get; set; }
+
+		#endregion Health Declarations
+
+		#region COVID Questions
+
+		[Required]
+		public bool CovidQuestion1 { get; set; }
+		[Required]
+		public bool CovidQuestion2 { get; set; }
+		[Required]
+		public bool CovidQuestion3 { get; set; }
+		[Required]
+		public bool CovidQuestion4 { get; set; }
+
+		#endregion COVID Questions
 	}
 }
