@@ -40,6 +40,7 @@ namespace InLife.Store.Api.Messages
 			model.Health1 = Health1;
 			model.Health2 = Health2;
 			model.Health3 = Health3;
+			model.IsEligible = IsEligible;
 
 			return model;
 		}
@@ -153,6 +154,9 @@ namespace InLife.Store.Api.Messages
 
 		[Required]
 		public bool Health3 { get; set; }
+
+		[Required]
+		public bool IsEligible { get; set; }
 
 		#endregion Health
 	}
