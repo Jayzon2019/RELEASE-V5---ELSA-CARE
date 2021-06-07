@@ -199,13 +199,13 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 ]
 ```
 
-11. Apply the appropriate changes to `inlife.store.ams`
+13. Apply the appropriate changes to `inlife.store.ams`
 
-12. Save the file.
+14. Save the file.
 
-13. Open `web.config` in your text editor.
+15. Open `web.config` in your text editor.
 
-15. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+16. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -215,9 +215,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-16. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+17. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-17. Restart the App Service
+18. Restart the App Service
 
 
 
@@ -305,6 +305,8 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 
 9. Go to the `ExternalServices` section and replace the values under `GroupSftp` depending on the configuration of the Group SFTP given by your service provider.
+10. Upload the SSH Private Key (use an Open SSH private key) on a directory under the App Service, then set the path in the `PrivateKey` value.
+11. Set the `Directory` value where you want in the SFTP folder to upload the files.
 ```json
 "ExternalServices":
 {
@@ -317,14 +319,15 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 		"Username": "root",
 		"Password": "",
 		"PrivateKey": "D:\\home\\.ssh\\InLife-Group-SFTP-OPENSSH",
-		"Passphrase": "PASSPHRASE"
+		"Passphrase": "PASSPHRASE",
+		"Directory":  "/home/group-applications/"
 	},
 	
 	...
 }
 ```
 
-9. Go to the `ExternalServices` section and replace the value of `PaymentGateway` depending on the configuration of the payment gateway given by your service provider..
+12. Go to the `ExternalServices` section and replace the value of `PaymentGateway` depending on the configuration of the payment gateway given by your service provider..
 ```json
 "ExternalServices":
 {
@@ -336,7 +339,7 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 
 
 
-10. Go to the `Smtp` section and replace the credentials with your own.
+13. Go to the `Smtp` section and replace the credentials with your own.
 ```json
 "Smtp":
 {
@@ -348,9 +351,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 }
 ```
 
-11. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+14. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
 
-12. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
+15. Go to the `AllowedOrigins` section and add the list of domains you want to have access to the API
 ```json
 "AllowedOrigins":
 [
@@ -358,11 +361,11 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 ]
 ```
 
-13. Save the file.
+16. Save the file.
 
-14. Open `web.config` in your text editor.
+17. Open `web.config` in your text editor.
 
-15. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
+18. Replace `modules="AspNetCoreModuleV2"` with `modules="AspNetCoreModule"`
 ```xml
 <system.webServer>
 	<handlers>
@@ -372,9 +375,9 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 </system.webServer>
 ```
 
-16. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
+19. Copy the files from the published folder `/bin/Release/netcoreapp3.1/win-x64/publish` to the designated Azure App Service
 
-17. Restart the App Service
+20. Restart the App Service
 
 
 
@@ -522,6 +525,8 @@ $ dotnet publish -c Release
 ```
 
 8. Go to the `ExternalServices` section and replace the values under `GroupSftp` depending on the configuration of the Group SFTP given by your service provider.
+9. Upload the SSH Private Key (use an Open SSH private key) on a directory under the App Service, then set the path in the `PrivateKey` value.
+10. Set the `Directory` value where you want in the SFTP folder to upload the files.
 ```json
 "ExternalServices":
 {
@@ -534,14 +539,15 @@ $ dotnet publish -c Release
 		"Username": "root",
 		"Password": "",
 		"PrivateKey": "D:\\home\\.ssh\\InLife-Group-SFTP-OPENSSH",
-		"Passphrase": "PASSPHRASE"
+		"Passphrase": "PASSPHRASE",
+		"Directory":  "/home/group-applications/"
 	},
 	
 	...
 }
 ```
 
-9. Go to the `Smtp` section and replace the credentials with your own.
+11. Go to the `Smtp` section and replace the credentials with your own.
 ```json
 "Smtp":
 {
@@ -553,17 +559,17 @@ $ dotnet publish -c Release
 }
 ```
 
-10. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
+12. Go to the `Email` section and replace all values of `SenderEmail` and `Recipients` with your own.
 
-11. Save the file.
+13. Save the file.
 
-12. Go to `/CompletedGroupApplicationsProcessor` folder.
+14. Go to `/CompletedGroupApplicationsProcessor` folder.
 
-13. Open `function.json` in your text editor.
+15. Open `function.json` in your text editor.
 
-14. Change the `schedule` value with your preferred schedule in running the Azure Function. The value is in CRON format.
+16. Change the `schedule` value with your preferred schedule in running the Azure Function. The value is in CRON format.
 
-15. Change `runOnStartup` value to `true`.
+17. Change `runOnStartup` value to `true`.
 ```json
 {
 	"type": "timerTrigger",
@@ -574,13 +580,13 @@ $ dotnet publish -c Release
 }
 ```
 
-16. Save the file.
+18. Save the file.
 
-17. Go back to the root published folder `/bin/Release/netcoreapp3.1/publish` and ZIP all files using the format `YYYY.MM.DD.HHmm.zip` (i.e 2021.01.14.2300.zip).
+19. Go back to the root published folder `/bin/Release/netcoreapp3.1/publish` and ZIP all files using the format `YYYY.MM.DD.HHmm.zip` (i.e 2021.01.14.2300.zip).
 
-12. Upload the ZIP file to the designated Azure Function
+20. Upload the ZIP file to the designated Azure Function
 
-13. Restart the App Service
+21. Restart the App Service
 
 > For more details, refer to the official documentation of Azure Functions at https://docs.microsoft.com/en-us/azure/azure-functions
 
