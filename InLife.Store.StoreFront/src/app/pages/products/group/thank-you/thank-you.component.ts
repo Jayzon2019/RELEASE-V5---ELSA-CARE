@@ -159,7 +159,7 @@ export class ThankYouComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.facebookPixelService.track('Purchase');
+		this.facebookPixelService.track('Purchase', { value: parseInt(this.totalPremium).toFixed(2), currency: 'USD' });
 
 		// let headers: HttpHeaders = new HttpHeaders();
 		// headers = headers.append('Content-Type', 'application/json');
