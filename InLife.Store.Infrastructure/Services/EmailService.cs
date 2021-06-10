@@ -480,7 +480,7 @@ namespace InLife.Store.Infrastructure.Services
 			);
 		}
 
-		public async Task SendGroupApplicationReferenceCode(GroupApplication application)
+		public async Task SendGroupApplicationReferenceCode(GroupApplication application, string url)
 		{
 			var emailSettings = this.emailSettings.GroupApplicationReferenceCode;
 
@@ -490,9 +490,12 @@ namespace InLife.Store.Infrastructure.Services
 				displayName: $"{application.RepresentativeNamePrefix} {application.RepresentativeFirstName} {application.RepresentativeLastName}".Trim()
 			);
 
+
+			var redirectBtnUrl = $"{url}/group?refCode={application.ReferenceCode}";
+
 			var body = new StringBuilder(EmailTemplates.GroupApplicationReferenceCode)
 				.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
-				.Replace("#CODE#", application.ReferenceCode)
+				.Replace("#URL#", redirectBtnUrl)
 				.ToString();
 
 			var sender = new MailAddress(emailSettings.SenderEmail, emailSettings.SenderName);

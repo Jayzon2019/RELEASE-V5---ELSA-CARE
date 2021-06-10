@@ -139,8 +139,10 @@ namespace InLife.Store.Api
 
 			try
 			{
+				var req = HttpContext.Request;
+				var url = $"{req.Scheme}://{req.Host}";
 				var quoteForm = request.Map();
-				var application = await applicationProcessing.RequestQuote(quoteForm);
+				var application = await applicationProcessing.RequestQuote(quoteForm, url);
 
 				var response = new GroupQuoteResponse(application);
 

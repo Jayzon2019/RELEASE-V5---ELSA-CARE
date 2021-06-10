@@ -9,7 +9,7 @@ namespace InLife.Store.Core.Business
 	{
 		GroupApplication GetApplication(string refcode);
 
-		Task<GroupApplication> RequestQuote(GroupQuoteForm form);
+		Task<GroupApplication> RequestQuote(GroupQuoteForm form, string url);
 		Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form);
 		Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form);
 

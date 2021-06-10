@@ -42,7 +42,7 @@ namespace InLife.Store.Core.Business
 			return applicationRepository.GetByReferenceCode(refcode);
 		}
 
-		public async Task<GroupApplication> RequestQuote(GroupQuoteForm form)
+		public async Task<GroupApplication> RequestQuote(GroupQuoteForm form, string url)
 		{
 			Contract.Requires(form != null);
 
@@ -108,7 +108,7 @@ namespace InLife.Store.Core.Business
 
 			applicationRepository.Create(application);
 
-			await emailService.SendGroupApplicationReferenceCode(application);
+			await emailService.SendGroupApplicationReferenceCode(application, url);
 
 			return application;
 		}
