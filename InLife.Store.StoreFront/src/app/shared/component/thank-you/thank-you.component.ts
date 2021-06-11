@@ -86,6 +86,6 @@ export class ThankYouComponent implements OnInit
 		this.plan = (planAcquired.plan == 'PrimeSecureLite') ?
 			"Prime Secure Lite" : (planAcquired.plan == 'PrimeCare') ?
 				"Prime Care" : "Prime Secure";
-		this.facebookPixelService.track('Purchase', { value: parseInt(amount).toFixed(2), currency: 'USD' });
+		this.facebookPixelService.track('Purchase', { value: parseInt(amount).toFixed(2), currency: 'PHP' });
 	}
 }
