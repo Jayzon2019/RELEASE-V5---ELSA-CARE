@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FacebookPixelService } from '@app/services';
 
 @Component({
 	selector: 'app-ineligible',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IneligibleComponent implements OnInit
 {
-	constructor() { }
+	constructor(private facebookPixelService: FacebookPixelService) { }
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
+		this.facebookPixelService.track('Ineligible');
 	}
 }

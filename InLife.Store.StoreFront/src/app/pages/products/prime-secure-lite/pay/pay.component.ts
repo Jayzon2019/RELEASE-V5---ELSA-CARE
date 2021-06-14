@@ -104,6 +104,8 @@ export class PayComponent implements OnInit
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
+		this.facebookPixelService.track('PlanSummary');
 		var arr =
 		{
 			"totalCashBenefit": this.calculationInformation.totalCashBenefit,
@@ -164,6 +166,8 @@ export class PayComponent implements OnInit
 							this.ngxService.stopAll();
 							this.util.ShowGeneralMessagePrompt({message: errorMsg});
 						} else {
+							this.facebookPixelService.track('CompleteRegistration');
+							this.facebookPixelService.track('SubmitApplication');
 							this.session.set(StorageType.POLICYNO, policyNo);
 							this.session.set(StorageType.ACQUIRED_PLAN, {plan: 'PrimeSecureLite', variant: ''});
 							this.policyNo = policyNo;

@@ -97,6 +97,8 @@ export class ApplyComponent implements OnInit
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
+		this.facebookPixelService.track('Apply');
 		const extension: Array<any> = this.session.get("extensionData");
 
 		if (extension) {
@@ -307,6 +309,7 @@ export class ApplyComponent implements OnInit
 		this.showThirdStep = true;
 		setTimeout(function ()
 		{
+			this.facebookPixelService.track('Identification');
 			document.querySelector('#personal-info-anchor').scrollIntoView({
 				behavior: 'smooth'
 			});
@@ -316,6 +319,7 @@ export class ApplyComponent implements OnInit
 	setShowFourth()
 	{
 		this.showFourthStep = true;
+		this.facebookPixelService.track('BeneficiaryDetails');
 		setTimeout(function ()
 		{
 			document.querySelector('#id-anchor').scrollIntoView({
@@ -328,6 +332,7 @@ export class ApplyComponent implements OnInit
 	setShowFifth()
 	{
 		this.showFifthStep = true;
+		this.facebookPixelService.track('Declarations');
 		setTimeout(function ()
 		{
 			document.querySelector('#bd-anchor').scrollIntoView({
@@ -447,9 +452,9 @@ export class ApplyComponent implements OnInit
 	submitApplyForm()
 	{
 		this.submitted = true;
-		this.facebookPixelService.track('Lead');
 		if (this.getApplyForm.valid && this.isValidFATCA())
 		{
+			this.facebookPixelService.track('Lead');
 			this.ngxService.start();
 			this.session.set("getApplyForm", this.getApplyForm.value);
 			this.session.set("extensionData", this.dynamicArray);

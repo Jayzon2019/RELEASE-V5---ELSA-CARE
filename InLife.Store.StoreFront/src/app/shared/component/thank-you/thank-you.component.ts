@@ -68,6 +68,7 @@ export class ThankYouComponent implements OnInit
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
 		const planAcquired = this.session.get(StorageType.ACQUIRED_PLAN);
 
 		let amount = "0.00";
