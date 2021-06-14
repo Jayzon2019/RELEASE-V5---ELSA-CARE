@@ -375,7 +375,6 @@ export class QuoteComponent implements OnInit
 	{
 		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
-		this.facebookPixelService.track('Lead');
 
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
