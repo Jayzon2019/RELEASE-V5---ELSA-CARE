@@ -69,6 +69,8 @@ export class QuoteComponent implements OnInit
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
+		this.facebookPixelService.track('GetQuote');
 		this.affiliate = this.affiliate = this.session.get('affiliate');
 		//try { this.affiliate = JSON.parse(sessionStorage.getItem("affiliate")); }
 		//catch(ex) { this.affiliate = {}; }
@@ -297,7 +299,7 @@ export class QuoteComponent implements OnInit
 	setShowSecond()
 	{
 		this.showSecondStep=true;
-
+		this.facebookPixelService.track('BasicInformation');
 		setTimeout(function ()
 		{
 			document.querySelector('#step2_head').scrollIntoView
@@ -324,7 +326,7 @@ export class QuoteComponent implements OnInit
 	setShowThird()
 	{
 		this.showThirdStep=true;
-
+		this.facebookPixelService.track('HealthCondition');
 		setTimeout(function ()
 		{
 			document.querySelector('#step3_head').scrollIntoView
@@ -527,6 +529,7 @@ export class QuoteComponent implements OnInit
 				this.session.set('refNo', refNo)
 				if(isEligible)
 				{
+					this.facebookPixelService.track('Lead');
 					this.router.navigate(['/prime-care/apply']);
 				}
 				else

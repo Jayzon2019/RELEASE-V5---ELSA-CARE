@@ -1,3 +1,4 @@
+import { FacebookPixelService } from './../../../../services/facebook-pixel.service';
 import { SessionStorageService } from '@app/services';
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -103,10 +104,11 @@ export class MainComponent implements OnInit
 		}
 	}
 
-	constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
+	constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService, private facebookPixelService: FacebookPixelService) { }
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
 		this.getPrimeSecureLiteHeroSlider();
 		// Remove policy no for verification of new application
 		this.session.remove(StorageType.POLICYNO);

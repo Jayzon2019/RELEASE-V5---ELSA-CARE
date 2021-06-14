@@ -1,3 +1,4 @@
+import { FacebookPixelService } from './../../../../services/facebook-pixel.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService, SessionStorageService } from '@app/services';
@@ -34,10 +35,11 @@ export class MainComponent implements OnInit, OnDestroy
 		}
 	}
 	destroy$ = new Subject();
-	constructor(private router: Router, private activateRoute: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService) { }
+	constructor(private router: Router, private activateRoute: ActivatedRoute, private apiService: ApiService, private sanitizer: DomSanitizer, private session: SessionStorageService, private facebookPixelService: FacebookPixelService) { }
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
 		this.getPrimeHeroSlider();
 		// Remove policy no for verification of new application
 		this.session.remove(StorageType.POLICYNO);

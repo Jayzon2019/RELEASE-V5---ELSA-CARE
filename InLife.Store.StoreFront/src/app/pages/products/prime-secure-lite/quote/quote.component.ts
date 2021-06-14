@@ -80,6 +80,8 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
+		this.facebookPixelService.track('GetQuote');
 		this.FUND_SOURCE = (environment.appApi.host === 'https://www.inlifestore.com.ph/api') ? CONSTANTS.PSLITE_FUND_SOURCE : CONSTANTS.FUND_SOURCE;
 		this.affiliate = this.session.get('affiliate');
 
@@ -356,7 +358,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 	setShowSecond()
 	{
 		this.showSecondStep=true;
-
+		this.facebookPixelService.track('BasicInformation');
 		setTimeout(function ()
 		{
 			document.querySelector('#calculate-premium-anchor').scrollIntoView
@@ -369,7 +371,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 	setShowThird()
 	{
 		this.showThirdStep=true;
-
+		this.facebookPixelService.track('HealthDeclarations');
 		setTimeout(function ()
 		{
 			document.querySelector('#basic-info-anchor').scrollIntoView
@@ -382,7 +384,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 	setShowForth()
 	{
 		this.showForthStep=true;
-
+		this.facebookPixelService.track('Covid19Questionnaire');
 		setTimeout(function ()
 		{
 			document.querySelector('#health-decl-anchor').scrollIntoView
@@ -457,7 +459,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
-		this.facebookPixelService.track('Lead');
+		
 
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
@@ -635,6 +637,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 					takeUntil(this.destroy$)
 				).subscribe((data: any) => {
 					if(data.underwritingStatus === 'CLEAN_CASE') {
+						this.facebookPixelService.track('Lead');
 						this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
 						this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
 						this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));

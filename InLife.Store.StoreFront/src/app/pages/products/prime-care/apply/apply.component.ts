@@ -85,6 +85,8 @@ export class ApplyComponent implements OnInit
 
 	ngOnInit(): void
 	{
+		this.facebookPixelService.track('ViewContent');
+		this.facebookPixelService.track('Apply');
 		this.newDynamic = { CompanyName: "", LifeFaceAmount: "", DreadDiseaseFaceAmount: "", AccidentalFaceAmount: "", IssueYear: "" };
 		this.dynamicArray.push(this.newDynamic);
 
@@ -346,7 +348,7 @@ export class ApplyComponent implements OnInit
 	setShowSecond()
 	{
 		this.showSecondStep = true;
-
+		this.facebookPixelService.track('BusinessEmployment');
 		setTimeout(function ()
 		{
 			document.querySelector('#step2_head').scrollIntoView({
@@ -358,6 +360,7 @@ export class ApplyComponent implements OnInit
 	setShowThird()
 	{
 		this.showThirdStep = true;
+		this.facebookPixelService.track('Identification');
 		setTimeout(function ()
 		{
 			document.querySelector('#step3_head').scrollIntoView({
@@ -369,6 +372,7 @@ export class ApplyComponent implements OnInit
 	setShowFourth()
 	{
 		this.showFourthStep = true;
+		this.facebookPixelService.track('BeneficiaryDetails');
 		setTimeout(function ()
 		{
 			document.querySelector('#step4_head').scrollIntoView({
@@ -381,6 +385,7 @@ export class ApplyComponent implements OnInit
 	setShowFifth()
 	{
 		this.showFifthStep = true;
+		this.facebookPixelService.track('Declarations');
 		setTimeout(function ()
 		{
 			document.querySelector('#step5_head').scrollIntoView({

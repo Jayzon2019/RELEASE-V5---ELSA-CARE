@@ -1,5 +1,5 @@
 import { PromptMessageComponent } from '../../../../shared/component/prompt-message/prompt-message.component';
-import { SessionStorageService } from '@app/services';
+import { FacebookPixelService, SessionStorageService } from '@app/services';
 import { Component, OnDestroy, OnInit, AfterViewInit, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../services/api.service';
@@ -29,10 +29,12 @@ export class MainComponent implements OnInit, OnDestroy {
 		private apiService: ApiService, private sanitizer: DomSanitizer,
 		private util: UtilitiesService,
 		private session: SessionStorageService,
+		public facebookPixelService: FacebookPixelService,
 		private appRef: ApplicationRef,
 		private dialog: MatDialog) { }
 
 	ngOnInit(): void {
+		this.facebookPixelService.track('ViewContent');
 		this.session.remove('selectedGroupPlanData');
 		this.session.remove(StorageType.POST_GROUP_QUOTE);
 		this.session.remove(StorageType.GROUP_PLAN_DATA);
