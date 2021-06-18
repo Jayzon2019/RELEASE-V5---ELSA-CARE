@@ -46,6 +46,7 @@ namespace InLife.Store.Api.Messages
 			model.CovidQuestion2 = CovidQuestion2;
 			model.CovidQuestion3 = CovidQuestion3;
 			model.CovidQuestion4 = CovidQuestion4;
+			model.IsEligible = IsEligible;
 
 			return model;
 		}
@@ -104,6 +105,8 @@ namespace InLife.Store.Api.Messages
 		public int Height { get; set; }
 
 		public int Weight { get; set; }
+
+		public bool IsEligible { get; set; }
 
 		#endregion Customer Details
 

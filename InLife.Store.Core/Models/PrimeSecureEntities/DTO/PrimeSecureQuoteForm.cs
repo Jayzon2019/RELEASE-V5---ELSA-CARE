@@ -27,6 +27,7 @@ namespace InLife.Store.Core.Models
 		public string CustomerEmailAddress { get; set; }
 		public int Height { get; set; }
 		public int Weight { get; set; }
+		public bool IsEligible { get; set; }
 
 		#endregion Customer Details
 

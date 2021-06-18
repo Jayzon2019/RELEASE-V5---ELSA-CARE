@@ -96,7 +96,8 @@ namespace InLife.Store.Core.Business
 				CovidQuestion1 = form.CovidQuestion1,
 				CovidQuestion2 = form.CovidQuestion2,
 				CovidQuestion3 = form.CovidQuestion3,
-				CovidQuestion4 = form.CovidQuestion4
+				CovidQuestion4 = form.CovidQuestion4,
+				IsEligible = form.IsEligible
 			};
 
 			//application.Status = GetStatus(application).Id;
