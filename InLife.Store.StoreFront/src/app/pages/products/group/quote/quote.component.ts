@@ -421,37 +421,44 @@ export class QuoteComponent implements OnInit, OnDestroy
 	
 	saveQuoteForm(type: any = 'submit')
 	{
-		if(type=='save') {
+		this.ngxService.start();
+		const groupPlanData = {
+			totalPremium: this.totalPremium,
+			insuranceCoverage: this.insuranceCoverage,
+			annualPremium: this.annualPremium,
+			productName: this.productName, // Employee Secure Plan
+			productType: this.groupPackageCtrl.get('PlanType').value, // 1,2,3,4
+			planCode: this.planCode, // 1 - Administrative and Office-based
+			plan: this.selectedPlan, // 1
+		}
+		const packageInfo = this.getQuoteForm.get('groupPackage').value;
+		const basicInfo = this.getQuoteForm.get('basicInformation').value;
+		basicInfo.AuthPrefixName = { id: basicInfo.AuthPrefixName, name: this.authPrefixTxt };
+		basicInfo.AuthSuffixName = { id: basicInfo.AuthSuffixName, name: this.authSuffixTxt };
+		basicInfo.Region = { id: basicInfo.Region, name: this.regionText };
+		basicInfo.City = { id: basicInfo.City, name: this.cityText };
+		let data = { ...packageInfo, ...basicInfo };
+		const groupQuoteDataNew = {
+			...data,
+			SelectedPlan: this.selectedPlan,
+			ProductName: this.productName,
+			CityTxt: this.cityText,
+			RegionTxt: this.regionText,
+			BarangayaTxt: this.barangayaText,
+			BusinessTxt: this.BusinessTxt, AuthSuffixTxt: this.authSuffixTxt, AuthPrefixTxt: this.authPrefixTxt
+		};
+
+		if (type == 'save') {
+			this.session.set('selectedGroupPlanData', groupPlanData);
+			this.session.set(StorageType.POST_GROUP_QUOTE, groupQuoteDataNew);
+
 			document.getElementById("closeModal-quote").click();
+			this.ngxService.stopAll();
 		}
 		this.submitted = true;
 		if (this.getQuoteForm.valid) {
-			this.ngxService.start();
-			const packageInfo = this.getQuoteForm.get('groupPackage').value;
-			const basicInfo  = this.getQuoteForm.get('basicInformation').value;
 			const access = this.session.get(StorageType.ACCESS_DATA);
-			basicInfo.AuthPrefixName = {id: basicInfo.AuthPrefixName, name: this.authPrefixTxt };
-			basicInfo.AuthSuffixName = {id: basicInfo.AuthSuffixName, name: this.authSuffixTxt };
-			basicInfo.Region = {id: basicInfo.Region, name: this.regionText };
-			basicInfo.City = {id: basicInfo.City, name: this.cityText};
-			let data = {...packageInfo, ...basicInfo};
-			const groupPlanData = {
-				totalPremium : this.totalPremium,
-			    insuranceCoverage : this.insuranceCoverage,
-				annualPremium : this.annualPremium,
-				productName: this.productName, // Employee Secure Plan
-				productType: this.groupPackageCtrl.get('PlanType').value, // 1,2,3,4
-				planCode: this.planCode, // 1 - Administrative and Office-based
-				plan: this.selectedPlan, // 1
-			}
-			const groupQuoteDataNew = { ...data, 
-				SelectedPlan: this.selectedPlan, 
-				ProductName: this.productName, 
-				CityTxt: this.cityText, 
-				RegionTxt: this.regionText, 
-				BarangayaTxt: this.barangayaText, 
-				BusinessTxt: this.BusinessTxt, AuthSuffixTxt : this.authSuffixTxt, AuthPrefixTxt : this.authPrefixTxt};
-
+			
 			if(this.hasData) {
 				
 				if(JSON.stringify(this.groupQuoteData) != JSON.stringify(groupQuoteDataNew)) {

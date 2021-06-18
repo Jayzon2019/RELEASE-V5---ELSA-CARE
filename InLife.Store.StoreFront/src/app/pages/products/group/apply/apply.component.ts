@@ -271,22 +271,19 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		this.hasError = false;
 		this.finishUpload = false;
 		console.log(this.getApplyForm);
-		if (this.getApplyForm.valid) {
-			this.ngxService.start();
-			const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
-			const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
-			const declarationsFormData = this.getApplyForm.get('declarationsForm').value;
-			let data = { ...basicInformationFormData, ...declarationsFormData };
-			this.session.set(StorageType.GROUP_PLAN_DATA, data);
-			this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
+		this.ngxService.start();
+		const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
+		const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
+		const declarationsFormData = this.getApplyForm.get('declarationsForm').value;
+		let data = { ...basicInformationFormData, ...declarationsFormData };
+		this.session.set(StorageType.GROUP_PLAN_DATA, data);
+		this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
 
-
-			if(formType == 'save') {
-				document.getElementById("closeModal").click();
-				this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
-			} else {
-				this.router.navigate(['/group/plan-summary']);
-			}
+		if(formType == 'save') {
+			document.getElementById("closeModal").click();
+			this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
+		} else {
+			this.router.navigate(['/group/plan-summary']);
 		}
 		return;
 	}
