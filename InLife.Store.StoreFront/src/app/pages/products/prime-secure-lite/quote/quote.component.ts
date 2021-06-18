@@ -629,35 +629,30 @@ export class QuoteComponent implements OnInit, OnDestroy
 		// 		let errorMsg = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
 		// 			this.util.ShowGeneralMessagePrompt({message: errorMsg});
 		// 	});
-		if(isEligible) {
-			if(JSON.stringify(oldDataExternalAPI) !== JSON.stringify(dataExternalAPI)) {
-				this.psLiteService_API.saveQuoteInternalAPI(internalData)
-				.pipe(
-					switchMap((resp) => this.psLiteService_API.createUnderWritingStatus(data)),
-					takeUntil(this.destroy$)
-				).subscribe((data: any) => {
-					if(data.underwritingStatus === 'CLEAN_CASE') {
-						this.facebookPixelService.track('Lead');
-						this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
-						this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
-						this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
-						this.session.set('UnderWritingStatus', data)
-						this.router.navigate(['prime-secure-lite/apply']);
-					} else {
-						this.router.navigate(['prime-secure-lite/ineligible']);
-					}
-				}, (error) => {
-					this.ngxService.stopAll();
-					let errorMsg = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
-					this.util.ShowGeneralMessagePrompt({message: errorMsg});
-				})
-			} else {
-				this.router.navigate(['prime-secure-lite/apply']);
-			}
+		if(JSON.stringify(oldDataExternalAPI) !== JSON.stringify(dataExternalAPI)) {
+			this.psLiteService_API.saveQuoteInternalAPI(internalData)
+			.pipe(
+				switchMap((resp) => this.psLiteService_API.createUnderWritingStatus(data)),
+				takeUntil(this.destroy$)
+			).subscribe((data: any) => {
+				this.facebookPixelService.track('Lead');
+				if(isEligible && data.underwritingStatus === 'CLEAN_CASE') {
+					this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
+					this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
+					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
+					this.session.set('UnderWritingStatus', data)
+					this.router.navigate(['prime-secure-lite/apply']);
+				} else {
+					this.router.navigate(['prime-secure-lite/ineligible']);
+				}
+			}, (error) => {
+				this.ngxService.stopAll();
+				let errorMsg = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
+				this.util.ShowGeneralMessagePrompt({message: errorMsg});
+			})
 		} else {
-			this.router.navigate(['prime-secure-lite/ineligible']);
+			this.router.navigate(['prime-secure-lite/apply']);
 		}
-		
 
 	}
 

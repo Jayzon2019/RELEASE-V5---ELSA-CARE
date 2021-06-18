@@ -526,9 +526,9 @@ export class QuoteComponent implements OnInit
 			{
 				let refNo = String(data.id).padStart(10, '0');
 				this.session.set('refNo', refNo)
+				this.facebookPixelService.track('Lead');
 				if(isEligible)
 				{
-					this.facebookPixelService.track('Lead');
 					this.router.navigate(['/prime-care/apply']);
 				}
 				else
