@@ -581,6 +581,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			covidQuestion2: convidInfo.get('healthCondition2').value === 'Yes',
 			covidQuestion3: convidInfo.get('healthCondition3').value === 'Yes',
 			covidQuestion4: convidInfo.get('healthCondition4').value === 'Yes',
+			isEligible: isEligible,
 		};
 		var dataExternalAPI = {
 			InsuredPrefixId: +basicInfo.get('prefix').value,
