@@ -118,7 +118,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 						break;
 					case '2':
 						this.lc1 = "25,000";
-						this.Pr1 = 184.75;
+						this.Pr1 = 194.75;
 						this.lc2 = "35,000";
 						this.Pr2 = 261.25;
 						this.lc3 = "55,000";
