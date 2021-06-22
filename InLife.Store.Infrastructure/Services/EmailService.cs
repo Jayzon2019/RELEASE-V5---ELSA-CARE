@@ -495,6 +495,7 @@ namespace InLife.Store.Infrastructure.Services
 
 			var body = new StringBuilder(EmailTemplates.GroupApplicationReferenceCode)
 				.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
+				.Replace("#CODE#", application.ReferenceCode)
 				.Replace("#URL#", redirectBtnUrl)
 				.ToString();
 
