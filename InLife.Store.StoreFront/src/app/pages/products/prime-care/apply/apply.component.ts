@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
+import { ViewportScroller, formatDate } from '@angular/common';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
@@ -510,6 +510,9 @@ export class ApplyComponent implements OnInit
 		this.facebookPixelService.track('Lead');
 		if (this.getApplyForm.valid)
 		{
+			var dob = formatDate(new Date(this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila');
+			this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').setValue(dob);
+
 			this.session.set("getApplyForm_PC", this.getApplyForm.value);
 			this.session.set("extensionData_PC", this.dynamicArray);
 			this.session.set("insuredIdentityDocumentImageData_PC", this.insuredIdentityDocumentImageData);

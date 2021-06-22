@@ -3,7 +3,7 @@ import { environment } from '@environment';
 
 import { Injectable, Injector, ElementRef, OnDestroy } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ViewportScroller, CurrencyPipe } from '@angular/common';
+import { ViewportScroller, CurrencyPipe, formatDate } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
@@ -456,14 +456,14 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 	submitQuoteForm()
 	{
-
-		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
 		
-
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
 		{
+			var dob = formatDate(new Date(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila');
+			this.getQuoteForm.get('calculatePremium').get('dateofbirth').setValue(dob);
+
 			this.session.set('getQuoteForm', this.getQuoteForm.value);
 			//this.session.set("getQuoteForm", JSON.stringify(this.getQuoteForm.value));
 			const healthCondition = this.getQuoteForm.get('healthCondition').value;
@@ -554,7 +554,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			customerPhoneNumber: basicInfo.get('landline').value,
 			customerMobileNumber: basicInfo.get('mobile').value,
 			customerEmailAddress: basicInfo.get('email').value,
-			customerBirthday: new Date(calcInfo.get('dateofbirth').value).toLocaleDateString(),
+			customerBirthday: formatDate(new Date(calcInfo.get('dateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila'),
 			customerGender: this.getReferenceDataName(CONSTANTS.GENDER, calcInfo.get('gender')),
 			height: this.feetToInches(health.get('heightInFeet').value) + health.get('heightInInches').value,
 			weight: health.get('weight').value,
@@ -589,7 +589,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			InsuredMiddleName: basicInfo.get('mname').value,
 			InsuredLastName: basicInfo.get('lname').value,
 			InsuredSuffixId: +basicInfo.get('suffix').value,
-			InsuredBirthday: new Date(calcInfo.get('dateofbirth').value).toLocaleDateString(),
+			InsuredBirthday: formatDate(new Date(calcInfo.get('dateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila'),
 			InsuredGenderId: +calcInfo.get('gender').value,
 			PlanCode: 'TR0091',
 			PlanName: 'Prime Secure Lite',
@@ -603,7 +603,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		this.ngxService.start();
 		const oldDataExternalAPI = this.session.get(StorageType.QUOTE_EXTERNAL_DATA);
-
+		
 		let internalData = JSON.stringify(dataInternalAPI);
 		let data = JSON.stringify(dataExternalAPI);
 

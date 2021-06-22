@@ -3,7 +3,7 @@ import { environment } from '@environment';
 
 import { Injectable, Injector } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
+import { ViewportScroller, formatDate } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
@@ -373,12 +373,14 @@ export class QuoteComponent implements OnInit
 
 	submitQuoteForm()
 	{
-		var dd = this.getQuoteForm.value.country;
 		this.submitted = true;
 
 		// TODO: Move eligibility checking on server
 		if (this.getQuoteForm.valid)
 		{
+			var dob = formatDate(new Date(this.getQuoteForm.get('calculatePremium').get('dateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila');
+			this.getQuoteForm.get('calculatePremium').get('dateofbirth').setValue(dob);
+
 			this.session.set('getQuoteForm', this.getQuoteForm.value);
 			//this.session.set("getQuoteForm", JSON.stringify(this.getQuoteForm.value));
 			const healthCondition = this.getQuoteForm.get('healthCondition').value;
@@ -451,7 +453,7 @@ export class QuoteComponent implements OnInit
 			"LastName": this.nullIfEmpty(basicInfo.get('lname').value),
 
 			"Gender": this.getReferenceDataName(CONSTANTS.GENDER, calcInfo.get('gender')),
-			"BirthDate": calcInfo.get('dateofbirth').value,
+			"BirthDate": formatDate(new Date(calcInfo.get('dateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila'),
 
 			"EmailAddress": this.nullIfEmpty(String(basicInfo.get('email').value).toLowerCase()),
 			"MobileNumber": this.nullIfEmpty(basicInfo.get('mobile').value),
