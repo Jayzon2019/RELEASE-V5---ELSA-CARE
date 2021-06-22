@@ -2593,14 +2593,14 @@ header.fixed.hide {
 	margin-left: 18px;
 }
 
-.tab-section .palet #faqs18 li::before {
+/* .tab-section .palet #faqs18 li::before {
 	content: counter(li) ".";
 	color: #42414d;
 	display: inline-block;
 	width: 1em;
 	margin-left: -1em;
 	margin-right: 2px;
-}
+} */
 
 .tab-section .palet #faqs18 li {
 	counter-increment: li;

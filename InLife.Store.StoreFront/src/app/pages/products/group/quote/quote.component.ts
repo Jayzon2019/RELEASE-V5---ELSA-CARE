@@ -271,11 +271,11 @@ export class QuoteComponent implements OnInit, OnDestroy
 					this.annualPremium = 400;
 					this.annualPremiumStr = '400';
 				} else if(this.plan == '2') {
-					total_premium = 184.75 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
+					total_premium = 194.75 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
 					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2'); 
 					this.insuranceCoverage = "25,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
-					this.annualPremium = 184.75;
-					this.annualPremiumStr = '184.75';
+					this.annualPremium = 194.75;
+					this.annualPremiumStr = '194.75';
 				} else if(this.plan == '3') {
 					
 					total_premium = 25.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);

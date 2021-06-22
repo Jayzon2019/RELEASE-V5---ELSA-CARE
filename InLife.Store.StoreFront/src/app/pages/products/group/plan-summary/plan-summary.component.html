@@ -190,30 +190,139 @@
 												<p>Benefits per Member </p>
 											</div>
 											<div class="col-md-8 detailbill">
-												<div class="row m-0">
-													<div class="col-6">
-														<p class="pb-0">Life Coverage</p>
-													</div>
-													<div class="col-6">
-														<p>&#8369; {{LifeCoverageperHead}}</p>
-													</div>
-												</div>
-												<div class="row m-0">
-													<div class="col-6">
-														<p class="pb-0" *ngIf="selectedGroupPlanData.plan !== '2'; else guard">
-															Accidental Death and Disability/Total and Permanent Disability Benefit
-														</p>
-														<ng-template #guard>
+												<ng-container *ngIf="selectedGroupPlanData.plan !== '3'">
+													<div class="row m-0">
+														<div class="col-6">
 															<p class="pb-0">
-																Accidental Death and Disability
+																Life Coverage
 															</p>
-														</ng-template>
-														
+														</div>
+														<div class="col-6">
+															<p>
+																&#8369;
+																{{
+																	LifeCoverageperHead
+																}}
+															</p>
+														</div>
 													</div>
-													<div class="col-6">
-														<p>&#8369; {{ADD_TPDCoverageperHead}}</p>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0" *ngIf="selectedGroupPlanData.plan !== '2'; else guard">
+																Accidental Death and Disability/Total and Permanent Disability Benefit
+															</p>
+															<ng-template #guard>
+																<p class="pb-0">
+																	Accidental Death and Disability
+																</p>
+															</ng-template>
+														</div>
+														<div class="col-6">
+															<p>
+																&#8369;
+																{{ ADD_TPDCoverageperHead }}
+															</p>
+														</div>
 													</div>
-												</div>
+
+												</ng-container>
+												<ng-container *ngIf="selectedGroupPlanData.plan == '3'">
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Life Coverage(non-accident)</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{LifeCoverageperHead}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Life Coverage(accident)</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{ADD_TPDCoverageperHead}}</p>
+														</div>
+													</div>
+													<div class="row m-0 mt-2">
+														<div class="col-12">
+															<p class="pb-0">For Students (coverage per Head)</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Disability:
+																<span class="disability-wrapper">
+																	<ol>
+																		<li>both hands or feet</li>
+																		<li>sight of both eyes</li>
+																		<li>one hand & a foot</li>
+																		<li>one hand & a sight of one eye</li>
+																		<li>a foot & a sight of one eye</li>
+																	</ol>
+																</span>
+															</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Disability_Double}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Disability:
+																<span class="disability-wrapper">
+																	<ol>
+																		<li>one hand or a foot</li>
+																		<li>sight of one eye</li>
+								
+																	</ol>
+																</span>
+															</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Disability_Single}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Room and Board</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Room_and_Board}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Special Hospital Services</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Special_Hospital_Service}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Doctor's Call</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Doctors_Call}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Maximum Hospitalization per Disability</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Maximum_Hospitalization_per_Disability}}</p>
+														</div>
+													</div>
+													<div class="row m-0">
+														<div class="col-6">
+															<p class="pb-0">Outpatient Benefits</p>
+														</div>
+														<div class="col-6">
+															<p>&#8369; {{StudentsTeachersOtherBenefits.Outpatient_Benefit}}</p>
+														</div>
+													</div>
+												</ng-container>
 												<div class="row m-0" *ngIf="selectedGroupPlanData.plan === '2'">
 													<div class="col-6">
 														<p class="pb-0">Burial Benefit</p>
