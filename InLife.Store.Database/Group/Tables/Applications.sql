@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Group].[Applications] (
+CREATE TABLE [Group].[Applications] (
     [Id]                                 UNIQUEIDENTIFIER   NOT NULL,
     [CreatedDate]                        DATETIMEOFFSET (7) CONSTRAINT [DF_Group_Applications_CreatedDate] DEFAULT (sysdatetimeoffset()) NOT NULL,
     [CompletedDate]                      DATETIMEOFFSET (7) NULL,
@@ -63,6 +63,7 @@
     [OtpExpiration]                      DATETIMEOFFSET (7) NULL,
     [Session]                            VARCHAR (300)      NULL,
     [SessionExpiration]                  DATETIMEOFFSET (7) NULL,
+    [AlreadyDeclared] BIT NULL, 
     CONSTRAINT [PK_Group_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC),
     CONSTRAINT [UK_Group_Applications] UNIQUE NONCLUSTERED ([ReferenceCode] ASC)
 );

@@ -10,8 +10,11 @@ namespace InLife.Store.Core.Business
 		GroupApplication GetApplication(string refcode);
 
 		Task<GroupApplication> RequestQuote(GroupQuoteForm form, string url);
-		Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form);
-		Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form);
+		Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form, string url);
+
+		GroupApplication UpdateQuoteStatus(string refcode);
+
+		Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form, string url);
 
 		Task<GroupApplication> UploadFile(string refcode, string documentType, string contentType, string filename, Stream stream);
 

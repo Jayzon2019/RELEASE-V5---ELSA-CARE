@@ -113,7 +113,7 @@ namespace InLife.Store.Core.Business
 			return application;
 		}
 
-		public async Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form)
+		public async Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form, string url)
 		{
 			Contract.Requires(form != null);
 
@@ -160,12 +160,26 @@ namespace InLife.Store.Core.Business
 
 			applicationRepository.Update(application);
 
-			await emailService.SendGroupApplicationReferenceCode(application);
+			await emailService.SendGroupApplicationReferenceCode(application, url);
 
 			return application;
 		}
 
-		public async Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form)
+		public GroupApplication UpdateQuoteStatus(string refcode)
+		{
+			var application = applicationRepository.GetByReferenceCode(refcode);
+
+			if (application == null)
+				return null;
+			application.AlreadyDeclared = true;
+			application.Status = GroupApplicationStatus.Payment.Id;
+
+			applicationRepository.Update(application);
+
+			return application;
+		}
+
+		public async Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form, string url)
 		{
 			Contract.Requires(form != null);
 
@@ -201,7 +215,7 @@ namespace InLife.Store.Core.Business
 
 			applicationRepository.Update(application);
 
-			await emailService.SendGroupApplicationReferenceCode(application);
+			await emailService.SendGroupApplicationReferenceCode(application, url);
 
 			return application;
 		}
@@ -539,6 +553,12 @@ namespace InLife.Store.Core.Business
 				String.IsNullOrWhiteSpace(application.RepresentativeFile) ||
 				String.IsNullOrWhiteSpace(application.BusinessRegistrationDocumentFile) ||
 				String.IsNullOrWhiteSpace(application.AuthorizationDocumentFile))
+			{
+				return GroupApplicationStatus.Application;
+			}
+
+			//  Check if apply page declarations completed
+			if (!application.AlreadyDeclared)
 			{
 				return GroupApplicationStatus.Application;
 			}

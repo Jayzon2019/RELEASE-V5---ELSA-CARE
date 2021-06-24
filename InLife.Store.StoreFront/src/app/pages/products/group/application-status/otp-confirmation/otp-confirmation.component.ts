@@ -138,10 +138,10 @@ export class OtpConfirmationComponent extends ApplicationStatusBaseComponent imp
   evaluateStatus(status: any = '') {
     switch(status) {
       case 'Application':
-        this.router.navigate(['group/application-status/requirements-pending'],{ queryParamsHandling: 'preserve' });
+        this.router.navigate(['group/application-status/requirements-pending'],{ queryParamsHandling: 'merge', queryParams: { appstatus: status} });
         break;
       case 'Payment':
-        this.router.navigate(['group/application-status/requirements-pending'],{ queryParamsHandling: 'preserve' });
+        this.router.navigate(['group/application-status/requirements-pending'],{ queryParamsHandling: 'merge', queryParams: { appstatus: status} });
         break;
       case 'PaymentProof':
         this.router.navigate(['group/application-status/payment-pending'],{ queryParamsHandling: 'preserve' });

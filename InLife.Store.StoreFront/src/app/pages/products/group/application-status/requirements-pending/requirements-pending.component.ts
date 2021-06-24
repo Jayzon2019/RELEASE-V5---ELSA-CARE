@@ -22,6 +22,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
   groupApplyData: any;
   cities: any =[];
   referenceCode: any;
+  appStatus: any;
   isCompletedRequirements: boolean = true;
   requirementTypesTitle: any = ['EmployeeCesusForm', 'EntityPlanForm', 'AuthRepresentativeId', 'BIRNoticeForm', 'SECRegistration', 'IncorporationArticles', 'IdentityCertificate', 'PostPolicyForm'];
   requirementsTypes: any = {
@@ -48,6 +49,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
     this.activatedRoute.queryParams
       .pipe(takeUntil(this.destroy$))
       .subscribe((param: Params) => {
+        this.appStatus = param['appstatus'];
         this.referenceCode = param["referenceCode"];
         this.getApplicationSummary();
       });
@@ -82,6 +84,8 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
         let prodName = planVariantCodeArr.slice(0, planVariantCodeArr.length -1);
         let totalMembers = data.totalMembers !== 0 ? data.totalMembers : data.totalStudents;
         let selectedPlan = this.getPlan(data.planCode);
+        let alreadyDeclared = data.alreadyDeclared;
+
         debugger
         this.groupPlan = {
           annualPremium:  selectedPlan === '1' ? Number(data.planPremium): this.decimalPipe.transform(data.planPremium, '1.2-2'),
@@ -132,15 +136,15 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
           TotalNumberOfStudents: data.totalStudents || null,
           TotalNumberOfTeachers: data.totalTeachers || null,
         }
-
+        
         this.groupApplyData = {
           ...commonAttr,
           Status: 2,
-          IsCheckDataPrivacy: true,
-          IsCheckDataUNSCR: true,
-          IsCheckDeclarationStatement: true,
-          IsCheckLifeProducts: true,
-          IsCheckSubmittedPhlippinesApp: true,
+          IsCheckDataPrivacy: alreadyDeclared,
+          IsCheckDataUNSCR: alreadyDeclared,
+          IsCheckDeclarationStatement: alreadyDeclared,
+          IsCheckLifeProducts: alreadyDeclared,
+          IsCheckSubmittedPhlippinesApp: alreadyDeclared,
         }
 
         this.requirementTypesTitle.forEach(type => {
@@ -164,6 +168,8 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
       });
   }
 
+  
+
   mapRequirementsFileDetails(type: string, data: any) {
     this.requirementsTypes[type] = {
       type: 'general',
@@ -183,7 +189,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
     this.session.set(StorageType.POST_GROUP_QUOTE, this.groupQuoteData);
     this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
 
-    if(this.isCompletedRequirements) {
+    if(this.isCompletedRequirements && this.appStatus !== 'Application') {
       this.session.set(StorageType.GROUP_PLAN_DATA, this.groupApplyData);
       this.router.navigate(['/group/plan-summary']);
     } else {

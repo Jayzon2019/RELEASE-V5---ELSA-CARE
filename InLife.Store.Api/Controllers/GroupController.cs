@@ -166,8 +166,34 @@ namespace InLife.Store.Api
 				if (!applicationProcessing.VerifySession(refcode, headers.Session))
 					return Unauthorized();
 
+				var req = HttpContext.Request;
+				var url = $"{req.Scheme}://{req.Host}";
 				var quoteForm = request.Map();
-				var application = await applicationProcessing.UpdateQuote(refcode, quoteForm);
+				var application = await applicationProcessing.UpdateQuote(refcode, quoteForm, url);
+
+				var response = new BaseGroupResponse(application);
+
+				return Ok(response);
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
+		}
+
+		// PATCH /group/applications
+		[HttpPatch("applications/{refcode}/status")]
+		public ActionResult UpdateQuoteStatus(string refcode, [FromHeader] RequestHeaders headers)
+		{
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			try
+			{
+				if (!applicationProcessing.VerifySession(refcode, headers.Session))
+					return Unauthorized();
+
+				var application = applicationProcessing.UpdateQuoteStatus(refcode);
 
 				var response = new BaseGroupResponse(application);
 
@@ -191,9 +217,10 @@ namespace InLife.Store.Api
 				if (!applicationProcessing.VerifySession(refcode, headers.Session))
 					return Unauthorized();
 
+				var req = HttpContext.Request;
+				var url = $"{req.Scheme}://{req.Host}";
 				var applicationForm = request.Map();
-
-				var application = await applicationProcessing.SaveApplication(refcode, applicationForm);
+				var application = await applicationProcessing.SaveApplication(refcode, applicationForm, url);
 
 				if (application == null)
 					return NotFound();

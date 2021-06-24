@@ -202,16 +202,16 @@ export class ApplyComponent implements OnInit, OnDestroy {
 					this.getApplyForm.get('requirementsForm').get(key).patchValue(value.fileInfo.loc);
 				}
 			});
-			this.showThirdStep = (this.getApplyForm.get('requirementsForm').valid) ? true : false;
-			if(this.showThirdStep) {
-				this.getApplyForm.get('declarationsForm').patchValue({
-					IsCheckDataPrivacy: true,
-					IsCheckDataUNSCR: true,
-					IsCheckDeclarationStatement: true,
-					IsCheckSubmittedPhlippinesApp: true,
-					IsCheckLifeProducts: true,
-				})
-			}
+			// this.showThirdStep = (this.getApplyForm.get('requirementsForm').valid) ? true : false;
+			// if(this.showThirdStep) {
+			// 	this.getApplyForm.get('declarationsForm').patchValue({
+			// 		IsCheckDataPrivacy: true,
+			// 		IsCheckDataUNSCR: true,
+			// 		IsCheckDeclarationStatement: true,
+			// 		IsCheckSubmittedPhlippinesApp: true,
+			// 		IsCheckLifeProducts: true,
+			// 	})
+			// }
 		}
 
 		this.setMunicipalities(getQuoteFormData.Region.id);
@@ -270,22 +270,29 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		this.submitted = true;
 		this.hasError = false;
 		this.finishUpload = false;
-		console.log(this.getApplyForm);
 		this.ngxService.start();
-		const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
-		const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
-		const declarationsFormData = this.getApplyForm.get('declarationsForm').value;
-		let data = { ...basicInformationFormData, ...declarationsFormData };
-		this.session.set(StorageType.GROUP_PLAN_DATA, data);
-		this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
 
-		if(formType == 'save') {
-			document.getElementById("closeModal").click();
-			this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
-		} else {
-			this.router.navigate(['/group/plan-summary']);
-		}
-		return;
+		this.apply_API.updateDeclaration(this.accessData.referenceCode)
+			.pipe(takeUntil(this.destroy$), finalize(() => this.ngxService.stopAll()))
+			.subscribe((resp) => {
+				const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
+				const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
+				const declarationsFormData = this.getApplyForm.get('declarationsForm').value;
+				let data = { ...basicInformationFormData, ...declarationsFormData };
+				this.session.set(StorageType.GROUP_PLAN_DATA, data);
+				this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
+
+				if(formType == 'save') {
+					document.getElementById("closeModal").click();
+					this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
+				} else {
+					this.router.navigate(['/group/plan-summary']);
+				}
+				return;
+			}, error => {
+				this.errorMsg = error.message;
+				this.hasError = true;
+			});
 	}
 
 

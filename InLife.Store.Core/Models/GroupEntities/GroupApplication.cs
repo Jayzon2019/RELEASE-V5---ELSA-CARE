@@ -134,5 +134,7 @@ namespace InLife.Store.Core.Models
 		public string IncorporationDocumentFile { get; set; }
 		public string AuthorizationDocumentFile { get; set; }
 		public string IndividualApplicationsFile { get; set; }
+
+		public bool AlreadyDeclared { get; set; }
 	}
 }
