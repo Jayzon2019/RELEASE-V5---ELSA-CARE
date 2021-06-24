@@ -272,12 +272,22 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		this.finishUpload = false;
 		this.ngxService.start();
 
+		const declarationForm = this.getApplyForm.get('declarationsForm');
+
+		const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
+		const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
+		const declarationsFormData = declarationForm.value;
+
+		if(formType === 'save' && !declarationForm.valid) {
+			document.getElementById("closeModal").click();
+			this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
+			return;
+		}
+		
 		this.apply_API.updateDeclaration(this.accessData.referenceCode)
 			.pipe(takeUntil(this.destroy$), finalize(() => this.ngxService.stopAll()))
 			.subscribe((resp) => {
-				const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
-				const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
-				const declarationsFormData = this.getApplyForm.get('declarationsForm').value;
+				
 				let data = { ...basicInformationFormData, ...declarationsFormData };
 				this.session.set(StorageType.GROUP_PLAN_DATA, data);
 				this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
