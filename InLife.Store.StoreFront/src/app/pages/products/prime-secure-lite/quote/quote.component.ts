@@ -637,7 +637,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 				takeUntil(this.destroy$)
 			).subscribe((data: any) => {
 				this.facebookPixelService.track('Lead');
-				if(isEligible && data.underwritingStatus === 'CLEAN_CASE') {
+				if(data && isEligible && data.underwritingStatus === 'CLEAN_CASE') {
 					this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
 					this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
 					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
