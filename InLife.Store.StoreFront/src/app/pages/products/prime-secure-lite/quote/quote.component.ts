@@ -45,6 +45,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 	calulatedAge:number=0;
 	privacyFile:any;
 	affiliate:any;
+	affiliateType:any;
 	destroy$ = new Subject();
 
 	quoteDetails: any;
@@ -90,23 +91,51 @@ export class QuoteComponent implements OnInit, OnDestroy
 		this.initForm(getQuoteFormData);
 		this.getFile();
 
-		if (this.affiliate?.agentCode)
+		if (this.affiliate)
 		{
-			this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
+			this.affiliateType = this.affiliate.AffiliateType == 'INLIFE AFFILIATE' ? '10' :
+							this.affiliate.AffiliateType == 'UNIONBANK BRANCH' ? '9' : '1';
 
-			this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agentCode);
-			this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agentName);
-			this.getQuoteForm.get('basicInformation').get('agentBranchCode').setValue(this.affiliate?.branchCode);
+			if(this.affiliate.AffiliateType == "INLIFE AFFILIATE") {
+				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('10');
+				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Affiliate.AffiliateCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Affiliate.AffiliateName);
 
-			this.getQuoteForm.get('basicInformation').get('acode').enable();
-			this.getQuoteForm.get('basicInformation').get('afname').enable();
-			this.getQuoteForm.get('basicInformation').get('alname').enable();
-			this.getQuoteForm.get('basicInformation').get('agentBranchCode').enable();
+				this.getQuoteForm.get('basicInformation').get('acode').enable();
+				this.getQuoteForm.get('basicInformation').get('afname').enable();
+				this.getQuoteForm.get('basicInformation').get('alname').enable();
 
-			this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
-			this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+
+			} else if (this.affiliate.AffiliateType == "UNIONBANK BRANCH") {
+				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('9');
+				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+
+				this.getQuoteForm.get('basicInformation').get('acode').enable();
+				this.getQuoteForm.get('basicInformation').get('afname').enable();
+				this.getQuoteForm.get('basicInformation').get('alname').enable();
+
+				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+			} else if (this.affiliate.AffiliateType == "INSULAR LIFE AGENT") {
+				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+
+				this.getQuoteForm.get('basicInformation').get('acode').enable();
+				this.getQuoteForm.get('basicInformation').get('afname').enable();
+				this.getQuoteForm.get('basicInformation').get('alname').enable();
+
+				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+			}
+			
 		}
-		else if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1')
+		else if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1' || this.getQuoteForm.get('basicInformation').get('primeCare').value == '10')
 		{
 			this.getQuoteForm.get('basicInformation').get('acode').disable();
 			this.getQuoteForm.get('basicInformation').get('agentBranchCode').disable();
@@ -145,7 +174,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		this.getQuoteForm.get('basicInformation').get('primeCare').valueChanges.subscribe(result =>
 		{
-			if (result === '1')
+			if (result === '1' || result === '10')
 			{
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
 				this.getQuoteForm.get('basicInformation').get('alname').enable();
@@ -539,7 +568,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 		}
 		let faceAmount = parseFloat(calcInfo.get('totalCashBenefit').value.substring(1).replace(/,/g, ''));
 		let monthlyIncome = parseFloat(basicInfo.get('monthlyIncome').value.substring(1).replace(/,/g, ''));
-		var dataInternalAPI =
+		var dataInternalAPI: any =
 		{
 			planCode: 'PLAN ' + this.eligiblePlan,
 			planName: 'PLAN ' + this.eligiblePlan,
@@ -567,7 +596,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			addressCountry: country,
 			bmi: +this.bodyMassIndex,
 
-			agentCode: basicInfo.get('acode').value,
+			agentCode: basicInfo.get('acode').value || this.affiliate?.Affiliate?.AffiliateCode,
 			agentFirstName: basicInfo.get('afname').value,
 			agentLastName: basicInfo.get('alname').value,
 			referralSource: this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
@@ -638,6 +667,12 @@ export class QuoteComponent implements OnInit, OnDestroy
 			).subscribe((data: any) => {
 				this.facebookPixelService.track('Lead');
 				if(data && isEligible && data.underwritingStatus === 'CLEAN_CASE') {
+
+					dataInternalAPI.AffiliateCode = this.affiliate?.Affiliate?.AffiliateCode || this.affiliate?.Agent?.AffCode;
+					dataInternalAPI.AffiliateName = this.affiliate?.Affiliate?.AffiliateName;
+					dataInternalAPI.AffiliateStatus = this.affiliate?.Affiliate?.AffiliateStatus;
+					dataInternalAPI.AffiliateType = this.affiliate?.AffiliateType;
+
 					this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
 					this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
 					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
@@ -647,6 +682,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 					this.router.navigate(['prime-secure-lite/ineligible']);
 				}
 			}, (error) => {
+				console.log(error);
 				this.ngxService.stopAll();
 				let errorMsg = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
 				this.util.ShowGeneralMessagePrompt({message: errorMsg});

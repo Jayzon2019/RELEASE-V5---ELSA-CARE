@@ -171,6 +171,7 @@ export const CONSTANTS =
 	[
 		{ "id": "1", "name": "REFERRAL OF INSULAR LIFE ADVISOR/ AGENT" },
 		{ "id": "9", "name": "REFERRAL FROM UNIONBANK BRANCH" },
+		{ "id": "10", "name": "REFERRAL FROM AN INLIFE AFFILIATE"},
 		{ "id": "2", "name": "SOCIAL MEDIA, FACEBOOK/ INSTAGRAM/ TWITTER" },
 		{ "id": "3", "name": "REFERRAL OF FAMILY/ FRIENDS/ RELATIVES" },
 		{ "id": "4", "name": "ONLINE ADS" },

@@ -30,6 +30,7 @@ import { StorageType } from '@app/services/storage-types.enum';
 export class PayComponent implements OnInit
 {
 	CONSTANTS = CONSTANTS;
+	quoteInformation: any;
 	basicInformation: any;
 	calculationInformation: any;
 	healthCondition: any;
@@ -54,6 +55,7 @@ export class PayComponent implements OnInit
 	health3: string;
 	privacyFile: any;
 	policy: any;
+	affiliate:any;
 
 	constructor
 	(
@@ -68,10 +70,13 @@ export class PayComponent implements OnInit
 		private facebookPixelService: FacebookPixelService,
 	)
 	{
+		this.affiliate = this.session.get('affiliate');
 		const getQuoteFormData = this.session.get('getQuoteForm') || "[]";
+		this.quoteInformation = this.session.get(StorageType.QUOTE_PC_DATA) || "[]";
 		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
 		const extension = this.session.get("extensionData_PC") || "[]";
 		this.getFile();
+		
 		this.basicInformation = getQuoteFormData.basicInformation;
 		this.calculationInformation = getQuoteFormData.calculatePremium;
 		this.totalCashBenefit = this.calculationInformation.totalCashBenefit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -279,9 +284,13 @@ export class PayComponent implements OnInit
 			"InsuredValidIdImage": this.insuredIdentityDocumentImageData,
 			"OwnerValidIdImage": this.insuredIdentityDocumentImageData,
 
-			"AgentCode": this.basicInformation.acode,
-			"RefFirstName": this.basicInformation.afname,
-			"RefLastName": this.basicInformation.alname
+			"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? '' : this.basicInformation.acode,
+			"RefFirstName": this.quoteInformation?.AffiliateCode ? '' : this.basicInformation.afname,
+			"RefLastName": this.quoteInformation?.AffiliateCode ? '' : this.basicInformation.alname,
+			"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : '',
+			"AffiliateName": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateName : '',
+       		"AffiliateStatus": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
+
 		}
 
 		// Do not include in request body if suffix is not applicable

@@ -65,6 +65,7 @@ export class ApplyComponent implements OnInit
 	pdfName: string = '';
 	pdfBase64 = '';
 	TINS = {};
+	quoteInformation: any;
 
 	constructor
 	(
@@ -81,7 +82,7 @@ export class ApplyComponent implements OnInit
 		this.ngxService.start();
 		this.getQuoteFormData = this.session.get("getQuoteForm") || "";
 		const getApplyFormData = this.session.get("getApplyForm") || "";
-
+		this.quoteInformation = this.session.get(StorageType.QUOTE_INTERNAL_DATA) || "[]";
 		this.insuredIdentityDocumentImagePreview = this.session.get("insuredIdentityDocumentImagePreview");
 		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData");
 		
@@ -489,7 +490,6 @@ export class ApplyComponent implements OnInit
 				"Question2": getQuoteForm.covidForm.privacyPolicy2 ? "Yes" : "No",//"No",
 				"PolicyDeliveryOption": "digitalhard",
 				"ServicingAgentBranchCode": getQuoteForm.basicInformation.agentBranchCode,
-				"AgentCode": getQuoteForm.basicInformation.acode,
 				"IsBanca": false,
 				"ProposalId": underwritingstatus?.proposalId || 50148,
 				
@@ -567,10 +567,16 @@ export class ApplyComponent implements OnInit
 				"ExistingOtherInsurance": extensionData,
 				"InsuredValidIdImage": this.insuredIdentityDocumentImageData || this.pdfBase64,//"XXXXXXXXXXXXXXX",
 				"OwnerValidIdImage": this.insuredIdentityDocumentImageData || this.pdfBase64,//"XXXXXXXXXXXXX",
-				"RefFirstName": getQuoteForm.basicInformation.afname || "",//"SampleFName",
-				"RefLastName": getQuoteForm.basicInformation.alname || "",//"SampleLName",
 				"InsuredHeight": totalInches,
-				"InsuredWeight": getQuoteForm.healthCondition.weight
+				"InsuredWeight": getQuoteForm.healthCondition.weight,
+
+
+				"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? '' : getQuoteForm.basicInformation.acode,
+				"RefFirstName": this.quoteInformation?.AffiliateCode ? '' : getQuoteForm.basicInformation.afname,
+				"RefLastName": this.quoteInformation?.AffiliateCode ? '' : getQuoteForm.basicInformation.alname,
+				"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : '',
+				"AffiliateName": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateName : '',
+				"AffiliateStatus": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
 			};
 
 			// Do not include in request body if suffix is not applicable

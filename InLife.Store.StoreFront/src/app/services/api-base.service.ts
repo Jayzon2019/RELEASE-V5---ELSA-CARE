@@ -24,7 +24,7 @@ export abstract class ApiBaseService {
             ok: error?.ok,
             status: type,
             statusText: error?.statusText,
-            message: 'An error occured during request. If error persist please contact support.'
+            message: error?.error?.detail
           }
           break;
         case 401:
@@ -40,7 +40,7 @@ export abstract class ApiBaseService {
             ok: error?.ok,
             status: type,
             statusText: error?.statusText,
-            message: "Server error occured, please try again. If error persist please contact support."
+            message: error?.error?.detail
           }
           break;
         default:

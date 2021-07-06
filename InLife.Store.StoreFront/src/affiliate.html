@@ -72,12 +72,20 @@
 
 				const path = window.location.pathname;
 				const dir = path.substring(0, path.lastIndexOf('/'));
-				var endpoint = `${dir}/api/affiliates/${code}`;
+				var base = '';
+				if(dir == 'https://uat-inlifestore.insularlife.com.ph' || dir == 'https://uat2-inlifestore.insularlife.com.ph') {
+					base = 'https://access-dev.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
+				} else if (dir == 'https://dev-inlife-estore.azurewebsites.net' || dir == 'http://localhost:4200') {
+					base = 'https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
+				}
+				var endpoint = `${base}/${code}`;
 
 				$.ajax
 				({
 					url: endpoint,
 					contentType: "application/json",
+					headers: { 'ClientID': 'f0b5e66c604f9a3b7868',
+								'ClientSecret': '0286b6b4fa642141831cde4ba6ae7675330a206ee811df8b44e10f0e743c' },
 					dataType: 'json',
 					success: function(data, status)
 					{

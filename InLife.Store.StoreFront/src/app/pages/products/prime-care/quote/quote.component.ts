@@ -1,3 +1,4 @@
+import { UtilitiesService } from '@app/shared/services/utilities.service';
 import { StorageType } from '@app/services/storage-types.enum';
 import { environment } from '@environment';
 
@@ -37,6 +38,7 @@ export class QuoteComponent implements OnInit
 	calulatedAge:number=0;
 	privacyFile:any;
 	affiliate:any;
+	affiliateType:any;
 
 	constructor
 	(
@@ -47,6 +49,7 @@ export class QuoteComponent implements OnInit
 		private session: SessionStorageService,
 		private ngxService: NgxUiLoaderService,
 		private vps: ViewportScroller,
+		private util: UtilitiesService,
 		private http: HttpClient,
 		private sanitizer: DomSanitizer,
 		private facebookPixelService: FacebookPixelService,
@@ -71,7 +74,7 @@ export class QuoteComponent implements OnInit
 	{
 		this.facebookPixelService.track('ViewContent');
 		this.facebookPixelService.track('GetQuote');
-		this.affiliate = this.affiliate = this.session.get('affiliate');
+		this.affiliate = this.session.get('affiliate');
 		//try { this.affiliate = JSON.parse(sessionStorage.getItem("affiliate")); }
 		//catch(ex) { this.affiliate = {}; }
 
@@ -98,20 +101,51 @@ export class QuoteComponent implements OnInit
 			// this.getQuoteForm.get('basicInformation').get('municipality').disable();
 		}
 
-		if (this.affiliate?.agentCode)
+		if (this.affiliate)
 		{
-			this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
-			this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agentCode);
-			this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agentName);
+			this.affiliateType = this.affiliate.AffiliateType == 'INLIFE AFFILIATE' ? '10' :
+							this.affiliate.AffiliateType == 'UNIONBANK BRANCH' ? '9' : '1';
 
-			this.getQuoteForm.get('basicInformation').get('acode').enable();
-			this.getQuoteForm.get('basicInformation').get('afname').enable();
-			this.getQuoteForm.get('basicInformation').get('alname').enable();
+			if(this.affiliate.AffiliateType == "INLIFE AFFILIATE") {
+				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('10');
+				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Affiliate.AffiliateCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Affiliate.AffiliateName);
 
-			this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
-			this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('acode').enable();
+				this.getQuoteForm.get('basicInformation').get('afname').enable();
+				this.getQuoteForm.get('basicInformation').get('alname').enable();
+
+				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+
+			} else if (this.affiliate.AffiliateType == "UNIONBANK BRANCH") {
+				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('9');
+				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+
+				this.getQuoteForm.get('basicInformation').get('acode').enable();
+				this.getQuoteForm.get('basicInformation').get('afname').enable();
+				this.getQuoteForm.get('basicInformation').get('alname').enable();
+
+				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+			} else if (this.affiliate.AffiliateType == "INSULAR LIFE AGENT") {
+				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+
+				this.getQuoteForm.get('basicInformation').get('acode').enable();
+				this.getQuoteForm.get('basicInformation').get('afname').enable();
+				this.getQuoteForm.get('basicInformation').get('alname').enable();
+
+				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
+				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
+			}
+			
 		}
-		else if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1')
+		else if (this.getQuoteForm.get('basicInformation').get('primeCare').value == '1' || this.getQuoteForm.get('basicInformation').get('primeCare').value == '10')
 		{
 			this.getQuoteForm.get('basicInformation').get('acode').disable();
 			this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -146,7 +180,7 @@ export class QuoteComponent implements OnInit
 
 		this.getQuoteForm.get('basicInformation').get('primeCare').valueChanges.subscribe(result =>
 		{
-			if (result === '1')
+			if (result === '1' || result === '10')
 			{
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
 				this.getQuoteForm.get('basicInformation').get('alname').enable();
@@ -461,7 +495,7 @@ export class QuoteComponent implements OnInit
 			"City": city,
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": basicInfo.get('acode').value,
+			"AgentCode": basicInfo.get('acode').value || this.affiliate?.Affiliate?.AffiliateCode,
 			"AgentFirstName": basicInfo.get('afname').value,
 			"AgentLastName": basicInfo.get('alname').value,
 
@@ -490,15 +524,7 @@ export class QuoteComponent implements OnInit
 
 		this.ngxService.start();
 
-		// LOG FOR DEBUGGING
-		//console.log(`Posting to ${endpoint}`);
-		this.session.set(StorageType.QUOTE_PC_DATA, data);
-
-		// if(isEligible) {
-		// 	this.router.navigate(['/prime-care/apply']);
-		// } else {
-		// 	this.router.navigate(['/prime-care/ineligible']);
-		// }
+		
 
 		this.http
 			.post(endpoint, body, options)
@@ -518,17 +544,26 @@ export class QuoteComponent implements OnInit
 						// server-side error
 						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
 					}
-					window.alert(errorMessage);
+					this.util.ShowGeneralMessagePrompt({message: errorMessage});
 					return throwError(errorMessage);
 				})
 			)
-			.subscribe((data: any) =>
+			.subscribe((response: any) =>
 			{
-				let refNo = String(data.id).padStart(10, '0');
+				let refNo = String(response.id).padStart(10, '0');
 				this.session.set('refNo', refNo)
 				this.facebookPixelService.track('Lead');
 				if(isEligible)
 				{
+					data.AffiliateCode = this.affiliate?.Affiliate?.AffiliateCode || this.affiliate?.Agent?.AffCode;
+					data.AffiliateName = this.affiliate?.Affiliate?.AffiliateName;
+					data.AffiliateStatus = this.affiliate?.Affiliate?.AffiliateStatus;
+					data.AffiliateType = this.affiliate?.AffiliateType;
+
+					// LOG FOR DEBUGGING
+					//console.log(`Posting to ${endpoint}`);
+					this.session.set(StorageType.QUOTE_PC_DATA, data);
+
 					this.router.navigate(['/prime-care/apply']);
 				}
 				else
