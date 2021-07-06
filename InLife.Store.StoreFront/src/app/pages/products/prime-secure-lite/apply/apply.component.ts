@@ -1,23 +1,15 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
-import { Location } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
-import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { MatDatepicker } from '@angular/material/datepicker';
+import { formatDate } from '@angular/common';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-
 import { jsPDF } from 'jspdf';
-
 import { CONSTANTS } from '@app/services/constants';
 import { Enumerations } from '@app/common/enumerations';
-import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
+import { FacebookPixelService, SessionStorageService } from '@app/services';
 import { DynamicGrid } from './extension.model';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment';
-import { catchError, finalize, retry } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { GeneralMessagePromptComponent } from '@app/shared/component/general-message-prompt/general-message-prompt.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilitiesService } from '@app/shared/services/utilities.service';
 import { StorageType } from '@app/services/storage-types.enum';
@@ -457,6 +449,10 @@ export class ApplyComponent implements OnInit
 		{
 			this.facebookPixelService.track('Lead');
 			this.ngxService.start();
+
+			var dob = formatDate(new Date(this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila');
+			this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').setValue(dob);
+
 			this.session.set("getApplyForm", this.getApplyForm.value);
 			this.session.set("extensionData", this.dynamicArray);
 			this.session.set("insuredIdentityDocumentImageData", this.insuredIdentityDocumentImageData);
@@ -468,7 +464,7 @@ export class ApplyComponent implements OnInit
 			const underwritingstatus = this.session.get("UnderWritingStatus");
 			const healthCon = getQuoteForm.healthCondition;
 
-			let bday = new Date(getQuoteForm.calculatePremium.dateofbirth).toLocaleDateString();
+			let bday = formatDate(new Date(getQuoteForm.calculatePremium.dateofbirth), 'MM/dd/yyyy', 'en-US', 'Asia/Manila');
 
 			let ownerSuffixID = this.nullIfZero(getQuoteForm.basicInformation.suffix);
 			let insuredSuffixId = this.nullIfZero(getQuoteForm.basicInformation.suffix);
@@ -558,7 +554,7 @@ export class ApplyComponent implements OnInit
 					"MobileNumber": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredMobile').value),
 					"CivilStatusId": parseInt(this.getApplyForm.get('beneficiaryDetails').get('insuredCivilStatus').value),//5,
 					"GenderId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('insuredGender').value),//8,
-					"Birthday": new Date(this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value).toLocaleDateString(),//"01/01/1980", 
+					"Birthday": formatDate(new Date(this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value), 'MM/dd/yyyy', 'en-US', 'Asia/Manila'),//"01/01/1980",
 					"RelationToInsuredId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('relation').value),//25,
 					"Priority": this.getApplyForm.get('beneficiaryDetails').get('designation').value,//0,
 					"Right": this.getApplyForm.get('beneficiaryDetails').get('type').value//0
