@@ -72,7 +72,7 @@
 
 				const path = window.location.pathname;
 				const dir = path.substring(0, path.lastIndexOf('/'));
-				var base = '';
+				var base = 'https://access.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info'; //prod
 				if(dir == 'https://uat-inlifestore.insularlife.com.ph' || dir == 'https://uat2-inlifestore.insularlife.com.ph') {
 					base = 'https://access-dev.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
 				} else if (dir == 'https://dev-inlife-estore.azurewebsites.net' || dir == 'http://localhost:4200') {
