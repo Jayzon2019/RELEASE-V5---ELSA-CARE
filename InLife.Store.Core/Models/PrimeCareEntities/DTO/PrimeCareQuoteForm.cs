@@ -50,6 +50,9 @@ namespace InLife.Store.Core.Models
 		public string AgentCode { get; set; }
 		public string AgentFirstName { get; set; }
 		public string AgentLastName { get; set; }
+		public string AffiliateCode { get; set; }
+		public string AffiliateName { get; set; }
+		public string AffiliateStatus { get; set; }
 
 		#endregion Product Details
 

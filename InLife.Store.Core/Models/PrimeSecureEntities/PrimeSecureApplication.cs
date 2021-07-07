@@ -26,6 +26,10 @@ namespace InLife.Store.Core.Models
 		public string AgentLastName { get; set; }
 		public string ReferralSource { get; set; }
 
+		public string AffiliateCode { get; set; }
+		public string AffiliateName { get; set; }
+		public string AffiliateStatus { get; set; }
+
 		// Health Condition
 		public bool? HealthDeclaration1 { get; set; }
 		public bool? HealthDeclaration2 { get; set; }

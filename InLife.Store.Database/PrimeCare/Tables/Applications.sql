@@ -1,4 +1,4 @@
-﻿CREATE TABLE [PrimeCare].[Applications] (
+CREATE TABLE [PrimeCare].[Applications] (
     [Id]                      UNIQUEIDENTIFIER   NOT NULL,
     [CreatedDate]             DATETIMEOFFSET (7) CONSTRAINT [DF_InsuranceApplications_DateCreated] DEFAULT (sysdatetimeoffset()) NOT NULL,
     [CompletedDate]           DATETIMEOFFSET (7) NULL,
@@ -35,6 +35,9 @@
     [BeneficiaryRight]        VARCHAR (20)       NULL,
     [BeneficiaryPriority]     VARCHAR (20)       NULL,
     [IsEligible]              BIT                NULL,
+    [AffiliateCode] NVARCHAR(50) NULL, 
+    [AffiliateName] NVARCHAR(50) NULL, 
+    [AffiliateStatus] NVARCHAR(50) NULL, 
     CONSTRAINT [PK_PrimeCare_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );
 

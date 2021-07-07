@@ -1487,7 +1487,10 @@
 												<ng-container *ngIf="affiliate">
 													<div class="col-md-6 mb-3">
 														<label for="">I learned about Prime Care through:</label>
-														<input type="text" class="form-control" [value]="affiliate.AffiliateType == 'INSULAR LIFE AGENT' ? 'REFERRAL OF INSULAR LIFE ADVISOR/ AGENT' : 'REFERRAL FROM UNIONBANK BRANCH'" readonly />
+														<input type="text" class="form-control" 
+															[value]="affiliate.AffiliateType == 'INSULAR LIFE AGENT' ? 'REFERRAL OF INSULAR LIFE ADVISOR/ AGENT' : 
+															affiliate.AffiliateType == 'INLIFE AFFILIATE' ? 'REFERRAL FROM AN INLIFE AFFILIATE' : 'REFERRAL FROM UNIONBANK BRANCH'" 
+															readonly />
 														<small class="errormsg" *ngIf="affiliate?.Affiliate?.AffiliateStatus === 'INACTIVE'">Affiliate link is invalid.</small>
 													</div>
 													<div class="col-md-6 mb-3">

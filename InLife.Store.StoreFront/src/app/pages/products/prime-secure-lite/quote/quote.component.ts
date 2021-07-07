@@ -568,6 +568,10 @@ export class QuoteComponent implements OnInit, OnDestroy
 		}
 		let faceAmount = parseFloat(calcInfo.get('totalCashBenefit').value.substring(1).replace(/,/g, ''));
 		let monthlyIncome = parseFloat(basicInfo.get('monthlyIncome').value.substring(1).replace(/,/g, ''));
+
+		let acode = basicInfo.get('acode').value !== '' ? basicInfo.get('acode').value : null;
+		let afname = basicInfo.get('afname').value !== '' ? basicInfo.get('afname').value : null;
+		let alname = basicInfo.get('alname').value !== '' ? basicInfo.get('alname').value : null;
 		var dataInternalAPI: any =
 		{
 			planCode: 'PLAN ' + this.eligiblePlan,
@@ -596,9 +600,14 @@ export class QuoteComponent implements OnInit, OnDestroy
 			addressCountry: country,
 			bmi: +this.bodyMassIndex,
 
-			agentCode: basicInfo.get('acode').value || this.affiliate?.Affiliate?.AffiliateCode,
-			agentFirstName: basicInfo.get('afname').value,
-			agentLastName: basicInfo.get('alname').value,
+			agentCode: !this.affiliate?.Affiliate ? acode : null,
+			agentFirstName: !this.affiliate?.Affiliate ? afname : null,
+			agentLastName: !this.affiliate?.Affiliate ? alname : null,
+
+			affiliateCode: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
+			affiliateName: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateName : null,
+			affiliateStatus: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
+
 			referralSource: this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
 
 			healthDeclaration1: health.get('healthDeclaration1').value === 'Yes',

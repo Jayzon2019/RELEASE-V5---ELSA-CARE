@@ -90,6 +90,10 @@ namespace InLife.Store.Core.Business
 				AgentFirstName = form.AgentFirstName,
 				AgentLastName = form.AgentLastName,
 
+				AffiliateCode = form.AffiliateCode,
+				AffiliateName = form.AffiliateName,
+				AffiliateStatus = form.AffiliateStatus,
+
 				Health1 = form.Health1,
 				Health2 = form.Health2,
 				Health3 = form.Health3,

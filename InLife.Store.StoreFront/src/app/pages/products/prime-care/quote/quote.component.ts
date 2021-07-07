@@ -474,6 +474,10 @@ export class QuoteComponent implements OnInit
 
 		let plan = this.plan.replace('_', ' ').toUpperCase();
 
+		let acode = basicInfo.get('acode').value !== '' ? basicInfo.get('acode').value : null;
+		let afname = basicInfo.get('afname').value !== '' ? basicInfo.get('afname').value : null;
+		let alname = basicInfo.get('alname').value !== '' ? basicInfo.get('alname').value : null;
+
 		var data: any =
 		{
 			"PlanCode": plan,
@@ -497,9 +501,13 @@ export class QuoteComponent implements OnInit
 			"City": city,
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": basicInfo.get('acode').value || this.affiliate?.Affiliate?.AffiliateCode,
-			"AgentFirstName": basicInfo.get('afname').value,
-			"AgentLastName": basicInfo.get('alname').value,
+			"AgentCode": !this.affiliate?.Affiliate ? acode : null,
+			"AgentFirstName": !this.affiliate?.Affiliate ? afname : null,
+			"AgentLastName": !this.affiliate?.Affiliate ? alname : null,
+
+			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate.Agent.AffCode : null,
+			"AffiliateName": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateName : null,
+			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateStatus : null,
 
 			"Health1": (health.healthCondition1 == 'Yes'),
 			"Health2": (health.healthCondition2 == 'Yes'),

@@ -88,6 +88,10 @@ namespace InLife.Store.Core.Business
 				AgentLastName = form.AgentLastName,
 				ReferralSource = form.ReferralSource,
 
+				AffiliateCode = form.AffiliateCode,
+				AffiliateName = form.AffiliateName,
+				AffiliateStatus = form.AffiliateStatus,
+
 				HealthDeclaration1 = form.HealthDeclaration1,
 				HealthDeclaration2 = form.HealthDeclaration2,
 				HealthDeclaration3 = form.HealthDeclaration3,

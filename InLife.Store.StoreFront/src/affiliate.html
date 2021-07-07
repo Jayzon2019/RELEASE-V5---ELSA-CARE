@@ -69,15 +69,16 @@
 				const targetPage = productPages[product]
 					? productPages[product]
 					: '/';
-
 				const path = window.location.pathname;
+				const origin = window.location.origin;
 				const dir = path.substring(0, path.lastIndexOf('/'));
 				var base = 'https://access.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info'; //prod
-				if(dir == 'https://uat-inlifestore.insularlife.com.ph' || dir == 'https://uat2-inlifestore.insularlife.com.ph') {
+				if(origin == 'https://uat-inlifestore.insularlife.com.ph' || origin == 'https://uat2-inlifestore.insularlife.com.ph') {
 					base = 'https://access-dev.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
-				} else if (dir == 'https://dev-inlife-estore.azurewebsites.net' || dir == 'http://localhost:4200') {
+				} else if (origin == 'https://dev-inlife-estore.azurewebsites.net' || origin == 'http://localhost:4200') {
 					base = 'https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
 				}
+				console.log(dir);
 				var endpoint = `${base}/${code}`;
 
 				$.ajax

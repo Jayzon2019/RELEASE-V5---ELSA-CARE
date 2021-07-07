@@ -42,6 +42,15 @@ namespace InLife.Store.Api.Messages
 			model.HealthDeclaration3 = HealthDeclaration3;
 			model.HealthDeclaration4 = HealthDeclaration4;
 
+			model.ReferralSource = ReferralSource;
+			model.AgentCode = AgentCode;
+			model.AgentFirstName = AgentFirstName;
+			model.AgentLastName = AgentLastName;
+
+			model.AffiliateCode = AffiliateCode;
+			model.AffiliateName = AffiliateName;
+			model.AffiliateStatus = AffiliateStatus;
+
 			model.CovidQuestion1 = CovidQuestion1;
 			model.CovidQuestion2 = CovidQuestion2;
 			model.CovidQuestion3 = CovidQuestion3;
@@ -140,6 +149,32 @@ namespace InLife.Store.Api.Messages
 		public string AddressCountry { get; set; }
 
 		#endregion Address
+
+		#region Referral
+
+		[Required]
+		[StringLength(80)]
+		public string ReferralSource { get; set; }
+
+		[StringLength(50)]
+		public string AgentCode { get; set; }
+
+		[StringLength(50)]
+		public string AgentFirstName { get; set; }
+
+		[StringLength(50)]
+		public string AgentLastName { get; set; }
+
+		[StringLength(50)]
+		public string AffiliateCode { get; set; }
+
+		[StringLength(50)]
+		public string AffiliateName { get; set; }
+
+		[StringLength(50)]
+		public string AffiliateStatus { get; set; }
+
+		#endregion Referral
 
 		#region Health Declarations
 

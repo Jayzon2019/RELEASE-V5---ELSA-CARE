@@ -1,4 +1,4 @@
-﻿CREATE TABLE [PrimeSecure].[Applications] (
+CREATE TABLE [PrimeSecure].[Applications] (
     [Id]                      UNIQUEIDENTIFIER   NOT NULL,
     [CreatedDate]             DATETIMEOFFSET (7) CONSTRAINT [DF_PrimeSecure_Applications_CreatedDate] DEFAULT (sysdatetimeoffset()) NOT NULL,
     [CompletedDate]           DATETIMEOFFSET (7) NULL,
@@ -18,6 +18,9 @@
     [AgentCode]               VARCHAR (50)       NULL,
     [AgentFirstName]          NVARCHAR (50)      NULL,
     [AgentLastName]           NVARCHAR (50)      NULL,
+	[AffiliateCode]           VARCHAR (50)       NULL,
+    [AffiliateName]           NVARCHAR (50)      NULL,
+    [AffiliateStatus]         NVARCHAR (50)      NULL,
     [ReferralSource]          NVARCHAR (50)      NULL,
     [CustomerId]              UNIQUEIDENTIFIER   NULL,
     [InsuredId]               UNIQUEIDENTIFIER   NULL,
