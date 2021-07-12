@@ -41,6 +41,9 @@ namespace InLife.Store.Api.Messages
 			model.AffiliateName = AffiliateName;
 			model.AffiliateStatus = AffiliateStatus;
 
+			model.BranchCode = BranchCode;
+			model.BranchName = BranchName;
+
 			model.Health1 = Health1;
 			model.Health2 = Health2;
 			model.Health3 = Health3;
@@ -154,6 +157,12 @@ namespace InLife.Store.Api.Messages
 
 		[StringLength(50)]
 		public string AffiliateStatus { get; set; }
+
+		[StringLength(50)]
+		public string BranchCode { get; set; }
+
+		[StringLength(50)]
+		public string BranchName { get; set; }
 
 		#endregion Referral
 

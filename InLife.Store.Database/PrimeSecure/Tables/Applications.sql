@@ -21,6 +21,8 @@ CREATE TABLE [PrimeSecure].[Applications] (
 	[AffiliateCode]           VARCHAR (50)       NULL,
     [AffiliateName]           NVARCHAR (50)      NULL,
     [AffiliateStatus]         NVARCHAR (50)      NULL,
+	[BranchCode]              VARCHAR (50)       NULL,
+    [BranchName]              NVARCHAR (50)      NULL,
     [ReferralSource]          NVARCHAR (50)      NULL,
     [CustomerId]              UNIQUEIDENTIFIER   NULL,
     [InsuredId]               UNIQUEIDENTIFIER   NULL,

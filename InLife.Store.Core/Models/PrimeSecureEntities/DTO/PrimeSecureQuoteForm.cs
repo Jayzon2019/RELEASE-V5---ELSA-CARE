@@ -59,6 +59,9 @@ namespace InLife.Store.Core.Models
 		public string AffiliateName { get; set; }
 		public string AffiliateStatus { get; set; }
 
+		public string BranchCode { get; set; }
+		public string BranchName { get; set; }
+
 		#endregion Referrer
 
 		#region Health Declarations

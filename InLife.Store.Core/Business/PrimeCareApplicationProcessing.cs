@@ -94,6 +94,9 @@ namespace InLife.Store.Core.Business
 				AffiliateName = form.AffiliateName,
 				AffiliateStatus = form.AffiliateStatus,
 
+				BranchCode = form.BranchCode,
+				BranchName = form.BranchName,
+
 				Health1 = form.Health1,
 				Health2 = form.Health2,
 				Health3 = form.Health3,

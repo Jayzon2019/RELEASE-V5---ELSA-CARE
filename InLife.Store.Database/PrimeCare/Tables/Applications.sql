@@ -35,9 +35,11 @@ CREATE TABLE [PrimeCare].[Applications] (
     [BeneficiaryRight]        VARCHAR (20)       NULL,
     [BeneficiaryPriority]     VARCHAR (20)       NULL,
     [IsEligible]              BIT                NULL,
-    [AffiliateCode] NVARCHAR(50) NULL, 
-    [AffiliateName] NVARCHAR(50) NULL, 
-    [AffiliateStatus] NVARCHAR(50) NULL, 
+    [AffiliateCode]           NVARCHAR(50) NULL, 
+    [AffiliateName]           NVARCHAR(50) NULL, 
+    [AffiliateStatus]         NVARCHAR(50) NULL,
+	[BranchCode]              VARCHAR (50)       NULL,
+    [BranchName]              NVARCHAR (50)      NULL,
     CONSTRAINT [PK_PrimeCare_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );
 

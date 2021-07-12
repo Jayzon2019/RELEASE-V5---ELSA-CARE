@@ -123,7 +123,7 @@ export class QuoteComponent implements OnInit
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('9');
 				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
 				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.BranchName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -508,6 +508,9 @@ export class QuoteComponent implements OnInit
 			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate.Agent.AffCode : null,
 			"AffiliateName": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateName : null,
 			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateStatus : null,
+
+			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
+			"BranchName": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
 
 			"Health1": (health.healthCondition1 == 'Yes'),
 			"Health2": (health.healthCondition2 == 'Yes'),

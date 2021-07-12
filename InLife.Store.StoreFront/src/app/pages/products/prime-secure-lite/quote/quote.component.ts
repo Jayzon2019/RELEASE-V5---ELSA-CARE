@@ -113,7 +113,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('9');
 				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
 				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.BranchName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -607,6 +607,9 @@ export class QuoteComponent implements OnInit, OnDestroy
 			affiliateCode: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
 			affiliateName: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateName : null,
 			affiliateStatus: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
+
+			branchCode: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
+			branchName: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
 
 			referralSource: this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
 

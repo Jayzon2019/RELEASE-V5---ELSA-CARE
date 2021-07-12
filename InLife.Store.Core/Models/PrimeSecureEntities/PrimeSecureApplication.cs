@@ -30,6 +30,9 @@ namespace InLife.Store.Core.Models
 		public string AffiliateName { get; set; }
 		public string AffiliateStatus { get; set; }
 
+		public string BranchCode { get; set; }
+		public string BranchName { get; set; }
+
 		// Health Condition
 		public bool? HealthDeclaration1 { get; set; }
 		public bool? HealthDeclaration2 { get; set; }

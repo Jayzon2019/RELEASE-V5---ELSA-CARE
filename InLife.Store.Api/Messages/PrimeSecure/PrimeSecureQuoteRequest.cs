@@ -51,6 +51,9 @@ namespace InLife.Store.Api.Messages
 			model.AffiliateName = AffiliateName;
 			model.AffiliateStatus = AffiliateStatus;
 
+			model.BranchCode = BranchCode;
+			model.BranchName = BranchName;
+
 			model.CovidQuestion1 = CovidQuestion1;
 			model.CovidQuestion2 = CovidQuestion2;
 			model.CovidQuestion3 = CovidQuestion3;
@@ -173,6 +176,12 @@ namespace InLife.Store.Api.Messages
 
 		[StringLength(50)]
 		public string AffiliateStatus { get; set; }
+
+		[StringLength(50)]
+		public string BranchCode { get; set; }
+
+		[StringLength(50)]
+		public string BranchName { get; set; }
 
 		#endregion Referral
 
