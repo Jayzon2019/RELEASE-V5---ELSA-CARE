@@ -284,13 +284,12 @@ export class PayComponent implements OnInit
 			"InsuredValidIdImage": this.insuredIdentityDocumentImageData,
 			"OwnerValidIdImage": this.insuredIdentityDocumentImageData,
 
-			"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? '' : this.basicInformation.acode,
-			"RefFirstName": this.quoteInformation?.AffiliateCode ? '' : this.basicInformation.afname,
-			"RefLastName": this.quoteInformation?.AffiliateCode ? '' : this.basicInformation.alname,
+			"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? '' : this.quoteInformation?.AgentCode,
+			"RefFirstName": this.quoteInformation?.AffiliateCode ? '' : this.quoteInformation?.AgentFirstName,
+			"RefLastName": this.quoteInformation?.AffiliateCode ? '' : this.quoteInformation?.AgentLastName,
 			"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : '',
 			"AffiliateName": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateName : '',
-       		"AffiliateStatus": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
-
+			"AffiliateStatus": !this.quoteInformation?.AffiliateStatus ? 'INACTIVE' : this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
 		}
 
 		// Do not include in request body if suffix is not applicable

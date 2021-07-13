@@ -567,12 +567,12 @@ export class ApplyComponent implements OnInit
 				"InsuredWeight": getQuoteForm.healthCondition.weight,
 
 
-				"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? '' : getQuoteForm.basicInformation.acode,
-				"RefFirstName": this.quoteInformation?.AffiliateCode ? '' : getQuoteForm.basicInformation.afname,
-				"RefLastName": this.quoteInformation?.AffiliateCode ? '' : getQuoteForm.basicInformation.alname,
-				"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : '',
-				"AffiliateName": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateName : '',
-				"AffiliateStatus": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
+				"AgentCode": this.quoteInformation?.affiliateCode && this.quoteInformation?.affiliateType != 'UNIONBANK BRANCH'? '' : this.quoteInformation?.agentCode,
+				"RefFirstName": this.quoteInformation?.affiliateCode ? '' : this.quoteInformation?.agentFirstName,
+				"RefLastName": this.quoteInformation?.affiliateCode ? '' : this.quoteInformation?.agentLastName,
+				"AffiliateCode": this.quoteInformation?.affiliateStatus == 'ACTIVE' || this.quoteInformation?.affiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.affiliateCode : '',
+				"AffiliateName": this.quoteInformation?.affiliateStatus == 'ACTIVE' ? this.quoteInformation?.affiliateName : '',
+				"AffiliateStatus": !this.quoteInformation?.affiliateStatus ? 'INACTIVE' : this.quoteInformation?.affiliateStatus == 'ACTIVE' ? this.quoteInformation?.affiliateStatus : ''
 			};
 
 			// Do not include in request body if suffix is not applicable

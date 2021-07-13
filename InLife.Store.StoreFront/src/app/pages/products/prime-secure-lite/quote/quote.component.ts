@@ -572,6 +572,9 @@ export class QuoteComponent implements OnInit, OnDestroy
 		let acode = basicInfo.get('acode').value !== '' ? basicInfo.get('acode').value : null;
 		let afname = basicInfo.get('afname').value !== '' ? basicInfo.get('afname').value : null;
 		let alname = basicInfo.get('alname').value !== '' ? basicInfo.get('alname').value : null;
+
+		let refSource = basicInfo.get('primeCare').value;
+		let name = afname + ' ' + alname;
 		var dataInternalAPI: any =
 		{
 			planCode: 'PLAN ' + this.eligiblePlan,
@@ -601,11 +604,11 @@ export class QuoteComponent implements OnInit, OnDestroy
 			bmi: +this.bodyMassIndex,
 
 			agentCode: !this.affiliate?.Affiliate ? acode : null,
-			agentFirstName: !this.affiliate?.Affiliate ? afname : null,
-			agentLastName: !this.affiliate?.Affiliate ? alname : null,
+			agentFirstName: this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
+			agentLastName: this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 
 			affiliateCode: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
-			affiliateName: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateName : null,
+			affiliateName: this.affiliate?.Affiilate ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null,
 			affiliateStatus: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
 
 			branchCode: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
@@ -679,12 +682,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			).subscribe((data: any) => {
 				this.facebookPixelService.track('Lead');
 				if(data && isEligible && data.underwritingStatus === 'CLEAN_CASE') {
-
-					dataInternalAPI.AffiliateCode = this.affiliate?.Affiliate?.AffiliateCode || this.affiliate?.Agent?.AffCode;
-					dataInternalAPI.AffiliateName = this.affiliate?.Affiliate?.AffiliateName;
-					dataInternalAPI.AffiliateStatus = this.affiliate?.Affiliate?.AffiliateStatus;
-					dataInternalAPI.AffiliateType = this.affiliate?.AffiliateType;
-
+					dataInternalAPI.affiliateType = this.affiliate?.AffiliateType;
 					this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
 					this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
 					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));

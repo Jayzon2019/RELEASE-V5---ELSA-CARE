@@ -478,6 +478,9 @@ export class QuoteComponent implements OnInit
 		let afname = basicInfo.get('afname').value !== '' ? basicInfo.get('afname').value : null;
 		let alname = basicInfo.get('alname').value !== '' ? basicInfo.get('alname').value : null;
 
+		let refSource = basicInfo.get('primeCare').value;
+		let name = afname + ' ' + alname;
+
 		var data: any =
 		{
 			"PlanCode": plan,
@@ -502,12 +505,12 @@ export class QuoteComponent implements OnInit
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
 			"AgentCode": !this.affiliate?.Affiliate ? acode : null,
-			"AgentFirstName": !this.affiliate?.Affiliate ? afname : null,
-			"AgentLastName": !this.affiliate?.Affiliate ? alname : null,
+			"AgentFirstName": this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
+			"AgentLastName": this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 
-			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate.Agent.AffCode : null,
-			"AffiliateName": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateName : null,
-			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate.AffiliateStatus : null,
+			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
+			"AffiliateName": this.affiliate?.Affiilate ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null,
+			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
 
 			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
 			"BranchName": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
@@ -568,9 +571,6 @@ export class QuoteComponent implements OnInit
 				this.facebookPixelService.track('Lead');
 				if(isEligible)
 				{
-					data.AffiliateCode = this.affiliate?.Affiliate?.AffiliateCode || this.affiliate?.Agent?.AffCode;
-					data.AffiliateName = this.affiliate?.Affiliate?.AffiliateName;
-					data.AffiliateStatus = this.affiliate?.Affiliate?.AffiliateStatus;
 					data.AffiliateType = this.affiliate?.AffiliateType;
 
 					// LOG FOR DEBUGGING

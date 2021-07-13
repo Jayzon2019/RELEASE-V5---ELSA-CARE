@@ -389,7 +389,10 @@
 													</div>
 													<div class="col-md-6 mb-9"
 														 *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value == '1' || getQuoteForm.get('basicInformation').get('primeCare').value == '10'">
-														<label for="">Agent Name</label>
+														 <label for="">
+															<ng-container *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value == '1'; else AffiliateName">Agent Name</ng-container>
+															<ng-template #AffiliateName>Affiliate Name</ng-template>
+														</label>
 														<div class="input-group">
 															<div class="fieldinnr50">
 																<input type="text" class="form-control fname" ng-required="isRequired"
