@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations.Schema;
 using InLife.Store.Core.Utilities;
 
 namespace InLife.Store.Core.Models
@@ -23,9 +22,13 @@ namespace InLife.Store.Core.Models
 
 		// Timestamp
 		public DateTimeOffset CreatedDate { get; set; }
+
+		[NotMapped]
 		public DateTime CreatedDateLocal => CreatedDate.ToLocalDateTime();
 
 		public DateTimeOffset? CompletedDate { get; set; }
+
+		[NotMapped]
 		public DateTime? CompletedDateLocal => CompletedDate?.ToLocalDateTime();
 	}
 }

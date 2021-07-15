@@ -52,10 +52,6 @@ namespace InLife.Store.Infrastructure.Repository
 					.ToTable("Applications", Schema.PrimeCare)
 					.HasKey(e => new { e.Id });
 
-				entity
-					.Ignore(e => e.CreatedDateLocal)
-					.Ignore(e => e.CompletedDateLocal);
-
 				// Shadow FK - CustomerId
 				entity.Property<int>("CustomerId");
 

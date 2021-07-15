@@ -54,10 +54,6 @@ namespace InLife.Store.Infrastructure.Repository
 					.ToTable("Applications", Schema.PrimeSecure)
 					.HasKey(e => new { e.Id });
 
-				entity
-					.Ignore(e => e.CreatedDateLocal)
-					.Ignore(e => e.CompletedDateLocal);
-
 				// Timestamp
 				entity
 					.Property(e => e.CreatedDate)
