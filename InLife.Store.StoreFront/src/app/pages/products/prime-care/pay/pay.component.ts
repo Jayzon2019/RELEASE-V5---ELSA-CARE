@@ -292,12 +292,12 @@ export class PayComponent implements OnInit
 			"InsuredValidIdImage": this.insuredIdentityDocumentImageData,
 			"OwnerValidIdImage": this.insuredIdentityDocumentImageData,
 
-			"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? '' : this.quoteInformation?.AgentCode,
-			"RefFirstName": this.quoteInformation?.AffiliateCode ? '' : this.quoteInformation?.AgentFirstName,
-			"RefLastName": this.quoteInformation?.AffiliateCode ? '' : this.quoteInformation?.AgentLastName,
-			"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : '',
+			"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? null : this.quoteInformation?.AgentCode,
+			"RefFirstName": this.quoteInformation?.AffiliateCode ? null : this.quoteInformation?.AgentFirstName,
+			"RefLastName": this.quoteInformation?.AffiliateCode ? null : this.quoteInformation?.AgentLastName,
+			"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : null,
 			"AffiliateName": this.quoteInformation?.AffiliateName,
-			"AffiliateStatus": !this.quoteInformation?.AffiliateStatus ? '' : this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
+			"AffiliateStatus": !this.quoteInformation?.AffiliateStatus ? null : this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : null
 		}
 
 		// Do not include in request body if suffix is not applicable

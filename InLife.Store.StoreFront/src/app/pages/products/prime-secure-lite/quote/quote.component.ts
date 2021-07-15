@@ -603,16 +603,16 @@ export class QuoteComponent implements OnInit, OnDestroy
 			addressCountry: country,
 			bmi: +this.bodyMassIndex,
 
-			agentCode: this.affiliate?.Affiliate ? this.affiliate?.Affiliate.AgentCode : '',
-			agentFirstName: this.affiliate?.Affiliate ? '' : refSource == '1' ? afname : '',
-			agentLastName: this.affiliate?.Affiliate ? '' : refSource == '1' ? alname : '',
+			agentCode: this.affiliate?.Affiliate ? this.affiliate?.Affiliate.AgentCode : null,
+			agentFirstName: this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
+			agentLastName: this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 
-			affiliateCode: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : '',
-			affiliateName: this.affiliate?.Affiilate && this.affiliate?.Affiilate?.AffiliateStatus == 'ACTIVE' ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : '',
-			affiliateStatus: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : '',
+			affiliateCode: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
+			affiliateName: this.affiliate?.Affiilate && this.affiliate?.Affiilate?.AffiliateStatus == 'ACTIVE' ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null,
+			affiliateStatus: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
 
-			branchCode: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : '',
-			branchName: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : '',
+			branchCode: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
+			branchName: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
 
 			referralSource: this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
 

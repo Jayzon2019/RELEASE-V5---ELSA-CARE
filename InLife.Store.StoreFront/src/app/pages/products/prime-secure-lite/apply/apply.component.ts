@@ -567,12 +567,12 @@ export class ApplyComponent implements OnInit
 				"InsuredWeight": getQuoteForm.healthCondition.weight,
 
 
-				"AgentCode": this.quoteInformation?.affiliateCode && this.quoteInformation?.affiliateType != 'UNIONBANK BRANCH'? '' : this.quoteInformation?.agentCode,
-				"RefFirstName": this.quoteInformation?.affiliateCode ? '' : this.quoteInformation?.agentFirstName,
-				"RefLastName": this.quoteInformation?.affiliateCode ? '' : this.quoteInformation?.agentLastName,
-				"AffiliateCode": this.quoteInformation?.affiliateStatus == 'ACTIVE' || this.quoteInformation?.affiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.affiliateCode : '',
+				"AgentCode": this.quoteInformation?.affiliateCode && this.quoteInformation?.affiliateType != 'UNIONBANK BRANCH'? null : this.quoteInformation?.agentCode,
+				"RefFirstName": this.quoteInformation?.affiliateCode ? null : this.quoteInformation?.agentFirstName,
+				"RefLastName": this.quoteInformation?.affiliateCode ? null : this.quoteInformation?.agentLastName,
+				"AffiliateCode": this.quoteInformation?.affiliateStatus == 'ACTIVE' || this.quoteInformation?.affiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.affiliateCode : null,
 				"AffiliateName": this.quoteInformation?.affiliateName,
-				"AffiliateStatus": !this.quoteInformation?.affiliateStatus ? '' : this.quoteInformation?.affiliateStatus == 'ACTIVE' ? this.quoteInformation?.affiliateStatus : ''
+				"AffiliateStatus": !this.quoteInformation?.affiliateStatus ? null : this.quoteInformation?.affiliateStatus == 'ACTIVE' ? this.quoteInformation?.affiliateStatus : null
 			};
 
 			// Do not include in request body if suffix is not applicable

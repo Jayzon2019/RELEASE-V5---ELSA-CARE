@@ -505,16 +505,16 @@ export class QuoteComponent implements OnInit
 			"City": city,
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": this.affiliate?.Affiliate ? this.affiliate?.Affiliate.AgentCode : '',
-			"AgentFirstName": this.affiliate?.Affiliate ? '' : refSource == '1' ? afname : '',
-			"AgentLastName": this.affiliate?.Affiliate ? '' : refSource == '1' ? alname : '',
+			"AgentCode": this.affiliate?.Affiliate ? this.affiliate?.Affiliate.AgentCode : null,
+			"AgentFirstName": this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
+			"AgentLastName": this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 
-			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : '',
-			"AffiliateName": this.affiliate?.Affiilate && this.affiliate?.Affiilate?.AffiliateStatus == 'ACTIVE' ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : '',
-			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : '',
+			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
+			"AffiliateName": this.affiliate?.Affiilate && this.affiliate?.Affiilate?.AffiliateStatus == 'ACTIVE' ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null,
+			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
 
-			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : '',
-			"BranchName": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : '',
+			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
+			"BranchName": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
 
 			"Health1": (health.healthCondition1 == 'Yes'),
 			"Health2": (health.healthCondition2 == 'Yes'),
