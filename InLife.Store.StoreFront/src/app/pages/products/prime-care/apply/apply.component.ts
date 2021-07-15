@@ -13,6 +13,7 @@ import { CONSTANTS } from '@app/services/constants';
 import { Enumerations } from '@app/common/enumerations';
 import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 import { DynamicGrid } from './extension.model';
+import { StorageType } from '@app/services/storage-types.enum';
 
 @Component
 ({
@@ -52,6 +53,7 @@ export class ApplyComponent implements OnInit
 	showFourthStep: Boolean = false;
 	showFifthStep: Boolean = false;
 	sizeError: boolean = false;
+	quoteInformation: any;
 
 	constructor
 	(
@@ -68,6 +70,7 @@ export class ApplyComponent implements OnInit
 		this.ngxService.start();
 		this.getQuoteFormData = this.session.get('getQuoteForm') || "[]";
 		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
+		this.quoteInformation = this.session.get(StorageType.QUOTE_PC_DATA) || "[]";
 
 		this.insuredIdentityDocumentImagePreview = this.session.get("insuredIdentityDocumentImagePreview_PC");
 		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData_PC");

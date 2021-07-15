@@ -461,6 +461,7 @@ export class QuoteComponent implements OnInit
 		const health = this.getQuoteForm.get('healthCondition').value;
 		const basicInfo  = this.getQuoteForm.get('basicInformation');
 		const calcInfo = this.getQuoteForm.get('calculatePremium');
+		const oldQuoteData = this.session.get(StorageType.QUOTE_PC_DATA);
 
 		let country = this.getReferenceDataName(CONSTANTS.COUNTRY, basicInfo.get('country'));
 		let region: string = null;
@@ -504,21 +505,23 @@ export class QuoteComponent implements OnInit
 			"City": city,
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": !this.affiliate?.Affiliate ? acode : null,
-			"AgentFirstName": this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
-			"AgentLastName": this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
+			"AgentCode": this.affiliate?.Affiliate ? this.affiliate?.Affiliate.AgentCode : '',
+			"AgentFirstName": this.affiliate?.Affiliate ? '' : refSource == '1' ? afname : '',
+			"AgentLastName": this.affiliate?.Affiliate ? '' : refSource == '1' ? alname : '',
 
-			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
-			"AffiliateName": this.affiliate?.Affiilate ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null,
-			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
+			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : '',
+			"AffiliateName": this.affiliate?.Affiilate && this.affiliate?.Affiilate?.AffiliateStatus == 'ACTIVE' ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : '',
+			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : '',
 
-			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
-			"BranchName": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
+			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : '',
+			"BranchName": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : '',
 
 			"Health1": (health.healthCondition1 == 'Yes'),
 			"Health2": (health.healthCondition2 == 'Yes'),
 			"Health3": (health.healthCondition3 == 'Yes'),
 
+			"AffiliateType": this.affiliate?.AffiliateType,
+			"Plan": this.plan,
 			"IsEligible": isEligible
 		};
 
@@ -540,50 +543,61 @@ export class QuoteComponent implements OnInit
 
 		this.ngxService.start();
 
-		
+		if(oldQuoteData) {
+			if(JSON.stringify(oldQuoteData) != JSON.stringify(data)) {
+				this.saveQuoteData(endpoint, body, options, isEligible, data);
+			} else {
+				this.router.navigate(['/prime-care/apply']);
+			}
+		} else {
+			this.saveQuoteData(endpoint, body, options, isEligible, data);
+		}
+	}
 
+
+	saveQuoteData(endpoint: any, body: any, options: any, isEligible: any, data: any) {
 		this.http
-			.post(endpoint, body, options)
-			.pipe(
-				retry(1),
-				catchError((error: HttpErrorResponse) =>
-				{
-					this.ngxService.stop();
-					let errorMessage = '';
-					if (error.error instanceof ErrorEvent)
-					{
-						// client-side error
-						errorMessage = `Error: ${error.error.message}`;
-					}
-					else
-					{
-						// server-side error
-						errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-					}
-					this.util.ShowGeneralMessagePrompt({message: errorMessage});
-					return throwError(errorMessage);
-				})
-			)
-			.subscribe((response: any) =>
+		.post(endpoint, body, options)
+		.pipe(
+			retry(1),
+			catchError((error: HttpErrorResponse) =>
 			{
-				let refNo = String(response.id).padStart(10, '0');
-				this.session.set('refNo', refNo)
-				this.facebookPixelService.track('Lead');
-				if(isEligible)
+				this.ngxService.stop();
+				let errorMessage = '';
+				if (error.error instanceof ErrorEvent)
 				{
-					data.AffiliateType = this.affiliate?.AffiliateType;
-
-					// LOG FOR DEBUGGING
-					//console.log(`Posting to ${endpoint}`);
-					this.session.set(StorageType.QUOTE_PC_DATA, data);
-
-					this.router.navigate(['/prime-care/apply']);
+					// client-side error
+					errorMessage = `Error: ${error.error.message}`;
 				}
 				else
 				{
-					this.router.navigate(['/prime-care/ineligible']);
+					// server-side error
+					errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
 				}
-			});
+				this.util.ShowGeneralMessagePrompt({message: errorMessage});
+				return throwError(errorMessage);
+			})
+		)
+		.subscribe((response: any) =>
+		{
+			let refNo = String(response?.id).padStart(10, '0');
+			this.session.set('refNo', refNo)
+			this.facebookPixelService.track('Lead');
+			if(isEligible)
+			{
+				
+
+				// LOG FOR DEBUGGING
+				//console.log(`Posting to ${endpoint}`);
+				this.session.set(StorageType.QUOTE_PC_DATA, data);
+
+				this.router.navigate(['/prime-care/apply']);
+			}
+			else
+			{
+				this.router.navigate(['/prime-care/ineligible']);
+			}
+		});
 	}
 
 	onChangeProviance(value)

@@ -155,6 +155,14 @@ export class PayComponent implements OnInit
 			this.callPaymentUrl();
 	}
 
+	editDetails() {
+		debugger
+		this.router.navigate(['/prime-care/quote'], {
+			queryParams: {
+				plan: this.quoteInformation.Plan
+			}
+		});
+	}
 	createApplication()
 	{
 
@@ -288,8 +296,8 @@ export class PayComponent implements OnInit
 			"RefFirstName": this.quoteInformation?.AffiliateCode ? '' : this.quoteInformation?.AgentFirstName,
 			"RefLastName": this.quoteInformation?.AffiliateCode ? '' : this.quoteInformation?.AgentLastName,
 			"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : '',
-			"AffiliateName": this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateName : '',
-			"AffiliateStatus": !this.quoteInformation?.AffiliateStatus ? 'INACTIVE' : this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
+			"AffiliateName": this.quoteInformation?.AffiliateName,
+			"AffiliateStatus": !this.quoteInformation?.AffiliateStatus ? '' : this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
 		}
 
 		// Do not include in request body if suffix is not applicable

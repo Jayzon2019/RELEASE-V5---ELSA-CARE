@@ -359,12 +359,8 @@
 											<div class="btnsec text-left">
 												<a
 													class="btn outlinedbtn"
-													[routerLink]="[
-														'/get-quote'
-													]"
-													[queryParams]="{
-														plan: 'plan_50'
-													}"
+													(click)="editDetails()"													
+													*ngIf="!policyNo"
 												>
 													<i class="material-icons"
 														>arrow_backward</i
