@@ -445,20 +445,29 @@ namespace InLife.Store.Core.Business
 
 		public async Task ProcessCompletedApplications()
 		{
+			// Business rule as of 2021.07.15
+			// Export if:
+			// * (not completed or not cancelled) and last update <= 30 days
+			// * completed and not exported
+			// * cancelled and not exported
+
 			// For testing purposes only
+			// Uncomment this then comment the try catch block below
 			// This will not mark the applications as exported
 			//var applications = applicationRepository
 			//	.GetAll()
-			//	.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+			//	.Where(x => x.CreatedDate.AddDays(30) >= currentDate && !x.ExportedDate.HasValue)
 			//	.ToList();
 			//await emailService.SendGroupApplicationsCompletedBatch(applications);
 
 			try
 			{
-				// Check all completed (PaymentProof) but not submitted
+				var currentDate = DateTimeOffset.UtcNow;
+
+				// Check all applications below 30 days and hasn't been exported yet
 				var applications = applicationRepository
 					.GetAll()
-					.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+					.Where(x => x.CreatedDate.AddDays(30) >= currentDate && !x.ExportedDate.HasValue)
 					.ToList();
 
 				if (applications.Count == 0)
@@ -474,11 +483,11 @@ namespace InLife.Store.Core.Business
 					// Send Notification
 					await emailService.SendGroupApplicationsCompletedBatch(applications);
 
-					// Set as exported
-					var currentDate = DateTimeOffset.Now;
+					// Set as exported if status is completed or cancelled
 					applications.ForEach(x =>
 					{
-						x.ExportedDate = currentDate;
+						if(x.Status == GroupApplicationStatus.Cancelled.Id || x.Status == GroupApplicationStatus.Complete.Id)
+							x.ExportedDate = currentDate;
 					});
 
 					applicationRepository.Update(applications);

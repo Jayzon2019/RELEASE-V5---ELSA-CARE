@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+
+using InLife.Store.Core.Utilities;
 using InLife.Store.Core.Models.Enumerations;
 
 namespace InLife.Store.Core.Models
@@ -23,6 +25,7 @@ namespace InLife.Store.Core.Models
 		public int? TotalStudents { get; set; }
 
 		public DateTimeOffset? ExportedDate { get; set; }
+		public DateTime? ExportedDateLocal => ExportedDate?.ToLocalDateTime();
 
 		public string RepresentativeNamePrefix { get; set; }
 		public string RepresentativeNameSuffix { get; set; }

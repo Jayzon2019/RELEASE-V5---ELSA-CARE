@@ -48,10 +48,13 @@ namespace InLife.Store.Infrastructure.Repository
 			builder.Entity<PrimeCareApplication>(entity =>
 			{
 				// Table mapping
-				entity.ToTable("Applications", Schema.PrimeCare);
+				entity
+					.ToTable("Applications", Schema.PrimeCare)
+					.HasKey(e => new { e.Id });
 
-				// PK - Id
-				entity.HasKey(e => new { e.Id });
+				entity
+					.Ignore(e => e.CreatedDateLocal)
+					.Ignore(e => e.CompletedDateLocal);
 
 				// Shadow FK - CustomerId
 				entity.Property<int>("CustomerId");

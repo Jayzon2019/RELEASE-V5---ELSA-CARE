@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using InLife.Store.Core.Utilities;
+
 namespace InLife.Store.Core.Models
 {
 	public class Application : Entity<Guid>
@@ -21,6 +23,9 @@ namespace InLife.Store.Core.Models
 
 		// Timestamp
 		public DateTimeOffset CreatedDate { get; set; }
+		public DateTime CreatedDateLocal => CreatedDate.ToLocalDateTime();
+
 		public DateTimeOffset? CompletedDate { get; set; }
+		public DateTime? CompletedDateLocal => CompletedDate?.ToLocalDateTime();
 	}
 }

@@ -797,7 +797,7 @@ namespace InLife.Store.Infrastructure.Services
 						</td>
 					</tr>")
 						.Replace("#REFERENCE-CODE#", application.ReferenceCode)
-						.Replace("#TRANSACTION-DATE#", application.CompletedDate.HasValue ? application.CompletedDate.Value.ToOffset(TimeSpan.FromHours(8)).ToString() : "")
+						.Replace("#TRANSACTION-DATE#", application.CompletedDateLocal?.ToString())
 						.Replace("#COMPANY#", application.CompanyName)
 						.Replace("#PLAN-CODE#", application.PlanCode)
 						.Replace("#PLAN-VARIANT-CODE#", application.PlanVariantCode)

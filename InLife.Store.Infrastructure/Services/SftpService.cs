@@ -138,8 +138,8 @@ namespace InLife.Store.Infrastructure.Services
 		{
 			var columns = new string[]
 			{
-				"ReferenceCode",
-				"CreatedDate", "CompletedDate", "ExportedDate",
+				"ReferenceCode", "Status",
+				"CreatedDateLocal", "CompletedDateLocal", "ExportedDateLocal",
 
 				"ProductCode", "ProductName", "PlanCode", "PlanVariantCode",
 				"PlanFaceAmount", "PlanPremium", "PaymentMode", "PaymentFrequency",
