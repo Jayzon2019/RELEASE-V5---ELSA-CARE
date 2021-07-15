@@ -571,8 +571,8 @@ export class ApplyComponent implements OnInit
 				"RefFirstName": this.quoteInformation?.affiliateCode ? '' : this.quoteInformation?.agentFirstName,
 				"RefLastName": this.quoteInformation?.affiliateCode ? '' : this.quoteInformation?.agentLastName,
 				"AffiliateCode": this.quoteInformation?.affiliateStatus == 'ACTIVE' || this.quoteInformation?.affiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.affiliateCode : '',
-				"AffiliateName": this.quoteInformation?.AffiliateName,
-				"AffiliateStatus": !this.quoteInformation?.AffiliateStatus ? '' : this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : ''
+				"AffiliateName": this.quoteInformation?.affiliateName,
+				"AffiliateStatus": !this.quoteInformation?.affiliateStatus ? '' : this.quoteInformation?.affiliateStatus == 'ACTIVE' ? this.quoteInformation?.affiliateStatus : ''
 			};
 
 			// Do not include in request body if suffix is not applicable
