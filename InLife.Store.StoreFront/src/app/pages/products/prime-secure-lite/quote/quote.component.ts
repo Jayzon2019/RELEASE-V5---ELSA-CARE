@@ -575,6 +575,8 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		let refSource = basicInfo.get('primeCare').value;
 		let name = afname + ' ' + alname;
+		let affiliateName = (this.affiliate?.Affiliate && this.affiliate?.Affiliate?.AffiliateStatus == 'ACTIVE') ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null
+
 		var dataInternalAPI: any =
 		{
 			planCode: 'PLAN ' + this.eligiblePlan,
@@ -603,12 +605,12 @@ export class QuoteComponent implements OnInit, OnDestroy
 			addressCountry: country,
 			bmi: +this.bodyMassIndex,
 
-			agentCode: this.affiliate?.Affiliate ? this.affiliate?.Affiliate.AgentCode : null,
+			agentCode: this.affiliate?.Agent ? this.affiliate?.Agent.AgentCode ? this.affiliate?.Agent.AgentCode : null : null,
 			agentFirstName: this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
 			agentLastName: this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 
 			affiliateCode: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
-			affiliateName: this.affiliate?.Affiilate && this.affiliate?.Affiilate?.AffiliateStatus == 'ACTIVE' ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null,
+			affiliateName: affiliateName,
 			affiliateStatus: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
 
 			branchCode: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,

@@ -368,7 +368,7 @@
 													</select>
 												</div>
 
-												<ng-container *ngIf="!affiliate">
+												<ng-container *ngIf="!affiliate || !affiliate.Result.Success">
 													<div class="col-md-6 mb-3">
 														<label for="">I learned about Prime Care through:</label>
 														<select class="form-control" id="" formControlName="primeCare"
@@ -422,7 +422,7 @@
 													</div>
 												</ng-container>
 
-												<ng-container *ngIf="affiliate">
+												<ng-container *ngIf="affiliate && affiliate.Result.Success">
 													<div class="col-md-6 mb-3">
 														<label for="">I learned about Prime Care through:</label>
 														<input type="text" class="form-control" 

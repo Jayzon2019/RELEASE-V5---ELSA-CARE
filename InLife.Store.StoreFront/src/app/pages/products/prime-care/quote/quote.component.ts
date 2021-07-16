@@ -481,6 +481,7 @@ export class QuoteComponent implements OnInit
 
 		let refSource = basicInfo.get('primeCare').value;
 		let name = afname + ' ' + alname;
+		let affiliateName = (this.affiliate?.Affiliate && this.affiliate?.Affiliate?.AffiliateStatus == 'ACTIVE') ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null
 
 		var data: any =
 		{
@@ -505,12 +506,12 @@ export class QuoteComponent implements OnInit
 			"City": city,
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": this.affiliate?.Affiliate ? this.affiliate?.Affiliate.AgentCode : null,
+			"AgentCode": this.affiliate?.Agent ? this.affiliate?.Agent.AgentCode ? this.affiliate?.Agent.AgentCode : null : null,
 			"AgentFirstName": this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
 			"AgentLastName": this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 
 			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
-			"AffiliateName": this.affiliate?.Affiilate && this.affiliate?.Affiilate?.AffiliateStatus == 'ACTIVE' ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null,
+			"AffiliateName": affiliateName,
 			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
 
 			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
@@ -524,7 +525,6 @@ export class QuoteComponent implements OnInit
 			"Plan": this.plan,
 			"IsEligible": isEligible
 		};
-
 		if(basicInfo.get('suffix').value !== '1')
 			data.NameSuffix = this.getReferenceDataName(CONSTANTS.SUFFIX, basicInfo.get('suffix'));
 
