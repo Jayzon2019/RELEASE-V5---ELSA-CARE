@@ -605,7 +605,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			addressCountry: country,
 			bmi: +this.bodyMassIndex,
 
-			agentCode: this.affiliate?.Agent ? this.affiliate?.Agent.AgentCode ? this.affiliate?.Agent.AgentCode : null : null,
+			agentCode: this.affiliate?.Agent ? this.affiliate?.Agent?.AgentCode : null,
 			agentFirstName: this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
 			agentLastName: this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 

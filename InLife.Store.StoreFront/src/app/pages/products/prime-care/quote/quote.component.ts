@@ -506,7 +506,7 @@ export class QuoteComponent implements OnInit
 			"City": city,
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": this.affiliate?.Agent ? this.affiliate?.Agent.AgentCode ? this.affiliate?.Agent.AgentCode : null : null,
+			"AgentCode": this.affiliate?.Agent ? this.affiliate?.Agent?.AgentCode : null,
 			"AgentFirstName": this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
 			"AgentLastName": this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
 
