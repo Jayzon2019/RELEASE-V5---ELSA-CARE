@@ -461,6 +461,7 @@ export class QuoteComponent implements OnInit
 		const health = this.getQuoteForm.get('healthCondition').value;
 		const basicInfo  = this.getQuoteForm.get('basicInformation');
 		const calcInfo = this.getQuoteForm.get('calculatePremium');
+		const premiumAmount = this.session.get('getinnerForm')?.amount;
 		const oldQuoteData = this.session.get(StorageType.QUOTE_PC_DATA);
 
 		let country = this.getReferenceDataName(CONSTANTS.COUNTRY, basicInfo.get('country'));
@@ -487,7 +488,8 @@ export class QuoteComponent implements OnInit
 		{
 			"PlanCode": plan,
 			"PlanName": plan,
-			"ProductFaceAmount": this.calPay(),
+			"PlanFaceAmount": +calcInfo.get('totalCashBenefit').value,
+			"PlanPremium": premiumAmount,
 			"PaymentFrequency": calcInfo.get('paymentMode').value,
 
 			"NamePrefix": this.getReferenceDataName(CONSTANTS.PREFIX, basicInfo.get('prefix')),
