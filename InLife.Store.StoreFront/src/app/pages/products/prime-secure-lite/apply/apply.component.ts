@@ -567,10 +567,10 @@ export class ApplyComponent implements OnInit
 				"InsuredWeight": getQuoteForm.healthCondition.weight,
 
 
-				"AgentCode": this.quoteInformation?.affiliateCode && this.quoteInformation?.affiliateType != 'UNIONBANK BRANCH'? null : this.quoteInformation?.agentCode,
-				"RefFirstName": this.quoteInformation?.affiliateCode ? null : this.quoteInformation?.agentFirstName,
-				"RefLastName": this.quoteInformation?.affiliateCode ? null : this.quoteInformation?.agentLastName,
-				"AffiliateCode": this.quoteInformation?.affiliateStatus == 'ACTIVE' || this.quoteInformation?.affiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.affiliateCode : null,
+				"AgentCode": this.quoteInformation.AgentCode,
+				"RefFirstName": this.quoteInformation?.AffiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.AgentFirstName,
+				"RefLastName": this.quoteInformation?.AffiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.AgentLastName,
+				"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' || this.quoteInformation?.AffiliateType == 'INSULAR LIFE AGENT' ? this.quoteInformation?.AffiliateCode : null,
 				"AffiliateName": this.quoteInformation?.affiliateName,
 				"AffiliateStatus": !this.quoteInformation?.affiliateStatus ? null : this.quoteInformation?.affiliateStatus == 'ACTIVE' ? this.quoteInformation?.affiliateStatus : null
 			};

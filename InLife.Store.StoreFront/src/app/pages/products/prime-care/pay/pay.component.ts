@@ -291,11 +291,12 @@ export class PayComponent implements OnInit
 
 			"InsuredValidIdImage": this.insuredIdentityDocumentImageData,
 			"OwnerValidIdImage": this.insuredIdentityDocumentImageData,
+			"Premium": this.quoteInformation.PlanPremium,
 
-			"AgentCode": this.quoteInformation?.AffiliateCode && this.quoteInformation?.AffiliateType != 'UNIONBANK BRANCH'? null : this.quoteInformation?.AgentCode,
-			"RefFirstName": this.quoteInformation?.AffiliateCode ? null : this.quoteInformation?.AgentFirstName,
-			"RefLastName": this.quoteInformation?.AffiliateCode ? null : this.quoteInformation?.AgentLastName,
-			"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' ? this.quoteInformation?.AffiliateCode : null,
+			"AgentCode": this.quoteInformation.AgentCode,
+			"RefFirstName": this.quoteInformation?.AffiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.AgentFirstName,
+			"RefLastName": this.quoteInformation?.AffiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.AgentLastName,
+			"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' || this.quoteInformation?.AffiliateType == 'INSULAR LIFE AGENT' ? this.quoteInformation?.AffiliateCode : null,
 			"AffiliateName": this.quoteInformation?.AffiliateName,
 			"AffiliateStatus": !this.quoteInformation?.AffiliateStatus ? null : this.quoteInformation?.AffiliateStatus == 'ACTIVE' ? this.quoteInformation?.AffiliateStatus : null
 		}
