@@ -565,12 +565,12 @@ export class ApplyComponent implements OnInit
 				"OwnerValidIdImage": this.insuredIdentityDocumentImageData || this.pdfBase64,//"XXXXXXXXXXXXX",
 				"InsuredHeight": totalInches,
 				"InsuredWeight": getQuoteForm.healthCondition.weight,
+				"Premium": +this.quoteInformation.planPremium,
 
-
-				"AgentCode": this.quoteInformation.AgentCode,
-				"RefFirstName": this.quoteInformation?.AffiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.AgentFirstName,
-				"RefLastName": this.quoteInformation?.AffiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.AgentLastName,
-				"AffiliateCode": this.quoteInformation?.AffiliateStatus == 'ACTIVE' || this.quoteInformation?.AffiliateType == 'UNIONBANK BRANCH' || this.quoteInformation?.AffiliateType == 'INSULAR LIFE AGENT' ? this.quoteInformation?.AffiliateCode : null,
+				"AgentCode": this.quoteInformation.agentCode,
+				"RefFirstName": this.quoteInformation?.affiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.agentFirstName,
+				"RefLastName": this.quoteInformation?.affiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.agentLastName,
+				"AffiliateCode": this.quoteInformation?.affiliateStatus == 'ACTIVE' || this.quoteInformation?.affiliateType == 'UNIONBANK BRANCH' || this.quoteInformation?.affiliateType == 'INSULAR LIFE AGENT' ? this.quoteInformation?.affiliateCode : null,
 				"AffiliateName": this.quoteInformation?.affiliateName,
 				"AffiliateStatus": !this.quoteInformation?.affiliateStatus ? null : this.quoteInformation?.affiliateStatus == 'ACTIVE' ? this.quoteInformation?.affiliateStatus : null
 			};

@@ -291,7 +291,7 @@ export class PayComponent implements OnInit
 
 			"InsuredValidIdImage": this.insuredIdentityDocumentImageData,
 			"OwnerValidIdImage": this.insuredIdentityDocumentImageData,
-			"Premium": this.quoteInformation.PlanPremium,
+			"Premium": +this.quoteInformation.PlanPremium,
 
 			"AgentCode": this.quoteInformation.AgentCode,
 			"RefFirstName": this.quoteInformation?.AffiliateType == 'INLIFE AFFILIATE' ? null : this.quoteInformation?.AgentFirstName,

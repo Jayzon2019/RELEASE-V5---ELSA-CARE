@@ -575,7 +575,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		let refSource = basicInfo.get('primeCare').value;
 		let name = afname + ' ' + alname;
-		let affiliateName = (this.affiliate?.Affiliate && this.affiliate?.Affiliate?.AffiliateStatus == 'ACTIVE') ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null
+		let affiliateName = (this.affiliate?.Affiliate && this.affiliate?.Affiliate?.AffiliateStatus == 'ACTIVE') ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null;
 
 		var dataInternalAPI: any =
 		{
