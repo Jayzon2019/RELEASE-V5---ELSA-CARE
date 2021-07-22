@@ -24,6 +24,7 @@ namespace InLife.Store.Api.Messages
 			model.CustomerPhoneNumber = CustomerPhoneNumber;
 			model.CustomerMobileNumber = CustomerMobileNumber;
 			model.CustomerEmailAddress = CustomerEmailAddress;
+			model.CustomerBirthdate = CustomerBirthdate;
 
 			model.Height = Height;
 			model.Weight = Weight;
@@ -100,6 +101,9 @@ namespace InLife.Store.Api.Messages
 		[Required]
 		[StringLength(50)]
 		public string CustomerLastName { get; set; }
+
+		[Required]
+		public DateTime CustomerBirthdate { get; set; }
 
 		[StringLength(20)]
 		public string CustomerPhoneNumber { get; set; }
