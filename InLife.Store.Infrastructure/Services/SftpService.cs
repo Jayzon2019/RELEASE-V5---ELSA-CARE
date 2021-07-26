@@ -186,12 +186,21 @@ namespace InLife.Store.Infrastructure.Services
 				for (var icol = 1; icol <= columns.Length; icol++)
 				{
 					var value = application.GetType().GetProperty(columns[icol - 1]).GetValue(application, null);
-					worksheet.Cell(irow, icol).Value = value?.ToString();
 
-					if (icol == 2 || icol == 3)
-						worksheet.Cell(irow, icol).DataType = XLDataType.DateTime;
-					else
+					if (value == null)
+					{
+						worksheet.Cell(irow, icol).Value = "";
 						worksheet.Cell(irow, icol).DataType = XLDataType.Text;
+					}
+					else
+					{
+						worksheet.Cell(irow, icol).Value = value?.ToString();
+
+						worksheet.Cell(irow, icol).DataType =
+							(icol == 3 || icol == 4 || icol == 5) // "CreatedDateLocal", "CompletedDateLocal", "ExportedDateLocal"
+							? XLDataType.DateTime
+							: XLDataType.Text;
+					}
 				}
 				irow++;
 			}
