@@ -66,6 +66,7 @@ namespace InLife.Store.Core.Business
 					MobileNumber = form.CustomerMobileNumber,
 					EmailAddress = form.CustomerEmailAddress,
 					BirthDate = form.CustomerBirthdate,
+					Gender = form.CustomerGender,
 
 					HomeAddress = new PrimeSecureAddress
 					{

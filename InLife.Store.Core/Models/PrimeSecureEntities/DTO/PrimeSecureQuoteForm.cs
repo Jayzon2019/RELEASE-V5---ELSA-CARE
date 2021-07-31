@@ -26,6 +26,7 @@ namespace InLife.Store.Core.Models
 		public string CustomerMobileNumber { get; set; }
 		public string CustomerEmailAddress { get; set; }
 		public DateTime CustomerBirthdate { get; set; }
+		public string CustomerGender { get; set; }
 		public int Height { get; set; }
 		public int Weight { get; set; }
 		public bool IsEligible { get; set; }
