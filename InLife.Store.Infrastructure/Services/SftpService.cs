@@ -174,7 +174,7 @@ namespace InLife.Store.Infrastructure.Services
 			// Headers
 			for (var i = 1; i <= columns.Length; i++)
 			{
-				worksheet.Cell(1, i).Value = columns[i - 1];
+				worksheet.Cell(1, i).Value = columns[i - 1].Replace("DateLocal", "Date");
 				worksheet.Cell(1, i).Style.Fill.BackgroundColor = XLColor.FromArgb(64,64,64);
 				worksheet.Cell(1, i).Style.Font.FontColor = XLColor.White;
 			}

@@ -527,6 +527,7 @@ namespace InLife.Store.Infrastructure.Services
 			var body = new StringBuilder(EmailTemplates.GroupApplicationOtp)
 				.Replace("#RECIPIENT-NAME#", recipient.DisplayName)
 				.Replace("#CODE#", application.Otp)
+				.Replace("#HOST#", GetBasePath())
 				.ToString();
 
 			var sender = new MailAddress(emailSettings.SenderEmail, emailSettings.SenderName);
@@ -574,7 +575,11 @@ namespace InLife.Store.Infrastructure.Services
 
 			var body = new StringBuilder(EmailTemplates.GroupApplicationCompleteAdmin)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
+
 				.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+				.Replace("#CREATION-DATE#", application.CreatedDateLocal.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+				.Replace("#COMPLETION-DATE#", application.CompletedDateLocal?.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+
 				.Replace("#COMPANY-NAME#", application.CompanyName)
 				.Replace("#COMPANY-ADDRESS#", application.CompanyAddress)
 				.Replace("#COMPANY-CONTACT-NUMBERS#", BuildContactNumbers(application.CompanyMobileNumber, application.CompanyPhoneNumber))
@@ -596,6 +601,8 @@ namespace InLife.Store.Infrastructure.Services
 				.Replace("#FEEDBACK-RATING#", application.FeedbackRating.ToString())
 				.Replace("#FEEDBACK-MESSAGE#", application.FeedbackMessage)
 				.Replace("#BENEFITS#", applicationBenefits.ToString())
+
+				.Replace("#HOST#", GetBasePath())
 
 				.ToString();
 
@@ -633,7 +640,10 @@ namespace InLife.Store.Infrastructure.Services
 			body = new StringBuilder(EmailTemplates.GroupApplicationThankYou)
 				.Replace("#RECIPIENT-NAME#", userRecipient.DisplayName)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
+
 				.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+				.Replace("#CREATION-DATE#", application.CreatedDateLocal.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+				.Replace("#COMPLETION-DATE#", application.CompletedDateLocal?.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
 
 				.Replace("#COMPANY-NAME#", application.CompanyName)
 				.Replace("#COMPANY-ADDRESS#", application.CompanyAddress)
@@ -653,6 +663,8 @@ namespace InLife.Store.Infrastructure.Services
 				.Replace("#PAYMENT-MODE#", PaymentMode.FromId(application.PaymentMode).Name)
 				.Replace("#PAYMENT-AMOUNT#", totalPremiums.ToString("#,##0.00"))
 				.Replace("#BENEFITS#", applicationBenefits.ToString())
+
+				.Replace("#HOST#", GetBasePath())
 
 				.ToString();
 
@@ -696,12 +708,18 @@ namespace InLife.Store.Infrastructure.Services
 
 			var body = new StringBuilder(EmailTemplates.GroupApplicationFeedbackAdmin)
 				.Replace("#REFERENCE-CODE#", application.ReferenceCode)
-				.Replace("#TRANSACTION-DATE#", application.CompletedDate.ToString())
+
+				.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+				.Replace("#CREATION-DATE#", application.CreatedDateLocal.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+				.Replace("#COMPLETION-DATE#", application.CompletedDateLocal?.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+
 				.Replace("#TRANSACTION-STATUS#", status)
 				.Replace("#COMPANY-NAME#", application.CompanyName)
 
 				.Replace("#FEEDBACK-RATING#", application.FeedbackRating.ToString())
 				.Replace("#FEEDBACK-MESSAGE#", application.FeedbackMessage)
+
+				.Replace("#HOST#", GetBasePath())
 
 				.ToString();
 
@@ -748,7 +766,8 @@ namespace InLife.Store.Infrastructure.Services
 					<thead>
 						<tr>
 							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Reference Code</th>
-							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Transaction Date</th>
+							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Creation Date</th>
+							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Completion Date</th>
 							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Company</th>
 							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Plan</th>
 							<th style=""border:solid 1px #ccc; padding:2px 4px;"">Variant</th>
@@ -778,7 +797,10 @@ namespace InLife.Store.Infrastructure.Services
 							#REFERENCE-CODE#
 						</td>
 						<td style=""border:solid 1px #ccc; padding:2px 4px; text-align:center;"">
-							#TRANSACTION-DATE#
+							#CREATION-DATE#
+						</td>
+						<td style=""border:solid 1px #ccc; padding:2px 4px; text-align:center;"">
+							#COMPLETION-DATE#
 						</td>
 						<td style=""border:solid 1px #ccc; padding:2px 4px; text-align:center;"">
 							#COMPANY#
@@ -797,7 +819,9 @@ namespace InLife.Store.Infrastructure.Services
 						</td>
 					</tr>")
 						.Replace("#REFERENCE-CODE#", application.ReferenceCode)
-						.Replace("#TRANSACTION-DATE#", application.CompletedDateLocal?.ToString())
+						.Replace("#TRANSACTION-DATE#", DateTime.Now.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+						.Replace("#CREATION-DATE#", application.CreatedDateLocal.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
+						.Replace("#COMPLETION-DATE#", application.CompletedDateLocal?.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))
 						.Replace("#COMPANY#", application.CompanyName)
 						.Replace("#PLAN-CODE#", application.PlanCode)
 						.Replace("#PLAN-VARIANT-CODE#", application.PlanVariantCode)
@@ -835,23 +859,7 @@ namespace InLife.Store.Infrastructure.Services
 
 		private StringBuilder LoadEmailTemplate(string filename)
 		{
-			string basePath;
-
-			// If Azure Function running locally
-			if (!String.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("AzureWebJobsScriptRoot")))
-				basePath = Environment.GetEnvironmentVariable("AzureWebJobsScriptRoot");
-
-			// If in Azure
-			//else if (!String.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("HOME")))
-			//	basePath = $"{Environment.GetEnvironmentVariable("HOME")}\\site\\wwwroot";
-
-			else
-				basePath = this.hostingEnvironment.ContentRootPath;
-
-			//var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			//var basePath = this.hostingEnvironment.ContentRootPath;
-			//var basePath = Directory.GetCurrentDirectory();
-
+			var basePath = GetBasePath();
 			var directory = $"EmailTemplates"; // TODO: Retrieve this from appsettings
 			var path = Path.Combine(basePath, directory, filename);
 
@@ -870,6 +878,28 @@ namespace InLife.Store.Infrastructure.Services
 			}
 
 			return new StringBuilder(body);
+		}
+
+		private string GetBasePath()
+		{
+			string basePath;
+
+			// If Azure Function running locally
+			if (!String.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("AzureWebJobsScriptRoot")))
+				basePath = Environment.GetEnvironmentVariable("AzureWebJobsScriptRoot");
+
+			// If in Azure
+			//else if (!String.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("HOME")))
+			//	basePath = $"{Environment.GetEnvironmentVariable("HOME")}\\site\\wwwroot";
+
+			else
+				basePath = this.hostingEnvironment.ContentRootPath;
+
+			//var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			//var basePath = this.hostingEnvironment.ContentRootPath;
+			//var basePath = Directory.GetCurrentDirectory();
+
+			return basePath;
 		}
 
 		private string BuildContactNumbers(string mobile, string phone)
