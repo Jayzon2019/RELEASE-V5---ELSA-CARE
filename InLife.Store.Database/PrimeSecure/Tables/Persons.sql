@@ -1,4 +1,4 @@
-﻿CREATE TABLE [PrimeSecure].[Persons] (
+CREATE TABLE [PrimeSecure].[Persons] (
     [Id]                      UNIQUEIDENTIFIER   NOT NULL,
     [CreatedDate]             DATETIMEOFFSET (7) CONSTRAINT [DF_PrimeSecure_Persons_CreatedDate] DEFAULT (sysdatetimeoffset()) NOT NULL,
     [NamePrefix]              NVARCHAR (30)      NULL,
@@ -9,7 +9,7 @@
     [Nationality]             NVARCHAR (50)      NULL,
     [CivilStatus]             VARCHAR (20)       NULL,
     [Gender]                  VARCHAR (20)       NULL,
-    [BirthDate]               SMALLDATETIME      NULL,
+    [BirthDate]               DATETIME2      NULL,
     [EmailAddress]            VARCHAR (320)      NULL,
     [MobileNumber]            VARCHAR (20)       NULL,
     [BirthAddressId]          UNIQUEIDENTIFIER   NULL,
