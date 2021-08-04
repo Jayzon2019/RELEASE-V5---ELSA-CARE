@@ -9,7 +9,7 @@ CREATE TABLE [PrimeSecure].[Persons] (
     [Nationality]             NVARCHAR (50)      NULL,
     [CivilStatus]             VARCHAR (20)       NULL,
     [Gender]                  VARCHAR (20)       NULL,
-    [BirthDate]               DATETIME2      NULL,
+    [BirthDate]               SMALLDATETIME      NULL,
     [EmailAddress]            VARCHAR (320)      NULL,
     [MobileNumber]            VARCHAR (20)       NULL,
     [BirthAddressId]          UNIQUEIDENTIFIER   NULL,
