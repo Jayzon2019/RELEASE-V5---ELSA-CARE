@@ -47,7 +47,7 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
 
                     return endpoint;
                 }),
-                switchMap((endpoint) => this.getApplicationSummary(endpoint)),
+                switchMap((endpoint) => this.getAffiliate(endpoint)),
                 finalize(() => window.location.href = this.target)
             )
             .subscribe(resp => {
@@ -58,7 +58,7 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
 
     }
 
-    public getApplicationSummary(endpoint: any) {
+    public getAffiliate(endpoint: any) {
         let headers: HttpHeaders = new HttpHeaders();
             headers = headers.append('Content-Type', 'application/json');
             headers = headers.append('ClientID', environment.affiliate.clientID);
