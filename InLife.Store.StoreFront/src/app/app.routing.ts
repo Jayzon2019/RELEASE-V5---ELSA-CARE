@@ -1,3 +1,4 @@
+import { AffiliateComponent } from './pages/affiliate/affiliate.component';
 import { PrimeCareSliderResolver } from './resolvers/prime-care-sliders.resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -19,6 +20,7 @@ const routes: Routes =
 		{ path: 'save-quote', component: SaveQuoteComponent },
 		{ path: 'payment-received', component: PaymentRecievedComponent },
 		// { path: 'thank-you', loadChildren: '@app/pages/thank-you.module#ThankYouModule' },
+		{ path: 'affiliate', component: AffiliateComponent},
 		{ path: 'thank-you', component: ThankYouComponent},
 		{ path: 'payment-callback', component: PaymentCallbackComponent },
 		{ path: 'payment-failed/:id', component: PaymentFailedComponent },

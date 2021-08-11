@@ -19,6 +19,12 @@ export const environment =
 		quoteEndpoint: '/prime-care/applications'
 	},
 
+	affiliate:
+	{
+		clientID: 'f0b5e66c604f9a3b7868',
+		clientSecret: '0286b6b4fa642141831cde4ba6ae7675330a206ee811df8b44e10f0e743c'
+	},
+
 	groupApi:
 	{
 		quoteEndpoint: '/group/applications',

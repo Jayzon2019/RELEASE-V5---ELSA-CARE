@@ -47,7 +47,6 @@
 			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 			crossorigin="anonymous"></script>
 
-		<script src="assets/js/appSettings.js"></script>
 		<script type="text/javascript">
 			(function ()
 			{
@@ -69,48 +68,8 @@
 				const targetPage = productPages[product]
 					? productPages[product]
 					: '/';
-				const path = window.location.pathname;
-				const origin = window.location.origin;
-				const dir = path.substring(0, path.lastIndexOf('/'));
-				var base = 'https://access.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info'; //prod
-				if(origin == 'https://uat-inlifestore.insularlife.com.ph' || origin == 'https://uat2-inlifestore.insularlife.com.ph') {
-					// base = 'https://access-dev.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
-					base = 'https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
-				} else if (origin == 'https://dev-inlife-estore.azurewebsites.net' || origin == 'http://localhost:4200') {
-					base = 'https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
-				}
-				console.log(dir);
-				var endpoint = `${base}/${code}`;
-
-				$.ajax
-				({
-					url: endpoint,
-					contentType: "application/json",
-					headers: { 'ClientID': 'f0b5e66c604f9a3b7868',
-								'ClientSecret': '0286b6b4fa642141831cde4ba6ae7675330a206ee811df8b44e10f0e743c' },
-					dataType: 'json',
-					success: function(data, status)
-					{
-						console.log('SUCCESS');
-						console.log(data);
-						console.log(status);
-						console.log(targetPage);
-						sessionStorage.setItem('affiliate', JSON.stringify(data));
-					},
-					error: function(result, status, error)
-					{
-						console.log('ERROR');
-						console.log(result);
-						console.log(status);
-						console.log(error);
-						sessionStorage.removeItem('affiliate');
-					},
-					complete: function()
-					{
-						console.log(targetPage);
-						window.location.href = targetPage;
-					}
-				});
+				
+				window.location.href = targetPage;
 			})();
 		</script>
 	</body>

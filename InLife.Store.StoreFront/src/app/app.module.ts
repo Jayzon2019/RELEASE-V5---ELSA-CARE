@@ -1,3 +1,4 @@
+import { AffiliateComponent } from './pages/affiliate/affiliate.component';
 import { FormsModule } from '@angular/forms';
 import { PrimeCareSliderResolver } from './resolvers/prime-care-sliders.resolver';
 import { CustomPreloaderService } from './services/customer-preloader.service';
@@ -73,6 +74,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig =
 		PaymentRecievedComponent,
 		PaymentCallbackComponent,
 		PaymentFailedComponent,
+		AffiliateComponent
 	],
 	imports:
 	[
