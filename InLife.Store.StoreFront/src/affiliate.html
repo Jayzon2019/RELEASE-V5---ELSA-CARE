@@ -65,9 +65,7 @@
 					?? params.get('prod')
 					?? params.get('p');
 
-				const targetPage = productPages[product]
-					? productPages[product]
-					: '/';
+				const targetPage = `affiliate?affcode=${code}&prod=${product}`
 				
 				window.location.href = targetPage;
 			})();
