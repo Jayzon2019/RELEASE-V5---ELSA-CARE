@@ -1,0 +1,20 @@
+[
+	{ "id": "1", "name": "PASSPORT" },
+	{ "id": "2", "name": "DRIVER’S LICENSE" },
+	{ "id": "3", "name": "UNIFIED MULTIPURPOSE ID (UMID)" },
+	{ "id": "4", "name": "PROFESSIONAL REGULATION COMMISSION (PRC) ID" },
+	{ "id": "5", "name": "VOTER’S OR COMELEC ID CARD" },
+	{ "id": "6", "name": "SOCIAL SECURITY SYSTEM (SSS) ID" },
+	{ "id": "7", "name": "TAX IDENTIFICATION NUMBER (TIN) CARD" },
+	{ "id": "8", "name": "ALIEN CERTIFICATE OF REGISTRATION (ACR) OR IMMIGRANT CERTIFICATE OF REGISTRATION" },
+	{ "id": "9", "name": "POSTAL ID (ISSUED 2015 ONWARDS)" },
+	{ "id": "10", "name": "PHILSYS ID" },
+	{ "id": "11", "name": "SCHOOL ID" },
+	{ "id": "12", "name": "SENIOR CITIZEN ID" },
+	{ "id": "12", "name": "PAGIBIG OR HOME DEVELOPMENT MUTUAL FUND (HDMF) ID" },
+	{ "id": "12", "name": "GOVERNMENT OFFICE ID OR GOCC ID" },
+	{ "id": "12", "name": "INTEGRATED BAR OF PHILIPPINES (IBP) ID" },
+	{ "id": "12", "name": "OVERSEAS WORKER’S WELFARE ADMINISTRATION (OWWA) ID" },
+	{ "id": "12", "name": "OVERSEAS FILIPINO WORKER (OFW) ID" },
+	{ "id": "13", "name": "PHILHEALTH ID" }
+]

@@ -73,10 +73,10 @@ export class PayComponent implements OnInit
 		this.affiliate = this.session.get('affiliate');
 		const getQuoteFormData = this.session.get('getQuoteForm') || "[]";
 		this.quoteInformation = this.session.get(StorageType.QUOTE_PC_DATA) || "[]";
-		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
+		const getApplyFormData = this.session.get("getApplyForm") || "[]";
 		const extension = this.session.get("extensionData_PC") || "[]";
 		this.getFile();
-		
+
 		this.basicInformation = getQuoteFormData.basicInformation;
 		this.calculationInformation = getQuoteFormData.calculatePremium;
 		this.totalCashBenefit = this.calculationInformation.totalCashBenefit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -169,7 +169,7 @@ export class PayComponent implements OnInit
 		let ownerSuffixID = this.nullIfZero(this.basicInformation.suffix);
 		let insuredSuffixId = this.nullIfZero(this.basicInformation.suffix);
 		let benefSuffixId = this.nullIfZero(this.beneficialInformation.suffix);
-		
+
 		let arrData: any =
 		{
 			"PlanCode": "AH0017",
@@ -343,7 +343,7 @@ export class PayComponent implements OnInit
 				this.policyNo = <string>data;
 
 				// LOG FOR DEBUGGING
-				
+
 
 				// Special case for PrimeCare API
 				// It returns STATUS OK 200 and an empty string for the policy number when there's an internal error in the API
@@ -370,7 +370,7 @@ export class PayComponent implements OnInit
 		} else { // Call payment request after payment transaction fails
 			this.callPaymentUrl();
 		}
-		
+
 	}
 
 	callPaymentUrl()

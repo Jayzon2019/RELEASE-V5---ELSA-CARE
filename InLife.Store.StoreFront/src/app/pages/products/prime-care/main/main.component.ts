@@ -56,6 +56,129 @@ export class MainComponent implements OnInit, OnDestroy
 		if(this.activateRoute.snapshot.fragment === 'ihc')
 			this.scroll();
 
+		let externalOrder = this.session.get('external-order');
+		if (externalOrder)
+		{
+			let getQuoteForm =
+			{
+				"calculatePremium":
+				{
+					"totalCashBenefit": "",
+					"dateofbirth": externalOrder.prospectBirthDate,
+					"gender": "",
+					"paymentMode": externalOrder.paymentFrequency
+				},
+				"basicInformation":
+				{
+					"prefix": externalOrder.prospectNamePrefixId,
+					"suffix": externalOrder.prospectNameSuffixId,
+					"fname": externalOrder.prospectFirstName,
+					"mname": externalOrder.prospectMiddleName,
+					"lname": externalOrder.prospectLastName,
+					"landline": externalOrder.prospectPhoneeNumber,
+					"mobile": externalOrder.prospectMobileNumber,
+					"country": externalOrder.prospectHomeCountryId,
+					"province": externalOrder.prospectHomeRegionId,
+					"municipality": externalOrder.prospectHomeCityId,
+					"primeCare": "",
+					"email": externalOrder.prospectEmailAddress
+				},
+				"healthCondition":
+				{
+					"healthDeclaration1": "",
+					"healthDeclaration2": "",
+					"healthDeclaration3": "",
+					"privacyPolicy": ""
+				}
+			};
+			this.session.set('getQuoteForm', JSON.stringify(getQuoteForm));
+
+			let getInnerForm =
+			{
+				"annual": externalOrder.paymentFrequency,
+				"amount": ""
+			};
+			this.session.set('getInnerForm', JSON.stringify(getInnerForm));
+
+			let getApplyForm =
+			{
+				"personalInformation":
+				{
+					"street": `${externalOrder.prospectHomeAddress1} ${externalOrder.prospectHomeAddress2}`,
+					"village": externalOrder.prospectHomeAddress3,
+					"zipCode": externalOrder.prospectHomeZipCode,
+					"civilStatus": externalOrder.prospectCivilStatusId,
+					"country": externalOrder.prospectHomeCountryId,
+					"province": externalOrder.prospectHomeRegionId,
+					"municipality": externalOrder.prospectHomeCityId,
+					"birthCountry": externalOrder.prospectBirthCountryId,
+					"birthProvince": externalOrder.prospectBirthRegionId,
+					"birthMunicipality": externalOrder.prospectBirthCityId,
+					"nationality": externalOrder.prospectNationalityId
+				},
+				"employment":
+				{
+					"company": "",
+					"occupation": "",
+					"fundSource": "",
+					"monthlyIncome": ""
+				},
+				"identification":
+				{
+					"legalIdType": "",
+					"LegalIdNumber": "",
+					"secondaryLegalIdType": "",
+					"secondaryLegalIdNumber": "",
+					"file": ""
+				},
+				"beneficiaryDetails":
+				{
+					"relation": "",
+					"prefix": "",
+					"fname": "",
+					"mname": "",
+					"lname": "",
+					"suffix": "",
+					"insuredStreet": "",
+					"sameAddress": "",
+					"insuredVillage": "",
+					"insuredZipCode": "",
+					"insuredCountry": "",
+					"insuredProvince": "",
+					"insuredMunicipality": "",
+					"insuredBirthProvince": "",
+					"insuredBirthMunicipality": "",
+					"insuredBirthCountry": "",
+					"insuredNationality": "",
+					"insuredLandline": "",
+					"insuredMobile": "",
+					"insuredCivilStatus": "",
+					"insuredGender": "",
+					"insuredDateofbirth": "",
+					"designation": "",
+					"type": ""
+				},
+				"declarationForm":
+				{
+					"declaration": "",
+					"uslawpersion": "",
+					"usnotlaw": "",
+					"confirmdeclare": "",
+					"changeexstinginsurance": "",
+					"premiumpaid": "",
+					"submitedPhilphine": "",
+					"informproduct": "",
+					"confirmcorrect": "",
+					"antimoneylaundary": "",
+					"companyname": "",
+					"basiccover": "",
+					"dreaddeaise": "",
+					"accidentrider": "",
+					"yearofissue": ""
+				}
+			};
+			this.session.set('getApplyForm', JSON.stringify(getApplyForm));
+		}
 	}
 	ngOnDestroy() {
 		this.destroy$.next(true);

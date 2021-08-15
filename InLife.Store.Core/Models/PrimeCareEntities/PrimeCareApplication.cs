@@ -13,6 +13,11 @@ namespace InLife.Store.Core.Models
 
 		public int ReferenceId { get; set; }
 
+		// Order
+		public string OrderNumber { get; set; }
+		public string OrderItemNumber { get; set; }
+		public string OrderStatus { get; set; }
+
 		// Customer
 		public Guid? CustomerId { get; set; }
 		public virtual PrimeCarePerson Customer { get; set; }

@@ -48,9 +48,9 @@ namespace InLife.Store.Api
 		[HttpGet("{code}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesErrorResponseType(typeof(ProblemDetails))]
-		public async Task<ActionResult> Get(string code)
+		public async Task<ActionResult> GetAffiliateInfo(string code)
 		{
-			var endpoint = $"{affiliateApi.Host}{affiliateApi.AgentInfoEndpoint}/{code}";
+			var endpoint = $"{affiliateApi.Host}{affiliateApi.AgentInfoEndpoint}".Replace("{code}", code);
 
 			var result = await affiliateApiClient.Value.GetAsync(endpoint);
 
@@ -67,6 +67,5 @@ namespace InLife.Store.Api
 
 			return GenericServerErrorResult();
 		}
-
 	}
 }

@@ -115,6 +115,74 @@ namespace InLife.Store.Core.Business
 			return application;
 		}
 
+		public async Task<PrimeCareApplication> ExternalOrder(ExternalOrderForm form)
+		{
+			Contract.Requires(form != null);
+
+			var id = Guid.NewGuid();
+
+			var application = new PrimeCareApplication
+			{
+				Id = id,
+				Status = PrimeCareApplicationStatus.Application.Name,
+
+				ReferenceCode = form.ReferenceCode,
+				OrderNumber = form.OrderNumber,
+				OrderItemNumber = form.OrderItemNumber,
+				OrderStatus = form.OrderStatus,
+
+				PlanCode = form.PlanCode,
+				PlanName = form.PlanName,
+
+				PlanFaceAmount = form.PlanFaceAmount,
+				PlanPremium = form.PlanPremium,
+				PaymentFrequency = form.PaymentFrequency,
+
+				Customer = new PrimeCarePerson
+				{
+					NamePrefix = form.NamePrefix,
+					NameSuffix = form.NameSuffix,
+					FirstName = form.FirstName,
+					MiddleName = form.MiddleName,
+					LastName = form.LastName,
+					Gender = form.Gender,
+					BirthDate = form.BirthDate,
+					EmailAddress = form.EmailAddress,
+					MobileNumber = form.MobileNumber,
+
+					BirthAddress = new PrimeCareAddress
+					{
+						City = form.BirthCity,
+						Region = form.BirthRegion,
+						Country = form.BirthCountry,
+					},
+
+					HomeAddress = new PrimeCareAddress
+					{
+						Address1 = form.HomeAddress1,
+						Address2 = form.HomeAddress2,
+						City = form.HomeCity,
+						Region = form.HomeRegion,
+						Country = form.HomeCountry,
+						ZipCode = form.HomeZipCode,
+						PhoneNumber = form.HomePhoneNumber
+					}
+				},
+
+				IsEligible = true
+			};
+
+			applicationRepository.Create(application);
+
+			//application.ReferenceCode = application.ReferenceId.ToString().PadLeft(10, '0');
+			//applicationRepository.Update(application);
+
+			//await emailService.SendPrimeCareQuoteApplication(application);
+
+			await Task.Delay(0);
+			return application;
+		}
+
 		//public Task<PrimeCareApplication> UpdateQuote(string refcode, PrimeCareQuoteForm form)
 		//{
 		//}

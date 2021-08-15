@@ -8,6 +8,7 @@ namespace InLife.Store.Core.Settings
 	{
 		public PrimeCareApi PrimeCareApi { get; set; }
 		public AffiliateApi AffiliateApi { get; set; }
+		public OrderApi OrderApi { get; set; }
 		public string PaymentGateway { get; set; }
 		public Sftp GroupSftp { get; set; }
 	}
@@ -26,6 +27,17 @@ namespace InLife.Store.Core.Settings
 		public string ClientSecret { get; set; }
 		public string Host { get; set; }
 		public string AgentInfoEndpoint { get; set; }
+	}
+
+	public class OrderApi
+	{
+		public string PartnerKey { get; set; }
+		public string PartnerSecret { get; set; }
+		public string SubscriptionKey { get; set; }
+		public string Host { get; set; }
+		public string GetEndpoint { get; set; }
+		public string CancelEndpoint { get; set; }
+		public string SuccessEndpoint { get; set; }
 	}
 
 	public class Sftp

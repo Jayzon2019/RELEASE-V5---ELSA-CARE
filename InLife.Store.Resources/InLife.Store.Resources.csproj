@@ -6,6 +6,12 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="EmailTemplates\**" />
+		<EmbeddedResource Include="ReferenceTables\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="ReferenceTables\Occupation.json" />
+	  <None Remove="ReferenceTables\Region.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -14,12 +20,21 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>EmailTemplates.resx</DependentUpon>
 		</Compile>
+		<Compile Update="ReferenceTables.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>ReferenceTables.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Update="EmailTemplates.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>EmailTemplates.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="ReferenceTables.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>ReferenceTables.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
 
