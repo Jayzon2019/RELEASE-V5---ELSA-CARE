@@ -50,10 +50,10 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
                 switchMap((endpoint) => this.getAffiliate(endpoint))
             )
             .subscribe(resp => {
-                sessionStorage.setItem('affiliate', JSON.stringify(resp));
+                session.set('affiliate', resp);
                 window.location.href = this.target
             }, error => {
-                sessionStorage.removeItem('affiliate');
+                session.remove('affiliate');
             });
 
     }

@@ -175,7 +175,8 @@ export class PayComponent implements OnInit
 						}
 					}, (error) => {
 						this.ngxService.stopAll();
-						this.util.ShowGeneralMessagePrompt({message: errorMsg});
+						let errorMsgs = (error) ? error.message : `We apologize things don't appear to be working at the moment. Please try again.`;
+						this.util.ShowGeneralMessagePrompt({message: errorMsgs});
 					})
 			}
 
