@@ -60,6 +60,7 @@ bld/
 
 # Database Project files
 *.jfm
+*.dbmdl
 
 # misc
 /.sass-cache
