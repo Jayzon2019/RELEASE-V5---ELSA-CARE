@@ -472,7 +472,7 @@ export class ApplyComponent implements OnInit
 
 			let totalInches = Math.round(healthCon.heightInFeet * 12) + healthCon.heightInInches;
 
-			let payload: any = {
+			let payload = {
 				"PlanCode": "TR0091",
 				"PlanName": "Prime Secure Lite",
 				"PaymentMode": 12,//12,
@@ -492,7 +492,7 @@ export class ApplyComponent implements OnInit
 				"OwnerIsInsured": 1,
 				"OwnerRelationToInsuredId": 24,
 				"OwnerPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
-				// "OwnerSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
+				"OwnerSuffixId": null,//24,
 				"OwnerFirstName": getQuoteForm.basicInformation.fname,//"testFaname",
 				"OwnerLastName": getQuoteForm.basicInformation.lname,//"testLName",
 				"OwnerMiddleName": getQuoteForm.basicInformation.mname,//"testMName",
@@ -508,7 +508,7 @@ export class ApplyComponent implements OnInit
 				"InsuredBirthday": bday,//"01/01/1980",
 				"InsuredGenderId": this.nullIfZero(getQuoteForm.calculatePremium.gender),//8,
 				"InsuredPrefixId": this.nullIfZero(getQuoteForm.basicInformation.prefix),//24,
-				// "InsuredSuffixId": this.nullIfZero(getQuoteForm.basicInformation.suffix),//24,
+				"InsuredSuffixId": null,//24,
 				"InsuredEmailAddress": getQuoteForm.basicInformation.email,//"test@gmail1.com",
 				"InsuredResidencePhoneNumber": this.nullIfZero(getQuoteForm.basicInformation.landline),//12345678,
 				"InsuredMobileNo": this.nullIfZero(getQuoteForm.basicInformation.mobile),//12345567,
@@ -541,7 +541,7 @@ export class ApplyComponent implements OnInit
 					"FirstName": this.getApplyForm.get('beneficiaryDetails').get('fname').value,//"SampleBeneFname",
 					"MiddleName": this.getApplyForm.get('beneficiaryDetails').get('mname').value,//"SampleBeneMname",
 					"LastName": this.getApplyForm.get('beneficiaryDetails').get('lname').value,//"SampleBeneLastName",
-					// "SuffixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('suffix').value),
+					"SuffixId": null,
 					"PrefixId": this.nullIfZero(this.getApplyForm.get('beneficiaryDetails').get('prefix').value),
 					"AddressType": 2,//2,Permanent
 					"Address1": this.getApplyForm.get('beneficiaryDetails').get('insuredStreet').value,//"Address1",

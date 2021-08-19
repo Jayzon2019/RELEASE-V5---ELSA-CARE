@@ -14,6 +14,7 @@ import { Enumerations } from '@app/common/enumerations';
 import { ApiService, FacebookPixelService, SessionStorageService } from '@app/services';
 import { DynamicGrid } from './extension.model';
 import { StorageType } from '@app/services/storage-types.enum';
+import { environment } from '@environment';
 
 @Component
 ({
@@ -54,6 +55,7 @@ export class ApplyComponent implements OnInit
 	showFifthStep: Boolean = false;
 	sizeError: boolean = false;
 	quoteInformation: any;
+	FUND_SOURCE: any;
 
 	constructor
 	(
@@ -71,6 +73,8 @@ export class ApplyComponent implements OnInit
 		this.getQuoteFormData = this.session.get('getQuoteForm') || "[]";
 		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
 		this.quoteInformation = this.session.get(StorageType.QUOTE_PC_DATA) || "[]";
+
+		this.FUND_SOURCE = (environment.appApi.host === 'https://www.inlifestore.com.ph/api') ? CONSTANTS.PSLITE_FUND_SOURCE : CONSTANTS.FUND_SOURCE;
 
 		this.insuredIdentityDocumentImagePreview = this.session.get("insuredIdentityDocumentImagePreview_PC");
 		this.insuredIdentityDocumentImageData = this.session.get("insuredIdentityDocumentImageData_PC");

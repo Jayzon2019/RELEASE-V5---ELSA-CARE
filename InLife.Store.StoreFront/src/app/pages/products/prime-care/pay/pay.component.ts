@@ -170,7 +170,7 @@ export class PayComponent implements OnInit
 		let insuredSuffixId = this.nullIfZero(this.basicInformation.suffix);
 		let benefSuffixId = this.nullIfZero(this.beneficialInformation.suffix);
 		
-		let arrData: any =
+		let arrData =
 		{
 			"PlanCode": "AH0017",
 			"PlanName": "Prime Care",
@@ -182,7 +182,7 @@ export class PayComponent implements OnInit
 			"OwnerRelationToInsuredId": 24, // Same Person
 
 			"OwnerPrefixId": this.nullIfZero(this.basicInformation.prefix),
-			// "OwnerSuffixId": this.nullIfZero(this.basicInformation.suffix),
+			"OwnerSuffixId": null,
 			"OwnerFirstName": this.basicInformation.fname,
 			"OwnerLastName": this.basicInformation.lname,
 			"OwnerMiddleName": this.basicInformation.mname,
@@ -195,7 +195,7 @@ export class PayComponent implements OnInit
 			"OwnerMobileNo": this.basicInformation.mobile,
 
 			"InsuredPrefixId": this.nullIfZero(this.basicInformation.prefix),
-			// "InsuredSuffixId": this.nullIfZero(this.basicInformation.suffix),
+			"InsuredSuffixId": null,
 			"InsuredFirstName": this.basicInformation.fname,
 			"InsuredMiddleName": this.basicInformation.mname,
 			"InsuredLastName": this.basicInformation.lname,
@@ -247,7 +247,7 @@ export class PayComponent implements OnInit
 
 			"Beneficiary":
 				[{
-					// "SuffixId": this.nullIfZero(this.beneficialInformation.suffix),
+					"SuffixId": null,
 					"FirstName": this.beneficialInformation.fname,
 					"MiddleName": this.beneficialInformation.mname,
 					"LastName": this.beneficialInformation.lname,
