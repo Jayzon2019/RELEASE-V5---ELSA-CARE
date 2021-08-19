@@ -56,6 +56,7 @@ export class ApplyComponent implements OnInit
 	sizeError: boolean = false;
 	quoteInformation: any;
 	FUND_SOURCE: any;
+	TINS = {};
 
 	constructor
 	(
@@ -338,6 +339,9 @@ export class ApplyComponent implements OnInit
 		this.showThirdStep = this.getApplyForm.get('employment').valid === true ? true : false;
 		this.showFourthStep = this.getApplyForm.get('identification').valid === true ? true : false;
 		this.showFifthStep = this.getApplyForm.get('beneficiaryDetails').valid === true ? true : false;
+
+		this.TINS = (environment.appApi.host === 'https://www.inlifestore.com.ph/api') ? CONSTANTS.PSLITE_TINS[0].PROD : CONSTANTS.PSLITE_TINS[0].UAT;
+
 		this.ngxService.stop();
 	}
 
