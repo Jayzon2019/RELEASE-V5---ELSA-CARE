@@ -7,8 +7,8 @@ export const environment =
 	production: false,
 	appApi:
 	{
-		host: 'https://dev-inlife-estore.azurewebsites.net/api',
-		// host: 'https://localhost:44328',
+		// host: 'https://dev-inlife-estore.azurewebsites.net/api',
+		host: 'https://localhost:44328',
 		quotesEndpoint: '/quotes',
 		ordersEndpoint: '/orders',
 		affiliatesEndpoint: '/affiliates'
@@ -22,12 +22,6 @@ export const environment =
 		createApplicationEndpoint: '/CreateApplication',
 		savePaymentEndpoint: '/SavePayment',
 		quoteEndpoint: '/prime-care/applications'
-	},
-
-	affiliate:
-	{
-		clientID: 'f0b5e66c604f9a3b7868',
-		clientSecret: '0286b6b4fa642141831cde4ba6ae7675330a206ee811df8b44e10f0e743c'
 	},
 
 	groupApi:

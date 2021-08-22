@@ -33,17 +33,12 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
                     const targetPage = productPages[product] ? productPages[product] : '/';
                     const path = window.location.pathname;
                     const origin = window.location.origin;
-                    const dir = path.substring(0, path.lastIndexOf('/'));
-                    var base = 'https://access.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info'; //prod
-                    if(origin == 'https://uat-inlifestore.insularlife.com.ph' || origin == 'https://uat2-inlifestore.insularlife.com.ph') {
-                        base = 'https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
-                    } else if (origin == 'https://dev-inlife-estore.azurewebsites.net' || origin == 'http://localhost:4200') {
-                        base = 'https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates/info';
-                    }
-            
-                    var endpoint = `${base}/${code}`;
-                    
+
+
+                    let endpoint = environment.appApi.host + `/affiliates/${code}`;
                     this.target = targetPage;
+
+                    debugger;
 
                     return endpoint;
                 }),
@@ -61,8 +56,6 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
     public getAffiliate(endpoint: any) {
         let headers: HttpHeaders = new HttpHeaders();
             headers = headers.append('Content-Type', 'application/json');
-            headers = headers.append('ClientID', environment.affiliate.clientID);
-            headers = headers.append('ClientSecret', environment.affiliate.clientSecret);
     
             let options =
             {
