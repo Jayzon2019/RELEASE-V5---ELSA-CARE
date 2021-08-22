@@ -56,7 +56,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 	Pr2: any = 0;
 	Pr3: any = 0;
 	Pr4: any = 0;
-	
+
 	groupQuoteData: any;
 	selectedPlanType: any;
 	authPrefixTxt: string = '';
@@ -72,7 +72,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 	valueChanged: Subscription;
 
 	constructor
-	( 
+	(
 		private router: Router,
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
@@ -86,21 +86,21 @@ export class QuoteComponent implements OnInit, OnDestroy
 		private util: UtilitiesService,
 		private decimalPipe: DecimalPipe
 	)
-	{ 
+	{
 		this.ngxService.start();
 		this.initForm();
-		
-		
+
+
 		this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params =>
 		{
 			if (params && (params.plan == '1' || params.plan == '2' || params.plan == '3'))
 			{
-				
+
 				this.productName = params.productName;
 				this.productType = Number(params.productType) == 0 ? null : Number(params.productType);
 				this.planCode = params.planCode;
 				this.selectedPlan = params.plan;
-				
+
 				switch(params.plan){
 					case '1':
 						this.lc1 = "100,000";
@@ -142,8 +142,8 @@ export class QuoteComponent implements OnInit, OnDestroy
 						// this.totalPremium = 25.5;
 						// this.insuranceCoverage = 10000;
 						// this.annualPremium = 25.5;
-						this.groupPackageCtrl.get('TotalNumberOfStudents').setValidators([Validators.required, Validators.min(50), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]);	
-						this.groupPackageCtrl.get('TotalNumberOfTeachers').setValidators([Validators.required, Validators.min(15), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]);	
+						this.groupPackageCtrl.get('TotalNumberOfStudents').setValidators([Validators.required, Validators.min(50), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]);
+						this.groupPackageCtrl.get('TotalNumberOfTeachers').setValidators([Validators.required, Validators.min(15), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]);
 
 						this.groupPackageCtrl.get('TotalNumberOfStudents').valueChanges
 							.pipe(takeUntil(this.destroy$))
@@ -204,7 +204,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 	initForm()
 	{
-		
+
 		let quote_form = this.session.get(StorageType.POST_GROUP_QUOTE);
 		let group_plan = this.session.get('selectedGroupPlanData');
 		console.log(group_plan);
@@ -221,13 +221,13 @@ export class QuoteComponent implements OnInit, OnDestroy
 		}
 
 		this.getQuoteForm = this.formBuilder.group({
-			groupPackage : this.formBuilder.group({ 
+			groupPackage : this.formBuilder.group({
 				TotalNumberOfMembers: new FormControl(this.hasData ? quote_form.TotalNumberOfMembers : "", [Validators.pattern("^[0-9]{1,15}$")]),
 				TotalNumberOfStudents: new FormControl(this.hasData ? quote_form.TotalNumberOfStudents : "", [Validators.pattern("^[0-9]{1,15}$")]),
 				TotalNumberOfTeachers: new FormControl(this.hasData ? quote_form.TotalNumberOfTeachers : "", [Validators.pattern("^[0-9]{1,15}$")]),
 				PlanType: new FormControl(this.hasData ? Number(group_plan.productType) : "", [Validators.required]),
 			}),
-			basicInformation :this.formBuilder.group({ 
+			basicInformation :this.formBuilder.group({
 				CompanyName: new FormControl(this.hasData ? quote_form.CompanyName: "", [Validators.required, Validators.pattern("[A-Za-zÑñ@',.+&0-9 ]+")]),
 				CompanyLandLineNo: new FormControl(this.hasData ? quote_form.CompanyLandLineNo: "", [Validators.required, Validators.pattern("^[0-9]{9}$")]),
 				CompanyMobileNo: new FormControl(this.hasData ? quote_form.CompanyMobileNo: "", [Validators.required,  Validators.pattern("^[1-9]{1}[0-9]{9}$")]),
@@ -249,14 +249,14 @@ export class QuoteComponent implements OnInit, OnDestroy
 				Status: new FormControl(1, [Validators.required]),
 				privacyPolicy: new FormControl(this.hasData ? quote_form.privacyPolicy:false, [Validators.required]),
 			}),
-			
+
 		});
 		console.log(this.getQuoteForm);
 
-		
+
 	}
 	onPlan(type){
-		debugger
+		//debugger
 		this.productType = type;
 		this.isValidTotalPremium = false;
 		this.groupPackageCtrl.patchValue({ PlanType: type});
@@ -272,19 +272,19 @@ export class QuoteComponent implements OnInit, OnDestroy
 					this.annualPremiumStr = '400';
 				} else if(this.plan == '2') {
 					total_premium = 194.75 * (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value || 1);
-					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2'); 
+					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "25,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = 194.75;
 					this.annualPremiumStr = '194.75';
 				} else if(this.plan == '3') {
-					
+
 					total_premium = 25.5 * (this.getQuoteForm.get('groupPackage').value.TotalNumberOfStudents || 1);
 					this.totalPremium = this.decimalPipe.transform(total_premium, '1.2-2');
 					this.insuranceCoverage = "10,000";//* (this.getQuoteForm.get('groupPackage').get('TotalNumberOfMembers').value | 1);
 					this.annualPremium = '25.50';
 					this.annualPremiumStr = '25.50';
 				}
-				
+
 				this.isValidTotalPremium = (total_premium >= CONSTANTS.MINIMUM_TOTAL_ANUAL_PREMIUM) ? true : false;
 				break;
 			case 2:
@@ -355,7 +355,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 				break;
 			default:
 		}
-		
+
 	}
 	setShowSecond()
 	{
@@ -393,32 +393,32 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 	getCity(e){
 		let selectedIndex = e.target.options.selectedIndex;
-		this.cityText = e.target.options[selectedIndex].text; 
+		this.cityText = e.target.options[selectedIndex].text;
 	}
 	getRegion(e){
 		let selectedIndex = e.target.options.selectedIndex;
-		this.regionText = e.target.options[selectedIndex].text; 
+		this.regionText = e.target.options[selectedIndex].text;
 		console.log(this.regionText);
 	}
 	getBarangaya(e){
 		let selectedIndex = e.target.options.selectedIndex;
-		this.barangayaText = e.target.options[selectedIndex].text; 
+		this.barangayaText = e.target.options[selectedIndex].text;
 	}
-	
+
 	getBusinessType(e){
 		let selectedIndex = e.target.options.selectedIndex;
-		this.BusinessTxt = e.target.options[selectedIndex].text; 
+		this.BusinessTxt = e.target.options[selectedIndex].text;
 	}
-	
+
 	getPrefix(e) {
 		let selectedIndex = e.target.options.selectedIndex;
-		this.authPrefixTxt = e.target.options[selectedIndex].text; 
+		this.authPrefixTxt = e.target.options[selectedIndex].text;
 	}
 	getSuffix(e) {
 		let selectedIndex = e.target.options.selectedIndex;
-		this.authSuffixTxt = e.target.options[selectedIndex].text; 
-	} 
-	
+		this.authSuffixTxt = e.target.options[selectedIndex].text;
+	}
+
 	saveQuoteForm(type: any = 'submit')
 	{
 		this.ngxService.start();
@@ -458,9 +458,9 @@ export class QuoteComponent implements OnInit, OnDestroy
 		this.submitted = true;
 		if (this.getQuoteForm.valid) {
 			const access = this.session.get(StorageType.ACCESS_DATA);
-			
+
 			if(this.hasData) {
-				
+
 				if(JSON.stringify(this.groupQuoteData) != JSON.stringify(groupQuoteDataNew)) {
 					console.log(this.groupQuoteData, groupQuoteDataNew);
 					console.log('edit');
@@ -502,7 +502,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 						this.errorState(error, type);
 					})
 			}
-			
+
 		}
 	}
 
@@ -533,7 +533,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			representativeNamePrefix: this.authPrefixTxt,
 			representativeNameSuffix: this.authSuffixTxt,
 			representativeFirstName: this.basicInfoCtrl.get('AuthFristName').value,
-			representativeMiddleName: this.basicInfoCtrl.get('AuthMiddleName').value, 
+			representativeMiddleName: this.basicInfoCtrl.get('AuthMiddleName').value,
 			representativeLastName: this.basicInfoCtrl.get('AuthLastName').value,
 			representativePhoneNumber: this.basicInfoCtrl.get('AuthLandlineNo').value,
 			representativeMobileNumber: this.basicInfoCtrl.get('AuthMobileNumber').value,

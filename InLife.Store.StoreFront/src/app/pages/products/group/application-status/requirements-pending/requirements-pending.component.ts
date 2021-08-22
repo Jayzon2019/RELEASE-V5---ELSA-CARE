@@ -35,16 +35,16 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
 		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		PostPolicyForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false}};
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
               private ngxService: NgxUiLoaderService,
               private session: SessionStorageService,
               private activatedRoute: ActivatedRoute,
               private decimalPipe: DecimalPipe,
-              private appStatusService_API: ApplicationStatusService) { 
+              private appStatusService_API: ApplicationStatusService) {
   }
 
   ngOnInit(): void {
-    
+
 
     this.activatedRoute.queryParams
       .pipe(takeUntil(this.destroy$))
@@ -86,7 +86,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
         let selectedPlan = this.getPlan(data.planCode);
         let alreadyDeclared = data.alreadyDeclared;
 
-        debugger
+        //debugger
         this.groupPlan = {
           annualPremium:  selectedPlan === '1' ? Number(data.planPremium): this.decimalPipe.transform(data.planPremium, '1.2-2'),
           insuranceCoverage: this.numberWithCommas(data.planFaceAmount.toString()),
@@ -105,7 +105,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
           AuthLastName: data.representativeLastName,
           AuthMiddleName: data.representativeMiddleName,
           AuthMobileNumber: data.representativeMobileNumber,
-          AuthPrefixName: this.getPrefixObject(data.representativeNamePrefix), 
+          AuthPrefixName: this.getPrefixObject(data.representativeNamePrefix),
           AuthSuffixName: this.getSuffixObject(data.representativeNameSuffix),
           Barangaya: data.companyTown,//"12",
           BusinessType: data.businessStructure,
@@ -136,7 +136,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
           TotalNumberOfStudents: data.totalStudents || null,
           TotalNumberOfTeachers: data.totalTeachers || null,
         }
-        
+
         this.groupApplyData = {
           ...commonAttr,
           Status: 2,
@@ -162,13 +162,13 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
               this.isCompletedRequirements = false;
             }
           }
-          
+
         });
-        
+
       });
   }
 
-  
+
 
   mapRequirementsFileDetails(type: string, data: any) {
     this.requirementsTypes[type] = {
@@ -193,7 +193,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
       this.session.set(StorageType.GROUP_PLAN_DATA, this.groupApplyData);
       this.router.navigate(['/group/plan-summary']);
     } else {
-      this.router.navigate(['/group/apply']);    
+      this.router.navigate(['/group/apply']);
     }
   }
 

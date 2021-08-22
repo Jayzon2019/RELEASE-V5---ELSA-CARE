@@ -95,9 +95,7 @@
     <Build Include="dbo\Tables\TblPrimeCare.sql" />
     <Build Include="dbo\Tables\UserSessions.sql" />
     <Build Include="PrimeCare\Tables\OtherInsurances.sql" />
-    <Build Include="PrimeCare\Tables\Customers.sql" />
     <Build Include="PrimeCare\Tables\Addresses.sql" />
-    <Build Include="PrimeCare\Tables\Quotes.sql" />
     <Build Include="PrimeCare\Tables\Persons.sql" />
     <Build Include="Security\PrimeSecure.sql" />
     <Build Include="Security\PrimeCare.sql" />
@@ -113,8 +111,8 @@
     <Build Include="Content\Tables\Faqs.sql" />
     <Build Include="Content\Tables\FaqCategories.sql" />
     <Build Include="PrimeSecure\Tables\Applications.sql" />
-    <Build Include="PrimeSecure\Tables\Customers.sql" />
     <Build Include="PrimeSecure\Tables\Addresses.sql" />
     <Build Include="dbo\Tables\ReferenceCodes.sql" />
+    <Build Include="PrimeSecure\Tables\Persons.sql" />
   </ItemGroup>
 </Project>
