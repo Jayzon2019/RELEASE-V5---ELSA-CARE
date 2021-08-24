@@ -103,14 +103,14 @@ export class QuoteComponent implements OnInit
 
 		if (this.affiliate)
 		{
-			this.affiliateType = this.affiliate.AffiliateType == 'INLIFE AFFILIATE' ? '10' :
-							this.affiliate.AffiliateType == 'UNIONBANK BRANCH' ? '9' : '1';
+			this.affiliateType = this.affiliate.affiliateType == 'INLIFE AFFILIATE' ? '10' :
+							this.affiliate.affiliateType == 'UNIONBANK BRANCH' ? '9' : '1';
 
-			if(this.affiliate.AffiliateType == "INLIFE AFFILIATE") {
+			if(this.affiliate.affiliateType == "INLIFE AFFILIATE") {
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('10');
 				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
-				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Affiliate.AffiliateCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Affiliate.AffiliateName);
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.affiliate.affiliateCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.affiliate.affiliateName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -119,11 +119,11 @@ export class QuoteComponent implements OnInit
 				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
 				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
 
-			} else if (this.affiliate.AffiliateType == "UNIONBANK BRANCH") {
+			} else if (this.affiliate.affiliateType == "UNIONBANK BRANCH") {
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('9');
 				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
-				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.BranchName);
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agent.agentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agent.branchName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -131,10 +131,10 @@ export class QuoteComponent implements OnInit
 
 				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
 				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
-			} else if (this.affiliate.AffiliateType == "INSULAR LIFE AGENT") {
+			} else if (this.affiliate.affiliateType == "INSULAR LIFE AGENT") {
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
-				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agent.agentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agent.agentName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -482,7 +482,7 @@ export class QuoteComponent implements OnInit
 
 		let refSource = basicInfo.get('primeCare').value;
 		let name = afname + ' ' + alname;
-		let affiliateName = (this.affiliate?.Affiliate && this.affiliate?.Affiliate?.AffiliateStatus == 'ACTIVE') ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null
+		let affiliateName = (this.affiliate?.affiliate && this.affiliate?.affiliate?.affiliateStatus == 'ACTIVE') ? this.affiliate.affiliate?.affiliateName : refSource == '10' ? name : null
 
 		var data: any =
 		{
@@ -508,22 +508,22 @@ export class QuoteComponent implements OnInit
 			"City": city,
 
 			"ReferralSource": this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
-			"AgentCode": this.affiliate?.Agent ? this.affiliate?.Agent?.AgentCode : null,
-			"AgentFirstName": this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
-			"AgentLastName": this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
+			"AgentCode": this.affiliate?.agent ? this.affiliate?.agent?.agentCode : null,
+			"AgentFirstName": this.affiliate?.affiliate ? null : refSource == '1' ? afname : null,
+			"AgentLastName": this.affiliate?.affiliate ? null : refSource == '1' ? alname : null,
 
-			"AffiliateCode": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
+			"AffiliateCode": this.affiliate?.affiliate ? this.affiliate.affiliate?.affiliateCode : this.affiliate?.agent?.affCode ? this.affiliate?.agent?.affCode : null,
 			"AffiliateName": affiliateName,
-			"AffiliateStatus": this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
+			"AffiliateStatus": this.affiliate?.affiliate ? this.affiliate.affiliate?.affiliateStatus : null,
 
-			"BranchCode": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
-			"BranchName": this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
+			"BranchCode": this.affiliate?.affiliateType == 'UNIONBANK BRANCH' ? this.affiliate.agent?.branchCode : null,
+			"BranchName": this.affiliate?.affiliateType == 'UNIONBANK BRANCH' ? this.affiliate.agent?.branchName : null,
 
 			"Health1": (health.healthCondition1 == 'Yes'),
 			"Health2": (health.healthCondition2 == 'Yes'),
 			"Health3": (health.healthCondition3 == 'Yes'),
 
-			"AffiliateType": this.affiliate?.AffiliateType,
+			"AffiliateType": this.affiliate?.affiliateType,
 			"Plan": this.plan,
 			"IsEligible": isEligible
 		};

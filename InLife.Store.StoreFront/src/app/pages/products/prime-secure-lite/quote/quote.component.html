@@ -1433,7 +1433,7 @@
 													</div>
 												</div>
 
-												<ng-container *ngIf="!affiliate || !affiliate.Result.Success">
+												<ng-container *ngIf="!affiliate || !affiliate.result.success">
 													<div class="col-md-6 mb-3">
 														<label for="">I learned about Prime Secure Lite through:</label>
 														<select class="form-control" id="" formControlName="primeCare"
@@ -1455,8 +1455,8 @@
 													<div class="col-md-6 mb-9"
 														 *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value == '1' || getQuoteForm.get('basicInformation').get('primeCare').value == '10'">
 														<label for="">
-															<ng-container *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value == '1'; else AffiliateName">Agent Name</ng-container>
-															<ng-template #AffiliateName>Affiliate Name</ng-template>
+															<ng-container *ngIf="getQuoteForm.get('basicInformation').get('primeCare').value == '1'; else affiliateName">Agent Name</ng-container>
+															<ng-template #affiliateName>Affiliate Name</ng-template>
 														</label>
 														<div class="input-group">
 															<div class="fieldinnr50">
@@ -1487,34 +1487,34 @@
 													</div>
 												</ng-container>
 
-												<ng-container *ngIf="affiliate && affiliate.Result.Success">
+												<ng-container *ngIf="affiliate && affiliate.result.success">
 													<div class="col-md-6 mb-3">
 														<label for="">I learned about Prime Secure Lite through:</label>
 														<input type="text" class="form-control" 
-															[value]="affiliate.AffiliateType == 'INSULAR LIFE AGENT' ? 'REFERRAL OF INSULAR LIFE ADVISOR/ AGENT' : 
-															affiliate.AffiliateType == 'INLIFE AFFILIATE' ? 'REFERRAL FROM AN INLIFE AFFILIATE' : 'REFERRAL FROM UNIONBANK BRANCH'" 
+															[value]="affiliate.affiliateType == 'INSULAR LIFE AGENT' ? 'REFERRAL OF INSULAR LIFE ADVISOR/ AGENT' : 
+															affiliate.affiliateType == 'INLIFE AFFILIATE' ? 'REFERRAL FROM AN INLIFE AFFILIATE' : 'REFERRAL FROM UNIONBANK BRANCH'" 
 															readonly />
-														<small class="errormsg" *ngIf="affiliate?.Affiliate?.AffiliateStatus === 'INACTIVE'">Affiliate link is invalid.</small>
+														<small class="errormsg" *ngIf="affiliate?.affiliate?.affiliateStatus === 'INACTIVE'">Affiliate link is invalid.</small>
 													</div>
 													<div class="col-md-6 mb-3">
-														<ng-container [ngSwitch]="affiliate?.AffiliateType">
+														<ng-container [ngSwitch]="affiliate?.affiliateType">
 															<ng-container *ngSwitchCase="'INSULAR LIFE AGENT'">
 																<label for="">Agent Name</label>
-																<input type="text" class="form-control" formControlName="afname" [value]="affiliate?.Agent?.AgentName" readonly />
+																<input type="text" class="form-control" formControlName="afname" [value]="affiliate?.agent?.agentName" readonly />
 															</ng-container>
 															<ng-container *ngSwitchCase="'INLIFE AFFILIATE'">
 																<label for="">Affiliate Name</label>
-																<input type="text" class="form-control" formControlName="afname" [value]="affiliate?.Affiliate?.AffiliateName" readonly />
+																<input type="text" class="form-control" formControlName="afname" [value]="affiliate?.affiliate?.affiliateName" readonly />
 															</ng-container>
 															<ng-container *ngSwitchDefault>
 																<label for="">Branch Name</label>
-																<input type="text" class="form-control" formControlName="afname" [value]="affiliate?.Agent?.BranchName" readonly />
+																<input type="text" class="form-control" formControlName="afname" [value]="affiliate?.agent?.branchName" readonly />
 															</ng-container>
 														</ng-container>
 													</div>
 													<input type="hidden" formControlName="primeCare" [value]="affiliateType" />
-													<input type="hidden" formControlName="acode"  [value]="affiliate?.Agent?.AgentCode || affiliate?.Affiliate?.AffiliateCode || ''" />
-													<input type="hidden" formControlName="afname" [value]="affiliate?.Agent?.AgentName || affiliate?.Affiliate?.AffiliateName || ''" />
+													<input type="hidden" formControlName="acode"  [value]="affiliate?.agent?.agentCode || affiliate?.affiliate?.affiliateCode || ''" />
+													<input type="hidden" formControlName="afname" [value]="affiliate?.agent?.agentName || affiliate?.affiliate?.affiliateName || ''" />
 													<input type="hidden" formControlName="alname" value="" />
 												</ng-container>
 

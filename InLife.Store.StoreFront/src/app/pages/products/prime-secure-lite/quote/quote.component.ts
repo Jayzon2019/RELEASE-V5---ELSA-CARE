@@ -93,14 +93,14 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		if (this.affiliate)
 		{
-			this.affiliateType = this.affiliate.AffiliateType == 'INLIFE AFFILIATE' ? '10' :
-							this.affiliate.AffiliateType == 'UNIONBANK BRANCH' ? '9' : '1';
+			this.affiliateType = this.affiliate.affiliateType == 'INLIFE AFFILIATE' ? '10' :
+							this.affiliate.affiliateType == 'UNIONBANK BRANCH' ? '9' : '1';
 
-			if(this.affiliate.AffiliateType == "INLIFE AFFILIATE") {
+			if(this.affiliate.affiliateType == "INLIFE AFFILIATE") {
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('10');
 				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
-				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Affiliate.AffiliateCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Affiliate.AffiliateName);
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.affiliate.affiliateCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.affiliate.affiliateName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -109,11 +109,11 @@ export class QuoteComponent implements OnInit, OnDestroy
 				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
 				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
 
-			} else if (this.affiliate.AffiliateType == "UNIONBANK BRANCH") {
+			} else if (this.affiliate.affiliateType == "UNIONBANK BRANCH") {
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('9');
 				this.getQuoteForm.get('basicInformation').get('primeCare').disable();
-				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.BranchName);
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agent.agentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agent.branchName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -121,10 +121,10 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 				this.getQuoteForm.get('basicInformation').get('afname').clearValidators();
 				this.getQuoteForm.get('basicInformation').get('alname').clearValidators();
-			} else if (this.affiliate.AffiliateType == "INSULAR LIFE AGENT") {
+			} else if (this.affiliate.affiliateType == "INSULAR LIFE AGENT") {
 				this.getQuoteForm.get('basicInformation').get('primeCare').setValue('1');
-				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.Agent.AgentCode);
-				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.Agent.AgentName);
+				this.getQuoteForm.get('basicInformation').get('acode').setValue(this.affiliate?.agent.agentCode);
+				this.getQuoteForm.get('basicInformation').get('afname').setValue(this.affiliate?.agent.agentName);
 
 				this.getQuoteForm.get('basicInformation').get('acode').enable();
 				this.getQuoteForm.get('basicInformation').get('afname').enable();
@@ -575,7 +575,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 
 		let refSource = basicInfo.get('primeCare').value;
 		let name = afname + ' ' + alname;
-		let affiliateName = (this.affiliate?.Affiliate && this.affiliate?.Affiliate?.AffiliateStatus == 'ACTIVE') ? this.affiliate.Affiliate?.AffiliateName : refSource == '10' ? name : null;
+		let affiliateName = (this.affiliate?.affiliate && this.affiliate?.affiliate?.affiliateStatus == 'ACTIVE') ? this.affiliate.affiliate?.affiliateName : refSource == '10' ? name : null;
 
 		var dataInternalAPI: any =
 		{
@@ -605,16 +605,16 @@ export class QuoteComponent implements OnInit, OnDestroy
 			addressCountry: country,
 			bmi: +this.bodyMassIndex,
 
-			agentCode: this.affiliate?.Agent ? this.affiliate?.Agent?.AgentCode : null,
-			agentFirstName: this.affiliate?.Affiliate ? null : refSource == '1' ? afname : null,
-			agentLastName: this.affiliate?.Affiliate ? null : refSource == '1' ? alname : null,
+			agentCode: this.affiliate?.agent ? this.affiliate?.agent?.agentCode : null,
+			agentFirstName: this.affiliate?.affiliate ? null : refSource == '1' ? afname : null,
+			agentLastName: this.affiliate?.affiliate ? null : refSource == '1' ? alname : null,
 
-			affiliateCode: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateCode : this.affiliate?.Agent?.AffCode ? this.affiliate?.Agent?.AffCode : null,
+			affiliateCode: this.affiliate?.affiliate ? this.affiliate.affiliate?.affiliateCode : this.affiliate?.agent?.affCode ? this.affiliate?.agent?.affCode : null,
 			affiliateName: affiliateName,
-			affiliateStatus: this.affiliate?.Affiliate ? this.affiliate.Affiliate?.AffiliateStatus : null,
+			affiliateStatus: this.affiliate?.affiliate ? this.affiliate.affiliate?.affiliateStatus : null,
 
-			branchCode: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchCode : null,
-			branchName: this.affiliate?.AffiliateType == 'UNIONBANK BRANCH' ? this.affiliate.Agent?.BranchName : null,
+			branchCode: this.affiliate?.affiliateType == 'UNIONBANK BRANCH' ? this.affiliate.agent?.branchCode : null,
+			branchName: this.affiliate?.affiliateType == 'UNIONBANK BRANCH' ? this.affiliate.agent?.branchName : null,
 
 			referralSource: this.getReferenceDataName(CONSTANTS.PRIME_CARE, basicInfo.get('primeCare')),
 
@@ -684,7 +684,7 @@ export class QuoteComponent implements OnInit, OnDestroy
 			).subscribe((data: any) => {
 				this.facebookPixelService.track('Lead');
 				if(data && isEligible && data.underwritingStatus === 'CLEAN_CASE') {
-					dataInternalAPI.affiliateType = this.affiliate?.AffiliateType;
+					dataInternalAPI.affiliateType = this.affiliate?.affiliateType;
 					this.session.set(StorageType.QUOTE_INTERNAL_DATA, dataInternalAPI);
 					this.session.set(StorageType.QUOTE_EXTERNAL_DATA, dataExternalAPI);
 					this.session.set('refNo', '1357246812'.concat(Math.floor(Math.random() * 100001).toString()));
