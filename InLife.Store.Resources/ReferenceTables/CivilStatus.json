@@ -1,0 +1,9 @@
+[
+	{ "id": "1", "name": "Annulled" },
+	{ "id": "2", "name": "Divorced" },
+	{ "id": "3", "name": "Legally Separated" },
+	{ "id": "4", "name": "Married" },
+	{ "id": "5", "name": "Single" },
+	{ "id": "6", "name": "Widowed" },
+	{ "id": "48", "name": "Not Applicable" }
+]

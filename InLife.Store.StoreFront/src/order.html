@@ -17,7 +17,7 @@
 		<meta name="description" content="Secure your future with the assistance of a trusted Philippine mutual life insurance company. With InLife, you can be financially prepared. Visit us today." />
 		<meta name="keywords" content="insular, insular life, trusted insurance company in the philippines, mutual life insurance company, insurance philippines, insurance plan philippines, life insurance companies in the philippines" />
 
-		<title>Affiliate Link | InLife Store</title>
+		<title>Order Link | InLife Store</title>
 
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 		<link rel="shortcut icon" href="favicon.ico" />
@@ -49,7 +49,7 @@
 
 		<script src="assets/js/appSettings.js"></script>
 		<script type="text/javascript">
-			(function ()
+			(async function ()
 			{
 				const productPages =
 				{
@@ -68,41 +68,49 @@
 					?? params.get('prod')
 					?? params.get('p');
 
+				const refno = params.get('refno');
+
 				const targetPage = productPages[product]
 					? productPages[product]
 					: '/';
 
 				const path = window.location.pathname;
 				const dir = path.substring(0, path.lastIndexOf('/'));
-				const endpoint = `${dir}/api/affiliates/${code}`;
 
-				$.ajax
-				({
-					url: endpoint,
-					contentType: "application/json",
-					dataType: 'json',
-					success: function(data, status)
-					{
-						console.log('SUCCESS');
-						console.log(data);
-						console.log(status);
-						console.log(targetPage);
-						sessionStorage.setItem('affiliate', JSON.stringify(data));
-					},
-					error: function(result, status, error)
-					{
-						console.log('ERROR');
-						console.log(result);
-						console.log(status);
-						console.log(error);
-						sessionStorage.removeItem('affiliate');
-					},
-					complete: function()
-					{
-						console.log(targetPage);
-						window.location.href = targetPage;
-					}
-				});
+				const affiliateEndpoint = `${dir}/api/affiliates/${code}`;
+				const orderEndpoint = `${dir}/api/orders/${refno}`;
+
+				try
+				{
+					let affiliateResponse = await $.ajax
+					({
+						url: affiliateEndpoint,
+						contentType: 'application/json',
+						dataType: 'json'
+					});
+					//console.log('affiliateResponse', affiliateResponse);
+
+					let orderResponse = await $.ajax
+					({
+						url: orderEndpoint,
+						contentType: 'application/json',
+						dataType: 'json'
+					});
+					//console.log('orderResponse', orderResponse);
+
+					sessionStorage.setItem('affiliate', JSON.stringify(affiliateResponse));
+					sessionStorage.setItem('external-order', JSON.stringify(orderResponse));
+
+					console.log('COMPLETE');
+				}
+				catch (ex)
+				{
+					console.error(ex);
+					sessionStorage.removeItem('affiliate');
+					sessionStorage.removeItem('external-order');
+				}
+
+				///window.location.href = targetPage;
 			})();
 		</script>
 	</body>

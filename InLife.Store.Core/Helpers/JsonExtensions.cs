@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -18,6 +18,14 @@ namespace InLife.Store.Core.Helpers
 
 			var newToken = new JProperty(newName, token);
 			parent.Replace(newToken);
+		}
+
+		public static string SearchValue(this JArray jarray, string searchName, string searchValue, string resultName)
+		{
+			string resultValue = "";
+
+			//var items = jarray.SelectTokens("$.[?(@.Country=='India')]");
+			return resultValue;
 		}
 	}
 }

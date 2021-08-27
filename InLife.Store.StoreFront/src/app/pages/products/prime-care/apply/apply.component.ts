@@ -72,7 +72,7 @@ export class ApplyComponent implements OnInit
 	{
 		this.ngxService.start();
 		this.getQuoteFormData = this.session.get('getQuoteForm') || "[]";
-		const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
+		const getApplyFormData = this.session.get("getApplyForm") || "[]";
 		this.quoteInformation = this.session.get(StorageType.QUOTE_PC_DATA) || "[]";
 
 		this.FUND_SOURCE = (environment.appApi.host === 'https://www.inlifestore.com.ph/api') ? CONSTANTS.PSLITE_FUND_SOURCE : CONSTANTS.FUND_SOURCE;
@@ -524,12 +524,12 @@ export class ApplyComponent implements OnInit
 			var dob = formatDate(new Date(this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').value), 'yyyy-MM-dd', 'en-US', 'Asia/Manila');
 			this.getApplyForm.get('beneficiaryDetails').get('insuredDateofbirth').setValue(dob);
 
-			this.session.set("getApplyForm_PC", this.getApplyForm.value);
+			this.session.set("getApplyForm", this.getApplyForm.value);
 			this.session.set("extensionData_PC", this.dynamicArray);
 			this.session.set("insuredIdentityDocumentImageData_PC", this.insuredIdentityDocumentImageData);
 			this.session.set("insuredIdentityDocumentImagePreview_PC", this.insuredIdentityDocumentImagePreview);
 
-			const getApplyFormData = this.session.get("getApplyForm_PC") || "[]";
+			const getApplyFormData = this.session.get("getApplyForm") || "[]";
 			const getQuoteForm = this.session.get('getQuoteForm') || "[]";
 
 			this.router.navigate(['prime-care/pay']);
@@ -561,7 +561,7 @@ export class ApplyComponent implements OnInit
 
 	backClicked()
 	{
-		this.session.set("getApplyForm_PC", this.getApplyForm.value);
+		this.session.set("getApplyForm", this.getApplyForm.value);
 		this.location.back();
 	}
 

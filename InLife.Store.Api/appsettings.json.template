@@ -43,14 +43,6 @@
 			"SavePaymentEndpoint": "/SavePayment"
 		},
 
-		"AffiliateApi":
-		{
-			"ClientId": "CLIENT-ID",
-			"ClientSecret": "CLIENT-SECRET",
-			"Host": "https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
-			"AgentInfoEndpoint": "/info"
-		},
-
 		"GroupApi":
 		{
 			"SubscriptionKey": "SUBSCRIPTION-KEY",
@@ -75,6 +67,25 @@
 			"Host": "https://apim-uat.insularlife.com.ph/pg/v4",
 			"CreateApplicationEndpoint": "/CreateApplication",
 			"SavePaymentEndpoint": "/SavePayment"
+		},
+
+		"AffiliateApi":
+		{
+			"ClientId": "CLIENT-ID",
+			"ClientSecret": "CLIENT-SECRET",
+			"Host": "https://access-tst.insularlife.com.ph/AdvisorsPortal/rest/affiliates",
+			"AgentInfoEndpoint": "/info"
+		},
+
+		"OrderApi":
+		{
+			"PartnerKey": "PARTNER-KEY",
+			"PartnerSecret": "PARTNER-SECRET",
+			"SubscriptionKey": "SUBSCRIPTION-KEY",
+			"Host": "https://apim-uat.insularlife.com.ph/indproductsmarketapi/v1",
+			"GetEndpoint": "/estore/orders/{reference_number}",
+			"CancelEndpoint": "/estore/orders/{reference_number}/cancel",
+			"SuccessEndpoint": "/estore/orders/{reference_number}/success"
 		},
 
 		"PaymentGateway": "https://beta2.insularlife.com.ph/CustomerPortal/Customer/E-Payment/ILPay.ashx"

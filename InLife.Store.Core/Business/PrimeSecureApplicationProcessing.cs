@@ -122,6 +122,76 @@ namespace InLife.Store.Core.Business
 			return application;
 		}
 
+		public async Task<PrimeSecureApplication> ExternalOrder(ExternalOrderForm form)
+		{
+			Contract.Requires(form != null);
+
+			var id = Guid.NewGuid();
+
+			var application = new PrimeSecureApplication
+			{
+				Id = id,
+				Status = PrimeSecureApplicationStatus.Application.Name,
+
+				ReferenceCode = form.ReferenceCode,
+				OrderNumber = form.OrderNumber,
+				OrderItemNumber = form.OrderItemNumber,
+				OrderStatus = form.OrderStatus,
+
+				PlanCode = form.PlanCode,
+				PlanName = form.PlanName,
+
+				PlanFaceAmount = form.PlanFaceAmount,
+				PlanPremium = form.PlanPremium,
+				PaymentFrequency = form.PaymentFrequency,
+
+				Customer = new PrimeSecurePerson
+				{
+					NamePrefix = form.NamePrefix,
+					NameSuffix = form.NameSuffix,
+					FirstName = form.FirstName,
+					MiddleName = form.MiddleName,
+					LastName = form.LastName,
+					Gender = form.Gender,
+					BirthDate = form.BirthDate,
+					EmailAddress = form.EmailAddress,
+					MobileNumber = form.MobileNumber,
+
+					BirthAddress = new PrimeSecureAddress
+					{
+						City = form.BirthCity,
+						Region = form.BirthRegion,
+						Country = form.BirthCountry,
+					},
+
+					HomeAddress = new PrimeSecureAddress
+					{
+						Address1 = form.HomeAddress1,
+						Address2 = form.HomeAddress2,
+						City = form.HomeCity,
+						Region = form.HomeRegion,
+						Country = form.HomeCountry,
+						ZipCode = form.HomeZipCode,
+						PhoneNumber = form.HomePhoneNumber
+					}
+				},
+
+				IsEligible = true
+			};
+
+			//application.Status = GetStatus(application).Id;
+
+			applicationRepository.Create(application);
+
+			//application.ReferenceCode = application.ReferenceId.ToString().PadLeft(10, '0');
+			//applicationRepository.Update(application);
+
+			//await emailService.SendPrimeSecureApplicationReferenceCode(application);
+
+			await Task.Delay(0);
+			return application;
+		}
+
 
 		//private PrimeSecureFile ParseDataUri(PrimeSecureFile file, string dataUri, string fileName = null)
 		//{

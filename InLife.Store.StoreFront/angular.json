@@ -29,6 +29,7 @@
 							"src/web.config",
 							"src/callback-ilpay.html",
 							"src/affiliate.html",
+							"src/order.html",
 							"src/maintenance.html",
 							"src/manifest.json"
 						],

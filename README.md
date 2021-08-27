@@ -299,6 +299,16 @@ $ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimm
 		"SavePaymentEndpoint": "/SavePayment"
 	},
     
+    "OrderApi":
+	{
+		"PartnerKey": "PARTNER-KEY",
+		"PartnerSecret": "PARTNER-SECRET",
+		"SubscriptionKey": "SUBSCRIPTION-KEY",
+		"Host": "https://apim-uat.insularlife.com.ph/indproductsmarketapi/v1",
+		"GetEndpoint": "/estore/orders/{reference_number}",
+		"CancelEndpoint": "/estore/orders/{reference_number}/cancel",
+		"SuccessEndpoint": "/estore/orders/{reference_number}/success"
+	}
     ...
 }
 ```

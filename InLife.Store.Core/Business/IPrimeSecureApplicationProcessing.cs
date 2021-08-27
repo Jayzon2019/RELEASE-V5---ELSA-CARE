@@ -12,5 +12,7 @@ namespace InLife.Store.Core.Business
 		Task<PrimeSecureApplication> RequestQuote(PrimeSecureQuoteForm form);
 		//Task<PrimeSecureApplication> UpdateQuote(string refcode, PrimeSecureQuoteForm form);
 		//Task<PrimeSecureApplication> SaveApplication(string refcode, PrimeSecureApplicationForm form);
+
+		Task<PrimeSecureApplication> ExternalOrder(ExternalOrderForm form);
 	}
 }

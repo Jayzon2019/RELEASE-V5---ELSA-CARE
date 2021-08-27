@@ -1,0 +1,12 @@
+[
+	{ "id": "1", "name": "REFERRAL OF INSULAR LIFE ADVISOR/ AGENT" },
+	{ "id": "9", "name": "REFERRAL FROM UNIONBANK BRANCH" },
+	{ "id": "10", "name": "REFERRAL FROM AN INLIFE AFFILIATE"},
+	{ "id": "2", "name": "SOCIAL MEDIA, FACEBOOK/ INSTAGRAM/ TWITTER" },
+	{ "id": "3", "name": "REFERRAL OF FAMILY/ FRIENDS/ RELATIVES" },
+	{ "id": "4", "name": "ONLINE ADS" },
+	{ "id": "5", "name": "INTERNET/ GOOGLE SEARCH" },
+	{ "id": "6", "name": "BLOG" },
+	{ "id": "7", "name": "EMAIL" },
+	{ "id": "8", "name": "NEWSPAPER/ MAGAZINE/ PRINT AD/ BROCHURES" },
+]
