@@ -53,6 +53,11 @@ namespace InLife.Store.Infrastructure.Repository
 					.ToTable("Applications", Schema.Group)
 					.HasKey(e => new { e.Id });
 
+				entity
+					.Ignore(e => e.CreatedDateLocal)
+					.Ignore(e => e.CompletedDateLocal)
+					.Ignore(e => e.ExportedDateLocal);
+
 				// Shadow FK - Files
 				//entity.Property<Guid?>(a => a.EmployeeCensusFileId);
 				//entity.Property<Guid?>(a => a.AdminFormFileId);

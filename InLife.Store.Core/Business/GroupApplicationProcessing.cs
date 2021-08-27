@@ -42,7 +42,7 @@ namespace InLife.Store.Core.Business
 			return applicationRepository.GetByReferenceCode(refcode);
 		}
 
-		public async Task<GroupApplication> RequestQuote(GroupQuoteForm form)
+		public async Task<GroupApplication> RequestQuote(GroupQuoteForm form, string url)
 		{
 			Contract.Requires(form != null);
 
@@ -108,12 +108,12 @@ namespace InLife.Store.Core.Business
 
 			applicationRepository.Create(application);
 
-			await emailService.SendGroupApplicationReferenceCode(application);
+			await emailService.SendGroupApplicationReferenceCode(application, url);
 
 			return application;
 		}
 
-		public async Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form)
+		public async Task<GroupApplication> UpdateQuote(string refcode, GroupQuoteForm form, string url)
 		{
 			Contract.Requires(form != null);
 
@@ -160,12 +160,26 @@ namespace InLife.Store.Core.Business
 
 			applicationRepository.Update(application);
 
-			await emailService.SendGroupApplicationReferenceCode(application);
+			await emailService.SendGroupApplicationReferenceCode(application, url);
 
 			return application;
 		}
 
-		public async Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form)
+		public GroupApplication UpdateQuoteStatus(string refcode)
+		{
+			var application = applicationRepository.GetByReferenceCode(refcode);
+
+			if (application == null)
+				return null;
+			application.AlreadyDeclared = true;
+			application.Status = GroupApplicationStatus.Payment.Id;
+
+			applicationRepository.Update(application);
+
+			return application;
+		}
+
+		public async Task<GroupApplication> SaveApplication(string refcode, GroupApplicationForm form, string url)
 		{
 			Contract.Requires(form != null);
 
@@ -201,7 +215,7 @@ namespace InLife.Store.Core.Business
 
 			applicationRepository.Update(application);
 
-			await emailService.SendGroupApplicationReferenceCode(application);
+			await emailService.SendGroupApplicationReferenceCode(application, url);
 
 			return application;
 		}
@@ -431,28 +445,30 @@ namespace InLife.Store.Core.Business
 
 		public async Task ProcessCompletedApplications()
 		{
+			// Business rule as of 2021.07.15
+			// Export if:
+			// * (not completed or not cancelled) and last update <= 30 days
+			// * completed and not exported
+			// * cancelled and not exported
+
 			// For testing purposes only
+			// Uncomment this then comment the try catch block below
 			// This will not mark the applications as exported
 			//var applications = applicationRepository
 			//	.GetAll()
-			//	.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+			//	.Where(x => x.CreatedDate.AddDays(30) >= currentDate && !x.ExportedDate.HasValue)
 			//	.ToList();
 			//await emailService.SendGroupApplicationsCompletedBatch(applications);
 
 			try
 			{
-				// Check all completed (PaymentProof) but not submitted
+				var currentDate = DateTimeOffset.UtcNow;
+
+				// Check all applications below 30 days and hasn't been exported yet
 				var applications = applicationRepository
 					.GetAll()
-					.Where(x => x.Status == GroupApplicationStatus.PaymentProof.Id && !x.ExportedDate.HasValue)
+					.Where(x => x.CreatedDate.AddDays(30) >= currentDate && !x.ExportedDate.HasValue)
 					.ToList();
-
-				// Map the correct application status from id to name
-				applications.ForEach(x =>
-				{
-					x.Status = GroupApplicationStatus.FromId(x.Status).Name;
-				});
-
 
 				if (applications.Count == 0)
 				{
@@ -467,11 +483,11 @@ namespace InLife.Store.Core.Business
 					// Send Notification
 					await emailService.SendGroupApplicationsCompletedBatch(applications);
 
-					// Set as exported
-					var currentDate = DateTimeOffset.Now;
+					// Set as exported if status is completed or cancelled
 					applications.ForEach(x =>
 					{
-						x.ExportedDate = currentDate;
+						if(x.Status == GroupApplicationStatus.Cancelled.Id || x.Status == GroupApplicationStatus.Complete.Id)
+							x.ExportedDate = currentDate;
 					});
 
 					applicationRepository.Update(applications);
@@ -550,6 +566,12 @@ namespace InLife.Store.Core.Business
 				return GroupApplicationStatus.Application;
 			}
 
+			//  Check if apply page declarations completed
+			if (!application.AlreadyDeclared)
+			{
+				return GroupApplicationStatus.Application;
+			}
+
 			// Payment
 			if (String.IsNullOrWhiteSpace(application.PaymentMode))
 				return GroupApplicationStatus.Payment;
@@ -582,16 +604,16 @@ namespace InLife.Store.Core.Business
 			// Security Agencies
 
 			if ("SecurityGuardPlan1".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱25,000", "Accidental Death and Disability: ₱25,000" };
+				return new string[] { "Life Coverage: ₱25,000", "Accidental Death and Disability: ₱25,000", "Burial Benefit: ₱5,000" };
 
 			if ("SecurityGuardPlan2".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱35,000", "Accidental Death and Disability: ₱35,000" };
+				return new string[] { "Life Coverage: ₱35,000", "Accidental Death and Disability: ₱35,000", "Burial Benefit: ₱5,000" };
 
 			if ("SecurityGuardPlan3".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱55,000", "Accidental Death and Disability: ₱55,000" };
+				return new string[] { "Life Coverage: ₱55,000", "Accidental Death and Disability: ₱55,000", "Burial Benefit: ₱5,000" };
 
 			if ("SecurityGuardPlan4".Equals(code, StringComparison.OrdinalIgnoreCase))
-				return new string[] { "Life Coverage: ₱65,000", "Accidental Death and Disability: ₱65,000" };
+				return new string[] { "Life Coverage: ₱65,000", "Accidental Death and Disability: ₱65,000", "Burial Benefit: ₱5,000" };
 
 			// Schools and Universities
 

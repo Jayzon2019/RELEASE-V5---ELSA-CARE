@@ -11,7 +11,7 @@ export const CONSTANTS =
 		PLAN_1: {
 			Life_Insurance_Non_Accident: "10,000",
 			Life_Insurance_Accident: "25,000",
-			Disability_Double: "10,000",
+			Disability_Double: "15,000",
 			Disability_Single: "7,500",
 			Room_and_Board: "200",
 			Special_Hospital_Service: "2,400",
@@ -22,7 +22,7 @@ export const CONSTANTS =
 		PLAN_2: {
 			Life_Insurance_Non_Accident: "20,000",
 			Life_Insurance_Accident: "45,000",
-			Disability_Double: "20,000",
+			Disability_Double: "25,000",
 			Disability_Single: "12,500",
 			Room_and_Board: "400",
 			Special_Hospital_Service: "4,800",
@@ -33,7 +33,7 @@ export const CONSTANTS =
 		PLAN_3: {
 			Life_Insurance_Non_Accident: "25,000",
 			Life_Insurance_Accident: "55,000",
-			Disability_Double: "25,000",
+			Disability_Double: "30,000",
 			Disability_Single: "15,000",
 			Room_and_Board: "500",
 			Special_Hospital_Service: "6,000",
@@ -44,7 +44,7 @@ export const CONSTANTS =
 		PLAN_4: {
 			Life_Insurance_Non_Accident: "35,000",
 			Life_Insurance_Accident: "75,000",
-			Disability_Double: "35,000",
+			Disability_Double: "40,000",
 			Disability_Single: "20,000",
 			Room_and_Board: "700",
 			Special_Hospital_Service: "8,400",
@@ -3403,20 +3403,20 @@ export const CONSTANTS =
 			subHeading: "Online insurance shopping made easy, fast, and convenient!",
 			subHeadingColor: "#42414d"
 		},
-		{
-			btnTxtLink: "/prime-secure-lite#getpslite",
-			contentPostion: "Left",
-			heading: "Get Health Protection and More",
-			headingColor: "#070752",
-			heroBg: "assets/images/hero-prime-secure-lite2.jpg",
-			heroBtnTxt: "Get Prime Secure Lite Now",
-			heroMobBg: "assets/images/hero-prime-secure-lite-mobile3.jpg",
-			heroTitle: "Prime Secure Lite",
-			id: 1011,
-			subHeading: "Prime Secure Lite is an affordable health and COVID-19 insurance package with life insurance coverage.",
-			subHeadingColor: "#42414d",
-			heroLogo: "/assets/images/prime-secure-lite-banner-logo.png"
-		},
+		// {
+		// 	btnTxtLink: "/prime-secure-lite#getpslite",
+		// 	contentPostion: "Left",
+		// 	heading: "Get Health Protection and More",
+		// 	headingColor: "#070752",
+		// 	heroBg: "assets/images/hero-prime-secure-lite2.jpg",
+		// 	heroBtnTxt: "Get Prime Secure Lite Now",
+		// 	heroMobBg: "assets/images/hero-prime-secure-lite-mobile3.jpg",
+		// 	heroTitle: "Prime Secure Lite",
+		// 	id: 1011,
+		// 	subHeading: "Prime Secure Lite is an affordable health and COVID-19 insurance package with life insurance coverage.",
+		// 	subHeadingColor: "#42414d",
+		// 	heroLogo: "/assets/images/prime-secure-lite-banner-logo.png"
+		// },
 		{
 			btnTxtLink: "/prime-care#ihc",
 			contentPostion: "Left",

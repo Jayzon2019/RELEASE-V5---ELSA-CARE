@@ -51,7 +51,7 @@ namespace InLife.Store.Api.Messages
 			IncorporationArticles = model.IncorporationDocumentFile;
 			IdentityCertificate = model.AuthorizationDocumentFile;
 			PostPolicyForm = model.IndividualApplicationsFile;
-
+			AlreadyDeclared = model.AlreadyDeclared;
 	}
 
 
@@ -110,5 +110,11 @@ namespace InLife.Store.Api.Messages
 		public string PostPolicyForm { get; set; }
 
 		#endregion Company Address
+
+		#region Declarations
+
+		public bool AlreadyDeclared { get; set; }
+
+		#endregion
 	}
 }

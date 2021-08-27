@@ -12,17 +12,26 @@ export class ApplyService extends ApiBaseService
         super(session);
 	}
 
-    // Upload file
-    uploadRequirement(url: any, data: any, fileType: any, fileName: any) {
-      let newHeaders = this.headerWithSession();
-      newHeaders = newHeaders.append('Content-Type', fileType);
-      newHeaders = newHeaders.append('Filename', fileName);
+  // Upload file
+  uploadRequirement(url: any, data: any, fileType: any, fileName: any) {
+    let newHeaders = this.headerWithSession();
+    newHeaders = newHeaders.append('Content-Type', fileType);
+    newHeaders = newHeaders.append('Filename', fileName);
 
-      return this.http.put(url, data, {headers: newHeaders})
-      .pipe(
-        map((response) => <any>response),
-        catchError(this.handleError)
-      );
-    }
+    return this.http.put(url, data, {headers: newHeaders})
+    .pipe(
+      map((response) => <any>response),
+      catchError(this.handleError)
+    );
+  }
+
+  // Update declarations status
+  updateDeclaration(refCode, data: any = null) {
+    return this.http.patch(`${this.baseURL()}/group/applications/${refCode}/status`, data, {headers :this.headerWithSession()})
+        .pipe(
+          map((response) => <any>response),
+          catchError(this.handleError)
+        );
+  }
     
 }

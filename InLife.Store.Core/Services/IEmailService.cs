@@ -33,7 +33,7 @@ namespace InLife.Store.Core.Services
 
 		#region Business - Group
 
-		Task SendGroupApplicationReferenceCode(GroupApplication application);
+		Task SendGroupApplicationReferenceCode(GroupApplication application, string url = null);
 
 		Task SendGroupApplicationOtp(GroupApplication application);
 

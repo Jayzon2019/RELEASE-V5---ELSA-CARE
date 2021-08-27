@@ -1,6 +1,5 @@
-﻿CREATE SCHEMA [PrimeSecure]
+CREATE SCHEMA [PrimeSecure]
     AUTHORIZATION [dbo];
-
 
 
 

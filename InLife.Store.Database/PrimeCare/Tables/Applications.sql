@@ -6,6 +6,9 @@ CREATE TABLE [PrimeCare].[Applications] (
     [ReferenceCode]           VARCHAR (20)       NULL,
     [PolicyNumber]            VARCHAR (50)       NULL,
     [Status]                  VARCHAR (20)       NULL,
+    [OrderNumber]             VARCHAR (20)       NULL,
+    [OrderItemNumber]         VARCHAR (20)       NULL,
+    [OrderStatus]             VARCHAR (20)       NULL,
     [ProductName]             NVARCHAR (50)      NOT NULL,
     [ProductCode]             VARCHAR (50)       NOT NULL,
     [PlanCode]                VARCHAR (50)       NOT NULL,
@@ -38,7 +41,7 @@ CREATE TABLE [PrimeCare].[Applications] (
     [AffiliateCode]           NVARCHAR(50) NULL, 
     [AffiliateName]           NVARCHAR(50) NULL, 
     [AffiliateStatus]         NVARCHAR(50) NULL,
-	[BranchCode]              VARCHAR (50)       NULL,
+    [BranchCode]              VARCHAR (50)       NULL,
     [BranchName]              NVARCHAR (50)      NULL,
     CONSTRAINT [PK_PrimeCare_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );

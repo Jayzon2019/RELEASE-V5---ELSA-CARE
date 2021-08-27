@@ -109,7 +109,7 @@ export class PlanSummaryComponent implements OnInit {
 		this.totalMembers = getApplyGroupFormData.TotalNumberOfMembers;
 		this.totalStudents = getApplyGroupFormData.TotalNumberOfStudents;
 		this.totalTeachers = getApplyGroupFormData.TotalNumberOfTeachers;
-		this.premiumPerHead = Number(getGroupQuoteFormData.annualPremium).toLocaleString();
+		this.premiumPerHead = getGroupQuoteFormData.annualPremium;
 		if (!this.totalMembers) {
 			this.totalMembers = "0";
 		}
@@ -120,7 +120,7 @@ export class PlanSummaryComponent implements OnInit {
 		this.totalPremium = getGroupQuoteFormData.totalPremium;
 		this.LifeCoverageperHead = getGroupQuoteFormData.insuranceCoverage || '';
 		this.ADD_TPDCoverageperHead = getGroupQuoteFormData.insuranceCoverage || '';
-		this.BurialCoverageperHead = getGroupQuoteFormData.insuranceCoverage || '';
+		this.BurialCoverageperHead = '5,000'; //getGroupQuoteFormData.insuranceCoverage || 
 		this.groupPolicyNo = this.session.get("groupPolicyNo");
 
 		if(this.selectedGroupPlanData.plan == '3') {

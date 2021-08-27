@@ -51,7 +51,6 @@ namespace InLife.Store.Infrastructure.Repository
 				entity
 					.ToTable("Applications", Schema.PrimeCare)
 					.HasKey(e => new { e.Id });
-
 				// Timestamp
 				entity
 					.Property(e => e.CreatedDate)
@@ -63,7 +62,6 @@ namespace InLife.Store.Infrastructure.Repository
 					.Property(e => e.ReferenceId)
 					.ValueGeneratedOnAdd()
 					.Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
-
 				// Shadow FK - CustomerId
 				//entity.Property<Guid?>("CustomerId");
 

@@ -4642,15 +4642,21 @@ section#plan-section-3::after {
 		font-size: 14px;
 		line-height: 20px;
 		padding-bottom: 9px;
+		text-indent: -36px;
+		padding-left: 36px;
 	}
 
-		.popup-content ol li a {
-			color: #e33c23
-		}
+	.popup-content ol li:first-child {
+		padding-left: 37px;
+	}
 
-		.popup-content ol li span {
-			padding-right: 20px;
-		}
+	.popup-content ol li a {
+		color: #e33c23
+	}
+
+	.popup-content ol li span {
+		padding-right: 20px;
+	}
 
 	.popup-content ol {
 		display: inline-block;

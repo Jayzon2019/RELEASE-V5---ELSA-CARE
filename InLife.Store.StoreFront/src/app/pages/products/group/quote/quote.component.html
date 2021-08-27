@@ -589,9 +589,9 @@
 															<button type="button" class="btn outlinedbtn text-left btn-back" (click)="backtoGroupPage()">
 																<i class="material-icons">arrow_backward</i> Back
 															</button>
-															<button class="btn savebtns outlinedbtn" type="btn" (click)="conformSave()" [disabled]="!getQuoteForm.get('basicInformation')?.valid || !getQuoteForm.get('basicInformation').value.privacyPolicy">
+															<!-- <button class="btn savebtns outlinedbtn" type="btn" (click)="conformSave()" [disabled]="!getQuoteForm.get('basicInformation')?.valid || !getQuoteForm.get('basicInformation').value.privacyPolicy">
 																SAVE INFORMATION
-															</button>
+															</button> -->
 															<a id="conformBtn" style="display:none" href="#Conform" rel="modal:open">
 																Alert
 															</a>
@@ -621,7 +621,7 @@
 										</div>
 										<div class="col-md-12">
 											<label for="" class="label" style="font-size:13px;font-weight:403;">Annual Premium per Member</label>
-											<h1 class="subprice"><del>p</del>{{annualPremium}}</h1>
+											<h1 class="subprice"><del>p</del>{{annualPremiumStr}}</h1>
 										</div>
 
 										<div class="col-md-12">

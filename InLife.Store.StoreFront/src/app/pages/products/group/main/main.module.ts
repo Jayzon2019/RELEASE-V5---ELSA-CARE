@@ -2,7 +2,7 @@ import {  HeroSliderResolver } from '../../../../resolvers/home-sliders.resolver
 import { ApplyService } from './../services/apply.service';
 import { ApplicationStatusService } from './../services/application-status.service';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
@@ -61,6 +61,7 @@ import { RequirementsPendingComponent } from '../application-status/requirements
 	],
 	providers:
 	[
+		DecimalPipe,
 		ApiService,
 		SessionStorageService,
 		GoogleAnalyticsService,

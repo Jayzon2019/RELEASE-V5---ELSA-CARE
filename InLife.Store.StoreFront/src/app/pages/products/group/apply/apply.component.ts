@@ -30,7 +30,7 @@ import { UtilitiesService } from '@app/shared/services/utilities.service';
 		providers: []
 	})
 export class ApplyComponent implements OnInit, OnDestroy {
-	
+
 	destroy$ = new Subject();
 	hasError: boolean = false;
 	errorMsg: string;
@@ -86,12 +86,11 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		IncorporationArticles: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
 		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		PostPolicyForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false},
-		
+
 	}
 
 	requests$ = new Subject();
 	queue: PendingRequest[] = [];
-
 
 	constructor
 		(
@@ -114,10 +113,6 @@ export class ApplyComponent implements OnInit, OnDestroy {
 
 	}
 
-
-	
-
-
 	dynamicArray: Array<DynamicGrid> = [];
 	newDynamic: any = {};
 
@@ -139,7 +134,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		const getGroupPlanData = this.session.get(StorageType.GROUP_PLAN_DATA);
 		const getRequirementsData = this.session.get(StorageType.REQUIREMENTS_DATA);
 		this.selectedPlan = getQuoteFormData.SelectedPlan || '';
-		this.onPlan(getQuoteFormData.TotalNumberOfMembers, getQuoteFormData.PlanType);
+		this.onPlan(getQuoteFormData.TotalNumberOfMembers, getQuoteFormData.SelectedPlan);
 		this.getApplyForm = this.formBuilder.group({
 			basicInformation: this.formBuilder.group({
 				CompanyName: new FormControl(getQuoteFormData.CompanyName || '', [Validators.required]),
@@ -202,16 +197,16 @@ export class ApplyComponent implements OnInit, OnDestroy {
 					this.getApplyForm.get('requirementsForm').get(key).patchValue(value.fileInfo.loc);
 				}
 			});
-			this.showThirdStep = (this.getApplyForm.get('requirementsForm').valid) ? true : false;
-			if(this.showThirdStep) {
-				this.getApplyForm.get('declarationsForm').patchValue({
-					IsCheckDataPrivacy: true,
-					IsCheckDataUNSCR: true,
-					IsCheckDeclarationStatement: true,
-					IsCheckSubmittedPhlippinesApp: true,
-					IsCheckLifeProducts: true,
-				})
-			}
+			// this.showThirdStep = (this.getApplyForm.get('requirementsForm').valid) ? true : false;
+			// if(this.showThirdStep) {
+			// 	this.getApplyForm.get('declarationsForm').patchValue({
+			// 		IsCheckDataPrivacy: true,
+			// 		IsCheckDataUNSCR: true,
+			// 		IsCheckDeclarationStatement: true,
+			// 		IsCheckSubmittedPhlippinesApp: true,
+			// 		IsCheckLifeProducts: true,
+			// 	})
+			// }
 		}
 
 		this.setMunicipalities(getQuoteFormData.Region.id);
@@ -236,7 +231,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		this.getApplyForm.get('declarationsForm').get(type).patchValue(isChecked);
 	}
 
-	onPlan(TotalNumberOfMembers, type) { 
+	onPlan(TotalNumberOfMembers, type) {
 		const getQuoteFormData = this.session.get("selectedGroupPlanData") || "[]";
 		this.selectedGroupPlanData= getQuoteFormData;
 		this.totalPremium = getQuoteFormData.totalPremium || 0;
@@ -270,73 +265,87 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		this.submitted = true;
 		this.hasError = false;
 		this.finishUpload = false;
-		console.log(this.getApplyForm);
-		if (this.getApplyForm.valid) {
-			this.ngxService.start();
-			const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
-			const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
-			const declarationsFormData = this.getApplyForm.get('declarationsForm').value;
-			let data = { ...basicInformationFormData, ...declarationsFormData };
-			this.session.set(StorageType.GROUP_PLAN_DATA, data);
-			this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
+		this.ngxService.start();
 
+		const declarationForm = this.getApplyForm.get('declarationsForm');
 
-			if(formType == 'save') {
-				document.getElementById("closeModal").click();
-				this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
-			} else {
-				this.router.navigate(['/group/plan-summary']);
-			}
+		const basicInformationFormData = this.getApplyForm.get('basicInformation').value;
+		const requirementsFormData = this.getApplyForm.get('requirementsForm').value;
+		const declarationsFormData = declarationForm.value;
+
+		if(formType === 'save' && !declarationForm.valid) {
+			document.getElementById("closeModal").click();
+			this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
+			return;
 		}
-		return;
+
+		this.apply_API.updateDeclaration(this.accessData.referenceCode)
+			.pipe(takeUntil(this.destroy$), finalize(() => this.ngxService.stopAll()))
+			.subscribe((resp) => {
+
+				let data = { ...basicInformationFormData, ...declarationsFormData };
+				this.session.set(StorageType.GROUP_PLAN_DATA, data);
+				this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
+
+				if(formType == 'save') {
+					document.getElementById("closeModal").click();
+					this.router.navigate(['/group/application-reference', this.accessData.referenceCode]);
+				} else {
+					this.router.navigate(['/group/plan-summary']);
+				}
+				return;
+			}, error => {
+				this.errorMsg = error.message;
+				this.hasError = true;
+			});
 	}
 
 
-	uploadByFile(fileData, type, dbType) {
-		this.addRequestToQueue(fileData, type, dbType);
+	uploadByFile(fileData, fileType, fileName, type, dbType) {
+		this.addRequestToQueue(fileData, fileType, fileName, type, dbType);
 	}
 
-	execute(requestData: PendingRequest) {
+	execute(request: PendingRequest) {
 		this.hasError = false;
 		if(true) {
-			let url = environment.appApi.host + `/group/applications/${this.accessData.referenceCode}/files/${requestData.dbType}`;
-			let formData = new FormData();
-			formData.append("file", requestData.fileData);
-			const req = this.apply_API.uploadRequirement(url, formData, requestData.fileData.type, requestData.fileData.name)
+			let url = environment.appApi.host + `/group/applications/${this.accessData.referenceCode}/files/${request.dbType}`;
+			// let formData = new FormData();
+			// formData.append("file", requestData.fileData);
+			const req = this.apply_API.uploadRequirement(url, request.fileData, request.fileType, request.fileName)
 				.pipe(
 					takeUntil(this.destroy$),
-					finalize(() => { 
+					finalize(() => {
 						//remove duplicate upload
-						console.log(requestData, this.queue[0]);
-						if(requestData === this.queue[0])
+						console.log(request, this.queue[0]);
+						if(request === this.queue[0])
 							this.queue.shift();
-						else 
+						else
 							this.queue.shift();
 						this.startNextRequest();
 
-						this.getApplyForm.get('requirementsForm').get(requestData.type).enable();
-						this.getApplyForm.get('requirementsForm').get(requestData.type).updateValueAndValidity();
+						this.getApplyForm.get('requirementsForm').get(request.type).enable();
+						this.getApplyForm.get('requirementsForm').get(request.type).updateValueAndValidity();
 					})
 				)
 				.subscribe(data => {
-					this.getApplyForm.get('requirementsForm').get(requestData.type).setValue(requestData.fileData);
-					this.requirementsTypes[requestData.type].error = {
+					this.getApplyForm.get('requirementsForm').get(request.type).setValue(request.fileData);
+					this.requirementsTypes[request.type].error = {
 						type: 'success',
 						msg: '(File successfully uploaded.)'
 					}
-					this.requirementsTypes[requestData.type].uploaded = true;
+					this.requirementsTypes[request.type].uploaded = true;
 
 					// this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
-					this.validateIncompleteRequirement(requestData.type);
+					this.validateIncompleteRequirement(request.type);
 				}, error => {
 					this.ngxService.stopAll();
 					this.hasError = true;
 					this.errorMsg = error.message;
-					this.requirementsTypes[requestData.type].error = {
+					this.requirementsTypes[request.type].error = {
 						type: 'upload',
 						msg: '(Failed to upload this file.)'
 					}
-					this.requirementsTypes[requestData.type].uploaded = false;
+					this.requirementsTypes[request.type].uploaded = false;
 				});
 				console.log(req);
 		}
@@ -347,10 +356,10 @@ export class ApplyComponent implements OnInit, OnDestroy {
 			this.showErrorPrompt = true;
 	}
 
-	addRequestToQueue(fileData, type, dbType) {
+	addRequestToQueue(fileData, fileType, fileName, type, dbType) {
 		this.hasQueue = true;
 		const sub = new Subject<any>();
-		const request = new PendingRequest(fileData, type, dbType, sub)
+		const request = new PendingRequest(fileData, fileType, fileName, type, dbType, sub)
 		console.log(this.queue.length);
 		// if there are no pending req's, execute immediately.
 		if (this.queue.length === 0) {
@@ -376,10 +385,10 @@ export class ApplyComponent implements OnInit, OnDestroy {
 
 	backtoQoute() {
 		console.log(this.selectedGroupPlanData);
-		 this.router.navigate(['/group/quote'], { queryParams: { 
-		 	plan: this.selectedGroupPlanData.plan, 
-		 	planCode: this.selectedGroupPlanData.planCode, 
-		 	productName:this.selectedGroupPlanData.productName, 
+		 this.router.navigate(['/group/quote'], { queryParams: {
+		 	plan: this.selectedGroupPlanData.plan,
+		 	planCode: this.selectedGroupPlanData.planCode,
+		 	productName:this.selectedGroupPlanData.productName,
 		 	productType: this.selectedGroupPlanData.productType
 		 }});
 	}
@@ -426,16 +435,18 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		const imageType = 'image/jpeg';
 
 		const reader: any = new FileReader();
-		console.log(event.target.files[0]);
 		if (event.target.files.length !== 0) {
 			const file = event.target.files[0];
 			const generalType = file.type.split('/')[0];
 
 			let fileType = '.'+file.name.split('.').pop();
-			if(!CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE.split(',').find(i => i == fileType)) return;
+
+			if(!CONSTANTS.REQUIREMENTS_ALLOWED_FILE_TYPE.split(',').find(i => i == fileType))
+				return;
 
 			if(generalType == 'application') {
-				reader.readAsDataURL(file);
+				//reader.readAsDataURL(file);
+				reader.readAsArrayBuffer(file);
 				reader.onloadend = () => {
 					this.requirementsTypes[type] = {
 						type: 'document',
@@ -452,54 +463,62 @@ export class ApplyComponent implements OnInit, OnDestroy {
 					this.evaluateFiles()
 					if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
 						this.getApplyForm.get('requirementsForm').get(type).disable();
-						this.uploadByFile(file, type, dbType);
+						this.uploadByFile(reader.result, file.type, file.name, type, dbType);
 					}
 				};
 			} else {
 				reader.onloadend = (event) => {
 					// Get the event.target.result from the reader (base64 of the image)
+
+
+					console.clear();
+					console.log('imageLoaded');
+
 					let uploadedImage = event.target.result;
 
+					console.log(uploadedImage);
+					debugger;
+
 					//this.insuredIdentityDocumentImagePreview = event.target.result;
-	
+
 					const image = new Image();
 					image.onload = (event) => {
 						// Fit image to bounding box
 						let scaleFactor = (limitWidth / image.width < limitHeight / image.height)
 							? (limitWidth / image.width)
 							: (limitHeight / image.height);
-	
+
 						let newWidth = image.width * scaleFactor;
 						let newHeight = image.height * scaleFactor;
-	
+
 						const canvas = document.createElement('canvas');
 						canvas.width = newWidth;
 						canvas.height = newHeight;
-	
+
 						const ctx = canvas.getContext('2d');
 						ctx.drawImage(image, 0, 0, newWidth, newHeight);
-	
+
 						let newDataUrl = '';
 						let newBase64ImageString = '';
 						let newFileSize = 0;
 						let newImageQuality = 100;
-	
+
 						// Degrade image until file size is less than the limit
 						do {
 							newDataUrl = canvas.toDataURL(imageType, newImageQuality / 100);
 							newBase64ImageString = newDataUrl.split(',')[1];
 							newFileSize = Math.round(newBase64ImageString.length * 3 / 4);
-	
+
 							//console.log(newImageQuality);
 							//console.log(newFileSize.toFixed(2));
 							//console.log(newBase64ImageString);
-	
+
 							newImageQuality -= (newImageQuality > 10)
 								? 5
 								: 1;
-	
+
 						} while (newFileSize > limitFileSize && newImageQuality > 0);
-						
+
 						this.requirementsTypes[type] = {
 							type: 'image',
 							title: '',
@@ -510,36 +529,39 @@ export class ApplyComponent implements OnInit, OnDestroy {
 							}
 						}
 						this.evaluateFiles();
-						if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
+						// if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
 							this.getApplyForm.get('requirementsForm').get(type).disable();
 							this.getApplyForm.get('requirementsForm').get(type).updateValueAndValidity();
-							this.uploadByFile(file, type, dbType);
-						}
+							this.uploadByFile(reader.result, file.type, file.name, type, dbType);
+						// }
 						//	this.insuredIdentityDocumentImagePreview = newDataUrl;
-	
+
 						// Convert to PDF
-						const doc = new jsPDF
-							({
-								orientation: (newWidth > newHeight) ? 'l' : 'p',
-								unit: 'px',
-								format: [newWidth, newHeight]
-							});
-	
-						doc.addImage(newBase64ImageString, 0, 0, newWidth, newHeight);
-	
+						// const doc = new jsPDF
+						// 	({
+						// 		orientation: (newWidth > newHeight) ? 'l' : 'p',
+						// 		unit: 'px',
+						// 		format: [newWidth, newHeight]
+						// 	});
+
+						// doc.addImage(newBase64ImageString, 0, 0, newWidth, newHeight);
+
 						// Output PDF to base64 string and strip to DATA only
-						const base64PdfString = (doc.output('datauristring') as string).split(',')[1];
+						//const base64PdfString = (doc.output('datauristring') as string).split(',')[1];
 						//console.log(base64PdfString);
-	
-						this.insuredIdentityDocumentImageData = base64PdfString;
+
+						//this.insuredIdentityDocumentImageData = base64PdfString;
 						this.hasImage = true;
 					};
-	
-					image.src = uploadedImage;
+
+					const urlCreator = window.URL || window.webkitURL;
+					image.src = urlCreator.createObjectURL(file);
+					//image.src = uploadedImage;
 				};
-				reader.readAsDataURL(file);
+				//reader.readAsDataURL(file);
+				reader.readAsArrayBuffer(file);
 			}
-			
+
 
 		}
 		//	console.log(this.insuredIdentityDocumentImagePreview)
@@ -639,7 +661,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		else if (fileName == "EntityPlan") {
 			filePath = '../../../../../assets/documents/Entity Plan Admin Form.pdf';
 			pdfName = 'Entity Plan Admin Form';
-		} 
+		}
 		FileSaver.saveAs(filePath, pdfName);
 	}
 
@@ -654,13 +676,17 @@ export class ApplyComponent implements OnInit, OnDestroy {
 }
 export class PendingRequest {
 	url: string;
-	fileData: any; 
-	type: string; 
+	fileData: any;
+	fileName: string;
+	fileType: string;
+	type: string;
 	dbType: string
 	subscription: Subject<any>;
-  
-	constructor(fileData: any, type: string, dbType, subscription: Subject<any>) {
+
+	constructor(fileData: any, fileType:string, fileName: string, type: string, dbType, subscription: Subject<any>) {
 	  this.fileData = fileData;
+	  this.fileType = fileType;
+	  this.fileName = fileName;
 	  this.type = type;
 	  this.dbType = dbType;
 	  this.subscription = subscription;

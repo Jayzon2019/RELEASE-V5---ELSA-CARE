@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { ApplicationStatusService } from './../../services/application-status.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -21,6 +22,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
   groupApplyData: any;
   cities: any =[];
   referenceCode: any;
+  appStatus: any;
   isCompletedRequirements: boolean = true;
   requirementTypesTitle: any = ['EmployeeCesusForm', 'EntityPlanForm', 'AuthRepresentativeId', 'BIRNoticeForm', 'SECRegistration', 'IncorporationArticles', 'IdentityCertificate', 'PostPolicyForm'];
   requirementsTypes: any = {
@@ -33,19 +35,21 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
 		IdentityCertificate: { type: '', title: '', fileInfo: {}, error: {msg: '*Required' }, uploaded: false},
 		PostPolicyForm: { type: '', title: '', fileInfo: {}, error: {}, uploaded: false}};
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
               private ngxService: NgxUiLoaderService,
               private session: SessionStorageService,
               private activatedRoute: ActivatedRoute,
-              private appStatusService_API: ApplicationStatusService) { 
+              private decimalPipe: DecimalPipe,
+              private appStatusService_API: ApplicationStatusService) {
   }
 
   ngOnInit(): void {
-    
+
 
     this.activatedRoute.queryParams
       .pipe(takeUntil(this.destroy$))
       .subscribe((param: Params) => {
+        this.appStatus = param['appstatus'];
         this.referenceCode = param["referenceCode"];
         this.getApplicationSummary();
       });
@@ -78,10 +82,16 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
       .subscribe((data: Application) => {
         let planVariantCodeArr = data.planVariantCode.split(' ');
         let prodName = planVariantCodeArr.slice(0, planVariantCodeArr.length -1);
+        let totalMembers = data.totalMembers !== 0 ? data.totalMembers : data.totalStudents;
+        let selectedPlan = this.getPlan(data.planCode);
+        let alreadyDeclared = data.alreadyDeclared;
+
+        //debugger
         this.groupPlan = {
-          annualPremium: Number(data.planPremium),
+          annualPremium:  selectedPlan === '1' ? Number(data.planPremium): this.decimalPipe.transform(data.planPremium, '1.2-2'),
           insuranceCoverage: this.numberWithCommas(data.planFaceAmount.toString()),
-          totalPremium: this.numberWithCommas((data.planPremium * Number(data.totalMembers)).toString()),
+          // totalPremium: this.numberWithCommas((data.planPremium * Number(totalMembers)).toString()),
+          totalPremium: selectedPlan === '1' ? this.decimalPipe.transform(data.planPremium * Number(totalMembers), '1.0-2'): this.decimalPipe.transform(data.planPremium * Number(totalMembers), '1.2-2'),
           planCode: this.getPlan(data.planCode) + ' - ' + data.planCode, // 1 - Administrative and Office-based
           plan: this.getPlan(data.planCode),
           productType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
@@ -95,7 +105,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
           AuthLastName: data.representativeLastName,
           AuthMiddleName: data.representativeMiddleName,
           AuthMobileNumber: data.representativeMobileNumber,
-          AuthPrefixName: this.getPrefixObject(data.representativeNamePrefix), 
+          AuthPrefixName: this.getPrefixObject(data.representativeNamePrefix),
           AuthSuffixName: this.getSuffixObject(data.representativeNameSuffix),
           Barangaya: data.companyTown,//"12",
           BusinessType: data.businessStructure,
@@ -120,7 +130,7 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
           CityTxt: data.companyCity,
           PlanType: Number(planVariantCodeArr[planVariantCodeArr.length - 1]),
           ProductName: prodName.join(' '),
-          SelectedPlan: this.getPlan(data.planCode),
+          SelectedPlan: selectedPlan,
           Status: 1,
           TotalNumberOfMembers: data.totalMembers,
           TotalNumberOfStudents: data.totalStudents || null,
@@ -130,11 +140,11 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
         this.groupApplyData = {
           ...commonAttr,
           Status: 2,
-          IsCheckDataPrivacy: true,
-          IsCheckDataUNSCR: true,
-          IsCheckDeclarationStatement: true,
-          IsCheckLifeProducts: true,
-          IsCheckSubmittedPhlippinesApp: true,
+          IsCheckDataPrivacy: alreadyDeclared,
+          IsCheckDataUNSCR: alreadyDeclared,
+          IsCheckDeclarationStatement: alreadyDeclared,
+          IsCheckLifeProducts: alreadyDeclared,
+          IsCheckSubmittedPhlippinesApp: alreadyDeclared,
         }
 
         this.requirementTypesTitle.forEach(type => {
@@ -152,11 +162,13 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
               this.isCompletedRequirements = false;
             }
           }
-          
+
         });
-        
+
       });
   }
+
+
 
   mapRequirementsFileDetails(type: string, data: any) {
     this.requirementsTypes[type] = {
@@ -177,11 +189,11 @@ export class RequirementsPendingComponent implements OnInit, OnDestroy {
     this.session.set(StorageType.POST_GROUP_QUOTE, this.groupQuoteData);
     this.session.set(StorageType.REQUIREMENTS_DATA, this.requirementsTypes);
 
-    if(this.isCompletedRequirements) {
+    if(this.isCompletedRequirements && this.appStatus !== 'Application') {
       this.session.set(StorageType.GROUP_PLAN_DATA, this.groupApplyData);
       this.router.navigate(['/group/plan-summary']);
     } else {
-      this.router.navigate(['/group/apply']);    
+      this.router.navigate(['/group/apply']);
     }
   }
 

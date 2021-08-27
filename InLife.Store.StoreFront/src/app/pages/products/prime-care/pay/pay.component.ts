@@ -169,8 +169,7 @@ export class PayComponent implements OnInit
 		let ownerSuffixID = this.nullIfZero(this.basicInformation.suffix);
 		let insuredSuffixId = this.nullIfZero(this.basicInformation.suffix);
 		let benefSuffixId = this.nullIfZero(this.beneficialInformation.suffix);
-		
-		let arrData =
+		let arrData: any =
 		{
 			"PlanCode": "AH0017",
 			"PlanName": "Prime Care",
@@ -343,7 +342,7 @@ export class PayComponent implements OnInit
 				this.policyNo = <string>data;
 
 				// LOG FOR DEBUGGING
-				
+
 
 				// Special case for PrimeCare API
 				// It returns STATUS OK 200 and an empty string for the policy number when there's an internal error in the API
@@ -371,7 +370,7 @@ export class PayComponent implements OnInit
 		} else { // Call payment request after payment transaction fails
 			this.callPaymentUrl();
 		}
-		
+
 	}
 
 	callPaymentUrl()

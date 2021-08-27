@@ -6,6 +6,9 @@ CREATE TABLE [PrimeSecure].[Applications] (
     [ReferenceCode]           VARCHAR (36)       NULL,
     [PolicyNumber]            VARCHAR (50)       NULL,
     [Status]                  VARCHAR (30)       NOT NULL,
+    [OrderNumber]             VARCHAR (20)       NULL,
+    [OrderItemNumber]         VARCHAR (20)       NULL,
+    [OrderStatus]             VARCHAR (20)       NULL,
     [ProductCode]             VARCHAR (50)       NOT NULL,
     [ProductName]             VARCHAR (50)       NOT NULL,
     [PlanCode]                VARCHAR (50)       NOT NULL,
@@ -18,10 +21,10 @@ CREATE TABLE [PrimeSecure].[Applications] (
     [AgentCode]               VARCHAR (50)       NULL,
     [AgentFirstName]          NVARCHAR (50)      NULL,
     [AgentLastName]           NVARCHAR (50)      NULL,
-	[AffiliateCode]           VARCHAR (50)       NULL,
+    [AffiliateCode]           VARCHAR (50)       NULL,
     [AffiliateName]           NVARCHAR (50)      NULL,
     [AffiliateStatus]         NVARCHAR (50)      NULL,
-	[BranchCode]              VARCHAR (50)       NULL,
+    [BranchCode]              VARCHAR (50)       NULL,
     [BranchName]              NVARCHAR (50)      NULL,
     [ReferralSource]          NVARCHAR (50)      NULL,
     [CustomerId]              UNIQUEIDENTIFIER   NULL,
@@ -55,8 +58,6 @@ CREATE TABLE [PrimeSecure].[Applications] (
     CONSTRAINT [PK_PrimeSecure_Applications] PRIMARY KEY NONCLUSTERED ([Id] ASC),
     CONSTRAINT [UK_PrimeSecure_Applications] UNIQUE NONCLUSTERED ([ReferenceCode] ASC)
 );
-
-
 
 
 

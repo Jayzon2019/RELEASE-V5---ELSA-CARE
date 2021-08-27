@@ -74,12 +74,11 @@
 							"serviceWorker": true,
 							"ngswConfigPath": "ngsw-config.json"
 						},
-						"devlocal": {
-							"baseHref": "https://localhost:4200/",
+						"dev": {
 							"fileReplacements": [
 								{
 									"replace": "src/environments/environment.ts",
-									"with": "src/environments/environment.devlocal.ts"
+									"with": "src/environments/environment.dev.ts"
 								}
 							],
 							"optimization": false,
@@ -103,11 +102,11 @@
 								}
 							]
 						},
-						"dev": {
+						"devlocal": {
 							"fileReplacements": [
 								{
 									"replace": "src/environments/environment.ts",
-									"with": "src/environments/environment.dev.ts"
+									"with": "src/environments/environment.devlocal.ts"
 								}
 							],
 							"optimization": false,

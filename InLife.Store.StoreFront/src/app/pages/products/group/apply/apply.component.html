@@ -2840,9 +2840,7 @@
 														<i class="material-icons">arrow_backward</i>
 														Back
 													</button>
-													<button class="btn savebtns outlinedbtn" type="btn" (click)="conformSave()" [disabled]="isFileSizeError || 
-													!getApplyForm.get('requirementsForm')?.valid || !getApplyForm.get('declarationsForm')?.valid
-												">
+													<button class="btn savebtns outlinedbtn" type="btn" (click)="conformSave()" [disabled]="(isFileSizeError || hasQueue) || (showThirdStep && !getApplyForm.get('declarationsForm')?.valid)">
 														Save Information
 													</button>
 													<a id="conformBtnApply" style="display:none" href="#Conform"

@@ -28,4 +28,5 @@ export interface Application {
     companyZipCode: string;
     companyCountry: string;
     businessStructure: string;
+    alreadyDeclared: boolean;
 }
