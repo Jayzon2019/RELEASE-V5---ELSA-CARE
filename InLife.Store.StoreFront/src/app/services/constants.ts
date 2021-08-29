@@ -3456,7 +3456,7 @@ export const CONSTANTS =
 		{ "id": "121", "name": "Family Income" },
 		{ "id": "122", "name": "Income from Employment" },
 		{ "id": "123", "name": "Savings" },
-		{ "id": "124", "name": "Others" },
+		// { "id": "124", "name": "Others" },
 		{ "id": "210", "name": "Rental Income" },
 		{ "id": "212", "name": "Interest Income" },
 		{ "id": "213", "name": "Investment" },
