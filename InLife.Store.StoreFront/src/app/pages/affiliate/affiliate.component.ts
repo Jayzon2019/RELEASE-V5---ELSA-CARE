@@ -15,7 +15,7 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
 
     target: string;
 
-	constructor(private http: HttpClient, session: SessionStorageService, private route: ActivatedRoute) { 
+	constructor(private http: HttpClient, session: SessionStorageService, private route: ActivatedRoute) {
         super(session);
         this.route.queryParams
             .pipe(
@@ -29,7 +29,7 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
                     console.log(params);
                     const code = params.affcode ?? params.code ?? params.c;
                     const product = params.product ?? params.prod ?? params.p;
-            
+
                     const targetPage = productPages[product] ? productPages[product] : '/';
                     const path = window.location.pathname;
                     const origin = window.location.origin;
@@ -38,7 +38,7 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
                     let endpoint = environment.appApi.host + `/affiliates/${code}`;
                     this.target = targetPage;
 
-                    debugger;
+                    //debugger;
 
                     return endpoint;
                 }),
@@ -56,20 +56,20 @@ export class AffiliateComponent extends ApiBaseService implements OnInit
     public getAffiliate(endpoint: any) {
         let headers: HttpHeaders = new HttpHeaders();
             headers = headers.append('Content-Type', 'application/json');
-    
+
             let options =
             {
                 headers: headers,
                 params: new HttpParams()
             };
-    
+
             return this.http
             .get(endpoint, options)
             .pipe(
                 map((response) => <any>response),
                 catchError(this.handleError)
               );
-    } 
+    }
 
 	ngOnInit(): void
 	{

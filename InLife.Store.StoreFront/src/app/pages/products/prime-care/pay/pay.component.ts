@@ -156,7 +156,7 @@ export class PayComponent implements OnInit
 	}
 
 	editDetails() {
-		debugger
+		//debugger
 		this.router.navigate(['/prime-care/quote'], {
 			queryParams: {
 				plan: this.quoteInformation.Plan
@@ -169,10 +169,7 @@ export class PayComponent implements OnInit
 		let ownerSuffixID = this.nullIfZero(this.basicInformation.suffix);
 		let insuredSuffixId = this.nullIfZero(this.basicInformation.suffix);
 		let benefSuffixId = this.nullIfZero(this.beneficialInformation.suffix);
-<<<<<<< HEAD
-=======
 
->>>>>>> dev/elsa-care
 		let arrData: any =
 		{
 			"PlanCode": "AH0017",
