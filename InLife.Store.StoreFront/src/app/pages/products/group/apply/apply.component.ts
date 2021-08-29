@@ -430,8 +430,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
 		//const fileSizeLimit = 5242880; // 5MB
 		this.sizeError = false;
 		const limitFileSize = 512000; // 500KB
-		const limitWidth = 500;
-		const limitHeight = 500;
+		const limitWidth = 2400;
+		const limitHeight = 2400;
 		const imageType = 'image/jpeg';
 
 		const reader: any = new FileReader();
@@ -468,19 +468,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 				};
 			} else {
 				reader.onloadend = (event) => {
-					// Get the event.target.result from the reader (base64 of the image)
-
-
-					console.clear();
-					console.log('imageLoaded');
-
 					let uploadedImage = event.target.result;
-
-					console.log(uploadedImage);
-					debugger;
-
-					//this.insuredIdentityDocumentImagePreview = event.target.result;
-
 					const image = new Image();
 					image.onload = (event) => {
 						// Fit image to bounding box
@@ -509,10 +497,6 @@ export class ApplyComponent implements OnInit, OnDestroy {
 							newBase64ImageString = newDataUrl.split(',')[1];
 							newFileSize = Math.round(newBase64ImageString.length * 3 / 4);
 
-							//console.log(newImageQuality);
-							//console.log(newFileSize.toFixed(2));
-							//console.log(newBase64ImageString);
-
 							newImageQuality -= (newImageQuality > 10)
 								? 5
 								: 1;
@@ -528,30 +512,16 @@ export class ApplyComponent implements OnInit, OnDestroy {
 								msg: '(Uploading file...)'
 							}
 						}
-						this.evaluateFiles();
-						// if(!(file.size > CONSTANTS.MAX_UPLOAD_FILE_SIZE)) {
-							this.getApplyForm.get('requirementsForm').get(type).disable();
-							this.getApplyForm.get('requirementsForm').get(type).updateValueAndValidity();
-							this.uploadByFile(reader.result, file.type, file.name, type, dbType);
-						// }
-						//	this.insuredIdentityDocumentImagePreview = newDataUrl;
 
-						// Convert to PDF
-						// const doc = new jsPDF
-						// 	({
-						// 		orientation: (newWidth > newHeight) ? 'l' : 'p',
-						// 		unit: 'px',
-						// 		format: [newWidth, newHeight]
-						// 	});
-
-						// doc.addImage(newBase64ImageString, 0, 0, newWidth, newHeight);
-
-						// Output PDF to base64 string and strip to DATA only
-						//const base64PdfString = (doc.output('datauristring') as string).split(',')[1];
-						//console.log(base64PdfString);
-
-						//this.insuredIdentityDocumentImageData = base64PdfString;
-						this.hasImage = true;
+						fetch(newDataUrl)
+							.then(res => res.blob())
+							.then(blob =>
+							{
+								this.evaluateFiles();
+								this.getApplyForm.get('requirementsForm').get(type).disable();
+								this.getApplyForm.get('requirementsForm').get(type).updateValueAndValidity();
+								this.uploadByFile(blob, file.type, file.name, type, dbType);
+							});
 					};
 
 					const urlCreator = window.URL || window.webkitURL;
