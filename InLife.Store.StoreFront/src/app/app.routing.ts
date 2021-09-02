@@ -41,7 +41,7 @@ const routes: Routes =
 						} 
 					},
 					// { path: 'prime-secure',loadChildren: () => import('@app/pages/products/prime-secure/main/main.module').then(m => m.MainModule) },
-					// { path: 'prime-secure-lite',loadChildren: () => import('@app/pages/products/prime-secure-lite/main/main.module').then(m => m.MainModule) },
+					{ path: 'prime-secure-lite',loadChildren: () => import('@app/pages/products/prime-secure-lite/main/main.module').then(m => m.MainModule) },
 					{ path: 'group',loadChildren: () => import('@app/pages/products/group/main/main.module').then(m => m.MainModule)},
 					{ path: 'feedback', loadChildren: () => import('@app/pages/feedback/feedback.module').then(m => m.FeedbackModule)},
 					{ path: 'prime-care/ineligible', loadChildren: () => import('@app/pages/products/prime-care/ineligible/ineligible.module').then(m => m.IneligibleModule) },
