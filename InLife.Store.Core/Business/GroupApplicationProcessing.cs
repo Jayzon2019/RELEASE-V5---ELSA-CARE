@@ -171,6 +171,7 @@ namespace InLife.Store.Core.Business
 
 			if (application == null)
 				return null;
+
 			application.AlreadyDeclared = true;
 			application.Status = GroupApplicationStatus.Payment.Id;
 
@@ -567,7 +568,7 @@ namespace InLife.Store.Core.Business
 			}
 
 			//  Check if apply page declarations completed
-			if (!application.AlreadyDeclared)
+			if (application.AlreadyDeclared ?? false)
 			{
 				return GroupApplicationStatus.Application;
 			}
