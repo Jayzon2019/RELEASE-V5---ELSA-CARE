@@ -113,7 +113,7 @@ namespace InLife.Store.Api.Messages
 
 		#region Declarations
 
-		public bool AlreadyDeclared { get; set; }
+		public bool? AlreadyDeclared { get; set; }
 
 		#endregion
 	}

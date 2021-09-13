@@ -400,8 +400,16 @@ namespace InLife.Store.Api
 		[HttpGet("applications/batch-process-test")]
 		public async Task<ActionResult> BatchProcessTest()
 		{
-			await applicationProcessing.ProcessCompletedApplications();
-			return Ok();
+			try
+			{
+
+				await applicationProcessing.ProcessCompletedApplications();
+				return Ok();
+			}
+			catch (Exception e)
+			{
+				return GenericServerErrorResult(e);
+			}
 		}
 
 	}

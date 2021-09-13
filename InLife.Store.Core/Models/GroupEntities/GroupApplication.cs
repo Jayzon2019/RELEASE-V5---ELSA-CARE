@@ -138,6 +138,6 @@ namespace InLife.Store.Core.Models
 		public string AuthorizationDocumentFile { get; set; }
 		public string IndividualApplicationsFile { get; set; }
 
-		public bool AlreadyDeclared { get; set; }
+		public bool? AlreadyDeclared { get; set; }
 	}
 }
